@@ -53,6 +53,13 @@ document.addEventListener("DOMContentLoaded", function () {
             '<h2 class="bkm-brand-heading" id="bkm-heading">Book Your<span class="bkm-brand-script">Stay</span></h2>',
           '</div>',
           '<address class="bkm-brand-address">Newcastle &middot; Monmouth &middot; Wales</address>',
+          '<div class="bkm-weather" id="bkm-weather">',
+            '<span class="bkm-weather-icon" id="bkm-weather-icon"></span>',
+            '<div class="bkm-weather-info">',
+              '<span class="bkm-weather-temp" id="bkm-weather-temp"></span>',
+              '<span class="bkm-weather-desc" id="bkm-weather-desc">&#8212;</span>',
+            '</div>',
+          '</div>',
         '</div>',
 
         '<!-- Phase 1: Date picker form -->',
@@ -92,6 +99,49 @@ document.addEventListener("DOMContentLoaded", function () {
   ].join("");
 
   document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+  /* -- live weather at Hilston Park via Open-Meteo (no API key) -- */
+  (function fetchWeather() {
+    var WMO = {
+      0:  ["\u2600", "Clear sky"],
+      1:  ["\uD83C\uDF24", "Mostly clear"],
+      2:  ["\u26C5", "Partly cloudy"],
+      3:  ["\u2601", "Overcast"],
+      45: ["\uD83C\uDF2B", "Foggy"],
+      48: ["\uD83C\uDF2B", "Foggy"],
+      51: ["\uD83C\uDF26", "Light drizzle"],
+      53: ["\uD83C\uDF26", "Drizzle"],
+      55: ["\uD83C\uDF27", "Heavy drizzle"],
+      61: ["\uD83C\uDF27", "Light rain"],
+      63: ["\uD83C\uDF27", "Rain"],
+      65: ["\uD83C\uDF27", "Heavy rain"],
+      71: ["\u2744", "Light snow"],
+      73: ["\u2744", "Snow"],
+      75: ["\u2744", "Heavy snow"],
+      77: ["\u2744", "Snow grains"],
+      80: ["\uD83C\uDF27", "Light showers"],
+      81: ["\uD83C\uDF27", "Showers"],
+      82: ["\uD83C\uDF27", "Heavy showers"],
+      85: ["\u2744", "Snow showers"],
+      86: ["\u2744", "Heavy snow showers"],
+      95: ["\u26C8", "Thunderstorm"],
+      96: ["\u26C8", "Thunderstorm"],
+      99: ["\u26C8", "Thunderstorm"]
+    };
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=51.786&longitude=-2.868&current=temperature_2m,weather_code&temperature_unit=celsius&timezone=Europe%2FLondon")
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var c    = d.current;
+        var info = WMO[c.weather_code] || ["\uD83C\uDF21", ""];
+        document.getElementById("bkm-weather-icon").textContent = info[0];
+        document.getElementById("bkm-weather-temp").textContent = Math.round(c.temperature_2m) + "\xB0C";
+        document.getElementById("bkm-weather-desc").textContent = info[1];
+      })
+      .catch(function () {
+        var el = document.getElementById("bkm-weather");
+        if (el) { el.style.display = "none"; }
+      });
+  }());
 
   /* -- resize the rates iframe via postMessage from QBook -- */
   window.addEventListener("message", function (e) {
