@@ -193,58 +193,104 @@ button { font: inherit; cursor: pointer; }
 .nav-list a:hover { opacity: 0.7; }
 
 /* =====================================================
-   HERO  (3-column)
+   HERO  (3-column — with hover reveal)
    ===================================================== */
 .hero {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  padding: 14px;
-  background: var(--white);
+  gap: 3px;
+  background: var(--dark-deep);
 }
 .hero-card {
   position: relative;
-  min-height: 560px;
+  min-height: 620px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+}
+/* scalable background layer */
+.hero-bg {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 26px;
+  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 0;
 }
+.hero-card:hover .hero-bg { transform: scale(1.08); }
+
+/* gradient overlay */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15,30,40,0.90) 0%,
+    rgba(15,30,40,0.35) 52%,
+    rgba(15,30,40,0.08) 100%
+  );
+  z-index: 1;
+  transition: background 0.55s ease;
+}
+.hero-card:hover .hero-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(15,30,40,0.97) 0%,
+    rgba(15,30,40,0.55) 60%,
+    rgba(15,30,40,0.18) 100%
+  );
+}
+
 .hero-frame {
   position: relative;
-  border: 1px solid rgba(255,255,255,0.85);
-  padding: 34px 28px 28px;
-  text-align: center;
+  z-index: 2;
+  padding: 0 38px 46px;
   width: 100%;
-  max-width: 420px;
-  background: rgba(40,55,65,0.42);
   color: var(--white);
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: 14px;
 }
 .hero-label {
-  font-size: 0.62rem;
+  display: inline-block;
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.92);
+  color: var(--teal);
+  border: 1px solid rgba(78,148,132,0.6);
+  background: rgba(78,148,132,0.12);
+  padding: 5px 13px;
+  align-self: flex-start;
 }
 .hero-frame h2 {
   font-family: var(--font-serif);
   font-weight: normal;
-  font-size: clamp(1.15rem, 1.55vw, 1.7rem);
-  line-height: 1.3;
+  font-size: clamp(1.3rem, 1.75vw, 2rem);
+  line-height: 1.22;
+}
+/* reveal group: description + CTA slide up on hover */
+.hero-reveal {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transform: translateY(18px);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.45s ease;
+  pointer-events: none;
+}
+.hero-card:hover .hero-reveal {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 .hero-sub {
-  font-size: 0.78rem;
-  line-height: 1.65;
-  color: rgba(255,255,255,0.88);
+  font-size: 0.8rem;
+  line-height: 1.72;
+  color: rgba(255,255,255,0.86);
 }
-.hero-frame .btn-hero { margin-top: 6px; }
+.hero-frame .btn-hero { align-self: flex-start; }
 
 /* =====================================================
    EXPERIENCE
@@ -311,51 +357,169 @@ button { font: inherit; cursor: pointer; }
 .exp-img--wide img { min-height: 320px; }
 
 /* =====================================================
-   PLAN YOUR DAY
+   CHOOSE YOUR EXPERIENCE  (replaces Plan Your Day)
    ===================================================== */
-.plan-day {
-  background: var(--dark);
-  padding: 76px 56px 88px;
+.choose-exp {
+  background: var(--dark-deep);
+  padding: 84px 56px 100px;
 }
-.plan-day .heading-display { margin-bottom: 48px; }
-.plan-cards {
+.choose-exp .heading-display { margin-bottom: 14px; }
+.choose-exp .section-intro {
+  text-align: center;
+  color: rgba(255,255,255,0.62);
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  line-height: 1.7;
+  margin-bottom: 56px;
+}
+
+/* grid */
+.svc-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 20px;
 }
-.plan-card {
+
+/* individual card */
+.svc-card {
   position: relative;
-  min-height: 440px;
-  background-size: cover;
-  background-position: center;
+  min-height: 540px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: stretch;
-  padding: 0;
-  text-align: left;
+  cursor: pointer;
 }
-.plan-overlay {
-  width: 100%;
-  background: rgba(0,0,0,0.55);
-  color: var(--white);
-  padding: 26px 28px 28px;
+
+/* colour accent bar at top */
+.svc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  z-index: 4;
+  transition: height 0.3s ease;
+}
+.svc-card:hover::before { height: 6px; }
+.svc-card--edu::before    { background: #5dab8c; }
+.svc-card--events::before { background: var(--teal); }
+.svc-card--stays::before  { background: #c9a96e; }
+
+/* scalable background image */
+.svc-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 0;
+}
+.svc-card:hover .svc-bg { transform: scale(1.07); }
+
+/* gradient overlay */
+.svc-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10,22,32,0.95) 30%,
+    rgba(10,22,32,0.25) 75%,
+    rgba(10,22,32,0.06) 100%
+  );
+  z-index: 1;
+  transition: background 0.5s ease;
+}
+.svc-card:hover .svc-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(10,22,32,0.98) 40%,
+    rgba(10,22,32,0.35) 75%,
+    rgba(10,22,32,0.12) 100%
+  );
+}
+
+/* content body */
+.svc-body {
+  position: relative;
+  z-index: 2;
+  padding: 30px 32px 36px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 0;
 }
-.plan-overlay h3 {
+
+/* audience tag pill */
+.svc-tag {
+  display: inline-block;
+  font-size: 0.57rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  padding: 5px 13px;
+  align-self: flex-start;
+  margin-bottom: 16px;
+}
+.svc-card--edu .svc-tag {
+  background: rgba(93,171,140,0.15);
+  color: #8ed9b8;
+  border: 1px solid rgba(93,171,140,0.45);
+}
+.svc-card--events .svc-tag {
+  background: rgba(78,148,132,0.15);
+  color: #7ecfbc;
+  border: 1px solid rgba(78,148,132,0.45);
+}
+.svc-card--stays .svc-tag {
+  background: rgba(201,169,110,0.15);
+  color: #e0c98e;
+  border: 1px solid rgba(201,169,110,0.45);
+}
+
+.svc-body h3 {
   font-family: var(--font-serif);
   font-weight: normal;
-  font-size: 1.45rem;
-  margin-bottom: 14px;
-  line-height: 1.2;
+  font-size: clamp(1.2rem, 1.55vw, 1.65rem);
+  color: var(--white);
+  line-height: 1.22;
+  margin-bottom: 22px;
 }
-.plan-overlay p {
+
+/* reveal block: bullets + CTA slide up on hover */
+.svc-reveal {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.52s ease, opacity 0.48s ease;
+  pointer-events: none;
+}
+.svc-card:hover .svc-reveal {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* bullet list */
+.svc-list { display: flex; flex-direction: column; gap: 9px; }
+.svc-list li {
   font-size: 0.8rem;
-  line-height: 1.65;
-  color: rgba(255,255,255,0.92);
+  color: rgba(255,255,255,0.82);
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
 }
+.svc-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+.svc-card--edu .svc-list li::before    { color: #5dab8c; }
+.svc-card--events .svc-list li::before { color: var(--teal); }
+.svc-card--stays .svc-list li::before  { color: #c9a96e; }
+
+.svc-reveal .btn-hero { align-self: flex-start; }
 
 
 /* =====================================================
