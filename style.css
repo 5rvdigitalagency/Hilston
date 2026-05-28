@@ -421,46 +421,59 @@ button { font: inherit; cursor: pointer; }
 .svc-body {
   position: relative;
   z-index: 2;
-  padding: 30px 32px 36px;
+  padding: 28px 32px 44px;
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
-/* audience tag pill */
+/* audience tag — prominent, full-width label */
 .svc-tag {
-  display: inline-block;
-  font-size: 0.57rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  padding: 5px 13px;
+  padding: 0;
   align-self: flex-start;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  color: inherit;
+}
+.svc-tag::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 1px;
+  flex-shrink: 0;
 }
 .svc-card--edu .svc-tag {
-  background: rgba(93,171,140,0.15);
   color: #8ed9b8;
-  border: 1px solid rgba(93,171,140,0.45);
 }
+.svc-card--edu .svc-tag::before { background: #8ed9b8; }
 .svc-card--events .svc-tag {
-  background: rgba(78,148,132,0.15);
   color: #7ecfbc;
-  border: 1px solid rgba(78,148,132,0.45);
 }
+.svc-card--events .svc-tag::before { background: #7ecfbc; }
 .svc-card--stays .svc-tag {
-  background: rgba(201,169,110,0.15);
   color: #e0c98e;
-  border: 1px solid rgba(201,169,110,0.45);
 }
+.svc-card--stays .svc-tag::before { background: #e0c98e; }
 
 .svc-body h3 {
   font-family: var(--font-serif);
   font-weight: normal;
-  font-size: clamp(1.2rem, 1.55vw, 1.65rem);
+  font-size: clamp(1.25rem, 1.65vw, 1.75rem);
   color: var(--white);
-  line-height: 1.22;
-  margin-bottom: 22px;
+  line-height: 1.18;
+  margin-bottom: 0;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              margin-bottom 0.45s ease;
+}
+.svc-card:hover .svc-body h3 {
+  transform: translateY(-6px);
+  margin-bottom: 20px;
 }
 
 /* reveal block: bullets + CTA slide up on hover */
@@ -468,14 +481,17 @@ button { font: inherit; cursor: pointer; }
   display: flex;
   flex-direction: column;
   gap: 22px;
-  transform: translateY(20px);
+  transform: translateY(16px);
   opacity: 0;
-  transition: transform 0.52s ease, opacity 0.48s ease;
+  max-height: 0;
+  overflow: hidden;
+  transition: transform 0.5s ease, opacity 0.45s ease, max-height 0.5s ease;
   pointer-events: none;
 }
 .svc-card:hover .svc-reveal {
   transform: translateY(0);
   opacity: 1;
+  max-height: 200px;
   pointer-events: auto;
 }
 
