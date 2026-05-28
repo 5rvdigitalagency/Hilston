@@ -733,6 +733,93 @@ button { font: inherit; cursor: pointer; }
 .footer-bar { height: 10px; background: var(--teal); }
 
 /* =====================================================
+   INSTAGRAM STRIP
+   ===================================================== */
+.insta-strip {
+  background: var(--dark-deep);
+  padding-top: 80px;
+  overflow: hidden;
+}
+
+.insta-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 64px 52px;
+  gap: 24px;
+}
+
+.insta-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+
+.insta-heading .heading-display { color: var(--white); }
+
+.insta-handle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  flex-shrink: 0;
+  padding-bottom: 4px;
+  transition: color 0.25s;
+}
+.insta-handle:hover { color: var(--white); }
+.insta-handle svg { flex-shrink: 0; }
+
+/* Marquee */
+.insta-track {
+  overflow: hidden;
+  width: 100%;
+}
+
+.insta-inner {
+  display: flex;
+  width: max-content;
+  /* set-width = 16 images × (340px + 6px gap) = 5536px */
+  animation: insta-scroll 90s linear infinite;
+}
+
+.insta-track:hover .insta-inner { animation-play-state: paused; }
+
+.insta-set {
+  display: flex;
+  gap: 6px;
+  margin-right: 6px; /* matches gap so seam is invisible */
+}
+
+.insta-set img {
+  width: 340px;
+  height: 340px;
+  object-fit: cover;
+  object-position: center;
+  flex-shrink: 0;
+  display: block;
+  filter: brightness(0.88);
+  transition: filter 0.3s ease;
+}
+.insta-track:hover .insta-set img { filter: brightness(1); }
+
+@keyframes insta-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-5536px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .insta-inner { animation: none; }
+  .insta-track { overflow-x: auto; scrollbar-width: thin; }
+}
+
+/* =====================================================
    RESPONSIVE
    ===================================================== */
 @media (max-width: 1100px) {
@@ -744,6 +831,7 @@ button { font: inherit; cursor: pointer; }
   .footer-grid { padding: 50px 40px 40px; }
   .experience-grid,
   .expertise-grid { gap: 36px; }
+  .insta-header { padding: 0 40px 44px; }
 }
 @media (max-width: 880px) {
   .hero { grid-template-columns: 1fr; }
@@ -760,6 +848,13 @@ button { font: inherit; cursor: pointer; }
   .expertise-image img { height: 360px; }
   .header-inner { flex-direction: column; gap: 16px; }
   .footer-links { grid-template-columns: repeat(3, 1fr); }
+  /* Instagram */
+  .insta-header { flex-direction: column; align-items: flex-start; padding: 0 40px 36px; gap: 20px; }
+  .insta-set img { width: 260px; height: 260px; }
+  @keyframes insta-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-4256px); } /* 16 × (260 + 6) */
+  }
 }
 @media (max-width: 560px) {
   .site-header,
@@ -773,6 +868,14 @@ button { font: inherit; cursor: pointer; }
   .header-logo img { height: 50px; }
   .footer-grid { padding: 36px 20px 30px; gap: 36px; }
   .footer-links { grid-template-columns: 1fr; }
+  /* Instagram */
+  .insta-strip { padding-top: 56px; }
+  .insta-header { padding: 0 20px 30px; }
+  .insta-set img { width: 200px; height: 200px; }
+  @keyframes insta-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-3296px); } /* 16 × (200 + 6) */
+  }
 }
 
 /* =====================================================
