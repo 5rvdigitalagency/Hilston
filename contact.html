@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Hilston Park Wales | School Trips &amp; Group Bookings</title>
+  <meta name="description" content="Contact Hilston Park in Wales for school trips, group bookings, corporate events, and team building. Enquire today for your next outdoor experience.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ---- CONTACT HERO ---- */
+    .contact-hero {
+      position: relative;
+      min-height: 480px;
+      height: 62vh;
+      max-height: 640px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .contact-hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .contact-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,22,30,0.82) 0%, rgba(10,22,30,0.28) 55%, rgba(10,22,30,0.12) 100%);
+    }
+    .contact-hero-inner {
+      position: relative; z-index: 2;
+      width: 100%; padding: 60px 80px;
+      color: var(--white);
+    }
+    .contact-hero-inner .hero-eyebrow {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--teal);
+      display: block; margin-bottom: 14px;
+    }
+    .contact-hero-inner h1 {
+      font-family: var(--font-serif); font-weight: normal;
+      font-size: clamp(2.2rem, 3.5vw, 3.6rem);
+      line-height: 1.1; color: var(--white); margin: 0;
+    }
+
+    /* ---- FORM + MAP ---- */
+    .contact-section {
+      background: var(--white);
+      padding: 80px 80px 70px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .contact-form-wrap h2 {
+      font-family: var(--font-serif); font-weight: normal;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      margin-bottom: 8px;
+    }
+    .contact-form-wrap .form-intro {
+      font-size: 0.88rem; color: var(--text-muted);
+      line-height: 1.7; margin-bottom: 32px;
+    }
+    .form-field { margin-bottom: 20px; }
+    .form-field label {
+      display: block; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%; padding: 13px 16px;
+      border: 1px solid var(--border);
+      background: var(--beige);
+      font-family: var(--font-sans); font-size: 0.88rem;
+      color: var(--text); outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { border-color: var(--teal); }
+    .form-field textarea { min-height: 130px; resize: vertical; }
+    .form-field select { appearance: none; cursor: pointer; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-checkbox {
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-bottom: 28px;
+    }
+    .form-checkbox input { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; accent-color: var(--teal); }
+    .form-checkbox label {
+      font-size: 0.78rem; color: var(--text-muted);
+      line-height: 1.6; text-transform: none; font-weight: normal;
+      letter-spacing: 0;
+    }
+    .form-checkbox label a { color: var(--teal); text-decoration: underline; }
+    .btn-submit {
+      display: inline-block; padding: 16px 40px;
+      background: var(--teal); color: var(--white);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; border: none; cursor: pointer;
+      transition: background 0.2s; width: 100%;
+    }
+    .btn-submit:hover { background: var(--teal-dark); }
+    .map-wrap {
+      height: 100%; min-height: 520px;
+    }
+    .map-wrap iframe {
+      width: 100%; height: 100%; min-height: 520px;
+      border: 0; display: block;
+    }
+
+    /* ---- CONTACT INFO CARDS ---- */
+    .contact-info-bar {
+      background: var(--beige);
+      padding: 56px 80px;
+      border-top: 1px solid var(--beige-2);
+    }
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .contact-info-card {
+      background: var(--white);
+      padding: 32px 28px;
+      display: flex; gap: 18px; align-items: flex-start;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .contact-info-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+    .contact-icon-box {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: var(--beige); display: flex;
+      align-items: center; justify-content: center;
+    }
+    .contact-icon-box svg { width: 22px; height: 22px; }
+    .contact-info-card .info-label {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 8px;
+    }
+    .contact-info-card .info-value {
+      font-size: 0.92rem; color: var(--text); line-height: 1.5;
+    }
+    .contact-info-card a.info-value { color: var(--teal); }
+    .contact-info-card a.info-value:hover { color: var(--teal-dark); }
+
+    /* ---- REACH US ---- */
+    .reach-section {
+      background: var(--dark-deep);
+      padding: 80px 80px 90px;
+    }
+    .reach-section .heading-display { margin-bottom: 48px; }
+    .reach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .reach-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 36px 30px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .reach-card:hover {
+      background: rgba(78,148,132,0.1);
+      border-color: rgba(78,148,132,0.4);
+    }
+    .reach-card .reach-icon {
+      width: 48px; height: 48px;
+      background: rgba(78,148,132,0.18);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .reach-card h3 {
+      font-family: var(--font-serif); font-weight: normal;
+      font-size: 1.3rem; color: var(--white);
+    }
+    .reach-card p {
+      font-size: 0.85rem; color: rgba(255,255,255,0.7);
+      line-height: 1.72; flex: 1;
+    }
+    .reach-card .btn-reach {
+      display: inline-block; padding: 11px 22px;
+      border: 1px solid rgba(255,255,255,0.35);
+      color: var(--white); font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      align-self: flex-start;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .reach-card .btn-reach:hover { background: var(--teal); border-color: var(--teal); }
+
+    /* ---- FAQ ---- */
+    .contact-faq {
+      background: var(--white);
+      padding: 80px 80px 90px;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .faq-grid .heading-display { position: sticky; top: 120px; }
+
+    /* ---- BLOGS TEASER ---- */
+    .contact-blogs {
+      background: var(--beige);
+      padding: 80px 80px 90px;
+    }
+    .contact-blogs .heading-display { margin-bottom: 48px; }
+    .blogs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .blog-card { background: var(--white); overflow: hidden; display: flex; flex-direction: column; }
+    .blog-card-img {
+      overflow: hidden;
+      aspect-ratio: 16/10;
+    }
+    .blog-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+      display: block;
+    }
+    .blog-card:hover .blog-card-img img { transform: scale(1.05); }
+    .blog-card-body { padding: 24px 22px 28px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .blog-card-body h3 {
+      font-family: var(--font-serif); font-weight: normal;
+      font-size: 1.1rem; line-height: 1.3; color: var(--text);
+    }
+    .blog-card-body p {
+      font-size: 0.82rem; line-height: 1.68; color: var(--text-muted); flex: 1;
+    }
+    .blog-read-more {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--teal);
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: gap 0.2s;
+    }
+    .blog-card:hover .blog-read-more { gap: 14px; }
+  </style>
+</head>
+<body>
+
+<div class="site-wrap">
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+      </div>
+      <a href="#contact-form" class="btn-book">BOOK NOW</a>
+    </div>
+  </header>
+
+  <!-- ===== NAV ===== -->
+  <nav class="main-nav">
+    <ul class="nav-list">
+      <li><a href="about.html">ABOUT</a></li>
+      <li><a href="educational.html">EDUCATION</a></li>
+      <li><a href="event.html">EVENTS</a></li>
+      <li><a href="accomodation.html">ACCOMMODATION</a></li>
+      <li><a href="contact.html" style="border-bottom:2px solid rgba(255,255,255,0.8);padding-bottom:2px;">CONTACT</a></li>
+      <li><a href="#">BLOG</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="contact-hero">
+    <video class="contact-hero-video" autoplay muted loop playsinline
+      poster="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f%2F69d6348ed57e8d1bb787c22b_Hilston_Park_Monmouthshire%20%281%29_poster.0000000.jpg">
+      <source src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f%2F69d6348ed57e8d1bb787c22b_Hilston_Park_Monmouthshire%20%281%29_mp4.mp4" type="video/mp4">
+    </video>
+    <div class="contact-hero-overlay"></div>
+    <div class="contact-hero-inner">
+      <span class="hero-eyebrow">Hilston Park &mdash; Wales</span>
+      <h1>Get In Touch</h1>
+    </div>
+  </section>
+
+  <!-- ===== FORM + MAP ===== -->
+  <section class="contact-section" id="contact-form">
+    <div class="contact-grid">
+      <div class="contact-form-wrap">
+        <h2>Send Us an Enquiry</h2>
+        <p class="form-intro">Whether you are planning a school trip, corporate retreat, or private stay, fill in the form and the team will be in touch.</p>
+        <form action="#" method="post" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" name="first_name" placeholder="Jane" required>
+            </div>
+            <div class="form-field">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" name="last_name" placeholder="Smith" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@school.ac.uk" required>
+          </div>
+          <div class="form-field">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+44 (0) ...">
+          </div>
+          <div class="form-field">
+            <label for="group-type">I am enquiring about</label>
+            <select id="group-type" name="group_type">
+              <option value="" disabled selected>Select group type</option>
+              <option value="school">School / Youth Group Trip</option>
+              <option value="corporate">Corporate Retreat / Team Building</option>
+              <option value="private">Private / Family Stay</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your group, preferred dates, and any specific requirements..."></textarea>
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="agree" name="agree" required>
+            <label for="agree">I agree with the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</label>
+          </div>
+          <button type="submit" class="btn-submit">SEND ENQUIRY</button>
+        </form>
+      </div>
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1231.9068138650382!2d-2.8053627225083204!3d51.86435920496475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4871c91eb9bdba4b%3A0xbf98d46c5c7c7501!2sNewcastle%2C%20Monmouth%20NP25%205NY%2C%20UK!5e0!3m2!1sen!2sin!4v1775039414743!5m2!1sen!2sin"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Hilston Park location map"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT INFO ===== -->
+  <div class="contact-info-bar">
+    <div class="contact-info-grid">
+      <div class="contact-info-card">
+        <div class="contact-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM19.6 8.25L12.53 12.67C12.21 12.87 11.79 12.87 11.47 12.67L4.4 8.25C4.15 8.09 4 7.82 4 7.53C4 6.86 4.73 6.46 5.3 6.81L12 11L18.7 6.81C19.27 6.46 20 6.86 20 7.53C20 7.82 19.85 8.09 19.6 8.25Z" fill="var(--teal)"/>
+          </svg>
+        </div>
+        <div>
+          <span class="info-label">Email Us</span>
+          <a href="mailto:info@hilstonpark.co.uk" class="info-value">info@hilstonpark.co.uk</a>
+        </div>
+      </div>
+      <div class="contact-info-card">
+        <div class="contact-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.2222 15.2686L16.6822 14.9786C16.0722 14.9086 15.4722 15.1186 15.0422 15.5486L13.2022 17.3886C10.3722 15.9486 8.05223 13.6386 6.61223 10.7986L8.46223 8.94855C8.89223 8.51855 9.10223 7.91855 9.03223 7.30855L8.74223 4.78855C8.62223 3.77855 7.77223 3.01855 6.75223 3.01855H5.02223C3.89223 3.01855 2.95223 3.95855 3.02223 5.08855C3.55223 13.6286 10.3822 20.4486 18.9122 20.9786C20.0422 21.0486 20.9822 20.1086 20.9822 18.9786V17.2486C20.9922 16.2386 20.2322 15.3886 19.2222 15.2686Z" fill="var(--teal)"/>
+          </svg>
+        </div>
+        <div>
+          <span class="info-label">Call Us</span>
+          <a href="tel:+441902500000" class="info-value">+44 (0) 1902 50000</a>
+        </div>
+      </div>
+      <div class="contact-info-card">
+        <div class="contact-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.16113C7.8 2.16113 4 5.38113 4 10.3611C4 13.5411 6.45 17.2811 11.34 21.5911C11.72 21.9211 12.29 21.9211 12.67 21.5911C17.55 17.2811 20 13.5411 20 10.3611C20 5.38113 16.2 2.16113 12 2.16113ZM12 12.1611C10.9 12.1611 10 11.2611 10 10.1611C10 9.06113 10.9 8.16113 12 8.16113C13.1 8.16113 14 9.06113 14 10.1611C14 11.2611 13.1 12.1611 12 12.1611Z" fill="var(--teal)"/>
+          </svg>
+        </div>
+        <div>
+          <span class="info-label">Address</span>
+          <p class="info-value">Newcastle, Monmouth,<br>Gwent, Wales, NP25 5NY</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== REACH US ===== -->
+  <section class="reach-section">
+    <h2 class="heading-display light center">Plan Your Visit</h2>
+    <div class="reach-grid">
+      <div class="reach-card">
+        <div class="reach-icon">
+          <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+            <circle cx="12" cy="12" r="4" fill="var(--teal)"/>
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>When to Visit</h3>
+        <p>Hilston Park welcomes guests year-round. Summer brings longer days and time outdoors, while autumn and winter offer a quieter setting, focused around the estate and indoors.</p>
+        <a href="#contact-form" class="btn-reach">PLAN YOUR DATES</a>
+      </div>
+      <div class="reach-card">
+        <div class="reach-icon">
+          <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="var(--teal)"/>
+          </svg>
+        </div>
+        <h3>Getting Here</h3>
+        <p>Located near Monmouth in the Wye Valley, Hilston Park is accessible by road. For schools and group organisers, the team can advise on travel arrangements and coach access.</p>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-reach">VIEW ON MAPS</a>
+      </div>
+      <div class="reach-card">
+        <div class="reach-icon">
+          <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="var(--teal)"/>
+          </svg>
+        </div>
+        <h3>Get in Touch</h3>
+        <p>Whether you are a school planning a residential trip, a corporate team arranging a retreat, or a family looking for a private stay, we would love to hear from you.</p>
+        <a href="#contact-form" class="btn-reach">SEND ENQUIRY</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="contact-faq">
+    <div class="faq-grid">
+      <div>
+        <h2 class="heading-display">Frequently<br>Asked<br><em class="script">Questions</em></h2>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span class="caret">&#9660;</span>
+            <span class="acc-label">What happens after I submit an enquiry?</span>
+            <span class="caret">&#9660;</span>
+          </button>
+          <div class="accordion-body"><p>Your enquiry is reviewed by the team and you will be contacted with availability and relevant next steps based on your group type and preferred dates.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span class="caret">&#9660;</span>
+            <span class="acc-label">How quickly will I receive a response?</span>
+            <span class="caret">&#9660;</span>
+          </button>
+          <div class="accordion-body"><p>Most enquiries are responded to within a short time during working hours. If more detail is needed to confirm availability, the team may contact you for clarification before providing a full response.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span class="caret">&#9660;</span>
+            <span class="acc-label">What details help you respond more accurately?</span>
+            <span class="caret">&#9660;</span>
+          </button>
+          <div class="accordion-body"><p>Group type, approximate group size, and preferred dates are most useful. For schools or corporate groups, adding a year group or event type helps refine the response.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span class="caret">&#9660;</span>
+            <span class="acc-label">Can I enquire without confirmed dates?</span>
+            <span class="caret">&#9660;</span>
+          </button>
+          <div class="accordion-body"><p>Yes. If your dates are not yet fixed, you can still send an enquiry. The team can advise on availability and help you plan suitable options.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span class="caret">&#9660;</span>
+            <span class="acc-label">How do I reach Hilston Park by road?</span>
+            <span class="caret">&#9660;</span>
+          </button>
+          <div class="accordion-body"><p>Hilston Park is located near Monmouth in the Wye Valley and is accessible by road. Most school groups and coaches travel directly, and private car access is also available from the estate entrance.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOGS TEASER ===== -->
+  <section class="contact-blogs">
+    <h2 class="heading-display center">From the Blog</h2>
+    <div class="blogs-grid">
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg" alt="Hilston Park International Menu" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <h3>Hilston Park&rsquo;s International Menu</h3>
+          <p>Our international menu is designed to celebrate cultural connection through every dish, bridging the gap between diverse traditions and cuisines.</p>
+          <a href="#" class="blog-read-more">READ MORE &rarr;</a>
+        </div>
+      </article>
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb6509b9ec1135b6c0dd89_Planning%20a%20School%20Adventure%20Trip%20in%202025.jpg" alt="Planning a School Adventure Trip" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <h3>Planning a School Adventure Trip? Unleash It at Hilston Park</h3>
+          <p>Organising a memorable school adventure trip can be a fulfilling challenge for educators. Here is how to strike the right balance between fun and learning.</p>
+          <a href="#" class="blog-read-more">READ MORE &rarr;</a>
+        </div>
+      </article>
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb632a2b3438cd618d8b30_Why%20Schools%20Are%20Booking%20Their%202025%20Trips%20at%20Hilston%20Park.jpg" alt="Why Schools Are Booking Hilston Park" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <h3>Why Schools Are Booking Their Trips at Hilston Park</h3>
+          <p>School travel has a significant impact on how young minds develop. A residential adventure gives children a chance to leave the classroom and grow outdoors.</p>
+          <a href="#" class="blog-read-more">READ MORE &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-crest">
+          <img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park">
+        </div>
+        <address>
+          Newcastle, Monmouth,<br>
+          Gwent, Wales, NP25 5NY
+        </address>
+        <div class="social-icons">
+          <a href="#" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
+          <a href="#" aria-label="Instagram" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4A6.2 6.2 0 0012 5.8zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"/></svg></a>
+          <a href="#" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
+          <a href="#" aria-label="Twitter / X" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 0h3.5L14 10.2 23 24h-7.4l-5.2-6.8L4.2 24H.7l8.3-9.5L0 0h7.6l4.7 6.2L18.2 0zm-1.2 21.6h1.9L7.1 2h-2L17 21.6z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Home</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Visit Us</h4>
+          <ul>
+            <li><a href="educational.html">Educational</a></li>
+            <li><a href="event.html">Events</a></li>
+            <li><a href="accomodation.html">Accommodation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bar"></div>
+  </footer>
+
+</div><!-- /site-wrap -->
+<script src="script.js"></script>
+</body>
+</html>
