@@ -608,47 +608,44 @@ button { font: inherit; cursor: pointer; }
   margin-bottom: 28px;
 }
 
-/* Accordion — border-bottom style */
-.accordion { display: flex; flex-direction: column; }
+/* Accordion */
+.accordion { display: flex; flex-direction: column; gap: 8px; }
 .accordion-item {
-  border-bottom: 1px solid rgba(74,99,113,0.18);
+  background: var(--beige);
   overflow: hidden;
+  border-radius: 2px;
 }
-.accordion-item:first-child { border-top: 1px solid rgba(74,99,113,0.18); }
 
 .accordion-btn {
   width: 100%;
   background: transparent;
   border: 0;
-  padding: 18px 4px;
-  display: flex;
-  justify-content: space-between;
+  padding: 14px 20px;
+  display: grid;
+  grid-template-columns: 24px 1fr 24px;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   cursor: pointer;
-  color: var(--text);
 }
 .acc-question {
-  text-align: left;
+  text-align: center;
   font-family: var(--font-sans);
-  font-size: 0.93rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  line-height: 1.4;
+  letter-spacing: 0.02em;
   color: var(--text);
-  flex: 1;
   transition: color 0.2s ease;
 }
 .accordion-item.open .acc-question { color: var(--teal-dark); }
 
 .acc-icon {
-  flex-shrink: 0;
-  color: var(--teal);
+  justify-self: end;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   transition: transform 0.3s ease, color 0.2s ease;
 }
-.acc-svg { width: 18px; height: 18px; display: block; }
+.acc-svg { width: 16px; height: 16px; display: block; }
 .accordion-item.open .acc-icon { transform: rotate(180deg); color: var(--teal-dark); }
 
 .accordion-body {
@@ -658,11 +655,11 @@ button { font: inherit; cursor: pointer; }
 }
 .accordion-item.open .accordion-body { max-height: 260px; }
 .accordion-body p {
-  padding: 0 4px 18px;
+  padding: 2px 28px 16px;
   color: var(--text-muted);
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   line-height: 1.75;
-  text-align: left;
+  text-align: center;
 }
 
 /* =====================================================
