@@ -954,30 +954,91 @@ button { font: inherit; cursor: pointer; }
 }
 .bkm-btn:hover { background: var(--teal-dark); }
 
-.bkm-alt-link {
-  display: block;
-  text-align: center;
-  margin-top: 16px;
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  letter-spacing: 0.06em;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 0.18s;
-}
-.bkm-alt-link:hover { color: var(--teal); }
-
 .bkm-note {
   margin-top: auto;
-  padding-top: 28px;
-  font-size: 0.68rem;
-  color: var(--border);
+  padding-top: 20px;
+  font-size: 0.67rem;
+  color: var(--beige-2);
   line-height: 1.65;
-  letter-spacing: 0.04em;
-  border-top: 1px solid var(--beige);
+  letter-spacing: 0.03em;
 }
 
-/* Mobile: stack columns */
+/* ---- Phase 2: booking widget panel ---- */
+.bkm-widget-panel {
+  display: none;
+  flex-direction: column;
+  background: var(--white);
+  overflow: hidden;
+  /* spans both grid columns when active */
+  grid-column: 1 / -1;
+}
+.bkm-panel.bkm-widget-active {
+  grid-template-columns: 1fr;
+  max-width: 980px;
+  height: min(88vh, 860px);
+}
+.bkm-panel.bkm-widget-active .bkm-brand,
+.bkm-panel.bkm-widget-active .bkm-form { display: none; }
+.bkm-panel.bkm-widget-active .bkm-widget-panel { display: flex; }
+
+.bkm-widget-header {
+  background: var(--dark-deep);
+  height: 58px;
+  padding: 0 20px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+.bkm-back-btn {
+  background: none; border: none;
+  color: rgba(255,255,255,0.5); cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0 20px;
+  height: 100%;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.bkm-back-btn:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+}
+.bkm-widget-logo {
+  height: 28px; opacity: 0.85;
+  margin-left: 20px; flex-shrink: 0;
+}
+.bkm-widget-title {
+  flex: 1;
+  font-size: 0.62rem; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  font-weight: 700;
+  padding-left: 18px;
+}
+.bkm-widget-close {
+  background: none; border: none;
+  color: rgba(255,255,255,0.4); cursor: pointer;
+  font-size: 1.3rem; font-weight: 300;
+  line-height: 1; padding: 12px;
+  transition: color 0.18s;
+  flex-shrink: 0;
+}
+.bkm-widget-close:hover { color: var(--white); }
+.bkm-widget-accent {
+  height: 3px;
+  background: var(--teal);
+  flex-shrink: 0;
+}
+.bkm-booking-iframe {
+  flex: 1;
+  width: 100%; border: none;
+  display: block; min-height: 0;
+}
+
+/* Mobile */
 @media (max-width: 700px) {
   .bkm-panel { grid-template-columns: 1fr; }
   .bkm-brand { min-height: 200px; padding: 28px 28px 32px; justify-content: flex-end; }
@@ -986,6 +1047,8 @@ button { font: inherit; cursor: pointer; }
   .bkm-brand-address { display: none; }
   .bkm-form { padding: 38px 28px 32px; }
   .bkm-fields { grid-template-columns: 1fr; gap: 20px; }
+  .bkm-panel.bkm-widget-active { height: 100dvh; max-width: 100%; }
+  .bkm-back-btn { padding: 0 14px; font-size: 0.62rem; }
 }
 
 /* =====================================================

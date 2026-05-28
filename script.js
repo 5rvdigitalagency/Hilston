@@ -27,26 +27,24 @@ document.addEventListener("DOMContentLoaded", function () {
   var today = new Date().toISOString().split("T")[0];
   var modalHTML = [
     '<div id="booking-modal" class="bkm-overlay" role="dialog" aria-modal="true" aria-labelledby="bkm-heading">',
-      '<div class="bkm-panel">',
+      '<div class="bkm-panel" id="bkm-panel">',
 
-        '<!-- Estate image panel -->',
+        '<!-- Phase 1: Estate image panel -->',
         '<div class="bkm-brand">',
           '<div class="bkm-brand-bg"></div>',
           '<div class="bkm-brand-grad"></div>',
           '<div class="bkm-brand-inner">',
             '<img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park" class="bkm-logo">',
-            '<h2 class="bkm-brand-heading" id="bkm-heading">Book Your',
-              '<span class="bkm-brand-script">Stay</span>',
-            '</h2>',
+            '<h2 class="bkm-brand-heading" id="bkm-heading">Book Your<span class="bkm-brand-script">Stay</span></h2>',
           '</div>',
           '<address class="bkm-brand-address">Newcastle &middot; Monmouth &middot; Wales</address>',
         '</div>',
 
-        '<!-- Form panel -->',
-        '<div class="bkm-form">',
+        '<!-- Phase 1: Date picker form -->',
+        '<div class="bkm-form" id="bkm-form-panel">',
           '<button class="bkm-close" id="bkm-close-btn" aria-label="Close">&times;</button>',
           '<p class="bkm-form-title">Plan your visit</p>',
-          '<p class="bkm-form-sub">Select your arrival and departure dates to check live availability at Hilston Park.</p>',
+          '<p class="bkm-form-sub">Select your arrival and departure dates, then check live availability &mdash; without leaving this page.</p>',
           '<div class="bkm-fields">',
             '<div class="bkm-field">',
               '<label for="bkm-checkin">Arrival</label>',
@@ -60,8 +58,19 @@ document.addEventListener("DOMContentLoaded", function () {
           '<p class="bkm-error" id="bkm-error">Please select a valid arrival and departure date.</p>',
           '<hr class="bkm-sep">',
           '<button class="bkm-btn" id="bkm-submit">Check Availability</button>',
-          '<a class="bkm-alt-link" id="bkm-browse" href="' + QBOOK_BASE + '" target="_blank" rel="noopener">Browse all dates without selecting &rarr;</a>',
-          '<p class="bkm-note">Secure booking powered by QBook &mdash; you will be taken to our booking portal to complete your reservation.</p>',
+          '<p class="bkm-note">Secure booking powered by QBook &mdash; all availability and payment handled on this site.</p>',
+        '</div>',
+
+        '<!-- Phase 2: Full booking widget (hidden until submit) -->',
+        '<div class="bkm-widget-panel" id="bkm-widget-panel">',
+          '<div class="bkm-widget-header">',
+            '<button class="bkm-back-btn" id="bkm-back-btn">&#8592; Back</button>',
+            '<img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park" class="bkm-widget-logo">',
+            '<span class="bkm-widget-title">Availability &amp; Booking</span>',
+            '<button class="bkm-widget-close" id="bkm-widget-close">&times;</button>',
+          '</div>',
+          '<div class="bkm-widget-accent"></div>',
+          '<iframe id="bkm-booking-iframe" class="bkm-booking-iframe" src="about:blank" allowtransparency="1" frameborder="0" title="Hilston Park Booking"></iframe>',
         '</div>',
 
       '</div>',
@@ -79,12 +88,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  var modal     = document.getElementById("booking-modal");
-  var closeBtn  = document.getElementById("bkm-close-btn");
-  var submitBtn = document.getElementById("bkm-submit");
-  var inEl      = document.getElementById("bkm-checkin");
-  var outEl     = document.getElementById("bkm-checkout");
-  var errEl     = document.getElementById("bkm-error");
+  var modal      = document.getElementById("booking-modal");
+  var panel      = document.getElementById("bkm-panel");
+  var closeBtn   = document.getElementById("bkm-close-btn");
+  var submitBtn  = document.getElementById("bkm-submit");
+  var backBtn    = document.getElementById("bkm-back-btn");
+  var widgetClose = document.getElementById("bkm-widget-close");
+  var inEl       = document.getElementById("bkm-checkin");
+  var outEl      = document.getElementById("bkm-checkout");
+  var errEl      = document.getElementById("bkm-error");
+  var bookIframe = document.getElementById("bkm-booking-iframe");
 
   function openModal() {
     modal.classList.add("is-open");
@@ -94,6 +107,17 @@ document.addEventListener("DOMContentLoaded", function () {
   function closeModal() {
     modal.classList.remove("is-open");
     document.body.style.overflow = "";
+    /* reset back to picker phase and unload iframe */
+    panel.classList.remove("bkm-widget-active");
+    bookIframe.src = "about:blank";
+  }
+  function showWidget() {
+    panel.classList.add("bkm-widget-active");
+    bookIframe.src = QBOOK_RATES_SRC;
+  }
+  function showPicker() {
+    panel.classList.remove("bkm-widget-active");
+    bookIframe.src = "about:blank";
   }
 
   /* -- ensure checkout >= checkin + 1 day -- */
@@ -106,16 +130,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  /* -- submit: open booking engine with dates -- */
+  /* -- submit: validate then show booking widget in-modal -- */
   submitBtn.addEventListener("click", function () {
     errEl.classList.remove("visible");
-    if (!inEl.value || !outEl.value || outEl.value <= inEl.value) {
+    /* only validate if at least one date is filled */
+    if ((inEl.value || outEl.value) && (!inEl.value || !outEl.value || outEl.value <= inEl.value)) {
       errEl.classList.add("visible");
       return;
     }
-    var url = QBOOK_BASE + "?from=" + inEl.value + "&to=" + outEl.value;
-    window.open(url, "_blank", "noopener");
+    showWidget();
   });
+
+  /* -- back/close on widget phase -- */
+  backBtn.addEventListener("click", showPicker);
+  widgetClose.addEventListener("click", closeModal);
 
   /* -- close behaviours -- */
   closeBtn.addEventListener("click", closeModal);
