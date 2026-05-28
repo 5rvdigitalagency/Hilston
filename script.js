@@ -67,8 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
             '</div>',
           '</div>',
           '<p class="bkm-error" id="bkm-error">Please select a valid arrival and departure date.</p>',
-          '<hr class="bkm-sep">',
-          '<button class="bkm-btn" id="bkm-submit">Check Availability</button>',
+          '<button class="bkm-btn" id="bkm-submit">Check Availability</button>'
           '<p class="bkm-note">Secure booking powered by QBook &mdash; all availability and payment handled on this site.</p>',
         '</div>',
 
