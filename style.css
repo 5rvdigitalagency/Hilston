@@ -744,3 +744,209 @@ button { font: inherit; cursor: pointer; }
   .footer-grid { padding: 36px 20px 30px; gap: 36px; }
   .footer-links { grid-template-columns: 1fr; }
 }
+
+/* =====================================================
+   BOOKING MODAL
+   ===================================================== */
+.bkm-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(10, 20, 28, 0.86);
+  backdrop-filter: blur(5px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.bkm-overlay.is-open {
+  opacity: 1; pointer-events: all;
+}
+
+/* Split panel: dark brand left + white form right */
+.bkm-panel {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  max-width: 800px; width: 100%;
+  position: relative;
+  border-top: 4px solid var(--teal);
+  transform: translateY(20px);
+  transition: transform 0.32s ease;
+}
+.bkm-overlay.is-open .bkm-panel {
+  transform: translateY(0);
+}
+
+/* ---- LEFT: dark brand column ---- */
+.bkm-brand {
+  background: var(--dark-deep);
+  padding: 48px 32px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.bkm-brand-inner { display: flex; flex-direction: column; gap: 30px; }
+.bkm-logo {
+  width: 150px; height: auto;
+  opacity: 0.9; display: block;
+}
+.bkm-brand-heading {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  font-size: 2.1rem;
+  color: var(--white);
+  line-height: 1.1;
+}
+.bkm-brand-script {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-size: 1.35em;
+  display: block;
+  color: var(--white);
+  line-height: 1;
+  margin-top: 2px;
+}
+.bkm-brand-address {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+}
+
+/* ---- RIGHT: white form column ---- */
+.bkm-form {
+  background: var(--white);
+  padding: 50px 46px 42px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.bkm-close {
+  position: absolute; top: 18px; right: 20px;
+  background: none; border: none;
+  font-size: 1.4rem; line-height: 1;
+  color: var(--text-muted); cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.15s;
+}
+.bkm-close:hover { color: var(--text); }
+
+.bkm-eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--teal);
+  font-weight: 700; margin-bottom: 30px;
+  display: flex; align-items: center; gap: 12px;
+}
+.bkm-eyebrow::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+.bkm-fields {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; margin-bottom: 28px;
+}
+.bkm-field { display: flex; flex-direction: column; gap: 10px; }
+.bkm-field label {
+  font-size: 0.65rem; letter-spacing: 0.18em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--text-muted);
+}
+.bkm-field input[type="date"] {
+  border: none;
+  border-bottom: 1.5px solid var(--beige-2);
+  padding: 10px 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem; color: var(--text);
+  background: transparent;
+  outline: none;
+  transition: border-bottom-color 0.2s;
+  width: 100%; cursor: pointer;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.bkm-field input[type="date"]:focus {
+  border-bottom-color: var(--teal);
+}
+
+.bkm-error {
+  font-size: 0.75rem; color: #c0392b;
+  margin-bottom: 14px; display: none;
+  letter-spacing: 0.02em;
+}
+.bkm-error.visible { display: block; }
+
+.bkm-btn {
+  display: block; width: 100%;
+  padding: 15px 30px;
+  background: var(--teal); color: var(--white);
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 26px;
+  border-radius: 0;
+}
+.bkm-btn:hover { background: var(--teal-dark); }
+
+.bkm-divider {
+  border: none; border-top: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.bkm-rates-label {
+  font-size: 0.65rem; letter-spacing: 0.18em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--text-muted); margin-bottom: 12px;
+}
+.bkm-rates-frame {
+  width: 100%; border: none;
+  min-height: 120px; display: block;
+  background: var(--beige);
+}
+.bkm-note {
+  font-size: 0.72rem; color: var(--text-muted);
+  margin-top: 12px; line-height: 1.6;
+}
+
+/* Mobile: stack columns */
+@media (max-width: 680px) {
+  .bkm-panel { grid-template-columns: 1fr; }
+  .bkm-brand { padding: 32px 28px 28px; flex-direction: row; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .bkm-brand-inner { flex-direction: row; align-items: center; gap: 18px; }
+  .bkm-brand-heading { font-size: 1.5rem; }
+  .bkm-logo { width: 100px; }
+  .bkm-brand-address { display: none; }
+  .bkm-form { padding: 36px 28px 30px; }
+  .bkm-fields { grid-template-columns: 1fr; }
+}
+
+/* =====================================================
+   RATES WIDGET (accommodation page inline)
+   ===================================================== */
+.rates-widget-section {
+  background: var(--beige);
+  padding: 60px 80px;
+}
+.rates-widget-section .section-eyebrow {
+  font-size: 0.72rem; letter-spacing: 0.18em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--teal); margin-bottom: 8px;
+}
+.rates-widget-section h2 {
+  font-family: var(--font-serif); font-weight: normal;
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  margin-bottom: 28px;
+}
+.rates-widget-wrap {
+  background: var(--white);
+  padding: 30px;
+}
+.rates-widget-wrap iframe {
+  width: 100%; border: none; display: block;
+}
+@media (max-width: 860px) {
+  .rates-widget-section { padding: 48px 32px; }
+}
+@media (max-width: 560px) {
+  .rates-widget-section { padding: 36px 20px; }
+}
