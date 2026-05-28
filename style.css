@@ -948,13 +948,8 @@ button { font: inherit; cursor: pointer; }
 }
 .bkm-error.visible { display: block; }
 
-/* divider between fields and button */
-.bkm-sep {
-  border: none; border-top: 1px solid var(--beige);
-  margin: 28px 0 26px;
-}
-
 .bkm-btn {
+  margin-top: 36px;
   display: block; width: 100%;
   padding: 16px 30px;
   background: var(--teal); color: var(--white);
