@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Hilston Park Outdoor Centre</title>
+  <meta name="description" content="Learn about Hilston Park, an activity centre in Monmouth offering residential trips, outdoor learning, and group experiences in Wales.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== ABOUT PAGE STYLES ===== */
+
+    /* HERO BANNER */
+    .about-hero {
+      position: relative;
+      min-height: 560px;
+      background: url('images/hero-families.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+    }
+    .about-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.74) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.18) 100%);
+    }
+    .about-hero-inner {
+      position: relative; z-index: 2;
+      width: 100%; padding: 64px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: flex-end;
+      color: var(--white);
+    }
+    .about-hero-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 14px;
+    }
+    .about-hero-inner h1 {
+      font-family: var(--font-serif);
+      font-weight: normal;
+      font-size: clamp(2.6rem, 4.2vw, 4.4rem);
+      line-height: 1.06; color: var(--white);
+    }
+    .about-hero-sub {
+      font-size: 0.96rem; line-height: 1.78;
+      color: rgba(255,255,255,0.88);
+      max-width: 50ch;
+      align-self: flex-end;
+      padding-bottom: 8px;
+    }
+
+    /* ABOUT INTRO */
+    .about-intro { background: var(--white); padding: 88px 80px; }
+    .about-intro-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .about-intro-sticky { position: sticky; top: 100px; }
+    .about-intro-sticky .heading-display { margin-bottom: 28px; }
+    .about-intro-sticky p {
+      font-size: 0.92rem; line-height: 1.88;
+      color: var(--text-muted); margin-bottom: 1.2rem;
+    }
+    .about-intro-images { display: flex; flex-direction: column; gap: 12px; }
+    .about-intro-images img { width: 100%; height: 230px; object-fit: cover; display: block; }
+
+    /* HISTORY */
+    .history { background: var(--beige); padding: 88px 80px; }
+    .history-heading { margin-bottom: 28px; }
+    .history-intro {
+      font-size: 0.92rem; line-height: 1.88;
+      color: var(--text-muted); max-width: 700px; margin-bottom: 48px;
+    }
+    .history-img-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px; margin-bottom: 60px;
+    }
+    .history-img-row img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .history-content-grid {
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: 64px; align-items: start;
+    }
+    .history-img-pair {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .history-img-pair img { width: 100%; height: 260px; object-fit: cover; display: block; }
+    .history-text .era { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 4px; }
+    .history-text p {
+      font-size: 0.9rem; line-height: 1.88; color: var(--text-muted); margin-bottom: 1.1rem;
+    }
+    .history-text p strong { color: var(--text); }
+    .history-text .btn-outline {
+      display: inline-flex; align-items: center; gap: 14px;
+      border: 1.5px solid var(--text); padding: 13px 26px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--text);
+      transition: background 0.2s, color 0.2s; margin-top: 8px;
+    }
+    .history-text .btn-outline:hover { background: var(--text); color: var(--white); }
+    .btn-outline svg { width: 18px; height: 10px; }
+
+    /* SAFETY */
+    .safety { background: var(--white); padding: 88px 80px; }
+    .safety-header { margin-bottom: 54px; }
+    .safety-header .heading-display { margin-bottom: 0; }
+    .safety-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .safety-point {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px 32px 0;
+    }
+    .safety-point:nth-child(even) { padding: 32px 0 32px 40px; border-left: 1px solid var(--border); }
+    .safety-point h3 {
+      font-family: var(--font-serif); font-weight: normal;
+      font-size: 1.3rem; margin-bottom: 12px; color: var(--text);
+    }
+    .safety-point p { font-size: 0.88rem; line-height: 1.82; color: var(--text-muted); }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--dark); padding: 88px 80px; text-align: center; }
+    .testimonial-wrap { min-height: 220px; display: flex; align-items: center; justify-content: center; }
+    .testimonial-item { display: none; flex-direction: column; align-items: center; gap: 18px; }
+    .testimonial-item.active { display: flex; }
+    .testimonial-quote-mark {
+      font-family: Georgia, serif; font-size: 5rem; line-height: 0.6;
+      color: var(--teal); margin-bottom: 8px;
+    }
+    .testimonial-text {
+      font-size: 1.18rem; line-height: 1.68; font-style: italic;
+      color: rgba(255,255,255,0.9); max-width: 640px;
+    }
+    .testimonial-author {
+      font-size: 0.72rem; letter-spacing: 0.24em;
+      text-transform: uppercase; color: rgba(255,255,255,0.6);
+    }
+    .testimonial-dots {
+      display: flex; justify-content: center; gap: 8px; margin-top: 36px;
+    }
+    .testimonial-dots button {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: none; background: rgba(255,255,255,0.3);
+      cursor: pointer; transition: background 0.25s, width 0.25s, border-radius 0.25s; padding: 0;
+    }
+    .testimonial-dots button.active { background: var(--teal); width: 24px; border-radius: 4px; }
+
+    /* VISIT US */
+    .visit-us { background: var(--beige); padding: 88px 80px; }
+    .visit-us .heading-display { margin-bottom: 44px; }
+    .visit-us-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .visit-card {
+      background: var(--white); padding: 36px 32px;
+      display: flex; flex-direction: column; gap: 16px;
+      border-top: 3px solid var(--teal);
+    }
+    .visit-icon {
+      width: 46px; height: 46px; background: var(--teal);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+    .visit-icon svg { width: 22px; height: 22px; stroke: white; fill: none; stroke-width: 2; }
+    .visit-card h3 {
+      font-family: var(--font-serif); font-weight: normal; font-size: 1.3rem; color: var(--text);
+    }
+    .visit-card p { font-size: 0.88rem; line-height: 1.78; color: var(--text-muted); flex: 1; }
+    .visit-card .btn-pill { margin-top: 4px; align-self: flex-start; }
+
+    /* BLOGS */
+    .blogs { background: var(--white); padding: 88px 80px; }
+    .blogs .heading-display { margin-bottom: 44px; }
+    .blogs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .blog-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+    .blog-card-img { overflow: hidden; height: 220px; }
+    .blog-card-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .blog-card:hover .blog-card-img img { transform: scale(1.06); }
+    .blog-card-body { padding: 22px 0 0; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .blog-card-body h3 {
+      font-family: var(--font-serif); font-weight: normal;
+      font-size: 1.1rem; line-height: 1.38; color: var(--text);
+    }
+    .blog-card-body p { font-size: 0.85rem; line-height: 1.72; color: var(--text-muted); flex: 1; }
+    .blog-read-more {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--teal); margin-top: 6px;
+    }
+    .blog-read-more svg { width: 16px; height: 16px; stroke: var(--teal); fill: none; stroke-width: 2; transition: transform 0.2s; }
+    .blog-card:hover .blog-read-more svg { transform: translate(3px,-3px); }
+
+    /* FAQ */
+    .faq { background: var(--beige); padding: 88px 80px; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1.65fr; gap: 80px; align-items: start; }
+    .faq-label {
+      font-family: var(--font-script); font-size: 1.6rem; color: var(--teal);
+      margin-bottom: 10px; display: block;
+    }
+
+    @media (max-width: 1100px) {
+      .about-intro, .history, .safety, .testimonials, .visit-us, .blogs, .faq { padding-left: 40px; padding-right: 40px; }
+      .about-hero-inner { padding: 48px 40px; }
+    }
+    @media (max-width: 880px) {
+      .about-hero-inner, .about-intro-grid, .history-content-grid, .safety-grid, .visit-us-grid, .blogs-grid, .faq-grid { grid-template-columns: 1fr; }
+      .about-hero-sub { padding-bottom: 0; }
+      .history-img-row { grid-template-columns: 1fr 1fr; }
+      .safety-point:nth-child(even) { border-left: none; padding-left: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="site-wrap">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <img src="images/logo.png" alt="Hilston Park Crest">
+        <div class="logo-text">
+          <span class="logo-name"><strong>HILSTON</strong><span class="logo-name-light">PARK</span></span>
+          <span class="logo-tagline">BRINGING HARMONY THROUGH HERITAGE</span>
+        </div>
+      </div>
+      <a href="#" class="btn-book">BOOK NOW</a>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="main-nav">
+    <ul class="nav-list">
+      <li><a href="about.html" style="border-bottom:2px solid rgba(255,255,255,0.8);padding-bottom:2px;">ABOUT</a></li>
+      <li><a href="#">EDUCATION</a></li>
+      <li><a href="#">EVENTS</a></li>
+      <li><a href="#">ACCOMMODATION</a></li>
+      <li><a href="#">CONTACT</a></li>
+      <li><a href="#">BLOG</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO BANNER -->
+  <section class="about-hero">
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-inner">
+      <div>
+        <p class="about-hero-eyebrow">Overview</p>
+        <h1>Hilston<br>Park</h1>
+      </div>
+      <p class="about-hero-sub">A heritage setting in the Wye Valley where residential stays are shaped by care, with over 50 years of experience behind every visit.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT INTRO -->
+  <section class="about-intro">
+    <div class="about-intro-grid">
+      <div class="about-intro-sticky">
+        <h2 class="heading-display">About<br>Hilston Park</h2>
+        <p>Between the Black Mountains and the River Wye, Hilston Park sets its historic heritage across meadows and woodlands. Serving as an outdoor activity centre in Monmouth for over 50 years, the estate has supported meaningful residential experiences for groups.</p>
+        <p>For students, days here bring space to learn together, build confidence, and take part in shared residential experiences. For corporate teams, it offers a space to refresh, reconnect, and return with better focus. For families and teams, it provides a calm environment where connecting with nature feels more present and meaningful.</p>
+        <p>Accommodation, activities, and catering are all in one place, so visitors can settle in easily and have a memorable experience. Each stay is supported by experienced, DBS-checked staff with clear safeguarding procedures. SEN considerations are also supported through a flexible and inclusive approach to ensure all guests can take part comfortably.</p>
+      </div>
+      <div class="about-intro-images">
+        <img src="images/accommodation.jpg" alt="School children at Hilston Park">
+        <img src="images/food.jpg" alt="On-site catering">
+        <img src="images/estate-exterior.png" alt="Accommodation at Hilston Park">
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAN YOUR DAY -->
+  <section class="plan-day">
+    <h2 class="heading-display light center">Plan Your Day at Hilston Park</h2>
+    <div class="plan-cards">
+      <article class="plan-card" style="background-image:url(images/hero-schools.jpg)">
+        <div class="plan-overlay">
+          <h3>Outdoor Learning<br>&amp; Development</h3>
+          <p>Safely structured, nature-based outdoor adventure activities for adults and pupils that challenge them to think differently.</p>
+          <a href="#" class="btn-pill">READ MORE</a>
+        </div>
+      </article>
+      <article class="plan-card" style="background-image:url(images/activity-portrait.jpg)">
+        <div class="plan-overlay">
+          <h3>Team Building &amp; Group<br>Challenges</h3>
+          <p>Interactive team building activities in the heart of Wales. Fresh ground, real challenges, and the kind of perspective that an office never quite manages to give.</p>
+          <a href="#" class="btn-pill">READ MORE</a>
+        </div>
+      </article>
+      <article class="plan-card" style="background-image:url(images/courtyard-room.jpg)">
+        <div class="plan-overlay">
+          <h3>Private Family<br>Stays</h3>
+          <p>Palladian elegance. Open countryside. Time that is yours alone. Hilston Park offers private family stays defined by space, silence and moments you&rsquo;ll never forget.</p>
+          <a href="#" class="btn-pill">READ MORE</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- OUR HISTORY -->
+  <section class="history">
+    <h2 class="heading-display history-heading">Our History</h2>
+    <p class="history-intro">Hilston Park has a long and established history within the Monmouthshire countryside. The written records of the estate trace back to the <strong>13th century</strong>, where it began as a manor estate near Skenfrith. Over centuries, the land evolved under the care of prominent local families and became a heritage estate with unique surroundings.</p>
+    <div class="history-img-row">
+      <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded24c489c62d9e3c1f8_img-6.jpg" alt="Historic Hilston Park">
+      <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded30dae33520b10571b_img-1.jpg" alt="Historic Hilston Park">
+      <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded331b430865b52e6c2_img-4.jpg" alt="Historic Hilston Park">
+      <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded2d063900245321fdc_img-7.jpg" alt="Historic Hilston Park">
+    </div>
+    <div class="history-content-grid">
+      <div class="history-img-pair">
+        <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded3b4dc65f3e7c8caf3_img-9.jpg" alt="Hilston Park archive">
+        <img src="images/manor-house.jpg" alt="Manor House staircase">
+      </div>
+      <div class="history-text">
+        <p class="era">In 1838,</p>
+        <p>the original house was damaged by fire and later rebuilt. The new building was designed in a Palladian style, which still stands today. It is now a Grade II listed estate and is known for its simple, balanced architecture.</p>
+        <p>Over the years, the estate changed ownership several times, with each period adding to its development. In the mid-1900s, its use began to change from a private home to an educational space. <strong>By 1971, it became an outdoor education centre</strong>, welcoming school groups for residential stays, adventure activities and learning beyond the traditional classroom.</p>
+        <p><strong>Today, Hilston Park continues as a leisure centre in Monmouth, hosting schools, corporate groups, and private visitors.</strong> With accommodation for over 130 guests, in-house catering, and more than 20 outdoor activities, the estate remains shaped by the same values of learning, wellbeing, and shared experience that have guided it for over 50 years.</p>
+        <a href="#" class="btn-outline">DISCOVER MORE
+          <svg viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 11L18 6L13 1M0 6h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAFETY STANDARDS -->
+  <section class="safety">
+    <div class="safety-header">
+      <h2 class="heading-display">Safety Standards<br>and Guidelines</h2>
+    </div>
+    <div class="safety-grid">
+      <div class="safety-point">
+        <h3>DBS-Checked Staff</h3>
+        <p>All staff working with groups at Hilston Park are DBS-checked through the Disclosure and Barring Service (DBS). This ensures that everyone involved in delivering residential programmes has been appropriately vetted to work with children and vulnerable individuals.</p>
+      </div>
+      <div class="safety-point">
+        <h3>Safeguarding Procedures</h3>
+        <p>Proper safeguarding procedures are in place across all residential stays and are followed consistently by the team. The procedures guide supervision, conduct, and response protocols, ensuring a safe and well-managed environment for schools, corporate groups, and private visitors.</p>
+      </div>
+      <div class="safety-point">
+        <h3>Risk Assessments</h3>
+        <p>Risk assessments are completed for activities and residential stays to support safe delivery across all programmes. These are used to plan group activities responsibly and are available to assist schools and organisers with their internal approval processes where required.</p>
+      </div>
+      <div class="safety-point">
+        <h3>Duty of Care</h3>
+        <p>A clear duty of care is maintained throughout every stay at Hilston Park. Experienced staff oversee visitors from arrival to departure, ensuring that accommodation, activities, and site use are managed safely and appropriately at all times.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testimonial-wrap" id="testimonialWrap">
+      <div class="testimonial-item active">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">The best part of the experience was, without a doubt, the staff. They are the most friendly group of people you could meet.</p>
+        <p class="testimonial-author">Sarah Powell</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">We came to Hilston Park with a primary school class for a residential. It was the best site I&rsquo;ve been to in 23 years of school camps.</p>
+        <p class="testimonial-author">Heidi Hal</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">The Hilston staff were all very helpful and friendly. I can&rsquo;t wait to come back to this site.</p>
+        <p class="testimonial-author">Supreet Singh</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">Absolutely great team that took care of us. Both daughters enjoyed the leap of faith via the special activities team.</p>
+        <p class="testimonial-author">Ibrahim Ahmet</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">Every time we come here as a school, it feels like a second home. The site itself is beautiful with a great selection of activities, and we are always very well fed.</p>
+        <p class="testimonial-author">Martin Barker</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">Creating a harmonious space in the Welsh countryside to celebrate, reconnect, and embrace adventure.</p>
+        <p class="testimonial-author">Emily Davies</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">Fantastic facilities, wonderful views. Thank you Hilston for making us feel welcome.</p>
+        <p class="testimonial-author">John Smith</p>
+      </div>
+    </div>
+    <div class="testimonial-dots" id="testimonialDots"></div>
+  </section>
+
+  <!-- VISIT US -->
+  <section class="visit-us">
+    <h2 class="heading-display center">Plan Your Visit</h2>
+    <div class="visit-us-grid">
+      <div class="visit-card">
+        <div class="visit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+          </svg>
+        </div>
+        <h3>When to Visit</h3>
+        <p>Hilston Park welcomes guests year-round. Summer brings longer days and time outdoors, while winter offers a quieter setting, with time focused indoors.</p>
+        <a href="#" class="btn-pill">LEARN MORE</a>
+      </div>
+      <div class="visit-card">
+        <div class="visit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+        </div>
+        <h3>Getting Here</h3>
+        <p>Hilston Park is located near Monmouth in Wales and is accessible by road. For schools and group organisers planning visits, travel assistance may also be provided.</p>
+        <a href="#" class="btn-pill">LEARN MORE</a>
+      </div>
+      <div class="visit-card">
+        <div class="visit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 12 19.79 19.79 0 01.42 3.18 2 2 0 012.4 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.9a16 16 0 006.18 6.18l1.27-.78a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </div>
+        <h3>Get in Touch</h3>
+        <p>Whether you are a school group planning a residential trip, a corporate group planning a retreat, or a wedding party, we&rsquo;d love to arrange your visit.</p>
+        <a href="#" class="btn-pill">CONTACT US</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOGS -->
+  <section class="blogs">
+    <h2 class="heading-display">Blogs</h2>
+    <div class="blogs-grid">
+      <a href="#" class="blog-card">
+        <div class="blog-card-img">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg" alt="Hilston Park International Menu">
+        </div>
+        <div class="blog-card-body">
+          <h3>Hilston Park&rsquo;s International Menu</h3>
+          <p>Our international menu is designed to celebrate cultural connection through every dish. Each item on our menu tells a unique story, bridging the gap between diverse traditions and cuisines from around the world.</p>
+          <span class="blog-read-more">READ MORE
+            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-card-img">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb6509b9ec1135b6c0dd89_Planning%20a%20School%20Adventure%20Trip%20in%202025.jpg" alt="Planning a School Adventure Trip">
+        </div>
+        <div class="blog-card-body">
+          <h3>Planning a School Adventure Trip in 2025? Unleash It at Hilston Park</h3>
+          <p>Organising a memorable school adventure trip in 2025 can be a fulfilling challenge for educators. Creating an experience that will engage students and promote their development requires striking the correct balance between enjoyment and education.</p>
+          <span class="blog-read-more">READ MORE
+            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-card-img">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb632a2b3438cd618d8b30_Why%20Schools%20Are%20Booking%20Their%202025%20Trips%20at%20Hilston%20Park.jpg" alt="Why Schools Are Booking at Hilston Park">
+        </div>
+        <div class="blog-card-body">
+          <h3>Unleash the Adventure: Why Schools Are Booking Their 2025 Trips at Hilston Park</h3>
+          <p>School travels have a significant impact on how young minds develop. A residential adventure provides a special chance for children to leave the classroom and engage in outdoor learning activities.</p>
+          <span class="blog-read-more">READ MORE
+            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="faq-grid">
+      <div>
+        <span class="faq-label">FAQ</span>
+        <h2 class="heading-display">Frequently<br>Asked<br>Questions</h2>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span></span>
+            <span class="acc-label">How is Hilston Park Outdoor Centre used?</span>
+            <span class="caret">&#9660;</span>
+          </button>
+          <div class="accordion-body"><p>Hilston Park outdoor centre is used for school residential trips, outdoor learning programmes, corporate retreats, and private group stays.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span></span>
+            <span class="acc-label">Who Runs Hilston Park?</span>
+            <span class="caret">&#9660;</span>
+          </button>
+          <div class="accordion-body"><p>Hilston Park is a charity-run residential centre operated by an experienced team responsible for delivering education, corporate, and private group programmes.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span></span>
+            <span class="acc-label">How Old is Hilston Park Building?</span>
+            <span class="caret">&#9660;</span>
+          </button>
+          <div class="accordion-body"><p>The earliest record of a building on the site dates back to 1293, which means the estate has been in use for over 700 years.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span></span>
+            <span class="acc-label">Who Can Stay at Hilston Park?</span>
+            <span class="caret">&#9660;</span>
+          </button>
+          <div class="accordion-body"><p>The centre hosts school groups, corporate teams, and private bookings, including families and community groups, with arrangements adapted to each type of stay.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span></span>
+            <span class="acc-label">What is Included in a Residential Stay?</span>
+            <span class="caret">&#9660;</span>
+          </button>
+          <div class="accordion-body"><p>Residential stays include accommodation, in-house catering, and access to on-site activities, organised according to the needs of the visiting group.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-crest">
+          <span class="crest-arc-top">BRINGING HARMONY</span>
+          <div class="crest-mark"><img src="images/logo.png" alt=""></div>
+          <span class="crest-year">&mdash; 1838 &mdash;</span>
+          <span class="crest-name">HILSTON<span class="crest-name-light">PARK</span></span>
+          <span class="crest-arc-bottom">THROUGH HERITAGE</span>
+        </div>
+        <address>Newcastle, Monmouth,<br>Gwent, Wales, NP25 5NY</address>
+        <div class="social-icons">
+          <a href="#" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
+          <a href="#" aria-label="Instagram" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4A6.2 6.2 0 0012 5.8zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"/></svg></a>
+          <a href="#" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
+          <a href="#" aria-label="Twitter / X" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 0h3.5L14 10.2 23 24h-7.4l-5.2-6.8L4.2 24H.7l8.3-9.5L0 0h7.6l4.7 6.2L18.2 0zm-1.2 21.6h1.9L7.1 2h-2L17 21.6z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Home</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Visit Us</h4>
+          <ul>
+            <li><a href="#">Educational</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Accommodation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bar"></div>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+<script>
+  // Testimonial carousel
+  (function(){
+    var items = document.querySelectorAll('.testimonial-item');
+    var dotsEl = document.getElementById('testimonialDots');
+    var current = 0;
+    items.forEach(function(_, i){
+      var b = document.createElement('button');
+      if(i===0) b.className='active';
+      b.addEventListener('click', function(){ go(i); });
+      dotsEl.appendChild(b);
+    });
+    function go(n){
+      items[current].classList.remove('active');
+      dotsEl.children[current].classList.remove('active');
+      current = n;
+      items[current].classList.add('active');
+      dotsEl.children[current].classList.add('active');
+    }
+    setInterval(function(){ go((current+1) % items.length); }, 4500);
+  })();
+</script>
+</body>
+</html>
