@@ -622,9 +622,9 @@ button { font: inherit; cursor: pointer; }
   border: 0;
   padding: 14px 20px;
   display: grid;
-  grid-template-columns: 24px 1fr 24px;
+  grid-template-columns: 20px 1fr 20px;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   cursor: pointer;
 }
 .acc-question {
@@ -635,18 +635,21 @@ button { font: inherit; cursor: pointer; }
   letter-spacing: 0.02em;
   color: var(--text);
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 .accordion-item.open .acc-question { color: var(--teal-dark); }
 
-.acc-icon {
-  justify-self: end;
+.acc-icon, .acc-icon-l {
   color: var(--text-muted);
   display: flex;
   align-items: center;
   transition: transform 0.3s ease, color 0.2s ease;
 }
+.acc-icon { justify-self: end; }
+.acc-icon-l { justify-self: start; pointer-events: none; }
 .acc-svg { width: 16px; height: 16px; display: block; }
-.accordion-item.open .acc-icon { transform: rotate(180deg); color: var(--teal-dark); }
+.accordion-item.open .acc-icon,
+.accordion-item.open .acc-icon-l { transform: rotate(180deg); color: var(--teal-dark); }
 
 .accordion-body {
   max-height: 0;

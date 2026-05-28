@@ -8,17 +8,21 @@ document.addEventListener("DOMContentLoaded", function () {
   var items = document.querySelectorAll(".accordion-item");
   items.forEach(function (item) {
     var btn  = item.querySelector(".accordion-btn");
-    var icon = item.querySelector(".acc-icon");
+    var iconR = item.querySelector(".acc-icon");
+    var iconL = item.querySelector(".acc-icon-l");
     btn.addEventListener("click", function () {
       var isOpen = item.classList.contains("open");
       items.forEach(function (i) {
         i.classList.remove("open");
-        var ic = i.querySelector(".acc-icon");
-        if (ic) ic.innerHTML = SVG_DOWN;
+        var ir = i.querySelector(".acc-icon");
+        var il = i.querySelector(".acc-icon-l");
+        if (ir) ir.innerHTML = SVG_DOWN;
+        if (il) il.innerHTML = SVG_DOWN;
       });
       if (!isOpen) {
         item.classList.add("open");
-        if (icon) icon.innerHTML = SVG_UP;
+        if (iconR) iconR.innerHTML = SVG_UP;
+        if (iconL) iconL.innerHTML = SVG_UP;
       }
     });
   });
