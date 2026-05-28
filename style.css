@@ -869,6 +869,31 @@ button { font: inherit; cursor: pointer; }
   position: relative; z-index: 2;
 }
 
+/* live weather widget */
+.bkm-weather {
+  display: flex; align-items: center; gap: 10px;
+  position: relative; z-index: 2;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+.bkm-weather-icon {
+  font-size: 1.65rem; line-height: 1; flex-shrink: 0;
+}
+.bkm-weather-info {
+  display: flex; flex-direction: column; gap: 3px;
+}
+.bkm-weather-temp {
+  font-family: var(--font-serif);
+  font-size: 1.45rem; color: var(--white); line-height: 1;
+}
+.bkm-weather-desc {
+  font-size: 0.63rem;
+  color: rgba(255,255,255,0.48);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 /* teal accent bar at bottom of image panel */
 .bkm-brand::after {
   content: '';
