@@ -206,8 +206,8 @@ button { font: inherit; cursor: pointer; }
   min-height: 620px;
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
-  cursor: pointer;
+  align-items: center;
+  justify-content: center;
 }
 /* scalable background layer */
 .hero-bg {
@@ -245,47 +245,29 @@ button { font: inherit; cursor: pointer; }
 .hero-frame {
   position: relative;
   z-index: 2;
-  padding: 0 38px 52px;
-  width: 100%;
-  color: var(--white);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 20px;
+  justify-content: center;
 }
 .hero-label {
   display: inline-block;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--white);
-  border: 1px solid rgba(255,255,255,0.55);
-  background: rgba(255,255,255,0.1);
-  padding: 9px 22px;
-  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.65);
+  background: rgba(20,35,45,0.35);
+  padding: 18px 36px;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.35s ease, border-color 0.35s ease, letter-spacing 0.35s ease;
 }
-/* reveal: CTA slides up on hover */
-.hero-reveal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  transform: translateY(16px);
-  opacity: 0;
-  transition: transform 0.5s ease, opacity 0.45s ease;
-  pointer-events: none;
-}
-.hero-card:hover .hero-reveal {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-.hero-frame .btn-hero {
-  padding: 14px 36px;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+.hero-card:hover .hero-label {
+  background: rgba(20,35,45,0.65);
+  border-color: rgba(255,255,255,1);
+  letter-spacing: 0.28em;
 }
 
 /* =====================================================
