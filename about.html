@@ -199,8 +199,34 @@
       margin-bottom: 10px; display: block;
     }
 
+    /* PLAN YOUR DAY */
+    .plan-day { background: var(--dark); padding: 88px 80px; }
+    .plan-day .heading-display { margin-bottom: 44px; }
+    .plan-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .plan-card {
+      position: relative; min-height: 460px;
+      background-size: cover; background-position: center; background-repeat: no-repeat;
+      display: flex; align-items: flex-end; overflow: hidden;
+    }
+    .plan-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+    }
+    .plan-overlay {
+      position: relative; z-index: 1;
+      padding: 32px 28px; display: flex; flex-direction: column; gap: 14px;
+    }
+    .plan-overlay h3 {
+      font-family: var(--font-serif); font-weight: normal;
+      font-size: 1.45rem; line-height: 1.2; color: var(--white);
+    }
+    .plan-overlay p { font-size: 0.86rem; line-height: 1.72; color: rgba(255,255,255,0.85); }
+    .plan-overlay .btn-pill { align-self: flex-start; margin-top: 4px; }
+
     @media (max-width: 1100px) {
-      .about-intro, .history, .safety, .testimonials, .visit-us, .blogs, .faq { padding-left: 40px; padding-right: 40px; }
+      .about-intro, .history, .safety, .testimonials, .visit-us, .blogs, .faq, .plan-day { padding-left: 40px; padding-right: 40px; }
       .about-hero-inner { padding: 48px 40px; }
     }
     @media (max-width: 880px) {
@@ -208,6 +234,8 @@
       .about-hero-sub { padding-bottom: 0; }
       .history-img-row { grid-template-columns: 1fr 1fr; }
       .safety-point:nth-child(even) { border-left: none; padding-left: 0; }
+      .plan-cards { grid-template-columns: 1fr; }
+      .plan-card { min-height: 340px; }
     }
   </style>
 </head>
