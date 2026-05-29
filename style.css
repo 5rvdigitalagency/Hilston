@@ -879,376 +879,108 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* =====================================================
-   BOOKING MODAL  —  Cal.com floating card style
+   BOOKING MODAL  —  Cal.com-style popup
    ===================================================== */
 .bkm-overlay {
   position: fixed; inset: 0; z-index: 9000;
-  background: rgba(8, 16, 22, 0.52);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   display: flex; align-items: center; justify-content: center;
   padding: 20px;
   opacity: 0; pointer-events: none;
-  transition: opacity 0.22s ease;
+  transition: opacity 0.25s ease;
 }
 .bkm-overlay.is-open {
   opacity: 1; pointer-events: all;
 }
 
-/* Centered card — scale+fade like Cal.com */
-.bkm-panel {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  max-width: 780px; width: 100%;
-  position: relative;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.32), 0 0 0 1px rgba(0,0,0,0.08);
+/* The floating popup card */
+.bkm-popup {
+  background: var(--white);
   border-radius: 16px;
   overflow: hidden;
-  opacity: 0;
-  transform: scale(0.96) translateY(10px);
-  transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+  width: 100%; max-width: 920px;
+  display: flex; flex-direction: column;
   max-height: calc(100vh - 40px);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,0,0,0.06);
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+  transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.26s ease;
 }
-.bkm-overlay.is-open .bkm-panel {
+.bkm-overlay.is-open .bkm-popup {
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: translateY(0) scale(1);
 }
 
-/* ---- LEFT: estate photo panel ---- */
-.bkm-brand {
-  position: relative;
-  overflow: hidden;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 28px 24px;
-}
-.bkm-brand-bg {
-  position: absolute; inset: 0;
-  background-image: url('images/estate-exterior.png');
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.6s ease;
-}
-.bkm-overlay.is-open .bkm-brand-bg {
-  transform: scale(1.03);
-}
-.bkm-brand-grad {
-  position: absolute; inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(10,22,32,0.97) 0%,
-    rgba(10,22,32,0.55) 50%,
-    rgba(10,22,32,0.18) 100%
-  );
-}
-.bkm-brand-inner {
-  position: relative; z-index: 2;
-  display: flex; flex-direction: column; gap: 20px;
-}
-.bkm-logo {
-  width: 130px; height: auto;
-  opacity: 0.92; display: block;
-}
-.bkm-brand-heading {
-  font-family: var(--font-serif);
-  font-weight: normal;
-  font-size: 2.2rem;
-  color: var(--white);
-  line-height: 1.08;
-  letter-spacing: -0.01em;
-}
-.bkm-brand-script {
-  font-family: var(--font-script);
-  font-style: normal;
-  font-size: 1.3em;
-  display: block;
-  color: var(--white);
-  line-height: 1;
-  margin-top: 4px;
-  opacity: 0.9;
-}
-.bkm-brand-address {
-  font-size: 0.68rem;
-  color: rgba(255,255,255,0.38);
-  line-height: 1.9;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  position: relative; z-index: 2;
-}
-.bkm-weather {
-  display: flex; align-items: center; gap: 10px;
-  position: relative; z-index: 2;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255,255,255,0.12);
-}
-.bkm-weather-icon { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
-.bkm-weather-info { display: flex; flex-direction: column; gap: 3px; }
-.bkm-weather-temp {
-  font-family: var(--font-serif);
-  font-size: 1.3rem; color: var(--white); line-height: 1;
-}
-.bkm-weather-desc {
-  font-size: 0.6rem;
-  color: rgba(255,255,255,0.48);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.bkm-brand::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--teal);
-  z-index: 3;
-}
-
-/* ---- RIGHT: calendar form panel ---- */
-.bkm-form {
-  background: var(--white);
-  padding: 28px 32px 24px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-.bkm-close {
-  position: absolute; top: 16px; right: 18px;
-  background: none; border: none;
-  font-size: 1.3rem; line-height: 1;
-  color: var(--border); cursor: pointer;
-  padding: 4px 8px;
-  transition: color 0.2s;
-  font-weight: 300;
-}
-.bkm-close:hover { color: var(--text); }
-.bkm-form-title {
-  font-family: var(--font-serif);
-  font-weight: normal;
-  font-size: 1.4rem;
-  color: var(--text);
-  line-height: 1.15;
-  margin-bottom: 14px;
-}
-
-/* ---- date summary chips (like Cal.com top row) ---- */
-.bkm-date-summary {
-  display: flex; align-items: center; gap: 6px;
-  margin-bottom: 14px;
-}
-.bkm-date-chip {
-  flex: 1;
-  display: flex; flex-direction: column; gap: 2px;
-  padding: 8px 12px;
-  border: 1px solid var(--beige-2);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
-}
-.bkm-date-chip:hover { border-color: var(--teal); }
-.bkm-date-chip.active {
-  border-color: var(--teal);
-  background: rgba(78,148,132,0.06);
-}
-.bkm-chip-label {
-  font-size: 0.58rem; letter-spacing: 0.18em;
-  text-transform: uppercase; font-weight: 700;
-  color: var(--text-muted);
-}
-.bkm-chip-value {
-  font-size: 0.82rem; color: var(--text);
-  font-family: var(--font-sans);
-}
-.bkm-date-chip-arrow {
-  color: var(--beige-2);
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-/* ---- calendar ---- */
-.bkm-cal { flex: 1; }
-.bkm-cal-nav {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 12px;
-}
-.bkm-cal-prev, .bkm-cal-next {
-  background: none; border: 1px solid var(--beige-2);
-  width: 30px; height: 30px;
-  border-radius: 6px;
-  font-size: 1.1rem; color: var(--text-muted);
-  cursor: pointer; line-height: 1;
-  display: flex; align-items: center; justify-content: center;
-  transition: border-color 0.18s, color 0.18s;
-}
-.bkm-cal-prev:hover, .bkm-cal-next:hover {
-  border-color: var(--teal); color: var(--teal);
-}
-.bkm-cal-month {
-  font-family: var(--font-sans);
-  font-size: 0.82rem; font-weight: 700;
-  color: var(--text); letter-spacing: 0.04em;
-}
-.bkm-cal-dow {
-  display: grid; grid-template-columns: repeat(7, 1fr);
-  gap: 2px; margin-bottom: 4px;
-}
-.bkm-cal-dow span {
-  text-align: center;
-  font-size: 0.58rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--text-muted);
-  padding: 4px 0;
-}
-.bkm-cal-grid {
-  display: grid; grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-}
-.bkm-day {
-  aspect-ratio: 1;
-  max-height: 36px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.76rem;
-  border-radius: 6px;
-  cursor: default;
-  color: var(--text);
-  position: relative;
-  transition: background 0.12s, color 0.12s;
-}
-.bkm-day-empty { background: none; }
-.bkm-day-past { color: var(--beige-2); cursor: not-allowed; }
-.bkm-day-pick { cursor: pointer; }
-.bkm-day-pick:hover:not(.bkm-day-start):not(.bkm-day-end) {
-  background: var(--beige);
-}
-.bkm-day-today::after {
-  content: '';
-  position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
-  width: 4px; height: 4px; border-radius: 50%;
-  background: var(--teal);
-}
-/* range fill */
-.bkm-day-range, .bkm-day-hover-range {
-  background: rgba(78,148,132,0.12);
-  border-radius: 0;
-  color: var(--text);
-}
-/* start/end caps */
-.bkm-day-start, .bkm-day-end {
-  background: var(--teal) !important;
-  color: var(--white) !important;
-  border-radius: 6px;
-  font-weight: 700;
-}
-.bkm-day-hover-end {
-  background: rgba(78,148,132,0.35) !important;
-  border-radius: 6px;
-}
-/* connect range to caps */
-.bkm-day-start { border-radius: 6px 0 0 6px; }
-.bkm-day-end   { border-radius: 0 6px 6px 0; }
-.bkm-day-start.bkm-day-end { border-radius: 6px; }
-
-/* error + button */
-.bkm-error {
-  font-size: 0.72rem; color: #b03030;
-  margin: 8px 0 0; display: none;
-  letter-spacing: 0.01em;
-}
-.bkm-error.visible { display: block; }
-.bkm-btn {
-  margin-top: 14px;
-  display: block; width: 100%;
-  padding: 13px 30px;
-  background: var(--teal); color: var(--white);
-  border: none;
-  font-family: var(--font-sans);
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s;
-  border-radius: 8px;
-}
-.bkm-btn:hover { background: var(--teal-dark); }
-.bkm-note {
-  margin-top: 10px;
-  font-size: 0.6rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  letter-spacing: 0.03em;
-  text-align: center;
-}
-
-/* ---- Phase 2: booking widget panel ---- */
-.bkm-widget-panel {
-  display: none;
-  flex-direction: column;
-  background: var(--white);
-  overflow: hidden;
-  grid-column: 1 / -1;
-}
-.bkm-panel.bkm-widget-active {
-  grid-template-columns: 1fr;
-  max-width: 980px;
-  height: min(88vh, 860px);
-  border-radius: 16px;
-}
-.bkm-panel.bkm-widget-active .bkm-brand,
-.bkm-panel.bkm-widget-active .bkm-form { display: none; }
-.bkm-panel.bkm-widget-active .bkm-widget-panel { display: flex; }
-.bkm-widget-header {
+/* Header bar */
+.bkm-popup-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px 14px 20px;
   background: var(--dark-deep);
-  height: 58px;
-  padding: 0 20px 0 0;
-  display: flex; align-items: center; gap: 0;
+  border-bottom: 3px solid var(--teal);
   flex-shrink: 0;
 }
-.bkm-back-btn {
-  background: none; border: none;
-  color: rgba(255,255,255,0.5); cursor: pointer;
-  font-family: var(--font-sans);
-  font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 0 20px; height: 100%;
-  border-right: 1px solid rgba(255,255,255,0.1);
-  transition: color 0.2s, background 0.2s;
+.bkm-popup-logo {
+  height: 34px; width: auto; opacity: 0.9;
   flex-shrink: 0;
 }
-.bkm-back-btn:hover { color: var(--white); background: rgba(255,255,255,0.05); }
-.bkm-widget-logo { height: 28px; opacity: 0.85; margin-left: 20px; flex-shrink: 0; }
-.bkm-widget-title {
+.bkm-popup-title {
+  font-family: var(--font-serif);
+  font-size: 1.0rem;
+  font-weight: normal;
+  color: rgba(255,255,255,0.75);
   flex: 1;
-  font-size: 0.62rem; letter-spacing: 0.22em;
-  text-transform: uppercase; color: rgba(255,255,255,0.35);
-  font-weight: 700; padding-left: 18px;
+  letter-spacing: 0.04em;
 }
-.bkm-widget-close {
-  background: none; border: none;
-  color: rgba(255,255,255,0.4); cursor: pointer;
-  font-size: 1.3rem; font-weight: 300;
-  line-height: 1; padding: 12px;
-  transition: color 0.18s; flex-shrink: 0;
+.bkm-popup-close {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.65);
+  border-radius: 8px;
+  width: 34px; height: 34px;
+  font-size: 1.25rem; line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  flex-shrink: 0;
 }
-.bkm-widget-close:hover { color: var(--white); }
-.bkm-widget-accent { height: 3px; background: var(--teal); flex-shrink: 0; }
-.bkm-booking-iframe { flex: 1; width: 100%; border: none; display: block; min-height: 0; }
+.bkm-popup-close:hover {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.36);
+  color: var(--white);
+}
 
-/* Mobile — bottom sheet */
+/* Body — iframe fills it */
+.bkm-popup-body {
+  flex: 1;
+  overflow: hidden;
+  min-height: 580px;
+  position: relative;
+}
+.bkm-popup-iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: none; display: block;
+}
+
+/* Mobile — slide up from bottom like Cal.com */
 @media (max-width: 700px) {
-  .bkm-overlay { align-items: flex-end; padding: 0; }
-  .bkm-panel {
-    grid-template-columns: 1fr;
-    border-radius: 16px 16px 0 0;
+  .bkm-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .bkm-popup {
+    border-radius: 20px 20px 0 0;
+    max-width: 100%;
+    max-height: 92dvh;
     opacity: 1;
     transform: translateY(100%);
     transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
-    max-height: 92dvh;
   }
-  .bkm-overlay.is-open .bkm-panel { transform: translateY(0); opacity: 1; }
-  .bkm-brand { display: none; }
-  .bkm-form { padding: 28px 20px 24px; border-radius: 16px 16px 0 0; }
-  .bkm-panel.bkm-widget-active { height: 92dvh; max-width: 100%; border-radius: 16px 16px 0 0; }
-  .bkm-back-btn { padding: 0 14px; font-size: 0.62rem; }
+  .bkm-overlay.is-open .bkm-popup {
+    transform: translateY(0);
+  }
 }
 
 /* =====================================================
