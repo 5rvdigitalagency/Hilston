@@ -276,22 +276,9 @@
     </div>
 
     <div class="insta-widget-wrap">
-      <!--
-        SETUP (2 minutes):
-        1. Go to https://behold.so → sign up free
-        2. Connect @hilstonparkofficial → create a feed
-        3. Copy your Feed ID (looks like: AbCd1234EfGh)
-        4. Replace REPLACE_WITH_YOUR_FEED_ID below with that ID
-      -->
-      <div id="behold-feed-REPLACE_WITH_YOUR_FEED_ID"></div>
+      <behold-widget feed-id="qbsvzG0laaLxFdO8loEs"></behold-widget>
       <script>
-        (function(){
-          var feedId = document.querySelector('[id^="behold-feed-"]').id.replace('behold-feed-','');
-          if(!feedId || feedId === 'REPLACE_WITH_YOUR_FEED_ID') return;
-          var s = document.createElement('script');
-          s.src = 'https://behold.so/embed/' + feedId + '/';
-          document.head.appendChild(s);
-        })();
+        (function(){var d=document,s=d.createElement("script");s.type="module";s.src="https://w.behold.so/widget.js";d.head.append(s);})();
       </script>
     </div>
   </section>
