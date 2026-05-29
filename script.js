@@ -229,4 +229,46 @@ document.addEventListener("DOMContentLoaded", function () {
     openModal();
   });
 
+  /* =========================================================
+     INSTAGRAM MARQUEE  —  Behold.so JSON API
+     ========================================================= */
+  var instaInner = document.getElementById("insta-inner");
+  if (instaInner) {
+    fetch("https://feeds.behold.so/qbsvzG0laaLxFdO8loEs")
+      .then(function(r){ return r.json(); })
+      .then(function(posts) {
+        if (!posts || !posts.length) return;
+
+        function buildSet(posts, hidden) {
+          var set = document.createElement("div");
+          set.className = "insta-set";
+          if (hidden) set.setAttribute("aria-hidden", "true");
+          posts.forEach(function(p) {
+            var imgSrc = p.thumbnailUrl || p.mediaUrl;
+            if (!imgSrc) return;
+            var a = document.createElement("a");
+            a.href = p.permalink || "https://www.instagram.com/hilstonparkofficial/";
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            a.setAttribute("aria-label", p.caption ? p.caption.slice(0, 80) : "View on Instagram");
+            var img = document.createElement("img");
+            img.src = imgSrc;
+            img.alt = "";
+            img.loading = "lazy";
+            a.appendChild(img);
+            set.appendChild(a);
+          });
+          return set;
+        }
+
+        instaInner.appendChild(buildSet(posts, false));
+        instaInner.appendChild(buildSet(posts, true));
+      })
+      .catch(function(){
+        /* silently hide the strip if fetch fails */
+        var strip = document.querySelector(".insta-strip");
+        if (strip) strip.style.display = "none";
+      });
+  }
+
 });
