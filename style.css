@@ -710,7 +710,11 @@ button { font: inherit; cursor: pointer; }
 .social-icon:hover { opacity: 0.75; }
 
 .footer-links {
-  display: contents;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  grid-column: span 3;
+  align-self: center;
 }
 .footer-col h4 {
   font-family: var(--font-serif);
@@ -773,47 +777,13 @@ button { font: inherit; cursor: pointer; }
 .insta-handle:hover { color: var(--white); }
 .insta-handle svg { flex-shrink: 0; }
 
-/* Marquee */
-.insta-track {
-  overflow: hidden;
-  width: 100%;
+/* Elfsight widget wrapper */
+.insta-widget-wrap {
+  padding: 0 0 8px;
 }
-
-.insta-inner {
-  display: flex;
-  width: max-content;
-  /* set-width = 16 images × (340px + 6px gap) = 5536px */
-  animation: insta-scroll 90s linear infinite;
-}
-
-.insta-track:hover .insta-inner { animation-play-state: paused; }
-
-.insta-set {
-  display: flex;
-  gap: 6px;
-  margin-right: 6px; /* matches gap so seam is invisible */
-}
-
-.insta-set img {
-  width: 340px;
-  height: 340px;
-  object-fit: cover;
-  object-position: center;
-  flex-shrink: 0;
-  display: block;
-  filter: brightness(0.88);
-  transition: filter 0.3s ease;
-}
-.insta-track:hover .insta-set img { filter: brightness(1); }
-
-@keyframes insta-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-5536px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .insta-inner { animation: none; }
-  .insta-track { overflow-x: auto; scrollbar-width: thin; }
+/* Force Elfsight widget to respect dark background */
+.insta-widget-wrap .eapps-instagram-feed {
+  background: transparent !important;
 }
 
 /* =====================================================
@@ -844,14 +814,9 @@ button { font: inherit; cursor: pointer; }
   .stay-info { padding: 36px 30px; }
   .expertise-image img { height: 360px; }
   .header-inner { flex-direction: column; gap: 16px; }
-  .footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .footer-links { grid-template-columns: repeat(3, 1fr); gap: 24px; }
   /* Instagram */
   .insta-header { flex-direction: column; align-items: flex-start; padding: 0 40px 36px; gap: 20px; }
-  .insta-set img { width: 260px; height: 260px; }
-  @keyframes insta-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-4256px); } /* 16 × (260 + 6) */
-  }
 }
 @media (max-width: 560px) {
   .site-header,
@@ -868,11 +833,6 @@ button { font: inherit; cursor: pointer; }
   /* Instagram */
   .insta-strip { padding-top: 56px; }
   .insta-header { padding: 0 20px 30px; }
-  .insta-set img { width: 200px; height: 200px; }
-  @keyframes insta-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-3296px); } /* 16 × (200 + 6) */
-  }
 }
 
 /* =====================================================
