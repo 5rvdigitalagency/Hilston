@@ -260,9 +260,7 @@
   </section>
 
   <!-- ===== INSTAGRAM ===== -->
-  <!-- Elfsight script — loads once, powers all widgets on the page -->
-  <script src="https://static.elfsight.com/platform/platform.js" async></script>
-
+  <!-- Behold.so — live Instagram feed, no branding -->
   <section class="insta-strip">
     <div class="insta-header">
       <div class="insta-heading">
@@ -279,12 +277,22 @@
 
     <div class="insta-widget-wrap">
       <!--
-        STEP: Replace the div below with your Elfsight embed div.
-        1. Go to https://elfsight.com → Create app → Instagram Feed
-        2. Connect @hilstonparkofficial, set layout to "Slider" or "Grid"
-        3. Copy the <div class="elfsight-app-XXXXXXXX..."> line and paste it here
+        SETUP (2 minutes):
+        1. Go to https://behold.so → sign up free
+        2. Connect @hilstonparkofficial → create a feed
+        3. Copy your Feed ID (looks like: AbCd1234EfGh)
+        4. Replace REPLACE_WITH_YOUR_FEED_ID below with that ID
       -->
-      <div class="elfsight-app-REPLACE_WITH_YOUR_APP_ID" data-elfsight-app-lazy></div>
+      <div id="behold-feed-REPLACE_WITH_YOUR_FEED_ID"></div>
+      <script>
+        (function(){
+          var feedId = document.querySelector('[id^="behold-feed-"]').id.replace('behold-feed-','');
+          if(!feedId || feedId === 'REPLACE_WITH_YOUR_FEED_ID') return;
+          var s = document.createElement('script');
+          s.src = 'https://behold.so/embed/' + feedId + '/';
+          document.head.appendChild(s);
+        })();
+      </script>
     </div>
   </section>
 
