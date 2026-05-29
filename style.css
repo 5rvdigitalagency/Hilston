@@ -879,48 +879,49 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* =====================================================
-   BOOKING MODAL
+   BOOKING MODAL  —  Cal.com floating card style
    ===================================================== */
 .bkm-overlay {
   position: fixed; inset: 0; z-index: 9000;
-  background: rgba(8, 16, 22, 0.55);
-  backdrop-filter: blur(4px);
-  display: flex; align-items: flex-end; justify-content: center;
-  padding: 0;
+  background: rgba(8, 16, 22, 0.52);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
   opacity: 0; pointer-events: none;
-  transition: opacity 0.28s ease;
+  transition: opacity 0.22s ease;
 }
 .bkm-overlay.is-open {
   opacity: 1; pointer-events: all;
 }
 
-/* Floating popup panel — slides up from bottom like Cal.com */
+/* Centered card — scale+fade like Cal.com */
 .bkm-panel {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  max-width: 800px; width: 100%;
+  grid-template-columns: 280px 1fr;
+  max-width: 780px; width: 100%;
   position: relative;
-  box-shadow: 0 -8px 40px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.06);
-  border-radius: 16px 16px 0 0;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.32), 0 0 0 1px rgba(0,0,0,0.08);
+  border-radius: 16px;
   overflow: hidden;
-  transform: translateY(100%);
-  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
-  max-height: 92vh;
+  opacity: 0;
+  transform: scale(0.96) translateY(10px);
+  transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+  max-height: calc(100vh - 40px);
 }
 .bkm-overlay.is-open .bkm-panel {
-  transform: translateY(0);
+  opacity: 1;
+  transform: scale(1) translateY(0);
 }
 
-/* ---- LEFT: full estate image with overlay ---- */
+/* ---- LEFT: estate photo panel ---- */
 .bkm-brand {
   position: relative;
   overflow: hidden;
-  min-height: 420px;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 36px 32px;
-  border-radius: 16px 0 0 0;
+  padding: 28px 24px;
 }
 .bkm-brand-bg {
   position: absolute; inset: 0;
@@ -946,13 +947,13 @@ button { font: inherit; cursor: pointer; }
   display: flex; flex-direction: column; gap: 20px;
 }
 .bkm-logo {
-  width: 140px; height: auto;
+  width: 130px; height: auto;
   opacity: 0.92; display: block;
 }
 .bkm-brand-heading {
   font-family: var(--font-serif);
   font-weight: normal;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   color: var(--white);
   line-height: 1.08;
   letter-spacing: -0.01em;
@@ -968,15 +969,13 @@ button { font: inherit; cursor: pointer; }
   opacity: 0.9;
 }
 .bkm-brand-address {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: rgba(255,255,255,0.38);
   line-height: 1.9;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   position: relative; z-index: 2;
 }
-
-/* live weather widget */
 .bkm-weather {
   display: flex; align-items: center; gap: 10px;
   position: relative; z-index: 2;
@@ -984,24 +983,18 @@ button { font: inherit; cursor: pointer; }
   padding-top: 14px;
   border-top: 1px solid rgba(255,255,255,0.12);
 }
-.bkm-weather-icon {
-  font-size: 1.65rem; line-height: 1; flex-shrink: 0;
-}
-.bkm-weather-info {
-  display: flex; flex-direction: column; gap: 3px;
-}
+.bkm-weather-icon { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+.bkm-weather-info { display: flex; flex-direction: column; gap: 3px; }
 .bkm-weather-temp {
   font-family: var(--font-serif);
-  font-size: 1.45rem; color: var(--white); line-height: 1;
+  font-size: 1.3rem; color: var(--white); line-height: 1;
 }
 .bkm-weather-desc {
-  font-size: 0.63rem;
+  font-size: 0.6rem;
   color: rgba(255,255,255,0.48);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-
-/* teal accent bar at bottom of image panel */
 .bkm-brand::after {
   content: '';
   position: absolute;
@@ -1011,17 +1004,17 @@ button { font: inherit; cursor: pointer; }
   z-index: 3;
 }
 
-/* ---- RIGHT: white form column ---- */
+/* ---- RIGHT: calendar form panel ---- */
 .bkm-form {
   background: var(--white);
-  padding: 44px 44px 40px;
+  padding: 28px 32px 24px;
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 0 16px 0 0;
+  overflow-y: auto;
 }
 .bkm-close {
-  position: absolute; top: 20px; right: 22px;
+  position: absolute; top: 16px; right: 18px;
   background: none; border: none;
   font-size: 1.3rem; line-height: 1;
   color: var(--border); cursor: pointer;
@@ -1030,61 +1023,143 @@ button { font: inherit; cursor: pointer; }
   font-weight: 300;
 }
 .bkm-close:hover { color: var(--text); }
-
-/* form heading */
 .bkm-form-title {
   font-family: var(--font-serif);
   font-weight: normal;
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   color: var(--text);
   line-height: 1.15;
-  margin-bottom: 8px;
-}
-.bkm-form-sub {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 36px;
+  margin-bottom: 14px;
 }
 
-/* date fields */
-.bkm-fields {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 28px; margin-bottom: 10px;
+/* ---- date summary chips (like Cal.com top row) ---- */
+.bkm-date-summary {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 14px;
 }
-.bkm-field { display: flex; flex-direction: column; gap: 10px; }
-.bkm-field label {
-  font-size: 0.62rem; letter-spacing: 0.2em;
+.bkm-date-chip {
+  flex: 1;
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 12px;
+  border: 1px solid var(--beige-2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.bkm-date-chip:hover { border-color: var(--teal); }
+.bkm-date-chip.active {
+  border-color: var(--teal);
+  background: rgba(78,148,132,0.06);
+}
+.bkm-chip-label {
+  font-size: 0.58rem; letter-spacing: 0.18em;
   text-transform: uppercase; font-weight: 700;
   color: var(--text-muted);
 }
-.bkm-field input[type="date"] {
-  border: none;
-  border-bottom: 1px solid var(--beige-2);
-  padding: 11px 0 10px;
+.bkm-chip-value {
+  font-size: 0.82rem; color: var(--text);
   font-family: var(--font-sans);
-  font-size: 0.92rem; color: var(--text);
-  background: transparent;
-  outline: none;
-  transition: border-bottom-color 0.22s;
-  width: 100%; cursor: pointer;
-  border-radius: 0;
 }
-.bkm-field input[type="date"]:focus {
-  border-bottom-color: var(--teal);
+.bkm-date-chip-arrow {
+  color: var(--beige-2);
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
+/* ---- calendar ---- */
+.bkm-cal { flex: 1; }
+.bkm-cal-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.bkm-cal-prev, .bkm-cal-next {
+  background: none; border: 1px solid var(--beige-2);
+  width: 30px; height: 30px;
+  border-radius: 6px;
+  font-size: 1.1rem; color: var(--text-muted);
+  cursor: pointer; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.18s, color 0.18s;
+}
+.bkm-cal-prev:hover, .bkm-cal-next:hover {
+  border-color: var(--teal); color: var(--teal);
+}
+.bkm-cal-month {
+  font-family: var(--font-sans);
+  font-size: 0.82rem; font-weight: 700;
+  color: var(--text); letter-spacing: 0.04em;
+}
+.bkm-cal-dow {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 2px; margin-bottom: 4px;
+}
+.bkm-cal-dow span {
+  text-align: center;
+  font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 4px 0;
+}
+.bkm-cal-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.bkm-day {
+  aspect-ratio: 1;
+  max-height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.76rem;
+  border-radius: 6px;
+  cursor: default;
+  color: var(--text);
+  position: relative;
+  transition: background 0.12s, color 0.12s;
+}
+.bkm-day-empty { background: none; }
+.bkm-day-past { color: var(--beige-2); cursor: not-allowed; }
+.bkm-day-pick { cursor: pointer; }
+.bkm-day-pick:hover:not(.bkm-day-start):not(.bkm-day-end) {
+  background: var(--beige);
+}
+.bkm-day-today::after {
+  content: '';
+  position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--teal);
+}
+/* range fill */
+.bkm-day-range, .bkm-day-hover-range {
+  background: rgba(78,148,132,0.12);
+  border-radius: 0;
+  color: var(--text);
+}
+/* start/end caps */
+.bkm-day-start, .bkm-day-end {
+  background: var(--teal) !important;
+  color: var(--white) !important;
+  border-radius: 6px;
+  font-weight: 700;
+}
+.bkm-day-hover-end {
+  background: rgba(78,148,132,0.35) !important;
+  border-radius: 6px;
+}
+/* connect range to caps */
+.bkm-day-start { border-radius: 6px 0 0 6px; }
+.bkm-day-end   { border-radius: 0 6px 6px 0; }
+.bkm-day-start.bkm-day-end { border-radius: 6px; }
+
+/* error + button */
 .bkm-error {
-  font-size: 0.73rem; color: #b03030;
-  margin: 10px 0 4px; display: none;
+  font-size: 0.72rem; color: #b03030;
+  margin: 8px 0 0; display: none;
   letter-spacing: 0.01em;
 }
 .bkm-error.visible { display: block; }
-
 .bkm-btn {
-  margin-top: 36px;
+  margin-top: 14px;
   display: block; width: 100%;
-  padding: 16px 30px;
+  padding: 13px 30px;
   background: var(--teal); color: var(--white);
   border: none;
   font-family: var(--font-sans);
@@ -1092,17 +1167,16 @@ button { font: inherit; cursor: pointer; }
   letter-spacing: 0.18em; text-transform: uppercase;
   cursor: pointer;
   transition: background 0.2s;
-  border-radius: 0;
+  border-radius: 8px;
 }
 .bkm-btn:hover { background: var(--teal-dark); }
-
 .bkm-note {
-  margin-top: auto;
-  padding-top: 20px;
-  font-size: 0.67rem;
-  color: var(--beige-2);
-  line-height: 1.65;
+  margin-top: 10px;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  line-height: 1.5;
   letter-spacing: 0.03em;
+  text-align: center;
 }
 
 /* ---- Phase 2: booking widget panel ---- */
@@ -1111,26 +1185,22 @@ button { font: inherit; cursor: pointer; }
   flex-direction: column;
   background: var(--white);
   overflow: hidden;
-  /* spans both grid columns when active */
   grid-column: 1 / -1;
 }
 .bkm-panel.bkm-widget-active {
   grid-template-columns: 1fr;
   max-width: 980px;
   height: min(88vh, 860px);
-  border-radius: 16px 16px 0 0;
+  border-radius: 16px;
 }
 .bkm-panel.bkm-widget-active .bkm-brand,
 .bkm-panel.bkm-widget-active .bkm-form { display: none; }
 .bkm-panel.bkm-widget-active .bkm-widget-panel { display: flex; }
-
 .bkm-widget-header {
   background: var(--dark-deep);
   height: 58px;
   padding: 0 20px 0 0;
-  display: flex;
-  align-items: center;
-  gap: 0;
+  display: flex; align-items: center; gap: 0;
   flex-shrink: 0;
 }
 .bkm-back-btn {
@@ -1139,58 +1209,45 @@ button { font: inherit; cursor: pointer; }
   font-family: var(--font-sans);
   font-size: 0.68rem; font-weight: 700;
   letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 0 20px;
-  height: 100%;
+  padding: 0 20px; height: 100%;
   border-right: 1px solid rgba(255,255,255,0.1);
   transition: color 0.2s, background 0.2s;
   flex-shrink: 0;
 }
-.bkm-back-btn:hover {
-  color: var(--white);
-  background: rgba(255,255,255,0.05);
-}
-.bkm-widget-logo {
-  height: 28px; opacity: 0.85;
-  margin-left: 20px; flex-shrink: 0;
-}
+.bkm-back-btn:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+.bkm-widget-logo { height: 28px; opacity: 0.85; margin-left: 20px; flex-shrink: 0; }
 .bkm-widget-title {
   flex: 1;
   font-size: 0.62rem; letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  font-weight: 700;
-  padding-left: 18px;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+  font-weight: 700; padding-left: 18px;
 }
 .bkm-widget-close {
   background: none; border: none;
   color: rgba(255,255,255,0.4); cursor: pointer;
   font-size: 1.3rem; font-weight: 300;
   line-height: 1; padding: 12px;
-  transition: color 0.18s;
-  flex-shrink: 0;
+  transition: color 0.18s; flex-shrink: 0;
 }
 .bkm-widget-close:hover { color: var(--white); }
-.bkm-widget-accent {
-  height: 3px;
-  background: var(--teal);
-  flex-shrink: 0;
-}
-.bkm-booking-iframe {
-  flex: 1;
-  width: 100%; border: none;
-  display: block; min-height: 0;
-}
+.bkm-widget-accent { height: 3px; background: var(--teal); flex-shrink: 0; }
+.bkm-booking-iframe { flex: 1; width: 100%; border: none; display: block; min-height: 0; }
 
-/* Mobile */
+/* Mobile — bottom sheet */
 @media (max-width: 700px) {
-  .bkm-panel { grid-template-columns: 1fr; border-radius: 16px 16px 0 0; }
-  .bkm-brand { min-height: 180px; padding: 24px 24px 28px; justify-content: flex-end; border-radius: 16px 16px 0 0; }
-  .bkm-brand-heading { font-size: 1.6rem; }
-  .bkm-logo { width: 100px; }
-  .bkm-brand-address { display: none; }
-  .bkm-form { padding: 32px 24px 28px; border-radius: 0; }
-  .bkm-fields { grid-template-columns: 1fr; gap: 20px; }
-  .bkm-panel.bkm-widget-active { height: 92dvh; max-width: 100%; }
+  .bkm-overlay { align-items: flex-end; padding: 0; }
+  .bkm-panel {
+    grid-template-columns: 1fr;
+    border-radius: 16px 16px 0 0;
+    opacity: 1;
+    transform: translateY(100%);
+    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+    max-height: 92dvh;
+  }
+  .bkm-overlay.is-open .bkm-panel { transform: translateY(0); opacity: 1; }
+  .bkm-brand { display: none; }
+  .bkm-form { padding: 28px 20px 24px; border-radius: 16px 16px 0 0; }
+  .bkm-panel.bkm-widget-active { height: 92dvh; max-width: 100%; border-radius: 16px 16px 0 0; }
   .bkm-back-btn { padding: 0 14px; font-size: 0.62rem; }
 }
 
