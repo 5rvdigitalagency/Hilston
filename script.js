@@ -236,15 +236,18 @@ document.addEventListener("DOMContentLoaded", function () {
   if (instaInner) {
     fetch("https://feeds.behold.so/qbsvzG0laaLxFdO8loEs")
       .then(function(r){ return r.json(); })
-      .then(function(posts) {
-        if (!posts || !posts.length) return;
+      .then(function(data) {
+        var posts = Array.isArray(data) ? data : (data.posts || []);
+        if (!posts.length) return;
 
         function buildSet(posts, hidden) {
           var set = document.createElement("div");
           set.className = "insta-set";
           if (hidden) set.setAttribute("aria-hidden", "true");
           posts.forEach(function(p) {
-            var imgSrc = p.thumbnailUrl || p.mediaUrl;
+            var imgSrc = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl)
+                      || (p.sizes && p.sizes.small && p.sizes.small.mediaUrl)
+                      || p.mediaUrl;
             if (!imgSrc) return;
             var a = document.createElement("a");
             a.href = p.permalink || "https://www.instagram.com/hilstonparkofficial/";
