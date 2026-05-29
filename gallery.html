@@ -88,33 +88,39 @@
       display: block;
     }
 
-    /* ---- GRID IMAGE AREA ---- */
-    /* The 1px gap between cells acts as the border lines */
+    /* ---- MASONRY IMAGE AREA ---- */
+    /* Border approach: each cell has right+bottom border; wrap has left+top */
     .gallery-images-wrap {
-      background: rgba(0,0,0,0.13); /* this IS the border/line colour */
-      padding: 0;
+      border-left: 1px solid rgba(0,0,0,0.13);
       border-top: 1px solid rgba(0,0,0,0.13);
+      background: #ece8e1;
     }
 
+    /* Masonry takes over layout; container must be position:relative */
     .gallery-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
+      position: relative;
+    }
+
+    /* Sizer sets the column width for Masonry */
+    .gallery-grid-sizer {
+      width: 50%;
     }
 
     .gallery-img-item {
+      width: 50%;
+      box-sizing: border-box;
       background: #ece8e1;
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      display: block;
-      height: 340px; /* uniform cell height — images crop to fill */
+      /* right+bottom borders = 1px separator lines between all cells */
+      border-right: 1px solid rgba(0,0,0,0.13);
+      border-bottom: 1px solid rgba(0,0,0,0.13);
     }
 
     .gallery-img-item img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;      /* natural aspect ratio — key Badrutt's behaviour */
       display: block;
       transition: transform 0.5s ease;
     }
@@ -194,12 +200,9 @@
       .gallery-sidebar-bottom { display: none; }
       .gallery-pills { padding-bottom: 0; }
     }
-    @media (max-width: 860px) {
-      .gallery-img-item { height: 260px; }
-    }
     @media (max-width: 500px) {
-      .gallery-grid { grid-template-columns: 1fr; }
-      .gallery-img-item { height: 220px; }
+      .gallery-grid-sizer,
+      .gallery-img-item { width: 100%; }
       .gallery-sidebar { padding: 28px 20px 24px; }
     }
 
@@ -255,6 +258,7 @@
       <!-- MASONRY IMAGES -->
       <div class="gallery-images-wrap">
         <div class="gallery-grid" id="galleryGrid">
+          <div class="gallery-grid-sizer"></div>
 
           <div class="gallery-img-item" data-category="activities">
             <img src="images/activity-portrait.jpg" alt="Outdoor activities at Hilston Park" loading="lazy">
@@ -386,6 +390,8 @@
 
 </div><!-- /site-wrap -->
 
+<script src="https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@5.0.0/imagesloaded.pkgd.min.js"></script>
 <script>
 (function () {
   'use strict';
@@ -407,7 +413,12 @@
         }
       });
       rebuildVisible();
-    });
+    /* re-layout masonry after filter change */
+    if (typeof msnry !== 'undefined' && msnry) {
+      msnry.options.itemSelector = '.gallery-img-item:not(.hidden)';
+      msnry.reloadItems();
+      msnry.layout();
+    }
   });
 
   /* ---- LIGHTBOX ---- */
@@ -459,6 +470,17 @@
     if (e.key === 'ArrowLeft')  openAt(current - 1);
     if (e.key === 'ArrowRight') openAt(current + 1);
     if (e.key === 'Escape')     close();
+  });
+
+  /* ---- MASONRY INIT ---- */
+  var msnry;
+  imagesLoaded('#galleryGrid', function () {
+    msnry = new Masonry('#galleryGrid', {
+      itemSelector: '.gallery-img-item',
+      columnWidth: '.gallery-grid-sizer',
+      gutter: 0,
+      percentPosition: true
+    });
   });
 
 }());
