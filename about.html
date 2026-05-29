@@ -151,17 +151,49 @@
     .safety-header .heading-display { margin-bottom: 0; }
     .safety-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 0;
+      gap: 20px;
     }
     .safety-point {
-      border-top: 1px solid var(--border);
-      padding: 32px 40px 32px 0;
+      position: relative; overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 36px 36px 40px;
+      transition: background 0.28s ease, border-color 0.28s ease, transform 0.28s ease, box-shadow 0.28s ease;
     }
-    .safety-point:nth-child(even) { padding: 32px 0 32px 40px; border-left: 1px solid var(--border); }
+    .safety-point::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--teal);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.32s ease;
+    }
+    .safety-point:hover {
+      background: var(--beige);
+      border-color: var(--teal);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+    .safety-point:hover::before { transform: scaleX(1); }
+    .safety-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--beige); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      transition: background 0.28s ease;
+    }
+    .safety-point:hover .safety-icon { background: var(--teal); }
+    .safety-icon svg {
+      width: 20px; height: 20px;
+      stroke: var(--teal); fill: none; stroke-width: 1.8;
+      transition: stroke 0.28s ease;
+    }
+    .safety-point:hover .safety-icon svg { stroke: var(--white); }
     .safety-point h3 {
       font-family: var(--font-serif); font-weight: normal;
       font-size: 1.3rem; margin-bottom: 12px; color: var(--text);
+      transition: color 0.28s ease;
     }
+    .safety-point:hover h3 { color: var(--teal-dark); }
     .safety-point p { font-size: 0.88rem; line-height: 1.82; color: var(--text-muted); }
 
     /* TESTIMONIALS */
@@ -277,7 +309,8 @@
     @media (max-width: 880px) {
       .about-hero-inner, .about-intro-grid, .safety-grid, .visit-us-grid, .blogs-grid, .faq-grid { grid-template-columns: 1fr; }
       .about-hero-sub { padding-bottom: 0; }
-      .safety-point:nth-child(even) { border-left: none; padding-left: 0; }
+      .safety-point:nth-child(even) { border-left: 1px solid var(--border); padding: 36px 36px 40px; }
+      .safety-grid { grid-template-columns: 1fr; }
       .plan-cards { grid-template-columns: 1fr; }
       .plan-card { min-height: 340px; }
       .timeline::before { left: 27px; transform: none; }
@@ -472,18 +505,30 @@
     </div>
     <div class="safety-grid">
       <div class="safety-point">
+        <div class="safety-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7l-9-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <h3>DBS-Checked Staff</h3>
         <p>All staff working with groups at Hilston Park are DBS-checked through the Disclosure and Barring Service (DBS). This ensures that everyone involved in delivering residential programmes has been appropriately vetted to work with children and vulnerable individuals.</p>
       </div>
       <div class="safety-point">
+        <div class="safety-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <h3>Safeguarding Procedures</h3>
         <p>Proper safeguarding procedures are in place across all residential stays and are followed consistently by the team. The procedures guide supervision, conduct, and response protocols, ensuring a safe and well-managed environment for schools, corporate groups, and private visitors.</p>
       </div>
       <div class="safety-point">
+        <div class="safety-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 11l3 3L22 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <h3>Risk Assessments</h3>
         <p>Risk assessments are completed for activities and residential stays to support safe delivery across all programmes. These are used to plan group activities responsibly and are available to assist schools and organisers with their internal approval processes where required.</p>
       </div>
       <div class="safety-point">
+        <div class="safety-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <h3>Duty of Care</h3>
         <p>A clear duty of care is maintained throughout every stay at Hilston Park. Experienced staff oversee visitors from arrival to departure, ensuring that accommodation, activities, and site use are managed safely and appropriately at all times.</p>
       </div>
