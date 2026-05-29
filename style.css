@@ -777,13 +777,50 @@ button { font: inherit; cursor: pointer; }
 .insta-handle:hover { color: var(--white); }
 .insta-handle svg { flex-shrink: 0; }
 
-/* Elfsight widget wrapper */
-.insta-widget-wrap {
-  padding: 0 0 8px;
+/* Marquee track */
+.insta-track {
+  overflow: hidden;
+  width: 100%;
 }
-/* Force Elfsight widget to respect dark background */
-.insta-widget-wrap .eapps-instagram-feed {
-  background: transparent !important;
+.insta-inner {
+  display: flex;
+  width: max-content;
+  animation: insta-scroll 90s linear infinite;
+}
+.insta-track:hover .insta-inner { animation-play-state: paused; }
+
+.insta-set {
+  display: flex;
+  gap: 6px;
+  margin-right: 6px;
+}
+.insta-set a {
+  display: block;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.insta-set a img {
+  width: 340px;
+  height: 340px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: brightness(0.88);
+  transition: filter 0.3s ease, transform 0.4s ease;
+}
+.insta-set a:hover img {
+  filter: brightness(1);
+  transform: scale(1.04);
+}
+
+@keyframes insta-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .insta-inner { animation: none; }
+  .insta-track { overflow-x: auto; scrollbar-width: thin; }
 }
 
 /* =====================================================
