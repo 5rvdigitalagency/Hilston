@@ -88,20 +88,22 @@
       display: block;
     }
 
-    /* ---- MASONRY IMAGE AREA ---- */
+    /* ---- GRID IMAGE AREA ---- */
+    /* The 1px gap between cells acts as the border lines */
     .gallery-images-wrap {
-      padding: 4px 4px 4px 4px;
-      background: #ece8e1;
+      background: rgba(0,0,0,0.13); /* this IS the border/line colour */
+      padding: 0;
+      border-top: 1px solid rgba(0,0,0,0.13);
     }
 
-    .gallery-masonry {
-      columns: 2;
-      column-gap: 4px;
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
     }
 
     .gallery-img-item {
-      break-inside: avoid;
-      margin-bottom: 4px;
+      background: #ece8e1;
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -189,10 +191,9 @@
       }
       .gallery-sidebar-bottom { display: none; }
       .gallery-pills { padding-bottom: 0; }
-      .gallery-masonry { columns: 2; }
     }
     @media (max-width: 500px) {
-      .gallery-masonry { columns: 1; }
+      .gallery-grid { grid-template-columns: 1fr; }
       .gallery-sidebar { padding: 28px 20px 24px; }
     }
 
@@ -247,7 +248,7 @@
 
       <!-- MASONRY IMAGES -->
       <div class="gallery-images-wrap">
-        <div class="gallery-masonry" id="galleryMasonry">
+        <div class="gallery-grid" id="galleryGrid">
 
           <div class="gallery-img-item" data-category="activities">
             <img src="images/activity-portrait.jpg" alt="Outdoor activities at Hilston Park" loading="lazy">
@@ -313,7 +314,7 @@
             <img src="images/gatehouse.webp" alt="Hilston Park gatehouse" loading="lazy">
           </div>
 
-        </div><!-- /gallery-masonry -->
+        </div><!-- /gallery-grid -->
       </div><!-- /gallery-images-wrap -->
 
     </div><!-- /gallery-layout -->
