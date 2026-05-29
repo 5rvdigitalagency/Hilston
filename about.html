@@ -65,40 +65,85 @@
     .about-intro-images { display: flex; flex-direction: column; gap: 12px; }
     .about-intro-images img { width: 100%; height: 230px; object-fit: cover; display: block; }
 
-    /* HISTORY */
+    /* HISTORY — TIMELINE */
     .history { background: var(--beige); padding: 88px 80px; }
-    .history-heading { margin-bottom: 28px; }
-    .history-intro {
+    .history-intro-block { margin-bottom: 72px; }
+    .history-intro-block .heading-display { margin-bottom: 20px; }
+    .history-intro-block p {
       font-size: 0.92rem; line-height: 1.88;
-      color: var(--text-muted); max-width: 700px; margin-bottom: 48px;
+      color: var(--text-muted); max-width: 620px;
     }
-    .history-img-row {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 12px; margin-bottom: 60px;
+    /* spine */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 0; bottom: 0; width: 2px;
+      transform: translateX(-50%);
+      background: linear-gradient(to bottom, transparent 0%, var(--teal) 5%, var(--teal) 95%, transparent 100%);
     }
-    .history-img-row img { width: 100%; height: 200px; object-fit: cover; display: block; }
-    .history-content-grid {
-      display: grid; grid-template-columns: 1fr 1.1fr;
-      gap: 64px; align-items: start;
+    /* row */
+    .tl-item {
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr;
+      margin-bottom: 52px;
+      position: relative;
+      opacity: 0;
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .history-img-pair {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-item.tl-from-left  { transform: translateX(-52px); }
+    .tl-item.tl-from-right { transform: translateX(52px); }
+    .tl-item.tl-visible    { opacity: 1; transform: translateX(0); }
+    /* center node */
+    .tl-node {
+      grid-column: 2; grid-row: 1;
+      display: flex; flex-direction: column; align-items: center;
+      padding-top: 24px; z-index: 2;
     }
-    .history-img-pair img { width: 100%; height: 260px; object-fit: cover; display: block; }
-    .history-text .era { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 4px; }
-    .history-text p {
-      font-size: 0.9rem; line-height: 1.88; color: var(--text-muted); margin-bottom: 1.1rem;
+    .tl-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--teal); border: 3px solid var(--beige);
+      outline: 2px solid var(--teal);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
-    .history-text p strong { color: var(--text); }
-    .history-text .btn-outline {
+    .tl-item.tl-visible .tl-dot {
+      transform: scale(1.35);
+      box-shadow: 0 0 0 7px rgba(78,148,132,0.15);
+    }
+    /* card placement */
+    .tl-item:nth-child(odd)  > .tl-card   { grid-column: 1; grid-row: 1; }
+    .tl-item:nth-child(odd)  > .tl-spacer { grid-column: 3; grid-row: 1; }
+    .tl-item:nth-child(even) > .tl-card   { grid-column: 3; grid-row: 1; }
+    .tl-item:nth-child(even) > .tl-spacer { grid-column: 1; grid-row: 1; }
+    /* card styles */
+    .tl-card { background: var(--white); overflow: hidden; }
+    .tl-card-img { width: 100%; height: 248px; object-fit: cover; display: block; }
+    .tl-card-body { padding: 26px 28px 32px; }
+    .tl-year {
+      display: inline-block;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--teal);
+      border: 1px solid var(--teal); padding: 5px 11px; margin-bottom: 14px;
+    }
+    .tl-card-body h3 {
+      font-family: var(--font-serif); font-weight: normal;
+      font-size: 1.3rem; line-height: 1.22; color: var(--text); margin-bottom: 12px;
+    }
+    .tl-card-body p {
+      font-size: 0.87rem; line-height: 1.82;
+      color: var(--text-muted); margin-bottom: 0.8rem;
+    }
+    .tl-card-body p:last-child { margin-bottom: 0; }
+    .tl-card-body .btn-outline {
       display: inline-flex; align-items: center; gap: 14px;
-      border: 1.5px solid var(--text); padding: 13px 26px;
+      border: 1.5px solid var(--text); padding: 12px 24px;
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--text);
-      transition: background 0.2s, color 0.2s; margin-top: 8px;
+      transition: background 0.2s, color 0.2s; margin-top: 16px;
     }
-    .history-text .btn-outline:hover { background: var(--text); color: var(--white); }
-    .btn-outline svg { width: 18px; height: 10px; }
+    .tl-card-body .btn-outline:hover { background: var(--text); color: var(--white); }
+    .tl-card-body .btn-outline svg { width: 18px; height: 10px; }
 
     /* SAFETY */
     .safety { background: var(--white); padding: 88px 80px; }
@@ -230,12 +275,19 @@
       .about-hero-inner { padding: 48px 40px; }
     }
     @media (max-width: 880px) {
-      .about-hero-inner, .about-intro-grid, .history-content-grid, .safety-grid, .visit-us-grid, .blogs-grid, .faq-grid { grid-template-columns: 1fr; }
+      .about-hero-inner, .about-intro-grid, .safety-grid, .visit-us-grid, .blogs-grid, .faq-grid { grid-template-columns: 1fr; }
       .about-hero-sub { padding-bottom: 0; }
-      .history-img-row { grid-template-columns: 1fr 1fr; }
       .safety-point:nth-child(even) { border-left: none; padding-left: 0; }
       .plan-cards { grid-template-columns: 1fr; }
       .plan-card { min-height: 340px; }
+      .timeline::before { left: 27px; transform: none; }
+      .tl-item { grid-template-columns: 56px 1fr; margin-bottom: 36px; }
+      .tl-item > .tl-node { grid-column: 1; grid-row: 1; padding-top: 20px; }
+      .tl-item:nth-child(odd)  > .tl-card,
+      .tl-item:nth-child(even) > .tl-card  { grid-column: 2; grid-row: 1; }
+      .tl-item:nth-child(odd)  > .tl-spacer,
+      .tl-item:nth-child(even) > .tl-spacer { display: none; }
+      .tl-item.tl-from-left, .tl-item.tl-from-right { transform: translateY(32px); }
     }
   </style>
 </head>
@@ -323,30 +375,88 @@
 
   <!-- OUR HISTORY -->
   <section class="history">
-    <h2 class="heading-display history-heading">Our History</h2>
-    <p class="history-intro">Hilston Park has a long and established history within the Monmouthshire countryside. The written records of the estate trace back to the <strong>13th century</strong>, where it began as a manor estate near Skenfrith. Over centuries, the land evolved under the care of prominent local families and became a heritage estate with unique surroundings.</p>
-    <div class="history-img-row">
-      <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded24c489c62d9e3c1f8_img-6.jpg" alt="Historic Hilston Park">
-      <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded30dae33520b10571b_img-1.jpg" alt="Historic Hilston Park">
-      <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded331b430865b52e6c2_img-4.jpg" alt="Historic Hilston Park">
-      <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded2d063900245321fdc_img-7.jpg" alt="Historic Hilston Park">
+    <div class="history-intro-block">
+      <h2 class="heading-display">Our History</h2>
+      <p>Hilston Park has a long and established history within the Monmouthshire countryside. The written records of the estate trace back to the <strong>13th century</strong>, where it began as a manor estate near Skenfrith. Over centuries, the land evolved under the care of prominent local families and became a heritage estate with unique surroundings.</p>
     </div>
-    <div class="history-content-grid">
-      <div class="history-img-pair">
-        <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded3b4dc65f3e7c8caf3_img-9.jpg" alt="Hilston Park archive">
-        <img src="images/manor-house.jpg" alt="Manor House staircase">
+
+    <div class="timeline">
+
+      <!-- 1: 13th Century -->
+      <div class="tl-item tl-from-left">
+        <div class="tl-card">
+          <img class="tl-card-img" src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded24c489c62d9e3c1f8_img-6.jpg" alt="Hilston Park aerial view">
+          <div class="tl-card-body">
+            <span class="tl-year">13th Century</span>
+            <h3>The Origins</h3>
+            <p>The written records of the Hilston estate trace back to 1293, where it began as a manor estate near Skenfrith in Monmouthshire. Over centuries, the land evolved under the care of prominent local families and became a heritage estate shaped by the Welsh landscape.</p>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+        <div class="tl-spacer"></div>
       </div>
-      <div class="history-text">
-        <p class="era">In 1838,</p>
-        <p>the original house was damaged by fire and later rebuilt. The new building was designed in a Palladian style, which still stands today. It is now a Grade II listed estate and is known for its simple, balanced architecture.</p>
-        <p>Over the years, the estate changed ownership several times, with each period adding to its development. In the mid-1900s, its use began to change from a private home to an educational space. <strong>By 1971, it became an outdoor education centre</strong>, welcoming school groups for residential stays, adventure activities and learning beyond the traditional classroom.</p>
-        <p><strong>Today, Hilston Park continues as a leisure centre in Monmouth, hosting schools, corporate groups, and private visitors.</strong> With accommodation for over 130 guests, in-house catering, and more than 20 outdoor activities, the estate remains shaped by the same values of learning, wellbeing, and shared experience that have guided it for over 50 years.</p>
-        <a href="#" class="btn-outline">DISCOVER MORE
-          <svg viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 11L18 6L13 1M0 6h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+
+      <!-- 2: 1838 -->
+      <div class="tl-item tl-from-right">
+        <div class="tl-spacer"></div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+        <div class="tl-card">
+          <img class="tl-card-img" src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded30dae33520b10571b_img-1.jpg" alt="Historic interior staircase">
+          <div class="tl-card-body">
+            <span class="tl-year">1838</span>
+            <h3>The Palladian Rebuild</h3>
+            <p>The original house was damaged by fire and later rebuilt in a Palladian style. The new building still stands today as a Grade II listed estate, known for its simple, balanced architecture and prominent position in the Monmouthshire countryside.</p>
+          </div>
+        </div>
       </div>
+
+      <!-- 3: Mid-1900s -->
+      <div class="tl-item tl-from-left">
+        <div class="tl-card">
+          <img class="tl-card-img" src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded331b430865b52e6c2_img-4.jpg" alt="Hilston Park team">
+          <div class="tl-card-body">
+            <span class="tl-year">Mid-1900s</span>
+            <h3>A Changing Estate</h3>
+            <p>Over the years, ownership of the estate changed several times, with each period shaping its character further. By the mid-1900s, its use began to shift from a private home toward a more open educational purpose, setting the stage for what Hilston Park would become.</p>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <!-- 4: 1971 -->
+      <div class="tl-item tl-from-right">
+        <div class="tl-spacer"></div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+        <div class="tl-card">
+          <img class="tl-card-img" src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded2d063900245321fdc_img-7.jpg" alt="Hilston Park manor exterior">
+          <div class="tl-card-body">
+            <span class="tl-year">1971</span>
+            <h3>An Education Centre is Born</h3>
+            <p>By 1971, Hilston Park officially became an outdoor education centre. School groups began arriving for residential stays, adventure activities, and learning beyond the traditional classroom &mdash; the beginning of 50+ years of meaningful group experiences.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5: Today -->
+      <div class="tl-item tl-from-left">
+        <div class="tl-card">
+          <img class="tl-card-img" src="images/manor-house.jpg" alt="Hilston Park today">
+          <div class="tl-card-body">
+            <span class="tl-year">Today</span>
+            <h3>Hilston Park Today</h3>
+            <p>Hilston Park continues as a leisure centre in Monmouth, hosting schools, corporate groups, and private visitors. With accommodation for over 130 guests, in-house catering, and more than 20 outdoor activities, the estate remains shaped by the same values of learning, wellbeing, and shared experience that have guided it for over 50 years.</p>
+            <a href="#" class="btn-outline">DISCOVER MORE
+              <svg viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 11L18 6L13 1M0 6h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+        <div class="tl-spacer"></div>
+      </div>
+
     </div>
   </section>
 
@@ -618,6 +728,21 @@
       dotsEl.children[current].classList.add('active');
     }
     setInterval(function(){ go((current+1) % items.length); }, 4500);
+  })();
+
+  // Timeline scroll animation
+  (function(){
+    var tlItems = document.querySelectorAll('.tl-item');
+    if (!tlItems.length) return;
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('tl-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    tlItems.forEach(function(el){ obs.observe(el); });
   })();
 </script>
 </body>
