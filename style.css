@@ -46,7 +46,7 @@ body {
   font-family: var(--font-sans);
   color: var(--text);
   line-height: 1.6;
-  background: var(--page-bg);
+  background: var(--dark);
 }
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: inherit; }
@@ -674,9 +674,9 @@ button { font: inherit; cursor: pointer; }
   grid-template-columns: 1fr 1.4fr;
   gap: 60px;
   padding: 60px 60px 50px;
-  align-items: start;
+  align-items: center;
 }
-.footer-brand { display: flex; flex-direction: column; gap: 26px; }
+.footer-brand { display: flex; flex-direction: column; gap: 26px; align-items: center; text-align: center; }
 
 .footer-crest {
   display: block;
@@ -713,7 +713,7 @@ button { font: inherit; cursor: pointer; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  padding-top: 4px;
+  padding-top: 0;
 }
 .footer-col h4 {
   font-family: var(--font-serif);
