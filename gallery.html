@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Hilston Park Outdoor Centre</title>
+  <meta name="description" content="Explore the Hilston Park gallery — the historic estate, outdoor activities, accommodation, and the beautiful Wye Valley landscape.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+    /* ===== GALLERY PAGE STYLES ===== */
+
+    /* HERO */
+    .gallery-hero {
+      position: relative;
+      min-height: 420px;
+      background: url('images/estate-exterior.png') center 40%/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+    }
+    .gallery-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 55%, rgba(0,0,0,0.18) 100%);
+    }
+    .gallery-hero-inner {
+      position: relative; z-index: 2;
+      padding: 64px 80px;
+      color: var(--white);
+    }
+    .gallery-hero-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 12px;
+    }
+    .gallery-hero-inner h1 {
+      font-family: var(--font-serif);
+      font-weight: normal;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      line-height: 1.08;
+      color: var(--white);
+      max-width: 18ch;
+    }
+    .gallery-hero-dash {
+      display: block;
+      width: 40px; height: 2px;
+      background: var(--teal);
+      margin: 22px 0;
+    }
+    .gallery-hero-sub {
+      font-size: 0.94rem; line-height: 1.76;
+      color: rgba(255,255,255,0.84);
+      max-width: 48ch;
+    }
+
+    /* FILTER BAR */
+    .gallery-filter-wrap {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+    .gallery-filter-inner {
+      padding: 0 80px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .gallery-filter-inner::-webkit-scrollbar { display: none; }
+    .gallery-filter-btn {
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      position: relative;
+      bottom: -1px;
+    }
+    .gallery-filter-btn:hover { color: var(--text); }
+    .gallery-filter-btn.active {
+      color: var(--text);
+      border-bottom-color: var(--teal);
+    }
+
+    /* GALLERY SECTION */
+    .gallery-section {
+      background: var(--white);
+      padding: 48px 80px 80px;
+    }
+
+    /* GRID */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: var(--beige);
+    }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.tall { grid-row: span 2; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, opacity 0.3s ease;
+    }
+    .gallery-item:not(.wide) img  { aspect-ratio: 4 / 3; }
+    .gallery-item.wide img        { aspect-ratio: 16 / 7; }
+    .gallery-item.tall img        { aspect-ratio: 3 / 4; }
+
+    /* Hover overlay */
+    .gallery-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 0.35s ease;
+      pointer-events: none;
+    }
+    .gallery-item:hover::after { background: rgba(0,0,0,0.18); }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    /* Zoom icon on hover */
+    .gallery-item .zoom-icon {
+      position: absolute;
+      bottom: 16px; right: 16px;
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.92);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 2;
+    }
+    .gallery-item .zoom-icon svg {
+      width: 18px; height: 18px;
+      stroke: var(--text); fill: none; stroke-width: 2;
+    }
+    .gallery-item:hover .zoom-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Filter hidden state */
+    .gallery-item.hidden {
+      display: none;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.94);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      position: relative;
+      max-width: 92vw;
+      max-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-img {
+      display: block;
+      max-width: 92vw;
+      max-height: 88vh;
+      object-fit: contain;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 24px; right: 32px;
+      background: none; border: none;
+      color: rgba(255,255,255,0.8);
+      font-size: 2.2rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s, transform 0.2s;
+      z-index: 1001;
+    }
+    .lightbox-close:hover { color: var(--white); transform: rotate(90deg); }
+    .lightbox-prev,
+    .lightbox-next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: var(--white);
+      width: 52px; height: 52px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 1001;
+    }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+    .lightbox-prev:hover,
+    .lightbox-next:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-prev svg,
+    .lightbox-next svg { width: 22px; height: 22px; stroke: white; fill: none; stroke-width: 2; }
+    .lightbox-counter {
+      position: fixed;
+      bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72rem; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* CTA STRIP */
+    .gallery-cta {
+      background: var(--beige);
+      padding: 70px 80px;
+      text-align: center;
+    }
+    .gallery-cta .heading-display { margin-bottom: 16px; }
+    .gallery-cta p {
+      font-size: 0.92rem; line-height: 1.78;
+      color: var(--text-muted);
+      max-width: 52ch;
+      margin: 0 auto 32px;
+    }
+    .gallery-cta-btns {
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+    }
+    .btn-outline-teal {
+      display: inline-flex; align-items: center; gap: 12px;
+      border: 1.5px solid var(--teal);
+      padding: 13px 28px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--teal);
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline-teal:hover { background: var(--teal); color: var(--white); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .gallery-hero-inner,
+      .gallery-filter-inner,
+      .gallery-section,
+      .gallery-cta { padding-left: 40px; padding-right: 40px; }
+    }
+    @media (max-width: 760px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.wide { grid-column: span 2; }
+      .gallery-hero-inner,
+      .gallery-filter-inner,
+      .gallery-section,
+      .gallery-cta { padding-left: 20px; padding-right: 20px; }
+      .gallery-hero { min-height: 300px; }
+      .lightbox-prev { left: 8px; }
+      .lightbox-next { right: 8px; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item.wide { grid-column: span 1; }
+      .gallery-item.wide img { aspect-ratio: 4 / 3; }
+    }
+
+  </style>
+</head>
+<body>
+<div class="site-wrap">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+      </div>
+      <a href="contact.html" class="btn-book">BOOK NOW</a>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="main-nav">
+    <ul class="nav-list">
+      <li><a href="about.html">ABOUT</a></li>
+      <li><a href="educational.html">EDUCATION</a></li>
+      <li><a href="event.html">EVENTS</a></li>
+      <li><a href="accomodation.html">ACCOMMODATION</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="blogs.html">BLOG</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="gallery-hero">
+    <div class="gallery-hero-overlay"></div>
+    <div class="gallery-hero-inner">
+      <p class="gallery-hero-eyebrow">Hilston Park</p>
+      <h1>Gallery</h1>
+      <span class="gallery-hero-dash"></span>
+      <p class="gallery-hero-sub">Discover the estate, activities, accommodation, and the landscape of the Wye Valley that makes every stay memorable.</p>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <div class="gallery-filter-wrap">
+    <div class="gallery-filter-inner">
+      <button class="gallery-filter-btn active" data-filter="all">All</button>
+      <button class="gallery-filter-btn" data-filter="estate">Estate</button>
+      <button class="gallery-filter-btn" data-filter="activities">Activities</button>
+      <button class="gallery-filter-btn" data-filter="accommodation">Accommodation</button>
+      <button class="gallery-filter-btn" data-filter="food">Food &amp; Dining</button>
+      <button class="gallery-filter-btn" data-filter="landscape">Landscape</button>
+    </div>
+  </div>
+
+  <!-- GALLERY GRID -->
+  <section class="gallery-section">
+    <div class="gallery-grid" id="galleryGrid">
+
+      <!-- ESTATE -->
+      <div class="gallery-item wide" data-category="estate" data-index="0">
+        <img src="images/estate-exterior.png" alt="Hilston Park estate exterior" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+      <div class="gallery-item" data-category="estate" data-index="1">
+        <img src="images/gatehouse.webp" alt="Hilston Park gatehouse" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- ACTIVITIES -->
+      <div class="gallery-item" data-category="activities" data-index="2">
+        <img src="images/activity-portrait.jpg" alt="Outdoor activity at Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+      <div class="gallery-item wide" data-category="activities" data-index="3">
+        <img src="images/adventure.jpg" alt="Adventure activities in the Wye Valley" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+      <div class="gallery-item" data-category="activities" data-index="4">
+        <img src="images/Climbing Kid.png" alt="Children climbing at Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- ESTATE historic -->
+      <div class="gallery-item" data-category="estate" data-index="5">
+        <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded24c489c62d9e3c1f8_img-6.jpg" alt="Historic Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+      <div class="gallery-item wide" data-category="estate" data-index="6">
+        <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded30dae33520b10571b_img-1.jpg" alt="Hilston Park estate building" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- ACCOMMODATION -->
+      <div class="gallery-item" data-category="accommodation" data-index="7">
+        <img src="images/accommodation.jpg" alt="Accommodation at Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- ACTIVITIES continued -->
+      <div class="gallery-item wide" data-category="activities" data-index="8">
+        <img src="images/hero-schools.jpg" alt="School group at Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+      <div class="gallery-item" data-category="activities" data-index="9">
+        <img src="images/hero-corporate.jpg" alt="Corporate team building at Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- ESTATE continued -->
+      <div class="gallery-item" data-category="estate" data-index="10">
+        <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded331b430865b52e6c2_img-4.jpg" alt="Historic Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+      <div class="gallery-item" data-category="estate" data-index="11">
+        <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded2d063900245321fdc_img-7.jpg" alt="Historic Hilston Park archive" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- FOOD -->
+      <div class="gallery-item wide" data-category="food" data-index="12">
+        <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg" alt="Hilston Park international menu" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+      <div class="gallery-item" data-category="food" data-index="13">
+        <img src="images/food.jpg" alt="Catering at Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- ACTIVITIES continued -->
+      <div class="gallery-item" data-category="activities" data-index="14">
+        <img src="images/nature-bushcraft.jpg" alt="Bushcraft and nature activities" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+      <div class="gallery-item wide" data-category="activities" data-index="15">
+        <img src="images/hero-families.jpg" alt="Family stay at Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- ESTATE manor house -->
+      <div class="gallery-item" data-category="estate" data-index="16">
+        <img src="images/manor-house.jpg" alt="Manor house staircase" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+      <div class="gallery-item" data-category="estate" data-index="17">
+        <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded3b4dc65f3e7c8caf3_img-9.jpg" alt="Historic Hilston Park archive" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- ACCOMMODATION courtyard -->
+      <div class="gallery-item wide" data-category="accommodation" data-index="18">
+        <img src="images/courtyard-room.jpg" alt="Courtyard room accommodation" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- ACTIVITIES ios -->
+      <div class="gallery-item" data-category="activities" data-index="19">
+        <img src="images/ios-photo.jpg" alt="Activities at Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+      <!-- LANDSCAPE -->
+      <div class="gallery-item wide" data-category="landscape" data-index="20">
+        <img src="images/blog-banner.jpg" alt="Wye Valley landscape" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+      <div class="gallery-item" data-category="activities" data-index="21">
+        <img src="images/ios-photo2.jpg" alt="Group activities at Hilston Park" loading="lazy">
+        <span class="zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <section class="gallery-cta">
+    <h2 class="heading-display center">Ready to Experience Hilston Park?</h2>
+    <p>Whether you are planning a school residential, a corporate retreat, or a private family stay — we&rsquo;d love to welcome you.</p>
+    <div class="gallery-cta-btns">
+      <a href="contact.html" class="btn-pill">ENQUIRE NOW</a>
+      <a href="about.html" class="btn-outline-teal">ABOUT US</a>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="lightbox-inner">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    </div>
+    <button class="lightbox-next" id="lightboxNext" aria-label="Next image">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <p class="lightbox-counter" id="lightboxCounter"></p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-crest">
+          <img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park">
+        </div>
+        <address>Newcastle, Monmouth,<br>Gwent, Wales, NP25 5NY</address>
+        <div class="social-icons">
+          <a href="#" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
+          <a href="#" aria-label="Instagram" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4A6.2 6.2 0 0012 5.8zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"/></svg></a>
+          <a href="#" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
+          <a href="#" aria-label="Twitter / X" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 0h3.5L14 10.2 23 24h-7.4l-5.2-6.8L4.2 24H.7l8.3-9.5L0 0h7.6l4.7 6.2L18.2 0zm-1.2 21.6h1.9L7.1 2h-2L17 21.6z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Home</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="blogs.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Visit Us</h4>
+          <ul>
+            <li><a href="educational.html">Educational</a></li>
+            <li><a href="event.html">Events</a></li>
+            <li><a href="accomodation.html">Accommodation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bar"></div>
+  </footer>
+
+</div><!-- /site-wrap -->
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---- FILTER ---- */
+  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+  const allItems   = document.querySelectorAll('.gallery-item');
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const filter = btn.dataset.filter;
+
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      allItems.forEach(function (item) {
+        if (filter === 'all' || item.dataset.category === filter) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      /* rebuild visible indices for lightbox */
+      rebuildVisible();
+    });
+  });
+
+  /* ---- LIGHTBOX ---- */
+  const lightbox    = document.getElementById('lightbox');
+  const lbImg       = document.getElementById('lightboxImg');
+  const lbClose     = document.getElementById('lightboxClose');
+  const lbPrev      = document.getElementById('lightboxPrev');
+  const lbNext      = document.getElementById('lightboxNext');
+  const lbCounter   = document.getElementById('lightboxCounter');
+
+  let visibleItems = [];
+  let currentLbIdx = 0;
+
+  function rebuildVisible() {
+    visibleItems = Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+  }
+  rebuildVisible();
+
+  function openLightbox(idx) {
+    currentLbIdx = idx;
+    const item = visibleItems[idx];
+    const img  = item.querySelector('img');
+    lbImg.src  = img.src;
+    lbImg.alt  = img.alt;
+    lbCounter.textContent = (idx + 1) + ' / ' + visibleItems.length;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lbImg.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  function navigate(dir) {
+    currentLbIdx = (currentLbIdx + dir + visibleItems.length) % visibleItems.length;
+    openLightbox(currentLbIdx);
+  }
+
+  allItems.forEach(function (item) {
+    item.addEventListener('click', function () {
+      rebuildVisible();
+      const idx = visibleItems.indexOf(item);
+      if (idx !== -1) openLightbox(idx);
+    });
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click',  function () { navigate(-1); });
+  lbNext.addEventListener('click',  function () { navigate(1);  });
+
+  /* click backdrop to close */
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  /* keyboard navigation */
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft')  navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+    if (e.key === 'Escape')     closeLightbox();
+  });
+
+}());
+</script>
+
+</body>
+</html>
