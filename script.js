@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var QBOOK_RATES_ID  = "QBOOKWIDGET_SC_BLOCKS_95cf3bb7f6e7ebf393fbcde248157d51";
 
   /* -- inject modal HTML once -- */
-  var today = new Date().toISOString().split("T")[0];
   var modalHTML = [
     '<div id="booking-modal" class="bkm-overlay" role="dialog" aria-modal="true" aria-labelledby="bkm-heading">',
       '<div class="bkm-panel" id="bkm-panel">',
@@ -62,22 +61,35 @@ document.addEventListener("DOMContentLoaded", function () {
           '</div>',
         '</div>',
 
-        '<!-- Phase 1: Date picker form -->',
+        '<!-- Phase 1: Calendar date picker -->',
         '<div class="bkm-form" id="bkm-form-panel">',
           '<button class="bkm-close" id="bkm-close-btn" aria-label="Close">&times;</button>',
           '<p class="bkm-form-title">Plan your visit</p>',
-          '<p class="bkm-form-sub">Select your arrival and departure dates, then check live availability &mdash; without leaving this page.</p>',
-          '<div class="bkm-fields">',
-            '<div class="bkm-field">',
-              '<label for="bkm-checkin">Arrival</label>',
-              '<input type="date" id="bkm-checkin" min="' + today + '">',
+          '<!-- selected dates summary row -->',
+          '<div class="bkm-date-summary" id="bkm-date-summary">',
+            '<div class="bkm-date-chip" id="bkm-chip-in">',
+              '<span class="bkm-chip-label">Arrival</span>',
+              '<span class="bkm-chip-value" id="bkm-chip-in-val">Select date</span>',
             '</div>',
-            '<div class="bkm-field">',
-              '<label for="bkm-checkout">Departure</label>',
-              '<input type="date" id="bkm-checkout" min="' + today + '">',
+            '<div class="bkm-date-chip-arrow">&#8594;</div>',
+            '<div class="bkm-date-chip" id="bkm-chip-out">',
+              '<span class="bkm-chip-label">Departure</span>',
+              '<span class="bkm-chip-value" id="bkm-chip-out-val">Select date</span>',
             '</div>',
           '</div>',
-          '<p class="bkm-error" id="bkm-error">Please select a valid arrival and departure date.</p>',
+          '<!-- calendar grid -->',
+          '<div class="bkm-cal" id="bkm-cal">',
+            '<div class="bkm-cal-nav">',
+              '<button class="bkm-cal-prev" id="bkm-cal-prev" aria-label="Previous month">&#8249;</button>',
+              '<span class="bkm-cal-month" id="bkm-cal-month"></span>',
+              '<button class="bkm-cal-next" id="bkm-cal-next" aria-label="Next month">&#8250;</button>',
+            '</div>',
+            '<div class="bkm-cal-dow">',
+              '<span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>',
+            '</div>',
+            '<div class="bkm-cal-grid" id="bkm-cal-grid"></div>',
+          '</div>',
+          '<p class="bkm-error" id="bkm-error">Please select both an arrival and departure date.</p>',
           '<button class="bkm-btn" id="bkm-submit">Check Availability</button>',
           '<p class="bkm-note">Secure booking powered by QBook &mdash; all availability and payment handled on this site.</p>',
         '</div>',
@@ -99,6 +111,136 @@ document.addEventListener("DOMContentLoaded", function () {
   ].join("");
 
   document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+  /* ---- Calendar picker logic ---- */
+  var calPickIn  = null; /* Date object */
+  var calPickOut = null;
+  var calStep    = "in"; /* "in" | "out" */
+  var calView    = new Date(); /* first day of displayed month */
+  calView.setDate(1);
+
+  var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var todayD = new Date(); todayD.setHours(0,0,0,0);
+
+  function fmtDate(d) {
+    if (!d) { return "Select date"; }
+    return d.getDate() + " " + MONTHS[d.getMonth()].slice(0,3) + " " + d.getFullYear();
+  }
+  function sameDay(a, b) {
+    return a && b && a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate();
+  }
+  function between(d, a, b) {
+    if (!a || !b) { return false; }
+    return d > a && d < b;
+  }
+
+  function renderCalendar() {
+    var grid  = document.getElementById("bkm-cal-grid");
+    var label = document.getElementById("bkm-cal-month");
+    if (!grid || !label) { return; }
+
+    label.textContent = MONTHS[calView.getMonth()] + " " + calView.getFullYear();
+
+    var year  = calView.getFullYear();
+    var month = calView.getMonth();
+    var first = new Date(year, month, 1).getDay(); /* 0=Sun */
+    var days  = new Date(year, month + 1, 0).getDate();
+
+    var html = "";
+    /* empty cells before first day */
+    for (var i = 0; i < first; i++) {
+      html += '<span class="bkm-day bkm-day-empty"></span>';
+    }
+    for (var d = 1; d <= days; d++) {
+      var dt = new Date(year, month, d);
+      var iso = year + "-" + ("0"+(month+1)).slice(-2) + "-" + ("0"+d).slice(-2);
+      var cls = "bkm-day";
+      var past = dt < todayD;
+      if (past) {
+        cls += " bkm-day-past";
+      } else {
+        if (sameDay(dt, calPickIn))  { cls += " bkm-day-start"; }
+        if (sameDay(dt, calPickOut)) { cls += " bkm-day-end"; }
+        if (calPickIn && calPickOut && between(dt, calPickIn, calPickOut)) { cls += " bkm-day-range"; }
+        if (sameDay(dt, todayD))     { cls += " bkm-day-today"; }
+        /* hover preview: if choosing end, highlight range up to hover */
+        cls += " bkm-day-pick";
+      }
+      html += '<span class="' + cls + '" data-date="' + iso + '">' + d + '</span>';
+    }
+    grid.innerHTML = html;
+
+    /* update summary chips */
+    document.getElementById("bkm-chip-in-val").textContent  = fmtDate(calPickIn);
+    document.getElementById("bkm-chip-out-val").textContent = fmtDate(calPickOut);
+    /* highlight active chip */
+    document.getElementById("bkm-chip-in").classList.toggle("active",  calStep === "in");
+    document.getElementById("bkm-chip-out").classList.toggle("active", calStep === "out");
+  }
+
+  /* Grid click */
+  document.getElementById("bkm-cal-grid").addEventListener("click", function (e) {
+    var dayEl = e.target.closest(".bkm-day-pick");
+    if (!dayEl) { return; }
+    var parts = dayEl.dataset.date.split("-");
+    var clicked = new Date(+parts[0], +parts[1]-1, +parts[2]);
+    if (calStep === "in") {
+      calPickIn  = clicked;
+      calPickOut = null;
+      calStep = "out";
+    } else {
+      if (clicked <= calPickIn) {
+        /* clicked before start: reset */
+        calPickIn  = clicked;
+        calPickOut = null;
+        calStep = "out";
+      } else {
+        calPickOut = clicked;
+        calStep = "done";
+      }
+    }
+    renderCalendar();
+  });
+
+  /* Grid hover — live range preview */
+  document.getElementById("bkm-cal-grid").addEventListener("mouseover", function (e) {
+    if (calStep !== "out") { return; }
+    var dayEl = e.target.closest(".bkm-day-pick");
+    if (!dayEl) { return; }
+    var parts = dayEl.dataset.date.split("-");
+    var hov = new Date(+parts[0], +parts[1]-1, +parts[2]);
+    var grid = document.getElementById("bkm-cal-grid");
+    Array.prototype.forEach.call(grid.querySelectorAll(".bkm-day-pick"), function (el) {
+      var ps = el.dataset.date.split("-");
+      var ed = new Date(+ps[0], +ps[1]-1, +ps[2]);
+      el.classList.toggle("bkm-day-hover-range", ed > calPickIn && ed < hov);
+      el.classList.toggle("bkm-day-hover-end",   ed.getTime() === hov.getTime() && hov > calPickIn);
+    });
+  });
+  document.getElementById("bkm-cal-grid").addEventListener("mouseleave", function () {
+    var grid = document.getElementById("bkm-cal-grid");
+    Array.prototype.forEach.call(grid.querySelectorAll(".bkm-day-hover-range, .bkm-day-hover-end"), function (el) {
+      el.classList.remove("bkm-day-hover-range", "bkm-day-hover-end");
+    });
+  });
+
+  /* chip clicks to reselect */
+  document.getElementById("bkm-chip-in").addEventListener("click", function () {
+    calStep = "in"; calPickIn = null; calPickOut = null; renderCalendar();
+  });
+  document.getElementById("bkm-chip-out").addEventListener("click", function () {
+    if (calPickIn) { calStep = "out"; renderCalendar(); }
+  });
+
+  /* month nav */
+  document.getElementById("bkm-cal-prev").addEventListener("click", function () {
+    calView.setMonth(calView.getMonth() - 1);
+    renderCalendar();
+  });
+  document.getElementById("bkm-cal-next").addEventListener("click", function () {
+    calView.setMonth(calView.getMonth() + 1);
+    renderCalendar();
+  });
 
   /* -- live weather at Hilston Park via Open-Meteo (no API key) -- */
   (function fetchWeather() {
@@ -152,28 +294,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  var modal      = document.getElementById("booking-modal");
-  var panel      = document.getElementById("bkm-panel");
-  var closeBtn   = document.getElementById("bkm-close-btn");
-  var submitBtn  = document.getElementById("bkm-submit");
-  var backBtn    = document.getElementById("bkm-back-btn");
+  var modal       = document.getElementById("booking-modal");
+  var panel       = document.getElementById("bkm-panel");
+  var closeBtn    = document.getElementById("bkm-close-btn");
+  var submitBtn   = document.getElementById("bkm-submit");
+  var backBtn     = document.getElementById("bkm-back-btn");
   var widgetClose = document.getElementById("bkm-widget-close");
-  var inEl       = document.getElementById("bkm-checkin");
-  var outEl      = document.getElementById("bkm-checkout");
-  var errEl      = document.getElementById("bkm-error");
-  var bookIframe = document.getElementById("bkm-booking-iframe");
+  var errEl       = document.getElementById("bkm-error");
+  var bookIframe  = document.getElementById("bkm-booking-iframe");
 
   function openModal() {
     modal.classList.add("is-open");
     document.body.style.overflow = "hidden";
-    inEl.focus();
+    renderCalendar();
   }
   function closeModal() {
     modal.classList.remove("is-open");
     document.body.style.overflow = "";
-    /* reset back to picker phase and unload iframe */
     panel.classList.remove("bkm-widget-active");
     bookIframe.src = "about:blank";
+    /* reset calendar */
+    calPickIn = null; calPickOut = null; calStep = "in";
+    calView = new Date(); calView.setDate(1);
   }
   function showWidget() {
     panel.classList.add("bkm-widget-active");
@@ -184,21 +326,10 @@ document.addEventListener("DOMContentLoaded", function () {
     bookIframe.src = "about:blank";
   }
 
-  /* -- ensure checkout >= checkin + 1 day -- */
-  inEl.addEventListener("change", function () {
-    if (inEl.value) {
-      var next = new Date(inEl.value);
-      next.setDate(next.getDate() + 1);
-      outEl.min = next.toISOString().split("T")[0];
-      if (outEl.value && outEl.value <= inEl.value) { outEl.value = ""; }
-    }
-  });
-
   /* -- submit: validate then show booking widget in-modal -- */
   submitBtn.addEventListener("click", function () {
     errEl.classList.remove("visible");
-    /* only validate if at least one date is filled */
-    if ((inEl.value || outEl.value) && (!inEl.value || !outEl.value || outEl.value <= inEl.value)) {
+    if (!calPickIn || !calPickOut) {
       errEl.classList.add("visible");
       return;
     }
@@ -228,50 +359,5 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     openModal();
   });
-
-  /* =========================================================
-     INSTAGRAM MARQUEE  —  Behold.so JSON API
-     ========================================================= */
-  var instaInner = document.getElementById("insta-inner");
-  if (instaInner) {
-    fetch("https://feeds.behold.so/qbsvzG0laaLxFdO8loEs")
-      .then(function(r){ return r.json(); })
-      .then(function(data) {
-        var posts = Array.isArray(data) ? data : (data.posts || []);
-        if (!posts.length) return;
-
-        function buildSet(posts, hidden) {
-          var set = document.createElement("div");
-          set.className = "insta-set";
-          if (hidden) set.setAttribute("aria-hidden", "true");
-          posts.forEach(function(p) {
-            var imgSrc = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl)
-                      || (p.sizes && p.sizes.small && p.sizes.small.mediaUrl)
-                      || p.mediaUrl;
-            if (!imgSrc) return;
-            var a = document.createElement("a");
-            a.href = p.permalink || "https://www.instagram.com/hilstonparkofficial/";
-            a.target = "_blank";
-            a.rel = "noopener noreferrer";
-            a.setAttribute("aria-label", p.caption ? p.caption.slice(0, 80) : "View on Instagram");
-            var img = document.createElement("img");
-            img.src = imgSrc;
-            img.alt = "";
-            img.loading = "lazy";
-            a.appendChild(img);
-            set.appendChild(a);
-          });
-          return set;
-        }
-
-        instaInner.appendChild(buildSet(posts, false));
-        instaInner.appendChild(buildSet(posts, true));
-      })
-      .catch(function(){
-        /* silently hide the strip if fetch fails */
-        var strip = document.querySelector(".insta-strip");
-        if (strip) strip.style.display = "none";
-      });
-  }
 
 });
