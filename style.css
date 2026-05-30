@@ -28,12 +28,12 @@
   --dark-deep:  #36505d;
   --beige:      #e9e6df;
   --beige-2:    #d8d4cc;
-  --page-bg:    #cfcec9;
+  --page-bg:    #ffffff;
   --white:      #ffffff;
   --text:       #2a2a2a;
   --text-muted: #6b6b6b;
   --border:     #cfcec9;
-  --canvas:     1440px;
+  --canvas:     100%;
   --font-serif: "Bodoni72","Bodoni 72",Georgia,serif;
   --font-script:"DartyZhedant",cursive;
   --font-sans:  "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -54,13 +54,61 @@ ul { list-style: none; }
 address { font-style: normal; }
 button { font: inherit; cursor: pointer; }
 
-/* ----- SITE WRAP (1440px canvas) ----- */
+/* ----- SITE WRAP (full-width website canvas) ----- */
 .site-wrap {
-  max-width: var(--canvas);
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   background: var(--white);
-  box-shadow: 0 0 40px rgba(0,0,0,0.06);
+  box-shadow: none;
   overflow: hidden;
+}
+
+/* Progressive section reveal used across all pages */
+.js-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+.js-reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slight intro polish on first paint */
+.site-header,
+.main-nav {
+  animation: fade-in-down 0.7s ease both;
+}
+.hero,
+.accom-hero,
+.post-hero {
+  animation: fade-in-up 0.9s ease both;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-down {
+  from { opacity: 0; transform: translateY(-14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .main-nav,
+  .hero,
+  .accom-hero,
+  .post-hero {
+    animation: none;
+  }
+  .js-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* ----- TYPOGRAPHY HELPERS ----- */
@@ -260,6 +308,7 @@ button { font: inherit; cursor: pointer; }
   border: 1px solid rgba(255,255,255,0.65);
   background: rgba(20,35,45,0.35);
   padding: 18px 36px;
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   cursor: pointer;
   text-decoration: none;
@@ -825,7 +874,7 @@ button { font: inherit; cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) {
   .insta-inner { animation: none; }
-  .insta-track { overflow-x: auto; scrollbar-width: thin; }
+  .insta-track { overflow-x: auto; }
 }
 
 /* =====================================================
@@ -906,6 +955,7 @@ button { font: inherit; cursor: pointer; }
 .bkm-overlay {
   position: fixed; inset: 0; z-index: 9000;
   background: rgba(6, 12, 16, 0.88);
+  -webkit-backdrop-filter: blur(10px) saturate(0.7);
   backdrop-filter: blur(10px) saturate(0.7);
   display: flex; align-items: center; justify-content: center;
   padding: 20px;
@@ -1201,7 +1251,7 @@ button { font: inherit; cursor: pointer; }
   line-height: 1;
   font-family: var(--font-sans);
 }
-.bkm-day-empty { /* spacer */ }
+.bkm-day-empty { pointer-events: none; }
 .bkm-day-past {
   color: rgba(26,26,26,0.2);
   pointer-events: none;
