@@ -785,8 +785,9 @@ button { font: inherit; cursor: pointer; }
 .insta-inner {
   display: flex;
   width: max-content;
-  /* set-width = 16 images × (340px + 6px gap) = 5536px */
-  animation: insta-scroll 90s linear infinite;
+  will-change: transform;
+  /* Each set = 16 × 340px images + 15 × 6px gaps + 6px margin-right = 5536px */
+  animation: insta-scroll 80s linear infinite;
 }
 
 .insta-track:hover .insta-inner { animation-play-state: paused; }
@@ -794,24 +795,32 @@ button { font: inherit; cursor: pointer; }
 .insta-set {
   display: flex;
   gap: 6px;
-  margin-right: 6px; /* matches gap so seam is invisible */
+  flex-shrink: 0;
+  margin-right: 6px;
 }
 
 .insta-set img {
-  width: 340px;
-  height: 340px;
+  width: 320px;
+  height: 320px;
   object-fit: cover;
   object-position: center;
   flex-shrink: 0;
   display: block;
-  filter: brightness(0.88);
-  transition: filter 0.3s ease;
+  filter: brightness(0.82) saturate(0.95);
+  transition: filter 0.35s ease, transform 0.35s ease;
 }
-.insta-track:hover .insta-set img { filter: brightness(1); }
+.insta-track:hover .insta-set img:hover {
+  filter: brightness(1) saturate(1);
+  transform: scale(1.02);
+  z-index: 1;
+  position: relative;
+}
+.insta-track:hover .insta-set img { filter: brightness(0.95) saturate(1); }
 
+/* 16 images × (320 + 6) = 5216px; +6 margin-right = 5222px for one set */
 @keyframes insta-scroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(-5536px); }
+  to   { transform: translateX(-5222px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -853,7 +862,7 @@ button { font: inherit; cursor: pointer; }
   .insta-set img { width: 260px; height: 260px; }
   @keyframes insta-scroll {
     from { transform: translateX(0); }
-    to   { transform: translateX(-4256px); } /* 16 × (260 + 6) */
+    to   { transform: translateX(-4262px); } /* 16 × (260 + 6) + 6 */
   }
 }
 @media (max-width: 560px) {
@@ -874,113 +883,493 @@ button { font: inherit; cursor: pointer; }
   .insta-set img { width: 200px; height: 200px; }
   @keyframes insta-scroll {
     from { transform: translateX(0); }
-    to   { transform: translateX(-3296px); } /* 16 × (200 + 6) */
+    to   { transform: translateX(-3302px); } /* 16 × (200 + 6) + 6 */
   }
 }
 
 /* =====================================================
-   BOOKING MODAL  —  Cal.com-style popup
+   BOOKING MODAL  —  Royal Estate Edition
    ===================================================== */
+
+/* Gold accent used only within the booking modal */
+:root {
+  --bkm-gold:        #c9a96e;
+  --bkm-gold-light:  #e8d5aa;
+  --bkm-gold-dim:    rgba(201,169,110,0.18);
+  --bkm-ink:         #0e1a1f;
+  --bkm-ink-mid:     #182630;
+  --bkm-ivory:       #f8f5ef;
+  --bkm-ivory-2:     #ede9e0;
+  --bkm-text:        #1a1a1a;
+}
+
 .bkm-overlay {
   position: fixed; inset: 0; z-index: 9000;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(6, 12, 16, 0.88);
+  backdrop-filter: blur(10px) saturate(0.7);
   display: flex; align-items: center; justify-content: center;
   padding: 20px;
   opacity: 0; pointer-events: none;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.4s ease;
 }
 .bkm-overlay.is-open {
   opacity: 1; pointer-events: all;
 }
 
-/* The floating popup card */
-.bkm-popup {
-  background: var(--white);
-  border-radius: 16px;
-  overflow: hidden;
-  width: 100%; max-width: 920px;
-  display: flex; flex-direction: column;
-  max-height: calc(100vh - 40px);
-  box-shadow: 0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,0,0,0.06);
-  opacity: 0;
-  transform: translateY(10px) scale(0.97);
-  transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.26s ease;
+/* ---- Outer frame: thin gold border ---- */
+.bkm-panel {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  max-width: 900px; width: 100%;
+  position: relative;
+  border: 1px solid rgba(201,169,110,0.28);
+  box-shadow:
+    0 0 0 1px rgba(201,169,110,0.08),
+    0 40px 100px rgba(0,0,0,0.65),
+    0 0 60px rgba(201,169,110,0.06) inset;
+  transform: translateY(28px) scale(0.97);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.bkm-overlay.is-open .bkm-popup {
-  opacity: 1;
+.bkm-overlay.is-open .bkm-panel {
   transform: translateY(0) scale(1);
 }
 
-/* Header bar */
-.bkm-popup-header {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 16px 14px 20px;
-  background: var(--dark-deep);
-  border-bottom: 3px solid var(--teal);
-  flex-shrink: 0;
+/* ---- LEFT: cinematic estate image column ---- */
+.bkm-brand {
+  position: relative;
+  overflow: hidden;
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 44px 40px 40px;
 }
-.bkm-popup-logo {
-  height: 34px; width: auto; opacity: 0.9;
-  flex-shrink: 0;
+.bkm-brand-bg {
+  position: absolute; inset: 0;
+  background-image: url('images/estate-exterior.png');
+  background-size: cover;
+  background-position: center 30%;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.bkm-popup-title {
+.bkm-overlay.is-open .bkm-brand-bg {
+  transform: scale(1.05);
+}
+/* Multi-stop cinematic gradient */
+.bkm-brand-grad {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(6,12,16,1.0)   0%,
+      rgba(6,12,16,0.84)  28%,
+      rgba(6,12,16,0.42)  60%,
+      rgba(6,12,16,0.08) 100%
+    );
+}
+/* Vignette sides */
+.bkm-brand::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to right, rgba(6,12,16,0.35) 0%, transparent 35%),
+    linear-gradient(to left,  rgba(6,12,16,0.35) 0%, transparent 35%);
+  pointer-events: none;
+}
+
+.bkm-brand-inner {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 16px;
+  margin-bottom: 20px;
+}
+.bkm-logo {
+  width: 130px; height: auto;
+  opacity: 0.9; display: block;
+  filter: brightness(1.05);
+}
+
+/* Decorative rule above heading */
+.bkm-brand-inner::before {
+  content: '';
+  display: block;
+  width: 36px; height: 1px;
+  background: var(--bkm-gold);
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.bkm-brand-heading {
   font-family: var(--font-serif);
-  font-size: 1.0rem;
   font-weight: normal;
-  color: rgba(255,255,255,0.75);
+  font-size: 2.6rem;
+  color: var(--white);
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+}
+.bkm-brand-script {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-size: 1.35em;
+  display: block;
+  color: var(--bkm-gold-light);
+  line-height: 0.95;
+  margin-top: 2px;
+}
+.bkm-brand-address {
+  font-size: 0.64rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.9;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  position: relative; z-index: 2;
+}
+
+/* Thin gold horizontal rule separating address from weather */
+.bkm-weather {
+  display: flex; align-items: center; gap: 12px;
+  position: relative; z-index: 2;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(201,169,110,0.22);
+}
+.bkm-weather-icon {
+  font-size: 1.5rem; line-height: 1; flex-shrink: 0;
+}
+.bkm-weather-info {
+  display: flex; flex-direction: column; gap: 3px;
+}
+.bkm-weather-temp {
+  font-family: var(--font-serif);
+  font-size: 1.35rem; color: var(--white); line-height: 1;
+}
+.bkm-weather-desc {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.42);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Gold accent bar — bottom of image column */
+.bkm-brand::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, var(--bkm-gold) 30%, var(--bkm-gold) 70%, transparent 100%);
+  z-index: 3;
+  opacity: 0.7;
+}
+
+/* ---- RIGHT: ivory form column ---- */
+.bkm-form {
+  background: var(--bkm-ivory);
+  padding: 52px 52px 44px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(201,169,110,0.15);
+}
+.bkm-close {
+  position: absolute; top: 22px; right: 24px;
+  background: none; border: none;
+  font-size: 1.1rem; line-height: 1;
+  color: rgba(26,26,26,0.3); cursor: pointer;
+  padding: 6px 8px;
+  transition: color 0.2s, transform 0.2s;
+  font-weight: 300;
+}
+.bkm-close:hover { color: var(--bkm-text); transform: scale(1.15); }
+
+/* Eyebrow label */
+.bkm-form::before {
+  content: 'Reserve Your Stay';
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bkm-gold);
+  margin-bottom: 10px;
+}
+
+/* Heading */
+.bkm-form-title {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  font-size: 1.9rem;
+  color: var(--bkm-text);
+  line-height: 1.1;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--bkm-ivory-2);
+}
+
+/* ---- Date summary chips ---- */
+.bkm-date-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.bkm-date-chip {
   flex: 1;
+  display: flex; flex-direction: column; gap: 4px;
+  border: 1px solid var(--bkm-ivory-2);
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: var(--white);
+}
+.bkm-date-chip:hover,
+.bkm-date-chip.active {
+  border-color: var(--bkm-gold);
+  background: rgba(201,169,110,0.06);
+}
+.bkm-chip-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bkm-gold);
+}
+.bkm-chip-value {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--bkm-text);
+  line-height: 1.2;
+}
+.bkm-date-chip-arrow {
+  font-size: 0.85rem;
+  color: rgba(26,26,26,0.25);
+  flex-shrink: 0;
+}
+
+/* ---- Calendar ---- */
+.bkm-cal {
+  margin-bottom: 4px;
+}
+.bkm-cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.bkm-cal-prev,
+.bkm-cal-next {
+  background: none; border: none;
+  font-size: 1.3rem; line-height: 1;
+  color: rgba(26,26,26,0.35);
+  cursor: pointer; padding: 4px 8px;
+  transition: color 0.18s;
+}
+.bkm-cal-prev:hover,
+.bkm-cal-next:hover { color: var(--bkm-text); }
+.bkm-cal-month {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: normal;
+  color: var(--bkm-text);
   letter-spacing: 0.04em;
 }
-.bkm-popup-close {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: rgba(255,255,255,0.65);
-  border-radius: 8px;
-  width: 34px; height: 34px;
-  font-size: 1.25rem; line-height: 1;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.18s, color 0.18s, border-color 0.18s;
-  flex-shrink: 0;
+
+/* Day-of-week header */
+.bkm-cal-dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 6px;
 }
-.bkm-popup-close:hover {
-  background: rgba(255,255,255,0.16);
-  border-color: rgba(255,255,255,0.36);
+.bkm-cal-dow span {
+  text-align: center;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(26,26,26,0.35);
+  padding: 4px 0;
+}
+
+/* Calendar grid */
+.bkm-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.bkm-day {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--bkm-text);
+  padding: 7px 2px;
+  line-height: 1;
+  font-family: var(--font-sans);
+}
+.bkm-day-empty { /* spacer */ }
+.bkm-day-past {
+  color: rgba(26,26,26,0.2);
+  pointer-events: none;
+}
+.bkm-day-pick {
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.bkm-day-pick:hover {
+  background: var(--bkm-gold-dim);
+  color: var(--bkm-text);
+}
+.bkm-day-today {
+  font-weight: 700;
+  color: var(--bkm-gold);
+}
+.bkm-day-start,
+.bkm-day-end {
+  background: var(--bkm-gold);
+  color: var(--white);
+  font-weight: 700;
+}
+.bkm-day-start { border-radius: 1px 0 0 1px; }
+.bkm-day-end   { border-radius: 0 1px 1px 0; }
+.bkm-day-range {
+  background: rgba(201,169,110,0.14);
+  color: var(--bkm-text);
+  border-radius: 0;
+}
+.bkm-day-hover-range {
+  background: rgba(201,169,110,0.10);
+}
+.bkm-day-hover-end {
+  background: rgba(201,169,110,0.55);
   color: var(--white);
 }
 
-/* Body — iframe fills it */
-.bkm-popup-body {
-  flex: 1;
-  overflow: hidden;
-  min-height: 580px;
-  position: relative;
+/* ---- Error / CTA ---- */
+.bkm-error {
+  font-size: 0.7rem; color: #9a2525;
+  margin: 8px 0 0; display: none;
+  letter-spacing: 0.01em;
 }
-.bkm-popup-iframe {
+.bkm-error.visible { display: block; }
+
+.bkm-btn {
+  margin-top: 20px;
+  display: block; width: 100%;
+  padding: 15px 30px;
+  background: var(--bkm-ink);
+  color: var(--bkm-gold-light);
+  border: 1px solid rgba(201,169,110,0.35);
+  font-family: var(--font-sans);
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.22s, border-color 0.22s, color 0.22s;
+  border-radius: 0;
+  position: relative; overflow: hidden;
+}
+.bkm-btn::before {
+  content: '';
   position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  border: none; display: block;
+  background: linear-gradient(135deg, transparent 0%, rgba(201,169,110,0.08) 100%);
+}
+.bkm-btn:hover {
+  background: #1a2d38;
+  border-color: var(--bkm-gold);
+  color: var(--bkm-gold);
 }
 
-/* Mobile — slide up from bottom like Cal.com */
+.bkm-note {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 0.62rem;
+  color: rgba(26,26,26,0.32);
+  line-height: 1.65;
+  letter-spacing: 0.03em;
+}
+
+/* ---- Phase 2: booking widget panel ---- */
+.bkm-widget-panel {
+  display: none;
+  flex-direction: column;
+  background: var(--white);
+  overflow: hidden;
+  grid-column: 1 / -1;
+}
+.bkm-panel.bkm-widget-active {
+  grid-template-columns: 1fr;
+  max-width: 1020px;
+  height: min(88vh, 880px);
+}
+.bkm-panel.bkm-widget-active .bkm-brand,
+.bkm-panel.bkm-widget-active .bkm-form { display: none; }
+.bkm-panel.bkm-widget-active .bkm-widget-panel { display: flex; }
+
+.bkm-widget-header {
+  background: var(--bkm-ink);
+  height: 60px;
+  padding: 0 20px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(201,169,110,0.15);
+}
+.bkm-back-btn {
+  background: none; border: none;
+  color: rgba(201,169,110,0.55); cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.63rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 0 22px;
+  height: 100%;
+  border-right: 1px solid rgba(201,169,110,0.12);
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.bkm-back-btn:hover {
+  color: var(--bkm-gold);
+  background: rgba(201,169,110,0.05);
+}
+.bkm-widget-logo {
+  height: 26px; opacity: 0.8;
+  margin-left: 22px; flex-shrink: 0;
+}
+.bkm-widget-title {
+  flex: 1;
+  font-size: 0.58rem; letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  font-weight: 700;
+  padding-left: 18px;
+}
+.bkm-widget-close {
+  background: none; border: none;
+  color: rgba(201,169,110,0.4); cursor: pointer;
+  font-size: 1.2rem; font-weight: 300;
+  line-height: 1; padding: 14px;
+  transition: color 0.18s;
+  flex-shrink: 0;
+}
+.bkm-widget-close:hover { color: var(--bkm-gold); }
+.bkm-widget-accent {
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, var(--bkm-gold) 20%, var(--bkm-gold) 80%, transparent 100%);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.bkm-booking-iframe {
+  flex: 1;
+  width: 100%; border: none;
+  display: block; min-height: 0;
+}
+
+/* Mobile */
 @media (max-width: 700px) {
-  .bkm-overlay {
-    align-items: flex-end;
-    padding: 0;
-  }
-  .bkm-popup {
-    border-radius: 20px 20px 0 0;
-    max-width: 100%;
-    max-height: 92dvh;
-    opacity: 1;
-    transform: translateY(100%);
-    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .bkm-overlay.is-open .bkm-popup {
-    transform: translateY(0);
-  }
+  .bkm-panel { grid-template-columns: 1fr; }
+  .bkm-brand { min-height: 210px; padding: 30px 28px 32px; justify-content: flex-end; }
+  .bkm-brand-heading { font-size: 2rem; }
+  .bkm-logo { width: 110px; }
+  .bkm-brand-address { display: none; }
+  .bkm-form { padding: 36px 28px 32px; }
+  .bkm-panel.bkm-widget-active { height: 100dvh; max-width: 100%; }
+  .bkm-back-btn { padding: 0 14px; }
+  .bkm-form::before { margin-top: 0; }
 }
 
 /* =====================================================
