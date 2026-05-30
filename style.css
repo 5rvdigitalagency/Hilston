@@ -57,8 +57,8 @@ button { font: inherit; cursor: pointer; }
 /* ----- SITE WRAP (full-width website canvas) ----- */
 .site-wrap {
   width: 100%;
-  max-width: none;
-  margin: 0;
+  max-width: 1920px;
+  margin: 0 auto;
   background: var(--white);
   box-shadow: none;
   overflow: hidden;
