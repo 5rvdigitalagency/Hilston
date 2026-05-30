@@ -715,71 +715,207 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* =====================================================
+   UTILITY PAGES (Visitors / Legal)
+   ===================================================== */
+.utility-hero {
+  background: linear-gradient(135deg, #36505d 0%, #4e9484 100%);
+  color: var(--white);
+  padding: 90px 80px;
+  text-align: center;
+}
+.utility-hero .eyebrow {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.78);
+}
+.utility-hero h1 {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  line-height: 1.05;
+  margin-bottom: 14px;
+}
+.utility-hero p {
+  max-width: 70ch;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.88);
+}
+
+.utility-section {
+  background: var(--beige);
+  padding: 78px 80px;
+}
+.utility-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.utility-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 30px;
+}
+.utility-card h2 {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.utility-card p {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+.utility-list {
+  list-style: none;
+  margin-top: 14px;
+}
+.utility-list li {
+  padding: 6px 0 6px 18px;
+  position: relative;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.utility-list li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  color: var(--teal);
+  font-weight: 700;
+}
+.utility-card a {
+  color: var(--teal-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.utility-note {
+  margin-top: 22px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* =====================================================
    FOOTER
    ===================================================== */
-.site-footer { background: var(--dark); color: var(--white); }
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 60px;
-  padding: 60px 60px 50px;
-  align-items: start;
+.site-footer {
+  background: linear-gradient(180deg, #395562 0%, #2f4854 55%, #243943 100%);
+  color: var(--white);
 }
-.footer-brand { display: flex; flex-direction: column; gap: 26px; }
+.footer-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 42px;
+  padding: 68px 60px 42px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+}
 
 .footer-crest {
   display: block;
 }
 .footer-crest img {
-  width: 220px;
+  width: 230px;
   height: auto;
   display: block;
-  opacity: 0.95;
+  opacity: 0.98;
 }
 
 .footer-brand address {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   line-height: 1.7;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.84);
 }
 
-.social-icons { display: flex; gap: 10px; }
+.social-icons { display: flex; gap: 12px; justify-content: center; }
 .social-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  background: #1c2a33;
+  width: 40px;
+  height: 40px;
+  background: rgba(18, 31, 39, 0.64);
   color: var(--white);
   border-radius: 50%;
-  transition: opacity 0.2s;
+  border: 1px solid rgba(255,255,255,0.16);
+  transition: transform 0.2s, background 0.2s, border-color 0.2s;
 }
 .social-icon svg { width: 16px; height: 16px; }
-.social-icon:hover { opacity: 0.75; }
+.social-icon:hover {
+  transform: translateY(-2px);
+  background: rgba(78,148,132,0.28);
+  border-color: rgba(255,255,255,0.32);
+}
 
 .footer-links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  padding-top: 4px;
+  gap: 42px;
+  width: 100%;
+  max-width: 980px;
+  text-align: center;
+  padding-top: 6px;
 }
 .footer-col h4 {
   font-family: var(--font-serif);
   font-weight: normal;
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   color: var(--white);
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
-.footer-col ul li { padding: 6px 0; }
+.footer-col ul li { padding: 4px 0; }
 .footer-col ul li a {
   color: rgba(255,255,255,0.78);
-  font-size: 0.92rem;
-  transition: color 0.2s;
+  font-size: 0.88rem;
+  transition: color 0.2s, letter-spacing 0.2s;
 }
-.footer-col ul li a:hover { color: var(--white); }
+.footer-col ul li a:hover { color: var(--white); letter-spacing: 0.02em; }
 
-.footer-bar { height: 10px; background: var(--teal); }
+.footer-meta {
+  margin-top: 8px;
+  width: 100%;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  padding-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 24px;
+}
+.footer-copy,
+.footer-madeby {
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.68);
+}
+.footer-madeby strong {
+  color: rgba(255,255,255,0.92);
+  font-weight: 700;
+}
+
+.footer-bar {
+  height: 10px;
+  background: linear-gradient(90deg, #58a895 0%, #4e9484 50%, #58a895 100%);
+}
 
 /* =====================================================
    INSTAGRAM STRIP
@@ -886,7 +1022,10 @@ button { font: inherit; cursor: pointer; }
   .stays,
   .expertise,
   .plan-day { padding-left: 40px; padding-right: 40px; }
-  .footer-grid { padding: 50px 40px 40px; }
+  .utility-hero,
+  .utility-section { padding-left: 40px; padding-right: 40px; }
+  .utility-grid { grid-template-columns: 1fr; }
+  .footer-grid { padding: 56px 40px 38px; }
   .experience-grid,
   .expertise-grid { gap: 36px; }
   .insta-header { padding: 0 40px 44px; }
@@ -905,7 +1044,7 @@ button { font: inherit; cursor: pointer; }
   .stay-info { padding: 36px 30px; }
   .expertise-image img { height: 360px; }
   .header-inner { flex-direction: column; gap: 16px; }
-  .footer-links { grid-template-columns: repeat(3, 1fr); }
+  .footer-links { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
   /* Instagram */
   .insta-header { flex-direction: column; align-items: flex-start; padding: 0 40px 36px; gap: 20px; }
   .insta-set img { width: 260px; height: 260px; }
@@ -920,12 +1059,19 @@ button { font: inherit; cursor: pointer; }
   .stays,
   .expertise,
   .plan-day { padding-left: 20px; padding-right: 20px; }
+  .utility-hero,
+  .utility-section { padding-left: 20px; padding-right: 20px; }
+  .utility-hero { padding-top: 64px; padding-bottom: 64px; }
+  .utility-section { padding-top: 56px; padding-bottom: 56px; }
+  .utility-card { padding: 24px 20px; }
   .nav-list { flex-wrap: wrap; gap: 14px; }
   .nav-list a { font-size: 0.7rem; letter-spacing: 0.14em; }
   .logo-name { font-size: 1.3rem; }
   .header-logo img { height: 50px; }
-  .footer-grid { padding: 36px 20px 30px; gap: 36px; }
+  .footer-grid { padding: 42px 20px 26px; gap: 30px; }
   .footer-links { grid-template-columns: 1fr; }
+  .footer-copy,
+  .footer-madeby { font-size: 0.68rem; letter-spacing: 0.06em; }
   /* Instagram */
   .insta-strip { padding-top: 56px; }
   .insta-header { padding: 0 20px 30px; }
