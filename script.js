@@ -360,4 +360,39 @@ document.addEventListener("DOMContentLoaded", function () {
     openModal();
   });
 
+  /* -- Global reveal animations for sections/cards across all pages -- */
+  (function initGlobalRevealAnimations() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+
+    var revealTargets = document.querySelectorAll(
+      "section, .stay-row, .expertise-grid, .plan-grid, .visit-card, .booking-card, .post-layout, .more-grid, .blog-card, .faq-grid, .rates-widget-section"
+    );
+
+    if (!revealTargets.length) { return; }
+
+    revealTargets.forEach(function (el, idx) {
+      /* Skip hidden booking modal internals */
+      if (el.closest("#booking-modal")) { return; }
+      el.classList.add("js-reveal");
+      el.style.transitionDelay = Math.min(idx * 35, 220) + "ms";
+    });
+
+    var io = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) { return; }
+        entry.target.classList.add("in-view");
+        observer.unobserve(entry.target);
+      });
+    }, {
+      threshold: 0.14,
+      rootMargin: "0px 0px -8% 0px"
+    });
+
+    revealTargets.forEach(function (el) {
+      if (el.classList.contains("js-reveal")) {
+        io.observe(el);
+      }
+    });
+  }());
+
 });
