@@ -898,52 +898,70 @@ html, body { overflow-x: hidden; }
 /* =====================================================
    FOOTER
    ===================================================== */
-.site-footer { background: var(--dark); color: var(--white); }
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 60px;
-  padding: 60px 60px 50px;
-  align-items: start;
+.site-footer {
+  background: linear-gradient(180deg, #395562 0%, #2f4854 55%, #243943 100%);
+  color: var(--white);
 }
-.footer-brand { display: flex; flex-direction: column; gap: 26px; }
+.footer-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 42px;
+  padding: 68px 60px 42px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+}
 
 .footer-crest {
   display: block;
 }
 .footer-crest img {
-  width: 220px;
+  width: 230px;
   height: auto;
   display: block;
-  opacity: 0.95;
+  opacity: 0.98;
 }
 
 .footer-brand address {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   line-height: 1.7;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.84);
 }
 
-.social-icons { display: flex; gap: 10px; }
+.social-icons { display: flex; gap: 12px; justify-content: center; }
 .social-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  background: #1c2a33;
+  width: 40px;
+  height: 40px;
+  background: rgba(18, 31, 39, 0.64);
   color: var(--white);
   border-radius: 50%;
-  transition: opacity 0.2s;
+  border: 1px solid rgba(255,255,255,0.16);
+  transition: transform 0.2s, background 0.2s, border-color 0.2s;
 }
 .social-icon svg { width: 16px; height: 16px; }
-.social-icon:hover { opacity: 0.75; }
+.social-icon:hover {
+  transform: translateY(-2px);
+  background: rgba(78,148,132,0.28);
+  border-color: rgba(255,255,255,0.32);
+}
 
 .footer-links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  padding-top: 4px;
+  gap: 42px;
+  width: 100%;
+  max-width: 980px;
+  text-align: center;
+  padding-top: 6px;
 }
 .footer-col h4 {
   font-family: var(--font-serif);
@@ -1058,7 +1076,7 @@ html, body { overflow-x: hidden; }
   .stays,
   .expertise,
   .plan-day { padding-left: 40px; padding-right: 40px; }
-  .footer-grid { padding: 50px 40px 40px; }
+  .footer-grid { padding: 56px 40px 38px; }
   .experience-grid,
   .expertise-grid { gap: 36px; }
   .insta-header { padding: 0 40px 44px; }
@@ -1080,8 +1098,7 @@ html, body { overflow-x: hidden; }
   .stat-label { font-size: 0.64rem; letter-spacing: 0.1em; }
 
   .experience-grid,
-  .expertise-grid,
-  .footer-grid { grid-template-columns: 1fr; }
+  .expertise-grid { grid-template-columns: 1fr; }
   .plan-cards { grid-template-columns: 1fr; }
   .stay-row,
   .stay-row--reverse { grid-template-columns: 1fr; }
