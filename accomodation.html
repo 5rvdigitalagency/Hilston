@@ -118,32 +118,38 @@
     .flexible-booking { background: var(--dark); padding: 88px 80px; }
     .flexible-booking-header { margin-bottom: 48px; }
     .flexible-booking-header h2 { color: var(--white); }
-    .booking-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .booking-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .booking-card {
-      background: rgba(255,255,255,0.06); padding: 40px 36px;
-      display: flex; flex-direction: column; gap: 14px;
-      border: 1px solid rgba(255,255,255,0.08);
-      position: relative; transition: background 0.25s;
+      background: rgba(255,255,255,0.05);
+      display: flex; flex-direction: column;
+      border: 1px solid rgba(255,255,255,0.09);
+      overflow: hidden;
+      position: relative; transition: border-color 0.3s, transform 0.3s;
     }
-    .booking-card:hover { background: rgba(255,255,255,0.1); }
-    .booking-badge {
-      display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--teal); background: rgba(78,148,132,0.12);
-      padding: 5px 10px; border: 1px solid rgba(78,148,132,0.3); margin-bottom: 6px;
+    .booking-card:hover { border-color: rgba(78,148,132,0.55); transform: translateY(-4px); }
+    .booking-card-img { width: 100%; height: 220px; overflow: hidden; flex-shrink: 0; position: relative; }
+    .booking-card-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); filter: brightness(0.82);
     }
-    .booking-card h3 { color: var(--white); font-family: var(--font-serif); font-weight: normal; font-size: 1.25rem; }
-    .booking-card > p { font-size: 0.86rem; line-height: 1.72; color: rgba(255,255,255,0.72); }
-    .booking-sub-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 4px; }
-    .booking-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-    .booking-list li { padding-left: 16px; position: relative; font-size: 0.86rem; line-height: 1.7; color: rgba(255,255,255,0.72); }
-    .booking-list li::before { content: "4"; position: absolute; left: 0; color: var(--teal); }
+    .booking-card:hover .booking-card-img img { transform: scale(1.05); filter: brightness(0.92); }
+    .booking-card-img::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--teal); }
+    .booking-card-body { padding: 32px 30px 36px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+    .booking-card h3 { color: var(--white); font-family: var(--font-serif); font-weight: normal; font-size: 1.45rem; line-height: 1.2; }
+    .booking-card-body > p { font-size: 0.87rem; line-height: 1.75; color: rgba(255,255,255,0.68); }
+    .booking-sub-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 4px; }
+    .booking-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+    .booking-list li { padding-left: 18px; position: relative; font-size: 0.86rem; line-height: 1.7; color: rgba(255,255,255,0.72); }
+    .booking-list li::before { content: "4"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
     .booking-card-cta {
       margin-top: auto; padding-top: 20px;
       display: inline-flex; align-items: center; gap: 10px;
-      color: var(--white); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-      border-top: 1px solid rgba(255,255,255,0.12); width: 100%;
+      color: var(--white); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      border-top: 1px solid rgba(255,255,255,0.10); width: 100%; transition: color 0.2s;
     }
-    .booking-card-cta svg { stroke: var(--teal); fill: none; stroke-width: 1.5; width: 20px; height: 12px; }
+    .booking-card-cta:hover { color: var(--teal); }
+    .booking-card-cta svg { stroke: var(--teal); fill: none; stroke-width: 1.5; width: 20px; height: 12px; transition: transform 0.2s; }
+    .booking-card-cta:hover svg { transform: translateX(4px); }
 
     /* VISIT US */
     .visit-us { background: var(--white); padding: 88px 80px; }
@@ -395,47 +401,61 @@
     </div>
     <div class="booking-grid">
       <div class="booking-card">
-        <span class="booking-badge">Best Value</span>
-        <h3>Direct Booking</h3>
-        <p>Pick your stay directly with Hilston Park for the most flexible options, group enquiries, and custom accommodation packages.</p>
-        <p class="booking-sub-label">Benefits</p>
-        <ul class="booking-list">
-          <li>Direct communication with our team</li>
-          <li>Flexible group stays</li>
-          <li>Custom packages (1&#8211;7+ days)</li>
-        </ul>
-        <a href="#" class="booking-card-cta">
-          BOOK DIRECTLY WITH HILSTON PARK
-          <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="booking-card-img">
+          <img src="images/manor-house.jpg" alt="Hilston Park Manor House" loading="lazy">
+        </div>
+        <div class="booking-card-body">
+          <h3>Direct Booking</h3>
+          <p>Book directly with Hilston Park for the most flexible options, group enquiries, and custom accommodation packages.</p>
+          <p class="booking-sub-label">Benefits</p>
+          <ul class="booking-list">
+            <li>Direct communication with our team</li>
+            <li>Flexible group stays</li>
+            <li>Custom packages (1&#8211;7+ days)</li>
+          </ul>
+          <a href="#" class="booking-card-cta">
+            BOOK DIRECTLY WITH HILSTON PARK
+            <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
       </div>
       <div class="booking-card">
-        <h3>Airbnb Stays</h3>
-        <p>Book selected accommodation at Hilston Park through Airbnb for shorter private stays and family breaks.</p>
-        <p class="booking-sub-label">Ideal for</p>
-        <ul class="booking-list">
-          <li>Couples</li>
-          <li>Families</li>
-          <li>Short countryside escapes</li>
-        </ul>
-        <a href="#" class="booking-card-cta">
-          VIEW ON AIRBNB
-          <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="booking-card-img">
+          <img src="images/hero-families.jpg" alt="Gatehouse countryside stay" loading="lazy">
+        </div>
+        <div class="booking-card-body">
+          <h3>Airbnb Stays</h3>
+          <p>Book selected accommodation at Hilston Park through Airbnb for shorter private stays and family breaks.</p>
+          <p class="booking-sub-label">Ideal for</p>
+          <ul class="booking-list">
+            <li>Couples</li>
+            <li>Families</li>
+            <li>Short countryside escapes</li>
+          </ul>
+          <a href="#" class="booking-card-cta">
+            VIEW ON AIRBNB
+            <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
       </div>
       <div class="booking-card">
-        <h3>Booking.com</h3>
-        <p>Selected stays are available through Booking.com for convenient, instant booking options.</p>
-        <p class="booking-sub-label">Good deal for</p>
-        <ul class="booking-list">
-          <li>Short stays</li>
-          <li>Last-minute bookings</li>
-          <li>Individual accommodation units</li>
-        </ul>
-        <a href="https://www.booking.com" target="_blank" rel="noopener" class="booking-card-cta">
-          CHECK OFFERS ON BOOKING.COM
-          <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="booking-card-img">
+          <img src="images/courtyard-room.jpg" alt="Courtyard Rooms at Hilston Park" loading="lazy">
+        </div>
+        <div class="booking-card-body">
+          <h3>Booking.com</h3>
+          <p>Selected stays are available through Booking.com for convenient, instant booking options.</p>
+          <p class="booking-sub-label">Good for</p>
+          <ul class="booking-list">
+            <li>Short stays</li>
+            <li>Last-minute bookings</li>
+            <li>Individual accommodation units</li>
+          </ul>
+          <a href="https://www.booking.com" target="_blank" rel="noopener" class="booking-card-cta">
+            CHECK OFFERS ON BOOKING.COM
+            <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
