@@ -1481,46 +1481,23 @@ html, body { overflow-x: hidden; }
   font-size: 1.75rem; color: var(--white); line-height: 1.15;
   margin-top: 8px;
 }
-.rates-cal-month {
-  display: flex; flex-direction: column; gap: 14px;
+.rates-cal-month { display: none; }
+.rates-cal-steps {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: 18px;
 }
-.rates-cal-month-label {
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
-  text-transform: uppercase; color: rgba(255,255,255,0.5);
+.rates-cal-steps li {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 0.84rem; line-height: 1.65; color: rgba(255,255,255,0.65);
 }
-.rates-cal-days-header {
-  display: grid; grid-template-columns: repeat(7,1fr);
-  gap: 4px;
-}
-.rates-cal-days-header span {
-  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; color: rgba(255,255,255,0.3);
-  text-align: center; padding: 4px 0;
-}
-.rates-cal-grid {
-  display: grid; grid-template-columns: repeat(7,1fr);
-  gap: 4px;
-}
-.rates-cal-grid span {
-  aspect-ratio: 1;
+.rates-step-num {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border: 1px solid rgba(78,148,132,0.5);
+  color: var(--teal);
+  border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.74rem; color: rgba(255,255,255,0.55);
-  border-radius: 3px;
-  cursor: default;
-}
-.rates-cal-grid span.empty { background: transparent; }
-.rates-cal-grid span.avail {
-  background: rgba(78,148,132,0.15);
-  color: rgba(255,255,255,0.88);
-}
-.rates-cal-grid span.avail:hover {
-  background: rgba(78,148,132,0.4);
-  color: var(--white);
-}
-.rates-cal-grid span.today {
-  background: var(--teal);
-  color: var(--white);
-  font-weight: 700;
+  font-size: 0.68rem; font-weight: 700;
 }
 .rates-cal-note {
   font-size: 0.78rem; line-height: 1.72;
