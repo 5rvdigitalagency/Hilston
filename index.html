@@ -8,29 +8,60 @@
 </head>
 <body>
 
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
 <div class="site-wrap">
 
-  <!-- ===== HEADER ===== -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-logo">
-        <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
-      </div>
-      <a href="#" class="btn-book">BOOK NOW</a>
-    </div>
-  </header>
+  <!-- ===== STICKY SHELL (header + nav) ===== -->
+  <div class="site-sticky" id="site-sticky">
 
-  <!-- ===== NAV ===== -->
-  <nav class="main-nav">
-    <ul class="nav-list">
-      <li><a href="about.html">ABOUT</a></li>
-      <li><a href="educational.html">EDUCATION</a></li>
-      <li><a href="event.html">EVENTS</a></li>
-      <li><a href="accomodation.html">ACCOMMODATION</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
-      <li><a href="blogs.html">BLOG</a></li>
-    </ul>
-  </nav>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+        </div>
+        <div class="header-actions">
+          <a href="#" class="btn-book">BOOK NOW</a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NAV ===== -->
+    <nav class="main-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="educational.html">EDUCATION</a></li>
+        <li><a href="event.html">EVENTS</a></li>
+        <li><a href="accomodation.html">ACCOMMODATION</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+        <li><a href="blogs.html">BLOG</a></li>
+      </ul>
+    </nav>
+
+  </div><!-- /site-sticky -->
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="educational.html">Education</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+      </ul>
+      <a href="#" class="btn-book mobile-nav-book">BOOK NOW</a>
+    </nav>
+  </div>
 
   <!-- ===== HERO ===== -->
   <section class="hero">
@@ -57,10 +88,35 @@
     </article>
   </section>
 
+  <!-- ===== STATS BAR ===== -->
+  <section class="stats-bar" aria-label="Hilston Park at a glance">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-number"><span class="stat-num" data-target="50">50</span><span class="stat-suffix">+</span></div>
+        <div class="stat-label">Years of Experience</div>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="stat-num" data-target="130">130</span><span class="stat-suffix">+</span></div>
+        <div class="stat-label">Guest Capacity</div>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="stat-num" data-target="15">15</span><span class="stat-suffix">+</span></div>
+        <div class="stat-label">Outdoor Activities</div>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="stat-num" data-target="60">60</span><span class="stat-suffix"></span></div>
+        <div class="stat-label">Acres of Grounds</div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== EXPERIENCE ===== -->
   <section class="experience">
     <div class="experience-grid">
-      <div class="experience-text">
+      <div class="experience-text" data-reveal="left">
         <h2 class="heading-display">The Hilston Park<br><em class="script">Experience</em></h2>
         <p>Far from the busier towns of South Wales, Hilston Park sits within acres of open meadows in the Welsh countryside. Featuring a 19th-century Palladian mansion between the River Wye and the Black Mountains, the estate carries a quietness that deeply supports well-being.</p>
         <p>Serving as an outdoor activity centre in Wales for over 50 years, the estate has welcomed schools, corporate teams, and families to encourage personal-level development. Groups come to find focus in a scenic woodland valley, portions of which are home to rare dragonflies and native plant species.</p>
@@ -76,10 +132,10 @@
           </ul>
         </div>
       </div>
-      <div class="experience-images">
-        <div class="exp-img exp-img--wide"><img src="images/accommodation.jpg" alt="Children at Hilston Park"></div>
-        <div class="exp-img"><img src="images/food.jpg" alt="On-site catering"></div>
-        <div class="exp-img"><img src="images/estate-exterior.png" alt="Accommodation"></div>
+      <div class="experience-images" data-reveal="right">
+        <div class="exp-img exp-img--wide"><img src="images/accommodation.jpg" alt="Children at Hilston Park" loading="lazy"></div>
+        <div class="exp-img"><img src="images/food.jpg" alt="On-site catering" loading="lazy"></div>
+        <div class="exp-img"><img src="images/estate-exterior.png" alt="Accommodation" loading="lazy"></div>
       </div>
     </div>
   </section>
@@ -89,7 +145,7 @@
     <h2 class="heading-display light center">Choose Your <em class="script">Experience</em></h2>
     <p class="section-intro">Hilston Park serves three distinct groups — each with a dedicated programme, tailored space, and a team that understands exactly what you need.</p>
 
-    <div class="svc-cards">
+    <div class="svc-cards" data-reveal>
 
       <article class="svc-card svc-card--edu">
         <div class="svc-bg" style="background-image:url(images/hero-schools.jpg)"></div>
@@ -150,11 +206,11 @@
 
   <!-- ===== RESIDENTIAL STAYS ===== -->
   <section class="stays">
-    <h2 class="heading-display center">Residential Stays &amp; Experiences</h2>
+    <h2 class="heading-display center" data-reveal>Residential Stays &amp; Experiences</h2>
     <p class="stays-intro">The heritage of Hilston Park is shown in its rooms. With a choice of historic Manor House settings or private countryside accommodation, we provide flexible, 1 to 7+ night residential trips for schools, corporate groups and private visitors.</p>
 
-    <article class="stay-row">
-      <div class="stay-image"><img src="images/manor-house.jpg" alt="Manor House interior"></div>
+    <article class="stay-row" data-reveal="left">
+      <div class="stay-image"><img src="images/manor-house.jpg" alt="Manor House interior" loading="lazy"></div>
       <div class="stay-info">
         <h3>Manor House</h3>
         <p class="stay-lead">Exclusive large-scale residential accommodation. Ideal for schools, large corporate groups and full-site bookings.</p>
@@ -167,8 +223,8 @@
       </div>
     </article>
 
-    <article class="stay-row stay-row--reverse">
-      <div class="stay-image"><img src="images/hero-corporate.jpg" alt="Courtyard Rooms"></div>
+    <article class="stay-row stay-row--reverse" data-reveal="right">
+      <div class="stay-image"><img src="images/hero-corporate.jpg" alt="Courtyard Rooms" loading="lazy"></div>
       <div class="stay-info">
         <h3>Courtyard Rooms</h3>
         <p class="stay-lead">Restored accommodation that offers a more private and refined stay experience. Usually booked for corporate groups and private guests.</p>
@@ -181,8 +237,8 @@
       </div>
     </article>
 
-    <article class="stay-row">
-      <div class="stay-image"><img src="images/hero-families.jpg" alt="Gatehouse"></div>
+    <article class="stay-row" data-reveal="left">
+      <div class="stay-image"><img src="images/hero-families.jpg" alt="Gatehouse" loading="lazy"></div>
       <div class="stay-info">
         <h3>Gatehouse</h3>
         <p class="stay-lead">An intimate countryside stay for smaller groups. Well-suited for families and private guests.</p>
@@ -199,10 +255,10 @@
   <!-- ===== EXPERTISE ===== -->
   <section class="expertise">
     <div class="expertise-grid">
-      <div class="expertise-image">
-        <img src="images/Climbing%20Kid.png" alt="Child climbing at Hilston Park">
+      <div class="expertise-image" data-reveal="left">
+        <img src="images/Climbing%20Kid.png" alt="Child climbing at Hilston Park" loading="lazy">
       </div>
-      <div class="expertise-content">
+      <div class="expertise-content" data-reveal="right">
         <h2 class="heading-display light center">Hilston Park is the Estate Managed<br>with 50+ Years of <em class="script">Safety and Expertise</em></h2>
         <p class="expertise-sub">Hilston Park runs on care, planning, and a deep understanding of how people grow.<br>A glimpse of what guests can expect during their time here:</p>
         <div class="accordion">
