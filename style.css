@@ -1482,22 +1482,50 @@ html, body { overflow-x: hidden; }
   margin-top: 8px;
 }
 .rates-cal-month { display: none; }
-.rates-cal-steps {
-  list-style: none; padding: 0;
-  display: flex; flex-direction: column; gap: 18px;
+.rates-date-form {
+  display: flex; flex-direction: column; gap: 14px;
 }
-.rates-cal-steps li {
-  display: flex; align-items: flex-start; gap: 14px;
-  font-size: 0.84rem; line-height: 1.65; color: rgba(255,255,255,0.65);
+.rates-date-field {
+  display: flex; flex-direction: column; gap: 6px;
 }
-.rates-step-num {
-  flex-shrink: 0;
-  width: 24px; height: 24px;
-  border: 1px solid rgba(78,148,132,0.5);
-  color: var(--teal);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.68rem; font-weight: 700;
+.rates-date-field label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.42);
+}
+.rates-date-field input[type="date"] {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: var(--white);
+  padding: 11px 12px;
+  font-size: 0.88rem;
+  font-family: var(--font-sans);
+  border-radius: 3px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  color-scheme: dark;
+  transition: border-color 0.2s;
+}
+.rates-date-field input[type="date"]:focus {
+  border-color: var(--teal);
+}
+.rates-date-btn {
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  padding: 13px 20px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border-radius: 2px;
+  margin-top: 6px;
+  transition: background 0.2s;
+}
+.rates-date-btn:hover {
+  background: var(--teal-dark);
 }
 .rates-cal-note {
   font-size: 0.78rem; line-height: 1.72;
