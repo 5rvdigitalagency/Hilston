@@ -10,136 +10,101 @@
 
     /* ===== GALLERY PAGE ===== */
 
-    .gallery-outer {
+    .gallery-section {
       background: #ece8e1;
-    }
-
-    /* 2-col outer: sidebar (1) + images (2) */
-    .gallery-layout {
-      display: grid;
-      grid-template-columns: 380px 1fr;
       min-height: 80vh;
     }
 
-    /* ---- SIDEBAR ---- */
-    .gallery-sidebar {
-      padding: 60px 44px 0 56px;
-      border-right: 1px solid rgba(0,0,0,0.12);
-      display: flex;
-      flex-direction: column;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow: hidden;
+    /* ---- PAGE HEADER ---- */
+    .gallery-header {
+      padding: 72px 60px 48px;
+      text-align: center;
     }
-
-    .gallery-title {
-      font-family: var(--font-serif);
-      font-weight: normal;
-      font-size: clamp(1.55rem, 1.8vw, 2.25rem);
-      line-height: 1.24;
-      color: var(--text);
-      margin-bottom: 36px;
-    }
-    .gallery-title em {
-      font-style: italic;
-    }
-
-    .gallery-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-bottom: 0;
-    }
-
-    .gallery-pill {
-      background: transparent;
-      border: 1px solid rgba(42,42,42,0.7);
-      border-radius: 999px;
-      padding: 7px 16px;
+    .gallery-eyebrow {
       font-family: var(--font-sans);
       font-size: 0.62rem;
       font-weight: 700;
-      letter-spacing: 0.13em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+    .gallery-heading {
+      font-family: var(--font-serif);
+      font-weight: normal;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      line-height: 1.18;
       color: var(--text);
+    }
+    .gallery-heading em { font-style: italic; }
+
+    /* ---- TAB BAR ---- */
+    .gallery-tabs-wrap {
+      padding: 0 60px;
+    }
+    .gallery-tabs-inner {
+      display: inline-flex;
+      background: rgba(0,0,0,0.07);
+      border-radius: 10px;
+      padding: 5px;
+      gap: 2px;
+    }
+    .gtab {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 9px 20px;
+      border: none;
+      border-radius: 7px;
+      background: transparent;
+      color: rgba(42,42,42,0.58);
       cursor: pointer;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
       white-space: nowrap;
     }
-    .gallery-pill:hover {
-      background: rgba(42,42,42,0.08);
-    }
-    .gallery-pill.active {
-      background: var(--text);
-      color: var(--white);
-      border-color: var(--text);
+    .gtab:hover { color: var(--text); }
+    .gtab.active {
+      background: var(--white);
+      color: var(--text);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.14);
     }
 
-    /* Image anchored to bottom of sidebar */
-    .gallery-sidebar-bottom {
-      margin-top: auto;
-      overflow: hidden;
-      flex-shrink: 0;
+    /* ---- IMAGE GRID ---- */
+    .gallery-grid-wrap {
+      padding: 40px 60px 80px;
     }
-    .gallery-sidebar-bottom img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* ---- MASONRY IMAGE AREA ---- */
-    /* Border approach: each cell has right+bottom border; wrap has left+top */
-    .gallery-images-wrap {
-      border-left: 1px solid rgba(0,0,0,0.13);
-      border-top: 1px solid rgba(0,0,0,0.13);
-      background: #ece8e1;
-    }
-
-    /* Masonry takes over layout; container must be position:relative */
     .gallery-grid {
-      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
     }
-
-    /* Sizer sets the column width for Masonry */
-    .gallery-grid-sizer {
-      width: 50%;
-    }
-
     .gallery-img-item {
-      width: 50%;
-      box-sizing: border-box;
-      background: #ece8e1;
+      overflow: hidden;
       cursor: pointer;
       position: relative;
-      overflow: hidden;
-      /* right+bottom borders = 1px separator lines between all cells */
-      border-right: 1px solid rgba(0,0,0,0.13);
-      border-bottom: 1px solid rgba(0,0,0,0.13);
+      aspect-ratio: 4 / 3;
+      border-radius: 6px;
     }
-
     .gallery-img-item img {
       width: 100%;
-      height: auto;      /* natural aspect ratio — key Badrutt's behaviour */
+      height: 100%;
+      object-fit: cover;
       display: block;
       transition: transform 0.5s ease;
     }
-    .gallery-img-item:hover img {
-      transform: scale(1.03);
-    }
+    .gallery-img-item:hover img { transform: scale(1.04); }
     .gallery-img-item::after {
       content: '';
       position: absolute; inset: 0;
       background: rgba(0,0,0,0);
-      transition: background 0.35s;
+      transition: background 0.3s;
       pointer-events: none;
+      border-radius: 6px;
     }
-    .gallery-img-item:hover::after {
-      background: rgba(0,0,0,0.08);
-    }
-    .gallery-img-item.hidden {
-      display: none;
-    }
+    .gallery-img-item:hover::after { background: rgba(0,0,0,0.06); }
+    .gallery-img-item.hidden { display: none; }
 
     /* ---- LIGHTBOX ---- */
     .lightbox {
@@ -186,24 +151,18 @@
 
     /* ---- RESPONSIVE ---- */
     @media (max-width: 1100px) {
-      .gallery-layout { grid-template-columns: 300px 1fr; }
-      .gallery-sidebar { padding: 44px 28px 0 28px; }
+      .gallery-header { padding: 56px 40px 36px; }
+      .gallery-tabs-wrap { padding: 0 40px; }
+      .gallery-grid-wrap { padding: 32px 40px 60px; }
     }
     @media (max-width: 860px) {
-      .gallery-layout { grid-template-columns: 1fr; }
-      .gallery-sidebar {
-        position: static; height: auto;
-        padding: 40px 32px 32px;
-        border-right: none;
-        border-bottom: 1px solid rgba(0,0,0,0.12);
-      }
-      .gallery-sidebar-bottom { display: none; }
-      .gallery-pills { padding-bottom: 0; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 500px) {
-      .gallery-grid-sizer,
-      .gallery-img-item { width: 100%; }
-      .gallery-sidebar { padding: 28px 20px 24px; }
+    @media (max-width: 560px) {
+      .gallery-header { padding: 40px 20px 28px; }
+      .gallery-tabs-wrap { padding: 0 20px; overflow-x: auto; padding-bottom: 4px; }
+      .gallery-grid-wrap { padding: 24px 20px 48px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     }
 
   </style>
@@ -234,101 +193,98 @@
   </nav>
 
   <!-- GALLERY -->
-  <div class="gallery-outer">
-    <div class="gallery-layout">
+  <section class="gallery-section">
 
-      <!-- LEFT SIDEBAR -->
-      <div class="gallery-sidebar">
-        <h1 class="gallery-title"><em>Hilston Gallery</em>&mdash;Explore the estate, activities and the Wye Valley landscape.</h1>
+    <!-- PAGE HEADER -->
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">Gallery</p>
+      <h1 class="gallery-heading"><em>Hilston Park</em> &mdash; explore the estate, activities &amp; Wye Valley landscape</h1>
+    </div>
 
-        <div class="gallery-pills" id="galleryPills">
-          <button class="gallery-pill active" data-filter="all">All</button>
-          <button class="gallery-pill" data-filter="estate">Estate</button>
-          <button class="gallery-pill" data-filter="activities">Activities</button>
-          <button class="gallery-pill" data-filter="accommodation">Accommodation</button>
-          <button class="gallery-pill" data-filter="food">Food &amp; Dining</button>
-          <button class="gallery-pill" data-filter="landscape">Landscape</button>
-        </div>
-
-        <div class="gallery-sidebar-bottom">
-          <img src="images/estate-exterior.png" alt="Hilston Park estate">
-        </div>
+    <!-- TAB BAR -->
+    <div class="gallery-tabs-wrap">
+      <div class="gallery-tabs-inner" role="tablist">
+        <button class="gtab active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="gtab" data-filter="estate" role="tab" aria-selected="false">Estate</button>
+        <button class="gtab" data-filter="activities" role="tab" aria-selected="false">Activities</button>
+        <button class="gtab" data-filter="accommodation" role="tab" aria-selected="false">Accommodation</button>
+        <button class="gtab" data-filter="food" role="tab" aria-selected="false">Food &amp; Dining</button>
+        <button class="gtab" data-filter="landscape" role="tab" aria-selected="false">Landscape</button>
       </div>
+    </div>
 
-      <!-- MASONRY IMAGES -->
-      <div class="gallery-images-wrap">
-        <div class="gallery-grid" id="galleryGrid">
-          <div class="gallery-grid-sizer"></div>
+    <!-- IMAGE GRID -->
+    <div class="gallery-grid-wrap">
+      <div class="gallery-grid" id="galleryGrid">
 
-          <div class="gallery-img-item" data-category="activities">
-            <img src="images/activity-portrait.jpg" alt="Outdoor activities at Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="accommodation">
-            <img src="images/manor-house.jpg" alt="Manor house interior" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="food">
-            <img src="images/food.jpg" alt="Catering at Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="accommodation">
-            <img src="images/accommodation.jpg" alt="Accommodation at Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="activities">
-            <img src="images/adventure.jpg" alt="Adventure activities in the Wye Valley" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="activities">
-            <img src="images/Climbing Kid.png" alt="Children climbing at Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="estate">
-            <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded24c489c62d9e3c1f8_img-6.jpg" alt="Historic Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="estate">
-            <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded30dae33520b10571b_img-1.jpg" alt="Hilston Park estate building" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="activities">
-            <img src="images/hero-schools.jpg" alt="School group at Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="activities">
-            <img src="images/hero-corporate.jpg" alt="Corporate team building at Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="estate">
-            <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded331b430865b52e6c2_img-4.jpg" alt="Historic Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="estate">
-            <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded2d063900245321fdc_img-7.jpg" alt="Hilston Park archive photo" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="food">
-            <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg" alt="Hilston Park international menu" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="activities">
-            <img src="images/nature-bushcraft.jpg" alt="Bushcraft and nature activities" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="activities">
-            <img src="images/hero-families.jpg" alt="Family stay at Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="estate">
-            <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded3b4dc65f3e7c8caf3_img-9.jpg" alt="Hilston Park archive" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="accommodation">
-            <img src="images/courtyard-room.jpg" alt="Courtyard room accommodation" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="activities">
-            <img src="images/ios-photo.jpg" alt="Activities at Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="landscape">
-            <img src="images/blog-banner.jpg" alt="Wye Valley landscape" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="activities">
-            <img src="images/ios-photo2.jpg" alt="Group activities at Hilston Park" loading="lazy">
-          </div>
-          <div class="gallery-img-item" data-category="estate">
-            <img src="images/gatehouse.webp" alt="Hilston Park gatehouse" loading="lazy">
-          </div>
+        <div class="gallery-img-item" data-category="activities">
+          <img src="images/activity-portrait.jpg" alt="Outdoor activities at Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="accommodation">
+          <img src="images/manor-house.jpg" alt="Manor house interior" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="food">
+          <img src="images/food.jpg" alt="Catering at Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="accommodation">
+          <img src="images/accommodation.jpg" alt="Accommodation at Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="activities">
+          <img src="images/adventure.jpg" alt="Adventure activities in the Wye Valley" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="activities">
+          <img src="images/Climbing Kid.png" alt="Children climbing at Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="estate">
+          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded24c489c62d9e3c1f8_img-6.jpg" alt="Historic Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="estate">
+          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded30dae33520b10571b_img-1.jpg" alt="Hilston Park estate building" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="activities">
+          <img src="images/hero-schools.jpg" alt="School group at Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="activities">
+          <img src="images/hero-corporate.jpg" alt="Corporate team building at Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="estate">
+          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded331b430865b52e6c2_img-4.jpg" alt="Historic Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="estate">
+          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded2d063900245321fdc_img-7.jpg" alt="Hilston Park archive photo" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="food">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg" alt="Hilston Park international menu" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="activities">
+          <img src="images/nature-bushcraft.jpg" alt="Bushcraft and nature activities" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="activities">
+          <img src="images/hero-families.jpg" alt="Family stay at Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="estate">
+          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/6a06ded3b4dc65f3e7c8caf3_img-9.jpg" alt="Hilston Park archive" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="accommodation">
+          <img src="images/courtyard-room.jpg" alt="Courtyard room accommodation" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="activities">
+          <img src="images/ios-photo.jpg" alt="Activities at Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="landscape">
+          <img src="images/blog-banner.jpg" alt="Wye Valley landscape" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="activities">
+          <img src="images/ios-photo2.jpg" alt="Group activities at Hilston Park" loading="lazy">
+        </div>
+        <div class="gallery-img-item" data-category="estate">
+          <img src="images/gatehouse.webp" alt="Hilston Park gatehouse" loading="lazy">
+        </div>
 
-        </div><!-- /gallery-grid -->
-      </div><!-- /gallery-images-wrap -->
+      </div><!-- /gallery-grid -->
+    </div><!-- /gallery-grid-wrap -->
 
-    </div><!-- /gallery-layout -->
-  </div><!-- /gallery-outer -->
+  </section><!-- /gallery-section -->
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
@@ -401,21 +357,24 @@
 
 </div><!-- /site-wrap -->
 
-<script src="https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
-<script src="https://unpkg.com/imagesloaded@5.0.0/imagesloaded.pkgd.min.js"></script>
+<script src="script.js"></script>
 <script>
 (function () {
   'use strict';
 
-  /* ---- FILTER PILLS ---- */
-  var pills   = document.querySelectorAll('.gallery-pill');
-  var items   = document.querySelectorAll('.gallery-img-item');
+  /* ---- TABS ---- */
+  var tabs  = document.querySelectorAll('.gtab');
+  var items = document.querySelectorAll('.gallery-img-item');
 
-  pills.forEach(function (pill) {
-    pill.addEventListener('click', function () {
-      var filter = pill.dataset.filter;
-      pills.forEach(function (p) { p.classList.remove('active'); });
-      pill.classList.add('active');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var filter = tab.dataset.filter;
+      tabs.forEach(function (t) {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
       items.forEach(function (item) {
         if (filter === 'all' || item.dataset.category === filter) {
           item.classList.remove('hidden');
@@ -423,13 +382,7 @@
           item.classList.add('hidden');
         }
       });
-      rebuildVisible();
-    /* re-layout masonry after filter change */
-    if (typeof msnry !== 'undefined' && msnry) {
-      msnry.options.itemSelector = '.gallery-img-item:not(.hidden)';
-      msnry.reloadItems();
-      msnry.layout();
-    }
+    });
   });
 
   /* ---- LIGHTBOX ---- */
@@ -440,15 +393,14 @@
   var lbNext    = document.getElementById('lightboxNext');
   var lbCounter = document.getElementById('lightboxCounter');
 
-  var visible = [];
   var current = 0;
 
-  function rebuildVisible () {
-    visible = Array.from(document.querySelectorAll('.gallery-img-item:not(.hidden)'));
+  function getVisible () {
+    return Array.from(document.querySelectorAll('.gallery-img-item:not(.hidden)'));
   }
-  rebuildVisible();
 
   function openAt (idx) {
+    var visible = getVisible();
     current = (idx + visible.length) % visible.length;
     var img = visible[current].querySelector('img');
     lbImg.src = img.src;
@@ -466,8 +418,7 @@
 
   items.forEach(function (item) {
     item.addEventListener('click', function () {
-      rebuildVisible();
-      openAt(visible.indexOf(item));
+      openAt(getVisible().indexOf(item));
     });
   });
 
@@ -481,17 +432,6 @@
     if (e.key === 'ArrowLeft')  openAt(current - 1);
     if (e.key === 'ArrowRight') openAt(current + 1);
     if (e.key === 'Escape')     close();
-  });
-
-  /* ---- MASONRY INIT ---- */
-  var msnry;
-  imagesLoaded('#galleryGrid', function () {
-    msnry = new Masonry('#galleryGrid', {
-      itemSelector: '.gallery-img-item',
-      columnWidth: '.gallery-grid-sizer',
-      gutter: 0,
-      percentPosition: true
-    });
   });
 
 }());
