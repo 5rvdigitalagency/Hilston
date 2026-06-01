@@ -1,6 +1,141 @@
 /* Hilston Park  --  script.js */
 document.addEventListener("DOMContentLoaded", function () {
 
+  /* =====================================================
+     SCROLL PROGRESS BAR
+     ===================================================== */
+  var progressBar = document.getElementById("scroll-progress");
+  if (progressBar) {
+    window.addEventListener("scroll", function () {
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var w = h > 0 ? (window.scrollY / h) * 100 : 0;
+      progressBar.style.width = w + "%";
+    }, { passive: true });
+  }
+
+  /* =====================================================
+     STICKY HEADER — compact on scroll
+     ===================================================== */
+  var stickyShell = document.getElementById("site-sticky");
+  if (stickyShell) {
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 60) {
+        stickyShell.classList.add("scrolled");
+      } else {
+        stickyShell.classList.remove("scrolled");
+      }
+    }, { passive: true });
+  }
+
+  /* =====================================================
+     MOBILE NAV TOGGLE
+     ===================================================== */
+  var navToggle  = document.getElementById("nav-toggle");
+  var mobileNav  = document.getElementById("mobile-nav");
+  if (navToggle && mobileNav) {
+    navToggle.addEventListener("click", function () {
+      var isOpen = mobileNav.classList.contains("is-open");
+      if (isOpen) {
+        mobileNav.classList.remove("is-open");
+        mobileNav.setAttribute("aria-hidden", "true");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.classList.remove("is-open");
+        document.body.style.overflow = "";
+      } else {
+        mobileNav.classList.add("is-open");
+        mobileNav.setAttribute("aria-hidden", "false");
+        navToggle.setAttribute("aria-expanded", "true");
+        navToggle.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
+    });
+    /* close on any link click */
+    mobileNav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        mobileNav.classList.remove("is-open");
+        mobileNav.setAttribute("aria-hidden", "true");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.classList.remove("is-open");
+        document.body.style.overflow = "";
+      });
+    });
+    /* close on Escape */
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && mobileNav.classList.contains("is-open")) {
+        mobileNav.classList.remove("is-open");
+        mobileNav.setAttribute("aria-hidden", "true");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+    });
+  }
+
+  /* =====================================================
+     ACTIVE NAV LINK
+     ===================================================== */
+  var currentPage = window.location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll(".nav-list a").forEach(function (link) {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+
+  /* =====================================================
+     SCROLL REVEAL (IntersectionObserver)
+     ===================================================== */
+  if ("IntersectionObserver" in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.10, rootMargin: "0px 0px -48px 0px" });
+
+    document.querySelectorAll("[data-reveal]").forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    /* fallback: just show everything */
+    document.querySelectorAll("[data-reveal]").forEach(function (el) {
+      el.classList.add("is-visible");
+    });
+  }
+
+  /* =====================================================
+     STATS COUNTER ANIMATION
+     ===================================================== */
+  function animateCounter(el) {
+    var target   = parseInt(el.getAttribute("data-target"), 10);
+    var duration = 1400;
+    var startTs  = null;
+    function step(ts) {
+      if (!startTs) startTs = ts;
+      var elapsed  = ts - startTs;
+      var progress = Math.min(elapsed / duration, 1);
+      /* ease-out cubic */
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var statsSection = document.querySelector(".stats-bar");
+  if (statsSection && "IntersectionObserver" in window) {
+    var statsObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          document.querySelectorAll(".stat-num").forEach(animateCounter);
+          statsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    statsObserver.observe(statsSection);
+  }
+
   /* ---- Accordion ---- */
   var SVG_DOWN = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>';
   var SVG_UP   = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" /></svg>';
@@ -26,9 +161,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-
-  /* ---- Mobile nav toggle (hamburger placeholder) ---- */
-  /* Nav wraps on small screens via CSS flex-wrap; no JS needed */
 
   /* =========================================================
      BOOKING MODAL
