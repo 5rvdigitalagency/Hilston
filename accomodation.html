@@ -67,40 +67,27 @@
     .accom-intro-img img { width: 100%; height: 520px; object-fit: cover; display: block; }
 
     /* ACCOMMODATION OPTIONS */
-    .accom-options { background: var(--beige); padding: 96px 80px; }
-    .accom-options-intro { max-width: 620px; margin-bottom: 0; }
-    .accom-options-intro .section-eyebrow { display: block; margin-bottom: 10px; }
-    .accom-options-intro h2 { margin-bottom: 14px; }
-    .accom-options-intro > p { font-size: 0.92rem; line-height: 1.78; color: var(--text-muted); }
+    .accom-options { background: var(--white); padding: 88px 80px; }
+    .accom-options-header { margin-bottom: 56px; }
+    .accom-options-header h2 { margin-bottom: 12px; }
+    .accom-options-header p { font-size: 0.92rem; line-height: 1.72; color: var(--text-muted); max-width: 680px; }
     .accom-block {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
-      padding: 72px 0; border-top: 1px solid var(--beige-2);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 64px;
     }
-    .accom-block:first-of-type { margin-top: 72px; }
-    .accom-block:last-of-type { border-bottom: 1px solid var(--beige-2); }
-    .accom-block-img { position: relative; overflow: hidden; }
-    .accom-block-img img { width: 100%; height: 500px; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .accom-block:hover .accom-block-img img { transform: scale(1.03); }
-    .accom-block-num {
-      display: block; font-family: var(--font-serif); font-size: 0.68rem;
-      letter-spacing: 0.35em; color: var(--teal); margin-bottom: 14px;
-    }
+    .accom-block:last-of-type { margin-bottom: 0; }
+    .accom-block img { width: 100%; height: 420px; object-fit: cover; display: block; }
     .accom-block-content h3 {
       font-family: var(--font-serif); font-weight: normal;
-      font-size: clamp(1.65rem, 2.4vw, 2.2rem); color: var(--text);
-      margin-bottom: 18px; line-height: 1.1;
+      font-size: 1.5rem; color: var(--text); margin-bottom: 14px;
     }
-    .accom-block-content > p { font-size: 0.9rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 22px; }
-    .accom-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; margin-bottom: 26px; }
-    .accom-list li { padding-left: 20px; position: relative; font-size: 0.88rem; line-height: 1.72; color: var(--text-muted); }
+    .accom-block-content > p { font-size: 0.9rem; line-height: 1.78; color: var(--text-muted); margin-bottom: 16px; }
+    .accom-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+    .accom-list li { padding-left: 18px; position: relative; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
     .accom-list li::before { content: "4"; position: absolute; left: 0; color: var(--teal); }
-    .accom-block-note {
-      font-size: 0.82rem; color: var(--text-muted);
-      border-left: 2px solid var(--teal); padding-left: 14px; line-height: 1.75;
-    }
-    .accom-block.reverse .accom-block-img { order: 2; }
+    .accom-block-note { font-size: 0.84rem; font-style: italic; color: var(--text-muted); }
+    .accom-block.reverse img { order: 2; }
     .accom-block.reverse .accom-block-content { order: 1; }
-    .accom-options-cta { text-align: center; padding-top: 64px; }
+    .accom-options-cta { text-align: center; margin-top: 56px; }
 
     /* ACTIVITIES */
     .activities { background: var(--beige); padding: 88px 80px; }
@@ -309,7 +296,6 @@
     <div class="accom-options-intro">
       <p class="section-eyebrow">Estate Accommodation</p>
       <h2 class="heading-display">Where You&#8217;ll Stay</h2>
-      <div class="section-rule"><span></span><span class="section-rule-diamond"></span><span></span></div>
       <p>Three distinct spaces across the Hilston Park estate &#8212; each offering a different character for families, private groups, and holiday stays in Wales.</p>
     </div>
 

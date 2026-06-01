@@ -1454,19 +1454,6 @@ html, body { overflow-x: hidden; }
   .bkm-back-btn { padding: 0 14px; font-size: 0.62rem; }
 }
 
-/* Section ornamental rule */
-.section-rule {
-  display: flex; align-items: center; gap: 14px;
-  margin: 18px 0 22px;
-}
-.section-rule span:not(.section-rule-diamond) {
-  flex: 1; height: 1px; background: var(--beige-2);
-}
-.section-rule-diamond {
-  width: 6px; height: 6px; background: var(--teal);
-  transform: rotate(45deg); flex-shrink: 0;
-}
-
 /* =====================================================
    RATES WIDGET (accommodation page inline)
    ===================================================== */
