@@ -1458,87 +1458,36 @@ html, body { overflow-x: hidden; }
    RATES WIDGET (accommodation page inline)
    ===================================================== */
 .rates-widget-section {
-  background: var(--dark-deep);
-  padding: 96px 80px;
-  position: relative;
+  background: var(--beige);
+  padding: 64px 80px;
 }
-/* Subtle top rule */
-.rates-widget-section::before {
-  content: '';
-  position: absolute; top: 0; left: 80px; right: 80px; height: 1px;
-  background: linear-gradient(to right, transparent, rgba(78,148,132,0.4), transparent);
+.rates-header {
+  display: flex; align-items: baseline; gap: 14px;
+  margin-bottom: 28px;
 }
-
-/* Header */
-.rates-header { text-align: center; margin-bottom: 60px; }
 .rates-eyebrow {
-  display: block;
-  font-family: var(--font-script);
-  font-size: 1.85rem;
-  color: var(--teal);
-  margin-bottom: 4px;
-  line-height: 1;
-}
-.rates-ornament {
-  display: flex; align-items: center; justify-content: center;
-  gap: 16px; margin: 14px auto 20px; max-width: 360px;
-}
-.rates-ornament-line {
-  flex: 1; height: 1px; background: rgba(255,255,255,0.14);
-}
-.rates-ornament-diamond {
-  width: 7px; height: 7px;
-  background: var(--teal);
-  transform: rotate(45deg);
-  flex-shrink: 0;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--teal);
+  white-space: nowrap;
 }
 .rates-title {
   font-family: var(--font-serif); font-weight: normal;
-  font-size: clamp(2.1rem, 3.4vw, 3.2rem);
-  color: var(--white); line-height: 1.1; margin-bottom: 18px;
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  color: var(--text); line-height: 1.1;
 }
-.rates-subtitle {
-  font-size: 0.88rem; color: rgba(255,255,255,0.5);
-  line-height: 1.82; max-width: 50ch; margin: 0 auto;
-  letter-spacing: 0.015em;
-}
-
-/* Frame panel */
 .rates-frame {
-  max-width: 1060px;
-  margin: 0 auto;
-  position: relative;
-  border: 1px solid rgba(255,255,255,0.09);
-  box-shadow:
-    0 0 0 4px rgba(78,148,132,0.1),
-    0 40px 100px rgba(0,0,0,0.4);
-}
-/* Inner teal inset rule */
-.rates-frame::before {
-  content: '';
-  position: absolute; inset: 4px;
-  border: 1px solid rgba(78,148,132,0.18);
-  pointer-events: none; z-index: 1;
-}
-.rates-frame-label {
-  background: var(--teal-dark);
-  color: rgba(255,255,255,0.85);
-  font-family: var(--font-sans);
-  font-size: 0.63rem; font-weight: 700;
-  letter-spacing: 0.3em; text-transform: uppercase;
-  padding: 12px 24px; text-align: center;
+  background: var(--white);
+  border: 1px solid var(--beige-2);
+  border-top: 3px solid var(--teal);
 }
 .rates-frame iframe {
   display: block; width: 100%; border: none;
 }
-
 @media (max-width: 860px) {
-  .rates-widget-section { padding: 72px 40px; }
-  .rates-widget-section::before { left: 40px; right: 40px; }
+  .rates-widget-section { padding: 48px 40px; }
 }
 @media (max-width: 560px) {
-  .rates-widget-section { padding: 52px 20px; }
-  .rates-widget-section::before { left: 20px; right: 20px; }
+  .rates-widget-section { padding: 36px 20px; }
 }
 
 /* =====================================================
