@@ -622,11 +622,17 @@
         <span class="rates-cal-eyebrow">Live Availability</span>
         <h2 class="rates-cal-title">Check Dates<br>&amp; Rates</h2>
       </div>
-      <ul class="rates-cal-steps">
-        <li><span class="rates-step-num">1</span>Choose your month using the dropdown</li>
-        <li><span class="rates-step-num">2</span>Filter by number of nights</li>
-        <li><span class="rates-step-num">3</span>Select a date to see room options &amp; prices</li>
-      </ul>
+      <form class="rates-date-form" id="ratesDateForm">
+        <div class="rates-date-field">
+          <label for="ratesCheckin">Check-in</label>
+          <input type="date" id="ratesCheckin" name="checkin">
+        </div>
+        <div class="rates-date-field">
+          <label for="ratesCheckout">Check-out</label>
+          <input type="date" id="ratesCheckout" name="checkout">
+        </div>
+        <button type="submit" class="rates-date-btn">Check Availability</button>
+      </form>
       <p class="rates-cal-note">Rates update in real time. Weekend and peak dates may vary.</p>
     </div>
 
@@ -747,6 +753,33 @@
       dotsEl.children[current].classList.add('active');
     }
     setInterval(function(){ go((current+1) % items.length); }, 4500);
+  })();
+
+  // Date picker → reload QBook widget with dates in URL
+  (function(){
+    var form = document.getElementById('ratesDateForm');
+    if (!form) return;
+    var iframe = document.getElementById('QBOOKWIDGET_SC_BLOCKS_95cf3bb7f6e7ebf393fbcde248157d51');
+    var baseUrl = 'https://cdn.hotels.uk.com/sc/51665/eff381e2425e310943f59d71f160fa71/0/4';
+    var ciIn  = document.getElementById('ratesCheckin');
+    var coIn  = document.getElementById('ratesCheckout');
+    var today = new Date().toISOString().split('T')[0];
+    ciIn.min = today;
+    coIn.min = today;
+    ciIn.addEventListener('change', function(){
+      var d = new Date(this.value);
+      d.setDate(d.getDate() + 1);
+      coIn.min = d.toISOString().split('T')[0];
+      if (coIn.value && coIn.value <= this.value) coIn.value = coIn.min;
+    });
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (!ciIn.value || !coIn.value) return;
+      // Convert YYYY-MM-DD to DD-MM-YYYY for QBook arrival/departure params
+      var ci = ciIn.value.split('-').reverse().join('-');
+      var co = coIn.value.split('-').reverse().join('-');
+      iframe.src = baseUrl + '?arrival=' + encodeURIComponent(ci) + '&departure=' + encodeURIComponent(co);
+    });
   })();
 </script>
 </body>
