@@ -615,18 +615,37 @@
 
   <!-- LIVE RATES & AVAILABILITY WIDGET -->
   <section class="rates-widget-section">
-    <div class="rates-header">
-      <span class="rates-eyebrow">Live Availability</span>
-      <h2 class="rates-title">Check Dates &amp; Rates</h2>
+
+    <!-- Left: decorative calendar panel -->
+    <div class="rates-cal-panel">
+      <div>
+        <span class="rates-cal-eyebrow">Live Availability</span>
+        <h2 class="rates-cal-title">Check Dates<br>&amp; Rates</h2>
+      </div>
+      <div class="rates-cal-month">
+        <span class="rates-cal-month-label" id="cal-month-label">June 2026</span>
+        <div class="rates-cal-days-header">
+          <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+        </div>
+        <div class="rates-cal-grid" id="rates-cal-grid"></div>
+      </div>
+      <p class="rates-cal-note">Select your preferred dates in the panel to the right to check live availability and room rates.</p>
     </div>
-    <div class="rates-frame">
+
+    <!-- Right: booking widget -->
+    <div class="rates-widget-panel">
+      <div class="rates-widget-bar">
+        <span>Live Rates &amp; Availability</span>
+        <span class="rates-widget-bar-dot"></span>
+      </div>
       <iframe
         id="QBOOKWIDGET_SC_BLOCKS_95cf3bb7f6e7ebf393fbcde248157d51"
         src="https://cdn.hotels.uk.com/sc/51665/eff381e2425e310943f59d71f160fa71/0/4"
-        width="100%" height="200" allowtransparency="1" frameborder="0"
+        width="100%" height="560" allowtransparency="1" frameborder="0"
         title="Hilston Park live availability and rates">
       </iframe>
     </div>
+
   </section>
 
   <!-- FOOTER -->
@@ -730,6 +749,31 @@
       dotsEl.children[current].classList.add('active');
     }
     setInterval(function(){ go((current+1) % items.length); }, 4500);
+  })();
+
+  // Rates calendar grid
+  (function(){
+    var grid = document.getElementById('rates-cal-grid');
+    var label = document.getElementById('cal-month-label');
+    if (!grid) return;
+    var now = new Date();
+    var y = now.getFullYear(), m = now.getMonth();
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    label.textContent = months[m] + ' ' + y;
+    var first = new Date(y, m, 1).getDay(); // 0=Sun
+    var startOffset = (first === 0) ? 6 : first - 1; // Mon-start
+    var days = new Date(y, m+1, 0).getDate();
+    var today = now.getDate();
+    for (var i = 0; i < startOffset; i++) {
+      var e = document.createElement('span'); e.className = 'empty'; grid.appendChild(e);
+    }
+    for (var d = 1; d <= days; d++) {
+      var s = document.createElement('span');
+      s.textContent = d;
+      if (d === today) s.className = 'today';
+      else if (d >= today) s.className = 'avail';
+      grid.appendChild(s);
+    }
   })();
 </script>
 </body>
