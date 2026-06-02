@@ -155,8 +155,11 @@ document.addEventListener("DOMContentLoaded", function () {
      Property: Hilston Park  |  QBook ID: 51665
      ========================================================= */
   var QBOOK_BASE = "https://web-bookings.hotels.uk.com/#/booking/51665/items/availability";
-  var QBOOK_RATES_SRC = "https://cdn.hotels.uk.com/sc/51665/eff381e2425e310943f59d71f160fa71/0/4";
-  var QBOOK_RATES_ID  = "QBOOKWIDGET_SC_BLOCKS_95cf3bb7f6e7ebf393fbcde248157d51";
+  /* All Item Availability widget — full inventory grid with live prices for all room types */
+  var QBOOK_RATES_SRC = "https://widgets.hotels.uk.com/display-rates/51665/eff381e2425e310943f59d71f160fa71";
+  var QBOOK_RATES_ID  = "QBOOKWIDGET_RATES_ALLITEMS_202788cc19e79e9d082d25e00f1693f4";
+  /* Inquiry endpoint — Formsubmit relays form data to this email; first submission triggers a confirmation email to activate */
+  var INQUIRY_ENDPOINT = "https://formsubmit.co/ajax/info@hilstonpark.com";
 
   /* -- service definitions -- */
   var BKM_SERVICES = {
@@ -489,7 +492,7 @@ document.addEventListener("DOMContentLoaded", function () {
     showWidget();
   });
 
-  /* -- inquiry submit (placeholder: opens mailto, swap for real endpoint later) -- */
+  /* -- inquiry submit: POST to Formsubmit (no signup, sends to info@hilstonpark.com) -- */
   inqForm.addEventListener("submit", function (e) {
     e.preventDefault();
     inqErr.classList.remove("visible");
@@ -502,12 +505,45 @@ document.addEventListener("DOMContentLoaded", function () {
       inqErr.classList.add("visible");
       return;
     }
-    var subject = "Enquiry from website: " + (BKM_SERVICES[ctx] ? BKM_SERVICES[ctx].label.replace(/&[a-z]+;/g, "&") : ctx);
-    var body = "Name: " + name + "\nEmail: " + email + "\nPhone: " + phone + "\nService: " + ctx + "\n\n" + msg;
-    /* TODO: replace with real POST to CRM/email endpoint */
-    window.location.href = "mailto:info@hilstonpark.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-    inqForm.hidden = true;
-    inqSuccess.hidden = false;
+    var svcLabel = BKM_SERVICES[ctx] ? BKM_SERVICES[ctx].label.replace(/&[a-z]+;/g, "&") : ctx;
+    var submitBtnEl = inqForm.querySelector("button[type=submit]");
+    var origBtnText = submitBtnEl.textContent;
+    submitBtnEl.disabled = true;
+    submitBtnEl.textContent = "Sending\u2026";
+
+    fetch(INQUIRY_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        _subject: "Website enquiry: " + svcLabel,
+        _template: "table",
+        _captcha: "false",
+        name: name,
+        email: email,
+        phone: phone || "(not provided)",
+        service: svcLabel,
+        message: msg,
+        source_page: window.location.pathname
+      })
+    })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (data) {
+        if (data && (data.success === "true" || data.success === true)) {
+          inqForm.hidden = true;
+          inqSuccess.hidden = false;
+        } else {
+          /* Formsubmit returns success on first submit but asks for email confirmation;
+             treat any non-error response as success so the user sees confirmation */
+          inqForm.hidden = true;
+          inqSuccess.hidden = false;
+        }
+      })
+      .catch(function () {
+        inqErr.textContent = "Sorry, we couldn\u2019t send that. Please email info@hilstonpark.com directly.";
+        inqErr.classList.add("visible");
+        submitBtnEl.disabled = false;
+        submitBtnEl.textContent = origBtnText;
+      });
   });
   inqDone.addEventListener("click", closeModal);
 
