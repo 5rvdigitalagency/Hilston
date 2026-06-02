@@ -1871,8 +1871,23 @@ body { overflow-x: clip; }
 /* --- Tablet portrait: switch to single column earlier where useful --- */
 @media (max-width: 768px) {
   .testimonials-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; padding: 48px 28px 32px; }
-  .footer-brand { grid-column: 1 / -1; }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 48px 32px 32px;
+    text-align: center;
+  }
+  .footer-brand { grid-column: 1 / -1; align-items: center; text-align: center; }
+  .footer-col { text-align: center; }
+  .footer-col h4 { margin-bottom: 14px; }
+  .footer-col ul li { padding: 4px 0; }
+  .social-icons { justify-content: center; }
+  .footer-meta {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
 }
 
 /* --- Booking modal: actually fit smaller phones --- */
