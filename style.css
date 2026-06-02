@@ -1226,7 +1226,6 @@ body { overflow-x: clip; }
     from { transform: translateX(0); }
     to   { transform: translateX(var(--scroll-dist, -3296px)); } /* 16 × (200 + 6) */
   }
-  }
 }
 
 /* =====================================================
