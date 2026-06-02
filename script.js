@@ -303,7 +303,6 @@ document.addEventListener("DOMContentLoaded", function () {
               '<button class="bkm-btn" id="bkm-inq-done">Close</button>',
             '</div>',
           '</div>',
-        '</div>',
 
         '<!-- PHASE 3: Booking summary confirmation -->',
         '<div class="bkm-phase bkm-phase-confirm" id="bkm-phase-confirm" hidden>',
@@ -313,6 +312,7 @@ document.addEventListener("DOMContentLoaded", function () {
           '<div class="bkm-summary" id="bkm-summary"></div>',
           '<a class="bkm-btn bkm-btn-proceed" id="bkm-proceed-btn" href="#" target="_blank" rel="noopener">Proceed to Secure Booking &rarr;</a>',
           '<p class="bkm-note">You will be taken to our secure booking partner, Q-Book, to confirm and pay. Your details above will be pre-applied.</p>',
+        '</div>',
         '</div>',
 
       '</div>',
