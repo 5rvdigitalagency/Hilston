@@ -2,18 +2,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   /* =====================================================
-     SCROLL PROGRESS BAR
-     ===================================================== */
-  var progressBar = document.getElementById("scroll-progress");
-  if (progressBar) {
-    window.addEventListener("scroll", function () {
-      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var w = h > 0 ? (window.scrollY / h) * 100 : 0;
-      progressBar.style.width = w + "%";
-    }, { passive: true });
-  }
-
-  /* =====================================================
      STICKY HEADER — compact on scroll
      ===================================================== */
   var stickyShell = document.getElementById("site-sticky");

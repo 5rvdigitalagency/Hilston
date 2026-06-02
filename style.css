@@ -29,7 +29,7 @@
   --beige:      #e9e6df;
   --beige-soft: #f5f2ee;
   --beige-2:    #d8d4cc;
-  --page-bg:    #ffffff;
+  --page-bg:    #f5f2ee;
   --white:      #ffffff;
   --text:       #2a2a2a;
   --text-muted: #6b6b6b;
@@ -55,23 +55,11 @@ ul { list-style: none; }
 address { font-style: normal; }
 button { font: inherit; cursor: pointer; }
 
-/* ----- SCROLL PROGRESS ----- */
-.scroll-progress {
-  position: fixed;
-  top: 0; left: 0;
-  height: 3px;
-  width: 0%;
-  background: var(--teal);
-  z-index: 9999;
-  transition: width 0.08s linear;
-  pointer-events: none;
-}
-
 /* ----- SITE WRAP (1440px canvas) ----- */
 .site-wrap {
   max-width: var(--canvas);
   margin: 0 auto;
-  background: var(--white);
+  background: var(--beige-soft);
   box-shadow: 0 0 40px rgba(0,0,0,0.06);
 }
 /* prevent horizontal overflow from hero/insta strips without clipping sticky.
@@ -352,7 +340,7 @@ body { overflow-x: clip; }
    STATS BAR
    ===================================================== */
 .stats-bar {
-  background: var(--white);
+  background: transparent;
   border-top: 1px solid var(--beige-2);
   border-bottom: 1px solid var(--beige-2);
   padding: 44px 56px;
@@ -511,8 +499,9 @@ body { overflow-x: clip; }
    EXPERIENCE
    ===================================================== */
 .experience {
-  background: var(--beige);
+  background: transparent;
   padding: 80px 64px 96px;
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 .experience-grid {
   display: grid;
@@ -757,8 +746,9 @@ body { overflow-x: clip; }
    STAYS
    ===================================================== */
 .stays {
-  background: var(--beige);
+  background: transparent;
   padding: 80px 56px;
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 .stays .heading-display { margin-bottom: 16px; }
 .stays-intro {
@@ -1009,8 +999,9 @@ body { overflow-x: clip; }
    TESTIMONIALS BAND
    ===================================================== */
 .testimonials-band {
-  background: var(--beige);
+  background: transparent;
   padding: 88px 60px;
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 .testimonials-inner { max-width: 1240px; margin: 0 auto; }
 .testimonials-head {
