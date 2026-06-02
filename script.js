@@ -155,6 +155,8 @@ document.addEventListener("DOMContentLoaded", function () {
      Property: Hilston Park  |  QBook ID: 51665
      ========================================================= */
   var QBOOK_BASE = "https://web-bookings.hotels.uk.com/#/booking/51665/items/availability";
+  /* k= is the property-level auth token Q-Book embeds in all its widget links — required for the SPA to load */
+  var QBOOK_K    = "JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D";
   /* All Item Availability widget — full inventory grid with live prices for all room types */
   var QBOOK_RATES_SRC = "https://widgets.hotels.uk.com/display-rates/51665/eff381e2425e310943f59d71f160fa71";
   var QBOOK_RATES_ID  = "QBOOKWIDGET_RATES_ALLITEMS_202788cc19e79e9d082d25e00f1693f4";
@@ -524,14 +526,13 @@ document.addEventListener("DOMContentLoaded", function () {
       return '<div class="bkm-sum-row"><span class="bkm-sum-label">' + r[0] + '</span><span class="bkm-sum-value">' + r[1] + '</span></div>';
     }).join("");
 
-    /* Build Q-Book deep-link URL */
-    var ciQ = ci.split("-").reverse().join("-");  /* DD-MM-YYYY */
-    var coQ = co.split("-").reverse().join("-");
+    /* Build Q-Book deep-link URL — Q-Book SPA requires from/to in YYYY-MM-DD format + k= property token */
     var url = QBOOK_BASE +
-      "?arrival=" + encodeURIComponent(ciQ) +
-      "&departure=" + encodeURIComponent(coQ);
-    if (adults > 0)  { url += "&adults="   + adults; }
-    if (kids > 0)    { url += "&children=" + kids; }
+      "?from=" + ci +
+      "&to="   + co +
+      "&k="    + QBOOK_K;
+    if (adults > 0)  { url += "&a=" + adults; }
+    if (kids > 0)    { url += "&c=" + kids; }
     proceedBtn.href = url;
 
     setBrand("stay");
