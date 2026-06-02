@@ -1291,14 +1291,14 @@ body { overflow-x: clip; }
   opacity: 1; pointer-events: all;
 }
 
-/* Floating popup panel — slides up from bottom like Cal.com */
+/* Floating popup panel */
 .bkm-panel {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  max-width: 800px; width: 100%;
+  grid-template-columns: 280px 1fr;
+  max-width: 860px; width: 100%;
   position: relative;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.32), 0 0 0 1px rgba(0,0,0,0.06);
-  border-radius: 16px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.38), 0 0 0 1px rgba(0,0,0,0.08);
+  border-radius: 0;
   overflow: hidden;
   transform: translateY(24px) scale(0.98);
   opacity: 0;
@@ -1319,7 +1319,7 @@ body { overflow-x: clip; }
   flex-direction: column;
   justify-content: flex-end;
   padding: 36px 32px;
-  border-radius: 16px 0 0 16px;
+  border-radius: 0;
 }
 .bkm-brand-bg {
   position: absolute; inset: 0;
@@ -1416,10 +1416,11 @@ body { overflow-x: clip; }
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 0 16px 16px 0;
+  border-radius: 0;
   overflow-y: auto;
   min-height: 420px;
   max-height: 92vh;
+  border-left: 3px solid var(--teal);
 }
 .bkm-phase {
   padding: 44px 44px 40px;
@@ -1436,7 +1437,7 @@ body { overflow-x: clip; }
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 0 16px 0 0;
+  border-radius: 0;
 }
 
 /* ---- Phase 0: service picker tiles ---- */
@@ -1455,15 +1456,17 @@ body { overflow-x: clip; }
   padding: 18px 16px;
   background: var(--white);
   border: 1px solid var(--beige-2);
-  border-radius: 8px;
+  border-left: 3px solid transparent;
+  border-radius: 0;
   cursor: pointer;
   font-family: var(--font-sans);
-  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  transition: border-color 0.2s, background 0.2s;
 }
 .bkm-tile:hover {
-  border-color: var(--teal);
-  background: rgba(0, 122, 122, 0.04);
-  transform: translateY(-1px);
+  border-color: var(--beige-2);
+  border-left-color: var(--teal);
+  background: var(--beige-soft);
+  transform: none;
 }
 .bkm-tile:focus-visible {
   outline: 2px solid var(--teal);
@@ -1599,6 +1602,50 @@ body { overflow-x: clip; }
   border-bottom-color: var(--teal);
 }
 
+/* Number inputs and selects — underline style matching date fields */
+.bkm-field input[type="number"] {
+  border: none;
+  border-bottom: 1px solid var(--beige-2);
+  padding: 11px 0 10px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--text);
+  background: transparent;
+  outline: none;
+  transition: border-bottom-color 0.22s;
+  width: 100%;
+  border-radius: 0;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.bkm-field input[type="number"]::-webkit-inner-spin-button,
+.bkm-field input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.bkm-field input[type="number"]:focus {
+  border-bottom-color: var(--teal);
+}
+.bkm-field select {
+  border: none;
+  border-bottom: 1px solid var(--beige-2);
+  padding: 11px 28px 10px 0;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--text);
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234e9484'/%3E%3C/svg%3E") no-repeat right 4px center;
+  outline: none;
+  transition: border-bottom-color 0.22s;
+  width: 100%;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+.bkm-field select:focus {
+  border-bottom-color: var(--teal);
+}
+
 .bkm-error {
   font-size: 0.73rem; color: #b03030;
   margin: 10px 0 4px; display: none;
@@ -1625,7 +1672,7 @@ body { overflow-x: clip; }
   margin-top: auto;
   padding-top: 20px;
   font-size: 0.67rem;
-  color: var(--beige-2);
+  color: var(--text-muted);
   line-height: 1.65;
   letter-spacing: 0.03em;
 }
@@ -1643,7 +1690,7 @@ body { overflow-x: clip; }
   grid-template-columns: 1fr;
   max-width: 980px;
   height: min(88vh, 860px);
-  border-radius: 16px 16px 0 0;
+  border-radius: 0;
 }
 .bkm-panel.bkm-widget-active .bkm-brand,
 .bkm-panel.bkm-widget-active .bkm-form,
@@ -1709,13 +1756,13 @@ body { overflow-x: clip; }
 
 /* Mobile */
 @media (max-width: 700px) {
-  .bkm-panel { grid-template-columns: 1fr; border-radius: 16px 16px 0 0; }
-  .bkm-brand { min-height: 180px; padding: 24px 24px 28px; justify-content: flex-end; border-radius: 16px 16px 0 0; }
+  .bkm-panel { grid-template-columns: 1fr; border-radius: 0; }
+  .bkm-brand { min-height: 180px; padding: 24px 24px 28px; justify-content: flex-end; border-radius: 0; }
   .bkm-brand-heading { font-size: 1.6rem; }
   .bkm-logo { width: 100px; }
   .bkm-brand-address { display: none; }
   .bkm-form { padding: 32px 24px 28px; border-radius: 0; }
-  .bkm-right { border-radius: 0 0 16px 16px; min-height: 0; }
+  .bkm-right { border-radius: 0; min-height: 0; border-left: none; border-top: 3px solid var(--teal); }
   .bkm-phase { padding: 28px 24px 28px; }
   .bkm-tiles { grid-template-columns: 1fr; }
   .bkm-tile-inq { flex-direction: column; align-items: flex-start; }
@@ -2056,7 +2103,7 @@ body { overflow-x: clip; }
 .bkm-summary {
   margin: 20px 0 8px;
   border: 1px solid var(--beige-2);
-  border-radius: 8px;
+  border-radius: 0;
   overflow: hidden;
 }
 .bkm-sum-row {
@@ -2144,23 +2191,27 @@ body { overflow-x: clip; }
   font-size: 0.72rem;
   line-height: 1.4;
   margin-top: 6px;
-  padding: 6px 10px;
-  border-radius: 5px;
+  padding: 6px 0 6px 10px;
+  border-radius: 0;
+  border-left: 2px solid transparent;
   display: none;
 }
 .bkm-capacity-hint--ok {
   display: block;
   color: var(--teal);
-  background: rgba(78,148,132,0.08);
+  border-left-color: var(--teal);
+  background: rgba(78,148,132,0.06);
 }
 .bkm-capacity-hint--warn {
   display: block;
   color: #b34a00;
+  border-left-color: #b34a00;
   background: #fff4eb;
 }
 .bkm-capacity-hint--info {
   display: block;
   color: var(--text-muted);
+  border-left-color: var(--border);
   background: var(--beige-soft);
 }
 /* ---- Capacity warning in booking summary ---- */
@@ -2178,13 +2229,27 @@ body { overflow-x: clip; }
   text-align: center;
   text-decoration: none;
   margin-top: 28px;
+  padding: 18px 30px;
+  background: var(--dark-deep);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 0;
+}
+.bkm-btn-proceed:hover {
+  background: var(--teal);
+  color: var(--white);
 }
 .bkm-req { color: var(--teal); }
 
 /* --- Booking modal: actually fit smaller phones --- */
 @media (max-width: 560px) {
-  .bkm-overlay { padding: 12px; }
-  .bkm-panel { max-height: 94dvh; }
+  .bkm-overlay { padding: 0; align-items: flex-end; }
+  .bkm-panel { max-height: 94dvh; border-radius: 0; }
   .bkm-form { padding: 26px 22px 22px; }
   .bkm-form-title { font-size: 1.45rem; }
   .bkm-fields { gap: 18px; margin-bottom: 6px; }
