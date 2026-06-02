@@ -305,17 +305,14 @@ document.addEventListener("DOMContentLoaded", function () {
           '</div>',
         '</div>',
 
-        '<!-- PHASE 3: Full QBook widget (replaces whole panel) -->',
-        '<div class="bkm-widget-panel" id="bkm-widget-panel">',
-          '<div class="bkm-widget-header">',
-            '<button class="bkm-back-btn" id="bkm-back-btn">&#8592; Back</button>',
-            '<img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park" class="bkm-widget-logo">',
-            '<span class="bkm-widget-title" id="bkm-widget-title">Availability &amp; Booking</span>',
-            '<button class="bkm-widget-close" id="bkm-widget-close">&times;</button>',
-          '</div>',
-          '<div class="bkm-widget-accent"></div>',
-          '<p class="bkm-widget-notice">Your selected dates are pre-applied. The final payment step opens in our secure booking partner.</p>',
-          '<iframe id="bkm-booking-iframe" class="bkm-booking-iframe" src="about:blank" allowtransparency="1" frameborder="0" title="Hilston Park Booking"></iframe>',
+        '<!-- PHASE 3: Booking summary confirmation -->',
+        '<div class="bkm-phase bkm-phase-confirm" id="bkm-phase-confirm" hidden>',
+          '<div class="bkm-crumb"><button class="bkm-switch" id="bkm-switch-confirm">&larr; Change dates</button></div>',
+          '<p class="bkm-form-title">Your booking summary</p>',
+          '<p class="bkm-form-sub">Review your details below, then proceed to complete your secure booking.</p>',
+          '<div class="bkm-summary" id="bkm-summary"></div>',
+          '<a class="bkm-btn bkm-btn-proceed" id="bkm-proceed-btn" href="#" target="_blank" rel="noopener">Proceed to Secure Booking &rarr;</a>',
+          '<p class="bkm-note">You will be taken to our secure booking partner, Q-Book, to confirm and pay. Your details above will be pre-applied.</p>',
         '</div>',
 
       '</div>',
@@ -380,24 +377,21 @@ document.addEventListener("DOMContentLoaded", function () {
   var panel      = document.getElementById("bkm-panel");
   var closeBtn   = document.getElementById("bkm-close-btn");
   var submitBtn  = document.getElementById("bkm-submit");
-  var backBtn    = document.getElementById("bkm-back-btn");
-  var widgetClose = document.getElementById("bkm-widget-close");
   var inEl       = document.getElementById("bkm-checkin");
   var outEl      = document.getElementById("bkm-checkout");
   var adultsEl   = document.getElementById("bkm-adults");
   var childrenEl = document.getElementById("bkm-children");
   var accTypeEl  = document.getElementById("bkm-acctype");
-  var errEl      = document.getElementById("bkm-error");
-  var bookIframe = document.getElementById("bkm-booking-iframe");
+  var errEl        = document.getElementById("bkm-error");
 
   var phasePicker  = document.getElementById("bkm-phase-picker");
   var phaseConfig  = document.getElementById("bkm-phase-config");
   var phaseInquire = document.getElementById("bkm-phase-inquire");
+  var phaseConfirm = document.getElementById("bkm-phase-confirm");
   var brandLead    = document.getElementById("bkm-brand-lead");
   var brandScript  = document.getElementById("bkm-brand-script");
   var configTitle  = document.getElementById("bkm-config-title");
   var configSub    = document.getElementById("bkm-config-sub");
-  var widgetTitle  = document.getElementById("bkm-widget-title");
   var inqTitle     = document.getElementById("bkm-inq-title");
   var inqSub       = document.getElementById("bkm-inq-sub");
   var inqForm      = document.getElementById("bkm-inq-form");
@@ -407,6 +401,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var inqDone      = document.getElementById("bkm-inq-done");
   var switchCfg    = document.getElementById("bkm-switch-config");
   var switchInq    = document.getElementById("bkm-switch-inquire");
+  var switchConf   = document.getElementById("bkm-switch-confirm");
+  var proceedBtn   = document.getElementById("bkm-proceed-btn");
+  var summaryEl    = document.getElementById("bkm-summary");
 
   var currentService = null;
 
@@ -417,12 +414,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function showPhase(name) {
-    [phasePicker, phaseConfig, phaseInquire].forEach(function (p) { p.hidden = true; });
+    [phasePicker, phaseConfig, phaseInquire, phaseConfirm].forEach(function (p) { p.hidden = true; });
     panel.classList.remove("bkm-widget-active");
     if (name === "picker")  phasePicker.hidden  = false;
     if (name === "config")  phaseConfig.hidden  = false;
     if (name === "inquire") phaseInquire.hidden = false;
-    if (name === "widget")  panel.classList.add("bkm-widget-active");
+    if (name === "confirm") phaseConfirm.hidden = false;
     errEl.classList.remove("visible");
     inqErr.classList.remove("visible");
   }
@@ -464,27 +461,50 @@ document.addEventListener("DOMContentLoaded", function () {
   function closeModal() {
     modal.classList.remove("is-open");
     document.body.style.overflow = "";
-    bookIframe.src = "about:blank";
     showPhase("picker");
     currentService = null;
   }
-  function showWidget() {
-    var s = BKM_SERVICES[currentService] || BKM_SERVICES.stay;
-    widgetTitle.innerHTML = "Availability &amp; Booking &mdash; " + s.label;
-    showPhase("widget");
-    /* deep-link arrival/departure (DD-MM-YYYY) so Q-Book opens with the user's selections pre-applied */
-    var src = QBOOK_RATES_SRC;
-    if (inEl.value && outEl.value) {
-      var ci = inEl.value.split("-").reverse().join("-");
-      var co = outEl.value.split("-").reverse().join("-");
-      var sep = src.indexOf("?") === -1 ? "?" : "&";
-      src = src + sep + "arrival=" + encodeURIComponent(ci) + "&departure=" + encodeURIComponent(co);
-      var adults = adultsEl && adultsEl.value ? parseInt(adultsEl.value, 10) : 0;
-      var kids   = childrenEl && childrenEl.value ? parseInt(childrenEl.value, 10) : 0;
-      if (adults > 0) { src += "&adults=" + adults; }
-      if (kids > 0)   { src += "&children=" + kids; }
-    }
-    bookIframe.src = src;
+
+  function fmt(dateStr) {
+    /* YYYY-MM-DD → "3 June 2026" */
+    var d = new Date(dateStr + "T12:00:00");
+    return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  }
+
+  function showConfirm() {
+    var ci = inEl.value;   /* YYYY-MM-DD */
+    var co = outEl.value;
+    var adults   = adultsEl   ? (parseInt(adultsEl.value,   10) || 0) : 0;
+    var kids     = childrenEl ? (parseInt(childrenEl.value, 10) || 0) : 0;
+    var accType  = accTypeEl  ? accTypeEl.options[accTypeEl.selectedIndex].text : "";
+    var nights   = Math.round((new Date(co) - new Date(ci)) / 86400000);
+
+    /* Build summary rows */
+    var rows = [
+      ["Check-in",  fmt(ci)],
+      ["Check-out", fmt(co)],
+      ["Duration",  nights + (nights === 1 ? " night" : " nights")],
+      ["Adults",    adults],
+      ["Children",  kids]
+    ];
+    if (accType && accTypeEl.value !== "any") { rows.push(["Preference", accType]); }
+
+    summaryEl.innerHTML = rows.map(function (r) {
+      return '<div class="bkm-sum-row"><span class="bkm-sum-label">' + r[0] + '</span><span class="bkm-sum-value">' + r[1] + '</span></div>';
+    }).join("");
+
+    /* Build Q-Book deep-link URL */
+    var ciQ = ci.split("-").reverse().join("-");  /* DD-MM-YYYY */
+    var coQ = co.split("-").reverse().join("-");
+    var url = QBOOK_BASE +
+      "?arrival=" + encodeURIComponent(ciQ) +
+      "&departure=" + encodeURIComponent(coQ);
+    if (adults > 0)  { url += "&adults="   + adults; }
+    if (kids > 0)    { url += "&children=" + kids; }
+    proceedBtn.href = url;
+
+    setBrand("stay");
+    showPhase("confirm");
   }
 
   /* -- picker tiles -- */
@@ -497,6 +517,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /* -- "switch service" links -- */
   switchCfg.addEventListener("click", function () { showPhase("picker"); });
   switchInq.addEventListener("click", function () { showPhase("picker"); });
+  switchConf.addEventListener("click", function () { showPhase("config"); });
 
   /* -- ensure checkout >= checkin + 1 day -- */
   inEl.addEventListener("change", function () {
@@ -508,7 +529,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  /* -- submit: require dates, deep-link them into Q-Book so the user doesn't re-enter -- */
+  /* -- submit: validate dates then show on-site summary before handing off to Q-Book -- */
   submitBtn.addEventListener("click", function () {
     errEl.classList.remove("visible");
     if (!inEl.value || !outEl.value || outEl.value <= inEl.value) {
@@ -516,7 +537,7 @@ document.addEventListener("DOMContentLoaded", function () {
       errEl.classList.add("visible");
       return;
     }
-    showWidget();
+    showConfirm();
   });
 
   /* -- inquiry submit: POST to Formsubmit (no signup, sends to info@hilstonpark.com) -- */
@@ -579,18 +600,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
   inqDone.addEventListener("click", closeModal);
-
-  /* -- back/close on widget phase -- */
-  backBtn.addEventListener("click", function () {
-    bookIframe.src = "about:blank";
-    /* return to configure phase for current service */
-    if (currentService && BKM_SERVICES[currentService] && BKM_SERVICES[currentService].flow !== "inquire") {
-      showPhase("config");
-    } else {
-      showPhase("picker");
-    }
-  });
-  widgetClose.addEventListener("click", closeModal);
 
   /* -- close behaviours --
         Track mousedown origin so a drag that starts inside the panel (e.g. native
