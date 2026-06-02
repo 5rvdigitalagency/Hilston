@@ -1187,6 +1187,9 @@ body { overflow-x: clip; }
   .experience-grid,
   .expertise-grid { grid-template-columns: 1fr; }
   .plan-cards { grid-template-columns: 1fr; }
+  .svc-cards { grid-template-columns: 1fr; }
+  .blogs-grid,
+  .visit-us-grid { grid-template-columns: 1fr; }
   .stay-row,
   .stay-row--reverse { grid-template-columns: 1fr; }
   .stay-row--reverse .stay-image { order: unset; }
