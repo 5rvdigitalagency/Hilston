@@ -592,10 +592,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   widgetClose.addEventListener("click", closeModal);
 
-  /* -- close behaviours -- */
+  /* -- close behaviours --
+        Track mousedown origin so a drag that starts inside the panel (e.g. native
+        date-picker calendar release) doesn't close the modal on mouseup. -- */
   closeBtn.addEventListener("click", closeModal);
+  var mouseDownOnOverlay = false;
+  modal.addEventListener("mousedown", function (e) {
+    mouseDownOnOverlay = (e.target === modal);
+  });
   modal.addEventListener("click", function (e) {
-    if (e.target === modal) { closeModal(); }
+    if (e.target === modal && mouseDownOnOverlay) { closeModal(); }
+    mouseDownOnOverlay = false;
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && modal.classList.contains("is-open")) { closeModal(); }
