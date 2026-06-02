@@ -72,7 +72,36 @@ button { font: inherit; cursor: pointer; }
 .insta-header,
 .stats-inner,
 .stays-intro,
-.stay-row {
+.stay-row,
+.plan-cards,
+.history-intro-block,
+.timeline,
+.testimonial-wrap,
+.testimonial-dots,
+.accom-block,
+.accom-options-intro,
+.accom-options-cta,
+.eve-accom-header,
+.eve-accom-cta,
+.age-gallery-header,
+.gallery-track,
+.rates-widget-panel,
+.newsletter-form,
+.visit-trio,
+[class$="-grid"],
+[class$="-inner"],
+[class$="-header"]:not(.site-header) {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.plan-day > .heading-display,
+.newsletter-band > h2,
+.newsletter-band > p,
+.planning-cta > h2,
+.planning-cta > p,
+body section > .heading-display,
+body section > .section-intro {
   max-width: 1240px;
   margin-left: auto;
   margin-right: auto;
@@ -1381,7 +1410,25 @@ body { overflow-x: clip; }
   z-index: 3;
 }
 
-/* ---- RIGHT: white form column ---- */
+/* ---- RIGHT: white column wrapper, holds all phases ---- */
+.bkm-right {
+  background: var(--white);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 16px 16px 0;
+  overflow-y: auto;
+  min-height: 420px;
+}
+.bkm-phase {
+  padding: 44px 44px 40px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.bkm-phase[hidden] { display: none; }
+
+/* legacy alias kept so widget-active rules still apply */
 .bkm-form {
   background: var(--white);
   padding: 44px 44px 40px;
@@ -1390,6 +1437,113 @@ body { overflow-x: clip; }
   flex-direction: column;
   border-radius: 0 16px 0 0;
 }
+
+/* ---- Phase 0: service picker tiles ---- */
+.bkm-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+.bkm-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  text-align: left;
+  padding: 18px 16px;
+  background: var(--white);
+  border: 1px solid var(--beige-2);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.bkm-tile:hover {
+  border-color: var(--teal);
+  background: rgba(0, 122, 122, 0.04);
+  transform: translateY(-1px);
+}
+.bkm-tile:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+.bkm-tile-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.bkm-tile-label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+.bkm-tile-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+.bkm-tile-inq {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--beige-1, #f6f1ea);
+}
+.bkm-tile-inq .bkm-tile-icon { font-size: 1.15rem; }
+.bkm-tile-inq .bkm-tile-label { font-size: 0.78rem; }
+.bkm-tile-inq .bkm-tile-desc { font-size: 0.66rem; margin-left: auto; }
+
+/* ---- "Choose different service" link ---- */
+.bkm-crumb { margin-bottom: 18px; }
+.bkm-switch {
+  background: none; border: none; padding: 0;
+  color: var(--teal);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.bkm-switch:hover { color: var(--teal-dark); }
+
+/* ---- Inquiry form ---- */
+.bkm-inq-form .bkm-field { margin-bottom: 16px; }
+.bkm-inq-form input[type="text"],
+.bkm-inq-form input[type="email"],
+.bkm-inq-form input[type="tel"],
+.bkm-inq-form textarea {
+  border: none;
+  border-bottom: 1px solid var(--beige-2);
+  padding: 10px 0 9px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem; color: var(--text);
+  background: transparent;
+  outline: none;
+  transition: border-bottom-color 0.22s;
+  width: 100%;
+  border-radius: 0;
+  resize: vertical;
+}
+.bkm-inq-form input:focus,
+.bkm-inq-form textarea:focus { border-bottom-color: var(--teal); }
+.bkm-field-guests { margin-top: 22px; max-width: 160px; }
+.bkm-field-guests input[type="number"] {
+  border: none;
+  border-bottom: 1px solid var(--beige-2);
+  padding: 11px 0 10px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--text);
+  background: transparent;
+  outline: none;
+  width: 100%;
+}
+.bkm-field-guests input[type="number"]:focus { border-bottom-color: var(--teal); }
+.bkm-inq-success { padding-top: 40px; }
 .bkm-close {
   position: absolute; top: 20px; right: 22px;
   background: none; border: none;
@@ -1491,7 +1645,8 @@ body { overflow-x: clip; }
   border-radius: 16px 16px 0 0;
 }
 .bkm-panel.bkm-widget-active .bkm-brand,
-.bkm-panel.bkm-widget-active .bkm-form { display: none; }
+.bkm-panel.bkm-widget-active .bkm-form,
+.bkm-panel.bkm-widget-active .bkm-right { display: none; }
 .bkm-panel.bkm-widget-active .bkm-widget-panel { display: flex; }
 
 .bkm-widget-header {
@@ -1559,6 +1714,11 @@ body { overflow-x: clip; }
   .bkm-logo { width: 100px; }
   .bkm-brand-address { display: none; }
   .bkm-form { padding: 32px 24px 28px; border-radius: 0; }
+  .bkm-right { border-radius: 0 0 16px 16px; min-height: 0; }
+  .bkm-phase { padding: 28px 24px 28px; }
+  .bkm-tiles { grid-template-columns: 1fr; }
+  .bkm-tile-inq { flex-direction: column; align-items: flex-start; }
+  .bkm-tile-inq .bkm-tile-desc { margin-left: 0; }
   .bkm-fields { grid-template-columns: 1fr; gap: 20px; }
   .bkm-panel.bkm-widget-active { height: 92dvh; max-width: 100%; }
   .bkm-back-btn { padding: 0 14px; font-size: 0.62rem; }
