@@ -168,14 +168,15 @@ document.addEventListener("DOMContentLoaded", function () {
   /* Room definitions — sourced from Q-Book api/pull and accommodation page.
      maxAdults/maxChildren reflect Q-Book item occupancy settings.
      qItemIDs used to pre-filter the Q-Book deep-link URL. */
+  /* maxGuests = total guests (adults + children) per Q-Book admin occupancy */
   var ROOM_DEFS = {
-    'any':                { label: 'All rooms', maxAdults: 0, maxChildren: 0, qItemIDs: [] },
-    'cosy-king':          { label: 'Cosy King Room',               maxAdults: 2, maxChildren: 0, qItemIDs: [83040, 83269] },
-    'double-garden':      { label: 'Double Garden View',           maxAdults: 2, maxChildren: 0, qItemIDs: [82356] },
-    'large-double-garden':{ label: 'Large Double Garden View',     maxAdults: 2, maxChildren: 0, qItemIDs: [82357, 82965] },
-    'family-room':        { label: 'Family Room',                  maxAdults: 3, maxChildren: 2, qItemIDs: [83057] },
-    'dormitory':          { label: 'Dormitory / Group Bunk Rooms', maxAdults: 0, maxChildren: 0, qItemIDs: [] },
-    'exclusive-use':      { label: 'Exclusive Use of House',       maxAdults: 0, maxChildren: 0, qItemIDs: [] }
+    'any':                { label: 'All rooms',                    maxGuests: 0, qItemIDs: [] },
+    'cosy-king':          { label: 'Cosy King Room',               maxGuests: 4, qItemIDs: [83040, 83269] },
+    'double-garden':      { label: 'Double Garden View',           maxGuests: 2, qItemIDs: [82356] },
+    'large-double-garden':{ label: 'Large Double Garden View',     maxGuests: 6, qItemIDs: [82357, 82965] },
+    'family-room':        { label: 'Family Room',                  maxGuests: 5, qItemIDs: [83057] },
+    'dormitory':          { label: 'Dormitory / Group Bunk Rooms', maxGuests: 0, qItemIDs: [] },
+    'exclusive-use':      { label: 'Exclusive Use of House',       maxGuests: 9, qItemIDs: [] }
   };
 
   /* -- service definitions -- */
@@ -580,9 +581,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* Room definition for selected type */
     var roomKey = accTypeEl ? accTypeEl.value : 'any';
     var roomDef = ROOM_DEFS[roomKey] || ROOM_DEFS['any'];
-    var overAdults   = roomDef.maxAdults   > 0 && adults   > roomDef.maxAdults;
-    var overChildren = roomDef.maxChildren === 0 && kids > 0 && roomKey !== 'any';
-    var overCapacity = overAdults || overChildren;
+    var overCapacity = roomDef.maxGuests > 0 && (adults + kids) > roomDef.maxGuests;
 
     var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -606,21 +605,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* Room preference + capacity */
     if (roomKey !== 'any') {
-      var capParts = [];
-      if (roomDef.maxAdults   > 0) capParts.push(roomDef.maxAdults + (roomDef.maxAdults === 1 ? ' adult' : ' adults'));
-      if (roomDef.maxChildren > 0) capParts.push(roomDef.maxChildren + ' children');
-      var capStr = capParts.length ? 'max ' + capParts.join(' + ') : '';
-      if (roomKey === 'dormitory' || roomKey === 'exclusive-use') {
-        html += row("Room type", roomDef.label);
-      } else {
-        html += row("Room type", roomDef.label + (capStr ? ' \u2014 ' + capStr : ''));
-      }
+      var capStr = roomDef.maxGuests > 0
+        ? ' \u2014 max ' + roomDef.maxGuests + (roomDef.maxGuests === 1 ? ' guest' : ' guests')
+        : '';
+      html += row("Room type", roomDef.label + capStr);
       if (overCapacity) {
-        var warnParts = [];
-        if (overAdults)   warnParts.push('max ' + roomDef.maxAdults + (roomDef.maxAdults === 1 ? ' adult' : ' adults'));
-        if (overChildren) warnParts.push('no children in this room');
-        html += '<div class="bkm-sum-capwarn">\u26A0\uFE0F Guest count exceeds this room\u2019s capacity (' +
-                warnParts.join('; ') + '). Please adjust or choose a different room on Q-Book.</div>';
+        html += '<div class="bkm-sum-capwarn">\u26A0\uFE0F ' + (adults + kids) + ' guests exceeds this room\u2019s capacity (max ' +
+                roomDef.maxGuests + '). Please adjust or choose a different room on Q-Book.</div>';
       }
     }
 
@@ -708,31 +699,24 @@ document.addEventListener("DOMContentLoaded", function () {
       capacityHintEl.className = 'bkm-capacity-hint';
       return;
     }
-    if (key === 'dormitory' || key === 'exclusive-use') {
+    if (key === 'dormitory') {
       capacityHintEl.textContent = 'For group sizes and availability, use Enquire about or contact us directly.';
       capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--info';
       return;
     }
-    var adults  = parseInt(adultsEl.value, 10)  || 0;
-    var kids    = parseInt(childrenEl.value, 10) || 0;
-    var overAdults   = def.maxAdults   > 0 && adults > def.maxAdults;
-    var overChildren = def.maxChildren >= 0 && kids > def.maxChildren && def.maxChildren === 0 && kids > 0;
-    var warn = overAdults || overChildren;
-    var cap = def.maxAdults + (def.maxChildren > 0 ? ' adults + ' + def.maxChildren + ' children' : ' guests');
-    if (def.maxChildren === 0) {
-      cap = 'up to ' + def.maxAdults + (def.maxAdults === 1 ? ' adult' : ' adults');
-    } else {
-      cap = 'up to ' + def.maxAdults + ' adults & ' + def.maxChildren + ' children';
-    }
-    if (warn) {
-      var over = [];
-      if (overAdults)   over.push('max ' + def.maxAdults + (def.maxAdults === 1 ? ' adult' : ' adults'));
-      if (overChildren) over.push('children not accommodated in this room');
-      capacityHintEl.textContent = '\u26A0\uFE0F Over capacity (' + over.join('; ') + ') \u2014 choose a different room or reduce guests.';
+    var adults = parseInt(adultsEl.value, 10)  || 0;
+    var kids   = parseInt(childrenEl.value, 10) || 0;
+    var total  = adults + kids;
+    var cap    = 'up to ' + def.maxGuests + (def.maxGuests === 1 ? ' guest' : ' guests');
+    if (def.maxGuests > 0 && total > def.maxGuests) {
+      capacityHintEl.textContent = '\u26A0\uFE0F Over capacity \u2014 this room holds ' + cap + '. Reduce guests or choose a different room.';
       capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--warn';
-    } else {
+    } else if (def.maxGuests > 0) {
       capacityHintEl.textContent = 'Capacity: ' + cap + '.';
       capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--ok';
+    } else {
+      capacityHintEl.textContent = 'Enquire for availability and pricing.';
+      capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--info';
     }
   }
   accTypeEl.addEventListener('change', updateCapacityHint);

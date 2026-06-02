@@ -1419,6 +1419,7 @@ body { overflow-x: clip; }
   border-radius: 0 16px 16px 0;
   overflow-y: auto;
   min-height: 420px;
+  max-height: 92vh;
 }
 .bkm-phase {
   padding: 44px 44px 40px;
