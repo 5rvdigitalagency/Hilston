@@ -97,6 +97,22 @@
     .accom-block.reverse .accom-block-content { order: 1; }
     .accom-options-cta { text-align: center; margin-top: 56px; }
 
+    /* ROOM TYPES */
+    .room-types { margin-top: 88px; padding-top: 72px; border-top: 1px solid var(--border); }
+    .room-types-head { text-align: center; margin-bottom: 48px; }
+    .room-types-head h3 { font-family: var(--font-serif); font-weight: normal; font-size: clamp(1.6rem, 2.4vw, 2.1rem); color: var(--text); margin-bottom: 14px; }
+    .room-types-head p { font-size: 0.92rem; line-height: 1.78; color: var(--text-muted); max-width: 60ch; margin: 0 auto; }
+    .room-types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .room-card { background: var(--beige); padding: 28px 26px; display: flex; flex-direction: column; gap: 10px; border-top: 3px solid var(--teal); transition: transform 0.25s, box-shadow 0.25s; }
+    .room-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); }
+    .room-card-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
+    .room-card h4 { font-family: var(--font-serif); font-weight: normal; font-size: 1.18rem; color: var(--text); line-height: 1.25; }
+    .room-card p { font-size: 0.86rem; line-height: 1.72; color: var(--text-muted); }
+    .room-card.featured { background: var(--dark); border-top-color: var(--teal); }
+    .room-card.featured h4, .room-card.featured .room-card-eyebrow { color: var(--white); }
+    .room-card.featured .room-card-eyebrow { color: var(--teal); }
+    .room-card.featured p { color: rgba(255,255,255,0.78); }
+
     /* ACTIVITIES */
     .activities { background: var(--beige); padding: 88px 80px; display: flex; flex-direction: column; align-items: center; }
     .activities-heading { margin: 0 auto 10px; text-align: center; max-width: 900px; }
@@ -218,6 +234,7 @@
       .booking-grid { grid-template-columns: 1fr; }
       .accom-block.reverse img { order: 0; }
       .accom-block.reverse .accom-block-content { order: 0; }
+      .room-types-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -392,6 +409,47 @@
           <li>Suitable for family holidays and private stays</li>
         </ul>
         <p class="accom-block-note">Ideal for guests who want their own space within the Hilston Park estate.</p>
+      </div>
+    </div>
+
+    <!-- Room Types within the Manor House -->
+    <div class="room-types">
+      <div class="room-types-head">
+        <p class="section-eyebrow">Manor House Rooms</p>
+        <h3>Room Options within the Manor House</h3>
+        <p>Choose from a range of room types to suit couples, families, and larger groups &#8212; from cosy private rooms to dormitory bunks and full exclusive use of the house.</p>
+      </div>
+      <div class="room-types-grid">
+        <div class="room-card">
+          <span class="room-card-eyebrow">For Two</span>
+          <h4>Cosy King Room</h4>
+          <p>A comfortable king-bedded room, ideal for couples seeking a quiet stay in the heart of the estate.</p>
+        </div>
+        <div class="room-card">
+          <span class="room-card-eyebrow">For Two</span>
+          <h4>Double Garden View</h4>
+          <p>A bright double room overlooking the gardens &#8212; a peaceful base for short breaks and weekend stays.</p>
+        </div>
+        <div class="room-card">
+          <span class="room-card-eyebrow">For Two</span>
+          <h4>Large Double Garden View</h4>
+          <p>A more spacious double room with garden views, offering extra room to relax after a day outdoors.</p>
+        </div>
+        <div class="room-card">
+          <span class="room-card-eyebrow">For Families</span>
+          <h4>Family Room</h4>
+          <p>A flexible room sleeping families together, with space for parents and children in one comfortable setting.</p>
+        </div>
+        <div class="room-card">
+          <span class="room-card-eyebrow">For Groups</span>
+          <h4>Dormitory / Group Bunk Rooms</h4>
+          <p>Shared bunk accommodation designed for schools, youth groups, and larger parties staying together.</p>
+        </div>
+        <div class="room-card featured">
+          <span class="room-card-eyebrow">Whole House</span>
+          <h4>Exclusive Use of House</h4>
+          <p>Book the entire Manor House for your group &#8212; private gatherings, celebrations, and multi-day stays with full estate access.</p>
+        </div>
       </div>
     </div>
 
