@@ -1323,7 +1323,7 @@ body { overflow-x: clip; }
 }
 .bkm-brand-bg {
   position: absolute; inset: 0;
-  background-image: url('images/estate-exterior.png');
+  background-image: url('images/manor-house.jpg');
   background-size: cover;
   background-position: center;
   transition: transform 0.6s ease;
