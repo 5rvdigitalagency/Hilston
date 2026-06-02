@@ -99,7 +99,12 @@
     .accom-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
     .accom-list li { padding-left: 18px; position: relative; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
     .accom-list li::before { content: "\2014"; position: absolute; left: 0; color: var(--teal); }
-    .accom-block-note { font-size: 0.82rem; font-style: normal; color: var(--text-muted); border-left: 2px solid var(--teal); padding-left: 14px; line-height: 1.75; }
+    .accom-block-note { font-size: 0.82rem; font-style: normal; color: var(--text-muted); border-left: 2px solid var(--teal); padding-left: 14px; line-height: 1.75; margin-bottom: 20px; }
+    .accom-occupancy { display: flex; align-items: center; gap: 20px; padding-top: 18px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .accom-occ-chip { display: flex; align-items: center; gap: 7px; }
+    .accom-occ-chip svg { width: 16px; height: 16px; stroke: var(--teal); fill: none; stroke-width: 1.6; flex-shrink: 0; }
+    .accom-occ-chip span { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--text); }
+    .accom-occ-chip span em { font-style: normal; color: var(--text-muted); font-weight: 400; }
     .accom-options-intro .section-eyebrow { display: none; }
     .accom-block-num {
       display: block; font-family: var(--font-sans); font-size: 0.72rem; font-weight: 700;
@@ -392,6 +397,16 @@
           <li>Breakfast included on selected packages</li>
         </ul>
         <p class="accom-block-note">Perfect for couples wanting a peaceful break away from everyday routine.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>Max. 4 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v13"/><path d="M21 7v13"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="6" rx="1"/></svg>
+            <span>King bed <em>&middot; en-suite</em></span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -420,6 +435,16 @@
           <li>Access to all shared estate spaces</li>
         </ul>
         <p class="accom-block-note">A favourite for guests who want calm and green views on their doorstep.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>Max. 2 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v13"/><path d="M21 7v13"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="6" rx="1"/></svg>
+            <span>Double bed <em>&middot; en-suite</em></span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -448,6 +473,16 @@
           <li>Ideal for longer stays</li>
         </ul>
         <p class="accom-block-note">More space, same peaceful outlook &#8212; a step up for guests who like room to breathe.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>Max. 6 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v13"/><path d="M21 7v13"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="6" rx="1"/></svg>
+            <span>Large double <em>&middot; en-suite</em></span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -476,6 +511,16 @@
           <li>Ideal for family activity weekends</li>
         </ul>
         <p class="accom-block-note">The right base for families who want to stay together and explore together.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Max. 4 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v13"/><path d="M21 7v13"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="6" rx="1"/></svg>
+            <span>Family suite <em>&middot; en-suite</em></span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -504,6 +549,16 @@
           <li>Separate facilities for boys and girls</li>
         </ul>
         <p class="accom-block-note">Built for group stays where structure, safety, and shared experience matter.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Max. 13 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>3 rooms <em>&middot; Boat House</em></span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -532,6 +587,16 @@
           <li>Suitable for 20&#8211;80 guests</li>
         </ul>
         <p class="accom-block-note">For groups who want complete privacy and the run of a genuine Welsh estate.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Up to 40 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Entire estate <em>&middot; all rooms</em></span>
+          </div>
+        </div>
       </div>
     </div>
 
