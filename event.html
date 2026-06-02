@@ -78,9 +78,10 @@
       background: rgba(255,255,255,0.06); padding: 36px 32px;
       display: flex; flex-direction: column; gap: 14px;
       border: 1px solid rgba(255,255,255,0.08);
-      transition: background 0.25s;
+      border-top: 3px solid transparent;
+      transition: background 0.25s, border-top-color 0.3s;
     }
-    .service-card:hover { background: rgba(255,255,255,0.1); }
+    .service-card:hover { background: rgba(255,255,255,0.1); border-top-color: var(--teal); }
     .service-icon {
       width: 48px; height: 48px; background: var(--teal); border-radius: 50%;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -135,14 +136,14 @@
     }
     .include-item p { font-size: 0.86rem; line-height: 1.72; color: var(--text-muted); }
     .include-cta { margin-top: 28px; }
-    .eve-include-images { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .eve-include-images { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; position: sticky; top: 120px; align-self: start; }
     .eve-include-images img { width: 100%; height: 218px; object-fit: cover; display: block; }
 
     /* ACCOMMODATION */
     .eve-accom { background: var(--beige); padding: 88px 80px; }
-    .eve-accom-header { margin-bottom: 56px; }
+    .eve-accom-header { margin-bottom: 56px; text-align: center; }
     .eve-accom-header h2 { margin-bottom: 12px; }
-    .eve-accom-header p { font-size: 0.92rem; line-height: 1.72; color: var(--text-muted); max-width: 680px; }
+    .eve-accom-header p { font-size: 0.92rem; line-height: 1.72; color: var(--text-muted); max-width: 680px; margin: 0 auto; }
     .accom-block {
       display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 64px;
     }
@@ -236,29 +237,60 @@
   </style>
 </head>
 <body>
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
 <div class="site-wrap">
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-logo">
-        <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
-      </div>
-      <a href="#" class="btn-book">BOOK NOW</a>
-    </div>
-  </header>
+  <!-- ===== STICKY SHELL (header + nav) ===== -->
+  <div class="site-sticky" id="site-sticky">
 
-  <!-- NAV -->
-  <nav class="main-nav">
-    <ul class="nav-list">
-      <li><a href="about.html">ABOUT</a></li>
-      <li><a href="educational.html">EDUCATION</a></li>
-      <li><a href="event.html" style="border-bottom:2px solid rgba(255,255,255,0.8);padding-bottom:2px;">EVENTS</a></li>
-      <li><a href="accomodation.html">ACCOMMODATION</a></li>
-      <li><a href="#">CONTACT</a></li>
-      <li><a href="#">BLOG</a></li>
-    </ul>
-  </nav>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+        </div>
+        <div class="header-actions">
+          <a href="#" class="btn-book">BOOK NOW</a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NAV ===== -->
+    <nav class="main-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="educational.html">EDUCATION</a></li>
+        <li><a href="event.html" class="nav-active">EVENTS</a></li>
+        <li><a href="accomodation.html">ACCOMMODATION</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+        <li><a href="blogs.html">BLOG</a></li>
+      </ul>
+    </nav>
+
+  </div><!-- /site-sticky -->
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="educational.html">Education</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+      </ul>
+      <a href="#" class="btn-book mobile-nav-book">BOOK NOW</a>
+    </nav>
+  </div>
 
   <!-- HERO VIDEO -->
   <section class="eve-hero">
@@ -270,11 +302,10 @@
     <div class="eve-hero-inner">
       <div>
         <h1>Curated Event Experiences At Hilston Park</h1>
-        <a href="#" class="btn-pill">PLAN YOUR EVENT</a>
+        <a href="contact.html" class="btn-pill">ENQUIRE NOW</a>
       </div>
       <div class="eve-hero-right">
         <p class="eve-hero-sub">We create events that are experienced, not simply attended. From corporate retreats and private gatherings to special occasions, every event at Hilston Park brings enriching experiences.</p>
-        <a href="#" class="btn-pill">BOOK NOW</a>
       </div>
     </div>
   </section>
@@ -486,7 +517,7 @@
     </div>
 
     <div class="eve-accom-cta">
-      <a href="#" class="btn-pill">ENQUIRE NOW</a>
+      <a href="contact.html" class="btn-pill">ENQUIRE NOW</a>
     </div>
   </section>
 
@@ -665,34 +696,32 @@
         </div>
       </div>
 
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>Home</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="blogs.html">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Visitors</h4>
-          <ul>
-            <li><a href="visitors.html">Visitor Guide</a></li>
-            <li><a href="educational.html">Educational</a></li>
-            <li><a href="event.html">Events</a></li>
-            <li><a href="accomodation.html">Accommodation</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="legal.html">Legal Hub</a></li>
-            <li><a href="terms.html">Terms &amp; Conditions</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
+      <div class="footer-col">
+        <h4>Home</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visitors</h4>
+        <ul>
+          <li><a href="visitors.html">Visitor Guide</a></li>
+          <li><a href="educational.html">Educational</a></li>
+          <li><a href="event.html">Events</a></li>
+          <li><a href="accomodation.html">Accommodation</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="legal.html">Legal Hub</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
       </div>
 
       <div class="footer-meta">

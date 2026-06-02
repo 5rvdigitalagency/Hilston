@@ -215,7 +215,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
-    .blog-card { background: var(--white); overflow: hidden; display: flex; flex-direction: column; }
+    .blog-card { background: var(--white); overflow: hidden; display: flex; flex-direction: column; border: 1px solid var(--border); }
     .blog-card-img {
       overflow: hidden;
       aspect-ratio: 16/10;
@@ -244,30 +244,60 @@
   </style>
 </head>
 <body>
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
 <div class="site-wrap">
 
-  <!-- ===== HEADER ===== -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-logo">
-        <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
-      </div>
-      <a href="#contact-form" class="btn-book">BOOK NOW</a>
-    </div>
-  </header>
+  <!-- ===== STICKY SHELL (header + nav) ===== -->
+  <div class="site-sticky" id="site-sticky">
 
-  <!-- ===== NAV ===== -->
-  <nav class="main-nav">
-    <ul class="nav-list">
-      <li><a href="about.html">ABOUT</a></li>
-      <li><a href="educational.html">EDUCATION</a></li>
-      <li><a href="event.html">EVENTS</a></li>
-      <li><a href="accomodation.html">ACCOMMODATION</a></li>
-      <li><a href="contact.html" style="border-bottom:2px solid rgba(255,255,255,0.8);padding-bottom:2px;">CONTACT</a></li>
-      <li><a href="blogs.html">BLOG</a></li>
-    </ul>
-  </nav>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+        </div>
+        <div class="header-actions">
+          <a href="#contact-form" class="btn-book">BOOK NOW</a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NAV ===== -->
+    <nav class="main-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="educational.html">EDUCATION</a></li>
+        <li><a href="event.html">EVENTS</a></li>
+        <li><a href="accomodation.html">ACCOMMODATION</a></li>
+        <li><a href="contact.html" class="nav-active">CONTACT</a></li>
+        <li><a href="blogs.html">BLOG</a></li>
+      </ul>
+    </nav>
+
+  </div><!-- /site-sticky -->
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="educational.html">Education</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+      </ul>
+      <a href="#contact-form" class="btn-book mobile-nav-book">BOOK NOW</a>
+    </nav>
+  </div>
 
   <!-- ===== HERO ===== -->
   <section class="contact-hero">
@@ -310,11 +340,11 @@
           <div class="form-field">
             <label for="group-type">I am enquiring about</label>
             <select id="group-type" name="group_type">
-              <option value="" disabled selected>Select group type</option>
-              <option value="school">School / Youth Group Trip</option>
-              <option value="corporate">Corporate Retreat / Team Building</option>
-              <option value="private">Private / Family Stay</option>
-              <option value="other">Other</option>
+              <option value="" disabled selected>Select enquiry type</option>
+              <option value="school">School Trip</option>
+              <option value="event">Event</option>
+              <option value="accommodation">Accommodation</option>
+              <option value="general">General</option>
             </select>
           </div>
           <div class="form-field">
@@ -423,7 +453,6 @@
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">What happens after I submit an enquiry?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -431,7 +460,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">How quickly will I receive a response?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -439,7 +467,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">What details help you respond more accurately?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -447,7 +474,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">Can I enquire without confirmed dates?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -455,7 +481,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">How do I reach Hilston Park by road?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -476,7 +501,7 @@
         <div class="blog-card-body">
           <h3>Hilston Park&rsquo;s International Menu</h3>
           <p>Our international menu is designed to celebrate cultural connection through every dish, bridging the gap between diverse traditions and cuisines.</p>
-          <a href="#" class="blog-read-more">READ MORE &rarr;</a>
+          <a href="blog-international-menu.html" class="blog-read-more">READ MORE &rarr;</a>
         </div>
       </article>
       <article class="blog-card">
@@ -486,7 +511,7 @@
         <div class="blog-card-body">
           <h3>Planning a School Adventure Trip? Unleash It at Hilston Park</h3>
           <p>Organising a memorable school adventure trip can be a fulfilling challenge for educators. Here is how to strike the right balance between fun and learning.</p>
-          <a href="#" class="blog-read-more">READ MORE &rarr;</a>
+          <a href="blog-school-trip.html" class="blog-read-more">READ MORE &rarr;</a>
         </div>
       </article>
       <article class="blog-card">
@@ -496,7 +521,7 @@
         <div class="blog-card-body">
           <h3>Why Schools Are Booking Their Trips at Hilston Park</h3>
           <p>School travel has a significant impact on how young minds develop. A residential adventure gives children a chance to leave the classroom and grow outdoors.</p>
-          <a href="#" class="blog-read-more">READ MORE &rarr;</a>
+          <a href="blog-why-schools-book.html" class="blog-read-more">READ MORE &rarr;</a>
         </div>
       </article>
     </div>
@@ -520,34 +545,32 @@
         </div>
       </div>
 
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>Home</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="blogs.html">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Visitors</h4>
-          <ul>
-            <li><a href="visitors.html">Visitor Guide</a></li>
-            <li><a href="educational.html">Educational</a></li>
-            <li><a href="event.html">Events</a></li>
-            <li><a href="accomodation.html">Accommodation</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="legal.html">Legal Hub</a></li>
-            <li><a href="terms.html">Terms &amp; Conditions</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
+      <div class="footer-col">
+        <h4>Home</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visitors</h4>
+        <ul>
+          <li><a href="visitors.html">Visitor Guide</a></li>
+          <li><a href="educational.html">Educational</a></li>
+          <li><a href="event.html">Events</a></li>
+          <li><a href="accomodation.html">Accommodation</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="legal.html">Legal Hub</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
       </div>
 
       <div class="footer-meta">

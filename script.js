@@ -396,13 +396,53 @@ document.addEventListener("DOMContentLoaded", function () {
           return set;
         }
 
-        instaInner.appendChild(buildSet(posts, false));
-        instaInner.appendChild(buildSet(posts, true));
+        var firstSet = buildSet(posts, false);
+        var dupeSet  = buildSet(posts, true);
+        instaInner.appendChild(firstSet);
+        instaInner.appendChild(dupeSet);
+
+        /* measure first set after images load so the loop is pixel-perfect */
+        var imgs = firstSet.querySelectorAll("img");
+        var loaded = 0;
+        function onImgLoad() {
+          loaded++;
+          if (loaded === imgs.length) {
+            var w = firstSet.offsetWidth + 6; /* +6 for the trailing margin-right */
+            instaInner.style.setProperty("--scroll-dist", "-" + w + "px");
+          }
+        }
+        imgs.forEach(function(img) {
+          if (img.complete) { onImgLoad(); }
+          else { img.addEventListener("load", onImgLoad); img.addEventListener("error", onImgLoad); }
+        });
+        if (!imgs.length) {
+          var w = firstSet.offsetWidth + 6;
+          instaInner.style.setProperty("--scroll-dist", "-" + w + "px");
+        }
       })
       .catch(function(){
         var strip = document.querySelector(".insta-strip");
         if (strip) strip.style.display = "none";
       });
+  }
+
+  /* =========================================================
+     AGE GROUP GALLERY — arrow navigation
+     ========================================================= */
+  var galleryTrack = document.getElementById("galleryTrack");
+  if (galleryTrack) {
+    var prevBtn = document.getElementById("galleryPrev");
+    var nextBtn = document.getElementById("galleryNext");
+    var slideWidth = function() {
+      var slide = galleryTrack.querySelector(".gallery-slide-item");
+      return slide ? slide.offsetWidth + 14 : 414; /* 400px + 14px gap */
+    };
+    if (prevBtn) prevBtn.addEventListener("click", function() {
+      galleryTrack.scrollBy({ left: -slideWidth(), behavior: "smooth" });
+    });
+    if (nextBtn) nextBtn.addEventListener("click", function() {
+      galleryTrack.scrollBy({ left: slideWidth(), behavior: "smooth" });
+    });
   }
 
 });
