@@ -71,9 +71,9 @@
     .accom-options-header { margin-bottom: 56px; }
     .accom-options-header h2 { margin-bottom: 12px; }
     .accom-options-header p { font-size: 0.92rem; line-height: 1.72; color: var(--text-muted); max-width: 680px; }
-    .accom-options-intro { margin-bottom: 72px; }
-    .accom-options-intro h2 { margin: 12px 0 18px; }
-    .accom-options-intro > p { font-size: 0.92rem; line-height: 1.78; color: var(--text-muted); max-width: 64ch; }
+    .accom-options-intro { margin-bottom: 72px; text-align: center; }
+    .accom-options-intro h2 { margin: 12px auto 18px; }
+    .accom-options-intro > p { font-size: 0.92rem; line-height: 1.78; color: var(--text-muted); max-width: 64ch; margin: 0 auto; }
     .accom-block {
       display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 64px;
     }
@@ -88,7 +88,11 @@
     .accom-list li { padding-left: 18px; position: relative; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
     .accom-list li::before { content: "\2014"; position: absolute; left: 0; color: var(--teal); }
     .accom-block-note { font-size: 0.82rem; font-style: normal; color: var(--text-muted); border-left: 2px solid var(--teal); padding-left: 14px; line-height: 1.75; }
-    .accom-options-intro .section-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); display: block; margin-bottom: 10px; }
+    .accom-options-intro .section-eyebrow { display: none; }
+    .accom-block-num {
+      display: block; font-family: var(--font-sans); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; color: var(--teal); margin-bottom: 8px;
+    }
     .accom-block.reverse img { order: 2; }
     .accom-block.reverse .accom-block-content { order: 1; }
     .accom-options-cta { text-align: center; margin-top: 56px; }
@@ -120,8 +124,9 @@
 
     /* FLEXIBLE BOOKING */
     .flexible-booking { background: var(--dark); padding: 88px 80px; }
-    .flexible-booking-header { margin-bottom: 48px; }
-    .flexible-booking-header h2 { color: var(--white); }
+    .flexible-booking-header { margin-bottom: 48px; text-align: center; }
+    .flexible-booking-header h2 { color: var(--white); margin-bottom: 24px; }
+    .flexible-booking-header .btn-pill { background: var(--teal); color: var(--white); }
     .booking-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .booking-card {
       background: rgba(255,255,255,0.05);
@@ -137,7 +142,7 @@
       transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); filter: brightness(0.82);
     }
     .booking-card:hover .booking-card-img img { transform: scale(1.05); filter: brightness(0.92); }
-    .booking-card-img::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--teal); }
+    .booking-card-img::after { display: none; }
     .booking-card-body { padding: 32px 30px 36px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
     .booking-card h3 { color: var(--white); font-family: var(--font-serif); font-weight: normal; font-size: 1.45rem; line-height: 1.2; }
     .booking-card-body > p { font-size: 0.87rem; line-height: 1.75; color: rgba(255,255,255,0.68); }
@@ -216,29 +221,60 @@
   </style>
 </head>
 <body>
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
 <div class="site-wrap">
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-logo">
-        <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
-      </div>
-      <a href="#" class="btn-book">BOOK NOW</a>
-    </div>
-  </header>
+  <!-- ===== STICKY SHELL (header + nav) ===== -->
+  <div class="site-sticky" id="site-sticky">
 
-  <!-- NAV -->
-  <nav class="main-nav">
-    <ul class="nav-list">
-      <li><a href="about.html">ABOUT</a></li>
-      <li><a href="educational.html">EDUCATION</a></li>
-      <li><a href="event.html">EVENTS</a></li>
-      <li><a href="accomodation.html" style="border-bottom:2px solid rgba(255,255,255,0.8);padding-bottom:2px;">ACCOMMODATION</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
-      <li><a href="blogs.html">BLOG</a></li>
-    </ul>
-  </nav>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+        </div>
+        <div class="header-actions">
+          <a href="#" class="btn-book">BOOK NOW</a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NAV ===== -->
+    <nav class="main-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="educational.html">EDUCATION</a></li>
+        <li><a href="event.html">EVENTS</a></li>
+        <li><a href="accomodation.html" class="nav-active">ACCOMMODATION</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+        <li><a href="blogs.html">BLOG</a></li>
+      </ul>
+    </nav>
+
+  </div><!-- /site-sticky -->
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="educational.html">Education</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+      </ul>
+      <a href="#" class="btn-book mobile-nav-book">BOOK NOW</a>
+    </nav>
+  </div>
 
   <!-- HERO VIDEO -->
   <section class="accom-hero">
@@ -250,11 +286,10 @@
     <div class="accom-hero-inner">
       <div>
         <h1>Countryside Stays for Families and Private Groups</h1>
-        <a href="#" class="btn-pill">PLAN YOUR ESCAPE</a>
+        <a href="contact.html" class="btn-pill">BOOK NOW</a>
       </div>
       <div class="accom-hero-right">
         <p class="accom-hero-sub">Spend quality time together in the peaceful surroundings of the Wye Valley. Hilston Park offers comfortable group accommodation in Wales for families, friends, and private gatherings.</p>
-        <a href="#" class="btn-pill">BOOK NOW</a>
       </div>
     </div>
   </section>
@@ -412,6 +447,7 @@
   <section class="flexible-booking">
     <div class="flexible-booking-header">
       <h2 class="heading-display">Flexible Ways to Book<br>the Hilston Park Estate</h2>
+      <a href="contact.html" class="btn-pill">ENQUIRE ABOUT A STAY</a>
     </div>
     <div class="booking-grid">
       <div class="booking-card">
@@ -571,7 +607,6 @@
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">Can we book the entire estate for a private stay?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -579,7 +614,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">Which accommodation is best for families?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -587,7 +621,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">Are stays self-catered or full-board?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -595,7 +628,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">Can different buildings be booked together?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -603,7 +635,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">Is Hilston Park suitable for large group stays?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -670,34 +701,32 @@
         </div>
       </div>
 
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>Home</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="blogs.html">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Visitors</h4>
-          <ul>
-            <li><a href="visitors.html">Visitor Guide</a></li>
-            <li><a href="educational.html">Educational</a></li>
-            <li><a href="event.html">Events</a></li>
-            <li><a href="accomodation.html">Accommodation</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="legal.html">Legal Hub</a></li>
-            <li><a href="terms.html">Terms &amp; Conditions</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
+      <div class="footer-col">
+        <h4>Home</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visitors</h4>
+        <ul>
+          <li><a href="visitors.html">Visitor Guide</a></li>
+          <li><a href="educational.html">Educational</a></li>
+          <li><a href="event.html">Events</a></li>
+          <li><a href="accomodation.html">Accommodation</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="legal.html">Legal Hub</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
       </div>
 
       <div class="footer-meta">

@@ -67,11 +67,11 @@
 
     /* HISTORY — TIMELINE */
     .history { background: var(--beige); padding: 88px 80px; }
-    .history-intro-block { margin-bottom: 72px; }
+    .history-intro-block { margin-bottom: 72px; text-align: center; }
     .history-intro-block .heading-display { margin-bottom: 20px; }
     .history-intro-block p {
       font-size: 0.92rem; line-height: 1.88;
-      color: var(--text-muted); max-width: 620px;
+      color: var(--text-muted); max-width: 620px; margin: 0 auto;
     }
     /* spine */
     .timeline { position: relative; }
@@ -117,7 +117,7 @@
     .tl-item:nth-child(even) > .tl-card   { grid-column: 3; grid-row: 1; }
     .tl-item:nth-child(even) > .tl-spacer { grid-column: 1; grid-row: 1; }
     /* card styles */
-    .tl-card { background: var(--white); overflow: hidden; }
+    .tl-card { background: var(--white); overflow: hidden; border: 1px solid var(--border); }
     .tl-card-img { width: 100%; height: 248px; object-fit: cover; display: block; }
     .tl-card-body { padding: 26px 28px 32px; }
     .tl-year {
@@ -142,12 +142,12 @@
       text-transform: uppercase; color: var(--text);
       transition: background 0.2s, color 0.2s; margin-top: 16px;
     }
-    .tl-card-body .btn-outline:hover { background: var(--text); color: var(--white); }
+    .tl-card-body .btn-outline:hover { background: var(--teal); border-color: var(--teal); color: var(--white); }
     .tl-card-body .btn-outline svg { width: 18px; height: 10px; }
 
     /* SAFETY */
     .safety { background: var(--white); padding: 88px 80px; }
-    .safety-header { margin-bottom: 54px; }
+    .safety-header { margin-bottom: 54px; text-align: center; }
     .safety-header .heading-display { margin-bottom: 0; }
     .safety-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -231,6 +231,11 @@
       background: var(--white); padding: 36px 32px;
       display: flex; flex-direction: column; gap: 16px;
       border-top: 3px solid var(--teal);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+    .visit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.1);
     }
     .visit-icon {
       width: 46px; height: 46px; background: var(--teal);
@@ -247,14 +252,14 @@
     .blogs { background: var(--white); padding: 88px 80px; }
     .blogs .heading-display { margin-bottom: 44px; }
     .blogs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-    .blog-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+    .blog-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; border: 1px solid var(--border); }
     .blog-card-img { overflow: hidden; height: 220px; }
     .blog-card-img img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       transition: transform 0.4s ease;
     }
     .blog-card:hover .blog-card-img img { transform: scale(1.06); }
-    .blog-card-body { padding: 22px 0 0; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .blog-card-body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
     .blog-card-body h3 {
       font-family: var(--font-serif); font-weight: normal;
       font-size: 1.1rem; line-height: 1.38; color: var(--text);
@@ -262,11 +267,13 @@
     .blog-card-body p { font-size: 0.85rem; line-height: 1.72; color: var(--text-muted); flex: 1; }
     .blog-read-more {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--teal); margin-top: 6px;
+      background: var(--teal); color: var(--white);
+      padding: 10px 20px; margin-top: 8px; align-self: flex-start;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; transition: background 0.22s ease;
     }
-    .blog-read-more svg { width: 16px; height: 16px; stroke: var(--teal); fill: none; stroke-width: 2; transition: transform 0.2s; }
-    .blog-card:hover .blog-read-more svg { transform: translate(3px,-3px); }
+    .blog-card:hover .blog-read-more { background: var(--teal-dark); }
+    .blog-read-more svg { display: none; }
 
     /* FAQ */
     .faq { background: var(--beige); padding: 88px 80px; }
@@ -284,15 +291,30 @@
     }
     .plan-card {
       position: relative; min-height: 460px;
-      background-size: cover; background-position: center; background-repeat: no-repeat;
-      display: flex; align-items: flex-end; overflow: hidden;
+      overflow: hidden; display: flex; align-items: flex-end;
     }
+    .plan-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center; background-repeat: no-repeat;
+      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 0;
+    }
+    .plan-card:hover .plan-bg { transform: scale(1.07); }
     .plan-card::before {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+      background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.18) 65%, transparent 100%);
+      z-index: 1;
     }
+    .plan-card::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: var(--teal); z-index: 4;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .plan-card:hover::after { transform: scaleX(1); }
     .plan-overlay {
-      position: relative; z-index: 1;
+      position: relative; z-index: 2;
       padding: 32px 28px; display: flex; flex-direction: column; gap: 14px;
     }
     .plan-overlay h3 {
@@ -325,29 +347,60 @@
   </style>
 </head>
 <body>
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
 <div class="site-wrap">
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-logo">
-        <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
-      </div>
-      <a href="#" class="btn-book">BOOK NOW</a>
-    </div>
-  </header>
+  <!-- ===== STICKY SHELL (header + nav) ===== -->
+  <div class="site-sticky" id="site-sticky">
 
-  <!-- NAV -->
-  <nav class="main-nav">
-    <ul class="nav-list">
-      <li><a href="about.html" style="border-bottom:2px solid rgba(255,255,255,0.8);padding-bottom:2px;">ABOUT</a></li>
-      <li><a href="educational.html">EDUCATION</a></li>
-      <li><a href="event.html">EVENTS</a></li>
-      <li><a href="accomodation.html">ACCOMMODATION</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
-      <li><a href="blogs.html">BLOG</a></li>
-    </ul>
-  </nav>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+        </div>
+        <div class="header-actions">
+          <a href="#" class="btn-book">BOOK NOW</a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NAV ===== -->
+    <nav class="main-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="about.html" class="nav-active">ABOUT</a></li>
+        <li><a href="educational.html">EDUCATION</a></li>
+        <li><a href="event.html">EVENTS</a></li>
+        <li><a href="accomodation.html">ACCOMMODATION</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+        <li><a href="blogs.html">BLOG</a></li>
+      </ul>
+    </nav>
+
+  </div><!-- /site-sticky -->
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="educational.html">Education</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+      </ul>
+      <a href="#" class="btn-book mobile-nav-book">BOOK NOW</a>
+    </nav>
+  </div>
 
   <!-- HERO BANNER -->
   <section class="about-hero">
@@ -382,25 +435,28 @@
   <section class="plan-day">
     <h2 class="heading-display light center">Plan Your Day at Hilston Park</h2>
     <div class="plan-cards">
-      <article class="plan-card" style="background-image:url(images/hero-schools.jpg)">
+      <article class="plan-card">
+        <div class="plan-bg" style="background-image:url(images/hero-schools.jpg)"></div>
         <div class="plan-overlay">
           <h3>Outdoor Learning<br>&amp; Development</h3>
           <p>Safely structured, nature-based outdoor adventure activities for adults and pupils that challenge them to think differently.</p>
-          <a href="#" class="btn-pill">READ MORE</a>
+          <a href="educational.html" class="btn-pill">READ MORE</a>
         </div>
       </article>
-      <article class="plan-card" style="background-image:url(images/activity-portrait.jpg)">
+      <article class="plan-card">
+        <div class="plan-bg" style="background-image:url(images/activity-portrait.jpg)"></div>
         <div class="plan-overlay">
           <h3>Team Building &amp; Group<br>Challenges</h3>
           <p>Interactive team building activities in the heart of Wales. Fresh ground, real challenges, and the kind of perspective that an office never quite manages to give.</p>
-          <a href="#" class="btn-pill">READ MORE</a>
+          <a href="event.html" class="btn-pill">READ MORE</a>
         </div>
       </article>
-      <article class="plan-card" style="background-image:url(images/courtyard-room.jpg)">
+      <article class="plan-card">
+        <div class="plan-bg" style="background-image:url(images/courtyard-room.jpg)"></div>
         <div class="plan-overlay">
           <h3>Private Family<br>Stays</h3>
           <p>Palladian elegance. Open countryside. Time that is yours alone. Hilston Park offers private family stays defined by space, silence and moments you&rsquo;ll never forget.</p>
-          <a href="#" class="btn-pill">READ MORE</a>
+          <a href="accomodation.html" class="btn-pill">READ MORE</a>
         </div>
       </article>
     </div>
@@ -620,9 +676,9 @@
   <section class="blogs">
     <h2 class="heading-display">Blogs</h2>
     <div class="blogs-grid">
-      <a href="#" class="blog-card">
+      <a href="blog-international-menu.html" class="blog-card">
         <div class="blog-card-img">
-          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg" alt="Hilston Park International Menu">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg" alt="Hilston Park International Menu" loading="lazy">
         </div>
         <div class="blog-card-body">
           <h3>Hilston Park&rsquo;s International Menu</h3>
@@ -632,9 +688,9 @@
           </span>
         </div>
       </a>
-      <a href="#" class="blog-card">
+      <a href="blog-school-trip.html" class="blog-card">
         <div class="blog-card-img">
-          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb6509b9ec1135b6c0dd89_Planning%20a%20School%20Adventure%20Trip%20in%202025.jpg" alt="Planning a School Adventure Trip">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb6509b9ec1135b6c0dd89_Planning%20a%20School%20Adventure%20Trip%20in%202025.jpg" alt="Planning a School Adventure Trip" loading="lazy">
         </div>
         <div class="blog-card-body">
           <h3>Planning a School Adventure Trip in 2025? Unleash It at Hilston Park</h3>
@@ -644,9 +700,10 @@
           </span>
         </div>
       </a>
-      <a href="#" class="blog-card">
+      <a href="blog-why-schools-book.html" class="blog-card">
         <div class="blog-card-img">
-          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb632a2b3438cd618d8b30_Why%20Schools%20Are%20Booking%20Their%202025%20Trips%20at%20Hilston%20Park.jpg" alt="Why Schools Are Booking at Hilston Park">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb632a2b3438cd618d8b30_Why%20Schools%20Are%20Booking%20Their%202025%20Trips%20at%20Hilston%20Park.jpg" alt="Why Schools Are Booking at Hilston Park" loading="lazy">
+        </div>
         </div>
         <div class="blog-card-body">
           <h3>Unleash the Adventure: Why Schools Are Booking Their 2025 Trips at Hilston Park</h3>
@@ -668,7 +725,6 @@
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">How is Hilston Park Outdoor Centre used?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -676,7 +732,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">Who Runs Hilston Park?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -684,7 +739,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">How Old is Hilston Park Building?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -692,7 +746,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">Who Can Stay at Hilston Park?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -700,7 +753,6 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-              <span class="acc-icon acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
               <span class="acc-question">What is Included in a Residential Stay?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
@@ -728,34 +780,32 @@
         </div>
       </div>
 
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>Home</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="blogs.html">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Visitors</h4>
-          <ul>
-            <li><a href="visitors.html">Visitor Guide</a></li>
-            <li><a href="educational.html">Educational</a></li>
-            <li><a href="event.html">Events</a></li>
-            <li><a href="accomodation.html">Accommodation</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="legal.html">Legal Hub</a></li>
-            <li><a href="terms.html">Terms &amp; Conditions</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
+      <div class="footer-col">
+        <h4>Home</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visitors</h4>
+        <ul>
+          <li><a href="visitors.html">Visitor Guide</a></li>
+          <li><a href="educational.html">Educational</a></li>
+          <li><a href="event.html">Events</a></li>
+          <li><a href="accomodation.html">Accommodation</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="legal.html">Legal Hub</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
       </div>
 
       <div class="footer-meta">

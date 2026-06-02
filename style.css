@@ -273,9 +273,11 @@ html, body { overflow-x: hidden; }
   transition: transform 0.25s ease;
 }
 .nav-list a:hover::after,
-.nav-list a.active::after { transform: scaleX(1); }
+.nav-list a.active::after,
+.nav-list a.nav-active::after { transform: scaleX(1); }
 .nav-list a:hover { opacity: 1; }
-.nav-list a.active { opacity: 1; }
+.nav-list a.active,
+.nav-list a.nav-active { opacity: 1; }
 
 /* =====================================================
    MOBILE NAV OVERLAY
@@ -825,7 +827,7 @@ html, body { overflow-x: hidden; }
   width: 100%;
   height: 540px;
   object-fit: cover;
-  object-position: left center;
+  object-position: center top;
   display: block;
 }
 .expertise-content { padding: 0 20px; }
@@ -903,9 +905,9 @@ html, body { overflow-x: hidden; }
   color: var(--white);
 }
 .footer-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  align-items: start;
   gap: 42px;
   padding: 68px 60px 42px;
 }
@@ -913,8 +915,8 @@ html, body { overflow-x: hidden; }
 .footer-brand {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
   gap: 18px;
 }
 
@@ -934,7 +936,7 @@ html, body { overflow-x: hidden; }
   color: rgba(255,255,255,0.84);
 }
 
-.social-icons { display: flex; gap: 12px; justify-content: center; }
+.social-icons { display: flex; gap: 12px; justify-content: flex-start; }
 .social-icon {
   display: flex;
   align-items: center;
@@ -955,13 +957,7 @@ html, body { overflow-x: hidden; }
 }
 
 .footer-links {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 42px;
-  width: 100%;
-  max-width: 980px;
-  text-align: center;
-  padding-top: 6px;
+  display: contents;
 }
 .footer-col h4 {
   font-family: var(--font-serif);
@@ -979,6 +975,78 @@ html, body { overflow-x: hidden; }
 .footer-col ul li a:hover { color: var(--white); }
 
 .footer-bar { height: 10px; background: var(--teal); }
+
+/* =====================================================
+   HERO — tagline overlay
+   ===================================================== */
+.hero { position: relative; }
+.hero-tagline {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  text-align: center;
+  padding: 20px 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, transparent 100%);
+  pointer-events: none;
+}
+.hero-tagline p {
+  color: rgba(255,255,255,0.90);
+  font-family: var(--font-sans);
+  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* =====================================================
+   TESTIMONIALS BAND
+   ===================================================== */
+.testimonials-band {
+  background: var(--beige);
+  padding: 88px 60px;
+}
+.testimonials-inner { max-width: 1240px; margin: 0 auto; }
+.testimonials-head {
+  text-align: center;
+  margin-bottom: 52px;
+}
+.testimonials-head .eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.tcard {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.tcard-stars { color: var(--teal); font-size: 1.1rem; letter-spacing: 2px; }
+.tcard-quote {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text);
+  flex: 1;
+}
+.tcard-author {
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-style: normal;
+}
 
 /* =====================================================
    INSTAGRAM STRIP
@@ -1059,7 +1127,7 @@ html, body { overflow-x: hidden; }
 
 @keyframes insta-scroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(-5536px); }
+  to   { transform: translateX(var(--scroll-dist, -5536px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1106,7 +1174,7 @@ html, body { overflow-x: hidden; }
   .stay-image img { height: 280px; }
   .stay-info { padding: 36px 30px; }
   .expertise-image img { height: 360px; }
-  .footer-links { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
 
   /* service cards: show content without hover on touch */
   .svc-reveal {
@@ -1126,7 +1194,7 @@ html, body { overflow-x: hidden; }
   .insta-set img { width: 260px; height: 260px; }
   @keyframes insta-scroll {
     from { transform: translateX(0); }
-    to   { transform: translateX(-4256px); } /* 16 × (260 + 6) */
+    to   { transform: translateX(var(--scroll-dist, -4256px)); } /* 16 × (260 + 6) */
   }
 }
 @media (max-width: 560px) {
@@ -1143,15 +1211,17 @@ html, body { overflow-x: hidden; }
   .nav-list a { font-size: 0.7rem; letter-spacing: 0.14em; }
   .logo-name { font-size: 1.3rem; }
   .header-logo img { height: 50px; }
-  .footer-grid { padding: 36px 20px 30px; gap: 36px; }
-  .footer-links { grid-template-columns: 1fr; }
+  .footer-grid { padding: 36px 20px 30px; gap: 36px; grid-template-columns: 1fr; }
+  .footer-brand { align-items: center; text-align: center; }
+  .social-icons { justify-content: center; }
   /* Instagram */
   .insta-strip { padding-top: 56px; }
   .insta-header { padding: 0 20px 30px; }
   .insta-set img { width: 200px; height: 200px; }
   @keyframes insta-scroll {
     from { transform: translateX(0); }
-    to   { transform: translateX(-3296px); } /* 16 × (200 + 6) */
+    to   { transform: translateX(var(--scroll-dist, -3296px)); } /* 16 × (200 + 6) */
+  }
   }
 }
 
