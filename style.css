@@ -1161,9 +1161,17 @@ body { overflow-x: clip; }
   margin-right: 6px; /* matches gap so seam is invisible */
 }
 
+.insta-set a {
+  display: block;
+  flex: 0 0 340px;
+  width: 340px;
+  height: 340px;
+}
+
 .insta-set img {
   width: 340px;
   height: 340px;
+  max-width: none;
   object-fit: cover;
   object-position: center;
   flex-shrink: 0;
@@ -1242,6 +1250,7 @@ body { overflow-x: clip; }
 
   /* Instagram */
   .insta-header { flex-direction: column; align-items: flex-start; padding: 0 40px 36px; gap: 20px; }
+  .insta-set a { flex: 0 0 260px; width: 260px; height: 260px; }
   .insta-set img { width: 260px; height: 260px; }
   @keyframes insta-scroll {
     from { transform: translateX(0); }
@@ -1268,6 +1277,7 @@ body { overflow-x: clip; }
   /* Instagram */
   .insta-strip { padding-top: 56px; }
   .insta-header { padding: 0 20px 30px; }
+  .insta-set a { flex: 0 0 200px; width: 200px; height: 200px; }
   .insta-set img { width: 200px; height: 200px; }
   @keyframes insta-scroll {
     from { transform: translateX(0); }
