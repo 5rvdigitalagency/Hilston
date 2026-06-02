@@ -165,6 +165,19 @@ document.addEventListener("DOMContentLoaded", function () {
   /* Inquiry endpoint — Formsubmit relays form data to this email; first submission triggers a confirmation email to activate */
   var INQUIRY_ENDPOINT = "https://formsubmit.co/ajax/info@hilstonpark.com";
 
+  /* Room definitions — sourced from Q-Book api/pull and accommodation page.
+     maxAdults/maxChildren reflect Q-Book item occupancy settings.
+     qItemIDs used to pre-filter the Q-Book deep-link URL. */
+  var ROOM_DEFS = {
+    'any':                { label: 'All rooms', maxAdults: 0, maxChildren: 0, qItemIDs: [] },
+    'cosy-king':          { label: 'Cosy King Room',               maxAdults: 2, maxChildren: 0, qItemIDs: [83040, 83269] },
+    'double-garden':      { label: 'Double Garden View',           maxAdults: 2, maxChildren: 0, qItemIDs: [82356] },
+    'large-double-garden':{ label: 'Large Double Garden View',     maxAdults: 2, maxChildren: 0, qItemIDs: [82357, 82965] },
+    'family-room':        { label: 'Family Room',                  maxAdults: 3, maxChildren: 2, qItemIDs: [83057] },
+    'dormitory':          { label: 'Dormitory / Group Bunk Rooms', maxAdults: 0, maxChildren: 0, qItemIDs: [] },
+    'exclusive-use':      { label: 'Exclusive Use of House',       maxAdults: 0, maxChildren: 0, qItemIDs: [] }
+  };
+
   /* -- service definitions -- */
   var BKM_SERVICES = {
     stay: {
@@ -265,6 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<option value="exclusive-use">Exclusive Use of House</option>',
               '</select>',
             '</div>',
+            '<p class="bkm-capacity-hint" id="bkm-capacity-hint"></p>',
             '<p class="bkm-error" id="bkm-error">Please select a valid arrival and departure date.</p>',
             '<button class="bkm-btn" id="bkm-submit">Apply</button>',
             '<p class="bkm-note" id="bkm-config-note">Secure booking powered by QBook.</p>',
@@ -406,8 +420,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var switchCfg    = document.getElementById("bkm-switch-config");
   var switchInq    = document.getElementById("bkm-switch-inquire");
   var switchConf   = document.getElementById("bkm-switch-confirm");
-  var proceedBtn   = document.getElementById("bkm-proceed-btn");
-  var summaryEl    = document.getElementById("bkm-summary");
+  var proceedBtn     = document.getElementById("bkm-proceed-btn");
+  var summaryEl      = document.getElementById("bkm-summary");
+  var capacityHintEl = document.getElementById("bkm-capacity-hint");
 
   var currentService = null;
 
@@ -562,6 +577,13 @@ document.addEventListener("DOMContentLoaded", function () {
       : null;
     var minNights = (nightRates.length > 0) ? nightRates[0].minNights : 1;
 
+    /* Room definition for selected type */
+    var roomKey = accTypeEl ? accTypeEl.value : 'any';
+    var roomDef = ROOM_DEFS[roomKey] || ROOM_DEFS['any'];
+    var overAdults   = roomDef.maxAdults   > 0 && adults   > roomDef.maxAdults;
+    var overChildren = roomDef.maxChildren === 0 && kids > 0 && roomKey !== 'any';
+    var overCapacity = overAdults || overChildren;
+
     var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
     /* Helper to build a summary row */
@@ -581,7 +603,26 @@ document.addEventListener("DOMContentLoaded", function () {
     if (minNights > 1) { html += row("Min. stay", minNights + " nights"); }
     html += row("Adults", adults);
     if (kids > 0) { html += row("Children", kids); }
-    if (accType && accTypeEl.value !== "any") { html += row("Preference", accType); }
+
+    /* Room preference + capacity */
+    if (roomKey !== 'any') {
+      var capParts = [];
+      if (roomDef.maxAdults   > 0) capParts.push(roomDef.maxAdults + (roomDef.maxAdults === 1 ? ' adult' : ' adults'));
+      if (roomDef.maxChildren > 0) capParts.push(roomDef.maxChildren + ' children');
+      var capStr = capParts.length ? 'max ' + capParts.join(' + ') : '';
+      if (roomKey === 'dormitory' || roomKey === 'exclusive-use') {
+        html += row("Room type", roomDef.label);
+      } else {
+        html += row("Room type", roomDef.label + (capStr ? ' \u2014 ' + capStr : ''));
+      }
+      if (overCapacity) {
+        var warnParts = [];
+        if (overAdults)   warnParts.push('max ' + roomDef.maxAdults + (roomDef.maxAdults === 1 ? ' adult' : ' adults'));
+        if (overChildren) warnParts.push('no children in this room');
+        html += '<div class="bkm-sum-capwarn">\u26A0\uFE0F Guest count exceeds this room\u2019s capacity (' +
+                warnParts.join('; ') + '). Please adjust or choose a different room on Q-Book.</div>';
+      }
+    }
 
     /* --- Section 2: Room rate --- */
     if (anyRateKnown) {
@@ -630,11 +671,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     summaryEl.innerHTML = html;
 
-    /* Build Q-Book deep-link URL */
-    var url = QBOOK_BASE + "?from=" + ci + "&to=" + co + "&k=" + QBOOK_K;
-    if (adults > 0) { url += "&a=" + adults; }
-    if (kids > 0)   { url += "&c=" + kids; }
-    proceedBtn.href = url;
+    /* Build Q-Book deep-link URL.
+       If a specific room type is selected and it has Q-Book item IDs, pass the first as &i=
+       so Q-Book can pre-filter the availability list to the relevant room. */
+    var qUrl = QBOOK_BASE + "?from=" + ci + "&to=" + co + "&k=" + QBOOK_K;
+    if (adults > 0) { qUrl += "&a=" + adults; }
+    if (kids > 0)   { qUrl += "&c=" + kids; }
+    if (roomDef.qItemIDs && roomDef.qItemIDs.length > 0) {
+      qUrl += "&i=" + roomDef.qItemIDs[0];
+    }
+    proceedBtn.href = qUrl;
 
     setBrand("stay");
     showPhase("confirm");
@@ -651,6 +697,47 @@ document.addEventListener("DOMContentLoaded", function () {
   switchCfg.addEventListener("click", function () { showPhase("picker"); });
   switchInq.addEventListener("click", function () { showPhase("picker"); });
   switchConf.addEventListener("click", function () { showPhase("config"); });
+
+  /* -- update capacity hint when accommodation type changes -- */
+  function updateCapacityHint() {
+    if (!capacityHintEl || !accTypeEl) return;
+    var key = accTypeEl.value;
+    var def = ROOM_DEFS[key];
+    if (!def || key === 'any') {
+      capacityHintEl.textContent = '';
+      capacityHintEl.className = 'bkm-capacity-hint';
+      return;
+    }
+    if (key === 'dormitory' || key === 'exclusive-use') {
+      capacityHintEl.textContent = 'For group sizes and availability, use Enquire about or contact us directly.';
+      capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--info';
+      return;
+    }
+    var adults  = parseInt(adultsEl.value, 10)  || 0;
+    var kids    = parseInt(childrenEl.value, 10) || 0;
+    var overAdults   = def.maxAdults   > 0 && adults > def.maxAdults;
+    var overChildren = def.maxChildren >= 0 && kids > def.maxChildren && def.maxChildren === 0 && kids > 0;
+    var warn = overAdults || overChildren;
+    var cap = def.maxAdults + (def.maxChildren > 0 ? ' adults + ' + def.maxChildren + ' children' : ' guests');
+    if (def.maxChildren === 0) {
+      cap = 'up to ' + def.maxAdults + (def.maxAdults === 1 ? ' adult' : ' adults');
+    } else {
+      cap = 'up to ' + def.maxAdults + ' adults & ' + def.maxChildren + ' children';
+    }
+    if (warn) {
+      var over = [];
+      if (overAdults)   over.push('max ' + def.maxAdults + (def.maxAdults === 1 ? ' adult' : ' adults'));
+      if (overChildren) over.push('children not accommodated in this room');
+      capacityHintEl.textContent = '\u26A0\uFE0F Over capacity (' + over.join('; ') + ') \u2014 choose a different room or reduce guests.';
+      capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--warn';
+    } else {
+      capacityHintEl.textContent = 'Capacity: ' + cap + '.';
+      capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--ok';
+    }
+  }
+  accTypeEl.addEventListener('change', updateCapacityHint);
+  adultsEl.addEventListener('input',   updateCapacityHint);
+  childrenEl.addEventListener('input',  updateCapacityHint);
 
   /* -- ensure checkout >= checkin + 1 day -- */
   inEl.addEventListener("change", function () {

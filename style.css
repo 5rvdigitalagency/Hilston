@@ -2137,6 +2137,41 @@ body { overflow-x: clip; }
   border-top: 1px solid var(--beige-2);
   font-style: italic;
 }
+
+/* ---- Capacity hint (config form, below acctype select) ---- */
+.bkm-capacity-hint {
+  font-size: 0.72rem;
+  line-height: 1.4;
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  display: none;
+}
+.bkm-capacity-hint--ok {
+  display: block;
+  color: var(--teal);
+  background: rgba(78,148,132,0.08);
+}
+.bkm-capacity-hint--warn {
+  display: block;
+  color: #b34a00;
+  background: #fff4eb;
+}
+.bkm-capacity-hint--info {
+  display: block;
+  color: var(--text-muted);
+  background: var(--beige-soft);
+}
+/* ---- Capacity warning in booking summary ---- */
+.bkm-sum-capwarn {
+  padding: 10px 16px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #b34a00;
+  background: #fff4eb;
+  border-top: 1px solid #ffd8b0;
+  border-bottom: 1px solid #ffd8b0;
+}
 .bkm-btn-proceed {
   display: block;
   text-align: center;
