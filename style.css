@@ -55,12 +55,34 @@ ul { list-style: none; }
 address { font-style: normal; }
 button { font: inherit; cursor: pointer; }
 
-/* ----- SITE WRAP (1440px canvas) ----- */
+/* ----- SITE WRAP (full-width canvas) ----- */
 .site-wrap {
-  max-width: var(--canvas);
+  width: 100%;
   margin: 0 auto;
   background: var(--beige-soft);
-  box-shadow: 0 0 40px rgba(0,0,0,0.06);
+}
+
+/* Shared content cap inside full-bleed sections */
+.container,
+.experience-grid,
+.svc-cards,
+.expertise-grid,
+.testimonials-inner,
+.footer-grid,
+.insta-header,
+.stats-inner,
+.stays-intro,
+.stay-row {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.stays > .heading-display,
+.choose-exp > .heading-display,
+.choose-exp > .section-intro {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* prevent horizontal overflow from hero/insta strips without clipping sticky.
    overflow-x:clip (not hidden) on body so it doesn't create a scroll container
@@ -897,9 +919,7 @@ body { overflow-x: clip; }
 .site-footer {
   background: linear-gradient(180deg, #395562 0%, #2f4854 55%, #243943 100%);
   color: var(--white);
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100%;
 }
 .footer-grid {
   display: grid;
@@ -1053,9 +1073,7 @@ body { overflow-x: clip; }
   background: var(--dark-deep);
   padding-top: 80px;
   overflow: hidden;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100%;
 }
 
 .insta-header {
@@ -1232,8 +1250,8 @@ body { overflow-x: clip; }
   position: fixed; inset: 0; z-index: 10001;
   background: rgba(8, 16, 22, 0.55);
   backdrop-filter: blur(4px);
-  display: flex; align-items: flex-end; justify-content: center;
-  padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
   opacity: 0; pointer-events: none;
   transition: opacity 0.28s ease;
 }
@@ -1247,15 +1265,17 @@ body { overflow-x: clip; }
   grid-template-columns: 300px 1fr;
   max-width: 800px; width: 100%;
   position: relative;
-  box-shadow: 0 -8px 40px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.06);
-  border-radius: 16px 16px 0 0;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.32), 0 0 0 1px rgba(0,0,0,0.06);
+  border-radius: 16px;
   overflow: hidden;
-  transform: translateY(100%);
-  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(24px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease;
   max-height: 92vh;
 }
 .bkm-overlay.is-open .bkm-panel {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
 /* ---- LEFT: full estate image with overlay ---- */
@@ -1267,7 +1287,7 @@ body { overflow-x: clip; }
   flex-direction: column;
   justify-content: flex-end;
   padding: 36px 32px;
-  border-radius: 16px 0 0 0;
+  border-radius: 16px 0 0 16px;
 }
 .bkm-brand-bg {
   position: absolute; inset: 0;
