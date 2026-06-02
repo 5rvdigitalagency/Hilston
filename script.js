@@ -613,6 +613,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* =========================================================
      INSTAGRAM MARQUEE  —  Behold.so JSON API
+     Seamless infinite scroll: build TWO identical sets and let
+     CSS animate the inner track from 0 to -50%. Because the two
+     halves are identical, the wrap-around is invisible.
      ========================================================= */
   var instaInner = document.getElementById("insta-inner");
   if (instaInner) {
@@ -639,56 +642,33 @@ document.addEventListener("DOMContentLoaded", function () {
             var img = document.createElement("img");
             img.src = imgSrc;
             img.alt = "";
-            img.loading = "lazy";
+            img.loading = "eager";
             a.appendChild(img);
             set.appendChild(a);
           });
           return set;
         }
 
-        /* Ensure enough tiles to fill at least 2x viewport for a seamless loop.
-           With only 6 posts at 340px the first set is ~2070px — on wide screens
-           the animation visibly "ends" before looping. Build multiple copies. */
+        /* Ensure each "set" is wide enough that the user never sees blank
+           space. With only ~6 posts at 340px, one set is shorter than wide
+           viewports — duplicate posts within each set until it's ≥ viewport. */
         var tileSize = 340 + 6;
-        var minSetWidth = Math.max(window.innerWidth * 1.5, 2400);
-        var copies = Math.max(1, Math.ceil(minSetWidth / (posts.length * tileSize)));
-        var allPosts = [];
-        for (var i = 0; i < copies; i++) { allPosts = allPosts.concat(posts); }
+        var minSetWidth = Math.max(window.innerWidth * 1.2, 2000);
+        var repeats = Math.max(1, Math.ceil(minSetWidth / (posts.length * tileSize)));
+        var setPosts = [];
+        for (var i = 0; i < repeats; i++) { setPosts = setPosts.concat(posts); }
 
-        var firstSet = buildSet(allPosts, false);
-        var dupeSet  = buildSet(allPosts, true);
-        instaInner.appendChild(firstSet);
-        instaInner.appendChild(dupeSet);
+        instaInner.appendChild(buildSet(setPosts, false));
+        instaInner.appendChild(buildSet(setPosts, true));
 
-        function applyScrollDist() {
-          var w = firstSet.offsetWidth + 6; /* +6 for trailing margin-right */
-          if (w < 100) return; /* layout not ready */
-          instaInner.style.setProperty("--scroll-dist", "-" + w + "px");
-          /* keep a constant pixels-per-second speed (~60px/s) so longer
-             strips don't loop too fast */
-          var duration = Math.max(40, Math.round(w / 60));
+        /* Scale animation duration so speed stays ~60px/s regardless of width.
+           Measure once after first paint; no further updates so animation never
+           restarts mid-loop. */
+        requestAnimationFrame(function() {
+          var halfWidth = instaInner.scrollWidth / 2;
+          var duration = Math.max(40, Math.round(halfWidth / 60));
           instaInner.style.animationDuration = duration + "s";
-        }
-
-        /* Measure now (CSS sizes are explicit so layout is immediate) and
-           re-measure once images report load, in case anything reflows. */
-        applyScrollDist();
-
-        var imgs = firstSet.querySelectorAll("img");
-        var loaded = 0;
-        function onImgLoad() {
-          loaded++;
-          if (loaded >= imgs.length) applyScrollDist();
-        }
-        imgs.forEach(function(img) {
-          if (img.complete) { onImgLoad(); }
-          else {
-            img.addEventListener("load", onImgLoad);
-            img.addEventListener("error", onImgLoad);
-          }
         });
-
-        window.addEventListener("resize", applyScrollDist);
       })
       .catch(function(){
         var strip = document.querySelector(".insta-strip");
