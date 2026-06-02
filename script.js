@@ -314,6 +314,7 @@ document.addEventListener("DOMContentLoaded", function () {
             '<button class="bkm-widget-close" id="bkm-widget-close">&times;</button>',
           '</div>',
           '<div class="bkm-widget-accent"></div>',
+          '<p class="bkm-widget-notice">Your selected dates are pre-applied. The final payment step opens in our secure booking partner.</p>',
           '<iframe id="bkm-booking-iframe" class="bkm-booking-iframe" src="about:blank" allowtransparency="1" frameborder="0" title="Hilston Park Booking"></iframe>',
         '</div>',
 
@@ -471,7 +472,19 @@ document.addEventListener("DOMContentLoaded", function () {
     var s = BKM_SERVICES[currentService] || BKM_SERVICES.stay;
     widgetTitle.innerHTML = "Availability &amp; Booking &mdash; " + s.label;
     showPhase("widget");
-    bookIframe.src = QBOOK_RATES_SRC;
+    /* deep-link arrival/departure (DD-MM-YYYY) so Q-Book opens with the user's selections pre-applied */
+    var src = QBOOK_RATES_SRC;
+    if (inEl.value && outEl.value) {
+      var ci = inEl.value.split("-").reverse().join("-");
+      var co = outEl.value.split("-").reverse().join("-");
+      var sep = src.indexOf("?") === -1 ? "?" : "&";
+      src = src + sep + "arrival=" + encodeURIComponent(ci) + "&departure=" + encodeURIComponent(co);
+      var adults = adultsEl && adultsEl.value ? parseInt(adultsEl.value, 10) : 0;
+      var kids   = childrenEl && childrenEl.value ? parseInt(childrenEl.value, 10) : 0;
+      if (adults > 0) { src += "&adults=" + adults; }
+      if (kids > 0)   { src += "&children=" + kids; }
+    }
+    bookIframe.src = src;
   }
 
   /* -- picker tiles -- */
@@ -495,10 +508,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  /* -- submit: validate then show booking widget in-modal -- */
+  /* -- submit: require dates, deep-link them into Q-Book so the user doesn't re-enter -- */
   submitBtn.addEventListener("click", function () {
     errEl.classList.remove("visible");
-    if ((inEl.value || outEl.value) && (!inEl.value || !outEl.value || outEl.value <= inEl.value)) {
+    if (!inEl.value || !outEl.value || outEl.value <= inEl.value) {
+      errEl.textContent = "Please select a valid arrival and departure date.";
       errEl.classList.add("visible");
       return;
     }

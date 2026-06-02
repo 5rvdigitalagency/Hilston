@@ -1733,6 +1733,17 @@ body { overflow-x: clip; }
   background: var(--teal);
   flex-shrink: 0;
 }
+.bkm-widget-notice {
+  margin: 0;
+  padding: 10px 18px;
+  background: #f6f1ea;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--beige-2);
+}
 .bkm-booking-iframe {
   flex: 1;
   width: 100%; border: none;
