@@ -850,6 +850,39 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* =========================================================
+     ACCOMMODATION ROOM GALLERIES — fade between slides
+     ========================================================= */
+  document.querySelectorAll("[data-accom-gallery]").forEach(function(gallery) {
+    var slides = gallery.querySelectorAll(".accom-gallery-slide");
+    if (slides.length <= 1) return;
+    var dotsContainer = gallery.querySelector(".accom-gal-dots");
+    var current = 0;
+
+    slides.forEach(function(_, i) {
+      var dot = document.createElement("button");
+      dot.className = "accom-gal-dot" + (i === 0 ? " active" : "");
+      dot.setAttribute("aria-label", "Go to image " + (i + 1));
+      (function(idx) {
+        dot.addEventListener("click", function() { goTo(idx); });
+      })(i);
+      dotsContainer.appendChild(dot);
+    });
+
+    function goTo(idx) {
+      slides[current].classList.remove("active");
+      dotsContainer.children[current].classList.remove("active");
+      current = (idx + slides.length) % slides.length;
+      slides[current].classList.add("active");
+      dotsContainer.children[current].classList.add("active");
+    }
+
+    var prevBtn = gallery.querySelector(".accom-gal-btn.prev");
+    var nextBtn = gallery.querySelector(".accom-gal-btn.next");
+    if (prevBtn) prevBtn.addEventListener("click", function() { goTo(current - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function() { goTo(current + 1); });
+  });
+
+  /* =========================================================
      AGE GROUP GALLERY — arrow navigation
      ========================================================= */
   var galleryTrack = document.getElementById("galleryTrack");
