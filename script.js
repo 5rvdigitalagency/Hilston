@@ -158,6 +158,8 @@ document.addEventListener("DOMContentLoaded", function () {
   /* All Item Availability widget — full inventory grid with live prices for all room types */
   var QBOOK_RATES_SRC = "https://widgets.hotels.uk.com/display-rates/51665/eff381e2425e310943f59d71f160fa71";
   var QBOOK_RATES_ID  = "QBOOKWIDGET_RATES_ALLITEMS_202788cc19e79e9d082d25e00f1693f4";
+  /* Server-rendered rates widget — CORS-open, server-side rendered HTML with live per-night pricing */
+  var SC_RATES_URL = "https://cdn.hotels.uk.com/sc/51665/eff381e2425e310943f59d71f160fa71/0/4";
   /* Inquiry endpoint — Formsubmit relays form data to this email; first submission triggers a confirmation email to activate */
   var INQUIRY_ENDPOINT = "https://formsubmit.co/ajax/info@hilstonpark.com";
 
@@ -471,7 +473,30 @@ document.addEventListener("DOMContentLoaded", function () {
     return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
   }
 
-  function showConfirm() {
+  /* Fetch the live nightly rate for a given check-in date from Q-Book's CDN widget.
+     Calls back with { perNight: Number, minNights: Number } or null if not available. */
+  function fetchNightlyRate(dateStr, callback) {
+    var d = new Date(dateStr + "T12:00:00");
+    var monthStart = dateStr.slice(0, 8) + "01";  /* YYYY-MM-01 */
+    var url = SC_RATES_URL + "?start=" + monthStart;
+    fetch(url)
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        /* Match the rate row for our specific check-in date.
+           The HTML contains: data-nights="N" ... <span class="date">DD Mon (Day)</span> ... £NNN.NN */
+        var day = ("0" + d.getDate()).slice(-2);
+        var mon = d.toLocaleDateString("en-GB", { month: "short" });  /* "Jun" */
+        var re = new RegExp(
+          'data-nights="(\\d+)"[\\s\\S]{0,300}?<span class="date">'
+          + day + '\\s' + mon + '[^<]*<\/span>[\\s\\S]{0,500}?\\xA3([\\d.]+)'
+        );
+        var m = re.exec(html);
+        callback(m ? { perNight: parseFloat(m[2]), minNights: parseInt(m[1], 10) } : null);
+      })
+      .catch(function () { callback(null); });
+  }
+
+  function showConfirm(rateInfo) {
     var ci = inEl.value;   /* YYYY-MM-DD */
     var co = outEl.value;
     var adults   = adultsEl   ? (parseInt(adultsEl.value,   10) || 0) : 0;
@@ -488,6 +513,12 @@ document.addEventListener("DOMContentLoaded", function () {
       ["Children",  kids]
     ];
     if (accType && accTypeEl.value !== "any") { rows.push(["Preference", accType]); }
+
+    /* Append live pricing rows if Q-Book returned a rate */
+    if (rateInfo) {
+      rows.push(["Per night (from)", "\xA3" + rateInfo.perNight.toFixed(2)]);
+      rows.push(["Est. total (from)", "\xA3" + (rateInfo.perNight * nights).toFixed(2)]);
+    }
 
     summaryEl.innerHTML = rows.map(function (r) {
       return '<div class="bkm-sum-row"><span class="bkm-sum-label">' + r[0] + '</span><span class="bkm-sum-value">' + r[1] + '</span></div>';
@@ -537,7 +568,17 @@ document.addEventListener("DOMContentLoaded", function () {
       errEl.classList.add("visible");
       return;
     }
-    showConfirm();
+    /* Show confirm phase immediately with a loading placeholder, then populate rates */
+    setBrand("stay");
+    showPhase("confirm");
+    summaryEl.innerHTML = '<div class="bkm-sum-loading">Fetching live rates\u2026</div>';
+    proceedBtn.style.opacity = "0.4";
+    proceedBtn.style.pointerEvents = "none";
+    fetchNightlyRate(inEl.value, function (rateInfo) {
+      proceedBtn.style.opacity = "";
+      proceedBtn.style.pointerEvents = "";
+      showConfirm(rateInfo);
+    });
   });
 
   /* -- inquiry submit: POST to Formsubmit (no signup, sends to info@hilstonpark.com) -- */
