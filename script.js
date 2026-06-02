@@ -169,37 +169,17 @@ document.addEventListener("DOMContentLoaded", function () {
       lead: "Book Your",
       sub: "Self-catered country house and group accommodation. Live availability via QBook.",
       configTitle: "Plan your stay",
-      configSub: "Select arrival and departure, then we&rsquo;ll show live availability and rates.",
+      configSub: "Select dates, group size and accommodation type to see live rates.",
       icon: "&#x1F3E1;",
       flow: "book"
     },
-    event: {
-      label: "Host an event",
-      script: "Event",
-      lead: "Plan Your",
-      sub: "Weddings, private functions, and exclusive-use celebrations.",
-      configTitle: "Tell us about your event",
-      configSub: "Bespoke events are confirmed by our team. We&rsquo;ll review your dates and respond within one working day.",
-      icon: "&#x2728;",
-      flow: "inquire"
-    },
-    corporate: {
-      label: "Corporate &amp; team building",
-      script: "Day",
-      lead: "Book a Corporate",
-      sub: "Packaged corporate days and team-building experiences.",
-      configTitle: "Plan your corporate day",
-      configSub: "Choose your dates and group size. Packaged days book directly; bespoke programmes go to our team.",
-      icon: "&#x1F465;",
-      flow: "book"
-    },
     inquire: {
-      label: "Ask a question",
-      script: "Touch",
-      lead: "Get in",
-      sub: "Not ready to book? Send us a question and we&rsquo;ll come back to you.",
-      configTitle: "Send us a message",
-      configSub: "Tell us what you&rsquo;re considering. The team responds within one working day.",
+      label: "Enquire about",
+      script: "Enquiry",
+      lead: "Send an",
+      sub: "Events, weddings, corporate days, school trips or anything else &mdash; tell us what you&rsquo;re considering.",
+      configTitle: "Send us an enquiry",
+      configSub: "Tell us what you&rsquo;re planning. The team responds within one working day.",
       icon: "&#x2709;",
       flow: "inquire"
     }
@@ -236,21 +216,19 @@ document.addEventListener("DOMContentLoaded", function () {
           '<!-- PHASE 0: Service picker -->',
           '<div class="bkm-phase bkm-phase-picker" id="bkm-phase-picker">',
             '<p class="bkm-form-title">What would you like to do?</p>',
-            '<p class="bkm-form-sub">Choose the service that fits &mdash; you can switch at any time.</p>',
+            '<p class="bkm-form-sub">Choose what fits &mdash; you can switch at any time.</p>',
             '<div class="bkm-tiles">',
-              '<button class="bkm-tile" data-pick="stay"><span class="bkm-tile-icon">&#x1F3E1;</span><span class="bkm-tile-label">Stay with us</span><span class="bkm-tile-desc">Self-catered country house &amp; group accommodation</span></button>',
-              '<button class="bkm-tile" data-pick="event"><span class="bkm-tile-icon">&#x2728;</span><span class="bkm-tile-label">Host an event</span><span class="bkm-tile-desc">Weddings, private functions &amp; exclusive use</span></button>',
-              '<button class="bkm-tile" data-pick="corporate"><span class="bkm-tile-icon">&#x1F465;</span><span class="bkm-tile-label">Corporate &amp; team building</span><span class="bkm-tile-desc">Packaged days &amp; group programmes</span></button>',
-              '<button class="bkm-tile bkm-tile-inq" data-pick="inquire"><span class="bkm-tile-icon">&#x2709;</span><span class="bkm-tile-label">Ask a question</span><span class="bkm-tile-desc">Not ready to book &mdash; send us a message</span></button>',
+              '<button class="bkm-tile" data-pick="stay"><span class="bkm-tile-icon">&#x1F3E1;</span><span class="bkm-tile-label">Stay with us</span><span class="bkm-tile-desc">Self-catered country house &amp; group accommodation &mdash; live rates &amp; availability</span></button>',
+              '<button class="bkm-tile" data-pick="inquire"><span class="bkm-tile-icon">&#x2709;</span><span class="bkm-tile-label">Enquire about</span><span class="bkm-tile-desc">Events, weddings, corporate days, school trips &mdash; send us a message</span></button>',
             '</div>',
             '<p class="bkm-note">Secure booking powered by QBook &mdash; all availability and payment handled on this site.</p>',
           '</div>',
 
-          '<!-- PHASE 1: Configure (dates / group size) -->',
+          '<!-- PHASE 1: Configure (dates / group size / accommodation) -->',
           '<div class="bkm-phase bkm-phase-config" id="bkm-phase-config" hidden>',
             '<div class="bkm-crumb"><button class="bkm-switch" id="bkm-switch-config">&larr; Choose different service</button></div>',
-            '<p class="bkm-form-title" id="bkm-config-title">Plan your visit</p>',
-            '<p class="bkm-form-sub" id="bkm-config-sub">Select your dates to continue.</p>',
+            '<p class="bkm-form-title" id="bkm-config-title">Plan your stay</p>',
+            '<p class="bkm-form-sub" id="bkm-config-sub">Select dates, group size and accommodation type to see live rates.</p>',
             '<div class="bkm-fields">',
               '<div class="bkm-field">',
                 '<label for="bkm-checkin">Arrival</label>',
@@ -261,27 +239,62 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<input type="date" id="bkm-checkout" min="' + today + '">',
               '</div>',
             '</div>',
-            '<div class="bkm-field bkm-field-guests" id="bkm-guests-wrap">',
-              '<label for="bkm-guests">Guests</label>',
-              '<input type="number" id="bkm-guests" min="1" max="200" value="2">',
+            '<div class="bkm-fields">',
+              '<div class="bkm-field">',
+                '<label for="bkm-adults">Adults</label>',
+                '<input type="number" id="bkm-adults" min="1" max="200" value="2">',
+              '</div>',
+              '<div class="bkm-field">',
+                '<label for="bkm-children">Children</label>',
+                '<input type="number" id="bkm-children" min="0" max="200" value="0">',
+              '</div>',
+            '</div>',
+            '<div class="bkm-field">',
+              '<label for="bkm-acctype">Accommodation type</label>',
+              '<select id="bkm-acctype">',
+                '<option value="any">Show all accommodation</option>',
+                '<option value="cosy-king">Cosy King Room</option>',
+                '<option value="double-garden">Double Garden View</option>',
+                '<option value="large-double-garden">Large Double Garden View</option>',
+                '<option value="family-room">Family Room</option>',
+                '<option value="dormitory">Dormitory / Group Bunk Rooms</option>',
+                '<option value="exclusive-use">Exclusive Use of House</option>',
+              '</select>',
             '</div>',
             '<p class="bkm-error" id="bkm-error">Please select a valid arrival and departure date.</p>',
-            '<button class="bkm-btn" id="bkm-submit">Check Availability</button>',
+            '<button class="bkm-btn" id="bkm-submit">Apply</button>',
             '<p class="bkm-note" id="bkm-config-note">Secure booking powered by QBook.</p>',
           '</div>',
 
           '<!-- PHASE 2: Inquiry form -->',
           '<div class="bkm-phase bkm-phase-inquire" id="bkm-phase-inquire" hidden>',
             '<div class="bkm-crumb"><button class="bkm-switch" id="bkm-switch-inquire">&larr; Choose different service</button></div>',
-            '<p class="bkm-form-title" id="bkm-inq-title">Send us a message</p>',
-            '<p class="bkm-form-sub" id="bkm-inq-sub">Tell us what you&rsquo;re considering. The team responds within one working day.</p>',
+            '<p class="bkm-form-title" id="bkm-inq-title">Send us an enquiry</p>',
+            '<p class="bkm-form-sub" id="bkm-inq-sub">Tell us what you&rsquo;re planning. The team responds within one working day.</p>',
             '<form class="bkm-inq-form" id="bkm-inq-form" novalidate>',
-              '<div class="bkm-field"><label for="bkm-inq-name">Your name</label><input type="text" id="bkm-inq-name" required></div>',
-              '<div class="bkm-field"><label for="bkm-inq-email">Email</label><input type="email" id="bkm-inq-email" required></div>',
-              '<div class="bkm-field"><label for="bkm-inq-phone">Phone (optional)</label><input type="tel" id="bkm-inq-phone"></div>',
-              '<div class="bkm-field"><label for="bkm-inq-message">Your enquiry</label><textarea id="bkm-inq-message" rows="4" required></textarea></div>',
+              '<div class="bkm-field"><label for="bkm-inq-name">Your name <span class="bkm-req">*</span></label><input type="text" id="bkm-inq-name" required></div>',
+              '<div class="bkm-field"><label for="bkm-inq-email">Email <span class="bkm-req">*</span></label><input type="email" id="bkm-inq-email" required></div>',
+              '<div class="bkm-field"><label for="bkm-inq-phone">Phone number <span class="bkm-req">*</span></label><input type="tel" id="bkm-inq-phone" required></div>',
+              '<div class="bkm-field">',
+                '<label for="bkm-inq-about">Enquiry about <span class="bkm-req">*</span></label>',
+                '<select id="bkm-inq-about" required>',
+                  '<option value="">Please select&hellip;</option>',
+                  '<option value="Wedding">Wedding</option>',
+                  '<option value="Private event / party">Private event / party</option>',
+                  '<option value="Corporate day / team building">Corporate day / team building</option>',
+                  '<option value="School trip / educational">School trip / educational</option>',
+                  '<option value="Group accommodation">Group accommodation</option>',
+                  '<option value="Exclusive use of house">Exclusive use of house</option>',
+                  '<option value="Other">Other</option>',
+                '</select>',
+              '</div>',
+              '<div class="bkm-fields">',
+                '<div class="bkm-field"><label for="bkm-inq-adults">Adults</label><input type="number" id="bkm-inq-adults" min="0" max="500" value="0"></div>',
+                '<div class="bkm-field"><label for="bkm-inq-children">Children</label><input type="number" id="bkm-inq-children" min="0" max="500" value="0"></div>',
+              '</div>',
+              '<div class="bkm-field"><label for="bkm-inq-message">Your enquiry <span class="bkm-req">*</span></label><textarea id="bkm-inq-message" rows="4" required></textarea></div>',
               '<input type="hidden" id="bkm-inq-context">',
-              '<p class="bkm-error" id="bkm-inq-error">Please fill in your name, email, and message.</p>',
+              '<p class="bkm-error" id="bkm-inq-error">Please complete all required fields.</p>',
               '<button type="submit" class="bkm-btn">Send Enquiry</button>',
             '</form>',
             '<div class="bkm-inq-success" id="bkm-inq-success" hidden>',
@@ -370,7 +383,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var widgetClose = document.getElementById("bkm-widget-close");
   var inEl       = document.getElementById("bkm-checkin");
   var outEl      = document.getElementById("bkm-checkout");
-  var guestsWrap = document.getElementById("bkm-guests-wrap");
+  var adultsEl   = document.getElementById("bkm-adults");
+  var childrenEl = document.getElementById("bkm-children");
+  var accTypeEl  = document.getElementById("bkm-acctype");
   var errEl      = document.getElementById("bkm-error");
   var bookIframe = document.getElementById("bkm-booking-iframe");
 
@@ -427,8 +442,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       configTitle.innerHTML = s.configTitle;
       configSub.innerHTML = s.configSub;
-      /* show guests field for corporate flow */
-      guestsWrap.style.display = (svc === "corporate") ? "" : "none";
       showPhase("config");
       setTimeout(function () { inEl.focus(); }, 80);
     }
@@ -496,12 +509,15 @@ document.addEventListener("DOMContentLoaded", function () {
   inqForm.addEventListener("submit", function (e) {
     e.preventDefault();
     inqErr.classList.remove("visible");
-    var name  = document.getElementById("bkm-inq-name").value.trim();
-    var email = document.getElementById("bkm-inq-email").value.trim();
-    var phone = document.getElementById("bkm-inq-phone").value.trim();
-    var msg   = document.getElementById("bkm-inq-message").value.trim();
-    var ctx   = inqContext.value || "general";
-    if (!name || !email || !msg || !/.+@.+\..+/.test(email)) {
+    var name     = document.getElementById("bkm-inq-name").value.trim();
+    var email    = document.getElementById("bkm-inq-email").value.trim();
+    var phone    = document.getElementById("bkm-inq-phone").value.trim();
+    var about    = document.getElementById("bkm-inq-about").value;
+    var adults   = document.getElementById("bkm-inq-adults").value || "0";
+    var children = document.getElementById("bkm-inq-children").value || "0";
+    var msg      = document.getElementById("bkm-inq-message").value.trim();
+    var ctx      = inqContext.value || "general";
+    if (!name || !email || !phone || !about || !msg || !/.+@.+\..+/.test(email)) {
       inqErr.classList.add("visible");
       return;
     }
@@ -515,12 +531,15 @@ document.addEventListener("DOMContentLoaded", function () {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({
-        _subject: "Website enquiry: " + svcLabel,
+        _subject: "Website enquiry: " + about,
         _template: "table",
         _captcha: "false",
         name: name,
         email: email,
-        phone: phone || "(not provided)",
+        phone: phone,
+        enquiry_about: about,
+        adults: adults,
+        children: children,
         service: svcLabel,
         message: msg,
         source_page: window.location.pathname
@@ -583,7 +602,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (el.hasAttribute("data-inquire")) {
       openModal("inquire");
     } else if (el.hasAttribute("data-booking-type")) {
-      openModal(el.getAttribute("data-booking-type"));
+      var t = el.getAttribute("data-booking-type");
+      /* legacy event/corporate tags now route into the unified enquiry flow */
+      if (t !== "stay" && t !== "inquire") { t = "inquire"; }
+      openModal(t);
     } else {
       openModal();
     }
