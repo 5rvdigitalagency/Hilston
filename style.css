@@ -1158,20 +1158,12 @@ body { overflow-x: clip; }
 .insta-set {
   display: flex;
   gap: 6px;
-  padding-right: 6px; /* keeps spacing between the two halves uniform */
-}
-
-.insta-set a {
-  display: block;
-  flex: 0 0 340px;
-  width: 340px;
-  height: 340px;
+  margin-right: 6px; /* matches gap so seam is invisible */
 }
 
 .insta-set img {
   width: 340px;
   height: 340px;
-  max-width: none;
   object-fit: cover;
   object-position: center;
   flex-shrink: 0;
@@ -1182,8 +1174,8 @@ body { overflow-x: clip; }
 .insta-track:hover .insta-set img { filter: brightness(1); }
 
 @keyframes insta-scroll {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
+  from { transform: translateX(0); }
+  to   { transform: translateX(var(--scroll-dist, -5536px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1250,8 +1242,11 @@ body { overflow-x: clip; }
 
   /* Instagram */
   .insta-header { flex-direction: column; align-items: flex-start; padding: 0 40px 36px; gap: 20px; }
-  .insta-set a { flex: 0 0 260px; width: 260px; height: 260px; }
   .insta-set img { width: 260px; height: 260px; }
+  @keyframes insta-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(var(--scroll-dist, -4256px)); } /* 16 × (260 + 6) */
+  }
 }
 @media (max-width: 560px) {
   .site-header,
@@ -1273,8 +1268,11 @@ body { overflow-x: clip; }
   /* Instagram */
   .insta-strip { padding-top: 56px; }
   .insta-header { padding: 0 20px 30px; }
-  .insta-set a { flex: 0 0 200px; width: 200px; height: 200px; }
   .insta-set img { width: 200px; height: 200px; }
+  @keyframes insta-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(var(--scroll-dist, -3296px)); } /* 16 × (200 + 6) */
+  }
 }
 
 /* =====================================================
@@ -1486,47 +1484,16 @@ body { overflow-x: clip; }
   line-height: 1.45;
 }
 .bkm-tile-inq {
-  /* legacy full-width variant — no longer used with the 2-tile layout */
-  grid-column: auto;
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--beige-1, #f6f1ea);
 }
-
-/* form inputs (number, text, email, tel, select, textarea) share the underline style */
-.bkm-field input[type="number"],
-.bkm-field input[type="text"],
-.bkm-field input[type="email"],
-.bkm-field input[type="tel"],
-.bkm-field select,
-.bkm-field textarea {
-  border: none;
-  border-bottom: 1px solid var(--beige-2);
-  padding: 11px 0 10px;
-  font-family: var(--font-sans);
-  font-size: 0.92rem; color: var(--text);
-  background: transparent;
-  outline: none;
-  transition: border-bottom-color 0.22s;
-  width: 100%;
-  border-radius: 0;
-  -webkit-appearance: none;
-  appearance: none;
-}
-.bkm-field select {
-  background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
-  background-position: calc(100% - 14px) 50%, calc(100% - 9px) 50%;
-  background-size: 5px 5px, 5px 5px;
-  background-repeat: no-repeat;
-  padding-right: 22px;
-  cursor: pointer;
-}
-.bkm-field textarea {
-  resize: vertical;
-  min-height: 90px;
-  line-height: 1.5;
-}
-.bkm-field input:focus,
-.bkm-field select:focus,
-.bkm-field textarea:focus { border-bottom-color: var(--teal); }
-.bkm-req { color: #b03030; font-weight: 700; margin-left: 2px; }
+.bkm-tile-inq .bkm-tile-icon { font-size: 1.15rem; }
+.bkm-tile-inq .bkm-tile-label { font-size: 0.78rem; }
+.bkm-tile-inq .bkm-tile-desc { font-size: 0.66rem; margin-left: auto; }
 
 /* ---- "Choose different service" link ---- */
 .bkm-crumb { margin-bottom: 18px; }
@@ -1577,47 +1544,6 @@ body { overflow-x: clip; }
 }
 .bkm-field-guests input[type="number"]:focus { border-bottom-color: var(--teal); }
 .bkm-inq-success { padding-top: 40px; }
-
-/* ---- Phase 3: Booking summary ---- */
-.bkm-summary {
-  margin: 20px 0 8px;
-  border: 1px solid var(--beige-2);
-  border-radius: 8px;
-  overflow: hidden;
-}
-.bkm-sum-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 13px 16px;
-  font-size: 0.88rem;
-  border-bottom: 1px solid var(--beige-2);
-}
-.bkm-sum-row:last-child { border-bottom: none; }
-.bkm-sum-loading {
-  padding: 20px 16px;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-align: center;
-  letter-spacing: 0.05em;
-}
-.bkm-sum-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--text-muted);
-}
-.bkm-sum-value {
-  font-weight: 600;
-  color: var(--text);
-}
-.bkm-btn-proceed {
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  margin-top: 28px;
-}
 .bkm-close {
   position: absolute; top: 20px; right: 22px;
   background: none; border: none;
@@ -1773,17 +1699,6 @@ body { overflow-x: clip; }
   height: 3px;
   background: var(--teal);
   flex-shrink: 0;
-}
-.bkm-widget-notice {
-  margin: 0;
-  padding: 10px 18px;
-  background: #f6f1ea;
-  color: var(--text-muted);
-  font-size: 0.72rem;
-  letter-spacing: 0.02em;
-  text-align: center;
-  flex-shrink: 0;
-  border-bottom: 1px solid var(--beige-2);
 }
 .bkm-booking-iframe {
   flex: 1;
@@ -2134,6 +2049,101 @@ body { overflow-x: clip; }
     gap: 6px;
   }
 }
+
+
+/* ---- Phase 3: Booking summary ---- */
+.bkm-summary {
+  margin: 20px 0 8px;
+  border: 1px solid var(--beige-2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.bkm-sum-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 16px;
+  font-size: 0.88rem;
+  border-bottom: 1px solid var(--beige-2);
+}
+.bkm-sum-row:last-child { border-bottom: none; }
+.bkm-sum-loading {
+  padding: 20px 16px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.bkm-sum-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.bkm-sum-value {
+  font-weight: 600;
+  color: var(--text);
+}
+/* Summary section headers */
+.bkm-sum-section {
+  padding: 8px 16px 6px;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: var(--beige-soft);
+  border-bottom: 1px solid var(--beige-2);
+}
+/* Subtotal row (room total) */
+.bkm-sum-row--subtotal {
+  background: var(--beige-soft);
+}
+.bkm-sum-row--subtotal .bkm-sum-value {
+  font-weight: 700;
+}
+/* Meal extra rows */
+.bkm-sum-row--meal .bkm-sum-label {
+  color: var(--text);
+}
+.bkm-sum-row--meal .bkm-sum-value {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+/* Grand total row */
+.bkm-sum-row--total {
+  background: var(--teal);
+}
+.bkm-sum-row--total .bkm-sum-label,
+.bkm-sum-row--total .bkm-sum-value {
+  color: #fff;
+}
+.bkm-sum-row--total .bkm-sum-label {
+  letter-spacing: 0.16em;
+}
+/* Muted row (unavailable nights) */
+.bkm-sum-row--muted .bkm-sum-value {
+  color: var(--text-muted);
+  font-style: italic;
+  font-weight: 400;
+}
+/* Footnote below meal extras */
+.bkm-sum-footnote {
+  padding: 10px 16px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  border-top: 1px solid var(--beige-2);
+  font-style: italic;
+}
+.bkm-btn-proceed {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 28px;
+}
+.bkm-req { color: var(--teal); }
 
 /* --- Booking modal: actually fit smaller phones --- */
 @media (max-width: 560px) {

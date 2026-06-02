@@ -475,64 +475,165 @@ document.addEventListener("DOMContentLoaded", function () {
     return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
   }
 
-  /* Fetch the live nightly rate for a given check-in date from Q-Book's CDN widget.
-     Calls back with { perNight: Number, minNights: Number } or null if not available. */
-  function fetchNightlyRate(dateStr, callback) {
-    var d = new Date(dateStr + "T12:00:00");
-    var monthStart = dateStr.slice(0, 8) + "01";  /* YYYY-MM-01 */
-    var url = SC_RATES_URL + "?start=" + monthStart;
-    fetch(url)
-      .then(function (r) { return r.text(); })
-      .then(function (html) {
-        /* Match the rate row for our specific check-in date.
-           The HTML contains: data-nights="N" ... <span class="date">DD Mon (Day)</span> ... £NNN.NN */
-        var day = ("0" + d.getDate()).slice(-2);
-        var mon = d.toLocaleDateString("en-GB", { month: "short" });  /* "Jun" */
-        var re = new RegExp(
-          'data-nights="(\\d+)"[\\s\\S]{0,300}?<span class="date">'
-          + day + '\\s' + mon + '[^<]*<\/span>[\\s\\S]{0,500}?\\xA3([\\d.]+)'
-        );
-        var m = re.exec(html);
-        callback(m ? { perNight: parseFloat(m[2]), minNights: parseInt(m[1], 10) } : null);
-      })
-      .catch(function () { callback(null); });
-  }
+  /* Fetch the live nightly rate for every night of the stay from Q-Book's CDN widget.
+     Fetches at most one HTTP request per calendar month spanned.
+     Calls back with an array of { date, perNight, minNights } — perNight is null if unavailable. */
+  function fetchAllNightlyRates(ci, co, callback) {
+    var ciDate = new Date(ci + "T12:00:00");
+    var nights  = Math.round((new Date(co + "T12:00:00") - ciDate) / 86400000);
+    if (nights < 1) { callback([]); return; }
 
-  function showConfirm(rateInfo) {
-    var ci = inEl.value;   /* YYYY-MM-DD */
-    var co = outEl.value;
-    var adults   = adultsEl   ? (parseInt(adultsEl.value,   10) || 0) : 0;
-    var kids     = childrenEl ? (parseInt(childrenEl.value, 10) || 0) : 0;
-    var accType  = accTypeEl  ? accTypeEl.options[accTypeEl.selectedIndex].text : "";
-    var nights   = Math.round((new Date(co) - new Date(ci)) / 86400000);
-
-    /* Build summary rows */
-    var rows = [
-      ["Check-in",  fmt(ci)],
-      ["Check-out", fmt(co)],
-      ["Duration",  nights + (nights === 1 ? " night" : " nights")],
-      ["Adults",    adults],
-      ["Children",  kids]
-    ];
-    if (accType && accTypeEl.value !== "any") { rows.push(["Preference", accType]); }
-
-    /* Append live pricing rows if Q-Book returned a rate */
-    if (rateInfo) {
-      rows.push(["Per night (from)", "\xA3" + rateInfo.perNight.toFixed(2)]);
-      rows.push(["Est. total (from)", "\xA3" + (rateInfo.perNight * nights).toFixed(2)]);
+    /* Build YYYY-MM-DD string for each night (check-in night through night before check-out) */
+    var nightDates = [];
+    for (var i = 0; i < nights; i++) {
+      var d = new Date(ciDate.getTime());
+      d.setDate(d.getDate() + i);
+      nightDates.push(d.toISOString().slice(0, 10));
     }
 
-    summaryEl.innerHTML = rows.map(function (r) {
-      return '<div class="bkm-sum-row"><span class="bkm-sum-label">' + r[0] + '</span><span class="bkm-sum-value">' + r[1] + '</span></div>';
-    }).join("");
+    /* Identify unique YYYY-MM-01 month keys */
+    var monthHtml = {};
+    nightDates.forEach(function (ds) {
+      var mk = ds.slice(0, 8) + "01";
+      monthHtml[mk] = null;
+    });
+    var monthKeys = Object.keys(monthHtml);
+    var remaining = monthKeys.length;
 
-    /* Build Q-Book deep-link URL — Q-Book SPA requires from/to in YYYY-MM-DD format + k= property token */
-    var url = QBOOK_BASE +
-      "?from=" + ci +
-      "&to="   + co +
-      "&k="    + QBOOK_K;
-    if (adults > 0)  { url += "&a=" + adults; }
-    if (kids > 0)    { url += "&c=" + kids; }
+    function resolveRates() {
+      var rates = nightDates.map(function (ds) {
+        var nd  = new Date(ds + "T12:00:00");
+        var day = ("0" + nd.getDate()).slice(-2);
+        var mon = nd.toLocaleDateString("en-GB", { month: "short" });
+        var mk  = ds.slice(0, 8) + "01";
+        var html = monthHtml[mk] || "";
+        var re  = new RegExp(
+          'data-nights="(\\d+)"[\\s\\S]{0,300}?<span class="date">'
+          + day + "\\s" + mon + "[^<]*<\\/span>[\\s\\S]{0,500}?\\xA3([\\d.]+)"
+        );
+        var m = re.exec(html);
+        return m
+          ? { date: ds, perNight: parseFloat(m[2]), minNights: parseInt(m[1], 10) }
+          : { date: ds, perNight: null, minNights: 1 };
+      });
+      callback(rates);
+    }
+
+    monthKeys.forEach(function (mk) {
+      fetch(SC_RATES_URL + "?start=" + mk)
+        .then(function (r) { return r.text(); })
+        .then(function (html) {
+          monthHtml[mk] = html;
+          remaining--;
+          if (remaining === 0) { resolveRates(); }
+        })
+        .catch(function () {
+          monthHtml[mk] = "";
+          remaining--;
+          if (remaining === 0) { resolveRates(); }
+        });
+    });
+  }
+
+  function showConfirm(nightRates) {
+    var ci = inEl.value;   /* YYYY-MM-DD */
+    var co = outEl.value;
+    var adults  = adultsEl   ? (parseInt(adultsEl.value,   10) || 0) : 0;
+    var kids    = childrenEl ? (parseInt(childrenEl.value, 10) || 0) : 0;
+    var accType = accTypeEl  ? accTypeEl.options[accTypeEl.selectedIndex].text : "";
+    var nights  = Math.round((new Date(co) - new Date(ci)) / 86400000);
+    var totalGuests = adults + kids;
+
+    /* Confirmed property constants from Q-Book admin (per person per night) */
+    var BREAKFAST_PP = 11;
+    var DINNER_PP    = 18;
+
+    /* Rate analysis */
+    var allRatesKnown = (nightRates.length === nights) &&
+                        nightRates.every(function (n) { return n.perNight !== null; });
+    var anyRateKnown  = nightRates.some(function (n) { return n.perNight !== null; });
+    var roomTotal = anyRateKnown
+      ? nightRates.reduce(function (s, n) { return s + (n.perNight || 0); }, 0)
+      : null;
+    var lowestRate = anyRateKnown
+      ? nightRates.reduce(function (lo, n) {
+          return (n.perNight !== null && (lo === null || n.perNight < lo)) ? n.perNight : lo;
+        }, null)
+      : null;
+    var minNights = (nightRates.length > 0) ? nightRates[0].minNights : 1;
+
+    var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    /* Helper to build a summary row */
+    var row = function (lbl, val, extra) {
+      var cls = "bkm-sum-row" + (extra ? " " + extra : "");
+      return '<div class="' + cls + '"><span class="bkm-sum-label">' + lbl +
+             '</span><span class="bkm-sum-value">' + val + '</span></div>';
+    };
+
+    var html = "";
+
+    /* --- Section 1: Trip details --- */
+    html += '<div class="bkm-sum-section">Trip details</div>';
+    html += row("Check-in",  fmt(ci));
+    html += row("Check-out", fmt(co));
+    html += row("Duration",  nights + (nights === 1 ? " night" : " nights"));
+    if (minNights > 1) { html += row("Min. stay", minNights + " nights"); }
+    html += row("Adults", adults);
+    if (kids > 0) { html += row("Children", kids); }
+    if (accType && accTypeEl.value !== "any") { html += row("Preference", accType); }
+
+    /* --- Section 2: Room rate --- */
+    if (anyRateKnown) {
+      html += '<div class="bkm-sum-section">Room rate</div>';
+      if (nights <= 7) {
+        nightRates.forEach(function (n, idx) {
+          var nd  = new Date(n.date + "T12:00:00");
+          var lbl = "Night " + (idx + 1) + " \u2014 " + DAYS[nd.getDay()] + " " + nd.getDate();
+          var val = n.perNight !== null ? "\xA3" + n.perNight.toFixed(2) : "On request";
+          html   += row(lbl, val, n.perNight === null ? "bkm-sum-row--muted" : "");
+        });
+      } else {
+        html += row("Per night (from)", "\xA3" + lowestRate.toFixed(2));
+      }
+      html += row(
+        allRatesKnown ? "Room total" : "Room total (partial)",
+        allRatesKnown ? "\xA3" + roomTotal.toFixed(2) : "\xA3" + roomTotal.toFixed(2) + "+ (est.)",
+        "bkm-sum-row--subtotal"
+      );
+    }
+
+    /* --- Section 3: Optional meal extras --- */
+    if (totalGuests > 0) {
+      var bkCost = BREAKFAST_PP * totalGuests * nights;
+      var dnCost = DINNER_PP    * totalGuests * nights;
+      html += '<div class="bkm-sum-section">Optional meal extras</div>';
+      html += row(
+        "Breakfast \u2014 \xA3" + BREAKFAST_PP + "/person/night",
+        "\xA3" + bkCost.toFixed(2) + " (" + totalGuests + (totalGuests === 1 ? " guest" : " guests") + ")",
+        "bkm-sum-row--meal"
+      );
+      html += row(
+        "Dinner & Lunch \u2014 \xA3" + DINNER_PP + "/person/night",
+        "\xA3" + dnCost.toFixed(2) + " (" + totalGuests + (totalGuests === 1 ? " guest" : " guests") + ")",
+        "bkm-sum-row--meal"
+      );
+      if (allRatesKnown) {
+        html += row(
+          "Total with all meals",
+          "\xA3" + (roomTotal + bkCost + dnCost).toFixed(2) + " (est.)",
+          "bkm-sum-row--total"
+        );
+      }
+      html += '<div class="bkm-sum-footnote">Meal extras are optional \u2014 add or remove when completing your booking on Q-Book.</div>';
+    }
+
+    summaryEl.innerHTML = html;
+
+    /* Build Q-Book deep-link URL */
+    var url = QBOOK_BASE + "?from=" + ci + "&to=" + co + "&k=" + QBOOK_K;
+    if (adults > 0) { url += "&a=" + adults; }
+    if (kids > 0)   { url += "&c=" + kids; }
     proceedBtn.href = url;
 
     setBrand("stay");
@@ -575,10 +676,10 @@ document.addEventListener("DOMContentLoaded", function () {
     summaryEl.innerHTML = '<div class="bkm-sum-loading">Fetching live rates\u2026</div>';
     proceedBtn.style.opacity = "0.4";
     proceedBtn.style.pointerEvents = "none";
-    fetchNightlyRate(inEl.value, function (rateInfo) {
+    fetchAllNightlyRates(inEl.value, outEl.value, function (nightRates) {
       proceedBtn.style.opacity = "";
       proceedBtn.style.pointerEvents = "";
-      showConfirm(rateInfo);
+      showConfirm(nightRates);
     });
   });
 
