@@ -27,6 +27,7 @@
   --dark:       #4a6371;
   --dark-deep:  #36505d;
   --beige:      #e9e6df;
+  --beige-soft: #f5f2ee;
   --beige-2:    #d8d4cc;
   --page-bg:    #cfcec9;
   --white:      #ffffff;
@@ -73,8 +74,11 @@ button { font: inherit; cursor: pointer; }
   background: var(--white);
   box-shadow: 0 0 40px rgba(0,0,0,0.06);
 }
-/* prevent horizontal overflow from hero/insta strips without clipping sticky */
-html, body { overflow-x: hidden; }
+/* prevent horizontal overflow from hero/insta strips without clipping sticky.
+   overflow-x:clip (not hidden) on body so it doesn't create a scroll container
+   that breaks position:fixed children (e.g. the booking modal overlay). */
+html { overflow-x: hidden; }
+body { overflow-x: clip; }
 
 /* ----- TYPOGRAPHY HELPERS ----- */
 .heading-display {
@@ -843,7 +847,7 @@ html, body { overflow-x: hidden; }
 /* Accordion */
 .accordion { display: flex; flex-direction: column; gap: 8px; }
 .accordion-item {
-  background: var(--beige);
+  background: var(--beige-soft);
   overflow: hidden;
   border-radius: 2px;
 }
@@ -1229,7 +1233,7 @@ html, body { overflow-x: hidden; }
    BOOKING MODAL
    ===================================================== */
 .bkm-overlay {
-  position: fixed; inset: 0; z-index: 9000;
+  position: fixed; inset: 0; z-index: 10001;
   background: rgba(8, 16, 22, 0.55);
   backdrop-filter: blur(4px);
   display: flex; align-items: flex-end; justify-content: center;
