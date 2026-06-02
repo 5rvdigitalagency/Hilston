@@ -78,6 +78,18 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 64px;
     }
     .accom-block:last-of-type { margin-bottom: 0; }
+    .accom-divider {
+      display: flex; align-items: center; gap: 22px;
+      margin: 0 0 64px;
+    }
+    .accom-divider::before,
+    .accom-divider::after {
+      content: ""; flex: 1; height: 1px; background: var(--border);
+    }
+    .accom-divider-gem {
+      width: 8px; height: 8px; background: var(--teal);
+      transform: rotate(45deg); flex-shrink: 0;
+    }
     .accom-block-img > img { width: 100%; height: 420px; object-fit: cover; display: block; }
     .accom-block-content h3 {
       font-family: var(--font-serif); font-weight: normal;
@@ -383,6 +395,8 @@
       </div>
     </div>
 
+    <div class="accom-divider"><span class="accom-divider-gem"></span></div>
+
     <!-- 02 Double Garden View -->
     <div class="accom-block reverse">
       <div class="accom-block-img">
@@ -408,6 +422,8 @@
         <p class="accom-block-note">A favourite for guests who want calm and green views on their doorstep.</p>
       </div>
     </div>
+
+    <div class="accom-divider"><span class="accom-divider-gem"></span></div>
 
     <!-- 03 Large Double Garden View -->
     <div class="accom-block">
@@ -435,6 +451,8 @@
       </div>
     </div>
 
+    <div class="accom-divider"><span class="accom-divider-gem"></span></div>
+
     <!-- 04 Family Room -->
     <div class="accom-block reverse">
       <div class="accom-block-img">
@@ -461,6 +479,8 @@
       </div>
     </div>
 
+    <div class="accom-divider"><span class="accom-divider-gem"></span></div>
+
     <!-- 05 Dormitory / Group Bunk Rooms -->
     <div class="accom-block">
       <div class="accom-block-img">
@@ -486,6 +506,8 @@
         <p class="accom-block-note">Built for group stays where structure, safety, and shared experience matter.</p>
       </div>
     </div>
+
+    <div class="accom-divider"><span class="accom-divider-gem"></span></div>
 
     <!-- 06 Exclusive Use of House -->
     <div class="accom-block reverse">
