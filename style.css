@@ -923,7 +923,8 @@ body { overflow-x: clip; }
   cursor: pointer;
 }
 .acc-question {
-  text-align: center;
+  grid-column: 2;
+  text-align: left;
   font-family: var(--font-sans);
   font-size: 0.88rem;
   font-weight: 600;
@@ -940,8 +941,8 @@ body { overflow-x: clip; }
   align-items: center;
   transition: transform 0.3s ease, color 0.2s ease;
 }
-.acc-icon { justify-self: end; }
-.acc-icon-l { justify-self: start; pointer-events: none; }
+.acc-icon { grid-column: 3; justify-self: end; }
+.acc-icon-l { grid-column: 1; justify-self: start; pointer-events: none; }
 .acc-svg { width: 16px; height: 16px; display: block; }
 .accordion-item.open .acc-icon,
 .accordion-item.open .acc-icon-l { transform: rotate(180deg); color: var(--teal-dark); }
@@ -957,7 +958,7 @@ body { overflow-x: clip; }
   color: var(--text-muted);
   font-size: 0.84rem;
   line-height: 1.75;
-  text-align: center;
+  text-align: left;
 }
 
 /* =====================================================
@@ -1350,12 +1351,13 @@ body { overflow-x: clip; }
   .stats-inner { flex-wrap: wrap; gap: 24px 0; }
   .stat-item { min-width: 50%; }
   .stat-divider { display: none; }
-  /* Accordion — remove left dummy column, allow question text to wrap */
+  /* Accordion — collapse to 2-column layout on small screens */
   .accordion-btn {
     grid-template-columns: 1fr 20px;
   }
+  .acc-question { grid-column: 1; font-size: 0.8rem; }
+  .acc-icon { grid-column: 2; }
   .acc-icon-l { display: none; }
-  .acc-question { font-size: 0.8rem; }
   .nav-list { flex-wrap: wrap; gap: 14px; }
   .nav-list a { font-size: 0.7rem; letter-spacing: 0.14em; }
   .logo-name { font-size: 1.3rem; }
