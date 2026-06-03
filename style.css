@@ -1149,9 +1149,8 @@ body { overflow-x: clip; }
 .insta-inner {
   display: flex;
   width: max-content;
-  min-width: max-content;
-  will-change: transform;
-  animation: insta-scroll var(--insta-dur, 60s) linear infinite;
+  /* set-width = 16 images × (340px + 6px gap) = 5536px */
+  animation: insta-scroll 90s linear infinite;
 }
 
 .insta-track:hover .insta-inner { animation-play-state: paused; }
@@ -1186,7 +1185,7 @@ body { overflow-x: clip; }
 
 @keyframes insta-scroll {
   from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(var(--insta-shift, -50%), 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
