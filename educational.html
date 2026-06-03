@@ -186,11 +186,9 @@
       text-align: center; font-size: 0.9rem; color: var(--text-muted);
       max-width: 680px; margin: 0 auto 48px; line-height: 1.72;
     }
-    .edu-accom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .edu-accom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: stretch; }
     .edu-accom-img { display: flex; flex-direction: column; gap: 8px; }
-    .edu-accom-img-main img { width: 100%; height: 300px; object-fit: cover; display: block; }
-    .edu-accom-img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .edu-accom-img-row img { width: 100%; height: 175px; object-fit: cover; display: block; }
+    .edu-accom-img img { width: 100%; flex: 1; object-fit: cover; display: block; min-height: 0; }
     .accom-section { margin-bottom: 0; counter-increment: accom-counter; padding: 20px 0; border-bottom: 1px solid var(--border); }
     .accom-section:first-child { padding-top: 0; }
     .edu-accom-content { counter-reset: accom-counter; }
@@ -533,13 +531,10 @@
     <p class="edu-accom-sub">For large group residentials of 30 or more, Hilston Park&rsquo;s historic manor house gives schools a fully self-contained space where students sleep, eat and spend time together.</p>
     <div class="edu-accom-grid">
       <div class="edu-accom-img">
-        <div class="edu-accom-img-main">
-          <img src="images/edu-intro.jpg" alt="Bunk rooms at Hilston Park">
-        </div>
-        <div class="edu-accom-img-row">
-          <img src="images/edu-accom-2.jpg" alt="Student dormitory at Hilston Park">
-          <img src="images/edu-accom-3.jpg" alt="Group accommodation at Hilston Park">
-        </div>
+        <img src="images/edu-accom-2.jpg" alt="Bunk rooms sleeping 130+ students at Hilston Park">
+        <img src="images/food.jpg" alt="Freshly prepared meals in Hilston Park's dining hall">
+        <img src="images/edu-accom-shared.jpg" alt="Shared common areas at Hilston Park">
+        <img src="images/edu-accom-activity.jpg" alt="Outdoor activity areas within walking distance at Hilston Park">
       </div>
       <div class="edu-accom-content">
         <div class="accom-section">
