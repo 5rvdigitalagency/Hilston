@@ -868,6 +868,11 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(function(data) {
         var posts = Array.isArray(data) ? data : (data.posts || []);
         if (!posts.length) return;
+        /* Only show real photo/video posts — skip graphic/text tiles */
+        posts = posts.filter(function(p) {
+          var t = (p.mediaType || "").toUpperCase();
+          return t === "IMAGE" || t === "VIDEO" || t === "CAROUSEL_ALBUM" || t === "";
+        });
 
         function buildSet(posts, hidden) {
           var set = document.createElement("div");
@@ -911,7 +916,14 @@ document.addEventListener("DOMContentLoaded", function () {
         requestAnimationFrame(function() {
           var halfWidth = instaInner.scrollWidth / 2;
           var duration = Math.max(40, Math.round(halfWidth / 60));
-          instaInner.style.animationDuration = duration + "s";
+          /* CSS vars in @keyframes don't update on an already-running animation
+             in all browsers — inject an exact override and restart instead */
+          var s = document.createElement("style");
+          s.textContent = "@keyframes insta-scroll{from{transform:translateX(0)}to{transform:translateX(-" + halfWidth + "px)}}";
+          document.head.appendChild(s);
+          instaInner.style.animation = "none";
+          instaInner.offsetWidth; /* force reflow so the new keyframe binds */
+          instaInner.style.animation = "insta-scroll " + duration + "s linear infinite";
         });
       })
       .catch(function(){
