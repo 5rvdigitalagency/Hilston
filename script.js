@@ -691,14 +691,34 @@ document.addEventListener("DOMContentLoaded", function () {
         instaInner.appendChild(buildSet(setPosts, false));
         instaInner.appendChild(buildSet(setPosts, true));
 
-        /* Scale animation duration so speed stays ~60px/s regardless of width.
-           Measure once after first paint; no further updates so animation never
-           restarts mid-loop. */
-        requestAnimationFrame(function() {
+        /* Pixel-perfect seamless loop:
+           - measure half of the inner track (== one set)
+           - shift the track by exactly that many pixels per cycle
+           - constant speed (~90 px/s) regardless of viewport width */
+        function applyAnim() {
           var halfWidth = instaInner.scrollWidth / 2;
-          var duration = Math.max(40, Math.round(halfWidth / 60));
-          instaInner.style.animationDuration = duration + "s";
+          if (halfWidth < 50) return;
+          var duration = Math.max(20, Math.round(halfWidth / 90));
+          instaInner.style.setProperty('--insta-shift', '-' + halfWidth + 'px');
+          instaInner.style.setProperty('--insta-dur', duration + 's');
+        }
+
+        requestAnimationFrame(applyAnim);
+
+        var imgs = instaInner.querySelectorAll('img');
+        var loaded = 0;
+        imgs.forEach(function(img) {
+          if (img.complete) { loaded++; return; }
+          img.addEventListener('load', function() {
+            loaded++;
+            if (loaded === imgs.length) applyAnim();
+          });
+          img.addEventListener('error', function() {
+            loaded++;
+            if (loaded === imgs.length) applyAnim();
+          });
         });
+        if (loaded === imgs.length) applyAnim();
       })
       .catch(function(){
         var strip = document.querySelector(".insta-strip");
