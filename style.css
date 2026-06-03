@@ -2331,6 +2331,17 @@ body { overflow-x: clip; }
   border-top: 1px solid #ffd8b0;
   border-bottom: 1px solid #ffd8b0;
 }
+/* ---- Availability warning in booking summary ---- */
+.bkm-sum-avail-warn {
+  padding: 12px 16px;
+  margin: 12px 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #7a1818;
+  background: #fdf2f2;
+  border: 1px solid #f0b8b8;
+  border-radius: 2px;
+}
 .bkm-btn-proceed {
   display: block;
   text-align: center;
