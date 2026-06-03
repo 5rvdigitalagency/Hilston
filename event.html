@@ -22,7 +22,7 @@
     }
     .eve-hero-inner {
       position: relative; z-index: 2; width: 100%; padding: 64px 80px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      display: grid; grid-template-columns: 1fr; gap: 0;
       align-items: flex-end; color: var(--white);
     }
     .eve-hero-inner h1 {
@@ -278,6 +278,7 @@
 
   <!-- ===== MOBILE NAV OVERLAY ===== -->
   <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
     <nav>
       <ul class="mobile-nav-list">
         <li><a href="index.html">Home</a></li>
@@ -302,10 +303,8 @@
     <div class="eve-hero-inner">
       <div>
         <h1>Curated Event Experiences At Hilston Park</h1>
-        <a href="contact.html" class="btn-pill">ENQUIRE NOW</a>
-      </div>
-      <div class="eve-hero-right">
         <p class="eve-hero-sub">We create events that are experienced, not simply attended. From corporate retreats and private gatherings to special occasions, every event at Hilston Park brings enriching experiences.</p>
+        <a href="contact.html" class="btn-pill">ENQUIRE NOW</a>
       </div>
     </div>
   </section>
@@ -629,25 +628,25 @@
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-btn">
-            <span></span>
-            <span class="acc-label">What types of groups can book events at Hilston Park?</span>
-            <span class="caret">&#9660;</span>
+            <span class="acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+            <span class="acc-question">What types of groups can book events at Hilston Park?</span>
+            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
           </button>
           <div class="accordion-body"><p>We welcome corporate teams, private groups, wellbeing organisations, and community groups. If you are looking for an outdoor event venue in Wales with on-site accommodation, outdoor activities, and catering, Hilston Park can support your event needs.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-            <span></span>
-            <span class="acc-label">Are events limited to fixed packages?</span>
-            <span class="caret">&#9660;</span>
+            <span class="acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+            <span class="acc-question">Are events limited to fixed packages?</span>
+            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
           </button>
           <div class="accordion-body"><p>Not at all. You decide how long you need. One day, three days, a full week. Most groups land somewhere between 1 and 7 days, but we work according to your schedule, not a fixed template.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-            <span></span>
-            <span class="acc-label">What is included in your group event?</span>
-            <span class="caret">&#9660;</span>
+            <span class="acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+            <span class="acc-question">What is included in your group event?</span>
+            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
           </button>
           <div class="accordion-body">
             <p>It depends on how you book:</p>
@@ -660,17 +659,17 @@
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-            <span></span>
-            <span class="acc-label">Are private bookings exclusive use?</span>
-            <span class="caret">&#9660;</span>
+            <span class="acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+            <span class="acc-question">Are private bookings exclusive use?</span>
+            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
           </button>
           <div class="accordion-body"><p>It depends on the accommodation and your dates. Some options can be arranged for exclusive use. Mention it when you enquire, and we will let you know what is available.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
-            <span></span>
-            <span class="acc-label">Do you support multi-day residential events?</span>
-            <span class="caret">&#9660;</span>
+            <span class="acc-icon-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+            <span class="acc-question">Do you support multi-day residential events?</span>
+            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
           </button>
           <div class="accordion-body"><p>Yes, and it is one of the things Hilston Park does well. Your group can stay overnight, run activities throughout the day, use the grounds in the evening, and have every meal catered on site.</p></div>
         </div>

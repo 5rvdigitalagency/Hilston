@@ -47,6 +47,17 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.style.overflow = "";
       });
     });
+    /* close on ✕ button */
+    var mobileNavClose = document.getElementById("mobile-nav-close");
+    if (mobileNavClose) {
+      mobileNavClose.addEventListener("click", function () {
+        mobileNav.classList.remove("is-open");
+        mobileNav.setAttribute("aria-hidden", "true");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.classList.remove("is-open");
+        document.body.style.overflow = "";
+      });
+    }
     /* close on Escape */
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && mobileNav.classList.contains("is-open")) {

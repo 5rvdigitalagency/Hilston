@@ -159,7 +159,7 @@
     }
     .blog-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 28px;
     }
     .blog-card-item {
@@ -225,8 +225,8 @@
     .blog-newsletter {
       background: var(--dark-deep);
       padding: 72px 80px;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 48px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      gap: 36px;
     }
     .newsletter-copy h2 {
       font-family: var(--font-serif); font-weight: normal;
@@ -234,7 +234,7 @@
       color: var(--white); margin-bottom: 10px;
     }
     .newsletter-copy p {
-      font-size: 0.86rem; color: rgba(255,255,255,0.65); max-width: 400px;
+      font-size: 0.86rem; color: rgba(255,255,255,0.65); max-width: 480px; text-align: center;
     }
     .newsletter-form {
       display: flex; gap: 0; flex-shrink: 0;
@@ -320,13 +320,23 @@
 <body>
 <div class="site-wrap">
 
+  <!-- ===== STICKY SHELL (header + nav) ===== -->
+  <div class="site-sticky" id="site-sticky">
+
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="header-inner">
       <div class="header-logo">
         <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
       </div>
-      <a href="contact.html" class="btn-book">BOOK / ENQUIRY</a>
+      <div class="header-actions">
+        <a href="contact.html" class="btn-book">BOOK / ENQUIRY</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -342,7 +352,24 @@
     </ul>
   </nav>
 
-  <!-- ===== HERO ===== -->
+  </div><!-- /site-sticky -->
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="educational.html">Education</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+      </ul>
+      <a href="contact.html" class="mobile-nav-book">BOOK / ENQUIRY</a>
+    </nav>
+  </div>
   <section class="blog-hero">
     <div class="blog-hero-bg"></div>
     <div class="blog-hero-overlay"></div>
