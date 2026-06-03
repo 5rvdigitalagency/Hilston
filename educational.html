@@ -133,19 +133,50 @@
     }
     .gallery-arrow:hover { background: var(--teal); border-color: var(--teal); }
     .gallery-track {
-      display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+      display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
       scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
       scrollbar-width: none; padding-right: 80px;
     }
     .gallery-track::-webkit-scrollbar { display: none; }
-    .gallery-slide-item { flex: 0 0 400px; scroll-snap-align: start; position: relative; overflow: hidden; height: 280px; }
-    .gallery-slide-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-slide-item {
+      flex: 0 0 360px; scroll-snap-align: start; position: relative;
+      overflow: hidden; height: 380px; border-radius: 3px;
+      cursor: pointer;
+    }
+    .gallery-slide-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transform: scale(1); transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+    .gallery-slide-item:hover img { transform: scale(1.05); }
     .gallery-slide-item .slide-label {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
-      padding: 28px 20px 16px; color: white;
-      font-size: 0.76rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 50%, transparent 100%);
+      padding: 56px 22px 22px; color: white;
+      transition: padding 0.35s ease;
     }
+    .gallery-slide-item:hover .slide-label { padding-bottom: 26px; }
+    .slide-label-title {
+      display: block; font-family: var(--font-sans); font-size: 0.72rem;
+      font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 7px; line-height: 1.4;
+    }
+    .slide-label-sub {
+      display: block; font-family: var(--font-sans); font-size: 0.84rem;
+      font-weight: 400; letter-spacing: 0; text-transform: none;
+      line-height: 1.55; color: rgba(255,255,255,0.82);
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+    }
+    .gallery-slide-item:hover .slide-label-sub { max-height: 80px; opacity: 1; }
+    .slide-label-arrow {
+      display: inline-block; margin-top: 12px; font-size: 0.68rem;
+      font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--teal); opacity: 0; transform: translateY(6px);
+      transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s;
+    }
+    .gallery-slide-item:hover .slide-label-arrow { opacity: 1; transform: translateY(0); }
 
     /* ACCOMMODATION */
     .edu-accom { background: var(--white); padding: 88px 80px; }
@@ -449,23 +480,43 @@
     <div class="gallery-track" id="galleryTrack">
       <div class="gallery-slide-item">
         <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/69d34042042ff8a03195bc19_map.jpg" alt="KS2 Primary School Residential">
-        <div class="slide-label">KS2 (Ages 8&ndash;11) &mdash; Primary School Residential Trips<br><span style="font-weight:400;font-size:0.7rem;opacity:0.82;">Away from home for the first time. We make sure it feels like the right decision.</span></div>
+        <div class="slide-label">
+          <span class="slide-label-title">KS2 (Ages 8&ndash;11) &mdash; Primary School Residential</span>
+          <span class="slide-label-sub">Away from home for the first time. We make sure it feels like the right decision.</span>
+          <span class="slide-label-arrow">Find out more &rarr;</span>
+        </div>
       </div>
       <div class="gallery-slide-item">
         <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/69d3462298d5affcfd818931_rope-climibing.jpg" alt="KS3 Secondary Outdoor Learning">
-        <div class="slide-label">KS3 (Ages 11&ndash;14) &mdash; Secondary School Outdoor Learning<br><span style="font-weight:400;font-size:0.7rem;opacity:0.82;">The age where curiosity kicks in. We give them the space to explore it safely.</span></div>
+        <div class="slide-label">
+          <span class="slide-label-title">KS3 (Ages 11&ndash;14) &mdash; Secondary Outdoor Learning</span>
+          <span class="slide-label-sub">The age where curiosity kicks in. We give them the space to explore it safely.</span>
+          <span class="slide-label-arrow">Find out more &rarr;</span>
+        </div>
       </div>
       <div class="gallery-slide-item">
         <img src="images/adventure.jpg" alt="KS4 GCSE Age Group">
-        <div class="slide-label">KS4 (Ages 14&ndash;16) &mdash; GCSE Age Group<br><span style="font-weight:400;font-size:0.7rem;opacity:0.82;">Ready for more. These sessions give them the challenge to match it.</span></div>
+        <div class="slide-label">
+          <span class="slide-label-title">KS4 (Ages 14&ndash;16) &mdash; GCSE Age Group</span>
+          <span class="slide-label-sub">Ready for more. These sessions give them the challenge to match it.</span>
+          <span class="slide-label-arrow">Find out more &rarr;</span>
+        </div>
       </div>
       <div class="gallery-slide-item">
         <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/69d3420c18071ba084d96ba8_nature-bushcraft.jpg" alt="Post-16 College Groups">
-        <div class="slide-label">Post-16 &amp; College Groups<br><span style="font-weight:400;font-size:0.7rem;opacity:0.82;">Last year of education. These sessions prepare for what comes next.</span></div>
+        <div class="slide-label">
+          <span class="slide-label-title">Post-16 &amp; College Groups</span>
+          <span class="slide-label-sub">Last year of education. These sessions prepare for what comes next.</span>
+          <span class="slide-label-arrow">Find out more &rarr;</span>
+        </div>
       </div>
       <div class="gallery-slide-item">
         <img src="images/accommodation.jpg" alt="SEND Inclusion Groups">
-        <div class="slide-label">SEND &amp; Inclusion Groups<br><span style="font-weight:400;font-size:0.7rem;opacity:0.82;">Every student participates. Our staff adapt pace, group size and setting for every need.</span></div>
+        <div class="slide-label">
+          <span class="slide-label-title">SEND &amp; Inclusion Groups</span>
+          <span class="slide-label-sub">Every student participates. Our staff adapt pace, group size and setting for every need.</span>
+          <span class="slide-label-arrow">Find out more &rarr;</span>
+        </div>
       </div>
     </div>
   </section>
