@@ -143,14 +143,15 @@ body { overflow-x: clip; }
   display: inline-block;
   padding: 12px 30px;
   border: 2px solid var(--teal);
+  background: var(--teal);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: var(--text);
+  color: var(--white);
   text-transform: uppercase;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, border-color 0.2s;
 }
-.btn-book:hover { background: var(--teal); color: var(--white); }
+.btn-book:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
 
 .btn-hero {
   display: block;
@@ -377,15 +378,32 @@ body { overflow-x: clip; }
   display: inline-block;
   padding: 14px 40px;
   border: 2px solid var(--teal);
+  background: var(--teal);
   color: var(--white);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, border-color 0.2s;
   margin-top: 16px;
 }
-.mobile-nav-book:hover { background: var(--teal); }
+.mobile-nav-book:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+
+.mobile-nav-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.70);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.2s, transform 0.25s;
+  z-index: 2;
+}
+.mobile-nav-close:hover { color: var(--white); transform: rotate(90deg); }
 
 /* =====================================================
    STATS BAR
@@ -912,7 +930,7 @@ body { overflow-x: clip; }
   letter-spacing: 0.02em;
   color: var(--text);
   transition: color 0.2s ease;
-  white-space: nowrap;
+  white-space: normal;
 }
 .accordion-item.open .acc-question { color: var(--teal-dark); }
 
@@ -1019,6 +1037,22 @@ body { overflow-x: clip; }
   transition: color 0.2s;
 }
 .footer-col ul li a:hover { color: var(--white); }
+
+.footer-meta {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+.footer-copy,
+.footer-madeby {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+}
 
 .footer-bar { height: 10px; background: var(--teal); }
 
@@ -1280,7 +1314,9 @@ body { overflow-x: clip; }
   .stay-image img { height: 280px; }
   .stay-info { padding: 36px 30px; }
   .expertise-image img { height: 360px; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-meta { grid-column: 1 / -1; }
 
   /* service cards: show content without hover on touch */
   .svc-reveal {
@@ -1314,6 +1350,12 @@ body { overflow-x: clip; }
   .stats-inner { flex-wrap: wrap; gap: 24px 0; }
   .stat-item { min-width: 50%; }
   .stat-divider { display: none; }
+  /* Accordion — remove left dummy column, allow question text to wrap */
+  .accordion-btn {
+    grid-template-columns: 1fr 20px;
+  }
+  .acc-icon-l { display: none; }
+  .acc-question { font-size: 0.8rem; }
   .nav-list { flex-wrap: wrap; gap: 14px; }
   .nav-list a { font-size: 0.7rem; letter-spacing: 0.14em; }
   .logo-name { font-size: 1.3rem; }

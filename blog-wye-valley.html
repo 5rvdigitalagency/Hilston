@@ -44,6 +44,13 @@
     }
     .post-hero-breadcrumb a { color: rgba(255,255,255,0.55); }
     .post-hero-breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+    .post-back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.70); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+    .post-back-btn:hover { color: var(--white); }
     .post-hero-meta {
       display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
     }
@@ -286,6 +293,7 @@
     <div class="post-hero-bg" style="background-image:url(images/nature-bushcraft.jpg)"></div>
     <div class="post-hero-overlay"></div>
     <div class="post-hero-inner">
+      <a href="blogs.html" class="post-back-btn">&#8592; Back to Blog</a>
       <div class="post-hero-breadcrumb">
         <a href="index.html">Home</a>
         <span>&#8250;</span>

@@ -22,7 +22,7 @@
     }
     .accom-hero-inner {
       position: relative; z-index: 2; width: 100%; padding: 64px 80px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      display: grid; grid-template-columns: 1fr; gap: 0;
       align-items: flex-end; color: var(--white);
     }
     .accom-hero-inner h1 {
@@ -298,6 +298,7 @@
 
   <!-- ===== MOBILE NAV OVERLAY ===== -->
   <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
     <nav>
       <ul class="mobile-nav-list">
         <li><a href="index.html">Home</a></li>
@@ -322,10 +323,8 @@
     <div class="accom-hero-inner">
       <div>
         <h1>Countryside Stays for Families and Private Groups</h1>
-        <a href="#" class="btn-pill" data-booking-type="stay">BOOK / ENQUIRY</a>
-      </div>
-      <div class="accom-hero-right">
         <p class="accom-hero-sub">Spend quality time together in the peaceful surroundings of the Wye Valley. Hilston Park offers comfortable group accommodation in Wales for families, friends, and private gatherings.</p>
+        <a href="#" class="btn-pill" data-booking-type="stay">BOOK / ENQUIRY</a>
       </div>
     </div>
   </section>
