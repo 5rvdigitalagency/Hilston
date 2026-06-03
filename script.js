@@ -646,6 +646,12 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
+    /* Partial availability warning — shown when some (but not all) nights returned
+       a rate, suggesting one or more nights in the range may already be booked. */
+    if (anyRateKnown && !allRatesKnown) {
+      html += '<div class="bkm-sum-avail-warn">\u26A0\uFE0F One or more nights in this period show no available rate and may already be booked. Please confirm full availability on Q-Book before completing your booking, or choose different dates.</div>';
+    }
+
     /* --- Section 3: Optional meal extras --- */
     if (totalGuests > 0) {
       var bkCost = BREAKFAST_PP * totalGuests * nights;
@@ -761,6 +767,15 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchAllNightlyRates(inEl.value, outEl.value, function (nightRates) {
       proceedBtn.style.opacity = "";
       proceedBtn.style.pointerEvents = "";
+      /* If the rates widget returned no rate for any night, those dates are not
+         available — do not advance to Q-Book. Show the error on the config screen
+         so the user can pick different dates or enquire. */
+      if (nightRates.length > 0 && !nightRates.some(function (n) { return n.perNight !== null; })) {
+        showPhase("config");
+        errEl.textContent = "These dates don\u2019t appear to be available. Please choose different dates, or send us an enquiry.";
+        errEl.classList.add("visible");
+        return;
+      }
       showConfirm(nightRates);
     });
   });
