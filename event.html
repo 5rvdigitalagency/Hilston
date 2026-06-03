@@ -118,27 +118,17 @@
 
     /* WHAT IS INCLUDED */
     .eve-include { background: var(--white); padding: 88px 80px; }
-    .eve-include-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; }
-    .eve-include h2 { margin-bottom: 12px; }
-    .eve-include-sub { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 28px; }
-    .include-list { counter-reset: inc; list-style: none; padding: 0; margin: 0; }
-    .include-item {
-      counter-increment: inc; padding: 22px 0 22px 52px;
-      position: relative; border-top: 1px solid var(--border);
-    }
-    .include-item:last-of-type { border-bottom: 1px solid var(--border); }
-    .include-item::before {
-      content: "0" counter(inc); position: absolute; left: 0; top: 22px;
-      font-family: var(--font-script); font-size: 1.4rem; color: var(--teal); line-height: 1;
-    }
-    .include-item h3 {
-      font-family: var(--font-serif); font-weight: normal;
-      font-size: 1.08rem; color: var(--text); margin-bottom: 6px;
-    }
-    .include-item p { font-size: 0.86rem; line-height: 1.72; color: var(--text-muted); }
-    .include-cta { margin-top: 28px; }
-    .eve-include-images { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; position: sticky; top: 120px; align-self: start; }
-    .eve-include-images img { width: 100%; height: 218px; object-fit: cover; display: block; }
+    .eve-include-header { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+    .eve-include-header h2 { margin-bottom: 14px; }
+    .eve-include-sub { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); margin: 0; }
+    .eve-offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+    .eve-offer-card { background: var(--beige); overflow: hidden; }
+    .eve-offer-card img { width: 100%; height: 300px; object-fit: cover; display: block; }
+    .eve-offer-card-body { padding: 28px 32px 36px; }
+    .eve-offer-num { font-family: var(--font-script); font-size: 1.5rem; color: var(--teal); display: block; margin-bottom: 6px; line-height: 1; }
+    .eve-offer-card-body h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.22rem; color: var(--text); margin-bottom: 10px; }
+    .eve-offer-card-body p { font-size: 0.86rem; line-height: 1.75; color: var(--text-muted); margin: 0; }
+    .eve-include-cta { text-align: center; margin-top: 52px; }
 
     /* ACCOMMODATION */
     .eve-accom { background: var(--beige); padding: 88px 80px; }
@@ -227,7 +217,7 @@
       .eve-hero-inner { padding: 48px 40px; }
     }
     @media (max-width: 880px) {
-      .eve-hero-inner, .eve-intro-grid, .activities-grid, .eve-include-inner, .accom-block, .visit-us-grid, .faq-grid { grid-template-columns: 1fr; }
+      .eve-hero-inner, .eve-intro-grid, .activities-grid, .eve-offer-grid, .accom-block, .visit-us-grid, .faq-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 36px 0; }
       .stat-item:nth-child(2)::after, .stat-item:nth-child(4)::after { display: none; }
       .service-grid { grid-template-columns: 1fr 1fr; }
@@ -445,38 +435,51 @@
 
   <!-- WHAT IS INCLUDED -->
   <section class="eve-include">
-    <div class="eve-include-inner">
-      <div>
-        <h2 class="heading-display">What&#8217;s Included in Your Event Experience</h2>
-        <p class="eve-include-sub">Hilston Park gives groups access to meet, stay, eat, and take part in outdoor activities within one countryside venue. A highlight of our services:</p>
-        <ol class="include-list">
-          <li class="include-item">
-            <h3>Weddings &amp; Private Celebrations</h3>
-            <p>Hilston Park&#8217;s historic manor house, private estate grounds, and countryside setting make it an exceptional venue for weddings, anniversaries, milestone birthdays, and family reunions. The estate is yours for the occasion.</p>
-          </li>
-          <li class="include-item">
-            <h3>Catering &amp; Dining</h3>
-            <p>Every event includes freshly prepared meals served in Hilston Park&#8217;s heritage dining hall. We handle all dietary requirements in advance — vegetarian, vegan, and allergies — so your event runs without interruption.</p>
-          </li>
-          <li class="include-item">
-            <h3>Outdoor Activities &amp; Team Building</h3>
-            <p>Over 15 outdoor activities are available to all event groups. From nature walks and bushcraft sessions to high ropes and raft building, every visit includes full activity access at no extra cost.</p>
-          </li>
-          <li class="include-item">
-            <h3>Adventure Experiences</h3>
-            <p>For groups that want more, adventure programming adds high ropes, zip line challenges, and problem-solving initiatives to your event day. Suitable for corporate groups, school trips, and private parties alike.</p>
-          </li>
-        </ol>
-        <div class="include-cta">
-          <a href="#" class="btn-pill" data-inquire>GET A CUSTOM ITINERARY</a>
+    <div class="eve-include-header">
+      <h2 class="heading-display">What&#8217;s Included in Your Event Experience</h2>
+      <p class="eve-include-sub">Hilston Park brings together the setting, the food, the activities, and the accommodation. Every occasion is different &mdash; the estate adapts to yours.</p>
+    </div>
+    <div class="eve-offer-grid">
+
+      <div class="eve-offer-card">
+        <img src="images/event-manor.jpg" alt="Wedding ceremony at Hilston Park estate">
+        <div class="eve-offer-card-body">
+          <span class="eve-offer-num">01</span>
+          <h3>Weddings &amp; Private Celebrations</h3>
+          <p>Hilston Park&#8217;s historic manor house, private estate grounds, and countryside setting make it an exceptional venue for weddings, anniversaries, milestone birthdays, and family reunions. The estate is yours for the occasion.</p>
         </div>
       </div>
-      <div class="eve-include-images">
-        <img src="images/event-incl-banner.jpg" alt="Outdoor activities at Hilston Park">
-        <img src="images/event-incl-food.jpg" alt="On-site catering at Hilston Park">
-        <img src="images/event-incl-nature.jpg" alt="Nature and bushcraft at Hilston Park">
-        <img src="images/event-incl-adventure.jpg" alt="Adventure at Hilston Park">
+
+      <div class="eve-offer-card">
+        <img src="images/event-incl-food.jpg" alt="Freshly prepared catering at Hilston Park">
+        <div class="eve-offer-card-body">
+          <span class="eve-offer-num">02</span>
+          <h3>Catering &amp; Dining</h3>
+          <p>Every event includes freshly prepared meals served in Hilston Park&#8217;s heritage dining hall. We handle all dietary requirements in advance &mdash; vegetarian, vegan, and allergies &mdash; so your event runs without interruption.</p>
+        </div>
       </div>
+
+      <div class="eve-offer-card">
+        <img src="images/event-incl-nature.jpg" alt="Outdoor activities and team building at Hilston Park">
+        <div class="eve-offer-card-body">
+          <span class="eve-offer-num">03</span>
+          <h3>Outdoor Activities &amp; Team Building</h3>
+          <p>Over 15 outdoor activities are available to all event groups. From nature walks and bushcraft sessions to high ropes and raft building, every visit includes full activity access at no extra cost.</p>
+        </div>
+      </div>
+
+      <div class="eve-offer-card">
+        <img src="images/event-incl-adventure.jpg" alt="Adventure experiences at Hilston Park">
+        <div class="eve-offer-card-body">
+          <span class="eve-offer-num">04</span>
+          <h3>Adventure Experiences</h3>
+          <p>For groups that want more, adventure programming adds high ropes, zip line challenges, and problem-solving initiatives to your event day. Suitable for corporate groups, school trips, and private parties alike.</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="eve-include-cta">
+      <a href="contact.html" class="btn-pill">GET A CUSTOM ITINERARY</a>
     </div>
   </section>
 
