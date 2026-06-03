@@ -155,29 +155,11 @@ document.addEventListener("DOMContentLoaded", function () {
      Property: Hilston Park  |  QBook ID: 51665
      ========================================================= */
   var QBOOK_BASE = "https://web-bookings.hotels.uk.com/#/booking/51665/items/availability";
-  /* k= is the property-level auth token Q-Book embeds in all its widget links — required for the SPA to load */
-  var QBOOK_K    = "JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D";
   /* All Item Availability widget — full inventory grid with live prices for all room types */
   var QBOOK_RATES_SRC = "https://widgets.hotels.uk.com/display-rates/51665/eff381e2425e310943f59d71f160fa71";
   var QBOOK_RATES_ID  = "QBOOKWIDGET_RATES_ALLITEMS_202788cc19e79e9d082d25e00f1693f4";
-  /* Server-rendered rates widget — CORS-open, server-side rendered HTML with live per-night pricing */
-  var SC_RATES_URL = "https://cdn.hotels.uk.com/sc/51665/eff381e2425e310943f59d71f160fa71/0/4";
   /* Inquiry endpoint — Formsubmit relays form data to this email; first submission triggers a confirmation email to activate */
   var INQUIRY_ENDPOINT = "https://formsubmit.co/ajax/info@hilstonpark.com";
-
-  /* Room definitions — sourced from Q-Book api/pull and accommodation page.
-     maxAdults/maxChildren reflect Q-Book item occupancy settings.
-     qItemIDs used to pre-filter the Q-Book deep-link URL. */
-  /* maxGuests = total guests (adults + children) per Q-Book admin occupancy */
-  var ROOM_DEFS = {
-    'any':                { label: 'All rooms',                    maxGuests: 0, qItemIDs: [] },
-    'cosy-king':          { label: 'Cosy King Room',               maxGuests: 4, qItemIDs: [83040, 83269] },
-    'double-garden':      { label: 'Double Garden View',           maxGuests: 2, qItemIDs: [82356] },
-    'large-double-garden':{ label: 'Large Double Garden View',     maxGuests: 6, qItemIDs: [82357, 82965] },
-    'family-room':        { label: 'Family Room',                  maxGuests: 5, qItemIDs: [83057] },
-    'dormitory':          { label: 'Dormitory / Group Bunk Rooms', maxGuests: 0, qItemIDs: [] },
-    'exclusive-use':      { label: 'Exclusive Use of House',       maxGuests: 9, qItemIDs: [] }
-  };
 
   /* -- service definitions -- */
   var BKM_SERVICES = {
@@ -279,7 +261,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<option value="exclusive-use">Exclusive Use of House</option>',
               '</select>',
             '</div>',
-            '<p class="bkm-capacity-hint" id="bkm-capacity-hint"></p>',
             '<p class="bkm-error" id="bkm-error">Please select a valid arrival and departure date.</p>',
             '<button class="bkm-btn" id="bkm-submit">Apply</button>',
             '<p class="bkm-note" id="bkm-config-note">Secure booking powered by QBook.</p>',
@@ -421,9 +402,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var switchCfg    = document.getElementById("bkm-switch-config");
   var switchInq    = document.getElementById("bkm-switch-inquire");
   var switchConf   = document.getElementById("bkm-switch-confirm");
-  var proceedBtn     = document.getElementById("bkm-proceed-btn");
-  var summaryEl      = document.getElementById("bkm-summary");
-  var capacityHintEl = document.getElementById("bkm-capacity-hint");
+  var proceedBtn   = document.getElementById("bkm-proceed-btn");
+  var summaryEl    = document.getElementById("bkm-summary");
 
   var currentService = null;
 
@@ -491,187 +471,37 @@ document.addEventListener("DOMContentLoaded", function () {
     return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
   }
 
-  /* Fetch the live nightly rate for every night of the stay from Q-Book's CDN widget.
-     Fetches at most one HTTP request per calendar month spanned.
-     Calls back with an array of { date, perNight, minNights } — perNight is null if unavailable. */
-  function fetchAllNightlyRates(ci, co, callback) {
-    var ciDate = new Date(ci + "T12:00:00");
-    var nights  = Math.round((new Date(co + "T12:00:00") - ciDate) / 86400000);
-    if (nights < 1) { callback([]); return; }
-
-    /* Build YYYY-MM-DD string for each night (check-in night through night before check-out) */
-    var nightDates = [];
-    for (var i = 0; i < nights; i++) {
-      var d = new Date(ciDate.getTime());
-      d.setDate(d.getDate() + i);
-      nightDates.push(d.toISOString().slice(0, 10));
-    }
-
-    /* Identify unique YYYY-MM-01 month keys */
-    var monthHtml = {};
-    nightDates.forEach(function (ds) {
-      var mk = ds.slice(0, 8) + "01";
-      monthHtml[mk] = null;
-    });
-    var monthKeys = Object.keys(monthHtml);
-    var remaining = monthKeys.length;
-
-    function resolveRates() {
-      var rates = nightDates.map(function (ds) {
-        var nd  = new Date(ds + "T12:00:00");
-        var day = ("0" + nd.getDate()).slice(-2);
-        var mon = nd.toLocaleDateString("en-GB", { month: "short" });
-        var mk  = ds.slice(0, 8) + "01";
-        var html = monthHtml[mk] || "";
-        var re  = new RegExp(
-          'data-nights="(\\d+)"[\\s\\S]{0,300}?<span class="date">'
-          + day + "\\s" + mon + "[^<]*<\\/span>[\\s\\S]{0,500}?\\xA3([\\d.]+)"
-        );
-        var m = re.exec(html);
-        return m
-          ? { date: ds, perNight: parseFloat(m[2]), minNights: parseInt(m[1], 10) }
-          : { date: ds, perNight: null, minNights: 1 };
-      });
-      callback(rates);
-    }
-
-    monthKeys.forEach(function (mk) {
-      fetch(SC_RATES_URL + "?start=" + mk)
-        .then(function (r) { return r.text(); })
-        .then(function (html) {
-          monthHtml[mk] = html;
-          remaining--;
-          if (remaining === 0) { resolveRates(); }
-        })
-        .catch(function () {
-          monthHtml[mk] = "";
-          remaining--;
-          if (remaining === 0) { resolveRates(); }
-        });
-    });
-  }
-
-  function showConfirm(nightRates) {
+  function showConfirm() {
     var ci = inEl.value;   /* YYYY-MM-DD */
     var co = outEl.value;
-    var adults  = adultsEl   ? (parseInt(adultsEl.value,   10) || 0) : 0;
-    var kids    = childrenEl ? (parseInt(childrenEl.value, 10) || 0) : 0;
-    var accType = accTypeEl  ? accTypeEl.options[accTypeEl.selectedIndex].text : "";
-    var nights  = Math.round((new Date(co) - new Date(ci)) / 86400000);
-    var totalGuests = adults + kids;
+    var adults   = adultsEl   ? (parseInt(adultsEl.value,   10) || 0) : 0;
+    var kids     = childrenEl ? (parseInt(childrenEl.value, 10) || 0) : 0;
+    var accType  = accTypeEl  ? accTypeEl.options[accTypeEl.selectedIndex].text : "";
+    var nights   = Math.round((new Date(co) - new Date(ci)) / 86400000);
 
-    /* Confirmed property constants from Q-Book admin (per person per night) */
-    var BREAKFAST_PP = 11;
-    var DINNER_PP    = 18;
+    /* Build summary rows */
+    var rows = [
+      ["Check-in",  fmt(ci)],
+      ["Check-out", fmt(co)],
+      ["Duration",  nights + (nights === 1 ? " night" : " nights")],
+      ["Adults",    adults],
+      ["Children",  kids]
+    ];
+    if (accType && accTypeEl.value !== "any") { rows.push(["Preference", accType]); }
 
-    /* Rate analysis */
-    var allRatesKnown = (nightRates.length === nights) &&
-                        nightRates.every(function (n) { return n.perNight !== null; });
-    var anyRateKnown  = nightRates.some(function (n) { return n.perNight !== null; });
-    var roomTotal = anyRateKnown
-      ? nightRates.reduce(function (s, n) { return s + (n.perNight || 0); }, 0)
-      : null;
-    var lowestRate = anyRateKnown
-      ? nightRates.reduce(function (lo, n) {
-          return (n.perNight !== null && (lo === null || n.perNight < lo)) ? n.perNight : lo;
-        }, null)
-      : null;
-    var minNights = (nightRates.length > 0) ? nightRates[0].minNights : 1;
+    summaryEl.innerHTML = rows.map(function (r) {
+      return '<div class="bkm-sum-row"><span class="bkm-sum-label">' + r[0] + '</span><span class="bkm-sum-value">' + r[1] + '</span></div>';
+    }).join("");
 
-    /* Room definition for selected type */
-    var roomKey = accTypeEl ? accTypeEl.value : 'any';
-    var roomDef = ROOM_DEFS[roomKey] || ROOM_DEFS['any'];
-    var overCapacity = roomDef.maxGuests > 0 && (adults + kids) > roomDef.maxGuests;
-
-    var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-    /* Helper to build a summary row */
-    var row = function (lbl, val, extra) {
-      var cls = "bkm-sum-row" + (extra ? " " + extra : "");
-      return '<div class="' + cls + '"><span class="bkm-sum-label">' + lbl +
-             '</span><span class="bkm-sum-value">' + val + '</span></div>';
-    };
-
-    var html = "";
-
-    /* --- Section 1: Trip details --- */
-    html += '<div class="bkm-sum-section">Trip details</div>';
-    html += row("Check-in",  fmt(ci));
-    html += row("Check-out", fmt(co));
-    html += row("Duration",  nights + (nights === 1 ? " night" : " nights"));
-    if (minNights > 1) { html += row("Min. stay", minNights + " nights"); }
-    html += row("Adults", adults);
-    if (kids > 0) { html += row("Children", kids); }
-
-    /* Room preference + capacity */
-    if (roomKey !== 'any') {
-      var capStr = roomDef.maxGuests > 0
-        ? ' \u2014 max ' + roomDef.maxGuests + (roomDef.maxGuests === 1 ? ' guest' : ' guests')
-        : '';
-      html += row("Room type", roomDef.label + capStr);
-      if (overCapacity) {
-        html += '<div class="bkm-sum-capwarn">\u26A0\uFE0F ' + (adults + kids) + ' guests exceeds this room\u2019s capacity (max ' +
-                roomDef.maxGuests + '). Please adjust or choose a different room on Q-Book.</div>';
-      }
-    }
-
-    /* --- Section 2: Room rate --- */
-    if (anyRateKnown) {
-      html += '<div class="bkm-sum-section">Room rate</div>';
-      if (nights <= 7) {
-        nightRates.forEach(function (n, idx) {
-          var nd  = new Date(n.date + "T12:00:00");
-          var lbl = "Night " + (idx + 1) + " \u2014 " + DAYS[nd.getDay()] + " " + nd.getDate();
-          var val = n.perNight !== null ? "\xA3" + n.perNight.toFixed(2) : "On request";
-          html   += row(lbl, val, n.perNight === null ? "bkm-sum-row--muted" : "");
-        });
-      } else {
-        html += row("Per night (from)", "\xA3" + lowestRate.toFixed(2));
-      }
-      html += row(
-        allRatesKnown ? "Room total" : "Room total (partial)",
-        allRatesKnown ? "\xA3" + roomTotal.toFixed(2) : "\xA3" + roomTotal.toFixed(2) + "+ (est.)",
-        "bkm-sum-row--subtotal"
-      );
-    }
-
-    /* --- Section 3: Optional meal extras --- */
-    if (totalGuests > 0) {
-      var bkCost = BREAKFAST_PP * totalGuests * nights;
-      var dnCost = DINNER_PP    * totalGuests * nights;
-      html += '<div class="bkm-sum-section">Optional meal extras</div>';
-      html += row(
-        "Breakfast \u2014 \xA3" + BREAKFAST_PP + "/person/night",
-        "\xA3" + bkCost.toFixed(2) + " (" + totalGuests + (totalGuests === 1 ? " guest" : " guests") + ")",
-        "bkm-sum-row--meal"
-      );
-      html += row(
-        "Dinner & Lunch \u2014 \xA3" + DINNER_PP + "/person/night",
-        "\xA3" + dnCost.toFixed(2) + " (" + totalGuests + (totalGuests === 1 ? " guest" : " guests") + ")",
-        "bkm-sum-row--meal"
-      );
-      if (allRatesKnown) {
-        html += row(
-          "Total with all meals",
-          "\xA3" + (roomTotal + bkCost + dnCost).toFixed(2) + " (est.)",
-          "bkm-sum-row--total"
-        );
-      }
-      html += '<div class="bkm-sum-footnote">Meal extras are optional \u2014 add or remove when completing your booking on Q-Book.</div>';
-    }
-
-    summaryEl.innerHTML = html;
-
-    /* Build Q-Book deep-link URL.
-       If a specific room type is selected and it has Q-Book item IDs, pass the first as &i=
-       so Q-Book can pre-filter the availability list to the relevant room. */
-    var qUrl = QBOOK_BASE + "?from=" + ci + "&to=" + co + "&k=" + QBOOK_K;
-    if (adults > 0) { qUrl += "&a=" + adults; }
-    if (kids > 0)   { qUrl += "&c=" + kids; }
-    if (roomDef.qItemIDs && roomDef.qItemIDs.length > 0) {
-      qUrl += "&i=" + roomDef.qItemIDs[0];
-    }
-    proceedBtn.href = qUrl;
+    /* Build Q-Book deep-link URL */
+    var ciQ = ci.split("-").reverse().join("-");  /* DD-MM-YYYY */
+    var coQ = co.split("-").reverse().join("-");
+    var url = QBOOK_BASE +
+      "?arrival=" + encodeURIComponent(ciQ) +
+      "&departure=" + encodeURIComponent(coQ);
+    if (adults > 0)  { url += "&adults="   + adults; }
+    if (kids > 0)    { url += "&children=" + kids; }
+    proceedBtn.href = url;
 
     setBrand("stay");
     showPhase("confirm");
@@ -688,40 +518,6 @@ document.addEventListener("DOMContentLoaded", function () {
   switchCfg.addEventListener("click", function () { showPhase("picker"); });
   switchInq.addEventListener("click", function () { showPhase("picker"); });
   switchConf.addEventListener("click", function () { showPhase("config"); });
-
-  /* -- update capacity hint when accommodation type changes -- */
-  function updateCapacityHint() {
-    if (!capacityHintEl || !accTypeEl) return;
-    var key = accTypeEl.value;
-    var def = ROOM_DEFS[key];
-    if (!def || key === 'any') {
-      capacityHintEl.textContent = '';
-      capacityHintEl.className = 'bkm-capacity-hint';
-      return;
-    }
-    if (key === 'dormitory') {
-      capacityHintEl.textContent = 'For group sizes and availability, use Enquire about or contact us directly.';
-      capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--info';
-      return;
-    }
-    var adults = parseInt(adultsEl.value, 10)  || 0;
-    var kids   = parseInt(childrenEl.value, 10) || 0;
-    var total  = adults + kids;
-    var cap    = 'up to ' + def.maxGuests + (def.maxGuests === 1 ? ' guest' : ' guests');
-    if (def.maxGuests > 0 && total > def.maxGuests) {
-      capacityHintEl.textContent = '\u26A0\uFE0F Over capacity \u2014 this room holds ' + cap + '. Reduce guests or choose a different room.';
-      capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--warn';
-    } else if (def.maxGuests > 0) {
-      capacityHintEl.textContent = 'Capacity: ' + cap + '.';
-      capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--ok';
-    } else {
-      capacityHintEl.textContent = 'Enquire for availability and pricing.';
-      capacityHintEl.className = 'bkm-capacity-hint bkm-capacity-hint--info';
-    }
-  }
-  accTypeEl.addEventListener('change', updateCapacityHint);
-  adultsEl.addEventListener('input',   updateCapacityHint);
-  childrenEl.addEventListener('input',  updateCapacityHint);
 
   /* -- ensure checkout >= checkin + 1 day -- */
   inEl.addEventListener("change", function () {
@@ -741,17 +537,7 @@ document.addEventListener("DOMContentLoaded", function () {
       errEl.classList.add("visible");
       return;
     }
-    /* Show confirm phase immediately with a loading placeholder, then populate rates */
-    setBrand("stay");
-    showPhase("confirm");
-    summaryEl.innerHTML = '<div class="bkm-sum-loading">Fetching live rates\u2026</div>';
-    proceedBtn.style.opacity = "0.4";
-    proceedBtn.style.pointerEvents = "none";
-    fetchAllNightlyRates(inEl.value, outEl.value, function (nightRates) {
-      proceedBtn.style.opacity = "";
-      proceedBtn.style.pointerEvents = "";
-      showConfirm(nightRates);
-    });
+    showConfirm();
   });
 
   /* -- inquiry submit: POST to Formsubmit (no signup, sends to info@hilstonpark.com) -- */
@@ -919,39 +705,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (strip) strip.style.display = "none";
       });
   }
-
-  /* =========================================================
-     ACCOMMODATION ROOM GALLERIES — fade between slides
-     ========================================================= */
-  document.querySelectorAll("[data-accom-gallery]").forEach(function(gallery) {
-    var slides = gallery.querySelectorAll(".accom-gallery-slide");
-    if (slides.length <= 1) return;
-    var dotsContainer = gallery.querySelector(".accom-gal-dots");
-    var current = 0;
-
-    slides.forEach(function(_, i) {
-      var dot = document.createElement("button");
-      dot.className = "accom-gal-dot" + (i === 0 ? " active" : "");
-      dot.setAttribute("aria-label", "Go to image " + (i + 1));
-      (function(idx) {
-        dot.addEventListener("click", function() { goTo(idx); });
-      })(i);
-      dotsContainer.appendChild(dot);
-    });
-
-    function goTo(idx) {
-      slides[current].classList.remove("active");
-      dotsContainer.children[current].classList.remove("active");
-      current = (idx + slides.length) % slides.length;
-      slides[current].classList.add("active");
-      dotsContainer.children[current].classList.add("active");
-    }
-
-    var prevBtn = gallery.querySelector(".accom-gal-btn.prev");
-    var nextBtn = gallery.querySelector(".accom-gal-btn.next");
-    if (prevBtn) prevBtn.addEventListener("click", function() { goTo(current - 1); });
-    if (nextBtn) nextBtn.addEventListener("click", function() { goTo(current + 1); });
-  });
 
   /* =========================================================
      AGE GROUP GALLERY — arrow navigation

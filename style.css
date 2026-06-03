@@ -897,7 +897,7 @@ body { overflow-x: clip; }
   width: 100%;
   background: transparent;
   border: 0;
-  padding: 14px 20px;
+  padding: 9px 20px;
   display: grid;
   grid-template-columns: 20px 1fr 20px;
   align-items: center;
@@ -1158,12 +1158,22 @@ body { overflow-x: clip; }
 .insta-set {
   display: flex;
   gap: 6px;
-  margin-right: 6px; /* matches gap so seam is invisible */
+  padding-right: 6px; /* keeps spacing between the two halves uniform */
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.insta-set a {
+  display: block;
+  flex: 0 0 340px;
+  width: 340px;
+  height: 340px;
 }
 
 .insta-set img {
   width: 340px;
   height: 340px;
+  max-width: none;
   object-fit: cover;
   object-position: center;
   flex-shrink: 0;
@@ -1174,8 +1184,8 @@ body { overflow-x: clip; }
 .insta-track:hover .insta-set img { filter: brightness(1); }
 
 @keyframes insta-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(var(--scroll-dist, -5536px)); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1242,11 +1252,8 @@ body { overflow-x: clip; }
 
   /* Instagram */
   .insta-header { flex-direction: column; align-items: flex-start; padding: 0 40px 36px; gap: 20px; }
+  .insta-set a { flex: 0 0 260px; width: 260px; height: 260px; }
   .insta-set img { width: 260px; height: 260px; }
-  @keyframes insta-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(var(--scroll-dist, -4256px)); } /* 16 × (260 + 6) */
-  }
 }
 @media (max-width: 560px) {
   .site-header,
@@ -1268,11 +1275,8 @@ body { overflow-x: clip; }
   /* Instagram */
   .insta-strip { padding-top: 56px; }
   .insta-header { padding: 0 20px 30px; }
+  .insta-set a { flex: 0 0 200px; width: 200px; height: 200px; }
   .insta-set img { width: 200px; height: 200px; }
-  @keyframes insta-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(var(--scroll-dist, -3296px)); } /* 16 × (200 + 6) */
-  }
 }
 
 /* =====================================================
