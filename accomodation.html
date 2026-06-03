@@ -78,7 +78,19 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 64px;
     }
     .accom-block:last-of-type { margin-bottom: 0; }
-    .accom-block img { width: 100%; height: 420px; object-fit: cover; display: block; }
+    .accom-divider {
+      display: flex; align-items: center; gap: 22px;
+      margin: 0 0 64px;
+    }
+    .accom-divider::before,
+    .accom-divider::after {
+      content: ""; flex: 1; height: 1px; background: var(--border);
+    }
+    .accom-divider-gem {
+      width: 8px; height: 8px; background: var(--teal);
+      transform: rotate(45deg); flex-shrink: 0;
+    }
+    .accom-block-img > img { width: 100%; height: 420px; object-fit: cover; display: block; }
     .accom-block-content h3 {
       font-family: var(--font-serif); font-weight: normal;
       font-size: 1.5rem; color: var(--text); margin-bottom: 14px;
@@ -87,31 +99,39 @@
     .accom-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
     .accom-list li { padding-left: 18px; position: relative; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
     .accom-list li::before { content: "\2014"; position: absolute; left: 0; color: var(--teal); }
-    .accom-block-note { font-size: 0.82rem; font-style: normal; color: var(--text-muted); border-left: 2px solid var(--teal); padding-left: 14px; line-height: 1.75; }
+    .accom-block-note { font-size: 0.82rem; font-style: normal; color: var(--text-muted); border-left: 2px solid var(--teal); padding-left: 14px; line-height: 1.75; margin-bottom: 20px; }
+    .accom-occupancy { display: flex; align-items: center; gap: 20px; padding-top: 18px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .accom-occ-chip { display: flex; align-items: center; gap: 7px; }
+    .accom-occ-chip svg { width: 16px; height: 16px; stroke: var(--teal); fill: none; stroke-width: 1.6; flex-shrink: 0; }
+    .accom-occ-chip span { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--text); }
+    .accom-occ-chip span em { font-style: normal; color: var(--text-muted); font-weight: 400; }
     .accom-options-intro .section-eyebrow { display: none; }
     .accom-block-num {
       display: block; font-family: var(--font-sans); font-size: 0.72rem; font-weight: 700;
       letter-spacing: 0.2em; color: var(--teal); margin-bottom: 8px;
     }
-    .accom-block.reverse img { order: 2; }
+    .accom-block.reverse .accom-block-img { order: 2; }
     .accom-block.reverse .accom-block-content { order: 1; }
     .accom-options-cta { text-align: center; margin-top: 56px; }
 
-    /* ROOM TYPES */
-    .room-types { margin-top: 88px; padding-top: 72px; border-top: 1px solid var(--border); }
-    .room-types-head { text-align: center; margin-bottom: 48px; }
-    .room-types-head h3 { font-family: var(--font-serif); font-weight: normal; font-size: clamp(1.6rem, 2.4vw, 2.1rem); color: var(--text); margin-bottom: 14px; }
-    .room-types-head p { font-size: 0.92rem; line-height: 1.78; color: var(--text-muted); max-width: 60ch; margin: 0 auto; }
-    .room-types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .room-card { background: var(--beige); padding: 28px 26px; display: flex; flex-direction: column; gap: 10px; border-top: 3px solid var(--teal); transition: transform 0.25s, box-shadow 0.25s; }
-    .room-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); }
-    .room-card-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
-    .room-card h4 { font-family: var(--font-serif); font-weight: normal; font-size: 1.18rem; color: var(--text); line-height: 1.25; }
-    .room-card p { font-size: 0.86rem; line-height: 1.72; color: var(--text-muted); }
-    .room-card.featured { background: var(--dark); border-top-color: var(--teal); }
-    .room-card.featured h4, .room-card.featured .room-card-eyebrow { color: var(--white); }
-    .room-card.featured .room-card-eyebrow { color: var(--teal); }
-    .room-card.featured p { color: rgba(255,255,255,0.78); }
+    /* ROOM GALLERY */
+    .accom-gallery { position: relative; width: 100%; height: 420px; overflow: hidden; }
+    .accom-gallery-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.5s ease; }
+    .accom-gallery-slide.active { opacity: 1; z-index: 1; }
+    .accom-gal-btn {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+      background: rgba(255,255,255,0.88); border: none; cursor: pointer;
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: var(--text); line-height: 1; padding: 0;
+      transition: background 0.2s, opacity 0.2s; opacity: 0.85;
+    }
+    .accom-gal-btn:hover { background: white; opacity: 1; }
+    .accom-gal-btn.prev { left: 12px; }
+    .accom-gal-btn.next { right: 12px; }
+    .accom-gal-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 6px; }
+    .accom-gal-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.5); border: none; cursor: pointer; padding: 0; transition: background 0.25s, width 0.25s, border-radius 0.25s; }
+    .accom-gal-dot.active { background: white; width: 20px; border-radius: 4px; }
 
     /* ACTIVITIES */
     .activities { background: var(--beige); padding: 88px 80px; display: flex; flex-direction: column; align-items: center; }
@@ -232,9 +252,8 @@
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 36px 0; }
       .stat-item:nth-child(2)::after, .stat-item:nth-child(4)::after { display: none; }
       .booking-grid { grid-template-columns: 1fr; }
-      .accom-block.reverse img { order: 0; }
+      .accom-block.reverse .accom-block-img { order: 0; }
       .accom-block.reverse .accom-block-content { order: 0; }
-      .room-types-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -350,105 +369,233 @@
   <!-- ACCOMMODATION OPTIONS -->
   <section class="accom-options">
     <div class="accom-options-intro">
-      <p class="section-eyebrow">Estate Accommodation</p>
+      <p class="section-eyebrow">Your Room at Hilston Park</p>
       <h2 class="heading-display">Where You&#8217;ll Stay</h2>
-      <p>Three distinct spaces across the Hilston Park estate &#8212; each offering a different character for families, private groups, and holiday stays in Wales.</p>
+      <p>Six room options across the Manor House &#8212; from cosy king rooms for couples to full exclusive use of the house for private groups and celebrations.</p>
     </div>
 
-    <!-- Manor House -->
+    <!-- 01 Cosy King Room -->
     <div class="accom-block">
       <div class="accom-block-img">
-        <img src="images/manor-house.jpg" alt="Manor House at Hilston Park" loading="lazy">
+        <div class="accom-gallery" data-accom-gallery>
+          <img src="images/accommodation.jpg" alt="Cosy King Room at Hilston Park" class="accom-gallery-slide active" loading="lazy">
+          <img src="images/ios-photo.jpg" alt="Cosy King Room interior" class="accom-gallery-slide" loading="lazy">
+          <img src="images/manor-house.jpg" alt="Manor House exterior" class="accom-gallery-slide" loading="lazy">
+          <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
+          <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
+          <div class="accom-gal-dots" aria-hidden="true"></div>
+        </div>
       </div>
       <div class="accom-block-content">
-        <span class="accom-block-num">01</span>
-        <h3>Manor House</h3>
-        <p>The principal residence of the estate, built for communal gathering. The Manor House is the heart of the Hilston Park experience for large groups.</p>
+        <span class="accom-block-num">01 &nbsp;&#8212;&nbsp; For Two</span>
+        <h3>Cosy King Room</h3>
+        <p>A comfortable king-bedded room tucked within the Manor House. Ideal for couples looking for a quiet, restorative stay in the Welsh countryside.</p>
         <ul class="accom-list">
-          <li>Large capacity across multiple rooms</li>
-          <li>Shared living and dining spaces</li>
-          <li>Suitable for organised residential stays</li>
-          <li>Often used for multi-family and extended group breaks</li>
+          <li>King-size bed with quality linen</li>
+          <li>En-suite or private bathroom</li>
+          <li>Views across the estate grounds</li>
+          <li>Breakfast included on selected packages</li>
         </ul>
-        <p class="accom-block-note">Best suited for guests who want a shared, communal experience on the estate.</p>
+        <p class="accom-block-note">Perfect for couples wanting a peaceful break away from everyday routine.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>Max. 4 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v13"/><path d="M21 7v13"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="6" rx="1"/></svg>
+            <span>King bed <em>&middot; en-suite</em></span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Courtyard Rooms -->
+    <div class="accom-divider"><span class="accom-divider-gem"></span></div>
+
+    <!-- 02 Double Garden View -->
     <div class="accom-block reverse">
       <div class="accom-block-img">
-        <img src="images/courtyard-room.jpg" alt="Courtyard Rooms at Hilston Park" loading="lazy">
+        <div class="accom-gallery" data-accom-gallery>
+          <img src="images/courtyard-room.jpg" alt="Double Garden View room" class="accom-gallery-slide active" loading="lazy">
+          <img src="images/ios-photo2.jpg" alt="Garden view from the room" class="accom-gallery-slide" loading="lazy">
+          <img src="images/accommodation.jpg" alt="Room interior" class="accom-gallery-slide" loading="lazy">
+          <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
+          <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
+          <div class="accom-gal-dots" aria-hidden="true"></div>
+        </div>
       </div>
       <div class="accom-block-content">
-        <span class="accom-block-num">02</span>
-        <h3>Courtyard Rooms</h3>
-        <p>A more private and considered accommodation option, set within the working courtyard of the estate.</p>
+        <span class="accom-block-num">02 &nbsp;&#8212;&nbsp; For Two</span>
+        <h3>Double Garden View</h3>
+        <p>A bright double room overlooking the gardens and grounds. A peaceful base for short breaks, weekend stays, and mid-week escapes.</p>
         <ul class="accom-list">
-          <li>Private rooms for smaller groups</li>
-          <li>Ideal for short breaks and weekend stays</li>
-          <li>Suitable for families or couples</li>
-          <li>Direct access to estate grounds and activities</li>
+          <li>Double bed with garden outlook</li>
+          <li>Natural light throughout the day</li>
+          <li>Quiet position within the house</li>
+          <li>Access to all shared estate spaces</li>
         </ul>
-        <p class="accom-block-note">Perfect for guests who prefer a relaxed and more private setting.</p>
+        <p class="accom-block-note">A favourite for guests who want calm and green views on their doorstep.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>Max. 2 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v13"/><path d="M21 7v13"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="6" rx="1"/></svg>
+            <span>Double bed <em>&middot; en-suite</em></span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Gatehouse -->
+    <div class="accom-divider"><span class="accom-divider-gem"></span></div>
+
+    <!-- 03 Large Double Garden View -->
     <div class="accom-block">
       <div class="accom-block-img">
-        <img src="images/gatehouse.webp" alt="Gatehouse at Hilston Park" loading="lazy">
+        <div class="accom-gallery" data-accom-gallery>
+          <img src="images/ios-photo.jpg" alt="Large Double Garden View room" class="accom-gallery-slide active" loading="lazy">
+          <img src="images/ios-photo2.jpg" alt="Large Double room interior" class="accom-gallery-slide" loading="lazy">
+          <img src="images/courtyard-room.jpg" alt="Estate grounds view" class="accom-gallery-slide" loading="lazy">
+          <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
+          <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
+          <div class="accom-gal-dots" aria-hidden="true"></div>
+        </div>
       </div>
       <div class="accom-block-content">
-        <span class="accom-block-num">03</span>
-        <h3>The Gatehouse</h3>
-        <p>A self-contained private residence at the entrance to the estate. The Gatehouse offers house-style living within the grounds.</p>
+        <span class="accom-block-num">03 &nbsp;&#8212;&nbsp; For Two</span>
+        <h3>Large Double Garden View</h3>
+        <p>A more spacious take on the garden double, with extra room to settle in and relax after a day on the estate grounds.</p>
         <ul class="accom-list">
-          <li>Private house-style accommodation</li>
-          <li>Multiple bedrooms for family or group use</li>
-          <li>Separate living and bathroom facilities</li>
-          <li>Suitable for family holidays and private stays</li>
+          <li>Larger double room with garden aspect</li>
+          <li>Comfortable seating and generous storage</li>
+          <li>Room to unwind after outdoor activities</li>
+          <li>Ideal for longer stays</li>
         </ul>
-        <p class="accom-block-note">Ideal for guests who want their own space within the Hilston Park estate.</p>
+        <p class="accom-block-note">More space, same peaceful outlook &#8212; a step up for guests who like room to breathe.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>Max. 6 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v13"/><path d="M21 7v13"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="6" rx="1"/></svg>
+            <span>Large double <em>&middot; en-suite</em></span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Room Types within the Manor House -->
-    <div class="room-types">
-      <div class="room-types-head">
-        <p class="section-eyebrow">Manor House Rooms</p>
-        <h3>Room Options within the Manor House</h3>
-        <p>Choose from a range of room types to suit couples, families, and larger groups &#8212; from cosy private rooms to dormitory bunks and full exclusive use of the house.</p>
+    <div class="accom-divider"><span class="accom-divider-gem"></span></div>
+
+    <!-- 04 Family Room -->
+    <div class="accom-block reverse">
+      <div class="accom-block-img">
+        <div class="accom-gallery" data-accom-gallery>
+          <img src="images/hero-families.jpg" alt="Family Room at Hilston Park" class="accom-gallery-slide active" loading="lazy">
+          <img src="images/ios-photo2.jpg" alt="Family accommodation interior" class="accom-gallery-slide" loading="lazy">
+          <img src="images/accommodation.jpg" alt="Hilston Park family stay" class="accom-gallery-slide" loading="lazy">
+          <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
+          <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
+          <div class="accom-gal-dots" aria-hidden="true"></div>
+        </div>
       </div>
-      <div class="room-types-grid">
-        <div class="room-card">
-          <span class="room-card-eyebrow">For Two</span>
-          <h4>Cosy King Room</h4>
-          <p>A comfortable king-bedded room, ideal for couples seeking a quiet stay in the heart of the estate.</p>
+      <div class="accom-block-content">
+        <span class="accom-block-num">04 &nbsp;&#8212;&nbsp; For Families</span>
+        <h3>Family Room</h3>
+        <p>A flexible room designed for families staying together, with space for parents and children in one comfortable, well-considered setting.</p>
+        <ul class="accom-list">
+          <li>Sleeping for adults and children together</li>
+          <li>Situated close to shared family spaces</li>
+          <li>Suitable for children of all ages</li>
+          <li>Ideal for family activity weekends</li>
+        </ul>
+        <p class="accom-block-note">The right base for families who want to stay together and explore together.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Max. 4 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v13"/><path d="M21 7v13"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="6" rx="1"/></svg>
+            <span>Family suite <em>&middot; en-suite</em></span>
+          </div>
         </div>
-        <div class="room-card">
-          <span class="room-card-eyebrow">For Two</span>
-          <h4>Double Garden View</h4>
-          <p>A bright double room overlooking the gardens &#8212; a peaceful base for short breaks and weekend stays.</p>
+      </div>
+    </div>
+
+    <div class="accom-divider"><span class="accom-divider-gem"></span></div>
+
+    <!-- 05 Dormitory / Group Bunk Rooms -->
+    <div class="accom-block">
+      <div class="accom-block-img">
+        <div class="accom-gallery" data-accom-gallery>
+          <img src="images/adventure.jpg" alt="Dormitory accommodation at Hilston Park" class="accom-gallery-slide active" loading="lazy">
+          <img src="images/nature-bushcraft.jpg" alt="Group stay outdoors" class="accom-gallery-slide" loading="lazy">
+          <img src="images/accommodation.jpg" alt="Group accommodation" class="accom-gallery-slide" loading="lazy">
+          <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
+          <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
+          <div class="accom-gal-dots" aria-hidden="true"></div>
         </div>
-        <div class="room-card">
-          <span class="room-card-eyebrow">For Two</span>
-          <h4>Large Double Garden View</h4>
-          <p>A more spacious double room with garden views, offering extra room to relax after a day outdoors.</p>
+      </div>
+      <div class="accom-block-content">
+        <span class="accom-block-num">05 &nbsp;&#8212;&nbsp; For Groups</span>
+        <h3>Dormitory / Group Bunk Rooms</h3>
+        <p>Shared bunk accommodation designed for schools, youth groups, and larger parties. Structured for supervision, comfort, and easy group management.</p>
+        <ul class="accom-list">
+          <li>Bunk-bed layouts for shared sleeping</li>
+          <li>Suitable for school residential visits</li>
+          <li>Staff rooms adjacent for supervision</li>
+          <li>Separate facilities for boys and girls</li>
+        </ul>
+        <p class="accom-block-note">Built for group stays where structure, safety, and shared experience matter.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Max. 13 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>3 rooms <em>&middot; Boat House</em></span>
+          </div>
         </div>
-        <div class="room-card">
-          <span class="room-card-eyebrow">For Families</span>
-          <h4>Family Room</h4>
-          <p>A flexible room sleeping families together, with space for parents and children in one comfortable setting.</p>
+      </div>
+    </div>
+
+    <div class="accom-divider"><span class="accom-divider-gem"></span></div>
+
+    <!-- 06 Exclusive Use of House -->
+    <div class="accom-block reverse">
+      <div class="accom-block-img">
+        <div class="accom-gallery" data-accom-gallery>
+          <img src="images/manor-house.jpg" alt="Exclusive use of Hilston Park Manor House" class="accom-gallery-slide active" loading="lazy">
+          <img src="images/estate-exterior.png" alt="Hilston Park estate exterior" class="accom-gallery-slide" loading="lazy">
+          <img src="images/gatehouse.webp" alt="Hilston Park grounds" class="accom-gallery-slide" loading="lazy">
+          <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
+          <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
+          <div class="accom-gal-dots" aria-hidden="true"></div>
         </div>
-        <div class="room-card">
-          <span class="room-card-eyebrow">For Groups</span>
-          <h4>Dormitory / Group Bunk Rooms</h4>
-          <p>Shared bunk accommodation designed for schools, youth groups, and larger parties staying together.</p>
-        </div>
-        <div class="room-card featured">
-          <span class="room-card-eyebrow">Whole House</span>
-          <h4>Exclusive Use of House</h4>
-          <p>Book the entire Manor House for your group &#8212; private gatherings, celebrations, and multi-day stays with full estate access.</p>
+      </div>
+      <div class="accom-block-content">
+        <span class="accom-block-num">06 &nbsp;&#8212;&nbsp; Whole House</span>
+        <h3>Exclusive Use of House</h3>
+        <p>Book the entire Manor House for your group. The whole estate becomes yours &#8212; ideal for large family gatherings, private celebrations, and multi-day group stays.</p>
+        <ul class="accom-list">
+          <li>Sole use of all rooms and shared spaces</li>
+          <li>Private access to the full estate and grounds</li>
+          <li>Full catering and event support available</li>
+          <li>Suitable for 20&#8211;80 guests</li>
+        </ul>
+        <p class="accom-block-note">For groups who want complete privacy and the run of a genuine Welsh estate.</p>
+        <div class="accom-occupancy">
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Up to 40 <em>guests</em></span>
+          </div>
+          <div class="accom-occ-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Entire estate <em>&middot; all rooms</em></span>
+          </div>
         </div>
       </div>
     </div>
