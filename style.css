@@ -1079,6 +1079,19 @@ body { overflow-x: clip; }
   flex-direction: column;
   gap: 16px;
 }
+.tcard {
+  transition: opacity 0.7s ease, transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.tcard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+  border-color: var(--teal);
+}
+/* staggered entrance for the three cards */
+.testimonials-grid .tcard:nth-child(1) { transition-delay: 0s; }
+.testimonials-grid .tcard:nth-child(2) { transition-delay: 0.15s; }
+.testimonials-grid .tcard:nth-child(3) { transition-delay: 0.30s; }
+.testimonials-grid .tcard.is-visible { transition-delay: 0s; }
 .tcard-stars { color: var(--teal); font-size: 1.1rem; letter-spacing: 2px; }
 .tcard-quote {
   font-family: var(--font-serif);
@@ -1087,12 +1100,46 @@ body { overflow-x: clip; }
   color: var(--text);
   flex: 1;
 }
+.tcard-footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+.tcard-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--av-bg, var(--teal));
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
 .tcard-author {
-  font-size: 0.74rem;
-  letter-spacing: 0.16em;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-style: normal;
+}
+.tcard-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+.tcard-org {
+  font-size: 0.70rem;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--text-muted);
-  font-style: normal;
 }
 
 /* =====================================================
@@ -1159,6 +1206,14 @@ body { overflow-x: clip; }
   display: flex;
   gap: 6px;
   margin-right: 6px; /* matches gap so seam is invisible */
+}
+
+.insta-set a {
+  display: block;
+  flex-shrink: 0;
+  width: 340px;
+  height: 340px;
+  overflow: hidden;
 }
 
 .insta-set img {
@@ -1242,6 +1297,7 @@ body { overflow-x: clip; }
 
   /* Instagram */
   .insta-header { flex-direction: column; align-items: flex-start; padding: 0 40px 36px; gap: 20px; }
+  .insta-set a { width: 260px; height: 260px; }
   .insta-set img { width: 260px; height: 260px; }
   @keyframes insta-scroll {
     from { transform: translateX(0); }
@@ -1268,6 +1324,7 @@ body { overflow-x: clip; }
   /* Instagram */
   .insta-strip { padding-top: 56px; }
   .insta-header { padding: 0 20px 30px; }
+  .insta-set a { width: 200px; height: 200px; }
   .insta-set img { width: 200px; height: 200px; }
   @keyframes insta-scroll {
     from { transform: translateX(0); }
