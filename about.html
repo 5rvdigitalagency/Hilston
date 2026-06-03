@@ -313,16 +313,34 @@
       transition: transform 0.35s ease;
     }
     .plan-card:hover::after { transform: scaleX(1); }
+    .plan-card::before {
+      transition: background 0.5s ease;
+    }
+    .plan-card:hover::before {
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 35%, rgba(0,0,0,0.28) 75%, transparent 100%);
+    }
     .plan-overlay {
       position: relative; z-index: 2;
-      padding: 32px 28px; display: flex; flex-direction: column; gap: 14px;
+      padding: 32px 28px; display: flex; flex-direction: column; gap: 0;
     }
     .plan-overlay h3 {
       font-family: var(--font-serif); font-weight: normal;
       font-size: 1.45rem; line-height: 1.2; color: var(--white);
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin-bottom 0.45s ease;
+      margin-bottom: 0;
     }
-    .plan-overlay p { font-size: 0.86rem; line-height: 1.72; color: rgba(255,255,255,0.85); }
-    .plan-overlay .btn-pill { align-self: flex-start; margin-top: 4px; }
+    .plan-card:hover .plan-overlay h3 { transform: translateY(-6px); margin-bottom: 6px; }
+    .plan-reveal {
+      display: flex; flex-direction: column; gap: 14px;
+      transform: translateY(16px); opacity: 0; max-height: 0; overflow: hidden;
+      transition: transform 0.5s ease, opacity 0.45s ease, max-height 0.5s ease;
+      pointer-events: none;
+    }
+    .plan-card:hover .plan-reveal {
+      transform: translateY(0); opacity: 1; max-height: 220px; pointer-events: auto;
+    }
+    .plan-reveal p { font-size: 0.86rem; line-height: 1.72; color: rgba(255,255,255,0.85); }
+    .plan-reveal .btn-pill { align-self: flex-start; margin-top: 4px; }
 
     @media (max-width: 1100px) {
       .about-intro, .history, .safety, .testimonials, .visit-us, .blogs, .faq, .plan-day { padding-left: 40px; padding-right: 40px; }
@@ -438,24 +456,30 @@
         <div class="plan-bg" style="background-image:url(images/hero-schools.jpg)"></div>
         <div class="plan-overlay">
           <h3>Outdoor Learning<br>&amp; Development</h3>
-          <p>Safely structured, nature-based outdoor adventure activities for adults and pupils that challenge them to think differently.</p>
-          <a href="educational.html" class="btn-pill">READ MORE</a>
+          <div class="plan-reveal">
+            <p>Safely structured, nature-based outdoor adventure activities for adults and pupils that challenge them to think differently.</p>
+            <a href="educational.html" class="btn-pill">LEARN MORE</a>
+          </div>
         </div>
       </article>
       <article class="plan-card">
         <div class="plan-bg" style="background-image:url(images/activity-portrait.jpg)"></div>
         <div class="plan-overlay">
           <h3>Team Building &amp; Group<br>Challenges</h3>
-          <p>Interactive team building activities in the heart of Wales. Fresh ground, real challenges, and the kind of perspective that an office never quite manages to give.</p>
-          <a href="event.html" class="btn-pill">READ MORE</a>
+          <div class="plan-reveal">
+            <p>Interactive team building activities in the heart of Wales. Fresh ground, real challenges, and the kind of perspective that an office never quite manages to give.</p>
+            <a href="event.html" class="btn-pill">LEARN MORE</a>
+          </div>
         </div>
       </article>
       <article class="plan-card">
         <div class="plan-bg" style="background-image:url(images/courtyard-room.jpg)"></div>
         <div class="plan-overlay">
           <h3>Private Family<br>Stays</h3>
-          <p>Palladian elegance. Open countryside. Time that is yours alone. Hilston Park offers private family stays defined by space, silence and moments you&rsquo;ll never forget.</p>
-          <a href="accomodation.html" class="btn-pill">READ MORE</a>
+          <div class="plan-reveal">
+            <p>Palladian elegance. Open countryside. Time that is yours alone. Hilston Park offers private family stays defined by space, silence and moments you&rsquo;ll never forget.</p>
+            <a href="accomodation.html" class="btn-pill">LEARN MORE</a>
+          </div>
         </div>
       </article>
     </div>
