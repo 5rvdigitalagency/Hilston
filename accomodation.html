@@ -98,7 +98,7 @@
     .accom-block-content > p { font-size: 0.9rem; line-height: 1.78; color: var(--text-muted); margin-bottom: 16px; }
     .accom-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
     .accom-list li { padding-left: 18px; position: relative; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
-    .accom-list li::before { content: "\2014"; position: absolute; left: 0; color: var(--teal); }
+    .accom-list li::before { content: "\2014"; position: absolute; left: 0; color: var(--text-muted); }
     .accom-block-note { font-size: 0.82rem; font-style: normal; color: var(--text-muted); border-left: 2px solid var(--teal); padding-left: 14px; line-height: 1.75; margin-bottom: 20px; }
     .accom-occupancy { display: flex; align-items: center; gap: 20px; padding-top: 18px; border-top: 1px solid var(--border); flex-wrap: wrap; }
     .accom-occ-chip { display: flex; align-items: center; gap: 7px; }
@@ -108,7 +108,7 @@
     .accom-options-intro .section-eyebrow { display: none; }
     .accom-block-num {
       display: block; font-family: var(--font-sans); font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.2em; color: var(--teal); margin-bottom: 8px;
+      letter-spacing: 0.16em; color: var(--teal); margin-bottom: 8px;
     }
     .accom-block.reverse .accom-block-img { order: 2; }
     .accom-block.reverse .accom-block-content { order: 1; }
@@ -182,20 +182,21 @@
     .booking-card-img::after { display: none; }
     .booking-card-body { padding: 32px 30px 36px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
     .booking-card h3 { color: var(--white); font-family: var(--font-serif); font-weight: normal; font-size: 1.45rem; line-height: 1.2; }
-    .booking-card-body > p { font-size: 0.87rem; line-height: 1.75; color: rgba(255,255,255,0.68); }
-    .booking-sub-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 4px; }
+    .booking-card-body > p { font-size: 0.87rem; line-height: 1.75; color: rgba(255,255,255,0.9); }
+    .booking-sub-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin-top: 4px; }
     .booking-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; }
-    .booking-list li { padding-left: 18px; position: relative; font-size: 0.86rem; line-height: 1.7; color: rgba(255,255,255,0.72); }
+    .booking-list li { padding-left: 18px; position: relative; font-size: 0.86rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
     .booking-list li::before { content: "4"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
     .booking-card-cta {
-      margin-top: auto; padding-top: 20px;
-      display: inline-flex; align-items: center; gap: 10px;
-      color: var(--white); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-      border-top: 1px solid rgba(255,255,255,0.10); width: 100%; transition: color 0.2s;
+      margin-top: auto; align-self: flex-start;
+      display: inline-flex; align-items: center;
+      background: var(--teal); color: var(--white);
+      padding: 11px 22px; border-radius: 9999px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      transition: background 0.22s;
     }
-    .booking-card-cta:hover { color: var(--teal); }
-    .booking-card-cta svg { stroke: var(--teal); fill: none; stroke-width: 1.5; width: 20px; height: 12px; transition: transform 0.2s; }
-    .booking-card-cta:hover svg { transform: translateX(4px); }
+    .booking-card-cta:hover { background: var(--teal-dark); color: var(--white); }
+    .booking-card-cta svg { display: none; }
 
     /* VISIT US */
     .visit-us { background: var(--white); padding: 88px 80px; }
@@ -218,10 +219,12 @@
     .testimonial-item.active { display: flex; }
     .testimonial-quote-mark { font-family: Georgia, serif; font-size: 5rem; line-height: 0.6; color: var(--teal); margin-bottom: 8px; }
     .testimonial-text { font-size: 1.18rem; line-height: 1.68; font-style: italic; color: rgba(255,255,255,0.9); max-width: 640px; }
-    .testimonial-author { font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
-    .testimonial-dots { display: flex; justify-content: center; gap: 8px; margin-top: 36px; }
-    .testimonial-dots button { width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(255,255,255,0.3); cursor: pointer; transition: background 0.25s, width 0.25s, border-radius 0.25s; padding: 0; }
-    .testimonial-dots button.active { background: var(--teal); width: 24px; border-radius: 4px; }
+    .testimonial-author { font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+    .testimonial-dots { display: flex; justify-content: center; gap: 4px; margin-top: 36px; }
+    .testimonial-dots button { width: 44px; height: 44px; background: transparent; border: none; position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; }
+    .testimonial-dots button::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: background 0.25s, width 0.25s, border-radius 0.25s; }
+    .testimonial-dots button.active { background: transparent; width: 44px; }
+    .testimonial-dots button.active::before { background: var(--teal); width: 24px; border-radius: 4px; }
 
     /* PLANNING CTA */
     .planning-cta { background: var(--beige); padding: 88px 80px; text-align: center; }
@@ -231,7 +234,7 @@
     /* NEWSLETTER */
     .newsletter-band { background: var(--teal); padding: 72px 80px; text-align: center; }
     .newsletter-band h2 { color: white; font-family: var(--font-serif); font-weight: normal; font-size: 2.4rem; margin-bottom: 10px; }
-    .newsletter-band p { color: rgba(255,255,255,0.86); font-size: 0.92rem; max-width: 46ch; margin: 0 auto 28px; line-height: 1.7; }
+    .newsletter-band p { color: white; font-size: 0.92rem; max-width: 46ch; margin: 0 auto 28px; line-height: 1.7; }
     .newsletter-form { display: flex; max-width: 460px; margin: 0 auto; }
     .newsletter-input { flex: 1; padding: 14px 18px; border: none; font-size: 0.9rem; outline: none; font-family: var(--font-sans); }
     .newsletter-btn { background: var(--dark); color: white; padding: 14px 24px; border: none; cursor: pointer; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-sans); transition: background 0.2s; }
@@ -313,6 +316,8 @@
     </nav>
   </div>
 
+  <main>
+
   <!-- HERO VIDEO -->
   <section class="accom-hero">
     <video class="accom-hero-video" autoplay muted loop playsinline preload="auto">
@@ -382,7 +387,7 @@
           <img src="images/room-cosy-king-3.jpg" alt="Cosy King Room interior" class="accom-gallery-slide" loading="lazy">
           <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
           <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
-          <div class="accom-gal-dots" aria-hidden="true"></div>
+          <div class="accom-gal-dots" role="group" aria-label="Image navigation"></div>
         </div>
       </div>
       <div class="accom-block-content">
@@ -420,7 +425,7 @@
           <img src="images/room-double-garden-3.jpg" alt="Double Garden View room interior" class="accom-gallery-slide" loading="lazy">
           <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
           <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
-          <div class="accom-gal-dots" aria-hidden="true"></div>
+          <div class="accom-gal-dots" role="group" aria-label="Image navigation"></div>
         </div>
       </div>
       <div class="accom-block-content">
@@ -458,7 +463,7 @@
           <img src="images/room-large-double-3.jpg" alt="Large Double Garden View room interior" class="accom-gallery-slide" loading="lazy">
           <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
           <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
-          <div class="accom-gal-dots" aria-hidden="true"></div>
+          <div class="accom-gal-dots" role="group" aria-label="Image navigation"></div>
         </div>
       </div>
       <div class="accom-block-content">
@@ -496,7 +501,7 @@
           <img src="images/room-family-3.jpg" alt="Family Room interior" class="accom-gallery-slide" loading="lazy">
           <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
           <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
-          <div class="accom-gal-dots" aria-hidden="true"></div>
+          <div class="accom-gal-dots" role="group" aria-label="Image navigation"></div>
         </div>
       </div>
       <div class="accom-block-content">
@@ -533,7 +538,7 @@
           <img src="images/room-dormitory-2.jpg" alt="Dormitory bunk rooms at Hilston Park" class="accom-gallery-slide" loading="lazy">
           <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
           <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
-          <div class="accom-gal-dots" aria-hidden="true"></div>
+          <div class="accom-gal-dots" role="group" aria-label="Image navigation"></div>
         </div>
       </div>
       <div class="accom-block-content">
@@ -571,7 +576,7 @@
           <img src="images/room-exclusive-use-3.jpg" alt="Hilston Park Manor House exterior" class="accom-gallery-slide" loading="lazy">
           <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
           <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
-          <div class="accom-gal-dots" aria-hidden="true"></div>
+          <div class="accom-gal-dots" role="group" aria-label="Image navigation"></div>
         </div>
       </div>
       <div class="accom-block-content">
@@ -609,7 +614,7 @@
           <img src="images/room-gatehouse-3.jpg" alt="Gatehouse interior" class="accom-gallery-slide" loading="lazy">
           <button class="accom-gal-btn prev" aria-label="Previous image">&#8592;</button>
           <button class="accom-gal-btn next" aria-label="Next image">&#8594;</button>
-          <div class="accom-gal-dots" aria-hidden="true"></div>
+          <div class="accom-gal-dots" role="group" aria-label="Image navigation"></div>
         </div>
       </div>
       <div class="accom-block-content">
@@ -648,37 +653,37 @@
     <div class="activities-grid">
       <div class="act-col">
         <div class="act-text-card">
-          <h3 class="act-label">Nature &amp; Bushcraft</h3>
-          <p>Explore the outdoors through hands-on learning, survival skills, and environmental discovery.</p>
+          <h3 class="act-label">Estate Walks &amp; Nature Trails</h3>
+          <p>Explore the grounds, meadows and woodland paths of the Hilston Park estate. Guided walks are available for groups who want to learn about the landscape and its wildlife.</p>
         </div>
         <div class="act-img-card" style="flex:1;min-height:320px;">
-          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/69d3462298d5affcfd818931_rope-climibing.jpg" alt="High Ropes and Climbing at Hilston Park">
+          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/69d3462298d5affcfd818931_rope-climibing.jpg" alt="Outdoor activities at Hilston Park">
         </div>
       </div>
       <div class="act-col">
         <div class="act-text-card">
-          <h3 class="act-label">High Ropes &amp; Climbing</h3>
-          <p>Boost confidence and trust through supported aerial challenges with full safety guidance.</p>
+          <h3 class="act-label">Archery &amp; Target Sports</h3>
+          <p>Supervised archery sessions available on-site for groups of all ages. A favourite for families and private parties looking for a fun outdoor challenge.</p>
         </div>
         <div class="act-img-card" style="min-height:150px;">
-          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/69d34042042ff8a03195bc19_map.jpg" alt="Navigation and map activity">
+          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/69d34042042ff8a03195bc19_map.jpg" alt="Outdoor group activity">
         </div>
         <div class="act-text-card">
-          <h3 class="act-label">Wilderness Discovery</h3>
-          <p>Learn about the habitats of rare dragonflies and plant species currently being protected for research.</p>
+          <h3 class="act-label">Kayaking &amp; Outdoor Water Activities</h3>
+          <p>Water-based activities in the surrounding Wye Valley area are available for guests looking to make the most of the region&#8217;s natural setting.</p>
         </div>
       </div>
       <div class="act-col">
         <div class="act-img-card" style="flex:1;min-height:320px;">
-          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/69d3420c18071ba084d96ba8_nature-bushcraft.jpg" alt="Nature and Bushcraft">
+          <img src="https://cdn.prod.website-files.com/69c65ed08058cf3dcdba9f2f/69d3420c18071ba084d96ba8_nature-bushcraft.jpg" alt="Campfire and outdoor cooking">
         </div>
         <div class="act-cta-card">
-          <a href="#">VIEW ALL ACTIVITIES</a>
+          <a href="contact.html#contact-form">ENQUIRE ABOUT ACTIVITIES</a>
           <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="act-text-card">
-          <h3 class="act-label">Team Challenges</h3>
-          <p>Build communication, leadership, and teamwork through group problem-solving activities.</p>
+          <h3 class="act-label">Campfire &amp; Outdoor Cooking</h3>
+          <p>Evening campfire sessions with outdoor cooking available for residential groups. A relaxed way to wind down after a day on the estate.</p>
         </div>
       </div>
     </div>
@@ -885,6 +890,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-grid">
@@ -904,7 +911,7 @@
       </div>
 
       <div class="footer-col">
-        <h4>Home</h4>
+        <h3>Home</h3>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -913,7 +920,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Visitors</h4>
+        <h3>Visitors</h3>
         <ul>
           <li><a href="visitors.html">Visitor Guide</a></li>
           <li><a href="educational.html">Educational</a></li>
@@ -923,7 +930,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h3>Legal</h3>
         <ul>
           <li><a href="legal.html">Legal Hub</a></li>
           <li><a href="terms.html">Terms &amp; Conditions</a></li>
@@ -972,6 +979,7 @@
     var current = 0;
     items.forEach(function(_, i){
       var b = document.createElement('button');
+      b.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
       if(i===0) b.className='active';
       b.addEventListener('click', function(){ go(i); });
       dotsEl.appendChild(b);

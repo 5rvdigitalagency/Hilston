@@ -214,14 +214,18 @@
       text-transform: uppercase; color: rgba(255,255,255,0.6);
     }
     .testimonial-dots {
-      display: flex; justify-content: center; gap: 8px; margin-top: 36px;
+      display: flex; justify-content: center; gap: 4px; margin-top: 36px;
     }
     .testimonial-dots button {
-      width: 8px; height: 8px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.3);
-      cursor: pointer; transition: background 0.25s, width 0.25s, border-radius 0.25s; padding: 0;
+      width: 44px; height: 44px; background: transparent; border: none; position: relative;
+      display: inline-flex; align-items: center; justify-content: center; padding: 0; cursor: pointer;
     }
-    .testimonial-dots button.active { background: var(--teal); width: 24px; border-radius: 4px; }
+    .testimonial-dots button::before {
+      content: ''; display: block; width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.3); transition: background 0.25s, width 0.25s, border-radius 0.25s;
+    }
+    .testimonial-dots button.active { background: transparent; width: 44px; }
+    .testimonial-dots button.active::before { background: var(--teal); width: 24px; border-radius: 4px; }
 
     /* VISIT US */
     .visit-us { background: var(--beige); padding: 88px 80px; }
@@ -690,7 +694,7 @@
 
   <!-- BLOGS -->
   <section class="blogs">
-    <h2 class="heading-display">Blogs</h2>
+    <h2 class="heading-display center">Blogs</h2>
     <div class="blogs-grid">
       <a href="blog-international-menu.html" class="blog-card">
         <div class="blog-card-img">
@@ -842,6 +846,7 @@
     var current = 0;
     items.forEach(function(_, i){
       var b = document.createElement('button');
+      b.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
       if(i===0) b.className='active';
       b.addEventListener('click', function(){ go(i); });
       dotsEl.appendChild(b);

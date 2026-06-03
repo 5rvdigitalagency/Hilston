@@ -236,11 +236,13 @@
     }
     .blog-read-more {
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--teal);
+      text-transform: uppercase; color: var(--white);
       display: inline-flex; align-items: center; gap: 8px;
-      transition: gap 0.2s;
+      background: var(--teal); padding: 10px 20px; margin-top: 8px; align-self: flex-start;
+      transition: background 0.22s ease;
     }
-    .blog-card:hover .blog-read-more { gap: 14px; }
+    .blog-card:hover .blog-read-more { background: var(--teal-dark); }
+    .blog-read-more svg { display: none; }
   </style>
 </head>
 <body>
