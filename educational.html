@@ -187,7 +187,10 @@
       max-width: 680px; margin: 0 auto 48px; line-height: 1.72;
     }
     .edu-accom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-    .edu-accom-img img { width: 100%; height: 480px; object-fit: cover; display: block; }
+    .edu-accom-img { display: flex; flex-direction: column; gap: 8px; }
+    .edu-accom-img-main img { width: 100%; height: 300px; object-fit: cover; display: block; }
+    .edu-accom-img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .edu-accom-img-row img { width: 100%; height: 175px; object-fit: cover; display: block; }
     .accom-section { margin-bottom: 0; counter-increment: accom-counter; padding: 20px 0; border-bottom: 1px solid var(--border); }
     .accom-section:first-child { padding-top: 0; }
     .edu-accom-content { counter-reset: accom-counter; }
@@ -530,7 +533,13 @@
     <p class="edu-accom-sub">For large group residentials of 30 or more, Hilston Park&rsquo;s historic manor house gives schools a fully self-contained space where students sleep, eat and spend time together.</p>
     <div class="edu-accom-grid">
       <div class="edu-accom-img">
-        <img src="images/edu-intro.jpg" alt="Bunk rooms at Hilston Park">
+        <div class="edu-accom-img-main">
+          <img src="images/edu-intro.jpg" alt="Bunk rooms at Hilston Park">
+        </div>
+        <div class="edu-accom-img-row">
+          <img src="images/edu-accom-2.jpg" alt="Student dormitory at Hilston Park">
+          <img src="images/edu-accom-3.jpg" alt="Group accommodation at Hilston Park">
+        </div>
       </div>
       <div class="edu-accom-content">
         <div class="accom-section">
