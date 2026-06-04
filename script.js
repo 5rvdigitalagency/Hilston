@@ -227,13 +227,13 @@ document.addEventListener("DOMContentLoaded", function () {
           '<div class="bkm-brand-inner">',
             '<img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park" class="bkm-logo">',
             '<h2 class="bkm-brand-heading" id="bkm-heading"><span id="bkm-brand-lead">Plan Your</span><span class="bkm-brand-script" id="bkm-brand-script">Visit</span></h2>',
-          '</div>',
-          '<address class="bkm-brand-address">Newcastle &middot; Monmouth &middot; Wales</address>',
-          '<div class="bkm-weather" id="bkm-weather">',
-            '<span class="bkm-weather-icon" id="bkm-weather-icon"></span>',
-            '<div class="bkm-weather-info">',
-              '<span class="bkm-weather-temp" id="bkm-weather-temp"></span>',
-              '<span class="bkm-weather-desc" id="bkm-weather-desc">&#8212;</span>',
+            '<address class="bkm-brand-address">Newcastle &middot; Monmouth &middot; Wales</address>',
+            '<div class="bkm-weather" id="bkm-weather">',
+              '<span class="bkm-weather-icon" id="bkm-weather-icon">&#x1F324;</span>',
+              '<div class="bkm-weather-info">',
+                '<span class="bkm-weather-temp" id="bkm-weather-temp">&#8212;</span>',
+                '<span class="bkm-weather-desc" id="bkm-weather-desc">Monmouth, Wales</span>',
+              '</div>',
             '</div>',
           '</div>',
         '</div>',
@@ -247,8 +247,8 @@ document.addEventListener("DOMContentLoaded", function () {
             '<p class="bkm-form-title">What would you like to do?</p>',
             '<p class="bkm-form-sub">Choose what fits &mdash; you can switch at any time.</p>',
             '<div class="bkm-tiles">',
-              '<button class="bkm-tile" data-pick="stay"><span class="bkm-tile-icon">&#x1F3E1;</span><span class="bkm-tile-label">Stay with us</span><span class="bkm-tile-desc">Self-catered country house &amp; group accommodation &mdash; live rates &amp; availability</span></button>',
-              '<button class="bkm-tile" data-pick="inquire"><span class="bkm-tile-icon">&#x2709;</span><span class="bkm-tile-label">Enquire about</span><span class="bkm-tile-desc">Events, weddings, corporate days, school trips &mdash; send us a message</span></button>',
+              '<button class="bkm-tile" data-pick="stay"><span class="bkm-tile-icon"><img src="Chnages/Stay with us model icon .png" alt="" aria-hidden="true" style="width:36px;height:36px;object-fit:contain;"></span><span class="bkm-tile-label">Stay with us</span><span class="bkm-tile-desc">Self-catered country house &amp; group accommodation &mdash; live rates &amp; availability</span></button>',
+              '<button class="bkm-tile" data-pick="inquire"><span class="bkm-tile-icon"><img src="Chnages/Enquire about model icon .png" alt="" aria-hidden="true" style="width:36px;height:36px;object-fit:contain;"></span><span class="bkm-tile-label">Enquire about</span><span class="bkm-tile-desc">Events, weddings, corporate days, school trips &mdash; send us a message</span></button>',
             '</div>',
             '<p class="bkm-note">Secure booking powered by QBook &mdash; all availability and payment handled on this site.</p>',
           '</div>',
@@ -414,10 +414,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("bkm-weather-temp").textContent = Math.round(c.temperature_2m) + "\xB0C";
         document.getElementById("bkm-weather-desc").textContent = info[1];
       })
-      .catch(function () {
-        var el = document.getElementById("bkm-weather");
-        if (el) { el.style.display = "none"; }
-      });
+      .catch(function () { /* keep widget visible with placeholder */ });
   }());
 
   /* -- resize the rates iframe via postMessage from QBook -- */

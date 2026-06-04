@@ -142,8 +142,8 @@ body { overflow-x: clip; }
 .btn-book {
   display: inline-block;
   padding: 12px 30px;
-  border: 2px solid var(--dark-deep);
-  background: var(--dark-deep);
+  border: 2px solid var(--teal);
+  background: var(--teal);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -151,7 +151,7 @@ body { overflow-x: clip; }
   text-transform: uppercase;
   transition: background 0.2s, border-color 0.2s;
 }
-.btn-book:hover { background: var(--dark); border-color: var(--dark); }
+.btn-book:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
 
 .btn-hero {
   display: block;
@@ -969,7 +969,7 @@ body { overflow-x: clip; }
   color: var(--text-muted);
   font-size: 0.84rem;
   line-height: 1.75;
-  text-align: center;
+  text-align: left;
 }
 
 /* =====================================================
@@ -1455,7 +1455,7 @@ body { overflow-x: clip; }
   min-height: 420px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 36px 32px;
   border-radius: 0;
 }
@@ -1481,6 +1481,8 @@ body { overflow-x: clip; }
 .bkm-brand-inner {
   position: relative; z-index: 2;
   display: flex; flex-direction: column; gap: 20px;
+  align-items: center;
+  text-align: center;
 }
 .bkm-logo {
   width: 140px; height: auto;
@@ -1493,6 +1495,7 @@ body { overflow-x: clip; }
   color: var(--white);
   line-height: 1.08;
   letter-spacing: -0.01em;
+  text-align: center;
 }
 .bkm-brand-script {
   font-family: var(--font-script);
@@ -1511,15 +1514,17 @@ body { overflow-x: clip; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   position: relative; z-index: 2;
+  text-align: center;
 }
 
 /* live weather widget */
 .bkm-weather {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
   position: relative; z-index: 2;
   margin-top: 14px;
   padding-top: 14px;
   border-top: 1px solid rgba(255,255,255,0.12);
+  width: 100%;
 }
 .bkm-weather-icon {
   font-size: 1.65rem; line-height: 1; flex-shrink: 0;
@@ -2118,7 +2123,7 @@ body { overflow-x: clip; }
 }
 .btn-book:hover {
   animation: none;
-  background: var(--dark);
+  background: var(--teal-dark);
   color: var(--white);
 }
 

@@ -54,7 +54,7 @@
     .about-intro { background: var(--white); padding: 88px 80px; }
     .about-intro-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: start;
+      gap: 56px; align-items: stretch;
     }
     .about-intro-sticky { position: sticky; top: 100px; }
     .about-intro-sticky .heading-display { margin-bottom: 28px; }
@@ -62,8 +62,7 @@
       font-size: 0.92rem; line-height: 1.88;
       color: var(--text-muted); margin-bottom: 1.2rem;
     }
-    .about-intro-images { display: flex; flex-direction: column; gap: 12px; }
-    .about-intro-images img { width: 100%; height: 230px; object-fit: cover; display: block; }
+    .about-intro-images { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-self: stretch; }
 
     /* HISTORY — TIMELINE */
     .history { background: var(--beige); padding: 88px 80px; }
@@ -409,8 +408,8 @@
       <ul class="nav-list">
         <li><a href="about.html" class="nav-active">ABOUT</a></li>
         <li><a href="educational.html">EDUCATION</a></li>
-        <li><a href="event.html">EVENTS</a></li>
         <li><a href="accomodation.html">ACCOMMODATION</a></li>
+        <li><a href="event.html">EVENTS</a></li>
         <li><a href="contact.html">CONTACT</a></li>
         <li><a href="blogs.html">BLOG</a></li>
       </ul>
@@ -426,8 +425,8 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="educational.html">Education</a></li>
-        <li><a href="event.html">Events</a></li>
         <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="event.html">Events</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
@@ -450,14 +449,25 @@
   <!-- ABOUT INTRO -->
   <section class="about-intro">
     <div class="about-intro-grid">
-      <div class="about-intro-sticky">
+      <div class="about-intro-sticky" data-reveal="left">
         <h2 class="heading-display">About<br>Hilston Park</h2>
-        <p>Hilston Park is a trusted activity centre in Monmouth, set between the Black Mountains and the River Wye. For over 50 years, the historic estate has provided residential experiences for schools, corporate teams, families, and groups, offering a unique setting surrounded by meadows and woodland. With accommodation, activities, and catering all in one place, guests can enjoy a seamless and memorable stay. Experienced DBS-checked staff, clear safeguarding procedures, and inclusive SEN support help ensure a safe, welcoming environment for everyone.</p>
+        <p>Hilston Park is a trusted activity centre in Monmouth, set between the Black Mountains and the River Wye. For over 50 years, the historic estate has provided residential experiences for schools, corporate teams, families, and groups, offering a unique setting surrounded by meadows and woodland.</p>
+        <p>With accommodation, activities, and catering all in one place, guests can enjoy a seamless and memorable stay. Experienced DBS-checked staff, clear safeguarding procedures, and inclusive SEN support help ensure a safe, welcoming environment for everyone.</p>
+        <div class="discover-box">
+          <h3>What makes Hilston Park special:</h3>
+          <ul>
+            <li>Historic 50+ acre estate in Monmouth, South Wales</li>
+            <li>Over 50 years welcoming schools, groups, and families</li>
+            <li>DBS-checked, SEN-experienced staff on-site</li>
+            <li>Inclusive SEN support and clear safeguarding procedures</li>
+            <li>All-inclusive stays with accommodation, activities, and catering</li>
+          </ul>
+        </div>
       </div>
-      <div class="about-intro-images">
-        <img src="images/about-team.jpg" alt="Hilston Park team outside the manor">
-        <img src="images/about-overview.jpg" alt="Hilston Park overview">
-        <img src="images/about-aerial.jpg" alt="Hilston Park estate from the air">
+      <div class="about-intro-images" data-reveal="right">
+        <div class="exp-img exp-img--wide"><img src="images/about-team.jpg" alt="Hilston Park team outside the manor" loading="lazy"></div>
+        <div class="exp-img"><img src="images/about-overview.jpg" alt="Hilston Park overview" loading="lazy"></div>
+        <div class="exp-img"><img src="images/about-aerial.jpg" alt="Hilston Park estate from the air" loading="lazy"></div>
       </div>
     </div>
   </section>
@@ -687,37 +697,37 @@
   <section class="blogs">
     <h2 class="heading-display center">Blogs</h2>
     <div class="blogs-grid">
-      <a href="blog-international-menu.html" class="blog-card">
+      <a href="blog-accommodation.html" class="blog-card">
         <div class="blog-card-img">
-          <img src="images/about-team.jpg" alt="Hilston Park International Menu" loading="lazy">
+          <img src="images/manor-house.jpg" alt="Accommodation at Hilston Park" loading="lazy">
         </div>
         <div class="blog-card-body">
-          <h3>Hilston Park&rsquo;s International Menu</h3>
-          <p>Hilston Park&#8217;s international menu brings together global flavours and cultural traditions through carefully prepared dishes for every guest.</p>
+          <h3>Choosing Accommodation for a Group Residential Stay</h3>
+          <p>From dormitory layouts for large year groups to private rooms for smaller groups, the right choice depends on your group size and programme structure.</p>
           <span class="blog-read-more">READ MORE
             <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
         </div>
       </a>
-      <a href="blog-school-trip.html" class="blog-card">
+      <a href="blog-team-building.html" class="blog-card">
         <div class="blog-card-img">
-          <img src="images/edu-act-1.jpg" alt="Planning a School Adventure Trip" loading="lazy">
+          <img src="images/hero-corporate.jpg" alt="Team Building at Hilston Park" loading="lazy">
         </div>
         <div class="blog-card-body">
-          <h3>Planning a School Adventure Trip in 2025? Unleash It at Hilston Park</h3>
-          <p>Organise a school adventure trip in 2025 at Hilston Park with engaging activities that support learning, teamwork, and student development.</p>
+          <h3>Team Building in the Welsh Countryside: What to Expect</h3>
+          <p>Taking a corporate team out of the office and into an estate setting changes how people collaborate. Here is an inside look at a Hilston Park team day.</p>
           <span class="blog-read-more">READ MORE
             <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
         </div>
       </a>
-      <a href="blog-why-schools-book.html" class="blog-card">
+      <a href="blog-wye-valley.html" class="blog-card">
         <div class="blog-card-img">
-          <img src="images/hp-hero-schools.jpg" alt="Why Schools Are Booking at Hilston Park" loading="lazy">
+          <img src="images/nature-bushcraft.jpg" alt="Wye Valley Estate Activities" loading="lazy">
         </div>
         <div class="blog-card-body">
-          <h3>Why Schools Are Booking Their 2025 Trips at Hilston Park</h3>
-          <p>Discover outdoor learning and residential adventures at Hilston Park that build students&#8217; confidence, teamwork, and personal growth through nature.</p>
+          <h3>The Wye Valley Estate: What Makes Hilston Park Unique</h3>
+          <p>Nestled between the River Wye and the Black Mountains, Hilston Park occupies a setting that is rarely found in managed outdoor activity centres.</p>
           <span class="blog-read-more">READ MORE
             <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -730,7 +740,8 @@
   <section class="faq">
     <div class="faq-grid">
       <div>
-        <h2 class="heading-display">Frequently<br>Asked<br><em class="script">Questions</em></h2>
+        <span class="faq-label">FAQ</span>
+        <h2 class="heading-display">Frequently<br>Asked<br>Questions</h2>
       </div>
       <div class="accordion">
         <div class="accordion-item">
