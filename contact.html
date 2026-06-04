@@ -82,7 +82,15 @@
     .form-field select:focus,
     .form-field textarea:focus { border-color: var(--teal); }
     .form-field textarea { min-height: 130px; resize: vertical; }
-    .form-field select { appearance: none; cursor: pointer; }
+    .form-field select { 
+      appearance: none; 
+      cursor: pointer; 
+      padding-right: 38px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23555'%3E%3Cpath fill-rule='evenodd' d='M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z' clip-rule='evenodd'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 18px;
+    }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-checkbox {
       display: flex; align-items: flex-start; gap: 12px;
@@ -243,6 +251,20 @@
     }
     .blog-card:hover .blog-read-more { background: var(--teal-dark); }
     .blog-read-more svg { display: none; }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 1100px) {
+      .contact-section { padding: 60px 40px 56px; }
+    }
+    @media (max-width: 880px) {
+      .contact-section { padding: 48px 24px 48px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-faq .faq-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    @media (max-width: 560px) {
+      .contact-section { padding: 36px 16px 40px; }
+    }
   </style>
 </head>
 <body>
@@ -355,7 +377,7 @@
           </div>
           <div class="form-checkbox">
             <input type="checkbox" id="agree" name="agree" required>
-            <label for="agree">I agree with the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</label>
+            <label for="agree">I agree with the <a href="terms.html">Terms of Use</a> and <a href="privacy.html">Privacy Policy</a>.</label>
           </div>
           <button type="submit" class="btn-submit">SEND ENQUIRY</button>
         </form>
@@ -420,7 +442,7 @@
           </svg>
         </div>
         <h3>When to Visit</h3>
-        <p>Hilston Park welcomes guests year-round. Summer brings longer days and time outdoors, while autumn and winter offer a quieter setting, focused around the estate and indoors.</p>
+        <p>Hilston Park welcomes guests year-round, with summer offering longer outdoor days and autumn and winter providing a quieter, estate-focused experience.</p>
         <a href="#contact-form" class="btn-reach">PLAN YOUR DATES</a>
       </div>
       <div class="reach-card">
@@ -430,7 +452,7 @@
           </svg>
         </div>
         <h3>Getting Here</h3>
-        <p>Located near Monmouth in the Wye Valley, Hilston Park is accessible by road. For schools and group organisers, the team can advise on travel arrangements and coach access.</p>
+        <p>Located near Monmouth in the Wye Valley, the estate is easily accessible by road, with travel guidance available for schools and group organisers.</p>
         <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-reach">VIEW ON MAPS</a>
       </div>
       <div class="reach-card">
@@ -440,7 +462,7 @@
           </svg>
         </div>
         <h3>Get in Touch</h3>
-        <p>Whether you are a school planning a residential trip, a corporate team arranging a retreat, or a family looking for a private stay, we would love to hear from you.</p>
+        <p>Whether you&#8217;re a school, corporate team, or family group, our team is ready to help you plan and arrange your visit.</p>
         <a href="#contact-form" class="btn-reach">SEND ENQUIRY</a>
       </div>
     </div>
@@ -458,35 +480,35 @@
               <span class="acc-question">What happens after I submit an enquiry?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
-          <div class="accordion-body"><p>Your enquiry is reviewed by the team and you will be contacted with availability and relevant next steps based on your group type and preferred dates.</p></div>
+          <div class="accordion-body"><p>Your enquiry is reviewed and you&#8217;ll be contacted with availability and next steps based on your group type and preferred dates.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
               <span class="acc-question">How quickly will I receive a response?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
-          <div class="accordion-body"><p>Most enquiries are responded to within a short time during working hours. If more detail is needed to confirm availability, the team may contact you for clarification before providing a full response.</p></div>
+          <div class="accordion-body"><p>Most enquiries are answered within a short time during working hours, with follow-up if additional details are needed.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
               <span class="acc-question">What details help you respond more accurately?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
-          <div class="accordion-body"><p>Group type, approximate group size, and preferred dates are most useful. For schools or corporate groups, adding a year group or event type helps refine the response.</p></div>
+          <div class="accordion-body"><p>Group type, group size, and preferred dates help the team provide more accurate availability and suitable options.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
               <span class="acc-question">Can I enquire without confirmed dates?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
-          <div class="accordion-body"><p>Yes. If your dates are not yet fixed, you can still send an enquiry. The team can advise on availability and help you plan suitable options.</p></div>
+          <div class="accordion-body"><p>Yes, you can still enquire without fixed dates, and the team will help suggest suitable availability.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
               <span class="acc-question">How do I reach Hilston Park by road?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
-          <div class="accordion-body"><p>Hilston Park is located near Monmouth in the Wye Valley and is accessible by road. Most school groups and coaches travel directly, and private car access is also available from the estate entrance.</p></div>
+          <div class="accordion-body"><p>Hilston Park is near Monmouth in the Wye Valley and is easily accessible by road for coaches and private vehicles.</p></div>
         </div>
       </div>
     </div>
@@ -502,7 +524,7 @@
         </div>
         <div class="blog-card-body">
           <h3>Hilston Park&rsquo;s International Menu</h3>
-          <p>Our international menu is designed to celebrate cultural connection through every dish, bridging the gap between diverse traditions and cuisines.</p>
+          <p>Hilston Park&#8217;s international menu brings together global flavours and cultural traditions through carefully prepared dishes for every guest.</p>
           <a href="blog-international-menu.html" class="blog-read-more">READ MORE &rarr;</a>
         </div>
       </article>
@@ -511,8 +533,8 @@
           <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb6509b9ec1135b6c0dd89_Planning%20a%20School%20Adventure%20Trip%20in%202025.jpg" alt="Planning a School Adventure Trip" loading="lazy">
         </div>
         <div class="blog-card-body">
-          <h3>Planning a School Adventure Trip? Unleash It at Hilston Park</h3>
-          <p>Organising a memorable school adventure trip can be a fulfilling challenge for educators. Here is how to strike the right balance between fun and learning.</p>
+          <h3>Planning a School Adventure Trip in 2025?</h3>
+          <p>Organise a school adventure trip in 2025 at Hilston Park with engaging activities that support learning, teamwork, and student development.</p>
           <a href="blog-school-trip.html" class="blog-read-more">READ MORE &rarr;</a>
         </div>
       </article>
@@ -522,7 +544,7 @@
         </div>
         <div class="blog-card-body">
           <h3>Why Schools Are Booking Their Trips at Hilston Park</h3>
-          <p>School travel has a significant impact on how young minds develop. A residential adventure gives children a chance to leave the classroom and grow outdoors.</p>
+          <p>Discover outdoor learning and residential adventures at Hilston Park that build students&#8217; confidence, teamwork, and personal growth through nature.</p>
           <a href="blog-why-schools-book.html" class="blog-read-more">READ MORE &rarr;</a>
         </div>
       </article>

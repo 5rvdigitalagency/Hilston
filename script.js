@@ -270,12 +270,22 @@ document.addEventListener("DOMContentLoaded", function () {
             '</div>',
             '<div class="bkm-fields">',
               '<div class="bkm-field">',
-                '<label for="bkm-adults">Adults</label>',
-                '<input type="number" id="bkm-adults" min="1" max="200" value="2">',
+                '<label>Adults</label>',
+                '<div class="bkm-stepper">',
+                  '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-adults" aria-label="Decrease adults">&#8722;</button>',
+                  '<span class="bkm-step-val" id="bkm-adults-val">2</span>',
+                  '<input type="hidden" id="bkm-adults" value="2">',
+                  '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-adults" aria-label="Increase adults">+</button>',
+                '</div>',
               '</div>',
               '<div class="bkm-field">',
-                '<label for="bkm-children">Children</label>',
-                '<input type="number" id="bkm-children" min="0" max="200" value="0">',
+                '<label>Children</label>',
+                '<div class="bkm-stepper">',
+                  '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-children" aria-label="Decrease children">&#8722;</button>',
+                  '<span class="bkm-step-val" id="bkm-children-val">0</span>',
+                  '<input type="hidden" id="bkm-children" value="0">',
+                  '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-children" aria-label="Increase children">+</button>',
+                '</div>',
               '</div>',
             '</div>',
             '<div class="bkm-field">',
@@ -319,8 +329,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 '</select>',
               '</div>',
               '<div class="bkm-fields">',
-                '<div class="bkm-field"><label for="bkm-inq-adults">Adults</label><input type="number" id="bkm-inq-adults" min="0" max="500" value="0"></div>',
-                '<div class="bkm-field"><label for="bkm-inq-children">Children</label><input type="number" id="bkm-inq-children" min="0" max="500" value="0"></div>',
+                '<div class="bkm-field">',
+                  '<label>Adults</label>',
+                  '<div class="bkm-stepper">',
+                    '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-inq-adults" aria-label="Decrease adults">&#8722;</button>',
+                    '<span class="bkm-step-val" id="bkm-inq-adults-val">0</span>',
+                    '<input type="hidden" id="bkm-inq-adults" value="0">',
+                    '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-inq-adults" aria-label="Increase adults">+</button>',
+                  '</div>',
+                '</div>',
+                '<div class="bkm-field">',
+                  '<label>Children</label>',
+                  '<div class="bkm-stepper">',
+                    '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-inq-children" aria-label="Decrease children">&#8722;</button>',
+                    '<span class="bkm-step-val" id="bkm-inq-children-val">0</span>',
+                    '<input type="hidden" id="bkm-inq-children" value="0">',
+                    '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-inq-children" aria-label="Increase children">+</button>',
+                  '</div>',
+                '</div>',
               '</div>',
               '<div class="bkm-field"><label for="bkm-inq-message">Your enquiry <span class="bkm-req">*</span></label><textarea id="bkm-inq-message" rows="4" required></textarea></div>',
               '<input type="hidden" id="bkm-inq-context">',
@@ -865,8 +891,14 @@ document.addEventListener("DOMContentLoaded", function () {
     var el = e.target.closest("[data-booking-type], [data-inquire], .btn-book");
     if (!el) { return; }
     var href = el.getAttribute("href") || "";
-    /* if the link goes somewhere real and the attrs aren't set, let it through */
     var hasAttr = el.hasAttribute("data-booking-type") || el.hasAttribute("data-inquire");
+    if (el.classList.contains("btn-book") && href === "#contact-form") { return; }
+    if (el.classList.contains("btn-book")) {
+      e.preventDefault();
+      openModal();
+      return;
+    }
+    /* if the link goes somewhere real and the attrs aren't set, let it through */
     if (!hasAttr && href && href !== "#" && !href.startsWith("#booking")) { return; }
     e.preventDefault();
     if (el.hasAttribute("data-inquire")) {
@@ -879,6 +911,31 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       openModal();
     }
+  });
+
+  /* =========================================================
+     GUEST STEPPER  — +/- buttons for adults / children
+     ========================================================= */
+  document.addEventListener("click", function(e) {
+    var btn = e.target.closest(".bkm-step-btn");
+    if (!btn) { return; }
+    e.preventDefault();
+    e.stopPropagation();
+    var targetId = btn.getAttribute("data-target");
+    var inp = document.getElementById(targetId);
+    var valEl = document.getElementById(targetId + "-val");
+    if (!inp || !valEl) { return; }
+    var val = parseInt(inp.value, 10) || 0;
+    var isAdults = (targetId === "bkm-adults");
+    var min = isAdults ? 1 : 0;
+    var max = 200;
+    if (btn.classList.contains("bkm-step-inc")) {
+      val = Math.min(val + 1, max);
+    } else {
+      val = Math.max(val - 1, min);
+    }
+    inp.value = val;
+    valEl.textContent = val;
   });
 
   /* =========================================================

@@ -135,16 +135,6 @@
       color: var(--text-muted); margin-bottom: 0.8rem;
     }
     .tl-card-body p:last-child { margin-bottom: 0; }
-    .tl-card-body .btn-outline {
-      display: inline-flex; align-items: center; gap: 14px;
-      border: 1.5px solid var(--text); padding: 12px 24px;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--text);
-      transition: background 0.2s, color 0.2s; margin-top: 16px;
-    }
-    .tl-card-body .btn-outline:hover { background: var(--teal); border-color: var(--teal); color: var(--white); }
-    .tl-card-body .btn-outline svg { width: 18px; height: 10px; }
-
     /* SAFETY */
     .safety { background: var(--white); padding: 88px 80px; }
     .safety-header { margin-bottom: 54px; text-align: center; }
@@ -254,7 +244,7 @@
 
     /* BLOGS */
     .blogs { background: var(--white); padding: 88px 80px; }
-    .blogs .heading-display { margin-bottom: 44px; }
+    .blogs .heading-display { margin-bottom: 44px; text-align: center; }
     .blogs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .blog-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; border: 1px solid var(--border); }
     .blog-card-img { overflow: hidden; height: 220px; }
@@ -345,6 +335,19 @@
     }
     .plan-reveal p { font-size: 0.86rem; line-height: 1.72; color: rgba(255,255,255,0.85); }
     .plan-reveal .btn-pill { align-self: flex-start; margin-top: 4px; }
+    .plan-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 10px;
+    }
+    .plan-tag::before {
+      content: ''; display: block; width: 18px; height: 1px;
+      background: var(--teal); flex-shrink: 0;
+    }
+    [data-reveal] .plan-card:nth-child(1) { transition-delay: 0s; }
+    [data-reveal] .plan-card:nth-child(2) { transition-delay: 0.12s; }
+    [data-reveal] .plan-card:nth-child(3) { transition-delay: 0.24s; }
 
     @media (max-width: 1100px) {
       .about-intro, .history, .safety, .testimonials, .visit-us, .blogs, .faq, .plan-day { padding-left: 40px; padding-right: 40px; }
@@ -352,6 +355,8 @@
     }
     @media (max-width: 880px) {
       .about-hero-inner, .about-intro-grid, .safety-grid, .visit-us-grid, .blogs-grid, .faq-grid { grid-template-columns: 1fr; }
+      /* Fix sticky text — revert to static so it scrolls normally on iPad/phone */
+      .about-intro-sticky { position: static; }
       .about-hero-sub { padding-bottom: 0; }
       .safety-point:nth-child(even) { border-left: 1px solid var(--border); padding: 36px 36px 40px; }
       .safety-grid { grid-template-columns: 1fr; }
@@ -365,6 +370,12 @@
       .tl-item:nth-child(odd)  > .tl-spacer,
       .tl-item:nth-child(even) > .tl-spacer { display: none; }
       .tl-item.tl-from-left, .tl-item.tl-from-right { transform: translateY(32px); }
+      .about-intro, .history, .safety, .testimonials, .visit-us, .blogs, .faq, .plan-day { padding-left: 24px; padding-right: 24px; }
+      .about-hero-inner { padding: 40px 24px; }
+    }
+    @media (max-width: 540px) {
+      .about-intro, .history, .safety, .testimonials, .visit-us, .blogs, .faq, .plan-day { padding-left: 16px !important; padding-right: 16px !important; }
+      .about-hero-inner { padding: 32px 16px; }
     }
   </style>
 </head>
@@ -383,7 +394,7 @@
           <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
         </div>
         <div class="header-actions">
-          <a href="#" class="btn-book">BOOK / ENQUIRY</a>
+          <a href="javascript:void(0)" class="btn-book">BOOK / ENQUIRY</a>
           <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
@@ -420,7 +431,7 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
-      <a href="#" class="btn-book mobile-nav-book">BOOK / ENQUIRY</a>
+      <a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK / ENQUIRY</a>
     </nav>
   </div>
 
@@ -432,7 +443,7 @@
         <p class="about-hero-eyebrow">Overview</p>
         <h1>Hilston<br>Park</h1>
       </div>
-      <p class="about-hero-sub">A heritage setting in the Wye Valley where residential stays are shaped by care, with over 50 years of experience behind every visit.</p>
+      <p class="about-hero-sub">A heritage setting in the Wye Valley, where every residential stay is shaped by care and supported by over 50 years of experience.</p>
     </div>
   </section>
 
@@ -441,9 +452,7 @@
     <div class="about-intro-grid">
       <div class="about-intro-sticky">
         <h2 class="heading-display">About<br>Hilston Park</h2>
-        <p>Between the Black Mountains and the River Wye, Hilston Park sets its historic heritage across meadows and woodlands. Serving as an outdoor activity centre in Monmouth for over 50 years, the estate has supported meaningful residential experiences for groups.</p>
-        <p>For students, days here bring space to learn together, build confidence, and take part in shared residential experiences. For corporate teams, it offers a space to refresh, reconnect, and return with better focus. For families and teams, it provides a calm environment where connecting with nature feels more present and meaningful.</p>
-        <p>Accommodation, activities, and catering are all in one place, so visitors can settle in easily and have a memorable experience. Each stay is supported by experienced, DBS-checked staff with clear safeguarding procedures. SEN considerations are also supported through a flexible and inclusive approach to ensure all guests can take part comfortably.</p>
+        <p>Hilston Park is a trusted activity centre in Monmouth, set between the Black Mountains and the River Wye. For over 50 years, the historic estate has provided residential experiences for schools, corporate teams, families, and groups, offering a unique setting surrounded by meadows and woodland. With accommodation, activities, and catering all in one place, guests can enjoy a seamless and memorable stay. Experienced DBS-checked staff, clear safeguarding procedures, and inclusive SEN support help ensure a safe, welcoming environment for everyone.</p>
       </div>
       <div class="about-intro-images">
         <img src="images/about-team.jpg" alt="Hilston Park team outside the manor">
@@ -456,13 +465,14 @@
   <!-- PLAN YOUR DAY -->
   <section class="plan-day">
     <h2 class="heading-display light center">Plan Your Day at Hilston Park</h2>
-    <div class="plan-cards">
+    <div class="plan-cards" data-reveal>
       <article class="plan-card">
         <div class="plan-bg" style="background-image:url(images/about-plan-outdoor.jpg)"></div>
         <div class="plan-overlay">
+          <span class="plan-tag">Education &amp; Youth</span>
           <h3>Outdoor Learning<br>&amp; Development</h3>
           <div class="plan-reveal">
-            <p>Safely structured, nature-based outdoor adventure activities for adults and pupils that challenge them to think differently.</p>
+            <p>Nature-based outdoor activities that build confidence, teamwork, and personal growth in a safe and engaging environment.</p>
             <a href="educational.html" class="btn-pill">LEARN MORE</a>
           </div>
         </div>
@@ -470,9 +480,10 @@
       <article class="plan-card">
         <div class="plan-bg" style="background-image:url(images/about-plan-team.jpg)"></div>
         <div class="plan-overlay">
+          <span class="plan-tag">Corporate &amp; Events</span>
           <h3>Team Building &amp; Group<br>Challenges</h3>
           <div class="plan-reveal">
-            <p>Interactive team building activities in the heart of Wales. Fresh ground, real challenges, and the kind of perspective that an office never quite manages to give.</p>
+            <p>Interactive challenges designed to strengthen teamwork, communication, and problem-solving in the Welsh countryside.</p>
             <a href="event.html" class="btn-pill">LEARN MORE</a>
           </div>
         </div>
@@ -480,9 +491,10 @@
       <article class="plan-card">
         <div class="plan-bg" style="background-image:url(images/about-plan-family.jpg)"></div>
         <div class="plan-overlay">
+          <span class="plan-tag">Private Stays</span>
           <h3>Private Family<br>Stays</h3>
           <div class="plan-reveal">
-            <p>Palladian elegance. Open countryside. Time that is yours alone. Hilston Park offers private family stays defined by space, silence and moments you&rsquo;ll never forget.</p>
+            <p>Enjoy exclusive countryside stays with comfortable accommodation, open spaces, and quality time together.</p>
             <a href="accomodation.html" class="btn-pill">LEARN MORE</a>
           </div>
         </div>
@@ -494,7 +506,7 @@
   <section class="history">
     <div class="history-intro-block">
       <h2 class="heading-display">Our History</h2>
-      <p>Hilston Park has a long and established history within the Monmouthshire countryside. The written records of the estate trace back to the <strong>13th century</strong>, where it began as a manor estate near Skenfrith. Over centuries, the land evolved under the care of prominent local families and became a heritage estate with unique surroundings.</p>
+      <p>Hilston Park has a long heritage in the Monmouthshire countryside, with origins dating back to the 13th century and a legacy shaped by families, architecture, and education.</p>
     </div>
 
     <div class="timeline">
@@ -506,7 +518,7 @@
           <div class="tl-card-body">
             <span class="tl-year">13th Century</span>
             <h3>The Origins</h3>
-            <p>The written records of the Hilston estate trace back to 1293, where it began as a manor estate near Skenfrith in Monmouthshire. Over centuries, the land evolved under the care of prominent local families and became a heritage estate shaped by the Welsh landscape.</p>
+            <p>The Hilston estate dates back to 1293, beginning as a manor near Skenfrith in Monmouthshire and evolving over time within the Welsh landscape.</p>
           </div>
         </div>
         <div class="tl-node"><div class="tl-dot"></div></div>
@@ -522,7 +534,7 @@
           <div class="tl-card-body">
             <span class="tl-year">1838</span>
             <h3>The Palladian Rebuild</h3>
-            <p>The original house was damaged by fire and later rebuilt in a Palladian style. The new building still stands today as a Grade II listed estate, known for its simple, balanced architecture and prominent position in the Monmouthshire countryside.</p>
+            <p>After fire damage, the estate was rebuilt in a Palladian style and now stands as a Grade II-listed building known for its balanced architecture.</p>
           </div>
         </div>
       </div>
@@ -534,7 +546,7 @@
           <div class="tl-card-body">
             <span class="tl-year">Mid-1900s</span>
             <h3>A Changing Estate</h3>
-            <p>Over the years, ownership of the estate changed several times, with each period shaping its character further. By the mid-1900s, its use began to shift from a private home toward a more open educational purpose, setting the stage for what Hilston Park would become.</p>
+            <p>Ownership changed over time, gradually shifting the estate from a private residence toward an educational and community-focused purpose.</p>
           </div>
         </div>
         <div class="tl-node"><div class="tl-dot"></div></div>
@@ -550,7 +562,7 @@
           <div class="tl-card-body">
             <span class="tl-year">1971</span>
             <h3>An Education Centre is Born</h3>
-            <p>By 1971, Hilston Park officially became an outdoor education centre. School groups began arriving for residential stays, adventure activities, and learning beyond the traditional classroom &mdash; the beginning of 50+ years of meaningful group experiences.</p>
+            <p>Hilston Park became an outdoor education centre, welcoming school groups for residential stays and outdoor learning experiences.</p>
           </div>
         </div>
       </div>
@@ -562,9 +574,8 @@
           <div class="tl-card-body">
             <span class="tl-year">Today</span>
             <h3>Hilston Park Today</h3>
-            <p>Hilston Park continues as a leisure centre in Monmouth, hosting schools, corporate groups, and private visitors. With accommodation for over 130 guests, in-house catering, and more than 20 outdoor activities, the estate remains shaped by the same values of learning, wellbeing, and shared experience that have guided it for over 50 years.</p>
-            <a href="gallery.html" class="btn-outline">DISCOVER MORE</a>
-            <a href="gallery.html" class="btn-outline" style="margin-top:12px;">VIEW GALLERY</a>
+            <p>Hilston Park operates as a residential and activity centre hosting schools, corporate groups, and private stays, with accommodation, catering, and outdoor experiences.</p>
+            <a href="gallery.html" class="btn-pill">DISCOVER MORE</a>
           </div>
         </div>
         <div class="tl-node"><div class="tl-dot"></div></div>
@@ -585,28 +596,28 @@
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7l-9-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>DBS-Checked Staff</h3>
-        <p>All staff working with groups at Hilston Park are DBS-checked through the Disclosure and Barring Service (DBS). This ensures that everyone involved in delivering residential programmes has been appropriately vetted to work with children and vulnerable individuals.</p>
+        <p>All staff working with groups are DBS-checked, ensuring they are appropriately vetted to support children, young people, and vulnerable individuals.</p>
       </div>
       <div class="safety-point">
         <div class="safety-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>Safeguarding Procedures</h3>
-        <p>Proper safeguarding procedures are in place across all residential stays and are followed consistently by the team. The procedures guide supervision, conduct, and response protocols, ensuring a safe and well-managed environment for schools, corporate groups, and private visitors.</p>
+        <p>Robust safeguarding procedures are followed across all stays, helping create a safe, secure, and well-managed environment for every visitor.</p>
       </div>
       <div class="safety-point">
         <div class="safety-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 11l3 3L22 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>Risk Assessments</h3>
-        <p>Risk assessments are completed for activities and residential stays to support safe delivery across all programmes. These are used to plan group activities responsibly and are available to assist schools and organisers with their internal approval processes where required.</p>
+        <p>Risk assessments are completed for activities and residential programmes to support safe planning, delivery, and group participation.</p>
       </div>
       <div class="safety-point">
         <div class="safety-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>Duty of Care</h3>
-        <p>A clear duty of care is maintained throughout every stay at Hilston Park. Experienced staff oversee visitors from arrival to departure, ensuring that accommodation, activities, and site use are managed safely and appropriately at all times.</p>
+        <p>Experienced staff provide supervision throughout each stay, maintaining high standards of safety, welfare, and visitor support at all times.</p>
       </div>
     </div>
   </section>
@@ -616,38 +627,18 @@
     <div class="testimonial-wrap" id="testimonialWrap">
       <div class="testimonial-item active">
         <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">The best part of the experience was, without a doubt, the staff. They are the most friendly group of people you could meet.</p>
-        <p class="testimonial-author">Sarah Powell</p>
+        <p class="testimonial-text">Absolutely beautiful location and lovely, well-kept accommodation. Would definitely love to return and make more wonderful memories with our little family. Our room had a double bed, bunk beds, and plenty of space for our travel cot. They provide you with extra cushions and blankets. We travelled with an 18-month-old and an 8-year-old. Thanks again!</p>
+        <p class="testimonial-author">Rani Kaur</p>
       </div>
       <div class="testimonial-item">
         <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">We came to Hilston Park with a primary school class for a residential. It was the best site I&rsquo;ve been to in 23 years of school camps.</p>
-        <p class="testimonial-author">Heidi Hal</p>
+        <p class="testimonial-text">Stayed here during a short weekend away with my husband and a group of friends. My husband and I stayed in a really cosy cabin with great amenities surrounded by a wonderful park, lake and scenery. The hosts were kind and welcoming, and the main building was wonderful and impressive. I would love to visit again on another climbing trip.</p>
+        <p class="testimonial-author">Subashini Nathan</p>
       </div>
       <div class="testimonial-item">
         <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">The Hilston staff were all very helpful and friendly. I can&rsquo;t wait to come back to this site.</p>
-        <p class="testimonial-author">Supreet Singh</p>
-      </div>
-      <div class="testimonial-item">
-        <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">Absolutely great team that took care of us. Both daughters enjoyed the leap of faith via the special activities team.</p>
-        <p class="testimonial-author">Ibrahim Ahmet</p>
-      </div>
-      <div class="testimonial-item">
-        <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">Every time we come here as a school, it feels like a second home. The site itself is beautiful with a great selection of activities, and we are always very well fed.</p>
-        <p class="testimonial-author">Martin Barker</p>
-      </div>
-      <div class="testimonial-item">
-        <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">Creating a harmonious space in the Welsh countryside to celebrate, reconnect, and embrace adventure.</p>
-        <p class="testimonial-author">Emily Davies</p>
-      </div>
-      <div class="testimonial-item">
-        <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">Fantastic facilities, wonderful views. Thank you Hilston for making us feel welcome.</p>
-        <p class="testimonial-author">John Smith</p>
+        <p class="testimonial-text">Came to a meditation retreat in Wales and had an amazing time. The service here was exceptional, and the staff here are so friendly and so polite, more than happy to help with anything which is needed whenever and wherever. The rooms are lovely, and the lobby fireplace makes it feel just like home.</p>
+        <p class="testimonial-author">Simran Kaur</p>
       </div>
     </div>
     <div class="testimonial-dots" id="testimonialDots"></div>
@@ -666,8 +657,8 @@
           </svg>
         </div>
         <h3>When to Visit</h3>
-        <p>Hilston Park welcomes guests year-round. Summer brings longer days and time outdoors, while winter offers a quieter setting, with time focused indoors.</p>
-        <a href="#" class="btn-pill">LEARN MORE</a>
+        <p>Hilston Park welcomes guests year-round with seasonal outdoor experiences, countryside stays, and activities for schools, groups, and families.</p>
+        <a href="contact.html" class="btn-pill">LEARN MORE</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -676,8 +667,8 @@
           </svg>
         </div>
         <h3>Getting Here</h3>
-        <p>Hilston Park is located near Monmouth in Wales and is accessible by road. For schools and group organisers planning visits, travel assistance may also be provided.</p>
-        <a href="#" class="btn-pill">LEARN MORE</a>
+        <p>Hilston Park is located near Monmouth, with easy road access, making it ideal for schools, corporate groups, families, and private countryside visits.</p>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">LEARN MORE</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -686,7 +677,7 @@
           </svg>
         </div>
         <h3>Get in Touch</h3>
-        <p>Whether you are a school group planning a residential trip, a corporate group planning a retreat, or a wedding party, we&rsquo;d love to arrange your visit.</p>
+        <p>Connect with the Hilston Park team to plan school trips, group retreats, family stays, and private countryside experiences.</p>
         <a href="contact.html" class="btn-pill">CONTACT US</a>
       </div>
     </div>
@@ -702,7 +693,7 @@
         </div>
         <div class="blog-card-body">
           <h3>Hilston Park&rsquo;s International Menu</h3>
-          <p>Our international menu is designed to celebrate cultural connection through every dish. Each item on our menu tells a unique story, bridging the gap between diverse traditions and cuisines from around the world.</p>
+          <p>Hilston Park&#8217;s international menu brings together global flavours and cultural traditions through carefully prepared dishes for every guest.</p>
           <span class="blog-read-more">READ MORE
             <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -714,7 +705,7 @@
         </div>
         <div class="blog-card-body">
           <h3>Planning a School Adventure Trip in 2025? Unleash It at Hilston Park</h3>
-          <p>Organising a memorable school adventure trip in 2025 can be a fulfilling challenge for educators. Creating an experience that will engage students and promote their development requires striking the correct balance between enjoyment and education.</p>
+          <p>Organise a school adventure trip in 2025 at Hilston Park with engaging activities that support learning, teamwork, and student development.</p>
           <span class="blog-read-more">READ MORE
             <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -725,8 +716,8 @@
           <img src="images/hp-hero-schools.jpg" alt="Why Schools Are Booking at Hilston Park" loading="lazy">
         </div>
         <div class="blog-card-body">
-          <h3>Unleash the Adventure: Why Schools Are Booking Their 2025 Trips at Hilston Park</h3>
-          <p>School travels have a significant impact on how young minds develop. A residential adventure provides a special chance for children to leave the classroom and engage in outdoor learning activities.</p>
+          <h3>Why Schools Are Booking Their 2025 Trips at Hilston Park</h3>
+          <p>Discover outdoor learning and residential adventures at Hilston Park that build students&#8217; confidence, teamwork, and personal growth through nature.</p>
           <span class="blog-read-more">READ MORE
             <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -747,35 +738,35 @@
               <span class="acc-question">How is Hilston Park Outdoor Centre used?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
-          <div class="accordion-body"><p>Hilston Park outdoor centre is used for school residential trips, outdoor learning programmes, corporate retreats, and private group stays.</p></div>
+          <div class="accordion-body"><p>Hilston Park Outdoor Centre hosts school residential trips, outdoor learning programmes, corporate retreats, and private group stays throughout the year.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
               <span class="acc-question">Who Runs Hilston Park?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
-          <div class="accordion-body"><p>Hilston Park is a charity-run residential centre operated by an experienced team responsible for delivering education, corporate, and private group programmes.</p></div>
+          <div class="accordion-body"><p>Hilston Park is a charity-run residential centre managed by an experienced team delivering programmes for schools, corporate groups, and private visitors.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
               <span class="acc-question">How Old is Hilston Park Building?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
-          <div class="accordion-body"><p>The earliest record of a building on the site dates back to 1293, which means the estate has been in use for over 700 years.</p></div>
+          <div class="accordion-body"><p>The earliest recorded building on the estate dates to 1293, giving Hilston Park a history spanning more than 700 years.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
               <span class="acc-question">Who Can Stay at Hilston Park?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
-          <div class="accordion-body"><p>The centre hosts school groups, corporate teams, and private bookings, including families and community groups, with arrangements adapted to each type of stay.</p></div>
+          <div class="accordion-body"><p>Hilston Park welcomes school groups, corporate teams, families, and community organisations, with stays tailored to suit different group requirements.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
               <span class="acc-question">What is Included in a Residential Stay?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button>
-          <div class="accordion-body"><p>Residential stays include accommodation, in-house catering, and access to on-site activities, organised according to the needs of the visiting group.</p></div>
+          <div class="accordion-body"><p>Residential stays include accommodation, on-site catering, and access to activities, with arrangements customised to meet each group&rsquo;s needs.</p></div>
         </div>
       </div>
     </div>

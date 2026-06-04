@@ -69,10 +69,12 @@
 
     /* EVENTS WE HOST */
     .events-we-host { background: var(--dark); padding: 88px 80px; }
-    .events-we-host-header { margin-bottom: 48px; }
+    .events-we-host-header { margin-bottom: 48px; text-align: center; }
     .events-we-host-header h2 { color: var(--white); }
+    .service-cta { text-align: center; margin-top: 48px; }
+    .service-carousel { position: relative; overflow: hidden; }
     .service-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+      display: flex; transition: transform 0.4s ease; gap: 2px;
     }
     .service-card {
       background: rgba(255,255,255,0.06); padding: 36px 32px;
@@ -80,8 +82,21 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-top: 3px solid transparent;
       transition: background 0.25s, border-top-color 0.3s;
+      cursor: pointer; flex: 0 0 calc(33.333% - 2px); min-width: calc(33.333% - 2px);
     }
     .service-card:hover { background: rgba(255,255,255,0.1); border-top-color: var(--teal); }
+    .carousel-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 32px; }
+    .carousel-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--teal); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .carousel-btn:hover { background: var(--teal-dark); }
+    .carousel-btn svg { stroke: white; fill: none; stroke-width: 2; width: 18px; height: 18px; }
+    .carousel-dots { display: flex; gap: 8px; }
+    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); border: none; cursor: pointer; padding: 0; transition: background 0.2s; }
+    .carousel-dot.active { background: var(--teal); }
     .service-icon {
       width: 48px; height: 48px; background: var(--teal); border-radius: 50%;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -121,12 +136,17 @@
     .eve-include-header { text-align: center; max-width: 680px; margin: 0 auto 56px; }
     .eve-include-header h2 { margin-bottom: 14px; }
     .eve-include-sub { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); margin: 0; }
-    .eve-offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
-    .eve-offer-card { background: var(--beige); overflow: hidden; }
-    .eve-offer-card img { width: 100%; height: 300px; object-fit: cover; display: block; }
-    .eve-offer-card-body { padding: 28px 32px 36px; }
-    .eve-offer-num { font-family: var(--font-script); font-size: 1.5rem; color: var(--teal); display: block; margin-bottom: 6px; line-height: 1; }
-    .eve-offer-card-body h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.22rem; color: var(--text); margin-bottom: 10px; }
+    .eve-offer-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .eve-offer-text { display: flex; flex-direction: column; gap: 0; }
+    .eve-offer-item { padding: 36px 0; border-bottom: 1px solid var(--border); }
+    .eve-offer-item:first-child { padding-top: 0; }
+    .eve-offer-item:last-child { border-bottom: none; }
+    .eve-offer-num { font-family: var(--font-script); font-size: 1.8rem; color: var(--teal); display: block; margin-bottom: 8px; line-height: 1; }
+    .eve-offer-item h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.22rem; color: var(--text); margin-bottom: 10px; }
+    .eve-offer-item p { font-size: 0.9rem; line-height: 1.78; color: var(--text-muted); }
+    .eve-offer-images { position: sticky; top: 120px; }
+    .eve-offer-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+    .eve-offer-img-grid img { width: 100%; height: 240px; object-fit: cover; display: block; }
     .eve-offer-card-body p { font-size: 0.86rem; line-height: 1.75; color: var(--text-muted); margin: 0; }
     .eve-include-cta { text-align: center; margin-top: 52px; }
 
@@ -217,15 +237,21 @@
       .eve-hero-inner { padding: 48px 40px; }
     }
     @media (max-width: 880px) {
-      .eve-hero-inner, .eve-intro-grid, .activities-grid, .eve-offer-grid, .accom-block, .visit-us-grid, .faq-grid { grid-template-columns: 1fr; }
+      .eve-hero-inner, .eve-intro-grid, .activities-grid, .eve-offer-layout, .accom-block, .visit-us-grid, .faq-grid { grid-template-columns: 1fr; }
+      .eve-offer-images { position: static; }
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 36px 0; }
       .stat-item:nth-child(2)::after, .stat-item:nth-child(4)::after { display: none; }
-      .service-grid { grid-template-columns: 1fr 1fr; }
+      .service-card { flex: 0 0 calc(50% - 1px); min-width: calc(50% - 1px); }
       .accom-block.reverse img { order: 0; }
       .accom-block.reverse .accom-block-content { order: 0; }
+      .eve-intro, .events-we-host, .activities, .eve-include, .eve-accom, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 24px; padding-right: 24px; }
+      .stats-bar { padding-left: 24px; padding-right: 24px; }
+      .eve-hero-inner { padding: 40px 24px; }
     }
     @media (max-width: 540px) {
-      .service-grid { grid-template-columns: 1fr; }
+      .service-card { flex: 0 0 100%; min-width: 100%; }
+      .eve-intro, .events-we-host, .activities, .eve-include, .eve-accom, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 16px !important; padding-right: 16px !important; }
+      .eve-hero-inner { padding: 32px 16px; }
     }
   </style>
 </head>
@@ -244,7 +270,7 @@
           <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
         </div>
         <div class="header-actions">
-          <a href="#" class="btn-book">BOOK / ENQUIRY</a>
+          <a href="javascript:void(0)" class="btn-book">BOOK / ENQUIRY</a>
           <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
@@ -281,7 +307,7 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
-      <a href="#" class="btn-book mobile-nav-book">BOOK / ENQUIRY</a>
+      <a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK / ENQUIRY</a>
     </nav>
   </div>
 
@@ -294,9 +320,9 @@
     <div class="eve-hero-overlay"></div>
     <div class="eve-hero-inner">
       <div>
-        <h1>Curated Event Experiences At Hilston Park</h1>
-        <p class="eve-hero-sub">We create events that are experienced, not simply attended. From corporate retreats and private gatherings to special occasions, every event at Hilston Park brings enriching experiences.</p>
-        <a href="contact.html" class="btn-pill">ENQUIRE NOW</a>
+        <h1>Curated Event Experiences at Hilston Park</h1>
+        <p class="eve-hero-sub">Hilston Park creates memorable events for corporate retreats, private gatherings, and special occasions in a historic countryside setting.</p>
+        <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">ENQUIRE NOW</a>
       </div>
     </div>
   </section>
@@ -310,7 +336,7 @@
       </div>
       <div class="stat-item">
         <div class="stat-number"><span class="counter" data-target="130">0</span><span class="stat-suffix">+</span></div>
-        <p class="stat-label">Guests Stays</p>
+        <p class="stat-label">Guest Stays</p>
       </div>
       <div class="stat-item">
         <div class="stat-number"><span class="counter" data-target="700">0</span><span class="stat-suffix">+</span></div>
@@ -331,10 +357,8 @@
       </div>
       <div class="eve-intro-text">
         <h2 class="heading-display">Every Event Finds Its Setting at Hilston Park</h2>
-        <p class="eve-intro-sub">From weddings and family celebrations to corporate retreats and team building days — Hilston Park hosts events that are experienced, not simply attended.</p>
-        <p>The historic manor house, private estate grounds, and Wye Valley setting create an environment that works across every occasion. Weddings are held in the open air and within the manor. Corporate groups use the grounds for team challenges and the indoor spaces for workshops. Families return year after year for private celebrations that feel genuinely special.</p>
-        <p>We plan the entire experience around you — activities, catering, accommodation, and setup. You share your group size, your occasion, and your dates. We build the event around what matters to you.</p>
-        <p>Whether you are planning a one-day gathering or a multi-day residential stay, Hilston Park provides the space, support, and setting for a stress-free, memorable event.</p>
+        <p class="eve-intro-sub">From weddings and family celebrations to corporate retreats and outdoor team building events, Hilston Park provides a unique countryside setting for memorable and meaningful group experiences.</p>
+        <p>The historic manor house, private estate grounds, and Wye Valley surroundings create the perfect backdrop for celebrations, workshops, retreats, and team activities, all within one location. We tailor every event around your needs, combining accommodation, catering, activities, and event spaces to deliver seamless one-day gatherings or multi-day residential experiences.</p>
       </div>
     </div>
   </section>
@@ -344,61 +368,75 @@
     <div class="events-we-host-header">
       <h2 class="heading-display">Events We Host</h2>
     </div>
-    <div class="service-grid">
-      <div class="service-card">
+    <div class="service-carousel">
+    <div class="service-grid" id="serviceGrid">
+      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
         <div class="service-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="12"/></svg>
         </div>
         <h3>Outdoor Corporate Events</h3>
-        <p>Take your team out to an environment that reduces mental fatigue. Hilston Park makes corporate events stress-free by handling the space, accommodation, activities, and catering.</p>
+        <p>Host productive corporate events with accommodation, catering, activities, and dedicated spaces designed to help teams reconnect and refocus.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
         <div class="service-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
         <h3>Outdoor Team Building Events</h3>
-        <p>Enhance workplace collaboration through outdoor challenges, leadership exercises, workshops, and hands-on group activities safely hosted within the landscapes of the Wye Valley.</p>
+        <p>Strengthen teamwork through outdoor challenges, leadership exercises, workshops, and engaging group activities across the estate.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
         <div class="service-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s-8-5.8-8-12a8 8 0 0116 0c0 6.2-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <h3>Wellbeing Retreats</h3>
-        <p>A quieter, more intentional event in a rural setting. Use the grounds and indoor spaces to deliver wellness programmes, mindfulness sessions, or leadership development days.</p>
+        <p>Deliver wellbeing programmes, mindfulness sessions, and leadership retreats within peaceful indoor and outdoor countryside spaces.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
         <div class="service-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
         <h3>Family Gatherings &amp; Celebrations</h3>
-        <p>Bring friends and family together for birthdays, reunions, anniversaries, and private countryside celebrations with accommodation, activities, dining, and outdoor space in one location.</p>
+        <p>Celebrate birthdays, reunions, and special occasions with accommodation, dining, activities, and private event spaces.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
         <div class="service-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
         </div>
         <h3>Health &amp; Wellbeing Residentials</h3>
-        <p>Plan a day or week-long rural retreat for structured wellbeing programmes or self-organised group stays in the heart of the Welsh countryside.</p>
+        <p>Enjoy residential retreats focused on wellbeing, personal development, group workshops, and restorative countryside experiences.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
         <div class="service-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
         </div>
         <h3>Environmental &amp; Conservation Programmes</h3>
-        <p>Connect groups with the natural surroundings of the Wye Valley through conservation activities. Explore the local landscapes and discover rare plant species and dragonflies found on the estate.</p>
+        <p>Explore local habitats, conservation activities, and wildlife while learning about the estate&#8217;s natural environment and biodiversity.</p>
       </div>
+    </div>
+    </div><!-- /.service-carousel -->
+    <div class="carousel-nav" id="serviceCarouselNav">
+      <button class="carousel-btn" id="servicePrev" aria-label="Previous">
+        <svg viewBox="0 0 18 18"><polyline points="11,3 5,9 11,15"/></svg>
+      </button>
+      <div class="carousel-dots" id="serviceDots"></div>
+      <button class="carousel-btn" id="serviceNext" aria-label="Next">
+        <svg viewBox="0 0 18 18"><polyline points="7,3 13,9 7,15"/></svg>
+      </button>
+    </div>
+    <div class="service-cta">
+      <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">ENQUIRE ABOUT AN EVENT</a>
     </div>
   </section>
 
   <!-- ACTIVITIES -->
   <section class="activities">
     <h2 class="heading-display activities-heading">Team Building Activities Included with Every Event</h2>
-    <p class="activities-subhead">Every Hilston Park event includes access to outdoor activities that get groups moving, collaborating, and genuinely engaged. No add-ons, no hidden costs.</p>
+    <p class="activities-subhead">Every Hilston Park event includes outdoor activities designed to encourage collaboration, communication, and active group participation.</p>
     <div class="activities-grid">
       <div class="act-col">
         <div class="act-text-card">
           <h3 class="act-label">Leadership Challenges</h3>
-          <p>Structured tasks that identify natural leaders, encourage shared decision-making, and develop communication under pressure.</p>
+          <p>Structured activities that develop leadership skills, encourage teamwork, and improve communication through shared decision-making.</p>
         </div>
         <div class="act-img-card" style="height:767px;">
           <img src="images/event-act-highropes.jpg" alt="High Ropes team building at Hilston Park">
@@ -407,14 +445,14 @@
       <div class="act-col">
         <div class="act-text-card">
           <h3 class="act-label">Orienteering &amp; Navigation</h3>
-          <p>Groups work together across the estate grounds to solve route challenges, sharpen focus, and build trust through shared problem-solving.</p>
+          <p>Interactive route-based challenges that build trust, teamwork, and problem-solving while exploring the estate grounds.</p>
         </div>
         <div class="act-img-card" style="height:600px;">
           <img src="images/event-act-nature.jpg" alt="Nature and bushcraft activity at Hilston Park">
         </div>
         <div class="act-text-card">
           <h3 class="act-label">Raft Building</h3>
-          <p>A classic team challenge. Groups are given materials, a brief and a deadline — what they build and how they build it reveals everything about how they work.</p>
+          <p>A practical group challenge that encourages planning, cooperation, creativity, and effective teamwork under time constraints.</p>
         </div>
       </div>
       <div class="act-col">
@@ -422,12 +460,12 @@
           <img src="images/event-act-third.jpg" alt="Outdoor problem-solving at Hilston Park">
         </div>
         <div class="act-cta-card">
-          <a href="contact.html#contact-form">ENQUIRE ABOUT ACTIVITIES</a>
+          <a href="javascript:void(0)" data-booking-type="event">ENQUIRE ABOUT ACTIVITIES</a>
           <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="act-text-card">
           <h3 class="act-label">Problem-Solving Initiatives</h3>
-          <p>Facilitated group exercises designed to test creative thinking and collective decision-making in a supportive outdoor setting.</p>
+          <p>Facilitated outdoor exercises focused on creative thinking, communication, and collective decision-making within a supportive environment.</p>
         </div>
       </div>
     </div>
@@ -437,7 +475,7 @@
   <section class="eve-include">
     <div class="eve-include-header">
       <h2 class="heading-display">What&#8217;s Included in Your Event Experience</h2>
-      <p class="eve-include-sub">Hilston Park brings together the setting, the food, the activities, and the accommodation. Every occasion is different &mdash; the estate adapts to yours.</p>
+      <p class="eve-include-sub">Hilston Park brings together accommodation, catering, activities, and event spaces, creating flexible experiences tailored to every occasion.</p>
     </div>
     <div class="eve-offer-grid">
 
@@ -446,7 +484,7 @@
         <div class="eve-offer-card-body">
           <span class="eve-offer-num">01</span>
           <h3>Weddings &amp; Private Celebrations</h3>
-          <p>Hilston Park&#8217;s historic manor house, private estate grounds, and countryside setting make it an exceptional venue for weddings, anniversaries, milestone birthdays, and family reunions. The estate is yours for the occasion.</p>
+          <p>A historic countryside setting for weddings, anniversaries, birthdays, reunions, and private gatherings with dedicated event spaces.</p>
         </div>
       </div>
 
@@ -455,7 +493,7 @@
         <div class="eve-offer-card-body">
           <span class="eve-offer-num">02</span>
           <h3>Catering &amp; Dining</h3>
-          <p>Every event includes freshly prepared meals served in Hilston Park&#8217;s heritage dining hall. We handle all dietary requirements in advance &mdash; vegetarian, vegan, and allergies &mdash; so your event runs without interruption.</p>
+          <p>Freshly prepared meals served on-site, with dietary requirements managed in advance for a seamless event experience.</p>
         </div>
       </div>
 
@@ -464,7 +502,7 @@
         <div class="eve-offer-card-body">
           <span class="eve-offer-num">03</span>
           <h3>Outdoor Activities &amp; Team Building</h3>
-          <p>Over 15 outdoor activities are available to all event groups. From nature walks and bushcraft sessions to high ropes and raft building, every visit includes full activity access at no extra cost.</p>
+          <p>Access to outdoor activities that encourage engagement, teamwork, exploration, and shared experiences throughout your event.</p>
         </div>
       </div>
 
@@ -473,13 +511,13 @@
         <div class="eve-offer-card-body">
           <span class="eve-offer-num">04</span>
           <h3>Adventure Experiences</h3>
-          <p>For groups that want more, adventure programming adds high ropes, zip line challenges, and problem-solving initiatives to your event day. Suitable for corporate groups, school trips, and private parties alike.</p>
+          <p>Additional adventure activities designed to challenge, motivate, and entertain groups in a safe outdoor environment.</p>
         </div>
       </div>
 
     </div>
     <div class="eve-include-cta">
-      <a href="contact.html" class="btn-pill">GET A CUSTOM ITINERARY</a>
+      <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">GET A CUSTOM ITINERARY</a>
     </div>
   </section>
 
@@ -521,7 +559,7 @@
     </div>
 
     <div class="eve-accom-cta">
-<a href="#" class="btn-pill" data-booking-type="event">PLAN AN EVENT</a>
+<a href="javascript:void(0)" class="btn-pill" data-booking-type="event">PLAN AN EVENT</a>
     </div>
   </section>
 
@@ -538,8 +576,8 @@
           </svg>
         </div>
         <h3>When to Visit</h3>
-        <p>Hilston Park welcomes guests year-round. Summer brings longer days and time outdoors, while winter offers a quieter setting with time focused indoors.</p>
-        <a href="#" class="btn-pill">LEARN MORE</a>
+        <p>Hilston Park welcomes guests year-round with seasonal outdoor experiences, countryside stays, and activities for schools, groups, and families.</p>
+        <a href="contact.html" class="btn-pill">LEARN MORE</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -548,8 +586,8 @@
           </svg>
         </div>
         <h3>Getting Here</h3>
-        <p>Hilston Park is located near Monmouth in Wales and is accessible by road. For schools and group organisers planning visits, travel assistance may also be provided.</p>
-        <a href="#" class="btn-pill">LEARN MORE</a>
+        <p>Hilston Park is located near Monmouth, with easy road access, making it ideal for schools, corporate groups, families, and private countryside visits.</p>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">LEARN MORE</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -558,8 +596,8 @@
           </svg>
         </div>
         <h3>Get in Touch</h3>
-        <p>Whether you are a school group, a corporate team planning a retreat, or a private group, we&#8217;d love to arrange your visit and make it exceptional.</p>
-        <a href="#" class="btn-pill">CONTACT US</a>
+        <p>Connect with the Hilston Park team to plan school trips, group retreats, family stays, and private countryside experiences.</p>
+        <a href="contact.html" class="btn-pill">CONTACT US</a>
       </div>
     </div>
   </section>
@@ -569,38 +607,23 @@
     <div class="testimonial-wrap" id="testimonialWrap">
       <div class="testimonial-item active">
         <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">The best part of the experience was, without a doubt, the staff. They are the most friendly group of people you could meet.</p>
-        <p class="testimonial-author">Sarah Powell</p>
-      </div>
-      <div class="testimonial-item">
-        <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">We came to Hilston Park with a primary school class for a residential. It was the best site I&#8217;ve been to in 23 years of school camps.</p>
-        <p class="testimonial-author">Heidi Hal</p>
-      </div>
-      <div class="testimonial-item">
-        <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">Attended a meditation retreat at this beautiful site. The site is absolutely beautiful, and the views are breathtaking.</p>
-        <p class="testimonial-author">Supreet Singh</p>
-      </div>
-      <div class="testimonial-item">
-        <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">Absolutely great team that took care of us. Both daughters enjoyed the leap of faith via the special activities team.</p>
-        <p class="testimonial-author">Ibrahim Ahmet</p>
-      </div>
-      <div class="testimonial-item">
-        <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">Every time we come here as a school, it feels like a second home. The site itself is beautiful with a great selection of activities, and we are always very well fed.</p>
-        <p class="testimonial-author">Martin Barker</p>
-      </div>
-      <div class="testimonial-item">
-        <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">My husband and I stayed in a really cosy cabin with great amenities surrounded by a wonderful park, lake and scenery.</p>
-        <p class="testimonial-author">Subashini Nathan</p>
-      </div>
-      <div class="testimonial-item">
-        <p class="testimonial-quote-mark">&ldquo;</p>
-        <p class="testimonial-text">Best week ever! It was so fun to come and play outside with lots of adrenaline activities, and the staff got so involved in making it the best experience.</p>
+        <p class="testimonial-text">Best week ever!! It was so fun to come and play outside with lots of adrenaline activities, and the staff got so involved in making it the best experience.</p>
         <p class="testimonial-author">Lua Martinez</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">We have all had a lovely time this weekend. All the staff at Hilston were amazing from start to finish. The activities have been so enjoyable, the food delicious, and no request has been too much. The children have all thoroughly enjoyed themselves &mdash; lots of smiles and laughter throughout the weekend.</p>
+        <p class="testimonial-author">N Gardiner</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">We spent a jam-packed 3 days in Hilston with our year 6 children. They have made the most wonderful memories, and so have we! The opportunities Hilston provided were fantastic and taught everyone some unforgettable life lessons. Everyone was happy and comfortable throughout the stay, and the staff cannot do enough to make everyone feel at home. The food was outstanding throughout our stay (thank you, Chef Ramsay and team!). Thank you so much to everyone involved.</p>
+        <p class="testimonial-author">Hollie Hipkiss</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">We had a family reunion at Hilston, with members ranging in age from 9 months to 80 years. Mani was a fantastic host, ensuring all needs were met and the chef catered a delicious evening meal and a solid breakfast before we hit the road. The grounds are beautiful, the accommodation is comfortable, and the staff are welcoming, attentive, and thoughtful. Highly recommend!!</p>
+        <p class="testimonial-author">Shirley Glover</p>
       </div>
     </div>
     <div class="testimonial-dots" id="testimonialDots"></div>
@@ -609,8 +632,8 @@
   <!-- PLANNING CTA -->
   <section class="planning-cta">
     <h2>Planning an Event, Retreat or Group Stay?</h2>
-    <p>Tell us about your group size, preferred dates, and what you have in mind. The Hilston Park team will help you work out the right combination of accommodation, activities, catering, and event space.</p>
-    <a href="#" class="btn-pill">DISCUSS YOUR EVENT</a>
+    <p>Tell us about your group, preferred dates, and event requirements. Our team will help create the right mix of accommodation, activities, catering, and event spaces.</p>
+    <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">DISCUSS YOUR EVENT</a>
   </section>
 
   <!-- NEWSLETTER -->
@@ -633,45 +656,38 @@
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-btn">
-            <span class="acc-question">What types of groups can book events at Hilston Park?</span>
+            <span class="acc-question">What types of groups can book events?</span>
             <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
           </button>
-          <div class="accordion-body"><p>We welcome corporate teams, private groups, wellbeing organisations, and community groups. If you are looking for an outdoor event venue in Wales with on-site accommodation, outdoor activities, and catering, Hilston Park can support your event needs.</p></div>
+          <div class="accordion-body"><p>Hilston Park welcomes corporate teams, private groups, wellbeing organisations, and community groups looking for an outdoor event venue in Wales with accommodation, activities, and catering.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
             <span class="acc-question">Are events limited to fixed packages?</span>
             <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
           </button>
-          <div class="accordion-body"><p>Not at all. You decide how long you need. One day, three days, a full week. Most groups land somewhere between 1 and 7 days, but we work according to your schedule, not a fixed template.</p></div>
+          <div class="accordion-body"><p>No. Events can be tailored to your schedule, whether you need a one-day event or a multi-day residential experience.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
             <span class="acc-question">What is included in your group event?</span>
             <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
           </button>
-          <div class="accordion-body">
-            <p>It depends on how you book:</p>
-            <ul style="list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:6px;">
-              <li style="padding-left:16px;position:relative;font-size:0.88rem;color:var(--text-muted);"><span style="position:absolute;left:0;color:var(--teal);">&#8212;</span>Day Event &mdash; Outdoor space, activities, and catering during your visit.</li>
-              <li style="padding-left:16px;position:relative;font-size:0.88rem;color:var(--text-muted);"><span style="position:absolute;left:0;color:var(--teal);">&#8212;</span>Residential Stay &mdash; Overnight accommodation, all meals, activities, and evening use of the grounds.</li>
-              <li style="padding-left:16px;position:relative;font-size:0.88rem;color:var(--text-muted);"><span style="position:absolute;left:0;color:var(--teal);">&#8212;</span>Meeting Spaces &mdash; Indoor rooms available for workshops, briefings, and sessions.</li>
-            </ul>
-          </div>
+          <div class="accordion-body"><p>Events can include accommodation, catering, outdoor activities, event spaces, and meeting rooms, depending on your requirements.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
             <span class="acc-question">Are private bookings exclusive use?</span>
             <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
           </button>
-          <div class="accordion-body"><p>It depends on the accommodation and your dates. Some options can be arranged for exclusive use. Mention it when you enquire, and we will let you know what is available.</p></div>
+          <div class="accordion-body"><p>Exclusive-use options may be available depending on accommodation type, group size, and booking dates. Please enquire for availability.</p></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-btn">
             <span class="acc-question">Do you support multi-day residential events?</span>
             <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
           </button>
-          <div class="accordion-body"><p>Yes, and it is one of the things Hilston Park does well. Your group can stay overnight, run activities throughout the day, use the grounds in the evening, and have every meal catered on site.</p></div>
+          <div class="accordion-body"><p>Yes. Hilston Park offers multi-day residential events with accommodation, activities, catering, and access to the estate grounds.</p></div>
         </div>
       </div>
     </div>
@@ -734,6 +750,36 @@
 </div>
 
 <script src="script.js"></script>
+<script>
+  (function(){
+    var grid = document.getElementById('serviceGrid');
+    var prevBtn = document.getElementById('servicePrev');
+    var nextBtn = document.getElementById('serviceNext');
+    var dotsEl = document.getElementById('serviceDots');
+    if(!grid) return;
+    var cards = grid.querySelectorAll('.service-card');
+    var total = cards.length;
+    var perView = window.innerWidth <= 640 ? 1 : window.innerWidth <= 1060 ? 2 : 3;
+    var pages = Math.ceil(total / perView);
+    var current = 0;
+    for(var i=0;i<pages;i++){
+      var d = document.createElement('button');
+      d.className = 'carousel-dot' + (i===0?' active':'');
+      d.setAttribute('aria-label','Page '+(i+1));
+      d.setAttribute('data-page', i);
+      d.addEventListener('click', function(){ goTo(parseInt(this.getAttribute('data-page'))); });
+      dotsEl.appendChild(d);
+    }
+    function goTo(n){
+      current = Math.max(0, Math.min(n, pages-1));
+      var cardW = cards[0].offsetWidth + 2;
+      grid.style.transform = 'translateX(-' + (current * perView * cardW) + 'px)';
+      dotsEl.querySelectorAll('.carousel-dot').forEach(function(d,i){ d.classList.toggle('active', i===current); });
+    }
+    prevBtn.addEventListener('click', function(){ goTo(current-1); });
+    nextBtn.addEventListener('click', function(){ goTo(current+1); });
+  })();
+</script>
 <script>
   (function(){
     var counters = document.querySelectorAll('.counter');
