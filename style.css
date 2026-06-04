@@ -378,7 +378,8 @@ body { overflow-x: clip; }
 .mobile-nav-list li a:hover { color: var(--teal); }
 .mobile-nav-list li a:hover::before { left: 20px; right: 20px; }
 .mobile-nav-book-item {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 .mobile-nav-book-item a.mobile-nav-book {
   display: inline-block;

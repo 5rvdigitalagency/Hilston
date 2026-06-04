@@ -277,11 +277,13 @@
       .edu-intro, .activities, .we-offer, .edu-accom, .visit-us, .testimonials, .newsletter-band, .faq { padding-left: 24px; padding-right: 24px; }
       .stats-bar { padding-left: 24px; padding-right: 24px; }
       .edu-hero-inner { padding: 40px 24px; }
-      .age-gallery { padding-left: 24px; }
-      .age-gallery-sub { padding-right: 24px; }
+      .age-gallery { padding-left: 24px; padding-right: 0; }
+      .age-gallery-header { flex-direction: column; align-items: flex-start; padding-right: 24px; gap: 16px; }
+      .age-gallery-header > div:first-child { text-align: left; flex: unset; }
+      .age-gallery-sub { padding-right: 0; margin: 0; }
+      .gallery-nav { align-self: flex-start; }
       .gallery-track { padding-right: 24px; }
-      .age-gallery-header > div:first-child { text-align: left; }
-      .age-gallery-sub { margin: 0; }
+      .gallery-slide-item { flex: 0 0 calc(100vw - 64px); height: 320px; }
       .visit-us .heading-display { text-align: center; }
       .visit-card .btn-pill { align-self: stretch; text-align: center; justify-content: center; }
       .edu-accom-img { grid-template-rows: 220px 220px; }
