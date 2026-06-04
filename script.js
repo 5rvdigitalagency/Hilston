@@ -173,9 +173,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var QBOOK_RATES_ID  = "QBOOKWIDGET_RATES_ALLITEMS_202788cc19e79e9d082d25e00f1693f4";
   /* Server-rendered rates widget — CORS-open, server-side rendered HTML with live per-night pricing */
   var SC_RATES_URL = "https://cdn.hotels.uk.com/sc/51665/eff381e2425e310943f59d71f160fa71/0/4";
-  /* Inquiry endpoint — Web3Forms (access key for Hilston Enquiries form) */
-  var INQUIRY_ENDPOINT = "https://api.web3forms.com/submit";
-  var INQUIRY_KEY = "9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4";
+  /* Inquiry endpoint — Formsubmit relays form data to this email; first submission triggers a confirmation email to activate */
+  var INQUIRY_ENDPOINT = "https://formsubmit.co/ajax/info@hilstonpark.com";
 
   /* Room definitions — sourced from Q-Book api/pull and accommodation page.
      maxAdults/maxChildren reflect Q-Book item occupancy settings.
@@ -839,8 +838,9 @@ document.addEventListener("DOMContentLoaded", function () {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({
-        access_key: INQUIRY_KEY,
-        subject: "Website enquiry: " + about,
+        _subject: "Website enquiry: " + about,
+        _template: "table",
+        _captcha: "false",
         name: name,
         email: email,
         phone: phone,
