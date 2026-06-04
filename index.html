@@ -5,6 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hilston Park</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Plan Your Visit */
+    .visit-us { background: var(--white); padding: 88px 80px; }
+    .visit-us .heading-display { margin-bottom: 44px; }
+    .visit-us-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .visit-card {
+      background: var(--beige-soft); padding: 36px 32px;
+      display: flex; flex-direction: column; gap: 16px; border-top: 3px solid var(--teal);
+    }
+    .visit-icon { width: 46px; height: 46px; background: var(--teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .visit-icon svg { width: 22px; height: 22px; stroke: white; fill: none; stroke-width: 2; }
+    .visit-card h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.3rem; color: var(--text); }
+    .visit-card p { font-size: 0.88rem; line-height: 1.78; color: var(--text-muted); flex: 1; }
+    .visit-card .btn-pill { margin-top: 4px; align-self: flex-start; }
+    /* FAQ */
+    .faq { background: var(--beige); padding: 88px 80px; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1.65fr; gap: 80px; align-items: start; }
+    .faq-label { font-family: var(--font-script); font-size: 1.6rem; color: var(--teal); margin-bottom: 10px; display: block; }
+    .faq-grid .heading-display { position: sticky; top: 120px; }
+    @media (max-width: 1100px) {
+      .visit-us, .faq { padding-left: 40px; padding-right: 40px; }
+    }
+    @media (max-width: 880px) {
+      .visit-us, .faq { padding-left: 24px; padding-right: 24px; }
+      .visit-us-grid { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; gap: 32px; }
+      .faq-grid .heading-display { position: static; }
+      .visit-us .heading-display { text-align: center; }
+      .visit-card .btn-pill { align-self: stretch; text-align: center; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .visit-us, .faq { padding-left: 16px !important; padding-right: 16px !important; }
+    }
+  </style>
 </head>
 <body>
 
@@ -37,8 +71,8 @@
       <ul class="nav-list">
         <li><a href="about.html">ABOUT</a></li>
         <li><a href="educational.html">EDUCATION</a></li>
-        <li><a href="event.html">EVENTS</a></li>
         <li><a href="accomodation.html">ACCOMMODATION</a></li>
+        <li><a href="event.html">EVENTS</a></li>
         <li><a href="contact.html">CONTACT</a></li>
         <li><a href="blogs.html">BLOG</a></li>
       </ul>
@@ -54,8 +88,8 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="educational.html">Education</a></li>
-        <li><a href="event.html">Events</a></li>
         <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="event.html">Events</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
@@ -73,17 +107,17 @@
       </div>
     </article>
     <article class="hero-card">
-      <div class="hero-bg" style="background-image:url(images/hp-hero-corporate.jpg)"></div>
-      <div class="hero-overlay"></div>
-      <div class="hero-frame">
-        <a href="event.html" class="hero-label">Corporate &amp; Group Events</a>
-      </div>
-    </article>
-    <article class="hero-card">
       <div class="hero-bg" style="background-image:url(images/hp-hero-families.jpg)"></div>
       <div class="hero-overlay"></div>
       <div class="hero-frame">
         <a href="accomodation.html" class="hero-label">Families &amp; Private Stays</a>
+      </div>
+    </article>
+    <article class="hero-card">
+      <div class="hero-bg" style="background-image:url(images/hp-hero-corporate.jpg)"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-frame">
+        <a href="event.html" class="hero-label">Corporate &amp; Group Events</a>
       </div>
     </article>
   </section>
@@ -163,23 +197,6 @@
         </div>
       </article>
 
-      <article class="svc-card svc-card--events">
-        <div class="svc-bg" style="background-image:url(images/hp-svc-corporate.jpg)"></div>
-        <div class="svc-overlay"></div>
-        <div class="svc-body">
-          <span class="svc-tag">Corporate &amp; Group Events</span>
-          <h3>Team retreats designed to deliver real results beyond the office</h3>
-          <div class="svc-reveal">
-            <ul class="svc-list">
-              <li>Adventure activities and team challenge programmes</li>
-              <li>Exclusive private estate hire</li>
-              <li>Flexible half-day to multi-day formats</li>
-            </ul>
-            <a href="javascript:void(0)" class="btn-hero" data-booking-type="event">PLAN AN EVENT</a>
-          </div>
-        </div>
-      </article>
-
       <article class="svc-card svc-card--stays">
         <div class="svc-bg" style="background-image:url(images/hp-svc-private.jpg)"></div>
         <div class="svc-overlay"></div>
@@ -193,6 +210,23 @@
               <li>1 to 7+ night residential stays</li>
             </ul>
             <a href="javascript:void(0)" class="btn-hero" data-booking-type="stay">CHECK AVAILABILITY</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="svc-card svc-card--events">
+        <div class="svc-bg" style="background-image:url(images/hp-svc-corporate.jpg)"></div>
+        <div class="svc-overlay"></div>
+        <div class="svc-body">
+          <span class="svc-tag">Corporate &amp; Group Events</span>
+          <h3>Team retreats designed to deliver real results beyond the office</h3>
+          <div class="svc-reveal">
+            <ul class="svc-list">
+              <li>Adventure activities and team challenge programmes</li>
+              <li>Exclusive private estate hire</li>
+              <li>Flexible half-day to multi-day formats</li>
+            </ul>
+            <a href="javascript:void(0)" class="btn-hero" data-booking-type="event">PLAN AN EVENT</a>
           </div>
         </div>
       </article>
@@ -350,6 +384,45 @@
     </div>
   </section>
 
+  <!-- ===== PLAN YOUR VISIT ===== -->
+  <section class="visit-us">
+    <h2 class="heading-display center">Plan Your Visit</h2>
+    <div class="visit-us-grid">
+      <div class="visit-card">
+        <div class="visit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+          </svg>
+        </div>
+        <h3>When to Visit</h3>
+        <p>Hilston Park welcomes guests year-round, offering summer outdoor experiences with longer days and winter stays focused on calm indoor and group activities.</p>
+        <a href="contact.html" class="btn-pill">LEARN MORE</a>
+      </div>
+      <div class="visit-card">
+        <div class="visit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+        </div>
+        <h3>Getting Here</h3>
+        <p>Located near Monmouth in Wales, Hilston Park is easily accessible by road, with travel support available for school and group organisers if required.</p>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">LEARN MORE</a>
+      </div>
+      <div class="visit-card">
+        <div class="visit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 12 19.79 19.79 0 01.42 3.18 2 2 0 012.4 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.9a16 16 0 006.18 6.18l1.27-.78a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </div>
+        <h3>Get in Touch</h3>
+        <p>Whether you&#8217;re a school, corporate team, or private group, our team is ready to help you plan and arrange your visit.</p>
+        <a href="contact.html" class="btn-pill">CONTACT US</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== INSTAGRAM ===== -->
   <section class="insta-strip">
     <div class="insta-header">
@@ -368,6 +441,53 @@
     <div class="insta-track" role="region" aria-label="Hilston Park Instagram gallery">
       <div class="insta-inner" id="insta-inner">
         <!-- populated by script.js via Behold JSON API -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq">
+    <div class="faq-grid">
+      <div>
+        <span class="faq-label">FAQ</span>
+        <h2 class="heading-display">Frequently<br>Asked<br>Questions</h2>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-btn">
+              <span class="acc-question">How is Hilston Park Outdoor Centre used?</span>
+              <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+            </button>
+          <div class="accordion-body"><p>Hilston Park Outdoor Centre hosts school residential trips, outdoor learning programmes, corporate retreats, and private group stays throughout the year.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+              <span class="acc-question">Who Runs Hilston Park?</span>
+              <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+            </button>
+          <div class="accordion-body"><p>Hilston Park is a charity-run residential centre managed by an experienced team delivering programmes for schools, corporate groups, and private visitors.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+              <span class="acc-question">How Old is Hilston Park Building?</span>
+              <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+            </button>
+          <div class="accordion-body"><p>The earliest recorded building on the estate dates to 1293, giving Hilston Park a history spanning more than 700 years.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+              <span class="acc-question">Who Can Stay at Hilston Park?</span>
+              <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+            </button>
+          <div class="accordion-body"><p>Hilston Park welcomes school groups, corporate teams, families, and community organisations, with stays tailored to suit different group requirements.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+              <span class="acc-question">What is Included in a Residential Stay?</span>
+              <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+            </button>
+          <div class="accordion-body"><p>Residential stays include accommodation, on-site catering, and access to activities, with arrangements customised to meet each group&rsquo;s needs.</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -428,6 +548,6 @@
 
 </div><!-- /site-wrap -->
 
-<script src="script.js"></script>
+<script src="script.js?v=2"></script>
 </body>
 </html>

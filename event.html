@@ -64,7 +64,7 @@
     .eve-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .eve-intro-img img { width: 100%; height: 520px; object-fit: cover; display: block; }
     .eve-intro-text h2 { margin-bottom: 10px; }
-    .eve-intro-sub { font-size: 1rem; line-height: 1.65; color: var(--text-muted); margin-bottom: 20px; font-style: italic; }
+    .eve-intro-sub { font-size: 1rem; line-height: 1.65; color: var(--text-muted); margin-bottom: 20px; }
     .eve-intro-text p { font-size: 0.92rem; line-height: 1.88; color: var(--text-muted); margin-bottom: 1.1rem; }
 
     /* EVENTS WE HOST */
@@ -285,8 +285,8 @@
       <ul class="nav-list">
         <li><a href="about.html">ABOUT</a></li>
         <li><a href="educational.html">EDUCATION</a></li>
-        <li><a href="event.html" class="nav-active">EVENTS</a></li>
         <li><a href="accomodation.html">ACCOMMODATION</a></li>
+        <li><a href="event.html" class="nav-active">EVENTS</a></li>
         <li><a href="contact.html">CONTACT</a></li>
         <li><a href="blogs.html">BLOG</a></li>
       </ul>
@@ -302,8 +302,8 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="educational.html">Education</a></li>
-        <li><a href="event.html">Events</a></li>
         <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="event.html">Events</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
@@ -477,41 +477,40 @@
       <h2 class="heading-display">What&#8217;s Included in Your Event Experience</h2>
       <p class="eve-include-sub">Hilston Park brings together accommodation, catering, activities, and event spaces, creating flexible experiences tailored to every occasion.</p>
     </div>
-    <div class="eve-offer-grid">
+    <div class="eve-offer-layout">
 
-      <div class="eve-offer-card">
-        <img src="images/event-manor.jpg" alt="Wedding ceremony at Hilston Park estate">
-        <div class="eve-offer-card-body">
+      <div class="eve-offer-text">
+        <div class="eve-offer-item">
           <span class="eve-offer-num">01</span>
           <h3>Weddings &amp; Private Celebrations</h3>
           <p>A historic countryside setting for weddings, anniversaries, birthdays, reunions, and private gatherings with dedicated event spaces.</p>
         </div>
-      </div>
 
-      <div class="eve-offer-card">
-        <img src="images/event-incl-food.jpg" alt="Freshly prepared catering at Hilston Park">
-        <div class="eve-offer-card-body">
+        <div class="eve-offer-item">
           <span class="eve-offer-num">02</span>
           <h3>Catering &amp; Dining</h3>
           <p>Freshly prepared meals served on-site, with dietary requirements managed in advance for a seamless event experience.</p>
         </div>
-      </div>
 
-      <div class="eve-offer-card">
-        <img src="images/event-incl-nature.jpg" alt="Outdoor activities and team building at Hilston Park">
-        <div class="eve-offer-card-body">
+        <div class="eve-offer-item">
           <span class="eve-offer-num">03</span>
           <h3>Outdoor Activities &amp; Team Building</h3>
           <p>Access to outdoor activities that encourage engagement, teamwork, exploration, and shared experiences throughout your event.</p>
         </div>
-      </div>
 
-      <div class="eve-offer-card">
-        <img src="images/event-incl-adventure.jpg" alt="Adventure experiences at Hilston Park">
-        <div class="eve-offer-card-body">
+        <div class="eve-offer-item">
           <span class="eve-offer-num">04</span>
           <h3>Adventure Experiences</h3>
           <p>Additional adventure activities designed to challenge, motivate, and entertain groups in a safe outdoor environment.</p>
+        </div>
+      </div>
+
+      <div class="eve-offer-images">
+        <div class="eve-offer-img-grid">
+          <img src="images/event-manor.jpg" alt="Wedding ceremony at Hilston Park estate">
+          <img src="images/event-incl-food.jpg" alt="Freshly prepared catering at Hilston Park">
+          <img src="images/event-incl-nature.jpg" alt="Outdoor activities at Hilston Park">
+          <img src="images/event-incl-adventure.jpg" alt="Adventure experiences at Hilston Park">
         </div>
       </div>
 

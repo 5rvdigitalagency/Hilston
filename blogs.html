@@ -248,7 +248,7 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    .newsletter-form input::placeholder { color: rgba(255,255,255,0.4); }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.8); }
     .newsletter-form input:focus { border-color: var(--teal); }
     .newsletter-form button {
       padding: 15px 28px;
@@ -263,12 +263,12 @@
     /* ========================================================
        VISIT INFO TRIO
     ======================================================== */
-    .blog-visit {
+    .visit-us {
       background: var(--beige);
       padding: 80px 80px 88px;
     }
-    .blog-visit .heading-display { margin-bottom: 48px; }
-    .visit-trio {
+    .visit-us .heading-display { margin-bottom: 48px; }
+    .visit-us-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
@@ -308,6 +308,7 @@
       background: var(--white);
       padding: 80px 80px 90px;
     }
+    .faq-label { font-family: var(--font-script); font-size: 1.6rem; color: var(--teal); margin-bottom: 10px; display: block; }
     .blog-faq-grid {
       display: grid;
       grid-template-columns: 1fr 1.6fr;
@@ -319,21 +320,21 @@
     /* ---- RESPONSIVE ---- */
     @media (max-width: 1100px) {
       .blog-hero-inner { padding: 48px 40px 56px; }
-      .blog-listing, .blog-newsletter, .blog-visit, .blog-faq { padding-left: 40px; padding-right: 40px; }
+      .blog-listing, .blog-newsletter, .visit-us, .blog-faq { padding-left: 40px; padding-right: 40px; }
     }
     @media (max-width: 880px) {
       .blog-hero-inner { padding: 40px 24px 48px; }
       .blog-featured-inner { grid-template-columns: 1fr; }
       .blog-featured-img { height: 280px; }
-      .blog-listing, .blog-newsletter, .blog-visit, .blog-faq { padding-left: 24px; padding-right: 24px; }
-      .visit-trio { grid-template-columns: 1fr; }
+      .blog-listing, .blog-newsletter, .visit-us, .blog-faq { padding-left: 24px; padding-right: 24px; }
+      .visit-us-grid { grid-template-columns: 1fr; }
       .blog-faq-grid { grid-template-columns: 1fr; gap: 32px; }
       .blog-faq-grid .heading-display { position: static; }
     }
     @media (max-width: 600px) {
       .blog-grid { grid-template-columns: 1fr; }
       .blog-hero-inner { padding: 32px 16px 40px; }
-      .blog-listing, .blog-newsletter, .blog-visit, .blog-faq { padding-left: 16px; padding-right: 16px; }
+      .blog-listing, .blog-newsletter, .visit-us, .blog-faq { padding-left: 16px; padding-right: 16px; }
     }
 
   </style>
@@ -366,8 +367,8 @@
     <ul class="nav-list">
       <li><a href="about.html">ABOUT</a></li>
       <li><a href="educational.html">EDUCATION</a></li>
-      <li><a href="event.html">EVENTS</a></li>
       <li><a href="accomodation.html">ACCOMMODATION</a></li>
+      <li><a href="event.html">EVENTS</a></li>
       <li><a href="contact.html">CONTACT</a></li>
       <li><a href="blogs.html" style="border-bottom:2px solid rgba(255,255,255,0.8);padding-bottom:2px;">BLOG</a></li>
     </ul>
@@ -383,8 +384,8 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="educational.html">Education</a></li>
-        <li><a href="event.html">Events</a></li>
         <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="event.html">Events</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
@@ -438,33 +439,12 @@
     <div class="blog-grid">
 
       <!-- Card 1 -->
-      <div class="blog-card-item" data-cat="activities">
-        <article class="blog-card">
-          <div class="blog-card-img">
-            <span class="cat-tag activities card-cat-tag">Activities</span>
-            <img
-              src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg"
-              alt="Hilston Park International Menu"
-              loading="lazy">
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span class="read-time">4 min read</span>
-            </div>
-            <h3>Hilston Park&rsquo;s International Menu</h3>
-            <p>Our international menu is designed to celebrate cultural connection through every dish, bridging the gap between diverse traditions and creating shared table experiences for all groups.</p>
-            <a href="blog-international-menu.html" class="blog-read-more">Read More &rarr;</a>
-          </div>
-        </article>
-      </div>
-
-      <!-- Card 2 -->
       <div class="blog-card-item" data-cat="education">
         <article class="blog-card">
           <div class="blog-card-img">
             <span class="cat-tag education card-cat-tag">Education</span>
             <img
-              src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb6509b9ec1135b6c0dd89_Planning%20a%20School%20Adventure%20Trip%20in%202025.jpg"
+              src="images/edu-canoeing.jpg"
               alt="Planning a School Adventure Trip"
               loading="lazy">
           </div>
@@ -479,7 +459,61 @@
         </article>
       </div>
 
+      <!-- Card 2 -->
+      <div class="blog-card-item" data-cat="accommodation">
+        <article class="blog-card">
+          <div class="blog-card-img">
+            <span class="cat-tag accommodation card-cat-tag">Accommodation</span>
+            <img src="images/manor-house.jpg" alt="Manor House at Hilston Park" loading="lazy">
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span class="read-time">4 min read</span>
+            </div>
+            <h3>Choosing Accommodation for a School Residential Trip</h3>
+            <p>From dormitory layouts for large year groups to private rooms for smaller groups, the right choice depends on your group size and programme structure. Here is a practical guide.</p>
+            <a href="blog-accommodation.html" class="blog-read-more">Read More &rarr;</a>
+          </div>
+        </article>
+      </div>
+
       <!-- Card 3 -->
+      <div class="blog-card-item" data-cat="events">
+        <article class="blog-card">
+          <div class="blog-card-img">
+            <span class="cat-tag events card-cat-tag">Events</span>
+            <img src="images/hero-corporate.jpg" alt="Team Building at Hilston Park" loading="lazy">
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span class="read-time">5 min read</span>
+            </div>
+            <h3>Team Building in the Welsh Countryside: What to Expect</h3>
+            <p>Taking a corporate team out of the office and into an estate setting changes how people collaborate. Here is an inside look at what a Hilston Park team day actually looks like.</p>
+            <a href="blog-team-building.html" class="blog-read-more">Read More &rarr;</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="blog-card-item" data-cat="activities">
+        <article class="blog-card">
+          <div class="blog-card-img">
+            <span class="cat-tag activities card-cat-tag">Activities</span>
+            <img src="images/nature-bushcraft.jpg" alt="Wye Valley Estate Activities" loading="lazy">
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span class="read-time">7 min read</span>
+            </div>
+            <h3>The Wye Valley Estate: What Makes Hilston Park Unique</h3>
+            <p>Nestled between the River Wye and the Black Mountains, Hilston Park occupies a setting that is rarely found in managed outdoor activity centres. A look at what the estate actually offers.</p>
+            <a href="blog-wye-valley.html" class="blog-read-more">Read More &rarr;</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Card 5 -->
       <div class="blog-card-item" data-cat="education">
         <article class="blog-card">
           <div class="blog-card-img">
@@ -500,56 +534,23 @@
         </article>
       </div>
 
-      <!-- Card 4 -->
-      <div class="blog-card-item" data-cat="events">
-        <article class="blog-card">
-          <div class="blog-card-img">
-            <span class="cat-tag events card-cat-tag">Events</span>
-            <img src="images/hero-corporate.jpg" alt="Team Building at Hilston Park" loading="lazy">
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span class="read-time">5 min read</span>
-            </div>
-            <h3>Team Building in the Welsh Countryside: What to Expect</h3>
-            <p>Taking a corporate team out of the office and into an estate setting changes how people collaborate. Here is an inside look at what a Hilston Park team day actually looks like.</p>
-            <a href="blog-team-building.html" class="blog-read-more">Read More &rarr;</a>
-          </div>
-        </article>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="blog-card-item" data-cat="accommodation">
-        <article class="blog-card">
-          <div class="blog-card-img">
-            <span class="cat-tag accommodation card-cat-tag">Accommodation</span>
-            <img src="images/manor-house.jpg" alt="Manor House at Hilston Park" loading="lazy">
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span class="read-time">4 min read</span>
-            </div>
-            <h3>Choosing Accommodation for a School Residential Trip</h3>
-            <p>From dormitory layouts for large year groups to private rooms for smaller groups, the right choice depends on your group size and programme structure. Here is a practical guide.</p>
-            <a href="blog-accommodation.html" class="blog-read-more">Read More &rarr;</a>
-          </div>
-        </article>
-      </div>
-
       <!-- Card 6 -->
       <div class="blog-card-item" data-cat="activities">
         <article class="blog-card">
           <div class="blog-card-img">
             <span class="cat-tag activities card-cat-tag">Activities</span>
-            <img src="images/nature-bushcraft.jpg" alt="Wye Valley Estate Activities" loading="lazy">
+            <img
+              src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg"
+              alt="Hilston Park International Menu"
+              loading="lazy">
           </div>
           <div class="blog-card-body">
             <div class="blog-card-meta">
-              <span class="read-time">7 min read</span>
+              <span class="read-time">4 min read</span>
             </div>
-            <h3>The Wye Valley Estate: What Makes Hilston Park Unique</h3>
-            <p>Nestled between the River Wye and the Black Mountains, Hilston Park occupies a setting that is rarely found in managed outdoor activity centres. A look at what the estate actually offers.</p>
-            <a href="blog-wye-valley.html" class="blog-read-more">Read More &rarr;</a>
+            <h3>Hilston Park&rsquo;s International Menu</h3>
+            <p>Our international menu is designed to celebrate cultural connection through every dish, bridging the gap between diverse traditions and creating shared table experiences for all groups.</p>
+            <a href="blog-international-menu.html" class="blog-read-more">Read More &rarr;</a>
           </div>
         </article>
       </div>
@@ -570,9 +571,9 @@
   </section>
 
   <!-- ===== VISIT INFO ===== -->
-  <section class="blog-visit">
-    <h2 class="heading-display center">Plan Your <em class="script">Visit</em></h2>
-    <div class="visit-trio">
+  <section class="visit-us">
+    <h2 class="heading-display center">Plan Your Visit</h2>
+    <div class="visit-us-grid">
       <div class="visit-card">
         <div class="visit-icon">
           <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
@@ -582,7 +583,7 @@
         </div>
         <h3>When to Visit</h3>
         <p>Hilston Park welcomes guests year-round. Summer brings longer days and time outdoors, while winter offers a quieter setting, with time focused indoors and on the estate.</p>
-        <a href="contact.html" class="visit-link">Plan Your Dates &rarr;</a>
+        <a href="contact.html" class="btn-pill">PLAN YOUR DATES</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -592,7 +593,7 @@
         </div>
         <h3>Getting Here</h3>
         <p>Located near Monmouth in the Wye Valley, Hilston Park is accessible by road. The team can advise on travel arrangements and coach access for school groups.</p>
-        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="visit-link">View on Maps &rarr;</a>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">VIEW ON MAPS</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -602,7 +603,7 @@
         </div>
         <h3>Get in Touch</h3>
         <p>Whether you are a school, corporate team, or private group, the Hilston Park team can help you plan the right programme for your visit.</p>
-        <a href="contact.html" class="visit-link">Send an Enquiry &rarr;</a>
+        <a href="contact.html" class="btn-pill">SEND AN ENQUIRY</a>
       </div>
     </div>
   </section>
@@ -611,7 +612,8 @@
   <section class="blog-faq">
     <div class="blog-faq-grid">
       <div>
-        <h2 class="heading-display">Frequently<br>Asked<br><em class="script">Questions</em></h2>
+        <span class="faq-label">FAQ</span>
+        <h2 class="heading-display">Frequently<br>Asked<br>Questions</h2>
       </div>
       <div class="accordion">
         <div class="accordion-item">
