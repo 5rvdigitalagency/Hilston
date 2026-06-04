@@ -213,11 +213,12 @@
     }
     .blog-read-more {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--teal);
-      transition: gap 0.2s;
+      background: var(--teal); color: var(--white);
+      padding: 10px 20px; margin-top: 8px; align-self: flex-start;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; transition: background 0.22s ease;
     }
-    .blog-card:hover .blog-read-more { gap: 14px; }
+    .blog-card:hover .blog-read-more { background: var(--teal-dark); gap: 8px; }
 
     /* ========================================================
        NEWSLETTER
@@ -315,6 +316,26 @@
     }
     .blog-faq-grid .heading-display { position: sticky; top: 120px; }
 
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 1100px) {
+      .blog-hero-inner { padding: 48px 40px 56px; }
+      .blog-listing, .blog-newsletter, .blog-visit, .blog-faq { padding-left: 40px; padding-right: 40px; }
+    }
+    @media (max-width: 880px) {
+      .blog-hero-inner { padding: 40px 24px 48px; }
+      .blog-featured-inner { grid-template-columns: 1fr; }
+      .blog-featured-img { height: 280px; }
+      .blog-listing, .blog-newsletter, .blog-visit, .blog-faq { padding-left: 24px; padding-right: 24px; }
+      .visit-trio { grid-template-columns: 1fr; }
+      .blog-faq-grid { grid-template-columns: 1fr; gap: 32px; }
+      .blog-faq-grid .heading-display { position: static; }
+    }
+    @media (max-width: 600px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-hero-inner { padding: 32px 16px 40px; }
+      .blog-listing, .blog-newsletter, .blog-visit, .blog-faq { padding-left: 16px; padding-right: 16px; }
+    }
+
   </style>
 </head>
 <body>
@@ -367,7 +388,7 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
-      <a href="contact.html" class="mobile-nav-book">BOOK / ENQUIRY</a>
+      <a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK / ENQUIRY</a>
     </nav>
   </div>
   <section class="blog-hero">

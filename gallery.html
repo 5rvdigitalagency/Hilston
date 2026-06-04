@@ -151,6 +151,18 @@
     }
 
     /* ---- RESPONSIVE ---- */
+    #gallery-filter-select {
+      display: none;
+      width: 100%; max-width: 320px;
+      padding: 10px 36px 10px 16px;
+      font-family: var(--font-sans); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z' clip-rule='evenodd'/%3E%3C/svg%3E") no-repeat right 10px center / 20px;
+      appearance: none; -webkit-appearance: none;
+      color: var(--text); cursor: pointer;
+    }
+
     @media (max-width: 1100px) {
       .gallery-header { padding: 56px 40px 36px; }
       .gallery-tabs-wrap { padding: 0 40px; }
@@ -161,7 +173,9 @@
     }
     @media (max-width: 560px) {
       .gallery-header { padding: 40px 20px 28px; }
-      .gallery-tabs-wrap { padding: 0 20px; overflow-x: auto; padding-bottom: 4px; }
+      .gallery-tabs-wrap { padding: 0 20px; text-align: left; }
+      .gallery-tabs-inner { display: none; }
+      #gallery-filter-select { display: block; }
       .gallery-grid-wrap { padding: 24px 20px 48px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     }
@@ -218,7 +232,7 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
-      <a href="contact.html" class="btn-book mobile-nav-book">BOOK / ENQUIRY</a>
+      <a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK / ENQUIRY</a>
     </nav>
   </div>
 
@@ -241,6 +255,14 @@
         <button class="gtab" data-filter="food" role="tab" aria-selected="false">Food &amp; Dining</button>
         <button class="gtab" data-filter="landscape" role="tab" aria-selected="false">Landscape</button>
       </div>
+      <select id="gallery-filter-select" aria-label="Filter gallery by category">
+        <option value="all">All</option>
+        <option value="estate">Estate</option>
+        <option value="activities">Activities</option>
+        <option value="accommodation">Accommodation</option>
+        <option value="food">Food &amp; Dining</option>
+        <option value="landscape">Landscape</option>
+      </select>
     </div>
 
     <!-- IMAGE GRID -->
@@ -523,6 +545,26 @@
       });
     });
   });
+
+  /* ---- MOBILE FILTER SELECT ---- */
+  var filterSelect = document.getElementById('gallery-filter-select');
+  if (filterSelect) {
+    filterSelect.addEventListener('change', function () {
+      var filter = filterSelect.value;
+      tabs.forEach(function (t) {
+        var isMatch = t.dataset.filter === filter;
+        t.classList.toggle('active', isMatch);
+        t.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+      });
+      items.forEach(function (item) {
+        if (filter === 'all' || item.dataset.category === filter) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  }
 
   /* ---- LIGHTBOX ---- */
   var lightbox  = document.getElementById('lightbox');
