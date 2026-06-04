@@ -268,25 +268,51 @@
 <body>
 <div class="site-wrap">
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-logo">
-        <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+  <!-- ===== STICKY SHELL ===== -->
+  <div class="site-sticky" id="site-sticky">
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+        </div>
+        <div class="header-actions">
+          <a href="javascript:void(0)" class="btn-book">BOOK / ENQUIRY</a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
       </div>
-      <a href="contact.html" class="btn-book">BOOK / ENQUIRY</a>
-    </div>
-  </header>
-  <nav class="main-nav">
-    <ul class="nav-list">
-      <li><a href="about.html">ABOUT</a></li>
-      <li><a href="educational.html">EDUCATION</a></li>
-      <li><a href="accomodation.html">ACCOMMODATION</a></li>
-      <li><a href="event.html">EVENTS</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
-      <li><a href="blogs.html" style="border-bottom:2px solid rgba(255,255,255,0.8);padding-bottom:2px;">BLOG</a></li>
-    </ul>
-  </nav>
+    </header>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="educational.html">EDUCATION</a></li>
+        <li><a href="accomodation.html">ACCOMMODATION</a></li>
+        <li><a href="event.html">EVENTS</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+        <li><a href="blogs.html" class="nav-active">BLOG</a></li>
+      </ul>
+    </nav>
+  </div><!-- /site-sticky -->
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="educational.html">Education</a></li>
+        <li><a href="accomodation.html">Accommodation</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+      </ul>
+      <a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK / ENQUIRY</a>
+    </nav>
+  </div>
 
   <!-- POST HERO -->
   <section class="post-hero">
