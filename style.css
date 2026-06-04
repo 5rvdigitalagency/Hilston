@@ -378,7 +378,9 @@ body { overflow-x: clip; }
 .mobile-nav-list li a:hover { color: var(--teal); }
 .mobile-nav-list li a:hover::before { left: 20px; right: 20px; }
 .mobile-nav-book {
-  display: inline-block;
+  display: block;
+  width: fit-content;
+  margin: 24px auto 0;
   padding: 14px 40px;
   border: 2px solid var(--teal);
   background: var(--teal);
@@ -387,8 +389,8 @@ body { overflow-x: clip; }
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  text-align: center;
   transition: background 0.2s, border-color 0.2s;
-  margin-top: 16px;
 }
 .mobile-nav-book:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
 
