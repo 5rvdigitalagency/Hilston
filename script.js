@@ -247,8 +247,8 @@ document.addEventListener("DOMContentLoaded", function () {
             '<p class="bkm-form-title">What would you like to do?</p>',
             '<p class="bkm-form-sub">Choose what fits &mdash; you can switch at any time.</p>',
             '<div class="bkm-tiles">',
-              '<button class="bkm-tile" data-pick="stay"><span class="bkm-tile-icon"><img src="Chnages/Stay with us model icon .png" alt="" aria-hidden="true" style="width:36px;height:36px;object-fit:contain;"></span><span class="bkm-tile-label">Stay with us</span><span class="bkm-tile-desc">Self-catered country house &amp; group accommodation &mdash; live rates &amp; availability</span></button>',
-              '<button class="bkm-tile" data-pick="inquire"><span class="bkm-tile-icon"><img src="Chnages/Enquire about model icon .png" alt="" aria-hidden="true" style="width:36px;height:36px;object-fit:contain;"></span><span class="bkm-tile-label">Enquire about</span><span class="bkm-tile-desc">Events, weddings, corporate days, school trips &mdash; send us a message</span></button>',
+              '<button class="bkm-tile" data-pick="stay"><span class="bkm-tile-icon"><img src="Chnages/Stay with us model icon .png" alt="" aria-hidden="true" style="width:80px;height:80px;object-fit:contain;"></span><span class="bkm-tile-label">Stay with us</span><span class="bkm-tile-desc">Self-catered country house &amp; group accommodation &mdash; live rates &amp; availability</span></button>',
+              '<button class="bkm-tile" data-pick="inquire"><span class="bkm-tile-icon"><img src="Chnages/Enquire about model icon .png" alt="" aria-hidden="true" style="width:80px;height:80px;object-fit:contain;"></span><span class="bkm-tile-label">Enquire about</span><span class="bkm-tile-desc">Events, weddings, corporate days, school trips &mdash; send us a message</span></button>',
             '</div>',
             '<p class="bkm-note">Secure booking powered by QBook &mdash; all availability and payment handled on this site.</p>',
           '</div>',
@@ -584,6 +584,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
   }
+
+  /* Expose for use by the availability bar on the accommodation page */
+  window._HP = {
+    fetchAllNightlyRates: fetchAllNightlyRates,
+    QBOOK_BASE:  QBOOK_BASE,
+    QBOOK_K:     QBOOK_K,
+    ROOM_DEFS:   ROOM_DEFS,
+    SC_RATES_URL: SC_RATES_URL
+  };
 
   function showConfirm(nightRates) {
     var ci = inEl.value;   /* YYYY-MM-DD */
