@@ -380,6 +380,20 @@ body { overflow-x: clip; }
 .mobile-nav-book-item {
   text-align: center;
 }
+.mobile-nav-book-item a.mobile-nav-book {
+  display: inline-block;
+  padding: 14px 40px;
+  border: 2px solid var(--teal);
+  background: var(--teal);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background 0.2s, border-color 0.2s;
+  margin-top: 8px;
+}
 .mobile-nav-book {
   display: inline-block;
   padding: 14px 40px;
