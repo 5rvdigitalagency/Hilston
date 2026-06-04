@@ -199,7 +199,6 @@
     .booking-card-cta:hover { background: var(--teal-dark); color: var(--white); }
     .booking-card-cta svg { display: none; }
 
-    /* VISIT US */
     /* LIVE RATES */
     .live-rates { background: var(--white); padding: 88px 80px; }
     .live-rates-header { text-align: center; max-width: 680px; margin: 0 auto 48px; }
@@ -218,13 +217,6 @@
       outline: none; width: 100%; appearance: none; -webkit-appearance: none;
     }
     .rates-filter-group input::placeholder { color: rgba(255,255,255,0.4); }
-    .rates-filter-group input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.7; cursor: pointer; }
-    /* Stepper control */
-    .rates-stepper { display: flex; align-items: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); height: 42px; }
-    .rates-stepper button { background: none; border: none; color: white; font-size: 1.2rem; line-height: 1; width: 36px; height: 100%; cursor: pointer; font-family: var(--font-sans); opacity: 0.8; flex-shrink: 0; transition: opacity 0.15s; }
-    .rates-stepper button:hover { opacity: 1; }
-    .rates-stepper input { background: none; border: none; color: white; text-align: center; font-size: 0.88rem; font-family: var(--font-sans); width: 100%; outline: none; padding: 0; -moz-appearance: textfield; }
-    .rates-stepper input::-webkit-inner-spin-button, .rates-stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     .rates-filter-group select option { background: var(--dark); color: var(--white); }
     .rates-search-btn {
       background: var(--teal); color: white; border: none; cursor: pointer;
@@ -248,8 +240,26 @@
       background: var(--teal); color: white; font-size: 0.7rem; font-weight: 700;
       letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; border: none;
       font-family: var(--font-sans); transition: background 0.2s; width: 100%;
+      text-decoration: none;
     }
     .rates-room-cta:hover { background: var(--teal-dark); }
+    /* Calendar icon - white */
+    .rates-filter-group input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.7; cursor: pointer; }
+    /* Stepper controls */
+    .rates-stepper { display: flex; align-items: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); height: 42px; }
+    .rates-stepper button { background: none; border: none; color: white; font-size: 1.2rem; line-height: 1; width: 36px; height: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s; }
+    .rates-stepper button:hover { background: rgba(255,255,255,0.1); }
+    .rates-stepper input { background: none; border: none; color: white; text-align: center; width: 100%; font-size: 0.9rem; font-family: var(--font-sans); -moz-appearance: textfield; outline: none; }
+    .rates-stepper input::-webkit-outer-spin-button, .rates-stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    /* Availability validation error */
+    .rates-error { color: #c82233; font-size: 0.8rem; padding: 10px 0 0; display: none; }
+    .rates-error.is-visible { display: block; }
+    /* Per-card availability states */
+    .rates-avail { min-height: 48px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .rates-avail-loading { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--text-muted); padding: 10px 0; }
+    .rates-avail-loading::before { content: ''; width: 14px; height: 14px; border: 2px solid var(--teal); border-top-color: transparent; border-radius: 50%; animation: hpSpin 0.7s linear infinite; flex-shrink: 0; }
+    @keyframes hpSpin { to { transform: rotate(360deg); } }
+    .rates-no-avail { display: none; background: var(--beige); border-left: 3px solid var(--teal); padding: 16px 20px; margin-top: 20px; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
 
     .visit-us { background: var(--white); padding: 88px 80px; }
     .visit-us .heading-display { margin-bottom: 44px; }
@@ -298,14 +308,14 @@
     .faq-label { font-family: var(--font-script); font-size: 1.6rem; color: var(--teal); margin-bottom: 10px; display: block; }
 
     @media (max-width: 1100px) {
-      .accom-intro, .accom-options, .activities, .flexible-booking, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 40px; padding-right: 40px; }
+      .accom-intro, .accom-options, .activities, .flexible-booking, .live-rates, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 40px; padding-right: 40px; }
       .stats-bar { padding-left: 40px; padding-right: 40px; }
       .accom-hero-inner { padding: 48px 40px; }
     }
     @media (max-width: 880px) {
       .accom-hero-inner, .accom-intro-grid, .accom-block, .visit-us-grid, .faq-grid { grid-template-columns: 1fr; }
       .accom-hero-inner { padding: 40px 24px; }
-      .accom-intro, .accom-options, .activities, .flexible-booking, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 24px; padding-right: 24px; }
+      .accom-intro, .accom-options, .activities, .flexible-booking, .live-rates, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 24px; padding-right: 24px; }
       .stats-bar { padding-left: 24px; padding-right: 24px; }
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 36px 0; }
       .stat-item:nth-child(2)::after, .stat-item:nth-child(4)::after { display: none; }
@@ -314,16 +324,24 @@
       .accom-block.reverse .accom-block-content { order: 0; }
       .accom-block-img > img { height: 280px; }
       .act-card { flex: 0 0 calc(50% - 8px); min-width: calc(50% - 8px); }
+      /* Rates - tablet: 2-col grid, 2-col filter inputs */
+      .rates-rooms-row { grid-template-columns: 1fr 1fr; }
+      .rates-filter-row { flex-wrap: wrap; padding: 20px; gap: 12px 16px; }
+      .rates-filter-group { flex: 1 1 calc(50% - 8px); min-width: 0; }
+      .rates-search-btn { flex: 1 1 100%; }
     }
     @media (max-width: 540px) {
       .accom-hero-inner { padding: 32px 16px; }
-      .accom-intro, .accom-options, .activities, .flexible-booking, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 16px !important; padding-right: 16px !important; }
+      .accom-intro, .accom-options, .activities, .flexible-booking, .live-rates, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 16px !important; padding-right: 16px !important; }
       .act-card { flex: 0 0 100%; min-width: 100%; }
+      /* Rates - mobile: must be AFTER 880px block to win the cascade */
       .rates-rooms-row { grid-template-columns: 1fr; }
-      .rates-filter-row { flex-direction: column; }
-    }
-    @media (max-width: 880px) {
-      .rates-rooms-row { grid-template-columns: 1fr 1fr; }
+      .rates-filter-row { flex-direction: column; padding: 16px; gap: 10px; }
+      .rates-filter-group { flex: 1 1 100%; min-width: 0; }
+      .rates-search-btn { width: 100%; }
+      .rates-stepper { height: 44px; }
+      .rates-stepper button { min-width: 44px; }
+      .rates-room-card img { height: 200px; }
     }
   </style>
 </head>
@@ -815,7 +833,7 @@
             <li>Families</li>
             <li>Short countryside escapes</li>
           </ul>
-          <a href="javascript:void(0)" class="booking-card-cta" data-booking-type="stay">
+          <a href="https://www.airbnb.co.uk/rooms/736106731807654969" target="_blank" rel="noopener" class="booking-card-cta">
             VIEW ON AIRBNB
             <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -834,7 +852,7 @@
             <li>Last-minute bookings</li>
             <li>Individual accommodation units</li>
           </ul>
-          <a href="https://www.booking.com" target="_blank" rel="noopener" class="booking-card-cta">
+          <a href="https://www.booking.com/searchresults.en-gb.html?highlighted_hotels=13083514&city=-2603323&source=hotel" target="_blank" rel="noopener" class="booking-card-cta">
             CHECK OFFERS ON BOOKING.COM
             <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -861,70 +879,86 @@
       <div class="rates-filter-group">
         <label for="ratesAdults">Adults</label>
         <div class="rates-stepper">
-          <button type="button" onclick="stepGuest('ratesAdults',-1)" aria-label="Decrease adults">&#8722;</button>
+          <button type="button" onclick="stepGuest('ratesAdults',-1)" aria-label="Decrease adults">−</button>
           <input type="number" id="ratesAdults" name="adults" min="1" max="80" value="1" readonly>
           <button type="button" onclick="stepGuest('ratesAdults',1)" aria-label="Increase adults">+</button>
         </div>
       </div>
       <div class="rates-filter-group">
-        <label for="ratesChildren">Children's</label>
+        <label for="ratesChildren">Children</label>
         <div class="rates-stepper">
-          <button type="button" onclick="stepGuest('ratesChildren',-1)" aria-label="Decrease children">&#8722;</button>
+          <button type="button" onclick="stepGuest('ratesChildren',-1)" aria-label="Decrease children">−</button>
           <input type="number" id="ratesChildren" name="children" min="0" max="50" value="0" readonly>
           <button type="button" onclick="stepGuest('ratesChildren',1)" aria-label="Increase children">+</button>
         </div>
       </div>
       <button type="submit" class="rates-search-btn" id="ratesSearchBtn">CHECK AVAILABILITY</button>
     </form>
+    <div class="rates-error" id="ratesError"></div>
     <div class="rates-rooms-row">
-      <div class="rates-room-card">
+      <div class="rates-room-card" data-room-key="exclusive-use">
         <img src="images/room-exclusive-use.jpg" alt="Exclusive Use of Hilston Park Manor House" loading="lazy">
         <div class="rates-room-body">
           <h3>Exclusive Use of House</h3>
           <p>Hire the entire Hilston Park estate for your group. Ideal for large retreats, corporate away days, and residential school trips.</p>
-          <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          <div class="rates-avail" data-avail>
+            <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          </div>
         </div>
       </div>
-      <div class="rates-room-card">
+      <div class="rates-room-card" data-room-key="cosy-king">
         <img src="images/room-cosy-king.jpg" alt="Cosy King Room at Hilston Park" loading="lazy">
         <div class="rates-room-body">
           <h3>Cosy King Room</h3>
           <p>A comfortable king room with estate views, perfect for couples and solo guests looking for a peaceful countryside retreat.</p>
-          <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          <div class="rates-avail" data-avail>
+            <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          </div>
         </div>
       </div>
-      <div class="rates-room-card">
+      <div class="rates-room-card" data-room-key="double-garden">
         <img src="images/room-double-garden.jpg" alt="Double Garden View Room at Hilston Park" loading="lazy">
         <div class="rates-room-body">
           <h3>Double Garden View</h3>
           <p>A beautifully appointed double room overlooking the estate gardens. Quiet, light-filled, and ideal for short breaks.</p>
-          <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          <div class="rates-avail" data-avail>
+            <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          </div>
         </div>
       </div>
-      <div class="rates-room-card">
+      <div class="rates-room-card" data-room-key="family-room">
         <img src="images/room-family.jpg" alt="Family Room at Hilston Park" loading="lazy">
         <div class="rates-room-body">
           <h3>Family Room</h3>
           <p>A flexible family room designed to keep parents and children comfortably together throughout their stay.</p>
-          <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          <div class="rates-avail" data-avail>
+            <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          </div>
         </div>
       </div>
-      <div class="rates-room-card">
+      <div class="rates-room-card" data-room-key="dormitory">
         <img src="images/room-dormitory.jpg" alt="Dormitory Group Bunk Rooms at Hilston Park" loading="lazy">
         <div class="rates-room-body">
           <h3>Dormitory Group Rooms</h3>
           <p>Bunk-style dormitory rooms ideal for school groups, youth trips, and team stays. Safe, comfortable, and well-supervised.</p>
-          <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          <div class="rates-avail" data-avail>
+            <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          </div>
         </div>
       </div>
-      <div class="rates-room-card">
+      <div class="rates-room-card" data-room-key="gatehouse">
         <img src="images/room-gatehouse.jpg" alt="Gatehouse at Hilston Park" loading="lazy">
         <div class="rates-room-body">
           <h3>Gatehouse</h3>
           <p>A charming cottage-style gatehouse offering a more independent stay. Perfect for families or small groups wanting privacy.</p>
-          <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          <div class="rates-avail" data-avail>
+            <button class="rates-room-cta" data-inquire>ENQUIRE NOW</button>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="rates-no-avail" id="ratesNoAvail">
+      No availability found for those dates. Try different dates or <button class="rates-avail-enquire" data-inquire style="vertical-align:middle;">Enquire</button> with our team.
     </div>
   </section>
 
@@ -942,7 +976,7 @@
         </div>
         <h3>When to Visit</h3>
         <p>Hilston Park welcomes guests year-round, offering summer outdoor experiences with longer days and winter stays focused on calm indoor and group activities.</p>
-        <a href="contact.html" class="btn-pill">LEARN MORE</a>
+        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -962,7 +996,7 @@
         </div>
         <h3>Get in Touch</h3>
         <p>Whether you&#8217;re a school, corporate team, or private group, our team is ready to help you plan and arrange your visit.</p>
-        <a href="contact.html" class="btn-pill">CONTACT US</a>
+        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
       </div>
     </div>
   </section>
@@ -1162,16 +1196,6 @@
     setInterval(function(){ go((current+1) % items.length); }, 4500);
   })();
 
-  // Stepper buttons for Adults / Children fields
-  function stepGuest(id, delta) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    var min = parseInt(el.min, 10) || 0;
-    var max = parseInt(el.max, 10) || 99;
-    var val = parseInt(el.value, 10) || 0;
-    el.value = Math.min(max, Math.max(min, val + delta));
-  }
-
   // +/- stepper for Adults / Children
   function stepGuest(id, delta) {
     var el = document.getElementById(id);
@@ -1182,37 +1206,101 @@
     el.value = Math.min(max, Math.max(min, val + delta));
   }
 
-  // CHECK AVAILABILITY → open booking modal with dates pre-filled
+  // CHECK AVAILABILITY — inline results, no modal
   (function(){
-    var form = document.getElementById('ratesDateForm');
+    var form  = document.getElementById('ratesDateForm');
     if (!form) return;
-    var ciIn  = document.getElementById('ratesCheckin');
-    var coIn  = document.getElementById('ratesCheckout');
-    var today = new Date().toISOString().split('T')[0];
-    ciIn.min = today;
-    coIn.min = today;
+    var errEl    = document.getElementById('ratesError');
+    var noAvail  = document.getElementById('ratesNoAvail');
+    var ciIn     = document.getElementById('ratesCheckin');
+    var coIn     = document.getElementById('ratesCheckout');
+    var today    = new Date().toISOString().split('T')[0];
+    ciIn.min = today; coIn.min = today;
+
+    // Rooms with a direct QBook item ID (first/preferred ID per type)
+    // Rooms NOT listed here (exclusive-use, dormitory, gatehouse) keep ENQUIRE NOW always
+    var ROOM_IDS = {
+      'cosy-king':     83040,
+      'double-garden': 82356,
+      'family-room':   83057
+    };
+
+    function showErr(msg) { errEl.textContent = msg; errEl.classList.add('is-visible'); }
+    function clearErr()   { errEl.classList.remove('is-visible'); }
+
     ciIn.addEventListener('change', function(){
-      var d = new Date(this.value);
-      d.setDate(d.getDate() + 1);
+      clearErr();
+      if (!this.value) return;
+      var d = new Date(this.value); d.setDate(d.getDate() + 1);
       coIn.min = d.toISOString().split('T')[0];
       if (coIn.value && coIn.value <= this.value) coIn.value = coIn.min;
     });
+    coIn.addEventListener('change', clearErr);
+
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      // Open modal on the "stay" config phase (same as clicking "Stay with us" tile)
-      var bookBtn = document.querySelector('[data-booking-type="stay"]');
-      if (bookBtn) bookBtn.click();
-      // Pre-fill modal fields after modal has rendered
-      requestAnimationFrame(function(){
-        var mCi       = document.getElementById('bkm-checkin');
-        var mCo       = document.getElementById('bkm-checkout');
-        var mAdults   = document.getElementById('bkm-adults');
-        var mChildren = document.getElementById('bkm-children');
-        if (mCi && ciIn.value)  { mCi.value = ciIn.value;  mCi.dispatchEvent(new Event('change')); }
-        if (mCo && coIn.value)  { mCo.value = coIn.value;  mCo.dispatchEvent(new Event('change')); }
-        if (mAdults)   { mAdults.value   = document.getElementById('ratesAdults').value   || 1;  mAdults.dispatchEvent(new Event('input')); }
-        if (mChildren) { mChildren.value = document.getElementById('ratesChildren').value || 0;  mChildren.dispatchEvent(new Event('input')); }
+      clearErr();
+      if (noAvail) noAvail.style.display = 'none';
+      var ci = ciIn.value, co = coIn.value;
+
+      if (!ci && !co) { showErr('Please select a check-in and check-out date.'); return; }
+      if (!ci)        { showErr('Please select a check-in date.'); return; }
+      if (!co)        { showErr('Please select a check-out date.'); return; }
+      if (co <= ci)   { showErr('Check-out must be after check-in.'); return; }
+
+      var adults   = parseInt(document.getElementById('ratesAdults').value,   10) || 1;
+      var children = parseInt(document.getElementById('ratesChildren').value, 10) || 0;
+      var hp       = window._HP || {};
+      var BASE     = hp.QBOOK_BASE || 'https://web-bookings.hotels.uk.com/#/booking/51665/items/availability';
+      var K        = hp.QBOOK_K   || 'JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D';
+
+      function buildUrl(itemID) {
+        var u = BASE + '?from=' + ci + '&to=' + co + '&k=' + K + '&a=' + adults + '&c=' + children;
+        if (itemID) u += '&i=' + itemID;
+        return u;
+      }
+
+      var cards = document.querySelectorAll('.rates-room-card[data-room-key]');
+
+      // Reset: show all bookable cards + loading spinner
+      cards.forEach(function(card){
+        var key = card.getAttribute('data-room-key');
+        if (!ROOM_IDS[key]) return;
+        card.style.display = '';
+        var avail = card.querySelector('[data-avail]');
+        if (avail) avail.innerHTML = '<span class="rates-avail-loading">Checking…</span>';
       });
+
+      // Scroll to room grid
+      var row = document.querySelector('.rates-rooms-row');
+      if (row) row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      function applyResults(available) {
+        var allHidden = true;
+        cards.forEach(function(card){
+          var key    = card.getAttribute('data-room-key');
+          var itemID = ROOM_IDS[key];
+          if (!itemID) return; // enquire-only: leave as-is
+          var avail  = card.querySelector('[data-avail]');
+          if (!avail) return;
+          if (available) {
+            allHidden = false;
+            avail.innerHTML = '<a href="' + buildUrl(itemID) + '" target="_blank" rel="noopener" class="rates-room-cta">BOOK NOW</a>';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        if (noAvail) noAvail.style.display = allHidden && !available ? 'block' : 'none';
+      }
+
+      if (hp.fetchAllNightlyRates) {
+        hp.fetchAllNightlyRates(ci, co, function(nightRates){
+          var anyRate = Array.isArray(nightRates) && nightRates.some(function(n){ return n.perNight !== null; });
+          applyResults(anyRate);
+        });
+      } else {
+        applyResults(true); // fail open
+      }
     });
   })();
 </script>
