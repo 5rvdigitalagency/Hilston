@@ -343,45 +343,94 @@
       <div class="contact-form-wrap">
         <h2>Send Us an Enquiry</h2>
         <p class="form-intro">Whether you are planning a school trip, corporate retreat, or private stay, fill in the form and the team will be in touch.</p>
-        <form action="#" method="post" novalidate>
+        <form id="contact-page-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value="9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4">
+          <input type="hidden" name="subject" value="Website Enquiry — Hilston Park">
+          <input type="hidden" name="redirect" value="false">
           <div class="form-row">
             <div class="form-field">
-              <label for="first-name">First Name</label>
+              <label for="first-name">First Name <span style="color:var(--teal)">*</span></label>
               <input type="text" id="first-name" name="first_name" placeholder="Jane" required>
             </div>
             <div class="form-field">
-              <label for="last-name">Last Name</label>
+              <label for="last-name">Last Name <span style="color:var(--teal)">*</span></label>
               <input type="text" id="last-name" name="last_name" placeholder="Smith" required>
             </div>
           </div>
           <div class="form-field">
-            <label for="email">Email Address</label>
+            <label for="email">Email Address <span style="color:var(--teal)">*</span></label>
             <input type="email" id="email" name="email" placeholder="jane@school.ac.uk" required>
           </div>
           <div class="form-field">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="+44 (0) ...">
+            <label for="phone">Phone Number <span style="color:var(--teal)">*</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="+44 (0) ..." required>
           </div>
           <div class="form-field">
-            <label for="group-type">I am enquiring about</label>
-            <select id="group-type" name="group_type">
+            <label for="group-type">I am enquiring about <span style="color:var(--teal)">*</span></label>
+            <select id="group-type" name="group_type" required>
               <option value="" disabled selected>Select enquiry type</option>
-              <option value="school">School Trip</option>
-              <option value="event">Event</option>
-              <option value="accommodation">Accommodation</option>
-              <option value="general">General</option>
+              <option value="School Trip">School Trip</option>
+              <option value="Corporate Event / Team Building">Corporate Event / Team Building</option>
+              <option value="Wedding">Wedding</option>
+              <option value="Private Event / Party">Private Event / Party</option>
+              <option value="Group Accommodation">Group Accommodation</option>
+              <option value="Exclusive Use of House">Exclusive Use of House</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div class="form-field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us about your group, preferred dates, and any specific requirements..."></textarea>
+            <label for="message">Your Enquiry <span style="color:var(--teal)">*</span></label>
+            <textarea id="message" name="message" rows="6" placeholder="Tell us about your group, preferred dates, and any specific requirements..." required></textarea>
           </div>
           <div class="form-checkbox">
             <input type="checkbox" id="agree" name="agree" required>
             <label for="agree">I agree with the <a href="terms.html">Terms of Use</a> and <a href="privacy.html">Privacy Policy</a>.</label>
           </div>
-          <button type="submit" class="btn-submit">SEND ENQUIRY</button>
+          <p id="contact-form-error" style="color:#c0392b;font-size:0.82rem;margin-bottom:12px;display:none;">Please complete all required fields and accept the terms.</p>
+          <p id="contact-form-success" style="color:var(--teal);font-size:0.9rem;margin-bottom:12px;display:none;">Thank you — your enquiry has been sent. We'll be in touch within one working day.</p>
+          <button type="submit" class="btn-submit" id="contact-submit-btn">SEND ENQUIRY</button>
         </form>
+        <script>
+          (function(){
+            var form = document.getElementById('contact-page-form');
+            var errEl = document.getElementById('contact-form-error');
+            var successEl = document.getElementById('contact-form-success');
+            var submitBtn = document.getElementById('contact-submit-btn');
+            if (!form) return;
+            form.addEventListener('submit', function(e){
+              e.preventDefault();
+              errEl.style.display = 'none';
+              successEl.style.display = 'none';
+              var agree = document.getElementById('agree');
+              if (!form.checkValidity() || !agree.checked) {
+                errEl.style.display = 'block';
+                return;
+              }
+              submitBtn.disabled = true;
+              submitBtn.textContent = 'Sending\u2026';
+              var data = new FormData(form);
+              fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+                .then(function(r){ return r.json(); })
+                .then(function(res){
+                  if (res.success) {
+                    form.reset();
+                    successEl.style.display = 'block';
+                  } else {
+                    errEl.textContent = 'Sorry, something went wrong. Please email info@hilstonpark.co.uk directly.';
+                    errEl.style.display = 'block';
+                  }
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = 'SEND ENQUIRY';
+                })
+                .catch(function(){
+                  errEl.textContent = 'Sorry, something went wrong. Please email info@hilstonpark.co.uk directly.';
+                  errEl.style.display = 'block';
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = 'SEND ENQUIRY';
+                });
+            });
+          }());
+        </script>
       </div>
       <div class="map-wrap">
         <iframe
@@ -522,32 +571,32 @@
     <div class="blogs-grid">
       <article class="blog-card">
         <div class="blog-card-img">
-          <img src="images/edu-canoeing.jpg" alt="Planning a School Adventure Trip" loading="lazy">
-        </div>
-        <div class="blog-card-body">
-          <h3>Planning a School Adventure Trip? Unleash It at Hilston Park</h3>
-          <p>From curriculum links to catering logistics, this guide walks through the key decisions school trip organisers face and how a fully managed residential centre simplifies each one.</p>
-          <a href="blog-school-trip.html" class="blog-read-more">READ MORE &rarr;</a>
-        </div>
-      </article>
-      <article class="blog-card">
-        <div class="blog-card-img">
-          <img src="images/hero-corporate.jpg" alt="Team Building at Hilston Park" loading="lazy">
-        </div>
-        <div class="blog-card-body">
-          <h3>Team Building in the Welsh Countryside: What to Expect</h3>
-          <p>Taking a corporate team out of the office and into an estate setting changes how people collaborate. An inside look at what a Hilston Park team day actually looks like.</p>
-          <a href="blog-team-building.html" class="blog-read-more">READ MORE &rarr;</a>
-        </div>
-      </article>
-      <article class="blog-card">
-        <div class="blog-card-img">
           <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg" alt="Hilston Park International Menu" loading="lazy">
         </div>
         <div class="blog-card-body">
           <h3>Hilston Park&rsquo;s International Menu</h3>
           <p>Hilston Park&#8217;s international menu brings together global flavours and cultural traditions through carefully prepared dishes for every guest.</p>
           <a href="blog-international-menu.html" class="blog-read-more">READ MORE &rarr;</a>
+        </div>
+      </article>
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb6509b9ec1135b6c0dd89_Planning%20a%20School%20Adventure%20Trip%20in%202025.jpg" alt="Planning a School Adventure Trip" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <h3>Planning a School Adventure Trip in 2025?</h3>
+          <p>Organise a school adventure trip in 2025 at Hilston Park with engaging activities that support learning, teamwork, and student development.</p>
+          <a href="blog-school-trip.html" class="blog-read-more">READ MORE &rarr;</a>
+        </div>
+      </article>
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb632a2b3438cd618d8b30_Why%20Schools%20Are%20Booking%20Their%202025%20Trips%20at%20Hilston%20Park.jpg" alt="Why Schools Are Booking Hilston Park" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <h3>Why Schools Are Booking Their Trips at Hilston Park</h3>
+          <p>Discover outdoor learning and residential adventures at Hilston Park that build students&#8217; confidence, teamwork, and personal growth through nature.</p>
+          <a href="blog-why-schools-book.html" class="blog-read-more">READ MORE &rarr;</a>
         </div>
       </article>
     </div>
