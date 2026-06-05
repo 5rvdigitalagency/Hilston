@@ -209,23 +209,16 @@
     .accom-cta { margin-top: 22px; }
 
     /* NEWSLETTER */
-    .newsletter-band { background: var(--teal); padding: 72px 80px; text-align: center; }
-    .newsletter-band h2 {
-      color: white; font-family: var(--font-serif); font-weight: normal;
-      font-size: 2.4rem; margin-bottom: 10px;
-    }
-    .newsletter-band p { color: rgba(255,255,255,0.86); font-size: 0.92rem; max-width: 46ch; margin: 0 auto 28px; line-height: 1.7; }
-    .newsletter-form { display: flex; gap: 0; max-width: 460px; margin: 0 auto; }
-    .newsletter-input {
-      flex: 1; padding: 18px 22px; border: none; font-size: 1rem;
-      outline: none; font-family: var(--font-sans);
-    }
-    .newsletter-btn {
-      background: var(--dark); color: white; padding: 14px 24px; border: none; cursor: pointer;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-      font-family: var(--font-sans); transition: background 0.2s;
-    }
-    .newsletter-btn:hover { background: #3c5060; }
+    .newsletter-band { background: var(--dark); padding: 56px 80px; }
+    .newsletter-band-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .newsletter-band h2 { font-family: var(--font-sans); font-weight: 600; font-size: clamp(1.5rem, 2vw, 2.1rem); color: var(--white); line-height: 1.28; margin-bottom: 16px; }
+    .newsletter-band-left p { color: rgba(255,255,255,0.75); font-size: 0.88rem; line-height: 1.72; }
+    .newsletter-sub { color: rgba(255,255,255,0.75); font-size: 0.88rem; line-height: 1.72; margin-bottom: 22px; }
+    .newsletter-form { display: flex; gap: 0; width: 100%; }
+    .newsletter-input { flex: 1; padding: 13px 18px; border: none; font-size: 0.88rem; outline: none; font-family: var(--font-sans); background: #d9d9d9; color: var(--text); }
+    .newsletter-input::placeholder { color: #6b6b6b; }
+    .newsletter-btn { background: var(--teal); color: white; padding: 13px 28px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-sans); transition: background 0.2s; white-space: nowrap; }
+    .newsletter-btn:hover { background: var(--teal-dark); }
 
     /* VISIT US */
     .visit-us { background: var(--beige); padding: 88px 80px; }
@@ -272,6 +265,7 @@
     }
     @media (max-width: 880px) {
       .edu-hero-inner, .edu-intro-grid, .activities-grid, .we-offer-inner, .edu-accom-grid, .visit-us-grid, .faq-grid { grid-template-columns: 1fr; }
+      .newsletter-band-inner { grid-template-columns: 1fr; gap: 28px; }
       /* Reset sticky images — scroll normally on iPad/phone */
       .we-offer-images { position: static; }
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 36px 0; }
@@ -637,12 +631,19 @@
 
   <!-- NEWSLETTER -->
   <section class="newsletter-band">
-    <h2>Plan Your Educational Trip at Hilston Park</h2>
-    <p>We take the pressure out of school residentials in Wales by providing adapted support for children and managing all catering in-house.</p>
-    <form class="newsletter-form" action="contact.html" method="get" onsubmit="event.preventDefault();window.location='contact.html#contact-form';">
-      <input class="newsletter-input" type="email" name="email" placeholder="School or organisation email address" required>
-      <button class="newsletter-btn" type="submit">Enquire About School Trips</button>
-    </form>
+    <div class="newsletter-band-inner">
+      <div class="newsletter-band-left">
+        <h2>Plan Your Educational Trip at Hilston Park</h2>
+        <p>We take the pressure out of school residentials in Wales by providing dedicated outdoor activity programmes, adapted support for every age group, and all catering managed in-house.</p>
+      </div>
+      <div class="newsletter-band-right">
+        <p class="newsletter-sub">Send us your school or organisation email and the team will be in touch with availability, pricing and programme options.</p>
+        <form class="newsletter-form" action="contact.html" method="get" onsubmit="event.preventDefault();window.location='contact.html#contact-form';">
+          <input class="newsletter-input" type="email" name="email" placeholder="School or organisation email address" required>
+          <button class="newsletter-btn" type="submit">Enquire Now</button>
+        </form>
+      </div>
+    </div>
   </section>
 
   <!-- FAQ -->

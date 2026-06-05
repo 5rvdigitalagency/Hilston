@@ -297,9 +297,16 @@
     .planning-cta p { font-size: 0.94rem; line-height: 1.78; color: var(--text-muted); max-width: 52ch; margin: 0 auto 32px; }
 
     /* NEWSLETTER */
-    .newsletter-band { background: var(--teal); padding: 72px 80px; text-align: center; }
-    .newsletter-band h2 { color: white; font-family: var(--font-serif); font-weight: normal; font-size: 2.4rem; margin-bottom: 10px; }
-    .newsletter-band p { color: white; font-size: 0.92rem; max-width: 46ch; margin: 0 auto 28px; line-height: 1.7; }
+    .newsletter-band { background: var(--dark); padding: 56px 80px; }
+    .newsletter-band-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .newsletter-band h2 { font-family: var(--font-sans); font-weight: 600; font-size: clamp(1.5rem, 2vw, 2.1rem); color: var(--white); line-height: 1.28; margin-bottom: 16px; }
+    .newsletter-band-left p { color: rgba(255,255,255,0.75); font-size: 0.88rem; line-height: 1.72; }
+    .newsletter-sub { color: rgba(255,255,255,0.75); font-size: 0.88rem; line-height: 1.72; margin-bottom: 22px; }
+    .newsletter-form { display: flex; gap: 0; width: 100%; }
+    .newsletter-input { flex: 1; padding: 13px 18px; border: none; font-size: 0.88rem; outline: none; font-family: var(--font-sans); background: #d9d9d9; color: var(--text); }
+    .newsletter-input::placeholder { color: #6b6b6b; }
+    .newsletter-btn { background: var(--teal); color: white; padding: 13px 28px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-sans); transition: background 0.2s; white-space: nowrap; }
+    .newsletter-btn:hover { background: var(--teal-dark); }
     .newsletter-form { display: flex; max-width: 460px; margin: 0 auto; }
     .newsletter-input { flex: 1; padding: 14px 18px; border: none; font-size: 0.9rem; outline: none; font-family: var(--font-sans); }
     .newsletter-btn { background: var(--dark); color: white; padding: 14px 24px; border: none; cursor: pointer; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-sans); transition: background 0.2s; }
@@ -317,6 +324,7 @@
     }
     @media (max-width: 880px) {
       .accom-hero-inner, .accom-intro-grid, .accom-block, .visit-us-grid, .faq-grid { grid-template-columns: 1fr; }
+      .newsletter-band-inner { grid-template-columns: 1fr; gap: 28px; }
       .accom-hero-inner { padding: 40px 24px; }
       .accom-intro, .accom-options, .activities, .flexible-booking, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 24px; padding-right: 24px; }
       .stats-bar { padding-left: 24px; padding-right: 24px; }
@@ -1041,11 +1049,18 @@
 
   <!-- NEWSLETTER -->
   <section class="newsletter-band">
-    <h2>Stay up to date</h2>
-    <p>Get regular updates about upcoming events, trip planning advice and compelling stories.</p>
-    <div class="newsletter-form">
-      <input class="newsletter-input" type="email" placeholder="Your email" required>
-      <button class="newsletter-btn" type="button">Subscribe</button>
+    <div class="newsletter-band-inner">
+      <div class="newsletter-band-left">
+        <h2>Plan Your Stay at Hilston Park</h2>
+        <p>From cosy king rooms to exclusive use of the whole estate — get updates on availability, seasonal offers, and new accommodation options as they become available.</p>
+      </div>
+      <div class="newsletter-band-right">
+        <p class="newsletter-sub">Stay in the loop with the latest availability, exclusive packages, and special rates for groups and families.</p>
+        <div class="newsletter-form">
+          <input class="newsletter-input" type="email" placeholder="Enter your email address" required>
+          <button class="newsletter-btn" type="button">Subscribe</button>
+        </div>
+      </div>
     </div>
   </section>
 
