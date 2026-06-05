@@ -3,11 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <title>Group Accommodation Wales | Youth &amp; Residential Stays | Hilston Park</title>
   <meta name="description" content="Stay at group accommodation in Wales for schools and youth groups. Enjoy comfortable residential stays and digital detox experiences in nature.">
   <link rel="stylesheet" href="style.css">
@@ -40,7 +35,7 @@
       align-items: flex-start; justify-content: flex-end; padding-bottom: 4px;
     }
     .accom-hero-sub {
-      font-size: 0.96rem; line-height: 1.74; color: rgba(255,255,255,0.88); max-width: 54ch; margin-bottom: 28px;
+      font-size: 0.96rem; line-height: 1.74; color: rgba(255,255,255,0.88); max-width: 44ch; margin-bottom: 28px;
     }
 
     /* STATS BAR */
@@ -192,7 +187,7 @@
     .booking-sub-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin-top: 4px; }
     .booking-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; }
     .booking-list li { padding-left: 18px; position: relative; font-size: 0.86rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
-    .booking-list li::before { content: "4"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+    .booking-list li::before { content: "\2014"; position: absolute; left: 0; color: var(--white); font-weight: 700; }
     .booking-card-cta {
       margin-top: auto; align-self: flex-start;
       display: inline-flex; align-items: center;
@@ -206,7 +201,7 @@
 
     /* VISIT US */
     /* LIVE RATES */
-    .live-rates { background: var(--white); padding: 88px 80px; }
+    .live-rates { background: var(--white); padding: 88px 80px 48px; }
     .live-rates-header { text-align: center; max-width: 680px; margin: 0 auto 48px; }
     .live-rates-header h2 { margin-bottom: 12px; }
     .live-rates-header p { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); }
@@ -267,7 +262,7 @@
     .rates-avail-enquire { background: none; border: 1.5px solid var(--teal); color: var(--teal); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; cursor: pointer; font-family: var(--font-sans); transition: background 0.2s, color 0.2s; }
     .rates-avail-enquire:hover { background: var(--teal); color: white; }
 
-    .visit-us { background: var(--white); padding: 88px 80px; }
+    .visit-us { background: var(--white); padding: 48px 80px 88px; }
     .visit-us .heading-display { margin-bottom: 44px; }
     .visit-us-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .visit-card {
@@ -302,9 +297,16 @@
     .planning-cta p { font-size: 0.94rem; line-height: 1.78; color: var(--text-muted); max-width: 52ch; margin: 0 auto 32px; }
 
     /* NEWSLETTER */
-    .newsletter-band { background: var(--teal); padding: 72px 80px; text-align: center; }
-    .newsletter-band h2 { color: white; font-family: var(--font-serif); font-weight: normal; font-size: 2.4rem; margin-bottom: 10px; }
-    .newsletter-band p { color: white; font-size: 0.92rem; max-width: 46ch; margin: 0 auto 28px; line-height: 1.7; }
+    .newsletter-band { background: var(--dark); padding: 56px 80px; }
+    .newsletter-band-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .newsletter-band h2 { font-family: var(--font-sans); font-weight: 600; font-size: clamp(1.5rem, 2vw, 2.1rem); color: var(--white); line-height: 1.28; margin-bottom: 16px; }
+    .newsletter-band-left p { color: rgba(255,255,255,0.75); font-size: 0.88rem; line-height: 1.72; }
+    .newsletter-sub { color: rgba(255,255,255,0.75); font-size: 0.88rem; line-height: 1.72; margin-bottom: 22px; }
+    .newsletter-form { display: flex; gap: 0; width: 100%; }
+    .newsletter-input { flex: 1; padding: 13px 18px; border: none; font-size: 0.88rem; outline: none; font-family: var(--font-sans); background: #d9d9d9; color: var(--text); }
+    .newsletter-input::placeholder { color: #6b6b6b; }
+    .newsletter-btn { background: var(--teal); color: white; padding: 13px 28px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-sans); transition: background 0.2s; white-space: nowrap; }
+    .newsletter-btn:hover { background: var(--teal-dark); }
     .newsletter-form { display: flex; max-width: 460px; margin: 0 auto; }
     .newsletter-input { flex: 1; padding: 14px 18px; border: none; font-size: 0.9rem; outline: none; font-family: var(--font-sans); }
     .newsletter-btn { background: var(--dark); color: white; padding: 14px 24px; border: none; cursor: pointer; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-sans); transition: background 0.2s; }
@@ -322,6 +324,7 @@
     }
     @media (max-width: 880px) {
       .accom-hero-inner, .accom-intro-grid, .accom-block, .visit-us-grid, .faq-grid { grid-template-columns: 1fr; }
+      .newsletter-band-inner { grid-template-columns: 1fr; gap: 28px; }
       .accom-hero-inner { padding: 40px 24px; }
       .accom-intro, .accom-options, .activities, .flexible-booking, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 24px; padding-right: 24px; }
       .stats-bar { padding-left: 24px; padding-right: 24px; }
@@ -386,7 +389,6 @@
         <li><a href="educational.html">EDUCATION</a></li>
         <li><a href="accomodation.html" class="nav-active">ACCOMMODATION</a></li>
         <li><a href="event.html">EVENTS</a></li>
-        <li><a href="gallery.html">GALLERY</a></li>
         <li><a href="contact.html">CONTACT</a></li>
         <li><a href="blogs.html">BLOG</a></li>
       </ul>
@@ -404,7 +406,6 @@
         <li><a href="educational.html">Education</a></li>
         <li><a href="accomodation.html">Accommodation</a></li>
         <li><a href="event.html">Events</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
         <li class="mobile-nav-book-item"><a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK / ENQUIRY</a></li>
@@ -632,7 +633,7 @@
     <hr class="accom-divider">
 
     <!-- 05 Dormitory / Group Bunk Rooms -->
-    <div class="accom-block">
+    <div class="accom-block" id="dormitory-rooms">
       <div class="accom-block-img">
         <div class="accom-gallery" data-accom-gallery>
           <img src="images/room-dormitory.jpg" alt="Dormitory bunk rooms at Hilston Park" class="accom-gallery-slide active" loading="lazy">
@@ -844,7 +845,7 @@
             <li>Families</li>
             <li>Short countryside escapes</li>
           </ul>
-          <a href="javascript:void(0)" class="booking-card-cta" data-booking-type="stay">
+          <a href="https://www.airbnb.co.uk/users/profile/1470176128171954742?previous_page_name=PdpHomeMarketplace" target="_blank" rel="noopener" class="booking-card-cta">
             VIEW ON AIRBNB
             <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -863,7 +864,7 @@
             <li>Last-minute bookings</li>
             <li>Individual accommodation units</li>
           </ul>
-          <a href="https://www.booking.com" target="_blank" rel="noopener" class="booking-card-cta">
+          <a href="https://www.booking.com/hotel/gb/hilston-park-centre.en-gb.html?aid=304142&label=gen173nr-10CAEoggI46AdIM1gEaFCIAQGYATO4AQfIAQzYAQPoAQH4AQGIAgGoAgG4Ao2Ti9EGwAIB0gIkZjk3NGQxY2EtZWFhYS00ODA3LWI4YWUtYjE0NDgwNWU1ZGNi2AIB4AIB&sid=07d9adf6a44544cd7206b0f541a047ca&dest_id=13083514&dest_type=hotel&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1780664739&srpvid=440f5c0f9f2205d1&type=total&ucfs=1" target="_blank" rel="noopener" class="booking-card-cta">
             CHECK OFFERS ON BOOKING.COM
             <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -997,7 +998,7 @@
         </div>
         <h3>Getting Here</h3>
         <p>Located near Monmouth in Wales, Hilston Park is easily accessible by road, with travel support available for school and group organisers if required.</p>
-        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">LEARN MORE</a>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">GET DIRECTIONS</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -1007,7 +1008,7 @@
         </div>
         <h3>Get in Touch</h3>
         <p>Whether you&#8217;re a school, corporate team, or private group, our team is ready to help you plan and arrange your visit.</p>
-        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
+        <a href="contact.html" class="btn-pill">CONTACT US</a>
       </div>
     </div>
   </section>
@@ -1048,11 +1049,18 @@
 
   <!-- NEWSLETTER -->
   <section class="newsletter-band">
-    <h2>Stay up to date</h2>
-    <p>Get regular updates about upcoming events, trip planning advice and compelling stories.</p>
-    <div class="newsletter-form">
-      <input class="newsletter-input" type="email" placeholder="Your email" required>
-      <button class="newsletter-btn" type="button">Subscribe</button>
+    <div class="newsletter-band-inner">
+      <div class="newsletter-band-left">
+        <h2>Plan Your Stay at Hilston Park</h2>
+        <p>From cosy king rooms to exclusive use of the whole estate — get updates on availability, seasonal offers, and new accommodation options as they become available.</p>
+      </div>
+      <div class="newsletter-band-right">
+        <p class="newsletter-sub">Stay in the loop with the latest availability, exclusive packages, and special rates for groups and families.</p>
+        <div class="newsletter-form">
+          <input class="newsletter-input" type="email" placeholder="Enter your email address" required>
+          <button class="newsletter-btn" type="button">Subscribe</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1117,19 +1125,20 @@
           Gwent, Wales, NP25 5NY
         </address>
         <div class="social-icons">
-          <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
+          <a href="https://www.youtube.com/@HilstonPark" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
           <a href="https://www.instagram.com/hilstonparkofficial/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4A6.2 6.2 0 0012 5.8zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"/></svg></a>
-          <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
+          <a href="https://www.tiktok.com/@hilston.park" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.84 1.54V6.8a4.84 4.84 0 01-1.07-.11z"/></svg></a>
+          <a href="https://www.facebook.com/hilstonparkofficial" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
         </div>
       </div>
 
       <div class="footer-col">
         <h3>Home</h3>
         <ul>
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="blogs.html">Blog</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1139,6 +1148,7 @@
           <li><a href="educational.html">Educational</a></li>
           <li><a href="event.html">Events</a></li>
           <li><a href="accomodation.html">Accommodation</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1152,7 +1162,7 @@
 
       <div class="footer-meta">
         <p class="footer-copy">&copy; 2026 Hilston Park. All rights reserved.</p>
-        <p class="footer-madeby">Website made by <a href="https://www.5rv.digital" target="_blank" rel="noopener noreferrer"><strong>5RV Digital</strong></a></p>
+        <p class="footer-madeby">Website made by <strong>5RV Digital</strong></p>
       </div>
     </div>
     <div class="footer-bar"></div>
@@ -1365,21 +1375,26 @@
     var total = cards.length;
     var perView = window.innerWidth <= 540 ? 1 : window.innerWidth <= 880 ? 2 : 3;
     var pages = Math.ceil(total / perView);
-    var current = 0;
+    var maxPos = Math.max(0, total - perView); /* max single-card offset */
+    var current = 0; /* index of the leftmost visible card */
     for(var i=0;i<pages;i++){
       var d = document.createElement("button");
       d.className = "act-carousel-dot" + (i===0?" active":"");
       d.setAttribute("aria-label","Page "+(i+1));
       d.setAttribute("data-page", i);
-      d.addEventListener("click", function(){ goTo(parseInt(this.getAttribute("data-page"))); });
+      d.addEventListener("click", function(){ goTo(parseInt(this.getAttribute("data-page")) * perView); });
       dotsEl.appendChild(d);
     }
+    function updateDots(){
+      var activePage = Math.min(Math.floor(current / perView), pages - 1);
+      dotsEl.querySelectorAll(".act-carousel-dot").forEach(function(d,i){ d.classList.toggle("active", i===activePage); });
+    }
     function goTo(n){
-      current = Math.max(0, Math.min(n, pages-1));
+      current = Math.max(0, Math.min(n, maxPos));
       var gap = 16;
       var cardW = cards[0].offsetWidth + gap;
-      grid.style.transform = "translateX(-" + (current * perView * cardW) + "px)";
-      dotsEl.querySelectorAll(".act-carousel-dot").forEach(function(d,i){ d.classList.toggle("active", i===current); });
+      grid.style.transform = "translateX(-" + (current * cardW) + "px)";
+      updateDots();
     }
     prevBtn.addEventListener("click", function(){ goTo(current-1); });
     nextBtn.addEventListener("click", function(){ goTo(current+1); });
