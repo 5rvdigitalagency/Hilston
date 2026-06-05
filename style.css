@@ -2834,8 +2834,8 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 }
 .hcs-placeholder { color: rgba(74,99,113,0.45); }
 .hcs-arrow {
-  flex-shrink: 0; margin-left: 10px; transition: transform 0.22s ease;
-  pointer-events: none; color: var(--teal);
+  flex-shrink: 0; margin-left: 8px; transition: transform 0.22s ease, opacity 0.22s ease;
+  pointer-events: none; color: var(--teal); display: block; line-height: 0;
 }
 .hcs.hcs-open .hcs-arrow { transform: rotate(180deg); }
 
@@ -2851,7 +2851,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 /* --- Line variant (booking modal, matches date/number field underline style) --- */
 .hcs--line { position: relative; }
 .hcs--line .hcs-btn {
-  padding: 11px 28px 10px 0; border-bottom: 1px solid var(--beige-2);
+  padding: 11px 22px 10px 0; border-bottom: 1px solid var(--beige-2);
   font-size: 0.92rem; color: var(--text); transition: border-bottom-color 0.22s;
 }
 .hcs--line.hcs-open .hcs-btn,
@@ -2859,10 +2859,10 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   border-bottom-color: var(--teal); outline: none;
 }
 .hcs--line .hcs-arrow {
-  position: absolute; right: 4px; top: 50%;
-  transform: translateY(-50%); margin-left: 0;
+  position: absolute; right: 0; top: 50%;
+  transform: translateY(-50%); margin-left: 0; opacity: 0.65;
 }
-.hcs--line.hcs-open .hcs-arrow { transform: translateY(-50%) rotate(180deg); }
+.hcs--line.hcs-open .hcs-arrow { transform: translateY(-50%) rotate(180deg); opacity: 1; }
 
 /* --- Filter variant (gallery mobile, shown at full width) --- */
 .hcs--filter .hcs-btn {
@@ -2974,21 +2974,22 @@ span.flatpickr-weekday {
 }
 
 /* Alt-input styling: booking modal (line underline style) */
-.bkm-field .flatpickr-input[type="text"] {
+.bkm-field input[type="text"] {
   border: none; border-bottom: 1px solid var(--beige-2);
   padding: 11px 0 10px; font-family: var(--font-sans); font-size: 0.92rem;
   color: var(--text); background: transparent; outline: none;
   transition: border-bottom-color 0.22s; width: 100%; cursor: pointer;
-  border-radius: 0;
+  border-radius: 0; box-shadow: none;
 }
-.bkm-field .flatpickr-input[type="text"]:focus { border-bottom-color: var(--teal); outline: none; }
+.bkm-field input[type="text"]:focus { border-bottom-color: var(--teal); outline: none; }
+.bkm-field input[type="text"]::placeholder { color: rgba(74,99,113,0.38); font-size: 0.88rem; }
 
 /* Alt-input styling: accommodation rates bar (dark bg, white text) */
-.rates-filter-group .flatpickr-input[type="text"] {
+.rates-filter-group input[type="text"] {
   background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
   color: var(--white); padding: 10px 14px; font-size: 0.88rem;
   font-family: var(--font-sans); outline: none; width: 100%;
-  cursor: pointer; border-radius: 0;
+  cursor: pointer; border-radius: 0; box-shadow: none;
 }
-.rates-filter-group .flatpickr-input[type="text"]::placeholder { color: rgba(255,255,255,0.4); }
-.rates-filter-group .flatpickr-input[type="text"]:focus { border-color: rgba(255,255,255,0.5); outline: none; }
+.rates-filter-group input[type="text"]::placeholder { color: rgba(255,255,255,0.4); }
+.rates-filter-group input[type="text"]:focus { border-color: rgba(255,255,255,0.5); outline: none; }
