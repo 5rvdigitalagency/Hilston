@@ -660,21 +660,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* --- Section 2: Room rate --- */
+    /* NOTE: SC_RATES_URL returns the property's lowest available nightly rate ("from" price),
+       not the rate for the specific room type selected. All rate figures are therefore
+       labelled as "from" — the confirmed price for the chosen room is shown on Q-Book. */
     if (anyRateKnown) {
-      html += '<div class="bkm-sum-section">Room rate</div>';
+      html += '<div class="bkm-sum-section">Room rate (from)</div>';
       if (nights <= 7) {
         nightRates.forEach(function (n, idx) {
           var nd  = new Date(n.date + "T12:00:00");
           var lbl = "Night " + (idx + 1) + " \u2014 " + DAYS[nd.getDay()] + " " + nd.getDate();
-          var val = n.perNight !== null ? "\xA3" + n.perNight.toFixed(2) : "On request";
+          var val = n.perNight !== null ? "from \xA3" + n.perNight.toFixed(2) : "On request";
           html   += row(lbl, val, n.perNight === null ? "bkm-sum-row--muted" : "");
         });
       } else {
-        html += row("Per night (from)", "\xA3" + lowestRate.toFixed(2));
+        html += row("Per night (from)", "from \xA3" + lowestRate.toFixed(2));
       }
       html += row(
-        allRatesKnown ? "Room total" : "Room total (partial)",
-        allRatesKnown ? "\xA3" + roomTotal.toFixed(2) : "\xA3" + roomTotal.toFixed(2) + "+ (est.)",
+        allRatesKnown ? "Room total (from)" : "Room total (partial, from)",
+        "from \xA3" + roomTotal.toFixed(2),
         "bkm-sum-row--subtotal"
       );
     }
@@ -702,12 +705,13 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       if (allRatesKnown) {
         html += row(
-          "Total with all meals",
-          "\xA3" + (roomTotal + bkCost + dnCost).toFixed(2) + " (est.)",
+          "Est. total with all meals",
+          "from \xA3" + (roomTotal + bkCost + dnCost).toFixed(2),
           "bkm-sum-row--total"
         );
       }
       html += '<div class="bkm-sum-footnote">Meal extras are optional \u2014 add or remove when completing your booking on Q-Book.</div>';
+      html += '<div class="bkm-sum-footnote bkm-sum-footnote--rate-note">Room rates shown are starting prices. Your exact room rate is confirmed on Q-Book.</div>';
     }
 
     summaryEl.innerHTML = html;

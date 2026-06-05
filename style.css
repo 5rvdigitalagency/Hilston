@@ -2409,6 +2409,14 @@ body { overflow-x: clip; }
   font-style: italic;
 }
 
+.bkm-sum-footnote--rate-note {
+  color: var(--forest);
+  font-style: normal;
+  font-weight: 500;
+  border-top: none;
+  padding-top: 4px;
+}
+
 /* ---- Capacity hint (config form, below acctype select) ---- */
 .bkm-capacity-hint {
   font-size: 0.72rem;
