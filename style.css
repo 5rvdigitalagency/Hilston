@@ -96,8 +96,7 @@ button { font: inherit; cursor: pointer; }
   margin-right: auto;
 }
 .plan-day > .heading-display,
-.newsletter-band > h2,
-.newsletter-band > p,
+.newsletter-band-inner,
 .planning-cta > h2,
 .planning-cta > p,
 body section > .heading-display,
