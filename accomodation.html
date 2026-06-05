@@ -133,10 +133,9 @@
       font-size: 0.92rem; line-height: 1.72; color: var(--text-muted);
       max-width: 680px; margin: 0 auto 44px;
     }
-    .activities-carousel { position: relative; overflow: hidden; width: 100%; }
-    .activities-grid { display: flex; gap: 16px; transition: transform 0.4s ease; }
+    .activities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; width: 100%; }
     .act-card {
-      background: var(--white); flex: 0 0 calc(33.333% - 11px); min-width: calc(33.333% - 11px);
+      background: var(--white);
       display: flex; flex-direction: column; overflow: hidden;
       border-top: 3px solid transparent; transition: border-top-color 0.3s;
     }
@@ -147,17 +146,6 @@
     .act-card-body { padding: 24px 26px 28px; flex: 1; display: flex; flex-direction: column; }
     .act-card-body h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.12rem; color: var(--text); margin-bottom: 8px; }
     .act-card-body p { font-size: 0.86rem; line-height: 1.72; color: var(--text-muted); }
-    .act-carousel-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 32px; }
-    .act-carousel-btn {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--teal); border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; transition: background 0.2s;
-    }
-    .act-carousel-btn:hover { background: var(--teal-dark); }
-    .act-carousel-btn svg { stroke: white; fill: none; stroke-width: 2; width: 18px; height: 18px; }
-    .act-carousel-dots { display: flex; gap: 8px; }
-    .act-carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.2); border: none; cursor: pointer; padding: 0; transition: background 0.2s; }
-    .act-carousel-dot.active { background: var(--teal); }
     .act-cta { text-align: center; margin-top: 40px; }
 
     /* FLEXIBLE BOOKING */
@@ -334,7 +322,7 @@
       .accom-block.reverse .accom-block-img { order: 0; }
       .accom-block.reverse .accom-block-content { order: 0; }
       .accom-block-img > img { height: 280px; }
-      .act-card { flex: 0 0 calc(50% - 8px); min-width: calc(50% - 8px); }
+      .activities-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 880px) {
       .rates-rooms-row { grid-template-columns: 1fr 1fr; }
@@ -346,7 +334,7 @@
     @media (max-width: 540px) {
       .accom-hero-inner { padding: 32px 16px; }
       .accom-intro, .accom-options, .activities, .flexible-booking, .live-rates, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 16px !important; padding-right: 16px !important; }
-      .act-card { flex: 0 0 100%; min-width: 100%; }
+      .activities-grid { grid-template-columns: 1fr; }
       .rates-rooms-row { grid-template-columns: 1fr; }
       .rates-filter-row { flex-direction: column; align-items: stretch; padding: 16px; gap: 10px; }
       .rates-filter-group { flex: 1 1 100%; min-width: 0; }
@@ -752,54 +740,43 @@
   <section class="activities">
     <h2 class="heading-display activities-heading">Activities Included with Accommodation in the Wye Valley</h2>
     <p class="activities-subhead">From peaceful walks across the estate to engaging outdoor challenges, our staff-led programmes create a refreshing digital detox in the UK, helping guests reconnect with nature and each other in a calm countryside setting.</p>
-    <div class="activities-carousel">
-      <div class="activities-grid" id="actGrid">
-        <div class="act-card">
-          <div class="act-card-img">
-            <img src="images/IMG_8188.jpg" alt="Woodland path at Hilston Park">
-          </div>
-          <div class="act-card-body">
-            <h3>Estate Walks &amp; Nature Trails</h3>
-            <p>Explore woodland paths, meadows, and estate grounds through guided walks that showcase local wildlife, landscapes, and countryside surroundings.</p>
-          </div>
+    <div class="activities-grid">
+      <div class="act-card">
+        <div class="act-card-img">
+          <img src="images/IMG_8188.jpg" alt="Woodland path at Hilston Park">
         </div>
-        <div class="act-card">
-          <div class="act-card-img">
-            <img src="images/5RV02909.jpg" alt="Archery session at Hilston Park">
-          </div>
-          <div class="act-card-body">
-            <h3>Archery &amp; Target Sports</h3>
-            <p>Enjoy supervised archery and target-based activities suitable for families, private groups, and guests seeking outdoor challenges.</p>
-          </div>
-        </div>
-        <div class="act-card">
-          <div class="act-card-img">
-            <img src="images/edu-group.jpg" alt="Water activities in the Wye Valley">
-          </div>
-          <div class="act-card-body">
-            <h3>Kayaking &amp; Outdoor Water Activities</h3>
-            <p>Take part in water-based activities within the Wye Valley, enjoying the region&#8217;s natural scenery and outdoor environment.</p>
-          </div>
-        </div>
-        <div class="act-card">
-          <div class="act-card-img">
-            <img src="https://images.unsplash.com/photo-1692313532975-513a383c48f7?auto=format&fit=crop&w=900&q=80" alt="Outdoor campfire cooking at Hilston Park">
-          </div>
-          <div class="act-card-body">
-            <h3>Campfire &amp; Outdoor Cooking</h3>
-            <p>Relax with evening campfire sessions and outdoor cooking experiences, ideal for residential groups and shared outdoor moments.</p>
-          </div>
+        <div class="act-card-body">
+          <h3>Estate Walks &amp; Nature Trails</h3>
+          <p>Explore woodland paths, meadows, and estate grounds through guided walks that showcase local wildlife, landscapes, and countryside surroundings.</p>
         </div>
       </div>
-    </div>
-    <div class="act-carousel-nav" id="actCarouselNav">
-      <button class="act-carousel-btn" id="actPrev" aria-label="Previous">
-        <svg viewBox="0 0 18 18"><polyline points="11,3 5,9 11,15"/></svg>
-      </button>
-      <div class="act-carousel-dots" id="actDots"></div>
-      <button class="act-carousel-btn" id="actNext" aria-label="Next">
-        <svg viewBox="0 0 18 18"><polyline points="7,3 13,9 7,15"/></svg>
-      </button>
+      <div class="act-card">
+        <div class="act-card-img">
+          <img src="images/5RV02909.jpg" alt="Archery session at Hilston Park">
+        </div>
+        <div class="act-card-body">
+          <h3>Archery &amp; Target Sports</h3>
+          <p>Enjoy supervised archery and target-based activities suitable for families, private groups, and guests seeking outdoor challenges.</p>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="act-card-img">
+          <img src="images/edu-group.jpg" alt="Water activities in the Wye Valley">
+        </div>
+        <div class="act-card-body">
+          <h3>Kayaking &amp; Outdoor Water Activities</h3>
+          <p>Take part in water-based activities within the Wye Valley, enjoying the region&#8217;s natural scenery and outdoor environment.</p>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="act-card-img">
+          <img src="https://images.unsplash.com/photo-1692313532975-513a383c48f7?auto=format&fit=crop&w=900&q=80" alt="Outdoor campfire cooking at Hilston Park">
+        </div>
+        <div class="act-card-body">
+          <h3>Campfire &amp; Outdoor Cooking</h3>
+          <p>Relax with evening campfire sessions and outdoor cooking experiences, ideal for residential groups and shared outdoor moments.</p>
+        </div>
+      </div>
     </div>
     <div class="act-cta">
       <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE ABOUT ACTIVITIES</a>
@@ -1364,41 +1341,5 @@
   })();
 </script>
 
-<script>
-  (function(){
-    var grid = document.getElementById("actGrid");
-    var prevBtn = document.getElementById("actPrev");
-    var nextBtn = document.getElementById("actNext");
-    var dotsEl = document.getElementById("actDots");
-    if(!grid) return;
-    var cards = grid.querySelectorAll(".act-card");
-    var total = cards.length;
-    var perView = window.innerWidth <= 540 ? 1 : window.innerWidth <= 880 ? 2 : 3;
-    var pages = Math.ceil(total / perView);
-    var maxPos = Math.max(0, total - perView); /* max single-card offset */
-    var current = 0; /* index of the leftmost visible card */
-    for(var i=0;i<pages;i++){
-      var d = document.createElement("button");
-      d.className = "act-carousel-dot" + (i===0?" active":"");
-      d.setAttribute("aria-label","Page "+(i+1));
-      d.setAttribute("data-page", i);
-      d.addEventListener("click", function(){ goTo(parseInt(this.getAttribute("data-page")) * perView); });
-      dotsEl.appendChild(d);
-    }
-    function updateDots(){
-      var activePage = Math.min(Math.floor(current / perView), pages - 1);
-      dotsEl.querySelectorAll(".act-carousel-dot").forEach(function(d,i){ d.classList.toggle("active", i===activePage); });
-    }
-    function goTo(n){
-      current = Math.max(0, Math.min(n, maxPos));
-      var gap = 16;
-      var cardW = cards[0].offsetWidth + gap;
-      grid.style.transform = "translateX(-" + (current * cardW) + "px)";
-      updateDots();
-    }
-    prevBtn.addEventListener("click", function(){ goTo(current-1); });
-    nextBtn.addEventListener("click", function(){ goTo(current+1); });
-  })();
-</script>
 </body>
 </html>
