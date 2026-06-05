@@ -268,7 +268,9 @@
     .visit-card {
       background: var(--beige); padding: 36px 32px;
       display: flex; flex-direction: column; gap: 16px; border-top: 3px solid var(--teal);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
     }
+    .visit-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(0,0,0,0.1); }
     .visit-icon { width: 46px; height: 46px; background: var(--teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     .visit-icon svg { width: 22px; height: 22px; stroke: white; fill: none; stroke-width: 2; }
     .visit-card h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.3rem; color: var(--text); }
@@ -978,7 +980,7 @@
         </div>
         <h3>When to Visit</h3>
         <p>Hilston Park welcomes guests year-round, offering summer outdoor experiences with longer days and winter stays focused on calm indoor and group activities.</p>
-        <a href="contact.html" class="btn-pill">LEARN MORE</a>
+        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -998,7 +1000,7 @@
         </div>
         <h3>Get in Touch</h3>
         <p>Whether you&#8217;re a school, corporate team, or private group, our team is ready to help you plan and arrange your visit.</p>
-        <a href="contact.html" class="btn-pill">CONTACT US</a>
+        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
       </div>
     </div>
   </section>
