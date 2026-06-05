@@ -459,17 +459,24 @@
             <input type="tel" id="phone" name="phone" placeholder="+44 (0) ..." required>
           </div>
           <div class="form-field">
-            <label for="group-type">I am enquiring about <span style="color:var(--teal)">*</span></label>
-            <select id="group-type" name="group_type" required>
-              <option value="" disabled selected>Select enquiry type</option>
-              <option value="School Trip">School Trip</option>
-              <option value="Corporate Event / Team Building">Corporate Event / Team Building</option>
-              <option value="Wedding">Wedding</option>
-              <option value="Private Event / Party">Private Event / Party</option>
-              <option value="Group Accommodation">Group Accommodation</option>
-              <option value="Exclusive Use of House">Exclusive Use of House</option>
-              <option value="Other">Other</option>
-            </select>
+            <label id="hcs-group-type-lbl">I am enquiring about <span style="color:var(--teal)">*</span></label>
+            <div class="hcs hcs--box" id="hcs-group-type" aria-labelledby="hcs-group-type-lbl">
+              <button type="button" class="hcs-btn" aria-haspopup="listbox" aria-expanded="false">
+                <span class="hcs-value hcs-placeholder">Select enquiry type</span>
+                <svg class="hcs-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="1 1 7 7 13 1"/></svg>
+              </button>
+              <ul class="hcs-list" role="listbox" aria-label="Enquiry type">
+                <li class="hcs-opt hcs-opt--placeholder" data-value="" role="option">Select enquiry type</li>
+                <li class="hcs-opt" data-value="School Trip" role="option">School Trip</li>
+                <li class="hcs-opt" data-value="Corporate Event / Team Building" role="option">Corporate Event / Team Building</li>
+                <li class="hcs-opt" data-value="Wedding" role="option">Wedding</li>
+                <li class="hcs-opt" data-value="Private Event / Party" role="option">Private Event / Party</li>
+                <li class="hcs-opt" data-value="Group Accommodation" role="option">Group Accommodation</li>
+                <li class="hcs-opt" data-value="Exclusive Use of House" role="option">Exclusive Use of House</li>
+                <li class="hcs-opt" data-value="Other" role="option">Other</li>
+              </ul>
+              <input type="hidden" id="group-type" name="group_type" value="">
+            </div>
           </div>
           <div class="form-field">
             <label for="message">Your Enquiry <span style="color:var(--teal)">*</span></label>

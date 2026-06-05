@@ -156,16 +156,9 @@
     }
 
     /* ---- RESPONSIVE ---- */
-    #gallery-filter-select {
+    #gallery-hcs-filter {
       display: none;
       width: 100%; max-width: 320px;
-      padding: 10px 36px 10px 16px;
-      font-family: var(--font-sans); font-size: 0.78rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      border: 1.5px solid var(--border); border-radius: 8px;
-      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z' clip-rule='evenodd'/%3E%3C/svg%3E") no-repeat right 10px center / 20px;
-      appearance: none; -webkit-appearance: none;
-      color: var(--text); cursor: pointer;
     }
 
     @media (max-width: 1100px) {
@@ -180,7 +173,7 @@
       .gallery-header { padding: 40px 20px 28px; }
       .gallery-tabs-wrap { padding: 0 20px; text-align: left; }
       .gallery-tabs-inner { display: none; }
-      #gallery-filter-select { display: block; }
+      #gallery-hcs-filter { display: block; }
       .gallery-grid-wrap { padding: 24px 20px 48px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     }
@@ -261,14 +254,21 @@
         <button class="gtab" data-filter="food" role="tab" aria-selected="false">Food &amp; Dining</button>
         <button class="gtab" data-filter="landscape" role="tab" aria-selected="false">Landscape</button>
       </div>
-      <select id="gallery-filter-select" aria-label="Filter gallery by category">
-        <option value="all">All</option>
-        <option value="estate">Estate</option>
-        <option value="activities">Activities</option>
-        <option value="accommodation">Accommodation</option>
-        <option value="food">Food &amp; Dining</option>
-        <option value="landscape">Landscape</option>
-      </select>
+      <div class="hcs hcs--filter" id="gallery-hcs-filter">
+        <button type="button" class="hcs-btn" aria-haspopup="listbox" aria-expanded="false">
+          <span class="hcs-value">All</span>
+          <svg class="hcs-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="1 1 7 7 13 1"/></svg>
+        </button>
+        <ul class="hcs-list" role="listbox" aria-label="Filter gallery by category">
+          <li class="hcs-opt hcs-selected" data-value="all" role="option">All</li>
+          <li class="hcs-opt" data-value="estate" role="option">Estate</li>
+          <li class="hcs-opt" data-value="activities" role="option">Activities</li>
+          <li class="hcs-opt" data-value="accommodation" role="option">Accommodation</li>
+          <li class="hcs-opt" data-value="food" role="option">Food &amp; Dining</li>
+          <li class="hcs-opt" data-value="landscape" role="option">Landscape</li>
+        </ul>
+        <input type="hidden" id="gallery-filter-select" value="all">
+      </div>
     </div>
 
     <!-- IMAGE GRID -->

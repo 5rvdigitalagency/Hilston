@@ -290,16 +290,23 @@ document.addEventListener("DOMContentLoaded", function () {
               '</div>',
             '</div>',
             '<div class="bkm-field">',
-              '<label for="bkm-acctype">Accommodation type</label>',
-              '<select id="bkm-acctype">',
-                '<option value="any">Show all accommodation</option>',
-                '<option value="cosy-king">Cosy King Room</option>',
-                '<option value="double-garden">Double Garden View</option>',
-                '<option value="large-double-garden">Large Double Garden View</option>',
-                '<option value="family-room">Family Room</option>',
-                '<option value="dormitory">Dormitory / Group Bunk Rooms</option>',
-                '<option value="exclusive-use">Exclusive Use of House</option>',
-              '</select>',
+              '<label id="bkm-acctype-lbl">Accommodation type</label>',
+              '<div class="hcs hcs--line" aria-labelledby="bkm-acctype-lbl">',
+                '<button type="button" class="hcs-btn" aria-haspopup="listbox" aria-expanded="false">',
+                  '<span class="hcs-value">Show all accommodation</span>',
+                  '<svg class="hcs-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="1 1 7 7 13 1"/></svg>',
+                '</button>',
+                '<ul class="hcs-list" role="listbox">',
+                  '<li class="hcs-opt hcs-selected" data-value="any" role="option">Show all accommodation</li>',
+                  '<li class="hcs-opt" data-value="cosy-king" role="option">Cosy King Room</li>',
+                  '<li class="hcs-opt" data-value="double-garden" role="option">Double Garden View</li>',
+                  '<li class="hcs-opt" data-value="large-double-garden" role="option">Large Double Garden View</li>',
+                  '<li class="hcs-opt" data-value="family-room" role="option">Family Room</li>',
+                  '<li class="hcs-opt" data-value="dormitory" role="option">Dormitory / Group Bunk Rooms</li>',
+                  '<li class="hcs-opt" data-value="exclusive-use" role="option">Exclusive Use of House</li>',
+                '</ul>',
+                '<input type="hidden" id="bkm-acctype" value="any">',
+              '</div>',
             '</div>',
             '<p class="bkm-capacity-hint" id="bkm-capacity-hint"></p>',
             '<p class="bkm-error" id="bkm-error">Please select a valid arrival and departure date.</p>',
@@ -317,17 +324,24 @@ document.addEventListener("DOMContentLoaded", function () {
               '<div class="bkm-field"><label for="bkm-inq-email">Email <span class="bkm-req">*</span></label><input type="email" id="bkm-inq-email" required></div>',
               '<div class="bkm-field"><label for="bkm-inq-phone">Phone number <span class="bkm-req">*</span></label><input type="tel" id="bkm-inq-phone" required></div>',
               '<div class="bkm-field">',
-                '<label for="bkm-inq-about">Enquiry about <span class="bkm-req">*</span></label>',
-                '<select id="bkm-inq-about" required>',
-                  '<option value="">Please select&hellip;</option>',
-                  '<option value="Wedding">Wedding</option>',
-                  '<option value="Private event / party">Private event / party</option>',
-                  '<option value="Corporate day / team building">Corporate day / team building</option>',
-                  '<option value="School trip / educational">School trip / educational</option>',
-                  '<option value="Group accommodation">Group accommodation</option>',
-                  '<option value="Exclusive use of house">Exclusive use of house</option>',
-                  '<option value="Other">Other</option>',
-                '</select>',
+                '<label id="bkm-inq-about-lbl">Enquiry about <span class="hcs-req">*</span></label>',
+                '<div class="hcs hcs--line" aria-labelledby="bkm-inq-about-lbl">',
+                  '<button type="button" class="hcs-btn" aria-haspopup="listbox" aria-expanded="false">',
+                    '<span class="hcs-value hcs-placeholder">Please select…</span>',
+                    '<svg class="hcs-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="1 1 7 7 13 1"/></svg>',
+                  '</button>',
+                  '<ul class="hcs-list" role="listbox">',
+                    '<li class="hcs-opt hcs-opt--placeholder" data-value="" role="option">Please select…</li>',
+                    '<li class="hcs-opt" data-value="Wedding" role="option">Wedding</li>',
+                    '<li class="hcs-opt" data-value="Private event / party" role="option">Private event / party</li>',
+                    '<li class="hcs-opt" data-value="Corporate day / team building" role="option">Corporate day / team building</li>',
+                    '<li class="hcs-opt" data-value="School trip / educational" role="option">School trip / educational</li>',
+                    '<li class="hcs-opt" data-value="Group accommodation" role="option">Group accommodation</li>',
+                    '<li class="hcs-opt" data-value="Exclusive use of house" role="option">Exclusive use of house</li>',
+                    '<li class="hcs-opt" data-value="Other" role="option">Other</li>',
+                  '</ul>',
+                  '<input type="hidden" id="bkm-inq-about" value="">',
+                '</div>',
               '</div>',
               '<div class="bkm-fields">',
                 '<div class="bkm-field">',
@@ -600,7 +614,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var co = outEl.value;
     var adults  = adultsEl   ? (parseInt(adultsEl.value,   10) || 0) : 0;
     var kids    = childrenEl ? (parseInt(childrenEl.value, 10) || 0) : 0;
-    var accType = accTypeEl  ? accTypeEl.options[accTypeEl.selectedIndex].text : "";
+    var accType = accTypeEl  ? accTypeEl.value : "";
     var nights  = Math.round((new Date(co) - new Date(ci)) / 86400000);
     var totalGuests = adults + kids;
 
@@ -1289,3 +1303,113 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () { btn.classList.add("is-visible"); }, 1200);
 }());
 
+
+/* =====================================================
+   HCS — Hilston Custom Select Engine
+   Replaces native <select> for consistent cross-platform styling.
+   Usage: call initHCS(wrapEl) on any .hcs element.
+   Auto-inits all .hcs present on DOMContentLoaded.
+   ===================================================== */
+function initHCS(wrap) {
+  if (!wrap || wrap._hcsInit) return;
+  wrap._hcsInit = true;
+
+  var btn    = wrap.querySelector('.hcs-btn');
+  var list   = wrap.querySelector('.hcs-list');
+  var opts   = wrap.querySelectorAll('.hcs-opt');
+  var valEl  = wrap.querySelector('.hcs-value');
+  var input  = wrap.querySelector('input[type="hidden"]');
+  var focIdx = -1;
+
+  function openHCS() {
+    document.querySelectorAll('.hcs.hcs-open').forEach(function (o) {
+      if (o !== wrap) closeHCS(o);
+    });
+    wrap.classList.add('hcs-open');
+    btn.setAttribute('aria-expanded', 'true');
+    var sel = list.querySelector('.hcs-selected');
+    if (sel) sel.scrollIntoView({ block: 'nearest' });
+    focIdx = sel ? Array.prototype.indexOf.call(opts, sel) : 0;
+    setFocus(focIdx);
+  }
+
+  function closeHCS(target) {
+    target = target || wrap;
+    target.classList.remove('hcs-open');
+    var b = target.querySelector('.hcs-btn');
+    if (b) b.setAttribute('aria-expanded', 'false');
+    opts.forEach(function (o) { o.classList.remove('hcs-focused'); });
+  }
+
+  function selectOpt(opt) {
+    var val  = opt.getAttribute('data-value');
+    var text = opt.textContent.trim();
+    var isPlaceholder = opt.classList.contains('hcs-opt--placeholder');
+    opts.forEach(function (o) { o.classList.remove('hcs-selected'); });
+    if (!isPlaceholder && val !== '') {
+      opt.classList.add('hcs-selected');
+      valEl.textContent = text;
+      valEl.classList.remove('hcs-placeholder');
+      if (input) input.value = val;
+    } else {
+      valEl.textContent = text;
+      valEl.classList.add('hcs-placeholder');
+      if (input) input.value = '';
+    }
+    if (input) {
+      var ev = document.createEvent('Event');
+      ev.initEvent('change', true, true);
+      input.dispatchEvent(ev);
+    }
+    closeHCS();
+    btn.focus();
+  }
+
+  function setFocus(idx) {
+    opts.forEach(function (o) { o.classList.remove('hcs-focused'); });
+    if (opts[idx]) {
+      opts[idx].classList.add('hcs-focused');
+      opts[idx].scrollIntoView({ block: 'nearest' });
+      focIdx = idx;
+    }
+  }
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    wrap.classList.contains('hcs-open') ? closeHCS() : openHCS();
+  });
+
+  opts.forEach(function (opt, i) {
+    opt.addEventListener('click', function (e) { e.stopPropagation(); selectOpt(opt); });
+    opt.addEventListener('mouseenter', function () { setFocus(i); });
+  });
+
+  btn.addEventListener('keydown', function (e) {
+    var k = e.key;
+    if (k === 'Enter' || k === ' ') {
+      e.preventDefault();
+      if (wrap.classList.contains('hcs-open')) { if (opts[focIdx]) selectOpt(opts[focIdx]); }
+      else { openHCS(); }
+    } else if (k === 'ArrowDown') {
+      e.preventDefault();
+      if (!wrap.classList.contains('hcs-open')) { openHCS(); return; }
+      setFocus(Math.min(focIdx + 1, opts.length - 1));
+    } else if (k === 'ArrowUp') {
+      e.preventDefault();
+      if (!wrap.classList.contains('hcs-open')) { openHCS(); return; }
+      setFocus(Math.max(focIdx - 1, 0));
+    } else if (k === 'Escape') {
+      closeHCS(); btn.focus();
+    } else if (k === 'Tab') {
+      closeHCS();
+    }
+  });
+
+  document.addEventListener('click', function () { closeHCS(); });
+  if (list) list.addEventListener('click', function (e) { e.stopPropagation(); });
+}
+
+/* Auto-init on page load */
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.hcs').forEach(function (w) { initHCS(w); });
+});
