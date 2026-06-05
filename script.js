@@ -1073,4 +1073,152 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-});
+}); /* end DOMContentLoaded */
+
+/* =====================================================
+   COOKIE CONSENT BANNER
+   ===================================================== */
+(function () {
+  var COOKIE_KEY = "hp_cookie_consent";
+
+  function getConsent () {
+    try { return JSON.parse(localStorage.getItem(COOKIE_KEY)); } catch (e) { return null; }
+  }
+  function saveConsent (prefs) {
+    try { localStorage.setItem(COOKIE_KEY, JSON.stringify(prefs)); } catch (e) {}
+  }
+
+  /* Banner HTML */
+  var bannerHTML = [
+    '<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">',
+      '<div class="cookie-banner-inner">',
+        '<div class="cookie-banner-text">',
+          '<strong>Cookie Notice</strong>',
+          '<p>We use cookies to improve your experience and understand how you use our site. See our <a href="privacy.html">Privacy Policy</a> for details.</p>',
+        '</div>',
+        '<div class="cookie-banner-actions">',
+          '<button class="cookie-btn cookie-btn-manage" id="cookie-manage">Manage Preferences</button>',
+          '<button class="cookie-btn cookie-btn-accept" id="cookie-accept">Accept All</button>',
+        '</div>',
+      '</div>',
+    '</div>',
+
+    '<div id="cookie-modal" class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">',
+      '<div class="cookie-modal-panel">',
+        '<button class="cookie-modal-close" id="cookie-modal-close" aria-label="Close preferences">&times;</button>',
+        '<h2 id="cookie-modal-title">Cookie Preferences</h2>',
+        '<p>Choose which cookies you allow. Necessary cookies keep the site working and cannot be disabled.</p>',
+        '<div class="cookie-pref">',
+          '<div class="cookie-pref-row">',
+            '<div><strong>Necessary Cookies</strong><p>Required for the website to function correctly. Cannot be disabled.</p></div>',
+            '<span class="cookie-toggle-fixed">Always On</span>',
+          '</div>',
+          '<div class="cookie-pref-row">',
+            '<div><strong>Analytics Cookies</strong><p>Help us understand how visitors interact with our website so we can improve it.</p></div>',
+            '<label class="cookie-toggle"><input type="checkbox" id="pref-analytics" checked><span class="cookie-toggle-slider"></span></label>',
+          '</div>',
+          '<div class="cookie-pref-row">',
+            '<div><strong>Marketing Cookies</strong><p>Allow us to show relevant content and measure the effectiveness of our campaigns.</p></div>',
+            '<label class="cookie-toggle"><input type="checkbox" id="pref-marketing"><span class="cookie-toggle-slider"></span></label>',
+          '</div>',
+        '</div>',
+        '<div class="cookie-modal-actions">',
+          '<button class="cookie-btn cookie-btn-accept" id="cookie-save-prefs">Save Preferences</button>',
+        '</div>',
+      '</div>',
+    '</div>'
+  ].join("");
+
+  /* Only show if consent not yet recorded */
+  if (!getConsent()) {
+    document.body.insertAdjacentHTML("beforeend", bannerHTML);
+
+    var banner     = document.getElementById("cookie-banner");
+    var modal      = document.getElementById("cookie-modal");
+    var btnAccept  = document.getElementById("cookie-accept");
+    var btnManage  = document.getElementById("cookie-manage");
+    var btnClose   = document.getElementById("cookie-modal-close");
+    var btnSave    = document.getElementById("cookie-save-prefs");
+    var cbAnalytics = document.getElementById("pref-analytics");
+    var cbMarketing = document.getElementById("pref-marketing");
+
+    /* Show banner after short delay */
+    setTimeout(function () {
+      banner.classList.add("is-visible");
+    }, 800);
+
+    function dismissBanner (prefs) {
+      saveConsent(prefs);
+      banner.classList.remove("is-visible");
+      setTimeout(function () { banner.parentNode && banner.parentNode.removeChild(banner); }, 500);
+      if (modal.classList.contains("is-open")) {
+        modal.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+    }
+
+    btnAccept.addEventListener("click", function () {
+      dismissBanner({ necessary: true, analytics: true, marketing: true, accepted: "all" });
+    });
+
+    btnManage.addEventListener("click", function () {
+      modal.classList.add("is-open");
+    });
+
+    btnClose.addEventListener("click", function () {
+      modal.classList.remove("is-open");
+    });
+
+    btnSave.addEventListener("click", function () {
+      dismissBanner({
+        necessary: true,
+        analytics: cbAnalytics.checked,
+        marketing: cbMarketing.checked,
+        accepted: "custom"
+      });
+    });
+
+    /* Close modal on overlay click */
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) { modal.classList.remove("is-open"); }
+    });
+
+    /* Close on Escape */
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) {
+        modal.classList.remove("is-open");
+      }
+    });
+  }
+}());
+
+/* =====================================================
+   WHATSAPP FLOATING BUTTON
+   Number: PENDING — update href to wa.me/[full number with country code]
+   e.g. href="https://wa.me/447700000000"
+   ===================================================== */
+(function () {
+  var WA_NUMBER = "PENDING"; /* ← replace with actual number when received from Jack */
+  if (WA_NUMBER === "PENDING") { return; } /* hide button until number is confirmed */
+
+  var btn = document.createElement("a");
+  btn.id            = "wa-btn";
+  btn.className     = "wa-btn";
+  btn.href          = "https://wa.me/" + WA_NUMBER;
+  btn.target        = "_blank";
+  btn.rel           = "noopener noreferrer";
+  btn.setAttribute("aria-label", "Chat with Hilston Park on WhatsApp");
+
+  btn.innerHTML = [
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">',
+      '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>',
+    '</svg>',
+    '<span class="wa-tooltip">Chat on WhatsApp</span>'
+  ].join("");
+
+  document.body.appendChild(btn);
+
+  /* Reveal after a moment so it doesn't flash on load */
+  setTimeout(function () { btn.classList.add("is-visible"); }, 1200);
+}());
+
