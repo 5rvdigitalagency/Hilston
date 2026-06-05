@@ -260,14 +260,84 @@
     .blog-card:hover .blog-read-more { background: var(--teal-dark); }
     .blog-read-more svg { display: none; }
 
+    /* ---- GOOGLE REVIEWS ---- */
+    .reviews-section {
+      background: var(--beige);
+      padding: 80px 80px 88px;
+      border-top: 1px solid var(--beige-2);
+    }
+    .reviews-section-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 48px; flex-wrap: wrap; gap: 20px;
+    }
+    .reviews-section-header .heading-display { margin: 0; }
+    .reviews-google-badge {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 18px;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+    .reviews-google-badge .g-icon { flex-shrink: 0; }
+    .reviews-google-badge .badge-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 44px;
+    }
+    .review-card {
+      background: var(--white);
+      padding: 28px 24px 24px;
+      display: flex; flex-direction: column; gap: 14px;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .review-card:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.07); }
+    .review-card-top { display: flex; align-items: center; gap: 13px; }
+    .reviewer-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .reviewer-name { font-size: 0.88rem; font-weight: 700; color: var(--text); display: block; line-height: 1.3; }
+    .reviewer-role { font-size: 0.68rem; color: var(--text-muted); display: block; margin-top: 2px; letter-spacing: 0.06em; }
+    .review-stars { color: #FBBC04; font-size: 1.05rem; letter-spacing: 1px; line-height: 1; }
+    .review-text {
+      font-size: 0.86rem; color: var(--text-muted); line-height: 1.74; flex: 1;
+    }
+    .review-card-footer {
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-top: 14px; border-top: 1px solid var(--beige-2);
+    }
+    .reviews-cta-row { text-align: center; }
+    .btn-google-reviews {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 40px;
+      background: var(--white); color: var(--text);
+      border: 2px solid var(--border);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: border-color 0.22s, background 0.22s, color 0.22s;
+    }
+    .btn-google-reviews:hover { border-color: var(--teal); background: var(--teal); color: var(--white); }
+    .btn-google-reviews svg { transition: fill 0.22s; }
+    .btn-google-reviews:hover svg path { fill: #fff; }
+
     /* ---- RESPONSIVE ---- */
     @media (max-width: 1100px) {
       .contact-section { padding: 60px 40px 56px; }
+      .reviews-section { padding: 64px 40px 72px; }
       .reach-section { padding: 64px 40px 72px; }
       .contact-faq { padding: 64px 40px 72px; }
     }
     @media (max-width: 880px) {
       .contact-section { padding: 48px 24px 48px; }
+      .reviews-section { padding: 56px 24px 64px; }
+      .reviews-section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .reviews-grid { grid-template-columns: 1fr; gap: 18px; }
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .contact-info-grid { grid-template-columns: 1fr; gap: 16px; }
       .form-row { grid-template-columns: 1fr; }
@@ -283,6 +353,8 @@
     }
     @media (max-width: 560px) {
       .contact-section { padding: 36px 16px 40px; }
+      .reviews-section { padding: 48px 16px 56px; }
+      .btn-google-reviews { width: 100%; justify-content: center; }
       .contact-info-bar { padding: 36px 16px 40px; }
       .reach-section { padding: 48px 16px 56px; }
       .contact-faq { padding: 48px 16px 56px; }
@@ -455,10 +527,87 @@
       </div>
       <div class="map-wrap">
         <iframe
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAOjBU0aXWKFA9MNgqK1GRJqrJ6wR1-yQo&q=Hilston+Park,Newcastle+Monmouth+NP25+5NY&maptype=roadmap&zoom=14"
+          src="https://maps.google.com/maps?q=Hilston+Park+NP25+5NY&t=m&z=14&ie=UTF8&iwloc=&output=embed"
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           title="Hilston Park location map"></iframe>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== GOOGLE REVIEWS ===== -->
+  <section class="reviews-section">
+    <div class="reviews-section-header">
+      <h2 class="heading-display">What Our Guests<br>Say on Google</h2>
+      <div class="reviews-google-badge">
+        <!-- Google G logo -->
+        <svg class="g-icon" width="28" height="28" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google">
+          <path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.2 33.8 29.6 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.1 3l6.3-6.3C34.8 4.5 29.6 2 24 2 11.9 2 2 11.9 2 24s9.9 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/>
+          <path fill="#34A853" d="M6.3 14.7l7 5.1C15.1 16 19.2 13 24 13c3.1 0 6 1.1 8.1 3l6.3-6.3C34.8 4.5 29.6 2 24 2 16.3 2 9.6 7.4 6.3 14.7z"/>
+          <path fill="#FBBC04" d="M24 46c5.5 0 10.6-1.8 14.6-4.9l-6.7-5.5C29.7 37.5 27 38.5 24 38.5c-5.5 0-10.2-3.3-12.4-8.1l-7 5.4C8.5 42.4 15.7 46 24 46z"/>
+          <path fill="#EA4335" d="M44.5 20H24v8.5h11.8c-.8 2.5-2.4 4.6-4.4 6.1l6.7 5.5C42.6 36.6 46 31 46 24c0-1.3-.2-2.7-.5-4z"/>
+        </svg>
+        <span class="badge-label">Reviews on Google</span>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <!-- Review 1 -->
+      <div class="review-card">
+        <div class="review-card-top">
+          <div class="reviewer-avatar" style="background:#4285F4;">CC</div>
+          <div>
+            <span class="reviewer-name">Claire Clark</span>
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          </div>
+        </div>
+        <p class="review-text">What an absolutely amazing experience I have had as a teacher with my school this week. The children have thoroughly enjoyed every moment of this memorable experience. Great facilities set in such picturesque surroundings. The staff are extremely friendly and welcoming, offering a high standard of service. Chris and his team are supportive and encouraging, providing fun, engaging activities that challenge the children and build their resilience.</p>
+        <div class="review-card-footer">
+          <!-- Google G small icon -->
+          <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.2 33.8 29.6 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.1 3l6.3-6.3C34.8 4.5 29.6 2 24 2 11.9 2 2 11.9 2 24s9.9 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/>
+          </svg>
+        </div>
+      </div>
+      <!-- Review 2 -->
+      <div class="review-card">
+        <div class="review-card-top">
+          <div class="reviewer-avatar" style="background:#34A853;">AB</div>
+          <div>
+            <span class="reviewer-name">A B</span>
+            <span class="reviewer-role">Local Guide</span>
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          </div>
+        </div>
+        <p class="review-text">Hilston Park is a fabulous outdoor education centre. We brought a group of children, some of whom were nervous. Chris and Dan supported them in overcoming their fears and fully participating in all the activities. Manni, Chef Ramsey, and the entire Hilston team have been amazing with all our children, ensuring we had everything we needed. We&rsquo;ll definitely come again!</p>
+        <div class="review-card-footer">
+          <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.2 33.8 29.6 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.1 3l6.3-6.3C34.8 4.5 29.6 2 24 2 11.9 2 2 11.9 2 24s9.9 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/>
+          </svg>
+        </div>
+      </div>
+      <!-- Review 3 -->
+      <div class="review-card">
+        <div class="review-card-top">
+          <div class="reviewer-avatar" style="background:#EA4335;">R</div>
+          <div>
+            <span class="reviewer-name">Rebecca</span>
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          </div>
+        </div>
+        <p class="review-text">What an amazing experience! We recently took our year 5&rsquo;s to Hilston Park, and it was an unforgettable experience for both the children and staff involved. All the Hilston staff were exceptional, went above and beyond, and truly made the experience. The activities were so much fun and the instructors were supportive yet challenged the children to reach new limits. Would absolutely recommend a stay here for your school residential.</p>
+        <div class="review-card-footer">
+          <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.2 33.8 29.6 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.1 3l6.3-6.3C34.8 4.5 29.6 2 24 2 11.9 2 2 11.9 2 24s9.9 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-cta-row">
+      <a href="https://www.google.com/search?q=Hilston+Park+Outdoor+Centre+Monmouth+reviews" target="_blank" rel="noopener" class="btn-google-reviews">
+        <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.2 33.8 29.6 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.1 3l6.3-6.3C34.8 4.5 29.6 2 24 2 11.9 2 2 11.9 2 24s9.9 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/>
+        </svg>
+        Read All Our Reviews on Google
+      </a>
     </div>
   </section>
 
