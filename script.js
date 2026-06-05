@@ -174,7 +174,8 @@ document.addEventListener("DOMContentLoaded", function () {
   /* Server-rendered rates widget — CORS-open, server-side rendered HTML with live per-night pricing */
   var SC_RATES_URL = "https://cdn.hotels.uk.com/sc/51665/eff381e2425e310943f59d71f160fa71/0/4";
   /* Inquiry endpoint — Formsubmit relays form data to this email; first submission triggers a confirmation email to activate */
-  var INQUIRY_ENDPOINT = "https://formsubmit.co/ajax/info@hilstonpark.com";
+  var INQUIRY_ENDPOINT = "https://api.web3forms.com/submit";
+  var INQUIRY_ACCESS_KEY = "d185ded1-269c-4f96-99db-28427596cf0a";
 
   /* Room definitions — sourced from Q-Book api/pull and accommodation page.
      maxAdults/maxChildren reflect Q-Book item occupancy settings.
@@ -838,9 +839,8 @@ document.addEventListener("DOMContentLoaded", function () {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({
-        _subject: "Website enquiry: " + about,
-        _template: "table",
-        _captcha: "false",
+        access_key: INQUIRY_ACCESS_KEY,
+        subject: "Website enquiry: " + about,
         name: name,
         email: email,
         phone: phone,
@@ -972,17 +972,14 @@ document.addEventListener("DOMContentLoaded", function () {
                       || (p.sizes && p.sizes.small  && p.sizes.small.mediaUrl)
                       || p.mediaUrl;
             if (!imgSrc) return;
-            var a = document.createElement("a");
-            a.href = p.permalink || "https://www.instagram.com/hilstonparkofficial/";
-            a.target = "_blank";
-            a.rel = "noopener noreferrer";
-            a.setAttribute("aria-label", p.caption ? p.caption.slice(0, 80) : "View on Instagram");
+            var tile = document.createElement("div");
+            tile.className = "insta-tile";
             var img = document.createElement("img");
             img.src = imgSrc;
-            img.alt = "";
+            img.alt = p.caption ? p.caption.slice(0, 80) : "";
             img.loading = "eager";
-            a.appendChild(img);
-            set.appendChild(a);
+            tile.appendChild(img);
+            set.appendChild(tile);
           });
           return set;
         }
