@@ -119,6 +119,15 @@ body section > .section-intro {
 html { overflow-x: hidden; }
 body { overflow-x: clip; }
 
+/* ----- ANTI-ORPHAN: prevent single words stranded on last line ----- */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance; /* balances line lengths, kills end-of-line orphans */
+}
+p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
+.eyebrow, .stat-label, .blog-excerpt, .blog-desc {
+  text-wrap: pretty;  /* avoids single orphan word on last line */
+}
+
 /* ----- TYPOGRAPHY HELPERS ----- */
 .heading-display {
   font-family: var(--font-serif);
@@ -126,6 +135,7 @@ body { overflow-x: clip; }
   font-size: clamp(1.9rem, 2.8vw, 2.85rem);
   line-height: 1.15;
   color: var(--text);
+  text-wrap: balance; /* explicit for the custom class */
 }
 .heading-display.light { color: var(--white); }
 .heading-display.center { text-align: center; }
