@@ -186,8 +186,8 @@
       text-align: center; font-size: 0.9rem; color: var(--text-muted);
       max-width: 680px; margin: 0 auto 48px; line-height: 1.72;
     }
-    .edu-accom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: stretch; }
-    .edu-accom-img { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; }
+    .edu-accom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .edu-accom-img { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 260px 260px; gap: 8px; }
     .edu-accom-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .accom-section { margin-bottom: 0; counter-increment: accom-counter; padding: 20px 0; border-bottom: 1px solid var(--border); }
     .accom-section:first-child { padding-top: 0; }
@@ -288,12 +288,12 @@
       .gallery-slide-item { flex: 0 0 calc(100vw - 64px); height: 320px; }
       .visit-us .heading-display { text-align: center; }
       .visit-card .btn-pill { align-self: stretch; text-align: center; justify-content: center; }
-      .edu-accom-img { grid-template-rows: 220px 220px; }
-      .edu-accom-img img { height: 100%; }
+      .edu-accom-img { grid-template-rows: 190px 190px; }
     }
     @media (max-width: 540px) {
       .edu-intro, .activities, .we-offer, .edu-accom, .visit-us, .testimonials, .newsletter-band, .faq { padding-left: 16px !important; padding-right: 16px !important; }
       .edu-hero-inner { padding: 32px 16px; }
+      .edu-accom-img { grid-template-rows: 160px 160px; }
     }
   </style>
 </head>
