@@ -945,76 +945,127 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* =========================================================
-     INSTAGRAM MARQUEE  —  Behold.so JSON API
-     Seamless infinite scroll: build TWO identical sets and let
-     CSS animate the inner track from 0 to -50%. Because the two
-     halves are identical, the wrap-around is invisible.
+     INSTAGRAM MARQUEE  —  Behold.so JSON API + local fallback
+     Tiles are <a> elements so CSS .insta-set a rules apply
+     (width/height/overflow:hidden). Falls back to local gallery
+     images on API timeout, network error, or empty feed.
      ========================================================= */
   var instaInner = document.getElementById("insta-inner");
   if (instaInner) {
-    fetch("https://feeds.behold.so/qbsvzG0laaLxFdO8loEs")
-      .then(function(r){ return r.json(); })
+
+    /* Local fallback images — always available, never break */
+    var INSTA_FALLBACK = [
+      { src: "images/gallery/5rv02864.jpg",  alt: "Outdoor activities at Hilston Park" },
+      { src: "images/gallery/5rv02899.jpg",  alt: "Team activities at Hilston Park" },
+      { src: "images/gallery/5rv02900.jpg",  alt: "Adventure experiences at Hilston Park" },
+      { src: "images/gallery/5rv02909.jpg",  alt: "Group activities at Hilston Park" },
+      { src: "images/gallery/5rv02928.jpg",  alt: "Outdoor experiences at Hilston Park" },
+      { src: "images/gallery/5rv02984.jpg",  alt: "Hilston Park estate" },
+      { src: "images/gallery/5rv03009.jpg",  alt: "Activities at Hilston Park" },
+      { src: "images/gallery/5rv03031.jpg",  alt: "School trips at Hilston Park" },
+      { src: "images/gallery/5rv03049.jpg",  alt: "Hilston Park outdoor centre" },
+      { src: "images/gallery/5rv03072.jpg",  alt: "Hilston Park group activities" },
+    ];
+
+    /* Build one marquee set. Each tile is an <a> so CSS .insta-set a rules
+       (width, height, overflow:hidden) apply correctly. */
+    function buildSet(items, hidden) {
+      var set = document.createElement("div");
+      set.className = "insta-set";
+      if (hidden) set.setAttribute("aria-hidden", "true");
+      items.forEach(function(item) {
+        var tile = document.createElement("a");
+        tile.className = "insta-tile";
+        tile.href   = item.permalink || "https://www.instagram.com/hilstonparkofficial/";
+        tile.target = "_blank";
+        tile.rel    = "noopener noreferrer";
+        tile.setAttribute("aria-label", item.alt || "View on Instagram");
+        var img = document.createElement("img");
+        img.src     = item.src;
+        img.alt     = item.alt || "";
+        img.loading = "eager";
+        img.decoding = "async";
+        tile.appendChild(img);
+        set.appendChild(tile);
+      });
+      return set;
+    }
+
+    /* Populate the marquee and start the CSS animation. */
+    function startMarquee(items) {
+      /* Pad each set so it always fills ≥ 150% of the viewport */
+      var tileSize   = 340 + 6;
+      var minWidth   = Math.max(window.innerWidth * 1.5, 2400);
+      var repeats    = Math.max(1, Math.ceil(minWidth / (items.length * tileSize)));
+      var setItems   = [];
+      for (var i = 0; i < repeats; i++) { setItems = setItems.concat(items); }
+
+      instaInner.innerHTML = "";
+      instaInner.appendChild(buildSet(setItems, false));
+      instaInner.appendChild(buildSet(setItems, true));
+
+      /* Inject exact keyframe after measuring real scrollWidth, then restart.
+         Using an id prevents duplicate <style> tags on re-renders. */
+      requestAnimationFrame(function() {
+        var halfWidth = instaInner.scrollWidth / 2;
+        var duration  = Math.max(40, Math.round(halfWidth / 80)); /* 80 px/s */
+        var existing  = document.getElementById("insta-kf");
+        if (existing) existing.remove();
+        var s = document.createElement("style");
+        s.id = "insta-kf";
+        s.textContent = "@keyframes insta-scroll{from{transform:translateX(0)}to{transform:translateX(-" + halfWidth + "px)}}";
+        document.head.appendChild(s);
+        instaInner.style.animation = "none";
+        instaInner.offsetWidth; /* force reflow so the new keyframe binds */
+        instaInner.style.animation = "insta-scroll " + duration + "s linear infinite";
+
+        /* Hover-pause: CSS animation-play-state cannot override an inline
+           animation shorthand, so we wire it via JS instead. */
+        var track = document.querySelector(".insta-track");
+        if (track) {
+          track.addEventListener("mouseenter", function() {
+            instaInner.style.animationPlayState = "paused";
+          });
+          track.addEventListener("mouseleave", function() {
+            instaInner.style.animationPlayState = "running";
+          });
+        }
+      });
+    }
+
+    /* Fetch with a 5-second timeout; fall back to local images on any failure */
+    var ctrl  = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function() { ctrl.abort(); }, 5000) : null;
+
+    fetch("https://feeds.behold.so/qbsvzG0laaLxFdO8loEs", ctrl ? { signal: ctrl.signal } : {})
+      .then(function(r) {
+        if (timer) clearTimeout(timer);
+        return r.json();
+      })
       .then(function(data) {
         var posts = Array.isArray(data) ? data : (data.posts || []);
-        if (!posts.length) return;
-        /* Only show real photo/video posts — skip graphic/text tiles */
+        /* Keep only photo / carousel posts (skip stories / reels thumbnails) */
         posts = posts.filter(function(p) {
           var t = (p.mediaType || "").toUpperCase();
-          return t === "IMAGE" || t === "VIDEO" || t === "CAROUSEL_ALBUM" || t === "";
+          return t === "IMAGE" || t === "CAROUSEL_ALBUM" || t === "";
         });
+        if (!posts.length) { startMarquee(INSTA_FALLBACK); return; }
 
-        function buildSet(posts, hidden) {
-          var set = document.createElement("div");
-          set.className = "insta-set";
-          if (hidden) set.setAttribute("aria-hidden", "true");
-          posts.forEach(function(p) {
-            var imgSrc = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl)
-                      || (p.sizes && p.sizes.small  && p.sizes.small.mediaUrl)
-                      || p.mediaUrl;
-            if (!imgSrc) return;
-            var tile = document.createElement("div");
-            tile.className = "insta-tile";
-            var img = document.createElement("img");
-            img.src = imgSrc;
-            img.alt = p.caption ? p.caption.slice(0, 80) : "";
-            img.loading = "eager";
-            tile.appendChild(img);
-            set.appendChild(tile);
-          });
-          return set;
-        }
+        var items = posts.map(function(p) {
+          return {
+            src: (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl)
+              || (p.sizes && p.sizes.small  && p.sizes.small.mediaUrl)
+              || p.mediaUrl || "",
+            alt:       p.caption ? p.caption.slice(0, 80) : "Hilston Park on Instagram",
+            permalink: p.permalink || "https://www.instagram.com/hilstonparkofficial/"
+          };
+        }).filter(function(i) { return i.src; });
 
-        /* Ensure each "set" is wide enough that the user never sees blank
-           space. With only ~6 posts at 340px, one set is shorter than wide
-           viewports — duplicate posts within each set until it's ≥ viewport. */
-        var tileSize = 340 + 6;
-        var minSetWidth = Math.max(window.innerWidth * 1.2, 2000);
-        var repeats = Math.max(1, Math.ceil(minSetWidth / (posts.length * tileSize)));
-        var setPosts = [];
-        for (var i = 0; i < repeats; i++) { setPosts = setPosts.concat(posts); }
-
-        instaInner.appendChild(buildSet(setPosts, false));
-        instaInner.appendChild(buildSet(setPosts, true));
-
-        /* Scale animation duration so speed stays ~60px/s regardless of width.
-           Measure once after first paint; no further updates so animation never
-           restarts mid-loop. */
-        requestAnimationFrame(function() {
-          var halfWidth = instaInner.scrollWidth / 2;
-          var duration = Math.max(40, Math.round(halfWidth / 60));
-          /* CSS vars in @keyframes don't update on an already-running animation
-             in all browsers — inject an exact override and restart instead */
-          var s = document.createElement("style");
-          s.textContent = "@keyframes insta-scroll{from{transform:translateX(0)}to{transform:translateX(-" + halfWidth + "px)}}";
-          document.head.appendChild(s);
-          instaInner.style.animation = "none";
-          instaInner.offsetWidth; /* force reflow so the new keyframe binds */
-          instaInner.style.animation = "insta-scroll " + duration + "s linear infinite";
-        });
+        startMarquee(items.length ? items : INSTA_FALLBACK);
       })
-      .catch(function(){
-        var strip = document.querySelector(".insta-strip");
-        if (strip) strip.style.display = "none";
+      .catch(function() {
+        if (timer) clearTimeout(timer);
+        startMarquee(INSTA_FALLBACK);
       });
   }
 
