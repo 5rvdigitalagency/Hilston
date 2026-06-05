@@ -1235,6 +1235,7 @@
     if (window.flatpickr) {
       var ratesFpBase = { dateFormat: 'Y-m-d', altInput: true, altFormat: 'j M Y', disableMobile: true, locale: { firstDayOfWeek: 1 } };
       ratesCoFP = flatpickr(coIn, Object.assign({}, ratesFpBase, { minDate: 'today', onOpen: clearErr }));
+      if (ratesCoFP && ratesCoFP.altInput) { ratesCoFP.altInput.placeholder = 'dd / mm / yyyy'; }
       ratesCiFP = flatpickr(ciIn, Object.assign({}, ratesFpBase, {
         minDate: 'today',
         onChange: function(selectedDates) {
@@ -1247,6 +1248,7 @@
           }
         }
       }));
+      if (ratesCiFP && ratesCiFP.altInput) { ratesCiFP.altInput.placeholder = 'dd / mm / yyyy'; }
     } else {
       ciIn.addEventListener('change', function(){
         clearErr();

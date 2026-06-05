@@ -262,11 +262,11 @@ document.addEventListener("DOMContentLoaded", function () {
             '<div class="bkm-fields">',
               '<div class="bkm-field">',
                 '<label for="bkm-checkin">Arrival</label>',
-                '<input type="date" id="bkm-checkin" min="' + today + '">',
+                '<input type="date" id="bkm-checkin" placeholder="dd / mm / yyyy" min="' + today + '">',
               '</div>',
               '<div class="bkm-field">',
                 '<label for="bkm-checkout">Departure</label>',
-                '<input type="date" id="bkm-checkout" min="' + today + '">',
+                '<input type="date" id="bkm-checkout" placeholder="dd / mm / yyyy" min="' + today + '">',
               '</div>',
             '</div>',
             '<div class="bkm-fields">',
@@ -801,6 +801,7 @@ document.addEventListener("DOMContentLoaded", function () {
       locale: { firstDayOfWeek: 1 }
     };
     bkmOutFP = flatpickr(outEl, Object.assign({}, fpBaseOpts, { minDate: "today" }));
+    if (bkmOutFP && bkmOutFP.altInput) { bkmOutFP.altInput.placeholder = "dd / mm / yyyy"; }
     bkmInFP  = flatpickr(inEl,  Object.assign({}, fpBaseOpts, {
       minDate: "today",
       onChange: function (selectedDates) {
@@ -812,6 +813,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     }));
+    if (bkmInFP && bkmInFP.altInput) { bkmInFP.altInput.placeholder = "dd / mm / yyyy"; }
   } else {
     /* Fallback for browsers where Flatpickr didn't load */
     inEl.addEventListener("change", function () {
