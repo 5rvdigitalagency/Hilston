@@ -793,6 +793,19 @@ document.addEventListener("DOMContentLoaded", function () {
       errEl.classList.add("visible");
       return;
     }
+    /* Block over-capacity bookings before proceeding.
+       The orange capacity hint already describes the issue; scroll to it and return. */
+    var selKey = accTypeEl ? accTypeEl.value : 'any';
+    var selDef = ROOM_DEFS[selKey] || ROOM_DEFS['any'];
+    if (selDef.maxGuests > 0) {
+      var selAdults = parseInt(adultsEl.value,   10) || 0;
+      var selKids   = parseInt(childrenEl.value, 10) || 0;
+      if ((selAdults + selKids) > selDef.maxGuests) {
+        /* Hint is already visible — just scroll it into view so user sees it */
+        if (capacityHintEl) { capacityHintEl.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+        return;
+      }
+    }
     /* Show confirm phase immediately with a loading placeholder, then populate rates */
     setBrand("stay");
     showPhase("confirm");
