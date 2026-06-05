@@ -790,6 +790,26 @@ document.addEventListener("DOMContentLoaded", function () {
   accTypeEl.addEventListener('change', updateCapacityHint);
 
   /* -- Flatpickr date pickers for booking modal dates -- */
+  /* Resize the Flatpickr month <select> to fit the current month name so
+     "June 2026" doesn't have an oversized gap caused by the browser sizing
+     the select to its longest option ("September"). */
+  function syncMonthWidth(fp) {
+    if (!fp || !fp.calendarContainer) return;
+    var sel = fp.calendarContainer.querySelector(".flatpickr-monthDropdown-months");
+    if (!sel) return;
+    var tmp = document.createElement("span");
+    tmp.style.cssText = "position:absolute;visibility:hidden;font-family:'Bodoni72','Bodoni 72',Georgia,serif;font-size:1.05rem;white-space:nowrap;pointer-events:none";
+    function resize() {
+      var opt = sel.options[sel.selectedIndex];
+      tmp.textContent = opt ? opt.text : sel.value;
+      document.body.appendChild(tmp);
+      sel.style.width = (tmp.offsetWidth + 6) + "px";
+      document.body.removeChild(tmp);
+    }
+    resize();
+    sel.addEventListener("change", resize);
+  }
+
   var bkmOutFP = null;
   var bkmInFP  = null;
   if (window.flatpickr && inEl && outEl) {
@@ -798,7 +818,9 @@ document.addEventListener("DOMContentLoaded", function () {
       altInput: true,
       altFormat: "j M Y",
       disableMobile: true,
-      locale: { firstDayOfWeek: 1 }
+      locale: { firstDayOfWeek: 1 },
+      onReady: function () { syncMonthWidth(this); },
+      onMonthChange: function () { syncMonthWidth(this); }
     };
     bkmOutFP = flatpickr(outEl, Object.assign({}, fpBaseOpts, { minDate: "today" }));
     if (bkmOutFP && bkmOutFP.altInput) { bkmOutFP.altInput.placeholder = "dd / mm / yyyy"; }
