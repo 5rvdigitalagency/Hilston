@@ -195,9 +195,9 @@
       color: var(--white); font-size: 0.68rem; font-weight: 700;
       letter-spacing: 0.18em; text-transform: uppercase;
       align-self: flex-start;
-      transition: background 0.25s, border-color 0.25s;
+      transition: background 0.22s, border-color 0.22s, transform 0.22s;
     }
-    .reach-card .btn-reach:hover { background: var(--teal); border-color: var(--teal); }
+    .reach-card .btn-reach:hover { background: var(--teal); border-color: var(--teal); transform: translateY(-2px); }
 
     /* ---- FAQ ---- */
     .contact-faq {
@@ -256,37 +256,15 @@
     /* ---- RESPONSIVE ---- */
     @media (max-width: 1100px) {
       .contact-section { padding: 60px 40px 56px; }
-      .contact-info-bar { padding: 48px 40px; }
-      .contact-info-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .reach-section { padding: 64px 40px 72px; }
-      .reach-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .contact-faq { padding: 64px 40px 72px; }
-      .contact-blogs { padding: 64px 40px 72px; }
-      .blogs-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     }
     @media (max-width: 880px) {
-      .contact-hero-inner { padding: 48px 24px 56px; }
       .contact-section { padding: 48px 24px 48px; }
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-      .map-wrap { min-height: 320px; }
-      .map-wrap iframe { min-height: 320px; }
       .form-row { grid-template-columns: 1fr; }
-      .contact-info-bar { padding: 40px 24px; }
-      .contact-info-grid { grid-template-columns: 1fr; gap: 16px; }
-      .reach-section { padding: 56px 24px 64px; }
-      .reach-grid { grid-template-columns: 1fr; gap: 16px; }
-      .contact-faq { padding: 56px 24px 64px; }
       .contact-faq .faq-grid { grid-template-columns: 1fr; gap: 24px; }
-      .contact-blogs { padding: 56px 24px 64px; }
-      .blogs-grid { grid-template-columns: 1fr; gap: 20px; }
     }
     @media (max-width: 560px) {
-      .contact-hero-inner { padding: 36px 16px 44px; }
       .contact-section { padding: 36px 16px 40px; }
-      .contact-info-bar { padding: 32px 16px; }
-      .reach-section { padding: 48px 16px 56px; }
-      .contact-faq { padding: 48px 16px 56px; }
-      .contact-blogs { padding: 48px 16px 56px; }
     }
   </style>
 </head>
@@ -512,7 +490,7 @@
         </div>
         <h3>When to Visit</h3>
         <p>Hilston Park welcomes guests year-round, with summer offering longer outdoor days and autumn and winter providing a quieter, estate-focused experience.</p>
-        <a href="#contact-form" class="btn-reach">PLAN YOUR DATES</a>
+        <a href="#contact-form" class="btn-reach">ENQUIRE NOW</a>
       </div>
       <div class="reach-card">
         <div class="reach-icon">
@@ -522,7 +500,7 @@
         </div>
         <h3>Getting Here</h3>
         <p>Located near Monmouth in the Wye Valley, the estate is easily accessible by road, with travel guidance available for schools and group organisers.</p>
-        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-reach">VIEW ON MAPS</a>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-reach">LEARN MORE</a>
       </div>
       <div class="reach-card">
         <div class="reach-icon">
@@ -532,7 +510,7 @@
         </div>
         <h3>Get in Touch</h3>
         <p>Whether you&#8217;re a school, corporate team, or family group, our team is ready to help you plan and arrange your visit.</p>
-        <a href="#contact-form" class="btn-reach">SEND ENQUIRY</a>
+        <a href="#contact-form" class="btn-reach">ENQUIRE NOW</a>
       </div>
     </div>
   </section>
