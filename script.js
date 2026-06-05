@@ -770,8 +770,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   accTypeEl.addEventListener('change', updateCapacityHint);
-  adultsEl.addEventListener('input',   updateCapacityHint);
-  childrenEl.addEventListener('input',  updateCapacityHint);
 
   /* -- ensure checkout >= checkin + 1 day -- */
   inEl.addEventListener("change", function () {
@@ -942,6 +940,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     inp.value = val;
     valEl.textContent = val;
+    /* Re-evaluate capacity hint whenever guest counts change */
+    if (targetId === "bkm-adults" || targetId === "bkm-children") {
+      updateCapacityHint();
+    }
   });
 
   /* =========================================================
