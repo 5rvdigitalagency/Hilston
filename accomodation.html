@@ -37,6 +37,16 @@
     .accom-hero-sub {
       font-size: 0.96rem; line-height: 1.74; color: rgba(255,255,255,0.88); max-width: 44ch; margin-bottom: 28px;
     }
+    .accom-hero-btn {
+      background: var(--white) !important;
+      color: var(--dark-deep) !important;
+      border-color: var(--white) !important;
+    }
+    .accom-hero-btn:hover {
+      background: var(--beige) !important;
+      border-color: var(--beige) !important;
+      color: var(--dark-deep) !important;
+    }
 
     /* STATS BAR */
     .stats-bar { background: var(--white); padding: 52px 80px; border-bottom: 1px solid var(--border); }
@@ -218,7 +228,61 @@
       outline: none; width: 100%; appearance: none; -webkit-appearance: none;
     }
     .rates-filter-group input::placeholder { color: rgba(255,255,255,0.4); }
-    .rates-filter-group input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.7; cursor: pointer; }
+    /* ── CUSTOM DATE PICKER ── */
+    .hils-dp { position: relative; }
+    .hils-dp-display {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      color: var(--white); padding: 10px 14px; font-size: 0.88rem; font-family: var(--font-sans);
+      cursor: pointer; user-select: none; height: 42px; box-sizing: border-box;
+    }
+    .hils-dp-display:hover { border-color: rgba(255,255,255,0.38); }
+    .hils-dp-display.is-open { border-color: var(--teal); }
+    .hils-dp-display svg { flex-shrink: 0; opacity: 0.6; }
+    .hils-dp-display .hils-dp-val { color: var(--white); }
+    .hils-dp-display .hils-dp-val.placeholder { color: rgba(255,255,255,0.4); }
+    .hils-dp-popup {
+      position: absolute; top: calc(100% + 4px); left: 0; z-index: 9999;
+      background: var(--dark-deep); border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45); width: 280px; padding: 16px;
+      display: none;
+    }
+    .hils-dp-popup.is-open { display: block; }
+    @media (max-width: 480px) { .hils-dp-popup { width: 260px; left: 50%; transform: translateX(-50%); } }
+    .hils-dp-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .hils-dp-nav button {
+      background: none; border: none; color: white; cursor: pointer;
+      font-size: 1.1rem; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+      opacity: 0.7; transition: opacity 0.15s; padding: 0;
+    }
+    .hils-dp-nav button:hover { opacity: 1; }
+    .hils-dp-month-label {
+      font-family: var(--font-sans); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--white);
+      cursor: pointer;
+    }
+    .hils-dp-dow {
+      display: grid; grid-template-columns: repeat(7,1fr);
+      margin-bottom: 6px;
+    }
+    .hils-dp-dow span {
+      text-align: center; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45); padding: 4px 0;
+    }
+    .hils-dp-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; }
+    .hils-dp-cell {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-family: var(--font-sans); color: rgba(255,255,255,0.85);
+      cursor: pointer; border-radius: 2px; transition: background 0.12s;
+    }
+    .hils-dp-cell:hover:not(.disabled):not(.empty) { background: rgba(60,122,108,0.45); }
+    .hils-dp-cell.today { color: var(--teal); font-weight: 700; }
+    .hils-dp-cell.selected { background: var(--teal); color: white; font-weight: 700; }
+    .hils-dp-cell.disabled { color: rgba(255,255,255,0.2); cursor: not-allowed; pointer-events: none; }
+    .hils-dp-cell.empty { cursor: default; }
     /* Stepper control */
     .rates-stepper { display: flex; align-items: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); height: 42px; }
     .rates-stepper button { background: none; border: none; color: white; font-size: 1.2rem; line-height: 1; width: 36px; height: 100%; cursor: pointer; font-family: var(--font-sans); opacity: 0.8; flex-shrink: 0; transition: opacity 0.15s; }
@@ -305,8 +369,8 @@
     .newsletter-form { display: flex; gap: 0; width: 100%; }
     .newsletter-input { flex: 1; padding: 13px 18px; border: none; font-size: 0.88rem; outline: none; font-family: var(--font-sans); background: #d9d9d9; color: var(--text); }
     .newsletter-input::placeholder { color: #6b6b6b; }
-    .newsletter-btn { background: var(--teal); color: white; padding: 13px 28px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-sans); transition: background 0.2s; white-space: nowrap; }
-    .newsletter-btn:hover { background: var(--teal-dark); }
+    .newsletter-btn { background: var(--white); color: var(--dark-deep); padding: 13px 28px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-sans); transition: background 0.2s, color 0.2s; white-space: nowrap; }
+    .newsletter-btn:hover { background: var(--beige); color: var(--dark-deep); }
     .newsletter-form { display: flex; max-width: 460px; margin: 0 auto; }
     .newsletter-input { flex: 1; padding: 14px 18px; border: none; font-size: 0.9rem; outline: none; font-family: var(--font-sans); }
     .newsletter-btn { background: var(--dark); color: white; padding: 14px 24px; border: none; cursor: pointer; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-sans); transition: background 0.2s; }
@@ -424,9 +488,9 @@
     <div class="accom-hero-overlay"></div>
     <div class="accom-hero-inner">
       <div>
-        <h1>Countryside Stays for Families and Private Groups</h1>
+        <h1>Countryside Stays<br>for Families and<br>Private Groups</h1>
         <p class="accom-hero-sub">Enjoy relaxing countryside breaks with comfortable group accommodation in Wales, perfect for families, friends, and private gatherings in the scenic Wye Valley.</p>
-        <a href="javascript:void(0)" class="btn-pill" data-booking-type="stay">BOOK / ENQUIRY</a>
+        <a href="javascript:void(0)" class="btn-pill accom-hero-btn" data-booking-type="stay">BOOK / ENQUIRY</a>
       </div>
     </div>
   </section>
@@ -881,12 +945,42 @@
     </div>
     <form class="rates-filter-row" id="ratesDateForm" onsubmit="return false;">
       <div class="rates-filter-group">
-        <label for="ratesCheckin">Check In</label>
-        <input type="date" id="ratesCheckin" name="checkin" placeholder="dd / mm / yyyy">
+        <label>Check In</label>
+        <div class="hils-dp" id="dpCheckin">
+          <div class="hils-dp-display" tabindex="0" role="button" aria-label="Select check-in date">
+            <span class="hils-dp-val placeholder">dd / mm / yyyy</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="3" width="14" height="12" rx="1" stroke="white" stroke-width="1.4"/><path d="M1 7h14" stroke="white" stroke-width="1.4"/><path d="M5 1v4M11 1v4" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="hils-dp-popup" role="dialog" aria-modal="true">
+            <div class="hils-dp-nav">
+              <button class="hils-dp-prev" aria-label="Previous month">&#8249;</button>
+              <span class="hils-dp-month-label"></span>
+              <button class="hils-dp-next" aria-label="Next month">&#8250;</button>
+            </div>
+            <div class="hils-dp-dow"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+            <div class="hils-dp-grid"></div>
+          </div>
+          <input type="hidden" id="ratesCheckin" name="checkin">
+        </div>
       </div>
       <div class="rates-filter-group">
-        <label for="ratesCheckout">Check Out</label>
-        <input type="date" id="ratesCheckout" name="checkout" placeholder="dd / mm / yyyy">
+        <label>Check Out</label>
+        <div class="hils-dp" id="dpCheckout">
+          <div class="hils-dp-display" tabindex="0" role="button" aria-label="Select check-out date">
+            <span class="hils-dp-val placeholder">dd / mm / yyyy</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="3" width="14" height="12" rx="1" stroke="white" stroke-width="1.4"/><path d="M1 7h14" stroke="white" stroke-width="1.4"/><path d="M5 1v4M11 1v4" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="hils-dp-popup" role="dialog" aria-modal="true">
+            <div class="hils-dp-nav">
+              <button class="hils-dp-prev" aria-label="Previous month">&#8249;</button>
+              <span class="hils-dp-month-label"></span>
+              <button class="hils-dp-next" aria-label="Next month">&#8250;</button>
+            </div>
+            <div class="hils-dp-dow"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+            <div class="hils-dp-grid"></div>
+          </div>
+          <input type="hidden" id="ratesCheckout" name="checkout">
+        </div>
       </div>
       <div class="rates-filter-group">
         <label for="ratesAdults">Adults</label>
@@ -1235,7 +1329,104 @@
     var ciIn    = document.getElementById('ratesCheckin');
     var coIn    = document.getElementById('ratesCheckout');
     var today   = new Date().toISOString().split('T')[0];
-    ciIn.min = today; coIn.min = today;
+
+    // ── CUSTOM DATE PICKER INIT ──
+    (function(){
+      var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+      function initPicker(wrapId, hiddenInput, getMinFn) {
+        var wrap    = document.getElementById(wrapId);
+        if (!wrap) return;
+        var display = wrap.querySelector('.hils-dp-display');
+        var popup   = wrap.querySelector('.hils-dp-popup');
+        var valSpan = wrap.querySelector('.hils-dp-val');
+        var grid    = wrap.querySelector('.hils-dp-grid');
+        var label   = wrap.querySelector('.hils-dp-month-label');
+        var prevBtn = wrap.querySelector('.hils-dp-prev');
+        var nextBtn = wrap.querySelector('.hils-dp-next');
+        var curYear, curMonth;
+        var open = false;
+
+        function todayDate() { var d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+
+        function openPicker() {
+          var now = hiddenInput.value ? new Date(hiddenInput.value + 'T00:00:00') : new Date();
+          curYear = now.getFullYear(); curMonth = now.getMonth();
+          render();
+          popup.classList.add('is-open');
+          display.classList.add('is-open');
+          open = true;
+        }
+
+        function closePicker() {
+          popup.classList.remove('is-open');
+          display.classList.remove('is-open');
+          open = false;
+        }
+
+        function render() {
+          label.textContent = MONTHS[curMonth] + ' ' + curYear;
+          var minStr = getMinFn ? getMinFn() : today;
+          var minDate = minStr ? new Date(minStr + 'T00:00:00') : null;
+          var selDate = hiddenInput.value ? new Date(hiddenInput.value + 'T00:00:00') : null;
+          var td = todayDate();
+          var first = new Date(curYear, curMonth, 1);
+          var startDow = (first.getDay() + 6) % 7; // Mon=0
+          var daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+          grid.innerHTML = '';
+          for (var i = 0; i < startDow; i++) {
+            var empty = document.createElement('div');
+            empty.className = 'hils-dp-cell empty';
+            grid.appendChild(empty);
+          }
+          for (var d = 1; d <= daysInMonth; d++) {
+            var cell = document.createElement('div');
+            var cellDate = new Date(curYear, curMonth, d);
+            cell.className = 'hils-dp-cell';
+            cell.textContent = d;
+            if (minDate && cellDate < minDate) { cell.classList.add('disabled'); }
+            if (td.getTime() === cellDate.getTime()) { cell.classList.add('today'); }
+            if (selDate && selDate.getTime() === cellDate.getTime()) { cell.classList.add('selected'); }
+            (function(yr, mo, dy) {
+              cell.addEventListener('mousedown', function(e) {
+                e.preventDefault(); e.stopPropagation();
+                var iso = yr + '-' + String(mo+1).padStart(2,'0') + '-' + String(dy).padStart(2,'0');
+                hiddenInput.value = iso;
+                var dd = String(dy).padStart(2,'0'), mm = String(mo+1).padStart(2,'0');
+                valSpan.textContent = dd + ' / ' + mm + ' / ' + yr;
+                valSpan.classList.remove('placeholder');
+                hiddenInput.dispatchEvent(new Event('change', {bubbles:true}));
+                closePicker();
+              });
+            })(curYear, curMonth, d);
+            grid.appendChild(cell);
+          }
+          prevBtn.disabled = (curYear === td.getFullYear() && curMonth <= td.getMonth());
+        }
+
+        prevBtn.addEventListener('mousedown', function(e){ e.preventDefault(); e.stopPropagation(); curMonth--; if(curMonth<0){curMonth=11;curYear--;} render(); });
+        nextBtn.addEventListener('mousedown', function(e){ e.preventDefault(); e.stopPropagation(); curMonth++; if(curMonth>11){curMonth=0;curYear++;} render(); });
+
+        display.addEventListener('mousedown', function(e){ e.preventDefault(); if(open) closePicker(); else openPicker(); });
+        display.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); if(open) closePicker(); else openPicker(); } if(e.key==='Escape') closePicker(); });
+
+        document.addEventListener('mousedown', function(e){
+          if (open && !wrap.contains(e.target)) closePicker();
+        });
+      }
+
+      initPicker('dpCheckin', ciIn, function(){ return today; });
+      initPicker('dpCheckout', coIn, function(){ return ciIn.value || today; });
+    })();
+
+    ciIn.addEventListener('change', function(){
+      clearErr();
+      if (!this.value) return;
+      var d = new Date(this.value); d.setDate(d.getDate() + 1);
+      var newMin = d.toISOString().split('T')[0];
+      if (coIn.value && coIn.value <= this.value) { coIn.value = ''; var s = document.querySelector('#dpCheckout .hils-dp-val'); if(s){s.textContent='dd / mm / yyyy'; s.className='hils-dp-val placeholder';} }
+    });
+    coIn.addEventListener('change', clearErr);
 
     // Rooms with QBook item IDs get per-room availability checks
     // exclusive-use, dormitory, gatehouse have no QBook item → always ENQUIRE NOW
@@ -1248,14 +1439,7 @@
     function showErr(msg) { if (errEl) { errEl.textContent = msg; errEl.classList.add('is-visible'); } }
     function clearErr()   { if (errEl) errEl.classList.remove('is-visible'); }
 
-    ciIn.addEventListener('change', function(){
-      clearErr();
-      if (!this.value) return;
-      var d = new Date(this.value); d.setDate(d.getDate() + 1);
-      coIn.min = d.toISOString().split('T')[0];
-      if (coIn.value && coIn.value <= this.value) coIn.value = coIn.min;
-    });
-    coIn.addEventListener('change', clearErr);
+    // date change listeners handled above in picker init
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
