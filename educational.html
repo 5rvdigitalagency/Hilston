@@ -562,7 +562,7 @@
           <p>All activity areas are within walking distance, helping groups save time and stay on-site throughout the day.</p>
         </div>
         <div class="accom-cta">
-          <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
+          <a href="accomodation.html#dormitory-rooms" class="btn-pill">DISCOVER YOUR STAY</a>
         </div>
       </div>
     </div>
@@ -592,7 +592,7 @@
         </div>
         <h3>Getting Here</h3>
         <p>Hilston Park is located near Monmouth, with easy road access, making it ideal for schools, corporate groups, families, and private countryside visits.</p>
-        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">LEARN MORE</a>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">GET DIRECTIONS</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -602,7 +602,7 @@
         </div>
         <h3>Get in Touch</h3>
         <p>Connect with the Hilston Park team to plan school trips, group retreats, family stays, and private countryside experiences.</p>
-        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
+        <a href="contact.html" class="btn-pill">CONTACT US</a>
       </div>
     </div>
   </section>
@@ -638,10 +638,11 @@
       </div>
       <div class="newsletter-band-right">
         <p class="newsletter-sub">Send us your school or organisation email and the team will be in touch with availability, pricing and programme options.</p>
-        <form class="newsletter-form" action="contact.html" method="get" onsubmit="event.preventDefault();window.location='contact.html#contact-form';">
-          <input class="newsletter-input" type="email" name="email" placeholder="School or organisation email address" required>
-          <button class="newsletter-btn" type="submit">Enquire Now</button>
+        <form class="newsletter-form" id="edu-newsletter-form">
+          <input class="newsletter-input" type="email" name="email" id="edu-nl-email" placeholder="School or organisation email address" required>
+          <button class="newsletter-btn" type="submit" id="edu-nl-btn">Enquire Now</button>
         </form>
+        <p id="edu-nl-success" style="color:#fff;font-size:0.88rem;margin-top:12px;display:none;">Thank you &mdash; the team will be in touch shortly.</p>
       </div>
     </div>
   </section>
@@ -816,6 +817,38 @@
     timer = setInterval(scroll, 2800);
     track.addEventListener('mouseenter', function(){ clearInterval(timer); });
     track.addEventListener('mouseleave', function(){ timer = setInterval(scroll, 2800); });
+  })();
+
+  // Newsletter form — Web3Forms
+  (function(){
+    var form = document.getElementById('edu-newsletter-form');
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn  = document.getElementById('edu-nl-btn');
+      var email = document.getElementById('edu-nl-email').value.trim();
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: 'd185ded1-269c-4f96-99db-28427596cf0a',
+          subject: 'School Trip Enquiry — Hilston Park',
+          email: email,
+          source_page: window.location.pathname
+        })
+      })
+      .then(function(r){ return r.json().catch(function(){ return {}; }); })
+      .then(function(){
+        form.style.display = 'none';
+        document.getElementById('edu-nl-success').style.display = 'block';
+      })
+      .catch(function(){
+        btn.disabled = false;
+        btn.textContent = 'Enquire Now';
+      });
+    });
   })();
 </script>
 </body>
