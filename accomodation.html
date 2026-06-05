@@ -6,6 +6,7 @@
   <title>Group Accommodation Wales | Youth &amp; Residential Stays | Hilston Park</title>
   <meta name="description" content="Stay at group accommodation in Wales for schools and youth groups. Enjoy comfortable residential stays and digital detox experiences in nature.">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <style>
     /* HERO VIDEO */
     .accom-hero {
@@ -1149,6 +1150,7 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="script.js"></script>
 <script>
   (function(){
@@ -1227,14 +1229,34 @@
     function showErr(msg) { if (errEl) { errEl.textContent = msg; errEl.classList.add('is-visible'); } }
     function clearErr()   { if (errEl) errEl.classList.remove('is-visible'); }
 
-    ciIn.addEventListener('change', function(){
-      clearErr();
-      if (!this.value) return;
-      var d = new Date(this.value); d.setDate(d.getDate() + 1);
-      coIn.min = d.toISOString().split('T')[0];
-      if (coIn.value && coIn.value <= this.value) coIn.value = coIn.min;
-    });
-    coIn.addEventListener('change', clearErr);
+    /* Flatpickr for rates bar date inputs */
+    var ratesCoFP = null;
+    var ratesCiFP = null;
+    if (window.flatpickr) {
+      var ratesFpBase = { dateFormat: 'Y-m-d', altInput: true, altFormat: 'j M Y', disableMobile: true, locale: { firstDayOfWeek: 1 } };
+      ratesCoFP = flatpickr(coIn, Object.assign({}, ratesFpBase, { minDate: 'today', onOpen: clearErr }));
+      ratesCiFP = flatpickr(ciIn, Object.assign({}, ratesFpBase, {
+        minDate: 'today',
+        onChange: function(selectedDates) {
+          clearErr();
+          if (selectedDates.length > 0 && ratesCoFP) {
+            var next = new Date(selectedDates[0]);
+            next.setDate(next.getDate() + 1);
+            ratesCoFP.set('minDate', next);
+            if (coIn.value && coIn.value <= ciIn.value) { ratesCoFP.clear(); }
+          }
+        }
+      }));
+    } else {
+      ciIn.addEventListener('change', function(){
+        clearErr();
+        if (!this.value) return;
+        var d = new Date(this.value); d.setDate(d.getDate() + 1);
+        coIn.min = d.toISOString().split('T')[0];
+        if (coIn.value && coIn.value <= this.value) coIn.value = coIn.min;
+      });
+      coIn.addEventListener('change', clearErr);
+    }
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
