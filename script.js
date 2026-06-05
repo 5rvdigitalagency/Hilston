@@ -789,15 +789,40 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   accTypeEl.addEventListener('change', updateCapacityHint);
 
-  /* -- ensure checkout >= checkin + 1 day -- */
-  inEl.addEventListener("change", function () {
-    if (inEl.value) {
-      var next = new Date(inEl.value);
-      next.setDate(next.getDate() + 1);
-      outEl.min = next.toISOString().split("T")[0];
-      if (outEl.value && outEl.value <= inEl.value) { outEl.value = ""; }
-    }
-  });
+  /* -- Flatpickr date pickers for booking modal dates -- */
+  var bkmOutFP = null;
+  var bkmInFP  = null;
+  if (window.flatpickr && inEl && outEl) {
+    var fpBaseOpts = {
+      dateFormat: "Y-m-d",
+      altInput: true,
+      altFormat: "j M Y",
+      disableMobile: true,
+      locale: { firstDayOfWeek: 1 }
+    };
+    bkmOutFP = flatpickr(outEl, Object.assign({}, fpBaseOpts, { minDate: "today" }));
+    bkmInFP  = flatpickr(inEl,  Object.assign({}, fpBaseOpts, {
+      minDate: "today",
+      onChange: function (selectedDates) {
+        if (selectedDates.length > 0 && bkmOutFP) {
+          var next = new Date(selectedDates[0]);
+          next.setDate(next.getDate() + 1);
+          bkmOutFP.set("minDate", next);
+          if (outEl.value && outEl.value <= inEl.value) { bkmOutFP.clear(); }
+        }
+      }
+    }));
+  } else {
+    /* Fallback for browsers where Flatpickr didn't load */
+    inEl.addEventListener("change", function () {
+      if (inEl.value) {
+        var next = new Date(inEl.value);
+        next.setDate(next.getDate() + 1);
+        outEl.min = next.toISOString().split("T")[0];
+        if (outEl.value && outEl.value <= inEl.value) { outEl.value = ""; }
+      }
+    });
+  }
 
   /* -- submit: validate dates then show on-site summary before handing off to Q-Book -- */
   submitBtn.addEventListener("click", function () {

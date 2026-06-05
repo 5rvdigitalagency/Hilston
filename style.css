@@ -2896,3 +2896,95 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 .hcs-opt.hcs-focused { background: var(--beige); color: var(--teal); }
 .hcs-opt.hcs-selected { background: var(--teal); color: var(--white); }
 .hcs-opt.hcs-selected:hover { background: var(--teal-dark); color: var(--white); }
+
+
+/* =================================================================
+   Flatpickr — Hilston Brand Theme
+   Overrides the CDN stylesheet to match: rectangular, teal, Helvetica
+   ================================================================= */
+
+/* Calendar wrapper */
+.flatpickr-calendar {
+  font-family: var(--font-sans) \!important;
+  border: 1px solid var(--border);
+  border-radius: 0 \!important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 16px;
+  width: 300px;
+}
+.flatpickr-calendar::before,
+.flatpickr-calendar::after { display: none \!important; }
+
+/* Month header bar */
+.flatpickr-months { background: var(--dark-deep); padding: 0; margin: -16px -16px 14px; height: 52px; }
+.flatpickr-months .flatpickr-month { background: transparent; color: var(--white); fill: var(--white); height: 52px; }
+.flatpickr-current-month {
+  font-family: var(--font-serif);
+  font-size: 1rem; font-weight: normal; letter-spacing: 0.05em;
+  color: var(--white); padding-top: 14px;
+}
+.flatpickr-current-month input.cur-year { color: var(--white); font-weight: normal; }
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+  color: var(--white); background: transparent; font-family: var(--font-serif); font-size: 1rem;
+}
+.flatpickr-prev-month, .flatpickr-next-month {
+  fill: rgba(255,255,255,0.7); padding: 16px 14px;
+  top: 0; height: 52px;
+}
+.flatpickr-prev-month:hover, .flatpickr-next-month:hover { fill: var(--white); }
+
+/* Weekday labels */
+.flatpickr-weekdays { background: transparent; }
+span.flatpickr-weekday {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-muted); background: transparent;
+}
+
+/* Day grid */
+.flatpickr-days { border: none; }
+.dayContainer { padding: 0; }
+.flatpickr-day {
+  border-radius: 0 \!important;
+  font-family: var(--font-sans); font-size: 0.82rem; color: var(--text);
+  max-width: 38px; height: 36px; line-height: 36px; border: none \!important;
+  transition: background 0.12s, color 0.12s;
+}
+.flatpickr-day:hover { background: var(--beige) \!important; color: var(--teal) \!important; }
+.flatpickr-day.today {
+  border-bottom: 2px solid var(--teal) \!important;
+  color: var(--teal); font-weight: 700;
+}
+.flatpickr-day.today:hover { background: var(--teal) \!important; color: var(--white) \!important; }
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+  background: var(--teal) \!important; color: var(--white) \!important;
+  border-color: var(--teal) \!important; border-radius: 0 \!important; font-weight: 600;
+}
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover,
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+  color: rgba(74,99,113,0.22) \!important; background: transparent \!important;
+}
+
+/* Alt-input styling: booking modal (line underline style) */
+.bkm-field .flatpickr-input[type="text"] {
+  border: none; border-bottom: 1px solid var(--beige-2);
+  padding: 11px 0 10px; font-family: var(--font-sans); font-size: 0.92rem;
+  color: var(--text); background: transparent; outline: none;
+  transition: border-bottom-color 0.22s; width: 100%; cursor: pointer;
+  border-radius: 0;
+}
+.bkm-field .flatpickr-input[type="text"]:focus { border-bottom-color: var(--teal); outline: none; }
+
+/* Alt-input styling: accommodation rates bar (dark bg, white text) */
+.rates-filter-group .flatpickr-input[type="text"] {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+  color: var(--white); padding: 10px 14px; font-size: 0.88rem;
+  font-family: var(--font-sans); outline: none; width: 100%;
+  cursor: pointer; border-radius: 0;
+}
+.rates-filter-group .flatpickr-input[type="text"]::placeholder { color: rgba(255,255,255,0.4); }
+.rates-filter-group .flatpickr-input[type="text"]:focus { border-color: rgba(255,255,255,0.5); outline: none; }
