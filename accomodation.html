@@ -1375,21 +1375,26 @@
     var total = cards.length;
     var perView = window.innerWidth <= 540 ? 1 : window.innerWidth <= 880 ? 2 : 3;
     var pages = Math.ceil(total / perView);
-    var current = 0;
+    var maxPos = Math.max(0, total - perView); /* max single-card offset */
+    var current = 0; /* index of the leftmost visible card */
     for(var i=0;i<pages;i++){
       var d = document.createElement("button");
       d.className = "act-carousel-dot" + (i===0?" active":"");
       d.setAttribute("aria-label","Page "+(i+1));
       d.setAttribute("data-page", i);
-      d.addEventListener("click", function(){ goTo(parseInt(this.getAttribute("data-page"))); });
+      d.addEventListener("click", function(){ goTo(parseInt(this.getAttribute("data-page")) * perView); });
       dotsEl.appendChild(d);
     }
+    function updateDots(){
+      var activePage = Math.min(Math.floor(current / perView), pages - 1);
+      dotsEl.querySelectorAll(".act-carousel-dot").forEach(function(d,i){ d.classList.toggle("active", i===activePage); });
+    }
     function goTo(n){
-      current = Math.max(0, Math.min(n, pages-1));
+      current = Math.max(0, Math.min(n, maxPos));
       var gap = 16;
       var cardW = cards[0].offsetWidth + gap;
-      grid.style.transform = "translateX(-" + (current * perView * cardW) + "px)";
-      dotsEl.querySelectorAll(".act-carousel-dot").forEach(function(d,i){ d.classList.toggle("active", i===current); });
+      grid.style.transform = "translateX(-" + (current * cardW) + "px)";
+      updateDots();
     }
     prevBtn.addEventListener("click", function(){ goTo(current-1); });
     nextBtn.addEventListener("click", function(){ goTo(current+1); });

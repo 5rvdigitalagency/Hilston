@@ -33,7 +33,7 @@
     }
     .contact-hero-inner .hero-eyebrow {
       font-size: 0.62rem; font-weight: 700; letter-spacing: 0.28em;
-      text-transform: uppercase; color: rgba(255,255,255,0.78);
+      text-transform: uppercase; color: var(--teal);
       display: block; margin-bottom: 14px;
     }
     .contact-hero-inner h1 {
@@ -178,7 +178,7 @@
     }
     .reach-card .reach-icon {
       width: 48px; height: 48px;
-      background: var(--teal); border-radius: 50%;
+      background: rgba(78,148,132,0.18);
       display: flex; align-items: center; justify-content: center;
     }
     .reach-card h3 {
@@ -195,9 +195,9 @@
       color: var(--white); font-size: 0.68rem; font-weight: 700;
       letter-spacing: 0.18em; text-transform: uppercase;
       align-self: flex-start;
-      transition: background 0.22s, border-color 0.22s, transform 0.22s;
+      transition: background 0.25s, border-color 0.25s;
     }
-    .reach-card .btn-reach:hover { background: var(--teal); border-color: var(--teal); transform: translateY(-2px); }
+    .reach-card .btn-reach:hover { background: var(--teal); border-color: var(--teal); }
 
     /* ---- FAQ ---- */
     .contact-faq {
@@ -256,23 +256,15 @@
     /* ---- RESPONSIVE ---- */
     @media (max-width: 1100px) {
       .contact-section { padding: 60px 40px 56px; }
-      .reach-section { padding: 60px 40px 70px; }
-      .contact-blogs { padding: 60px 40px 70px; }
     }
     @media (max-width: 880px) {
       .contact-section { padding: 48px 24px 48px; }
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .form-row { grid-template-columns: 1fr; }
       .contact-faq .faq-grid { grid-template-columns: 1fr; gap: 24px; }
-      .reach-section { padding: 48px 24px 56px; }
-      .reach-grid { grid-template-columns: 1fr; }
-      .contact-blogs { padding: 48px 24px 56px; }
-      .blogs-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
       .contact-section { padding: 36px 16px 40px; }
-      .reach-section { padding: 40px 16px 48px; }
-      .contact-blogs { padding: 40px 16px 48px; }
     }
   </style>
 </head>
@@ -492,33 +484,33 @@
       <div class="reach-card">
         <div class="reach-icon">
           <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
-            <circle cx="12" cy="12" r="4" fill="white"/>
-            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="4" fill="var(--teal)"/>
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
         <h3>When to Visit</h3>
         <p>Hilston Park welcomes guests year-round, with summer offering longer outdoor days and autumn and winter providing a quieter, estate-focused experience.</p>
-        <a href="#contact-form" class="btn-reach">ENQUIRE NOW</a>
+        <a href="#contact-form" class="btn-reach">PLAN YOUR DATES</a>
       </div>
       <div class="reach-card">
         <div class="reach-icon">
           <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="var(--teal)"/>
           </svg>
         </div>
         <h3>Getting Here</h3>
         <p>Located near Monmouth in the Wye Valley, the estate is easily accessible by road, with travel guidance available for schools and group organisers.</p>
-        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-reach">GET DIRECTIONS</a>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-reach">VIEW ON MAPS</a>
       </div>
       <div class="reach-card">
         <div class="reach-icon">
           <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="white"/>
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="var(--teal)"/>
           </svg>
         </div>
         <h3>Get in Touch</h3>
         <p>Whether you&#8217;re a school, corporate team, or family group, our team is ready to help you plan and arrange your visit.</p>
-        <a href="#contact-form" class="btn-reach">ENQUIRE NOW</a>
+        <a href="#contact-form" class="btn-reach">SEND ENQUIRY</a>
       </div>
     </div>
   </section>
@@ -619,10 +611,9 @@
           Gwent, Wales, NP25 5NY
         </address>
         <div class="social-icons">
-          <a href="https://www.youtube.com/@HilstonPark" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
           <a href="https://www.instagram.com/hilstonparkofficial/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4A6.2 6.2 0 0012 5.8zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"/></svg></a>
-          <a href="https://www.tiktok.com/@hilston.park" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.84 1.54V6.8a4.84 4.84 0 01-1.07-.11z"/></svg></a>
-          <a href="https://www.facebook.com/hilstonparkofficial" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
         </div>
       </div>
 
