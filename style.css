@@ -176,9 +176,13 @@ body { overflow-x: clip; }
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  transition: background 0.2s;
+  transition: background 0.22s, transform 0.22s, box-shadow 0.22s;
 }
-.btn-pill:hover { background: var(--teal-dark); }
+.btn-pill:hover {
+  background: var(--teal-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(47,99,88,0.28);
+}
 
 /* =====================================================
    STICKY SHELL
@@ -1267,7 +1271,7 @@ body { overflow-x: clip; }
   animation: insta-scroll 90s linear infinite;
 }
 
-/* hover-pause is handled via JS (inline animation shorthand overrides CSS animation-play-state) */
+.insta-track:hover .insta-inner { animation-play-state: paused; }
 
 .insta-set {
   display: flex;

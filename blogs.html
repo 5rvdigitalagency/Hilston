@@ -245,12 +245,12 @@
     .newsletter-form input {
       width: 300px; padding: 15px 20px;
       border: 1px solid rgba(255,255,255,0.2);
-      background: var(--white);
-      color: var(--text); font-family: var(--font-sans); font-size: 0.88rem;
+      background: rgba(255,255,255,0.08);
+      color: var(--white); font-family: var(--font-sans); font-size: 0.88rem;
       outline: none;
       transition: border-color 0.2s;
     }
-    .newsletter-form input::placeholder { color: var(--text-muted); }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.8); }
     .newsletter-form input:focus { border-color: var(--teal); }
     .newsletter-form button {
       padding: 15px 28px;
@@ -285,7 +285,7 @@
     .visit-card:hover { border-color: var(--teal); transform: translateY(-5px); box-shadow: 0 10px 36px rgba(0,0,0,0.1); }
     .visit-icon {
       width: 48px; height: 48px;
-      background: var(--teal); border-radius: 50%;
+      background: var(--beige);
       display: flex; align-items: center; justify-content: center;
     }
     .visit-card h3 {
@@ -327,7 +327,7 @@
     @media (max-width: 880px) {
       .blog-hero-inner { padding: 40px 24px 48px; }
       .blog-featured-inner { grid-template-columns: 1fr; }
-      .blog-featured-img { height: 280px; min-height: unset; margin-right: 0; }
+      .blog-featured-img { height: 280px; }
       .blog-listing, .blog-newsletter, .visit-us, .blog-faq { padding-left: 24px; padding-right: 24px; }
       .visit-us-grid { grid-template-columns: 1fr; }
       .blog-faq-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -337,12 +337,6 @@
       .blog-grid { grid-template-columns: 1fr; }
       .blog-hero-inner { padding: 32px 16px 40px; }
       .blog-listing, .blog-newsletter, .visit-us, .blog-faq { padding-left: 16px; padding-right: 16px; }
-      .blog-listing-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
-      .filter-tabs { width: 100%; }
     }
 
   </style>
@@ -462,7 +456,7 @@
             </div>
             <h3>Planning a School Adventure Trip? Unleash It at Hilston Park</h3>
             <p>From curriculum links to catering logistics, this guide walks through the key decisions school trip organisers face &mdash; and how a fully managed residential centre simplifies each one.</p>
-            <a href="blog-school-trip.html" class="blog-read-more">Read More</a>
+            <a href="blog-school-trip.html" class="blog-read-more">Read More &rarr;</a>
           </div>
         </article>
       </div>
@@ -480,7 +474,7 @@
             </div>
             <h3>Choosing Accommodation for a School Residential Trip</h3>
             <p>From dormitory layouts for large year groups to private rooms for smaller groups, the right choice depends on your group size and programme structure. Here is a practical guide.</p>
-            <a href="blog-accommodation.html" class="blog-read-more">Read More</a>
+            <a href="blog-accommodation.html" class="blog-read-more">Read More &rarr;</a>
           </div>
         </article>
       </div>
@@ -498,7 +492,7 @@
             </div>
             <h3>Team Building in the Welsh Countryside: What to Expect</h3>
             <p>Taking a corporate team out of the office and into an estate setting changes how people collaborate. Here is an inside look at what a Hilston Park team day actually looks like.</p>
-            <a href="blog-team-building.html" class="blog-read-more">Read More</a>
+            <a href="blog-team-building.html" class="blog-read-more">Read More &rarr;</a>
           </div>
         </article>
       </div>
@@ -516,7 +510,7 @@
             </div>
             <h3>The Wye Valley Estate: What Makes Hilston Park Unique</h3>
             <p>Nestled between the River Wye and the Black Mountains, Hilston Park occupies a setting that is rarely found in managed outdoor activity centres. A look at what the estate actually offers.</p>
-            <a href="blog-wye-valley.html" class="blog-read-more">Read More</a>
+            <a href="blog-wye-valley.html" class="blog-read-more">Read More &rarr;</a>
           </div>
         </article>
       </div>
@@ -537,7 +531,7 @@
             </div>
             <h3>Why Schools Are Booking Their Trips at Hilston Park</h3>
             <p>School travel has a significant impact on how young minds develop. A residential adventure gives children a chance to leave the classroom and grow in a managed outdoor setting.</p>
-            <a href="blog-why-schools-book.html" class="blog-read-more">Read More</a>
+            <a href="blog-why-schools-book.html" class="blog-read-more">Read More &rarr;</a>
           </div>
         </article>
       </div>
@@ -558,7 +552,7 @@
             </div>
             <h3>Hilston Park&rsquo;s International Menu</h3>
             <p>Our international menu is designed to celebrate cultural connection through every dish, bridging the gap between diverse traditions and creating shared table experiences for all groups.</p>
-            <a href="blog-international-menu.html" class="blog-read-more">Read More</a>
+            <a href="blog-international-menu.html" class="blog-read-more">Read More &rarr;</a>
           </div>
         </article>
       </div>
@@ -585,8 +579,8 @@
       <div class="visit-card">
         <div class="visit-icon">
           <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
-            <circle cx="12" cy="12" r="4" fill="white"/>
-            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="4" fill="var(--teal)"/>
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
         <h3>When to Visit</h3>
@@ -596,22 +590,22 @@
       <div class="visit-card">
         <div class="visit-icon">
           <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="var(--teal)"/>
           </svg>
         </div>
         <h3>Getting Here</h3>
         <p>Located near Monmouth in the Wye Valley, Hilston Park is accessible by road. The team can advise on travel arrangements and coach access for school groups.</p>
-        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">GET DIRECTIONS</a>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">LEARN MORE</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
           <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="white"/>
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="var(--teal)"/>
           </svg>
         </div>
         <h3>Get in Touch</h3>
         <p>Whether you are a school, corporate team, or private group, the Hilston Park team can help you plan the right programme for your visit.</p>
-        <a href="contact.html" class="btn-pill">CONTACT US</a>
+        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
       </div>
     </div>
   </section>
@@ -675,10 +669,9 @@
           Gwent, Wales, NP25 5NY
         </address>
         <div class="social-icons">
-          <a href="https://www.youtube.com/@HilstonPark" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
           <a href="https://www.instagram.com/hilstonparkofficial/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4A6.2 6.2 0 0012 5.8zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"/></svg></a>
-          <a href="https://www.tiktok.com/@hilston.park" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.84 1.54V6.8a4.84 4.84 0 01-1.07-.11z"/></svg></a>
-          <a href="https://www.facebook.com/hilstonparkofficial" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
         </div>
       </div>
 
