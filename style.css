@@ -2812,3 +2812,87 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   .cookie-pref-row { padding: 14px 16px; gap: 14px; }
 }
 
+
+
+/* =================================================================
+   HCS — Hilston Custom Select
+   Replaces native <select> for consistent cross-platform styling.
+   Variants: .hcs--box (bordered, forms), .hcs--line (underline, modal)
+   ================================================================= */
+.hcs { position: relative; width: 100%; }
+.hcs-btn {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; background: none; border: none; padding: 0;
+  cursor: pointer; text-align: left; font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+.hcs-btn:focus { outline: none; }
+.hcs-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.hcs-value {
+  flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  transition: color 0.15s;
+}
+.hcs-placeholder { color: rgba(74,99,113,0.45); }
+.hcs-arrow {
+  flex-shrink: 0; margin-left: 10px; transition: transform 0.22s ease;
+  pointer-events: none; color: var(--teal);
+}
+.hcs.hcs-open .hcs-arrow { transform: rotate(180deg); }
+
+/* --- Box variant (contact form, matches input/textarea styling) --- */
+.hcs--box .hcs-btn {
+  padding: 13px 16px; border: 1px solid var(--border);
+  background: var(--beige); font-size: 0.88rem; color: var(--text);
+  transition: border-color 0.2s;
+}
+.hcs--box.hcs-open .hcs-btn,
+.hcs--box .hcs-btn:focus-visible { border-color: var(--teal); }
+
+/* --- Line variant (booking modal, matches date/number field underline style) --- */
+.hcs--line { position: relative; }
+.hcs--line .hcs-btn {
+  padding: 11px 28px 10px 0; border-bottom: 1px solid var(--beige-2);
+  font-size: 0.92rem; color: var(--text); transition: border-bottom-color 0.22s;
+}
+.hcs--line.hcs-open .hcs-btn,
+.hcs--line .hcs-btn:focus-visible {
+  border-bottom-color: var(--teal); outline: none;
+}
+.hcs--line .hcs-arrow {
+  position: absolute; right: 4px; top: 50%;
+  transform: translateY(-50%); margin-left: 0;
+}
+.hcs--line.hcs-open .hcs-arrow { transform: translateY(-50%) rotate(180deg); }
+
+/* --- Filter variant (gallery mobile, shown at full width) --- */
+.hcs--filter .hcs-btn {
+  padding: 10px 36px 10px 16px;
+  border: 1.5px solid var(--border);
+  background: var(--white); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text);
+  transition: border-color 0.2s;
+}
+.hcs--filter.hcs-open .hcs-btn { border-color: var(--teal); }
+.hcs--filter .hcs-arrow { margin-left: 0; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); }
+.hcs--filter.hcs-open .hcs-arrow { transform: translateY(-50%) rotate(180deg); }
+
+/* --- Dropdown list --- */
+.hcs-list {
+  display: none; position: absolute; top: calc(100% + 1px); left: 0;
+  width: 100%; background: var(--white);
+  border: 1px solid var(--border); border-top: none;
+  z-index: 9999; list-style: none; margin: 0; padding: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10); max-height: 260px;
+  overflow-y: auto;
+}
+.hcs.hcs-open .hcs-list { display: block; }
+.hcs-opt {
+  padding: 11px 16px; font-family: var(--font-sans); font-size: 0.88rem;
+  color: var(--text); cursor: pointer; user-select: none;
+  transition: background 0.12s, color 0.12s;
+}
+.hcs-opt--placeholder { color: rgba(74,99,113,0.45); font-style: italic; }
+.hcs-opt:hover,
+.hcs-opt.hcs-focused { background: var(--beige); color: var(--teal); }
+.hcs-opt.hcs-selected { background: var(--teal); color: var(--white); }
+.hcs-opt.hcs-selected:hover { background: var(--teal-dark); color: var(--white); }
