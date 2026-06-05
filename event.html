@@ -75,6 +75,7 @@
     .service-carousel { position: relative; overflow: hidden; }
     .service-grid {
       display: flex; transition: transform 0.4s ease; gap: 2px;
+      max-width: none; margin-left: 0; margin-right: 0; width: 100%;
     }
     .service-card {
       background: rgba(255,255,255,0.06); padding: 36px 32px;
@@ -133,22 +134,20 @@
 
     /* WHAT IS INCLUDED */
     .eve-include { background: var(--white); padding: 88px 80px; }
-    .eve-include-header { text-align: center; max-width: 680px; margin: 0 auto 56px; }
-    .eve-include-header h2 { margin-bottom: 14px; }
-    .eve-include-sub { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); margin: 0; }
-    .eve-offer-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .eve-include-sub { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); margin: 0 0 32px; }
+    .eve-offer-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; }
+    .eve-offer-layout > div:first-child > .heading-display { margin-bottom: 14px; }
     .eve-offer-text { display: flex; flex-direction: column; gap: 0; }
-    .eve-offer-item { padding: 36px 0; border-bottom: 1px solid var(--border); }
-    .eve-offer-item:first-child { padding-top: 0; }
-    .eve-offer-item:last-child { border-bottom: none; }
+    .eve-offer-item { padding: 22px 0; border-top: 1px solid var(--border); }
+    .eve-offer-item:last-child { border-bottom: 1px solid var(--border); }
     .eve-offer-num { font-family: var(--font-script); font-size: 1.8rem; color: var(--teal); display: block; margin-bottom: 8px; line-height: 1; }
     .eve-offer-item h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.22rem; color: var(--text); margin-bottom: 10px; }
     .eve-offer-item p { font-size: 0.9rem; line-height: 1.78; color: var(--text-muted); }
-    .eve-offer-images { position: sticky; top: 120px; }
-    .eve-offer-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+    .eve-offer-images { position: sticky; top: 120px; align-self: start; }
+    .eve-offer-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .eve-offer-img-grid img { width: 100%; height: 240px; object-fit: cover; display: block; }
     .eve-offer-card-body p { font-size: 0.86rem; line-height: 1.75; color: var(--text-muted); margin: 0; }
-    .eve-include-cta { text-align: center; margin-top: 52px; }
+    .eve-include-cta { margin-top: 28px; }
 
     /* ACCOMMODATION */
     .eve-accom { background: var(--beige); padding: 88px 80px; }
@@ -180,7 +179,9 @@
     .visit-card {
       background: var(--beige); padding: 36px 32px;
       display: flex; flex-direction: column; gap: 16px; border-top: 3px solid var(--teal);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
     }
+    .visit-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(0,0,0,0.1); }
     .visit-icon { width: 46px; height: 46px; background: var(--teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     .visit-icon svg { width: 22px; height: 22px; stroke: white; fill: none; stroke-width: 2; }
     .visit-card h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.3rem; color: var(--text); }
@@ -473,35 +474,35 @@
 
   <!-- WHAT IS INCLUDED -->
   <section class="eve-include">
-    <div class="eve-include-header">
-      <h2 class="heading-display">What&#8217;s Included in Your Event Experience</h2>
-      <p class="eve-include-sub">Hilston Park brings together accommodation, catering, activities, and event spaces, creating flexible experiences tailored to every occasion.</p>
-    </div>
     <div class="eve-offer-layout">
 
-      <div class="eve-offer-text">
-        <div class="eve-offer-item">
-          <span class="eve-offer-num">01</span>
-          <h3>Weddings &amp; Private Celebrations</h3>
-          <p>A historic countryside setting for weddings, anniversaries, birthdays, reunions, and private gatherings with dedicated event spaces.</p>
+      <div>
+        <h2 class="heading-display">What&#8217;s Included in Your Event Experience</h2>
+        <p class="eve-include-sub">Hilston Park brings together accommodation, catering, activities, and event spaces, creating flexible experiences tailored to every occasion.</p>
+        <div class="eve-offer-text">
+          <div class="eve-offer-item">
+            <span class="eve-offer-num">01</span>
+            <h3>Weddings &amp; Private Celebrations</h3>
+            <p>A historic countryside setting for weddings, anniversaries, birthdays, reunions, and private gatherings with dedicated event spaces.</p>
+          </div>
+          <div class="eve-offer-item">
+            <span class="eve-offer-num">02</span>
+            <h3>Catering &amp; Dining</h3>
+            <p>Freshly prepared meals served on-site, with dietary requirements managed in advance for a seamless event experience.</p>
+          </div>
+          <div class="eve-offer-item">
+            <span class="eve-offer-num">03</span>
+            <h3>Outdoor Activities &amp; Team Building</h3>
+            <p>Access to outdoor activities that encourage engagement, teamwork, exploration, and shared experiences throughout your event.</p>
+          </div>
+          <div class="eve-offer-item">
+            <span class="eve-offer-num">04</span>
+            <h3>Adventure Experiences</h3>
+            <p>Additional adventure activities designed to challenge, motivate, and entertain groups in a safe outdoor environment.</p>
+          </div>
         </div>
-
-        <div class="eve-offer-item">
-          <span class="eve-offer-num">02</span>
-          <h3>Catering &amp; Dining</h3>
-          <p>Freshly prepared meals served on-site, with dietary requirements managed in advance for a seamless event experience.</p>
-        </div>
-
-        <div class="eve-offer-item">
-          <span class="eve-offer-num">03</span>
-          <h3>Outdoor Activities &amp; Team Building</h3>
-          <p>Access to outdoor activities that encourage engagement, teamwork, exploration, and shared experiences throughout your event.</p>
-        </div>
-
-        <div class="eve-offer-item">
-          <span class="eve-offer-num">04</span>
-          <h3>Adventure Experiences</h3>
-          <p>Additional adventure activities designed to challenge, motivate, and entertain groups in a safe outdoor environment.</p>
+        <div class="eve-include-cta">
+          <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">GET A CUSTOM ITINERARY</a>
         </div>
       </div>
 
@@ -514,9 +515,6 @@
         </div>
       </div>
 
-    </div>
-    <div class="eve-include-cta">
-      <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">GET A CUSTOM ITINERARY</a>
     </div>
   </section>
 
@@ -758,7 +756,7 @@
     if(!grid) return;
     var cards = grid.querySelectorAll('.service-card');
     var total = cards.length;
-    var perView = window.innerWidth <= 640 ? 1 : window.innerWidth <= 1060 ? 2 : 3;
+    var perView = window.innerWidth <= 540 ? 1 : window.innerWidth <= 880 ? 2 : 3;
     var pages = Math.ceil(total / perView);
     var current = 0;
     for(var i=0;i<pages;i++){
