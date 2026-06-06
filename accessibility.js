@@ -112,6 +112,7 @@
             '<span class="a11y-font-size-label" id="a11y-font-label" aria-live="polite" aria-atomic="true">Default</span>',
             '<button class="a11y-font-btn" id="a11y-font-inc" aria-label="Increase text size" aria-describedby="a11y-font-label-heading">A+</button>',
           '</div>',
+          '<button class="a11y-font-reset" id="a11y-font-reset" aria-label="Reset text size to default">Reset to default size</button>',
         '</div>',
 
         '<hr class="a11y-divider">',
@@ -132,18 +133,20 @@
         /* Colour vision modes */
         '<div class="a11y-section">',
           '<span class="a11y-section-label" id="a11y-cb-label">Colour Vision</span>',
+          '<button class="a11y-cb-none active" id="a11y-cb-none" data-mode="none" aria-pressed="true" aria-label="No colour filter \u2014 normal vision (currently active)">',
+            '&#10003; No filter \u2014 normal vision',
+          '</button>',
           '<div class="a11y-cb-grid" role="group" aria-labelledby="a11y-cb-label">',
-            '<button class="a11y-cb-btn active" data-mode="none" aria-pressed="true">Normal</button>',
-            '<button class="a11y-cb-btn" data-mode="deuteranopia" aria-pressed="false">Deuteranopia<br><small>red-green</small></button>',
-            '<button class="a11y-cb-btn" data-mode="protanopia" aria-pressed="false">Protanopia<br><small>red deficiency</small></button>',
-            '<button class="a11y-cb-btn" data-mode="tritanopia" aria-pressed="false">Tritanopia<br><small>blue-yellow</small></button>',
-            '<button class="a11y-cb-btn" data-mode="achromatopsia" aria-pressed="false">Achromatopsia<br><small>monochrome</small></button>',
+            '<button class="a11y-cb-btn" data-mode="deuteranopia" aria-pressed="false" aria-label="Deuteranopia: red-green colour blindness simulation">Deuteranopia<br><small>red-green</small></button>',
+            '<button class="a11y-cb-btn" data-mode="protanopia" aria-pressed="false" aria-label="Protanopia: red deficiency simulation">Protanopia<br><small>red deficiency</small></button>',
+            '<button class="a11y-cb-btn" data-mode="tritanopia" aria-pressed="false" aria-label="Tritanopia: blue-yellow colour blindness simulation">Tritanopia<br><small>blue-yellow</small></button>',
+            '<button class="a11y-cb-btn" data-mode="achromatopsia" aria-pressed="false" aria-label="Achromatopsia: monochrome vision simulation">Achromatopsia<br><small>monochrome</small></button>',
           '</div>',
         '</div>',
 
         '<hr class="a11y-divider">',
 
-        '<button class="a11y-reset-all" id="a11y-reset-all">Reset all accessibility settings</button>',
+        '<button class="a11y-reset-all" id="a11y-reset-all" aria-label="Reset all accessibility settings to default">&#8635; Reset all settings</button>',
 
       '</div>',
       /* ---- Trigger button ---- */
@@ -191,6 +194,11 @@
     var incBtn = document.getElementById('a11y-font-inc');
     if (decBtn) decBtn.disabled = (size <= FONT_MIN);
     if (incBtn) incBtn.disabled = (size >= FONT_MAX);
+    /* Show/hide the individual font reset link */
+    var fontReset = document.getElementById('a11y-font-reset');
+    if (fontReset) {
+      fontReset.classList.toggle('is-visible', size !== FONT_DEFAULT);
+    }
   }
 
   function applyInvert(on) {
@@ -215,10 +223,32 @@
       html.classList.add('a11y-' + mode);
     }
     try { localStorage.setItem(LS.cbMode, mode); } catch(e) {}
+
+    /* Update the "No filter" button */
+    var noneBtn = document.getElementById('a11y-cb-none');
+    if (noneBtn) {
+      var isNone = (!mode || mode === 'none');
+      noneBtn.classList.toggle('active', isNone);
+      noneBtn.setAttribute('aria-pressed', isNone ? 'true' : 'false');
+      noneBtn.setAttribute('aria-label', isNone
+        ? 'No colour filter \u2014 normal vision (currently active)'
+        : 'Remove colour filter and return to normal vision');
+      noneBtn.innerHTML = isNone
+        ? '&#10003; No filter \u2014 normal vision'
+        : '&#8592; Remove filter \u2014 return to normal';
+    }
+
+    /* Update the mode buttons */
     document.querySelectorAll('.a11y-cb-btn').forEach(function (btn) {
-      var isActive = btn.getAttribute('data-mode') === mode;
+      var m = btn.getAttribute('data-mode');
+      var isActive = (m === mode);
       btn.classList.toggle('active', isActive);
       btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      if (isActive) {
+        btn.setAttribute('aria-label', 'Currently active: ' + btn.textContent.trim() + ' \u2014 click to remove this filter');
+      } else {
+        btn.setAttribute('aria-label', btn.textContent.trim() + ' colour vision simulation');
+      }
     });
   }
 
@@ -349,12 +379,34 @@
       });
     }
 
-    /* 8. Colour-blind mode buttons */
+    /* 8. Colour-blind mode buttons — clicking active button removes the filter */
     document.querySelectorAll('.a11y-cb-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        applyColorblind(btn.getAttribute('data-mode'));
+        var clickedMode = btn.getAttribute('data-mode');
+        /* If this mode is already active, clicking it again removes it */
+        if (btn.classList.contains('active') && clickedMode !== 'none') {
+          applyColorblind('none');
+        } else {
+          applyColorblind(clickedMode);
+        }
       });
     });
+
+    /* "No filter" button */
+    var noneBtn = document.getElementById('a11y-cb-none');
+    if (noneBtn) {
+      noneBtn.addEventListener('click', function () {
+        applyColorblind('none');
+      });
+    }
+
+    /* Font reset */
+    var fontResetBtn = document.getElementById('a11y-font-reset');
+    if (fontResetBtn) {
+      fontResetBtn.addEventListener('click', function () {
+        applyFontSize(FONT_DEFAULT);
+      });
+    }
 
     /* 9. Reset all */
     var resetBtn = document.getElementById('a11y-reset-all');
