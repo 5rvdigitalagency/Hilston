@@ -76,7 +76,7 @@ html.a11y-invert #a11y-fab .a11y-panel {
   position: fixed;
   bottom: 24px;
   left: 24px;
-  z-index: 8900;
+  z-index: 9999; /* above cookie banner (9998), below booking modal (10001) */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
