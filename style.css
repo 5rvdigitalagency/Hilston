@@ -1380,6 +1380,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   .expertise-grid { grid-template-columns: 1fr; }
   .plan-cards { grid-template-columns: 1fr; }
   .svc-cards { grid-template-columns: 1fr; }
+  .choose-exp { padding-left: 24px; padding-right: 24px; }
   .blogs-grid,
   .visit-us-grid { grid-template-columns: 1fr; }
   .stay-row,
@@ -1966,13 +1967,13 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 
 /* Mobile */
 @media (max-width: 700px) {
-  .bkm-panel { grid-template-columns: 1fr; border-radius: 0; }
-  .bkm-brand { min-height: 180px; padding: 24px 24px 28px; justify-content: flex-end; border-radius: 0; }
+  .bkm-panel { grid-template-columns: 1fr; border-radius: 0; max-height: 92dvh; overflow: hidden; }
+  .bkm-brand { min-height: 150px; padding: 24px 24px 28px; justify-content: flex-end; border-radius: 0; }
   .bkm-brand-heading { font-size: 1.6rem; }
   .bkm-logo { width: 100px; }
   .bkm-brand-address { display: none; }
   .bkm-form { padding: 32px 24px 28px; border-radius: 0; }
-  .bkm-right { border-radius: 0; min-height: 0; border-left: none; border-top: 3px solid var(--teal); }
+  .bkm-right { border-radius: 0; min-height: 0; border-left: none; border-top: 3px solid var(--teal); overflow-y: auto; max-height: calc(92dvh - 150px); -webkit-overflow-scrolling: touch; }
   .bkm-phase { padding: 28px 24px 28px; }
   .bkm-tiles { grid-template-columns: 1fr; }
   .bkm-tile-inq { flex-direction: column; align-items: flex-start; }
@@ -1980,7 +1981,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   .bkm-fields { grid-template-columns: 1fr; gap: 20px; }
   .bkm-panel.bkm-widget-active { height: 92dvh; max-width: 100%; }
   .bkm-back-btn { padding: 0 14px; font-size: 0.62rem; }
-  /* Close button — dark circle so white × is visible on any background */
+  /* Close button — white × on dark circle, clearly visible on mobile */
   .bkm-close {
     color: var(--white);
     background: rgba(10, 22, 32, 0.55);
@@ -2293,6 +2294,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   .stays,
   .expertise,
   .choose-exp { padding-top: 56px; padding-bottom: 56px; }
+  .choose-exp { padding-left: 16px; padding-right: 16px; }
   .experience-grid { gap: 32px; }
   .discover-box { padding: 22px 22px; }
   .stay-info { padding: 28px 22px; }
