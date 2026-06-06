@@ -362,6 +362,7 @@
       .contact-blogs { padding: 48px 16px 56px; }
     }
   </style>
+  <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
 <!-- Scroll progress -->
@@ -422,7 +423,7 @@
   </div>
 
   <!-- ===== HERO ===== -->
-  <section class="contact-hero">
+  <section class="contact-hero" id="main-content" tabindex="-1">
     <img class="contact-hero-img" src="images/contact-hero.jpg" alt="Hilston Park team">
     <div class="contact-hero-overlay"></div>
     <div class="contact-hero-inner">
@@ -836,5 +837,9 @@
 </div><!-- /site-wrap -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="script.js"></script>
+
+  <script src="accessibility.js"></script>
+  <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key -->
+  <script src="//code.tidio.co/PLACEHOLDER_KEY.js" async></script>
 </body>
 </html>

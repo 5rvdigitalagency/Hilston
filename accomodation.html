@@ -345,6 +345,7 @@
       .rates-room-card img { height: 200px; }
     }
   </style>
+  <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
 <!-- Scroll progress -->
@@ -407,7 +408,7 @@
   <main>
 
   <!-- HERO VIDEO -->
-  <section class="accom-hero">
+  <section class="accom-hero" id="main-content" tabindex="-1">
     <video class="accom-hero-video" autoplay muted loop playsinline preload="auto">
       <source src="Videos/Accommodation%20Hero%20Compressed.mp4" type="video/mp4">
       <img src="images/accommodation.jpg" alt="Hilston Park accommodation">
@@ -1383,5 +1384,9 @@
   })();
 </script>
 
+
+  <script src="accessibility.js"></script>
+  <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key -->
+  <script src="//code.tidio.co/PLACEHOLDER_KEY.js" async></script>
 </body>
 </html>

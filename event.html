@@ -255,6 +255,7 @@
       .eve-hero-inner { padding: 32px 16px; }
     }
   </style>
+  <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
 <!-- Scroll progress -->
@@ -315,7 +316,7 @@
   </div>
 
   <!-- HERO VIDEO -->
-  <section class="eve-hero">
+  <section class="eve-hero" id="main-content" tabindex="-1">
     <video class="eve-hero-video" autoplay muted loop playsinline>
       <source src="Videos/events-hero.mp4" type="video/mp4">
       <img src="images/event-hero.jpg" alt="Hilston Park events">
@@ -830,5 +831,9 @@
     setInterval(function(){ go((current+1) % items.length); }, 4500);
   })();
 </script>
+
+  <script src="accessibility.js"></script>
+  <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key -->
+  <script src="//code.tidio.co/PLACEHOLDER_KEY.js" async></script>
 </body>
 </html>

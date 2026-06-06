@@ -108,6 +108,7 @@
       .policy-section { padding: 44px 20px 80px; }
     }
   </style>
+  <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
 <div class="site-wrap">
@@ -133,7 +134,7 @@
     </ul>
   </nav>
 
-  <section class="utility-hero">
+  <section class="utility-hero" id="main-content" tabindex="-1">
     <span class="eyebrow">Hilston Park</span>
     <h1>Terms &amp; Conditions</h1>
     <p>Please read these terms carefully before making a booking, using the website, or attending any stay, event, activity, or educational visit at Hilston Park.</p>
@@ -267,5 +268,9 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="script.js"></script>
+
+  <script src="accessibility.js"></script>
+  <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key -->
+  <script src="//code.tidio.co/PLACEHOLDER_KEY.js" async></script>
 </body>
 </html>

@@ -47,6 +47,7 @@
       .visit-us, .faq { padding-left: 16px !important; padding-right: 16px !important; }
     }
   </style>
+  <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
 
@@ -108,7 +109,7 @@
   </div>
 
   <!-- ===== HERO ===== -->
-  <section class="hero">
+  <section class="hero" id="main-content" tabindex="-1">
     <article class="hero-card">
       <div class="hero-bg" style="background-image:url(images/hp-hero-schools.jpg)"></div>
       <div class="hero-overlay"></div>
@@ -559,5 +560,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="script.js?v=3"></script>
+
+  <script src="accessibility.js"></script>
+  <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key -->
+  <script src="//code.tidio.co/PLACEHOLDER_KEY.js" async></script>
 </body>
 </html>

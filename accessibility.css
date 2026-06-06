@@ -1,0 +1,334 @@
+/* =====================================================
+   HILSTON PARK — accessibility.css
+   Skip link, focus styles, accessibility toolbar widget,
+   and colorblind / vision filter classes.
+   Filters are applied to <body> to preserve position:fixed
+   stacking in the booking modal and sticky header.
+   ===================================================== */
+
+/* ----- SKIP LINK ----- */
+.skip-link {
+  position: absolute;
+  top: -200%;
+  left: 16px;
+  z-index: 99999;
+  padding: 12px 24px;
+  background: #3c7a6c;
+  color: #fff;
+  font-family: "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: top 0.18s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ----- GLOBAL FOCUS RING (keyboard nav) ----- */
+:focus-visible {
+  outline: 3px solid #3c7a6c !important;
+  outline-offset: 3px !important;
+  border-radius: 2px;
+}
+/* Don't show focus ring on mouse click */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ----- COLORBLIND / VISION FILTER CLASSES ----- */
+/* SVG filter definitions are injected by accessibility.js into <body>.
+   We filter <body> (not <html>) to avoid breaking position:fixed stacking. */
+
+html.a11y-deuteranopia  body { filter: url(#a11y-deuteranopia-filter); }
+html.a11y-protanopia    body { filter: url(#a11y-protanopia-filter); }
+html.a11y-tritanopia    body { filter: url(#a11y-tritanopia-filter); }
+html.a11y-achromatopsia body { filter: url(#a11y-achromatopsia-filter); }
+
+html.a11y-invert        body { filter: invert(1) hue-rotate(180deg); }
+
+/* Combined: invert + colorblind */
+html.a11y-invert.a11y-deuteranopia  body { filter: invert(1) hue-rotate(180deg) url(#a11y-deuteranopia-filter); }
+html.a11y-invert.a11y-protanopia    body { filter: invert(1) hue-rotate(180deg) url(#a11y-protanopia-filter); }
+html.a11y-invert.a11y-tritanopia    body { filter: invert(1) hue-rotate(180deg) url(#a11y-tritanopia-filter); }
+html.a11y-invert.a11y-achromatopsia body { filter: invert(1) hue-rotate(180deg) url(#a11y-achromatopsia-filter); }
+
+/* Re-normalise the accessibility toolbar itself when body is filtered
+   so the controls stay readable in all modes */
+html.a11y-invert #a11y-fab,
+html.a11y-deuteranopia  #a11y-fab,
+html.a11y-protanopia    #a11y-fab,
+html.a11y-tritanopia    #a11y-fab,
+html.a11y-achromatopsia #a11y-fab {
+  filter: none !important;
+}
+html.a11y-invert #a11y-fab .a11y-panel {
+  /* re-invert the panel so it renders in normal colours */
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* ----- ACCESSIBILITY TOOLBAR WIDGET ----- */
+.a11y-fab {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 8900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* The circular trigger button */
+.a11y-toggle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.35);
+  background: #3c7a6c;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.28);
+  transition: background 0.2s, transform 0.18s, box-shadow 0.18s;
+  flex-shrink: 0;
+}
+.a11y-toggle:hover {
+  background: #2f6358;
+  transform: scale(1.08);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.32);
+}
+.a11y-toggle svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+/* The expanding panel */
+.a11y-panel {
+  position: absolute;
+  bottom: 58px;
+  left: 0;
+  width: 272px;
+  background: #fff;
+  border: 1px solid #cfcec9;
+  border-radius: 12px;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.15);
+  padding: 18px 16px 14px;
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+  transform-origin: bottom left;
+}
+.a11y-panel.is-open {
+  display: flex;
+  animation: a11y-pop 0.18s ease forwards;
+}
+
+@keyframes a11y-pop {
+  from { opacity: 0; transform: scale(0.92) translateY(6px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Panel header */
+.a11y-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+.a11y-panel-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #3c7a6c;
+}
+.a11y-panel-close {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #5c5c5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.15s;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0;
+}
+.a11y-panel-close:hover { background: #f5f2ee; color: #2a2a2a; }
+
+/* Sections */
+.a11y-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.a11y-section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #2a2a2a;
+  letter-spacing: 0.05em;
+}
+
+/* Font size row */
+.a11y-font-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.a11y-font-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #cfcec9;
+  background: #f5f2ee;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2a2a2a;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.a11y-font-btn:hover { background: #e9e6df; border-color: #b8b6b0; }
+.a11y-font-size-label {
+  flex: 1;
+  text-align: center;
+  font-size: 0.76rem;
+  color: #5c5c5c;
+  min-width: 0;
+}
+
+/* Toggle switch rows */
+.a11y-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.a11y-toggle-label {
+  font-size: 0.78rem;
+  color: #2a2a2a;
+  flex: 1;
+}
+
+/* Switch component */
+.a11y-switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.a11y-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.a11y-switch-slider {
+  position: absolute;
+  inset: 0;
+  background: #cfcec9;
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.a11y-switch-slider::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.a11y-switch input:checked + .a11y-switch-slider { background: #3c7a6c; }
+.a11y-switch input:checked + .a11y-switch-slider::before { transform: translateX(18px); }
+.a11y-switch input:focus-visible + .a11y-switch-slider {
+  outline: 3px solid #3c7a6c;
+  outline-offset: 2px;
+}
+
+/* Colorblind mode grid */
+.a11y-cb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.a11y-cb-btn {
+  padding: 7px 6px;
+  border: 1px solid #cfcec9;
+  background: #f5f2ee;
+  border-radius: 6px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #2a2a2a;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.35;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.a11y-cb-btn:hover { background: #e9e6df; border-color: #b8b6b0; }
+.a11y-cb-btn.active {
+  background: #3c7a6c;
+  border-color: #2f6358;
+  color: #fff;
+}
+.a11y-cb-btn.active:hover { background: #2f6358; }
+
+/* Divider */
+.a11y-divider {
+  border: none;
+  border-top: 1px solid #e9e6df;
+  margin: 0;
+}
+
+/* Reset all */
+.a11y-reset-all {
+  font-size: 0.68rem;
+  color: #5c5c5c;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-align: center;
+  width: 100%;
+  font-family: inherit;
+  transition: color 0.15s;
+}
+.a11y-reset-all:hover { color: #2a2a2a; }
+
+/* Colour-blind mode legend labels */
+.a11y-cb-btn[data-mode="none"]          { grid-column: span 2; }
+
+/* ---- Responsive: keep toolbar above mobile nav ---- */
+@media (max-width: 480px) {
+  .a11y-fab {
+    bottom: 16px;
+    left: 12px;
+  }
+  .a11y-panel {
+    width: calc(100vw - 24px);
+    left: 0;
+  }
+}
