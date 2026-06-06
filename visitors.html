@@ -12,6 +12,7 @@
   <meta name="description" content="Plan your visit to Hilston Park with guidance on stays, activities, events, and practical travel details.">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
 <div class="site-wrap">
@@ -37,7 +38,7 @@
     </ul>
   </nav>
 
-  <section class="utility-hero">
+  <section class="utility-hero" id="main-content" tabindex="-1">
     <span class="eyebrow">Hilston Park</span>
     <h1>Visitor Guide</h1>
     <p>Everything you need to plan a smooth and memorable stay at Hilston Park, from daytime activities to overnight accommodation and event planning support.</p>
@@ -125,5 +126,9 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="script.js"></script>
+
+  <script src="accessibility.js"></script>
+  <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key -->
+  <script src="//code.tidio.co/PLACEHOLDER_KEY.js" async></script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+# Copilot workspace indexing exclusions
+# These files are too large, binary, or irrelevant to code assistance
+
+# Requirement/change-tracking exports (Jira/Linear HTML dumps with embedded images)
+Chnages/
+New Updates/
+
+# Design assets and media — not useful for code context
+Hilston Website Images/
+Archive/
+Videos/
+fonts/
+images/gallery/
+
+# Written content docs
+Written Content/
+
+# Reference/planning files in root
+Attached Element Context from Integrated

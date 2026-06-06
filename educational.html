@@ -302,6 +302,7 @@
       .edu-accom-img { grid-template-rows: 160px 160px; }
     }
   </style>
+  <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
 <!-- Scroll progress -->
@@ -362,7 +363,7 @@
   </div>
 
   <!-- HERO VIDEO -->
-  <section class="edu-hero">
+  <section class="edu-hero" id="main-content" tabindex="-1">
     <video class="edu-hero-video" autoplay muted loop playsinline preload="auto">
       <source src="Videos/Educational%20Hero%20Video%20Compressed.mp4" type="video/mp4">
       <img src="images/hero-schools.jpg" alt="Hilston Park educational visits">
@@ -824,5 +825,9 @@
     track.addEventListener('mouseleave', function(){ timer = setInterval(scroll, 2800); });
   })();
 </script>
+
+  <script src="accessibility.js"></script>
+  <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key -->
+  <script src="//code.tidio.co/PLACEHOLDER_KEY.js" async></script>
 </body>
 </html>

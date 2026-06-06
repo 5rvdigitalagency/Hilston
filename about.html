@@ -387,6 +387,7 @@
       .about-hero-inner { padding: 32px 16px; }
     }
   </style>
+  <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
 <!-- Scroll progress -->
@@ -447,7 +448,7 @@
   </div>
 
   <!-- HERO BANNER -->
-  <section class="about-hero">
+  <section class="about-hero" id="main-content" tabindex="-1">
     <video class="about-hero-video" autoplay muted loop playsinline preload="auto" oncanplay="this.playbackRate=1.4">
       <source src="Videos/About%20Page%20Hero%20Compressed.mp4" type="video/mp4">
     </video>
@@ -893,5 +894,9 @@
     tlItems.forEach(function(el){ obs.observe(el); });
   })();
 </script>
+
+  <script src="accessibility.js"></script>
+  <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key -->
+  <script src="//code.tidio.co/PLACEHOLDER_KEY.js" async></script>
 </body>
 </html>
