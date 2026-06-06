@@ -186,6 +186,7 @@ html.a11y-invert #a11y-fab .a11y-panel {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 .a11y-font-btn {
   width: 34px;
@@ -212,6 +213,22 @@ html.a11y-invert #a11y-fab .a11y-panel {
   color: #5c5c5c;
   min-width: 0;
 }
+.a11y-font-reset {
+  width: 100%;
+  text-align: center;
+  font-size: 0.68rem;
+  color: #5c5c5c;
+  background: none;
+  border: none;
+  padding: 2px 0 0;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: inherit;
+  transition: color 0.15s;
+  display: none;
+}
+.a11y-font-reset.is-visible { display: block; }
+.a11y-font-reset:hover { color: #2a2a2a; }
 
 /* Toggle switch rows */
 .a11y-toggle-row {
@@ -267,11 +284,40 @@ html.a11y-invert #a11y-fab .a11y-panel {
   outline-offset: 2px;
 }
 
+/* Colorblind — "No filter" reset bar */
+.a11y-cb-none {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cfcec9;
+  background: #f5f2ee;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #5c5c5c;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.a11y-cb-none:hover { background: #e9e6df; border-color: #b8b6b0; color: #2a2a2a; }
+.a11y-cb-none.active {
+  background: #3c7a6c;
+  border-color: #2f6358;
+  color: #fff;
+  font-weight: 700;
+}
+.a11y-cb-none.active:hover { background: #2f6358; }
+
 /* Colorblind mode grid */
 .a11y-cb-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6px;
+  margin-top: 6px;
 }
 .a11y-cb-btn {
   padding: 7px 6px;
@@ -286,6 +332,7 @@ html.a11y-invert #a11y-fab .a11y-panel {
   text-align: center;
   line-height: 1.35;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
+  position: relative;
 }
 .a11y-cb-btn:hover { background: #e9e6df; border-color: #b8b6b0; }
 .a11y-cb-btn.active {
@@ -293,7 +340,14 @@ html.a11y-invert #a11y-fab .a11y-panel {
   border-color: #2f6358;
   color: #fff;
 }
-.a11y-cb-btn.active:hover { background: #2f6358; }
+.a11y-cb-btn.active:hover { background: #c0392b; border-color: #a93226; }
+/* Show × when active to signal "click to remove" */
+.a11y-cb-btn.active::before {
+  content: '\00D7\0020';
+  font-size: 0.9rem;
+  font-weight: 700;
+  opacity: 0.85;
+}
 
 /* Divider */
 .a11y-divider {
@@ -304,22 +358,22 @@ html.a11y-invert #a11y-fab .a11y-panel {
 
 /* Reset all */
 .a11y-reset-all {
-  font-size: 0.68rem;
-  color: #5c5c5c;
-  background: none;
-  border: none;
-  padding: 4px 0;
-  cursor: pointer;
-  text-decoration: underline;
-  text-align: center;
   width: 100%;
+  padding: 9px 14px;
+  border: 1px solid #cfcec9;
+  background: #f5f2ee;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
   font-family: inherit;
-  transition: color 0.15s;
+  color: #5c5c5c;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-.a11y-reset-all:hover { color: #2a2a2a; }
+.a11y-reset-all:hover { background: #fdecea; border-color: #e2a09a; color: #c0392b; }
 
-/* Colour-blind mode legend labels */
-.a11y-cb-btn[data-mode="none"]          { grid-column: span 2; }
+/* nothing — Normal is now .a11y-cb-none outside the grid */
 
 /* ---- Responsive: keep toolbar above mobile nav ---- */
 @media (max-width: 480px) {
