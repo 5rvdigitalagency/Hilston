@@ -152,8 +152,8 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 .btn-book {
   display: inline-block;
   padding: 12px 30px;
-  border: 2px solid var(--teal);
-  background: var(--teal);
+  border: 2px solid #4A6372;
+  background: #4A6372;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -161,7 +161,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   text-transform: uppercase;
   transition: background 0.2s, border-color 0.2s;
 }
-.btn-book:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+.btn-book:hover { background: #3a5060; border-color: #3a5060; }
 
 .btn-hero {
   display: block;
