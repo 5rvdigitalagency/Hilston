@@ -350,8 +350,10 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   background: var(--dark-deep);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  overflow-y: auto;
+  padding: 80px 24px 48px;
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
@@ -371,6 +373,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   align-items: center;
   gap: 8px;
   margin-bottom: 40px;
+  width: 100%;
 }
 .mobile-nav-list li a {
   font-family: var(--font-serif);
@@ -1495,30 +1498,32 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   .footer-col h3,
   .footer-col h4 {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative;
     cursor: pointer;
     padding: 16px 0;
     margin-bottom: 0;
     user-select: none;
     -webkit-user-select: none;
+    text-align: center;
   }
   .footer-col h3::after,
   .footer-col h4::after {
     content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
     width: 8px;
     height: 8px;
     border-right: 2px solid rgba(255,255,255,0.55);
     border-bottom: 2px solid rgba(255,255,255,0.55);
-    transform: rotate(45deg);
-    transition: transform 0.25s ease;
-    flex-shrink: 0;
-    margin-top: -3px;
+    transform: translateY(-65%) rotate(45deg);
+    transition: transform 0.25s ease, top 0.25s ease;
   }
   .footer-col.is-open h3::after,
   .footer-col.is-open h4::after {
-    transform: rotate(-135deg);
-    margin-top: 3px;
+    transform: translateY(-35%) rotate(-135deg);
   }
   .footer-col ul {
     overflow: hidden;
