@@ -1020,7 +1020,9 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   grid-template-columns: 2fr 1fr 1fr 1fr;
   align-items: start;
   gap: 42px;
-  padding: 68px 60px 42px;
+  max-width: none;
+  margin: 0;
+  padding: 68px 56px 42px;
 }
 
 .footer-brand {
@@ -1069,6 +1071,9 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 
 .footer-links {
   display: contents;
+}
+.footer-col:last-of-type {
+  text-align: right;
 }
 .footer-col h4 {
   font-family: var(--font-serif);
