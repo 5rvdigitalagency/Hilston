@@ -308,7 +308,9 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 .nav-list {
   display: flex;
   justify-content: space-between;
-  padding: 0 56px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0;
   gap: 0;
 }
 .nav-list a {
