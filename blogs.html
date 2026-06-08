@@ -575,10 +575,50 @@
       <h2>Stay in the <em class="script">Loop</em></h2>
       <p>Get planning guides, trip inspiration, and seasonal updates from Hilston Park direct to your inbox.</p>
     </div>
-    <form class="newsletter-form" action="#" method="post" novalidate>
+    <form class="newsletter-form" id="blog-newsletter-form" action="#" method="post" novalidate>
       <input type="email" name="email" placeholder="Your email address" required>
       <button type="submit">Subscribe</button>
     </form>
+    <p id="blog-newsletter-msg" style="margin-top:0.75rem;font-size:0.875rem;display:none;"></p>
+    <script>
+      (function () {
+        var form = document.getElementById('blog-newsletter-form');
+        var msg = document.getElementById('blog-newsletter-msg');
+        if (!form) return;
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var email = form.querySelector('input[type=email]').value.trim();
+          if (!email) return;
+          var btn = form.querySelector('button');
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: '9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4',
+              subject: 'Newsletter Subscription — Hilston Park Blog',
+              email: email,
+              source_page: window.location.pathname
+            })
+          })
+          .then(function (r) { return r.json(); })
+          .then(function () {
+            form.style.display = 'none';
+            msg.style.color = 'var(--teal, #2a9d8f)';
+            msg.textContent = 'Thanks for subscribing!';
+            msg.style.display = 'block';
+          })
+          .catch(function () {
+            btn.disabled = false;
+            btn.textContent = 'Subscribe';
+            msg.style.color = '#e63946';
+            msg.textContent = 'Sorry, something went wrong. Please try again.';
+            msg.style.display = 'block';
+          });
+        });
+      })();
+    </script>
   </section>
 
   <!-- ===== VISIT INFO ===== -->
