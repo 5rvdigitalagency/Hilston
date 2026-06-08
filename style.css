@@ -683,7 +683,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 .choose-exp .heading-display { margin-bottom: 14px; }
 .choose-exp .section-intro {
   text-align: center;
-  color: rgba(255,255,255,0.62);
+  color: rgba(255,255,255,0.85);
   font-size: 0.88rem;
   letter-spacing: 0.06em;
   line-height: 1.7;
@@ -940,7 +940,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 .expertise-content { padding: 0 20px; }
 .expertise-content .heading-display { margin-bottom: 18px; }
 .expertise-sub {
-  color: rgba(255,255,255,0.9);
+  color: #ffffff;
   text-align: center;
   font-size: 0.9rem;
   line-height: 1.65;
@@ -1140,7 +1140,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--teal-dark);
   margin-bottom: 14px;
 }
 .testimonials-grid {
@@ -1246,7 +1246,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--white);
   margin-bottom: 10px;
 }
 
