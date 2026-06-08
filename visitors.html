@@ -12,6 +12,95 @@
   <meta name="description" content="Plan your visit to Hilston Park with guidance on stays, activities, events, and practical travel details.">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ---- UTILITY HERO ---- */
+    .utility-hero {
+      background: #e9e6df;
+      text-align: center;
+      padding: 80px 24px 72px;
+    }
+    .utility-hero .eyebrow {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin-bottom: 18px;
+    }
+    .utility-hero h1 {
+      font-family: var(--font-serif, 'Bodoni 72', Georgia, serif);
+      font-weight: normal;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      line-height: 1.15;
+      color: #36505d;
+      margin: 0 auto 20px;
+      max-width: 760px;
+    }
+    .utility-hero p {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: #6b6b6b;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    /* ---- UTILITY SECTION ---- */
+    .utility-section {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 72px 24px 96px;
+    }
+    .utility-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .utility-card {
+      background: #f4f2ee;
+      border-radius: 4px;
+      padding: 36px 32px;
+    }
+    .utility-card h2 {
+      font-family: var(--font-serif, 'Bodoni 72', Georgia, serif);
+      font-weight: normal;
+      font-size: clamp(1.3rem, 2vw, 1.7rem);
+      color: #36505d;
+      margin: 0 0 14px;
+    }
+    .utility-card p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: #6b6b6b;
+      margin: 0 0 18px;
+    }
+    .utility-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .utility-list li {
+      font-size: 0.9rem;
+      color: #6b6b6b;
+      padding: 6px 0;
+      border-bottom: 1px solid #cfcec9;
+    }
+    .utility-list li:last-child { border-bottom: none; }
+    .utility-list a { color: var(--teal-dark, #4e9484); text-decoration: none; }
+    .utility-list a:hover { text-decoration: underline; }
+    .utility-note {
+      font-size: 0.9rem;
+      color: #6b6b6b;
+      text-align: center;
+      margin: 0;
+    }
+    @media (max-width: 640px) {
+      .utility-hero { padding: 56px 20px 52px; }
+      .utility-section { padding: 48px 20px 72px; }
+      .utility-grid { grid-template-columns: 1fr; gap: 24px; }
+      .utility-card { padding: 28px 20px; }
+    }
+  </style>
   <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
