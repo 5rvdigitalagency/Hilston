@@ -274,8 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<label>Adults</label>',
                 '<div class="bkm-stepper">',
                   '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-adults" aria-label="Decrease adults">&#8722;</button>',
-                  '<span class="bkm-step-val" id="bkm-adults-val">2</span>',
-                  '<input type="hidden" id="bkm-adults" value="2">',
+                  '<input type="number" class="bkm-step-val bkm-step-editable" id="bkm-adults" value="2" min="1" max="999" inputmode="numeric" aria-label="Number of adults">',
                   '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-adults" aria-label="Increase adults">+</button>',
                 '</div>',
               '</div>',
@@ -283,8 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<label>Children</label>',
                 '<div class="bkm-stepper">',
                   '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-children" aria-label="Decrease children">&#8722;</button>',
-                  '<span class="bkm-step-val" id="bkm-children-val">0</span>',
-                  '<input type="hidden" id="bkm-children" value="0">',
+                  '<input type="number" class="bkm-step-val bkm-step-editable" id="bkm-children" value="0" min="0" max="999" inputmode="numeric" aria-label="Number of children">',
                   '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-children" aria-label="Increase children">+</button>',
                 '</div>',
               '</div>',
@@ -320,12 +318,12 @@ document.addEventListener("DOMContentLoaded", function () {
             '<p class="bkm-form-title" id="bkm-inq-title">Send us an enquiry</p>',
             '<p class="bkm-form-sub" id="bkm-inq-sub">Tell us what you&rsquo;re planning. The team responds within one working day.</p>',
             '<form class="bkm-inq-form" id="bkm-inq-form" novalidate>',
-              '<div class="bkm-field"><label for="bkm-inq-name">Your name <span class="bkm-req">*</span></label><input type="text" id="bkm-inq-name" required></div>',
-              '<div class="bkm-field"><label for="bkm-inq-email">Email <span class="bkm-req">*</span></label><input type="email" id="bkm-inq-email" required></div>',
-              '<div class="bkm-field"><label for="bkm-inq-phone">Phone number <span class="bkm-req">*</span></label><input type="tel" id="bkm-inq-phone" required></div>',
+              '<div class="bkm-field"><label for="bkm-inq-name">Your name <span class="bkm-req">*</span></label><input type="text" id="bkm-inq-name" autocomplete="name" required><span class="bkm-field-err" id="bkm-err-name"></span></div>',
+              '<div class="bkm-field"><label for="bkm-inq-email">Email <span class="bkm-req">*</span></label><input type="email" id="bkm-inq-email" autocomplete="email" required><span class="bkm-field-err" id="bkm-err-email"></span></div>',
+              '<div class="bkm-field"><label for="bkm-inq-phone">Phone number <span class="bkm-req">*</span></label><input type="tel" id="bkm-inq-phone" autocomplete="tel" required><span class="bkm-field-err" id="bkm-err-phone"></span></div>',
               '<div class="bkm-field">',
                 '<label id="bkm-inq-about-lbl">Enquiry about <span class="hcs-req">*</span></label>',
-                '<div class="hcs hcs--line" aria-labelledby="bkm-inq-about-lbl">',
+                '<div class="hcs hcs--line" id="bkm-inq-about-hcs" aria-labelledby="bkm-inq-about-lbl">',
                   '<button type="button" class="hcs-btn" aria-haspopup="listbox" aria-expanded="false">',
                     '<span class="hcs-value hcs-placeholder">Please select…</span>',
                     '<svg class="hcs-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="1 1 7 7 13 1"/></svg>',
@@ -342,14 +340,14 @@ document.addEventListener("DOMContentLoaded", function () {
                   '</ul>',
                   '<input type="hidden" id="bkm-inq-about" value="">',
                 '</div>',
+                '<span class="bkm-field-err" id="bkm-err-about"></span>',
               '</div>',
               '<div class="bkm-fields">',
                 '<div class="bkm-field">',
                   '<label>Adults</label>',
                   '<div class="bkm-stepper">',
                     '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-inq-adults" aria-label="Decrease adults">&#8722;</button>',
-                    '<span class="bkm-step-val" id="bkm-inq-adults-val">0</span>',
-                    '<input type="hidden" id="bkm-inq-adults" value="0">',
+                    '<input type="number" class="bkm-step-val bkm-step-editable" id="bkm-inq-adults" value="0" min="0" max="999" inputmode="numeric" aria-label="Number of adults">',
                     '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-inq-adults" aria-label="Increase adults">+</button>',
                   '</div>',
                 '</div>',
@@ -357,13 +355,12 @@ document.addEventListener("DOMContentLoaded", function () {
                   '<label>Children</label>',
                   '<div class="bkm-stepper">',
                     '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-inq-children" aria-label="Decrease children">&#8722;</button>',
-                    '<span class="bkm-step-val" id="bkm-inq-children-val">0</span>',
-                    '<input type="hidden" id="bkm-inq-children" value="0">',
+                    '<input type="number" class="bkm-step-val bkm-step-editable" id="bkm-inq-children" value="0" min="0" max="999" inputmode="numeric" aria-label="Number of children">',
                     '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-inq-children" aria-label="Increase children">+</button>',
                   '</div>',
                 '</div>',
               '</div>',
-              '<div class="bkm-field"><label for="bkm-inq-message">Your enquiry <span class="bkm-req">*</span></label><textarea id="bkm-inq-message" rows="4" required></textarea></div>',
+              '<div class="bkm-field"><label for="bkm-inq-message">Your enquiry <span class="bkm-req">*</span></label><textarea id="bkm-inq-message" rows="4" required></textarea><span class="bkm-field-err" id="bkm-err-message"></span></div>',
               '<input type="hidden" id="bkm-inq-context">',
               '<p class="bkm-error" id="bkm-inq-error">Please complete all required fields.</p>',
               '<button type="submit" class="bkm-btn">Send Enquiry</button>',
@@ -678,7 +675,13 @@ document.addEventListener("DOMContentLoaded", function () {
        not the rate for the specific room type selected. All rate figures are therefore
        labelled as "from" — the confirmed price for the chosen room is shown on Q-Book. */
     if (anyRateKnown) {
-      html += '<div class="bkm-sum-section">Room rate (from)</div>';
+      /* Section header: when a specific room type is selected the SC_RATES_URL still
+         returns the property's lowest rate across ALL rooms, not that room's rate.
+         Label accordingly so users aren't misled. */
+      var rateSectionLabel = (roomKey !== 'any')
+        ? 'Lowest available rate (any room, from)'
+        : 'Room rate (from)';
+      html += '<div class="bkm-sum-section">' + rateSectionLabel + '</div>';
       if (nights <= 7) {
         nightRates.forEach(function (n, idx) {
           var nd  = new Date(n.date + "T12:00:00");
@@ -694,6 +697,10 @@ document.addEventListener("DOMContentLoaded", function () {
         "from \xA3" + roomTotal.toFixed(2),
         "bkm-sum-row--subtotal"
       );
+      /* Inline notice when a specific room type is selected */
+      if (roomKey !== 'any') {
+        html += '<div class="bkm-sum-room-rate-notice">\u24D8 This is the property\u2019s lowest available starting rate \u2014 not the confirmed rate for ' + roomDef.label + '. Your exact price is shown on Q-Book after clicking Proceed.</div>';
+      }
     }
 
     /* Partial availability warning — shown when some (but not all) nights returned
@@ -725,7 +732,11 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       }
       html += '<div class="bkm-sum-footnote">Meal extras are optional \u2014 add or remove when completing your booking on Q-Book.</div>';
-      html += '<div class="bkm-sum-footnote bkm-sum-footnote--rate-note">Room rates shown are starting prices. Your exact room rate is confirmed on Q-Book.</div>';
+      html += '<div class="bkm-sum-footnote bkm-sum-footnote--rate-note">'
+        + (roomKey !== 'any'
+            ? 'Rate shown is the property\u2019s lowest starting price across all rooms \u2014 not specific to ' + roomDef.label + '. Your confirmed rate for the selected room is shown on Q-Book.'
+            : 'Room rates shown are starting prices. Your exact room rate is confirmed on Q-Book.')
+        + '</div>';
     }
 
     summaryEl.innerHTML = html;
@@ -903,7 +914,42 @@ document.addEventListener("DOMContentLoaded", function () {
     var children = document.getElementById("bkm-inq-children").value || "0";
     var msg      = document.getElementById("bkm-inq-message").value.trim();
     var ctx      = inqContext.value || "general";
-    if (!name || !email || !phone || !about || !msg || !/.+@.+\..+/.test(email)) {
+    /* Per-field validation */
+    var valid = true;
+    function fieldErr(errId, errMsg) {
+      var el = document.getElementById(errId);
+      if (!el) { return; }
+      el.textContent = errMsg;
+      el.classList.toggle("visible", !!errMsg);
+    }
+    function setInvalid(inputId, invalid) {
+      var el = document.getElementById(inputId);
+      if (el) { el.classList.toggle("bkm-invalid", invalid); }
+    }
+    var nameOk = name.length >= 2 && /^[a-zA-Z\s'\-\.]+$/.test(name);
+    fieldErr("bkm-err-name", nameOk ? "" : "Please enter your full name (letters only).");
+    setInvalid("bkm-inq-name", !nameOk);
+
+    var emailOk = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email);
+    fieldErr("bkm-err-email", emailOk ? "" : "Please enter a valid email address.");
+    setInvalid("bkm-inq-email", !emailOk);
+
+    var phoneDigits = phone.replace(/\D/g, "");
+    var phoneOk = phoneDigits.length >= 7 && phoneDigits.length <= 15 && /^[\+\d][\d\s\-\(\)\.]+$/.test(phone);
+    fieldErr("bkm-err-phone", phoneOk ? "" : "Please enter a valid phone number (digits only).");
+    setInvalid("bkm-inq-phone", !phoneOk);
+
+    var aboutOk = !!about;
+    fieldErr("bkm-err-about", aboutOk ? "" : "Please select what your enquiry is about.");
+    var hcsAbout = document.getElementById("bkm-inq-about-hcs");
+    if (hcsAbout) { hcsAbout.classList.toggle("hcs--invalid", !aboutOk); }
+
+    var msgOk = msg.length >= 5;
+    fieldErr("bkm-err-message", msgOk ? "" : "Please describe your enquiry (at least 5 characters).");
+    setInvalid("bkm-inq-message", !msgOk);
+
+    valid = nameOk && emailOk && phoneOk && aboutOk && msgOk;
+    if (!valid) {
       inqErr.classList.add("visible");
       return;
     }
@@ -1007,24 +1053,94 @@ document.addEventListener("DOMContentLoaded", function () {
     e.stopPropagation();
     var targetId = btn.getAttribute("data-target");
     var inp = document.getElementById(targetId);
-    var valEl = document.getElementById(targetId + "-val");
-    if (!inp || !valEl) { return; }
-    var val = parseInt(inp.value, 10) || 0;
-    var isAdults = (targetId === "bkm-adults");
-    var min = isAdults ? 1 : 0;
-    var max = 200;
+    if (!inp) { return; }
+    var val = parseInt(inp.value, 10);
+    if (isNaN(val)) { val = 0; }
+    var min = (targetId === "bkm-adults") ? 1 : 0;
+    var max = 999;
     if (btn.classList.contains("bkm-step-inc")) {
       val = Math.min(val + 1, max);
     } else {
       val = Math.max(val - 1, min);
     }
     inp.value = val;
-    valEl.textContent = val;
     /* Re-evaluate capacity hint whenever guest counts change */
     if (targetId === "bkm-adults" || targetId === "bkm-children") {
       updateCapacityHint();
     }
   });
+
+  /* Editable steppers: allow only whole numbers; clamp on blur */
+  document.addEventListener("input", function (e) {
+    if (!e.target.classList.contains("bkm-step-editable")) { return; }
+    var raw = e.target.value.replace(/[^0-9]/g, "");
+    if (e.target.value !== raw) { e.target.value = raw; }
+  });
+  document.addEventListener("blur", function (e) {
+    if (!e.target.classList.contains("bkm-step-editable")) { return; }
+    var id  = e.target.id;
+    var min = (id === "bkm-adults") ? 1 : 0;
+    var val = parseInt(e.target.value, 10);
+    if (isNaN(val) || val < min) { val = min; }
+    if (val > 999) { val = 999; }
+    e.target.value = val;
+    if (id === "bkm-adults" || id === "bkm-children") { updateCapacityHint(); }
+  }, true);
+
+  /* Live per-field validation on blur for enquiry form */
+  (function () {
+    function liveValidate(id) {
+      var el = document.getElementById(id);
+      if (!el) { return; }
+      var val = el.value.trim ? el.value.trim() : el.value;
+      if (!val) {
+        el.classList.remove("bkm-invalid");
+        var errKey = id.replace("bkm-inq-", "");
+        var errEl = document.getElementById("bkm-err-" + errKey);
+        if (errEl) { errEl.classList.remove("visible"); }
+        return;
+      }
+      var ok = true; var msg = "";
+      if (id === "bkm-inq-name") {
+        ok = val.length >= 2 && /^[a-zA-Z\s'\-\.]+$/.test(val);
+        msg = ok ? "" : "Please enter your full name (letters only).";
+      } else if (id === "bkm-inq-email") {
+        ok = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(val);
+        msg = ok ? "" : "Please enter a valid email address.";
+      } else if (id === "bkm-inq-phone") {
+        var digits = val.replace(/\D/g, "");
+        ok = digits.length >= 7 && digits.length <= 15 && /^[\+\d][\d\s\-\(\)\.]+$/.test(val);
+        msg = ok ? "" : "Please enter a valid phone number (digits only).";
+      } else if (id === "bkm-inq-message") {
+        ok = val.length >= 5;
+        msg = ok ? "" : "Please describe your enquiry.";
+      }
+      var errKey = id.replace("bkm-inq-", "");
+      var errEl = document.getElementById("bkm-err-" + errKey);
+      if (errEl) { errEl.textContent = msg; errEl.classList.toggle("visible", !ok); }
+      el.classList.toggle("bkm-invalid", !ok);
+    }
+    ["bkm-inq-name", "bkm-inq-email", "bkm-inq-phone", "bkm-inq-message"].forEach(function (fid) {
+      document.addEventListener("blur",  function (e) { if (e.target.id === fid) { liveValidate(fid); } }, true);
+      document.addEventListener("focus", function (e) {
+        if (e.target.id !== fid) { return; }
+        var errKey = fid.replace("bkm-inq-", "");
+        var errEl = document.getElementById("bkm-err-" + errKey);
+        if (errEl) { errEl.classList.remove("visible"); }
+        e.target.classList.remove("bkm-invalid");
+      }, true);
+    });
+    /* Clear "Enquiry about" error as soon as the HCS fires its change event */
+    document.addEventListener("change", function (e) {
+      if (e.target.id !== "bkm-inq-about") { return; }
+      var errEl  = document.getElementById("bkm-err-about");
+      var hcsEl  = document.getElementById("bkm-inq-about-hcs");
+      if (e.target.value) {
+        if (errEl)  { errEl.textContent = ""; errEl.classList.remove("visible"); }
+        if (hcsEl)  { hcsEl.classList.remove("hcs--invalid"); }
+      }
+    });
+  }());
 
   /* =========================================================
      INSTAGRAM MARQUEE  —  Behold.so JSON API + local fallback

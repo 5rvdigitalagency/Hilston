@@ -307,8 +307,9 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 }
 .nav-list {
   display: flex;
-  justify-content: center;
-  gap: clamp(20px, 4vw, 60px);
+  justify-content: space-between;
+  padding: 0 56px;
+  gap: 0;
 }
 .nav-list a {
   color: var(--white);
@@ -1856,6 +1857,28 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   display: flex; align-items: center; justify-content: center;
   min-width: 36px;
 }
+/* When .bkm-step-val is used on an <input type="number"> */
+input.bkm-step-val {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  background: none;
+  border-top: none;
+  border-bottom: none;
+  outline: none;
+  font-family: var(--font-sans);
+  width: 54px;
+  cursor: text;
+}
+input.bkm-step-val:focus {
+  border-bottom: none;
+  outline: none;
+}
+input.bkm-step-val::-webkit-inner-spin-button,
+input.bkm-step-val::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 .bkm-error {
   font-size: 0.73rem; color: #b03030;
@@ -1863,6 +1886,18 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   letter-spacing: 0.01em;
 }
 .bkm-error.visible { display: block; }
+
+.bkm-field-err {
+  font-size: 0.71rem;
+  color: #b03030;
+  display: none;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.bkm-field-err.visible { display: block; }
+.bkm-inq-form input.bkm-invalid,
+.bkm-inq-form textarea.bkm-invalid { border-bottom-color: #b03030; }
+.bkm-inq-form .hcs--invalid .hcs-btn { border-bottom-color: #b03030; }
 
 .bkm-btn {
   margin-top: 36px;
@@ -2427,6 +2462,19 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   font-weight: 500;
   border-top: none;
   padding-top: 4px;
+}
+
+/* Inline notice shown when a specific room type is selected but the rate displayed
+   is the property's lowest available (not that room's confirmed rate) */
+.bkm-sum-room-rate-notice {
+  margin: 4px 16px 8px;
+  padding: 8px 12px;
+  background: #fff8e1;
+  border-left: 3px solid #e6a817;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: #6b4c00;
 }
 
 /* ---- Capacity hint (config form, below acctype select) ---- */
