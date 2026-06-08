@@ -1020,8 +1020,8 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   grid-template-columns: 2fr 1fr 1fr 1fr;
   align-items: start;
   gap: 42px;
-  max-width: none;
-  margin: 0;
+  max-width: 1480px;
+  margin: 0 auto;
   padding: 68px 56px 42px;
 }
 
