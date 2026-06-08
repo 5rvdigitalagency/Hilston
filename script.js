@@ -1320,6 +1320,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  /* =====================================================
+     FOOTER COLLAPSIBLE COLUMNS (mobile only)
+     ===================================================== */
+  document.querySelectorAll(".footer-col").forEach(function (col) {
+    var heading = col.querySelector("h3, h4");
+    if (!heading) return;
+    heading.addEventListener("click", function () {
+      if (window.innerWidth > 560) return;
+      col.classList.toggle("is-open");
+    });
+  });
+
 }); /* end DOMContentLoaded */
 
 /* =====================================================

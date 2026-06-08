@@ -1485,9 +1485,54 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   .nav-list a { font-size: 0.7rem; letter-spacing: 0.14em; }
   .logo-name { font-size: 1.3rem; }
   .header-logo img { height: 50px; }
-  .footer-grid { padding: 36px 20px 30px; gap: 36px; grid-template-columns: 1fr; }
-  .footer-brand { align-items: center; text-align: center; }
+  .footer-grid { padding: 36px 20px 30px; gap: 0; grid-template-columns: 1fr; }
+  .footer-brand { align-items: center; text-align: center; margin-bottom: 28px; }
   .social-icons { justify-content: center; }
+  /* Collapsible footer columns */
+  .footer-col {
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+  }
+  .footer-col h3,
+  .footer-col h4 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 16px 0;
+    margin-bottom: 0;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .footer-col h3::after,
+  .footer-col h4::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid rgba(255,255,255,0.55);
+    border-bottom: 2px solid rgba(255,255,255,0.55);
+    transform: rotate(45deg);
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+    margin-top: -3px;
+  }
+  .footer-col.is-open h3::after,
+  .footer-col.is-open h4::after {
+    transform: rotate(-135deg);
+    margin-top: 3px;
+  }
+  .footer-col ul {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.25s ease;
+    padding-bottom: 0;
+  }
+  .footer-col.is-open ul {
+    max-height: 320px;
+    opacity: 1;
+    padding-bottom: 16px;
+  }
+  .footer-meta { margin-top: 24px; }
   /* Instagram */
   .insta-strip { padding-top: 56px; }
   .insta-header { padding: 0 20px 30px; }
