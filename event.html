@@ -650,6 +650,49 @@
       </div>
     </div>
   </section>
+  <script>
+    (function () {
+      var wrap = document.querySelector('.newsletter-band .newsletter-form');
+      if (!wrap) return;
+      var emailInput = wrap.querySelector('input[type=email]');
+      var btn = wrap.querySelector('button');
+      if (!emailInput || !btn) return;
+      var msg = document.createElement('p');
+      msg.style.cssText = 'margin-top:0.75rem;font-size:0.875rem;display:none;';
+      wrap.parentNode.insertBefore(msg, wrap.nextSibling);
+      btn.addEventListener('click', function () {
+        var email = emailInput.value.trim();
+        if (!email) { emailInput.style.outline = '2px solid #e63946'; return; }
+        emailInput.style.outline = '';
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: '9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4',
+            subject: 'Newsletter Subscription — Events',
+            email: email,
+            source_page: window.location.pathname
+          })
+        })
+        .then(function (r) { return r.json(); })
+        .then(function () {
+          wrap.style.display = 'none';
+          msg.style.color = 'var(--teal, #2a9d8f)';
+          msg.textContent = 'Thanks for subscribing!';
+          msg.style.display = 'block';
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+          msg.style.color = '#e63946';
+          msg.textContent = 'Sorry, something went wrong. Please try again.';
+          msg.style.display = 'block';
+        });
+      });
+    })();
+  </script>
 
   <!-- FAQ -->
   <section class="faq">

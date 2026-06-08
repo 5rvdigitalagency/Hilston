@@ -648,10 +648,51 @@
   <section class="newsletter-band">
     <h2>Plan Your Educational Trip at Hilston&nbsp;Park</h2>
     <p>We take the pressure out of school residentials in Wales by providing adapted support for children and managing all catering in-house.</p>
-    <form class="newsletter-form" action="contact.html" method="get" onsubmit="event.preventDefault();window.location='contact.html#contact-form';">
-      <input class="newsletter-input" type="email" name="email" placeholder="School or organisation email address" required>
+    <form class="newsletter-form" id="edu-enquiry-form" action="#" method="post" novalidate>
+      <input class="newsletter-input" type="email" id="edu-enquiry-email" name="email" placeholder="School or organisation email address" required>
       <button class="newsletter-btn" type="submit">Enquire About School Trips</button>
     </form>
+    <p id="edu-enquiry-msg" style="margin-top:0.75rem;font-size:0.875rem;display:none;"></p>
+    <script>
+      (function () {
+        var form = document.getElementById('edu-enquiry-form');
+        var msg = document.getElementById('edu-enquiry-msg');
+        if (!form) return;
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var email = document.getElementById('edu-enquiry-email').value.trim();
+          if (!email) return;
+          var btn = form.querySelector('button');
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: '9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4',
+              subject: 'School Trip Enquiry — Hilston Park',
+              email: email,
+              message: 'School trip enquiry submitted from the Educational Trips page.',
+              source_page: window.location.pathname
+            })
+          })
+          .then(function (r) { return r.json(); })
+          .then(function () {
+            form.style.display = 'none';
+            msg.style.color = 'var(--teal, #2a9d8f)';
+            msg.textContent = "Thanks! We'll be in touch shortly.";
+            msg.style.display = 'block';
+          })
+          .catch(function () {
+            btn.disabled = false;
+            btn.textContent = 'Enquire About School Trips';
+            msg.style.color = '#e63946';
+            msg.textContent = 'Sorry, something went wrong. Please email info@hilstonpark.co.uk directly.';
+            msg.style.display = 'block';
+          });
+        });
+      })();
+    </script>
   </section>
 
   <!-- FAQ -->
