@@ -1062,6 +1062,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tile.target = "_blank";
         tile.rel    = "noopener noreferrer";
         tile.setAttribute("aria-label", item.alt || "View on Instagram");
+        if (hidden) tile.tabIndex = -1;
         var img = document.createElement("img");
         img.src     = item.src;
         img.alt     = item.alt || "";
