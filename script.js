@@ -1324,7 +1324,7 @@ document.addEventListener("DOMContentLoaded", function () {
      FOOTER COLLAPSIBLE COLUMNS (mobile only)
      ===================================================== */
   document.querySelectorAll(".footer-col").forEach(function (col) {
-    var heading = col.querySelector("h3, h4");
+    var heading = col.querySelector("h2, h3, h4");
     if (!heading) return;
     heading.addEventListener("click", function () {
       if (window.innerWidth > 560) return;
@@ -1374,11 +1374,11 @@ document.addEventListener("DOMContentLoaded", function () {
           '</div>',
           '<div class="cookie-pref-row">',
             '<div><strong>Analytics Cookies</strong><p>Help us understand how visitors interact with our website so we can improve it.</p></div>',
-            '<label class="cookie-toggle"><input type="checkbox" id="pref-analytics" checked><span class="cookie-toggle-slider"></span></label>',
+            '<label class="cookie-toggle"><input type="checkbox" id="pref-analytics" aria-label="Analytics Cookies" checked><span class="cookie-toggle-slider"></span></label>',
           '</div>',
           '<div class="cookie-pref-row">',
             '<div><strong>Marketing Cookies</strong><p>Allow us to show relevant content and measure the effectiveness of our campaigns.</p></div>',
-            '<label class="cookie-toggle"><input type="checkbox" id="pref-marketing"><span class="cookie-toggle-slider"></span></label>',
+            '<label class="cookie-toggle"><input type="checkbox" id="pref-marketing" aria-label="Marketing Cookies"><span class="cookie-toggle-slider"></span></label>',
           '</div>',
         '</div>',
         '<div class="cookie-modal-actions">',

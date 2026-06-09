@@ -2311,8 +2311,8 @@ input.bkm-step-val::-webkit-outer-spin-button {
    BOOK NOW — subtle pulse on desktop idle
    ===================================================== */
 @keyframes btn-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(54,80,93,0); }
-  50%       { box-shadow: 0 0 0 6px rgba(54,80,93,0.22); }
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.04); }
 }
 .btn-book {
   animation: btn-pulse 3.5s ease-in-out 4s infinite;
@@ -2481,8 +2481,7 @@ input.bkm-step-val::-webkit-outer-spin-button {
   }
   .footer-brand { grid-column: 1 / -1; align-items: center; text-align: center; }
   .footer-col { text-align: center; }
-  .footer-col h3,
-  .footer-col h4 { margin-bottom: 14px; }
+  .footer-col h2 { margin-bottom: 14px; }
   .footer-col ul li { padding: 4px 0; }
   .social-icons { justify-content: center; }
   .footer-meta {
@@ -3269,7 +3268,7 @@ span.flatpickr-weekday {
   opacity: 0;
   pointer-events: none;
   cursor: pointer;
-  transition: bottom 0.35s ease;
+  transition: transform 0.35s ease;
 }
 .wa-btn.is-visible {
   opacity: 1;
@@ -3278,12 +3277,15 @@ span.flatpickr-weekday {
 }
 /* Shift above consent banner when it's showing */
 body:has(#hp-cookie-banner.hpcc-show) .wa-btn {
-  bottom: 150px;
+  transform: translateY(-122px);
 }
 .wa-btn:hover {
   background: #1ebe5d;
   box-shadow: 0 6px 24px rgba(0,0,0,0.28);
   transform: scale(1.07) translateY(-2px);
+}
+body:has(#hp-cookie-banner.hpcc-show) .wa-btn:hover {
+  transform: scale(1.07) translateY(-124px);
 }
 .wa-btn svg {
   width: 30px;
@@ -3325,5 +3327,5 @@ body:has(#hp-cookie-banner.hpcc-show) .wa-btn {
   .wa-btn { bottom: 20px; right: 16px; width: 52px; height: 52px; }
   .wa-btn svg { width: 26px; height: 26px; }
   .wa-tooltip { display: none; }
-  body:has(#hp-cookie-banner.hpcc-show) .wa-btn { bottom: 145px; }
+  body:has(#hp-cookie-banner.hpcc-show) .wa-btn { transform: translateY(-125px); }
 }

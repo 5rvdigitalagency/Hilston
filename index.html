@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Preconnect to key third-party origins (LCP / dynamic content) -->
+  <link rel="preconnect" href="https://feeds.behold.so">
+  <link rel="preconnect" href="https://api.open-meteo.com">
+  <!-- LCP image: preload the first hero so the browser fetches it at highest priority -->
+  <link rel="preload" as="image" href="images/hp-hero-schools.jpg" fetchpriority="high">
   <!-- Cookie Consent — loads before GTM to initialise Consent Mode v2 -->
   <link rel="stylesheet" href="consent.css?v=5">
   <script src="consent.js"></script>
@@ -20,7 +25,8 @@
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <title>Hilston Park | Outdoor Activity Centre &amp; Residential Stays in Wales</title>
   <meta name="description" content="Hilston Park is a countryside activity centre in Wales offering residential school trips, outdoor team-building events, and private stays in the Wye Valley for over 50 years.">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"></noscript>
   <link rel="stylesheet" href="style.css?v=5">
   <style>
     /* Plan Your Visit */
@@ -58,7 +64,8 @@
       .visit-us, .faq { padding-left: 16px !important; padding-right: 16px !important; }
     }
   </style>
-  <link rel="stylesheet" href="accessibility.css?v=2">
+  <link rel="preload" href="accessibility.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="accessibility.css?v=2"></noscript>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -77,10 +84,10 @@
     <header class="site-header">
       <div class="header-inner">
         <div class="header-logo">
-          <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+          <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park" width="315" height="60"></a>
         </div>
         <div class="header-actions">
-          <a href="javascript:void(0)" class="btn-book">BOOK NOW</a>
+          <a href="contact.html" class="btn-book">BOOK NOW</a>
           <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
@@ -118,7 +125,7 @@
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
-        <li class="mobile-nav-book-item"><a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK NOW</a></li>
+        <li class="mobile-nav-book-item"><a href="contact.html" class="btn-book mobile-nav-book">BOOK NOW</a></li>
       </ul>
     </nav>
   </div>
@@ -129,7 +136,7 @@
       <div class="hero-bg" style="background-image:url(images/hp-hero-schools.jpg)"></div>
       <div class="hero-overlay"></div>
       <div class="hero-frame">
-        <a href="educational.html" class="hero-label">Schools &amp; Youth Groups</a>
+        <a href="contact.html" class="hero-label">Schools &amp; Youth Groups</a>
       </div>
     </article>
     <article class="hero-card">
@@ -218,7 +225,7 @@
               <li>On-site residential accommodation with full catering</li>
               <li>DBS-checked, SEN-experienced staff</li>
             </ul>
-            <a href="javascript:void(0)" class="btn-hero" data-inquire>PLAN A SCHOOL TRIP</a>
+            <a href="educational.html" class="btn-hero" data-inquire>PLAN A SCHOOL TRIP</a>
           </div>
         </div>
       </article>
@@ -235,7 +242,7 @@
               <li>Sleeps groups from 9 to 130+ guests</li>
               <li>1 to 7+ night residential stays</li>
             </ul>
-            <a href="javascript:void(0)" class="btn-hero" data-booking-type="stay">CHECK AVAILABILITY</a>
+            <a href="accomodation.html" class="btn-hero" data-booking-type="stay">CHECK AVAILABILITY</a>
           </div>
         </div>
       </article>
@@ -252,7 +259,7 @@
               <li>Exclusive private estate hire</li>
               <li>Flexible half-day to multi-day formats</li>
             </ul>
-            <a href="javascript:void(0)" class="btn-hero" data-booking-type="event">PLAN AN EVENT</a>
+            <a href="event.html" class="btn-hero" data-booking-type="event">PLAN AN EVENT</a>
           </div>
         </div>
       </article>
@@ -275,7 +282,7 @@
           <li>Shared Residential Layout</li>
           <li>Close access to activities and dining</li>
         </ul>
-        <a href="javascript:void(0)" class="btn-pill" data-inquire>BOOK NOW</a>
+        <a href="contact.html" class="btn-pill" data-inquire>BOOK NOW</a>
       </div>
     </article>
 
@@ -289,7 +296,7 @@
           <li>Smaller Group Setup</li>
           <li>Quiet, Self-Contained Environment</li>
         </ul>
-        <a href="javascript:void(0)" class="btn-pill" data-booking-type="stay">BOOK NOW</a>
+        <a href="accomodation.html" class="btn-pill" data-booking-type="stay">BOOK NOW</a>
       </div>
     </article>
 
@@ -303,7 +310,7 @@
           <li>En-Suite + Shared Bathrooms</li>
           <li>Private Standalone Building within the Estate Grounds</li>
         </ul>
-        <a href="javascript:void(0)" class="btn-pill" data-booking-type="stay">BOOK NOW</a>
+        <a href="accomodation.html" class="btn-pill" data-booking-type="stay">BOOK NOW</a>
       </div>
     </article>
   </section>
@@ -432,7 +439,7 @@
         </div>
         <h3>When to Visit</h3>
         <p>Hilston Park welcomes guests year-round, offering summer outdoor experiences with longer days and winter stays focused on calm indoor and group activities.</p>
-        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
+        <a href="contact.html" class="btn-pill" data-inquire>ENQUIRE NOW</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -442,7 +449,7 @@
         </div>
         <h3>Getting Here</h3>
         <p>Located near Monmouth in Wales, Hilston Park is easily accessible by road, with travel support available for school and group organisers if required.</p>
-        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">LEARN MORE</a>
+        <a href="https://www.google.com/maps/place/Newcastle,+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">Get Directions</a>
       </div>
       <div class="visit-card">
         <div class="visit-icon">
@@ -452,7 +459,7 @@
         </div>
         <h3>Get in Touch</h3>
         <p>Whether you&#8217;re a school, corporate team, or private group, our team is ready to help you plan and arrange your visit.</p>
-        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
+        <a href="contact.html" class="btn-pill" data-inquire>ENQUIRE NOW</a>
       </div>
     </div>
   </section>
@@ -531,7 +538,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-crest">
-          <img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park">
+          <img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park" width="315" height="60">
         </div>
         <address>
           Newcastle, Monmouth,<br>
@@ -546,7 +553,7 @@
       </div>
 
       <div class="footer-col">
-        <h3>Home</h3>
+        <h2>Home</h2>
         <ul>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -555,7 +562,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h3>Visitors</h3>
+        <h2>Visitors</h2>
         <ul>
           <li><a href="visitors.html">Visitor Guide</a></li>
           <li><a href="educational.html">Educational</a></li>
@@ -564,7 +571,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h3>Legal</h3>
+        <h2>Legal</h2>
         <ul>
           <li><a href="legal.html">Safeguarding &amp; Child<br>Protection Policy</a></li>
           <li><a href="terms.html">Terms &amp; Conditions</a></li>
@@ -587,7 +594,6 @@
 <script src="script.js?v=4"></script>
 
   <script src="accessibility.js"></script>
-  <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key -->
-  <script src="//code.tidio.co/PLACEHOLDER_KEY.js" async></script>
+  <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key before going live -->
 </body>
 </html>
