@@ -545,6 +545,11 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   justify-content: center;
 }
 /* scalable background layer — now an <img> for LCP discoverability */
+.hero-card > picture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
 .hero-bg {
   position: absolute;
   inset: 0;
