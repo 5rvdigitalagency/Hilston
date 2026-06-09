@@ -1279,6 +1279,31 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   text-transform: uppercase;
   color: var(--text-muted);
 }
+.testimonials-cta {
+  margin-top: 48px;
+  text-align: center;
+}
+.btn-google-reviews {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 40px;
+  background: var(--white);
+  color: var(--text);
+  border: 2px solid var(--border);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.22s, background 0.22s, color 0.22s;
+}
+.btn-google-reviews:hover { border-color: var(--teal); background: var(--teal); color: var(--white); }
+.btn-google-reviews svg { transition: fill 0.22s; }
+.btn-google-reviews:hover svg path { fill: #fff; }
+@media (max-width: 480px) {
+  .btn-google-reviews { width: 100%; justify-content: center; }
+}
 
 /* =====================================================
    INSTAGRAM STRIP
