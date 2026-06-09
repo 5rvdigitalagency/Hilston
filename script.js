@@ -1182,7 +1182,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var img = document.createElement("img");
         img.src     = item.src;
         img.alt     = item.alt || "";
-        img.loading = "eager";
+        img.loading = "lazy";
         img.decoding = "async";
         tile.appendChild(img);
         set.appendChild(tile);
@@ -1232,7 +1232,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    /* Fetch with a 5-second timeout; fall back to local images on any failure */
+    function startInstaFetch() {
     var ctrl  = typeof AbortController !== "undefined" ? new AbortController() : null;
     var timer = ctrl ? setTimeout(function() { ctrl.abort(); }, 5000) : null;
 
@@ -1266,6 +1266,16 @@ document.addEventListener("DOMContentLoaded", function () {
         if (timer) clearTimeout(timer);
         startMarquee(INSTA_FALLBACK);
       });
+    }
+
+    /* Only start fetch when Instagram section scrolls into view */
+    var instaSection = instaInner.closest("section") || instaInner.parentElement;
+    if ("IntersectionObserver" in window) {
+      var instaObs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) { instaObs.disconnect(); startInstaFetch(); }
+      }, { rootMargin: "300px" });
+      instaObs.observe(instaSection);
+    } else { startInstaFetch(); }
   }
 
   /* =========================================================
