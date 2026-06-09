@@ -3272,10 +3272,6 @@ span.flatpickr-weekday {
 /* =====================================================
    WHATSAPP FLOATING BUTTON
    ===================================================== */
-@keyframes wa-pop-in {
-  from { opacity: 0; transform: scale(0.7) translateY(12px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
-}
 .wa-btn {
   position: fixed;
   bottom: 28px;
@@ -3292,14 +3288,15 @@ span.flatpickr-weekday {
   box-shadow: 0 4px 18px rgba(0,0,0,0.22);
   text-decoration: none;
   opacity: 0;
+  transform: scale(0.7) translateY(12px);
   pointer-events: none;
   cursor: pointer;
-  transition: transform 0.35s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 .wa-btn.is-visible {
   opacity: 1;
+  transform: scale(1) translateY(0);
   pointer-events: auto;
-  animation: wa-pop-in 0.4s ease forwards;
 }
 /* Shift above consent banner when it's showing */
 body:has(#hp-cookie-banner.hpcc-show) .wa-btn {
