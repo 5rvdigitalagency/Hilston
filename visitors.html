@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Cookie Consent — loads before GTM to initialise Consent Mode v2 -->
+  <link rel="stylesheet" href="consent.css">
+  <script src="consent.js"></script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TDVPHZJJ');</script>
+  <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -104,6 +114,10 @@
   <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDVPHZJJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 <div class="site-wrap">
 
   <!-- ===== STICKY SHELL (header + nav) ===== -->
@@ -116,7 +130,7 @@
           <a href="index.html"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
         </div>
         <div class="header-actions">
-          <a href="javascript:void(0)" class="btn-book">BOOK NOW</a>
+          <a href="javascript:void(0)" class="btn-book">BOOK / ENQUIRY</a>
           <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
@@ -131,7 +145,7 @@
       <ul class="nav-list">
         <li><a href="about.html">ABOUT</a></li>
         <li><a href="educational.html">EDUCATION</a></li>
-        <li><a href="accomodation.html">PRIVATE STAY</a></li>
+        <li><a href="accomodation.html">ACCOMMODATION</a></li>
         <li><a href="event.html">EVENTS</a></li>
         <li><a href="gallery.html">GALLERY</a></li>
         <li><a href="contact.html">CONTACT</a></li>
@@ -149,12 +163,12 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="educational.html">Education</a></li>
-        <li><a href="accomodation.html">Private Stay</a></li>
+        <li><a href="accomodation.html">Accommodation</a></li>
         <li><a href="event.html">Events</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="blogs.html">Blog</a></li>
-        <li class="mobile-nav-book-item"><a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK NOW</a></li>
+        <li class="mobile-nav-book-item"><a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK / ENQUIRY</a></li>
       </ul>
     </nav>
   </div>
@@ -224,7 +238,7 @@
           <li><a href="visitors.html">Visitor Guide</a></li>
           <li><a href="educational.html">Educational</a></li>
           <li><a href="event.html">Events</a></li>
-          <li><a href="accomodation.html">Private Stay</a></li>
+          <li><a href="accomodation.html">Accommodation</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -233,6 +247,7 @@
           <li><a href="legal.html">Safeguarding &amp; Child<br>Protection Policy</a></li>
           <li><a href="terms.html">Terms &amp; Conditions</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="#" class="cookie-pref-link" onclick="if(window.hilstonConsent){window.hilstonConsent.open();}return false;">Cookie Preferences</a></li>
         </ul>
       </div>
 
