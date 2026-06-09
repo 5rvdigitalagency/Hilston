@@ -41,35 +41,28 @@
 }
 
 /* ----- COLORBLIND / VISION FILTER CLASSES ----- */
-/* SVG filter definitions are injected by accessibility.js into <body>.
-   We filter <body> (not <html>) to avoid breaking position:fixed stacking. */
+/* Filters are applied to #a11y-page-wrap (injected by accessibility.js),
+   NOT to <body>. Applying filter to <body> creates a new containing block
+   for position:fixed descendants, which breaks the FAB, booking modal,
+   cookie banner etc. The wrap sits inside <body> but the FAB is a sibling
+   outside it, so the FAB's position:fixed stays viewport-relative. */
 
-html.a11y-deuteranopia  body { filter: url(#a11y-deuteranopia-filter); }
-html.a11y-protanopia    body { filter: url(#a11y-protanopia-filter); }
-html.a11y-tritanopia    body { filter: url(#a11y-tritanopia-filter); }
-html.a11y-achromatopsia body { filter: url(#a11y-achromatopsia-filter); }
+#a11y-page-wrap { filter: none; } /* establish layer; overridden below */
 
-html.a11y-invert        body { filter: invert(1) hue-rotate(180deg); }
+html.a11y-deuteranopia  #a11y-page-wrap { filter: url(#a11y-deuteranopia-filter); }
+html.a11y-protanopia    #a11y-page-wrap { filter: url(#a11y-protanopia-filter); }
+html.a11y-tritanopia    #a11y-page-wrap { filter: url(#a11y-tritanopia-filter); }
+html.a11y-achromatopsia #a11y-page-wrap { filter: url(#a11y-achromatopsia-filter); }
+
+html.a11y-invert        #a11y-page-wrap { filter: invert(1) hue-rotate(180deg); }
 
 /* Combined: invert + colorblind */
-html.a11y-invert.a11y-deuteranopia  body { filter: invert(1) hue-rotate(180deg) url(#a11y-deuteranopia-filter); }
-html.a11y-invert.a11y-protanopia    body { filter: invert(1) hue-rotate(180deg) url(#a11y-protanopia-filter); }
-html.a11y-invert.a11y-tritanopia    body { filter: invert(1) hue-rotate(180deg) url(#a11y-tritanopia-filter); }
-html.a11y-invert.a11y-achromatopsia body { filter: invert(1) hue-rotate(180deg) url(#a11y-achromatopsia-filter); }
-
-/* Re-normalise the accessibility toolbar itself when body is filtered
-   so the controls stay readable in all modes */
-html.a11y-invert #a11y-fab,
-html.a11y-deuteranopia  #a11y-fab,
-html.a11y-protanopia    #a11y-fab,
-html.a11y-tritanopia    #a11y-fab,
-html.a11y-achromatopsia #a11y-fab {
-  filter: none !important;
-}
-html.a11y-invert #a11y-fab .a11y-panel {
-  /* re-invert the panel so it renders in normal colours */
-  filter: invert(1) hue-rotate(180deg);
-}
+html.a11y-invert.a11y-deuteranopia  #a11y-page-wrap { filter: invert(1) hue-rotate(180deg) url(#a11y-deuteranopia-filter); }
+html.a11y-invert.a11y-protanopia    #a11y-page-wrap { filter: invert(1) hue-rotate(180deg) url(#a11y-protanopia-filter); }
+html.a11y-invert.a11y-tritanopia    #a11y-page-wrap { filter: invert(1) hue-rotate(180deg) url(#a11y-tritanopia-filter); }
+html.a11y-invert.a11y-achromatopsia #a11y-page-wrap { filter: invert(1) hue-rotate(180deg) url(#a11y-achromatopsia-filter); }
+/* #a11y-fab lives outside #a11y-page-wrap so it is never inside the filtered
+   subtree — no re-normalisation rules are needed. */
 
 /* ----- ACCESSIBILITY TOOLBAR WIDGET ----- */
 .a11y-fab {
@@ -80,6 +73,11 @@ html.a11y-invert #a11y-fab .a11y-panel {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  transition: bottom 0.35s ease;
+}
+/* Shift above consent banner when it's showing */
+body:has(#hp-cookie-banner.hpcc-show) .a11y-fab {
+  bottom: 146px;
 }
 
 /* The circular trigger button */

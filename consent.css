@@ -9,7 +9,7 @@
   position: fixed;
   bottom: 24px;
   left: 24px;
-  z-index: 9000;
+  z-index: 100000;
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -21,8 +21,14 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
-  transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease, bottom 0.35s ease;
   line-height: 1;
+}
+/* Cookie FAB is hidden while the banner itself is showing (redundant UI) */
+#hp-cookie-banner.hpcc-show ~ #hp-cookie-fab,
+body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
+  opacity: 0;
+  pointer-events: none;
 }
 #hp-cookie-fab:hover {
   background: #2f6358;
@@ -40,7 +46,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 9100;
+  z-index: 100001;
   background: #fff;
   border-top: 3px solid #3c7a6c;
   box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.14);
@@ -154,7 +160,7 @@
 #hp-cookie-modal {
   position: fixed;
   inset: 0;
-  z-index: 9200;
+  z-index: 100002;
   display: flex;
   align-items: center;
   justify-content: center;

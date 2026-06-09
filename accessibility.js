@@ -134,19 +134,19 @@
         '<div class="a11y-section">',
           '<span class="a11y-section-label" id="a11y-cb-label">Colour Vision</span>',
           '<button class="a11y-cb-none active" id="a11y-cb-none" data-mode="none" aria-pressed="true" aria-label="No colour filter \u2014 normal vision (currently active)">',
-            '&#10003; No filter \u2014 normal vision',
+            '<span aria-hidden="true">&#10003; </span>No colour filter \u2014 normal vision',
           '</button>',
           '<div class="a11y-cb-grid" role="group" aria-labelledby="a11y-cb-label">',
-            '<button class="a11y-cb-btn" data-mode="deuteranopia" aria-pressed="false" aria-label="Deuteranopia: red-green colour blindness simulation">Deuteranopia<br><small>red-green</small></button>',
-            '<button class="a11y-cb-btn" data-mode="protanopia" aria-pressed="false" aria-label="Protanopia: red deficiency simulation">Protanopia<br><small>red deficiency</small></button>',
-            '<button class="a11y-cb-btn" data-mode="tritanopia" aria-pressed="false" aria-label="Tritanopia: blue-yellow colour blindness simulation">Tritanopia<br><small>blue-yellow</small></button>',
-            '<button class="a11y-cb-btn" data-mode="achromatopsia" aria-pressed="false" aria-label="Achromatopsia: monochrome vision simulation">Achromatopsia<br><small>monochrome</small></button>',
+            '<button class="a11y-cb-btn" data-mode="deuteranopia" aria-pressed="false" aria-label="Deuteranopia red-green colour blindness simulation">Deuteranopia <small>red-green</small></button>',
+            '<button class="a11y-cb-btn" data-mode="protanopia" aria-pressed="false" aria-label="Protanopia red deficiency colour blindness simulation">Protanopia <small>red deficiency</small></button>',
+            '<button class="a11y-cb-btn" data-mode="tritanopia" aria-pressed="false" aria-label="Tritanopia blue-yellow colour blindness simulation">Tritanopia <small>blue-yellow</small></button>',
+            '<button class="a11y-cb-btn" data-mode="achromatopsia" aria-pressed="false" aria-label="Achromatopsia monochrome colour blindness simulation">Achromatopsia <small>monochrome</small></button>',
           '</div>',
         '</div>',
 
         '<hr class="a11y-divider">',
 
-        '<button class="a11y-reset-all" id="a11y-reset-all" aria-label="Reset all accessibility settings to default">&#8635; Reset all settings</button>',
+        '<button class="a11y-reset-all" id="a11y-reset-all" aria-label="Reset all settings to accessibility defaults"><span aria-hidden="true">&#8635; </span>Reset all settings</button>',
 
       '</div>',
       /* ---- Trigger button ---- */
@@ -234,8 +234,8 @@
         ? 'No colour filter \u2014 normal vision (currently active)'
         : 'Remove colour filter and return to normal vision');
       noneBtn.innerHTML = isNone
-        ? '&#10003; No filter \u2014 normal vision'
-        : '&#8592; Remove filter \u2014 return to normal';
+        ? '<span aria-hidden="true">&#10003; </span>No colour filter \u2014 normal vision'
+        : '<span aria-hidden="true">&#8592; </span>Remove filter \u2014 return to normal';
     }
 
     /* Update the mode buttons */
@@ -292,22 +292,34 @@
      ===================================================== */
   document.addEventListener('DOMContentLoaded', function () {
 
-    /* 1. Inject SVG filter definitions */
+    /* 1. Wrap all existing body content in #a11y-page-wrap.
+          The CSS colour/invert filters are applied to this wrapper (not body)
+          so that position:fixed elements that are siblings of the wrapper
+          (the FAB, below) are NOT inside the filtered subtree and keep
+          correct viewport-relative positioning. */
+    var pageWrap = document.createElement('div');
+    pageWrap.id = 'a11y-page-wrap';
+    while (document.body.firstChild) {
+      pageWrap.appendChild(document.body.firstChild);
+    }
+    document.body.appendChild(pageWrap);
+
+    /* 2. Inject SVG filter definitions into body, before the wrap */
     var filterContainer = document.createElement('div');
     filterContainer.innerHTML = SVG_FILTERS;
-    document.body.insertBefore(filterContainer.firstChild, document.body.firstChild);
+    document.body.insertBefore(filterContainer.firstChild, pageWrap);
 
-    /* 2. Inject skip-to-main link */
+    /* 3. Inject skip-to-main link into body, before the wrap (first in tab order) */
     var skipLink = document.createElement('a');
     skipLink.href = '#main-content';
     skipLink.className = 'skip-link';
     skipLink.textContent = 'Skip to main content';
-    document.body.insertBefore(skipLink, document.body.firstChild);
+    document.body.insertBefore(skipLink, pageWrap);
 
-    /* 3. Inject toolbar */
+    /* 4. Inject toolbar into body AFTER the wrap (outside filtered subtree) */
     document.body.insertAdjacentHTML('beforeend', TOOLBAR_HTML);
 
-    /* 4. Sync UI to restored preferences */
+    /* 5. Sync UI to restored preferences */
     applyFontSize(currentFontSize);
 
     var savedInvert = false;
@@ -318,7 +330,7 @@
     try { savedCB = localStorage.getItem(LS.cbMode) || 'none'; } catch(e) {}
     applyColorblind(savedCB);
 
-    /* 5. Toggle button */
+    /* 6. Toggle button */
     var toggleBtn = document.getElementById('a11y-toggle-btn');
     if (toggleBtn) {
       toggleBtn.addEventListener('click', function (e) {
@@ -357,7 +369,7 @@
       }
     });
 
-    /* 6. Font size buttons */
+    /* 7. Font size buttons */
     var decBtn = document.getElementById('a11y-font-dec');
     var incBtn = document.getElementById('a11y-font-inc');
     if (decBtn) {
@@ -371,7 +383,7 @@
       });
     }
 
-    /* 7. Invert switch */
+    /* 8. Invert switch */
     var invertChk = document.getElementById('a11y-invert-chk');
     if (invertChk) {
       invertChk.addEventListener('change', function () {
@@ -379,7 +391,7 @@
       });
     }
 
-    /* 8. Colour-blind mode buttons — clicking active button removes the filter */
+    /* 9. Colour-blind mode buttons — clicking active button removes the filter */
     document.querySelectorAll('.a11y-cb-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var clickedMode = btn.getAttribute('data-mode');
@@ -408,7 +420,7 @@
       });
     }
 
-    /* 9. Reset all */
+    /* 10. Reset all */
     var resetBtn = document.getElementById('a11y-reset-all');
     if (resetBtn) {
       resetBtn.addEventListener('click', function () { resetAll(); });

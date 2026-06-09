@@ -1457,8 +1457,8 @@ document.addEventListener("DOMContentLoaded", function () {
    e.g. href="https://wa.me/447700000000"
    ===================================================== */
 (function () {
-  var WA_NUMBER = "PENDING"; /* ← replace with actual number when received from Jack */
-  if (WA_NUMBER === "PENDING") { return; } /* hide button until number is confirmed */
+  /* TODO: replace with actual WhatsApp number (digits only, incl. country code, e.g. 447700000000) */
+  var WA_NUMBER = "447700000000";
 
   var btn = document.createElement("a");
   btn.id            = "wa-btn";

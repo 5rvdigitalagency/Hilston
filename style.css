@@ -1083,7 +1083,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 .footer-col:last-of-type {
   text-align: right;
 }
-.footer-col h4 {
+.footer-col h2 {
   font-family: var(--font-serif);
   font-weight: normal;
   font-size: 1.35rem;
@@ -1524,8 +1524,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   .footer-col {
     border-bottom: 1px solid rgba(255,255,255,0.10);
   }
-  .footer-col h3,
-  .footer-col h4 {
+  .footer-col h2 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1537,8 +1536,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
     -webkit-user-select: none;
     text-align: center;
   }
-  .footer-col h3::after,
-  .footer-col h4::after {
+  .footer-col h2::after {
     content: '';
     position: absolute;
     right: 0;
@@ -1550,8 +1548,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
     transform: translateY(-65%) rotate(45deg);
     transition: transform 0.25s ease, top 0.25s ease;
   }
-  .footer-col.is-open h3::after,
-  .footer-col.is-open h4::after {
+  .footer-col.is-open h2::after {
     transform: translateY(-35%) rotate(-135deg);
   }
   .footer-col ul {
@@ -3246,3 +3243,87 @@ span.flatpickr-weekday {
 }
 .rates-filter-group input[type="text"]::placeholder { color: rgba(255,255,255,0.4); }
 .rates-filter-group input[type="text"]:focus { border-color: rgba(255,255,255,0.5); outline: none; }
+
+/* =====================================================
+   WHATSAPP FLOATING BUTTON
+   ===================================================== */
+@keyframes wa-pop-in {
+  from { opacity: 0; transform: scale(0.7) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.wa-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.22);
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: bottom 0.35s ease;
+}
+.wa-btn.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  animation: wa-pop-in 0.4s ease forwards;
+}
+/* Shift above consent banner when it's showing */
+body:has(#hp-cookie-banner.hpcc-show) .wa-btn {
+  bottom: 150px;
+}
+.wa-btn:hover {
+  background: #1ebe5d;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+  transform: scale(1.07) translateY(-2px);
+}
+.wa-btn svg {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+/* Tooltip */
+.wa-tooltip {
+  position: absolute;
+  right: 68px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.78rem;
+  font-family: var(--font-sans);
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.wa-tooltip::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: #1a1a1a;
+}
+.wa-btn:hover .wa-tooltip,
+.wa-btn:focus .wa-tooltip {
+  opacity: 1;
+}
+/* On mobile push up if a cookie banner might overlap */
+@media (max-width: 600px) {
+  .wa-btn { bottom: 20px; right: 16px; width: 52px; height: 52px; }
+  .wa-btn svg { width: 26px; height: 26px; }
+  .wa-tooltip { display: none; }
+  body:has(#hp-cookie-banner.hpcc-show) .wa-btn { bottom: 145px; }
+}
