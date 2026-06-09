@@ -544,12 +544,14 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   align-items: center;
   justify-content: center;
 }
-/* scalable background layer */
+/* scalable background layer — now an <img> for LCP discoverability */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 0;
 }
