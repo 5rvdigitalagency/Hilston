@@ -4,6 +4,7 @@
   <!-- Preconnect to key third-party origins (LCP / dynamic content) -->
   <link rel="preconnect" href="https://feeds.behold.so">
   <link rel="preconnect" href="https://api.open-meteo.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <!-- Preload LCP hero image -->
   <link rel="preload" href="images/hp-hero-schools.webp" as="image" type="image/webp">
   <!-- Cookie Consent — loads before GTM to initialise Consent Mode v2 -->
@@ -1227,10 +1228,10 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
 
 </div><!-- /site-wrap -->
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="script.js?v=4"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
+<script src="script.js?v=4" defer></script>
 
-  <script src="accessibility.js"></script>
+  <script src="accessibility.js" defer></script>
   <!-- TIDIO LIVE CHAT — replace PLACEHOLDER_KEY with your Tidio public key before going live -->
 </body>
 </html>
