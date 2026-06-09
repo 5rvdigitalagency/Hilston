@@ -5,8 +5,10 @@
   <link rel="preconnect" href="https://feeds.behold.so">
   <link rel="preconnect" href="https://api.open-meteo.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <!-- Preload LCP hero image -->
-  <link rel="preload" href="images/hp-hero-schools.webp" as="image" type="image/webp">
+  <!-- Preload LCP hero image (responsive: 768px on mobile, 1280px on desktop) -->
+  <link rel="preload" as="image" type="image/webp" fetchpriority="high"
+        imagesrcset="images/hp-hero-schools-768.webp 768w, images/hp-hero-schools.webp 1280w"
+        imagesizes="(max-width: 880px) 100vw, 33vw">
   <!-- Cookie Consent — loads before GTM to initialise Consent Mode v2 -->
   <style id="hp-consent-styles">
 /* ==========================================================================
@@ -771,7 +773,7 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
   <!-- ===== HERO ===== -->
   <section class="hero" id="main-content" tabindex="-1">
     <article class="hero-card">
-      <picture><source srcset="images/hp-hero-schools.webp" type="image/webp"><img class="hero-bg" src="images/hp-hero-schools.webp" alt="" role="presentation" fetchpriority="high" decoding="sync" width="1280" height="853"></picture>
+      <picture><source srcset="images/hp-hero-schools-768.webp 768w, images/hp-hero-schools.webp 1280w" sizes="(max-width: 880px) 100vw, 33vw" type="image/webp"><img class="hero-bg" src="images/hp-hero-schools.webp" alt="" role="presentation" fetchpriority="high" decoding="sync" width="1280" height="853"></picture>
       <div class="hero-overlay"></div>
       <div class="hero-frame">
         <a href="contact.html" class="hero-label">Schools &amp; Youth Groups</a>
