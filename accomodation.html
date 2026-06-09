@@ -132,9 +132,10 @@
     .accom-gal-btn:hover { background: white; opacity: 1; }
     .accom-gal-btn.prev { left: 12px; }
     .accom-gal-btn.next { right: 12px; }
-    .accom-gal-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 6px; }
-    .accom-gal-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.5); border: none; cursor: pointer; padding: 0; transition: background 0.25s, width 0.25s, border-radius 0.25s; }
-    .accom-gal-dot.active { background: white; width: 20px; border-radius: 4px; }
+    .accom-gal-dots { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 2px; align-items: center; }
+    .accom-gal-dot { width: 24px; height: 24px; background: transparent; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .accom-gal-dot::before { content: ''; display: block; width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: background 0.25s, width 0.25s, border-radius 0.25s; }
+    .accom-gal-dot.active::before { background: white; width: 20px; border-radius: 4px; }
 
     /* ACTIVITIES */
     .activities { background: var(--beige); padding: 88px 80px; display: flex; flex-direction: column; align-items: center; }
@@ -210,7 +211,7 @@
       max-width: 1240px; margin-left: auto; margin-right: auto;
     }
     .rates-filter-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 160px; }
-    .rates-filter-group label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+    .rates-filter-group label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.9); }
     .rates-filter-group input,
     .rates-filter-group select {
       background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
@@ -300,8 +301,8 @@
     .newsletter-band { background: var(--dark); padding: 56px 80px; }
     .newsletter-band-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .newsletter-band h2 { font-family: var(--font-sans); font-weight: 600; font-size: clamp(1.5rem, 2vw, 2.1rem); color: var(--white); line-height: 1.28; margin-bottom: 16px; }
-    .newsletter-band-left p { color: rgba(255,255,255,0.75); font-size: 0.88rem; line-height: 1.72; }
-    .newsletter-sub { color: rgba(255,255,255,0.75); font-size: 0.88rem; line-height: 1.72; margin-bottom: 22px; }
+    .newsletter-band-left p { color: rgba(255,255,255,0.9); font-size: 0.88rem; line-height: 1.72; }
+    .newsletter-sub { color: rgba(255,255,255,0.9); font-size: 0.88rem; line-height: 1.72; margin-bottom: 22px; }
     .newsletter-form { display: flex; gap: 0; width: 100%; }
     .newsletter-input { flex: 1; padding: 13px 18px; border: none; font-size: 0.88rem; outline: none; font-family: var(--font-sans); background: #d9d9d9; color: var(--text); }
     .newsletter-input::placeholder { color: #6b6b6b; }
