@@ -326,11 +326,12 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 }
 .nav-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
   max-width: 1240px;
   margin: 0 auto;
   padding: 0;
-  gap: 0;
+  gap: 40px;
 }
 .nav-list a {
   color: var(--white);
@@ -1052,7 +1053,6 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   max-width: 1240px;
   margin: 0 auto;
   padding: 68px 0 42px;
-  align-items: center;
 }
 
 .footer-brand {
@@ -1105,9 +1105,6 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 
 .footer-links {
   display: contents;
-}
-.footer-col:last-of-type {
-  text-align: right;
 }
 .footer-col h2 {
   font-family: var(--font-serif);
