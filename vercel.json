@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/accomodation",
+      "destination": "/accommodation",
+      "permanent": true
+    },
+    {
+      "source": "/accomodation.html",
+      "destination": "/accommodation",
+      "permanent": true
+    }
+  ]
+}

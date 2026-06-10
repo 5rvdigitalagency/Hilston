@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /* =====================================================
      ACTIVE NAV LINK
      ===================================================== */
-  var currentPage = window.location.pathname.split("/").pop() || "index.html";
+  var currentPage = window.location.pathname.split("/").pop() || "index";
   document.querySelectorAll(".nav-list a").forEach(function (link) {
     if (link.getAttribute("href") === currentPage) {
       link.classList.add("active");
@@ -1363,7 +1363,7 @@ document.addEventListener("DOMContentLoaded", function () {
       '<div class="cookie-banner-inner">',
         '<div class="cookie-banner-text">',
           '<strong>Cookie Notice</strong>',
-          '<p>We use cookies to improve your experience and understand how you use our site. See our <a href="privacy.html">Privacy Policy</a> for details.</p>',
+          '<p>We use cookies to improve your experience and understand how you use our site. See our <a href="privacy">Privacy Policy</a> for details.</p>',
         '</div>',
         '<div class="cookie-banner-actions">',
           '<button class="cookie-btn cookie-btn-manage" id="cookie-manage">Manage Preferences</button>',
