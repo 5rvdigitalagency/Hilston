@@ -498,10 +498,11 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 #ccm-trigger-badge { display: none !important; }
 
 /* Centre the GTM cookie consent modal in the full-screen wrapper */
-#custom-cookie-manager.ccm-wrapper {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+#custom-cookie-manager .ccm-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Equalise a11y toggle button to match WhatsApp (58px) */
