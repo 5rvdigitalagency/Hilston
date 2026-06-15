@@ -102,9 +102,10 @@ body:has(#hp-cookie-banner.hpcc-show) .a11y-fab {
   box-shadow: 0 6px 22px rgba(0,0,0,0.32);
 }
 .a11y-toggle svg {
-  width: 26px;
-  height: 26px;
-  fill: currentColor;
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
   pointer-events: none;
 }
 

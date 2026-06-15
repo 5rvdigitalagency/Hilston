@@ -155,10 +155,13 @@
         ' aria-controls="a11y-panel"',
         ' aria-label="Open accessibility options"',
         ' title="Accessibility">',
-        /* Universal Access / person icon */
-        '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">',
-          '<circle cx="12" cy="3.5" r="1.8"/>',
-          '<path d="M18.5 8.5h-5.28l-.6-1.6H8a.9.9 0 000 1.8h3.18l.6 1.6H7.1a.9.9 0 00-.86 1.18l1.9 5.7a.9.9 0 00.86.62h.16l-.62 3.2a.9.9 0 001.76.36L11.25 18h1.5l.95 3.36a.9.9 0 001.76-.36l-.62-3.2h.16a.9.9 0 00.86-.62l1.9-5.7a.9.9 0 00-.86-1.18h-3.18l-.3-.8h5.08a.9.9 0 000-1.8z"/>',
+        /* Accessibility — outline person with arms out, legible at any size */
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">',
+          '<circle cx="12" cy="4" r="2"/>',
+          '<line x1="3" y1="9" x2="21" y2="9"/>',
+          '<line x1="12" y1="9" x2="12" y2="16"/>',
+          '<line x1="12" y1="16" x2="8" y2="22"/>',
+          '<line x1="12" y1="16" x2="16" y2="22"/>',
         '</svg>',
       '</button>',
 
