@@ -470,6 +470,31 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 .mobile-nav-close:hover { color: var(--white); transform: rotate(90deg); }
 
 /* =====================================================
+   COOKIE PREFERENCES RE-OPEN BUTTON
+   ===================================================== */
+.hp-cookie-reopen {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 99000;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  transition: background 0.2s, transform 0.2s;
+  line-height: 1;
+}
+.hp-cookie-reopen:hover { background: var(--teal-dark, #2d5e52); transform: scale(1.08); }
+
+/* =====================================================
    STATS BAR
    ===================================================== */
 .stats-bar {
