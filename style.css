@@ -489,8 +489,16 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  transition: background 0.2s, transform 0.2s;
+  opacity: 0;
+  transform: scale(0.7) translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s ease, box-shadow 0.2s ease;
   line-height: 1;
+}
+.hp-cookie-reopen.is-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
 }
 .hp-cookie-reopen:hover { background: var(--teal-dark, #2d5e52); transform: scale(1.08); }
 
@@ -3402,4 +3410,5 @@ body:has(#hp-cookie-banner.hpcc-show) .wa-btn:hover {
   .wa-tooltip { display: none; }
   body:has(#hp-cookie-banner.hpcc-show) .wa-btn { transform: translateY(-125px); }
   .hp-cookie-reopen { bottom: 82px; right: 16px; width: 52px; height: 52px; font-size: 1.1rem; }
+  .hp-cookie-reopen.is-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
 }
