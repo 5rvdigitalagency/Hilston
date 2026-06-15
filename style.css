@@ -474,9 +474,9 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
    ===================================================== */
 .hp-cookie-reopen {
   position: fixed;
-  bottom: 80px;
-  left: 24px;
-  z-index: 99000;
+  bottom: 96px;
+  right: 28px;
+  z-index: 10000;
   width: 46px;
   height: 46px;
   border-radius: 50%;
