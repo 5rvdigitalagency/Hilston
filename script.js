@@ -1383,6 +1383,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* Reveal after a moment so it doesn't flash on load */
   setTimeout(function () { btn.classList.add("is-visible"); }, 1200);
+  /* Cookie button (static HTML) — same delay */
+  setTimeout(function () {
+    var cookieBtn = document.getElementById('hp-cookie-reopen');
+    if (cookieBtn) cookieBtn.classList.add('is-visible');
+  }, 1200);
+  /* a11y-fab (injected by defer'd accessibility.js) — slight extra delay */
+  setTimeout(function () {
+    var a11yFab = document.getElementById('a11y-fab');
+    if (a11yFab) a11yFab.classList.add('is-visible');
+  }, 1400);
 }());
 
 
