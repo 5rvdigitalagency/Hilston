@@ -1,0 +1,25 @@
+name: Dependency Review
+
+on:
+  pull_request:
+    branches: [ "**" ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          comment-summary-in-pr: always
+          fail-on-severity: high
+          # Strong copyleft licenses blocked for proprietary projects.
+          # Adjust or remove for OSS projects.
+          deny-licenses: GPL-2.0, GPL-3.0, AGPL-3.0
