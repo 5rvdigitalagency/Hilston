@@ -494,6 +494,9 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 }
 .hp-cookie-reopen:hover { background: var(--teal-dark, #2d5e52); transform: scale(1.08); }
 
+/* Hide GTM's own cookie badge — replaced by #hp-cookie-reopen */
+#ccm-trigger-badge { display: none !important; }
+
 /* =====================================================
    STATS BAR
    ===================================================== */
