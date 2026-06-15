@@ -7,11 +7,14 @@ document.addEventListener("DOMContentLoaded", function () {
   var stickyShell = document.getElementById("site-sticky");
   if (stickyShell) {
     window.addEventListener("scroll", function () {
-      if (window.scrollY > 60) {
+      if (window.scrollY > 80) {
         stickyShell.classList.add("scrolled");
-      } else {
+      } else if (window.scrollY < 40) {
         stickyShell.classList.remove("scrolled");
       }
+      /* 40–80 px dead-zone: keep whichever state is active.
+         This prevents the header's own layout-shift from toggling
+         the class back and forth (scroll-anchor feedback / shiver). */
     }, { passive: true });
   }
 
