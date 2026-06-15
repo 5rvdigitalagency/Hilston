@@ -3401,4 +3401,5 @@ body:has(#hp-cookie-banner.hpcc-show) .wa-btn:hover {
   .wa-btn svg { width: 26px; height: 26px; }
   .wa-tooltip { display: none; }
   body:has(#hp-cookie-banner.hpcc-show) .wa-btn { transform: translateY(-125px); }
+  .hp-cookie-reopen { bottom: 82px; right: 16px; width: 52px; height: 52px; font-size: 1.1rem; }
 }
