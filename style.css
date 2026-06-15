@@ -391,17 +391,17 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 40px;
+  gap: 2px;
+  margin-bottom: 24px;
   width: 100%;
 }
 .mobile-nav-list li a {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
   font-weight: normal;
   color: var(--white);
   letter-spacing: 0.06em;
-  padding: 12px 20px;
+  padding: 8px 20px;
   display: block;
   text-align: center;
   transition: color 0.2s ease;
@@ -1470,7 +1470,9 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   /* Show hamburger, hide desktop nav links */
   .nav-toggle { display: flex; }
   .main-nav { display: none; }
-  /* Reset iPad 2-row header — mobile is single row: logo + book + hamburger */
+  /* Hide Book Now from header — it lives inside the hamburger overlay */
+  .header-actions .btn-book { display: none; }
+  /* Reset iPad 2-row header — mobile is single row: logo + hamburger */
   .header-inner { flex-direction: row; flex-wrap: nowrap; justify-content: space-between; gap: 0; }
   .header-logo { flex: 0 0 auto; margin-bottom: 0; justify-content: flex-start; }
   .header-logo img { height: 46px; max-width: none; }
