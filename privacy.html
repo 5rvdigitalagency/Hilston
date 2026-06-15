@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Cookie Consent — loads before GTM to initialise Consent Mode v2 -->
-  <link rel="stylesheet" href="consent.css?v=5">
-  <script src="consent.js"></script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -151,26 +148,58 @@
   <!-- End Google Tag Manager (noscript) -->
 <div class="site-wrap">
 
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-logo">
-        <a href="index"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
-      </div>
-      <a href="javascript:void(0)" class="btn-book">BOOK NOW</a>
-    </div>
-  </header>
+  <!-- ===== STICKY SHELL (header + nav) ===== -->
+  <div class="site-sticky" id="site-sticky">
 
-  <nav class="main-nav">
-    <ul class="nav-list">
-      <li><a href="about">ABOUT</a></li>
-      <li><a href="educational">EDUCATION</a></li>
-      <li><a href="accommodation">PRIVATE STAY</a></li>
-      <li><a href="event">EVENTS</a></li>
-      <li><a href="gallery">GALLERY</a></li>
-      <li><a href="contact">CONTACT</a></li>
-      <li><a href="blogs">BLOG</a></li>
-    </ul>
-  </nav>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <a href="index"><picture><source srcset="Logo/Hilston_Park_Logo_3_Black.webp" type="image/webp"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park" width="315" height="60"></picture></a>
+        </div>
+        <div class="header-actions">
+          <a href="contact" class="btn-book">BOOK NOW</a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NAV ===== -->
+    <nav class="main-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="about">ABOUT</a></li>
+        <li><a href="educational">EDUCATION</a></li>
+        <li><a href="accommodation">PRIVATE STAY</a></li>
+        <li><a href="event">EVENTS</a></li>
+        <li><a href="gallery">GALLERY</a></li>
+        <li><a href="contact">CONTACT</a></li>
+        <li><a href="blogs">BLOG</a></li>
+      </ul>
+    </nav>
+
+  </div><!-- /site-sticky -->
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="index">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="educational">Education</a></li>
+        <li><a href="accommodation">Private Stay</a></li>
+        <li><a href="event">Events</a></li>
+        <li><a href="gallery">Gallery</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="blogs">Blog</a></li>
+        <li class="mobile-nav-book-item"><a href="contact" class="btn-book mobile-nav-book">BOOK NOW</a></li>
+      </ul>
+    </nav>
+  </div>
 
   <section class="utility-hero" id="main-content" tabindex="-1">
     <span class="eyebrow">Hilston Park</span>
@@ -321,7 +350,6 @@
           <li><a href="legal">Safeguarding &amp; Child<br>Protection Policy</a></li>
           <li><a href="terms">Terms &amp; Conditions</a></li>
           <li><a href="privacy">Privacy Policy</a></li>
-          <li><a href="#" class="cookie-pref-link" onclick="if(window.hilstonConsent){window.hilstonConsent.open();}return false;">Cookie Preferences</a></li>
         </ul>
       </div>
 
