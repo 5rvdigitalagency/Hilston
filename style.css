@@ -477,8 +477,8 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
   bottom: 96px;
   right: 28px;
   z-index: 10000;
-  width: 46px;
-  height: 46px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   background: var(--teal);
   color: var(--white);
@@ -496,6 +496,23 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 
 /* Hide GTM's own cookie badge — replaced by #hp-cookie-reopen */
 #ccm-trigger-badge { display: none !important; }
+
+/* Centre the GTM cookie consent modal in the full-screen wrapper */
+#custom-cookie-manager.ccm-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Equalise a11y toggle button to match WhatsApp (58px) */
+.a11y-toggle {
+  width: 58px !important;
+  height: 58px !important;
+}
+.a11y-toggle svg {
+  width: 30px !important;
+  height: 30px !important;
+}
 
 /* =====================================================
    STATS BAR
