@@ -1337,12 +1337,9 @@ document.addEventListener("DOMContentLoaded", function () {
    WHATSAPP FLOATING BUTTON
    Number: PENDING — update href to wa.me/[full number with country code]
    e.g. href="https://wa.me/447700000000"
-   Hidden until WhatsApp number confirmed — re-enable by removing the return below
    ===================================================== */
 (function () {
-  return; /* HIDDEN: no WhatsApp number yet */
-  /* TODO: replace with actual WhatsApp number (digits only, incl. country code, e.g. 447700000000) */
-  var WA_NUMBER = "447700000000";
+  var WA_NUMBER = "447803016677";
 
   var btn = document.createElement("a");
   btn.id            = "wa-btn";
