@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TDVPHZJJ');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <title>Unleashing Your Inner Adventurer | Hilston Park</title>
+  <meta name="description" content="Prepare to embark on an exhilarating journey of self-discovery at Hilston Park. Outdoor learning activities designed to awaken the senses, challenge the mind, and inspire the soul.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="style.css?v=6">
+  <style>
+    :root { --teal:#4e9484; --teal-dark:#3c7a6c; --dark:#4a6371; --dark-deep:#36505d; --beige:#e9e6df; --beige-2:#d8d4cc; --white:#ffffff; --text:#2a2a2a; --text-muted:#6b6b6b; --border:#cfcec9; --page-bg:#cfcec9; }
+    .post-hero { position: relative; min-height: 520px; display: flex; align-items: flex-end; overflow: hidden; }
+    .post-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 12s ease; }
+    .post-hero:hover .post-hero-bg { transform: scale(1.04); }
+    .post-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,22,32,0.92) 35%, rgba(10,22,32,0.3) 75%, rgba(10,22,32,0.12) 100%); }
+    .post-hero-inner { position: relative; z-index: 2; padding: 0 80px 72px; max-width: 860px; }
+    .post-hero-breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 22px; }
+    .post-hero-breadcrumb a { color: rgba(255,255,255,0.55); } .post-hero-breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+    .post-back-btn { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.70); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 20px; transition: color 0.2s; }
+    .post-back-btn:hover { color: var(--white); }
+    .post-hero-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .post-cat-tag { display: inline-block; padding: 5px 14px; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); }
+    .post-read-time { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+    .post-hero-inner h1 { font-family: var(--font-serif); font-weight: normal; font-size: clamp(2rem, 3.8vw, 3.8rem); line-height: 1.07; color: var(--white); margin-bottom: 20px; }
+    .post-hero-intro { font-size: 0.94rem; line-height: 1.74; color: rgba(255,255,255,0.72); max-width: 620px; }
+    .post-body { background: transparent; max-width: 1240px; margin-left: auto; margin-right: auto; padding: 80px 0 100px; display: grid; grid-template-columns: 1fr 280px; gap: 80px; align-items: start; }
+    .post-content { max-width: 720px; }
+    .post-content h2 { font-family: var(--font-serif); font-weight: normal; font-size: clamp(1.4rem, 2vw, 1.9rem); color: var(--text); margin: 48px 0 18px; line-height: 1.2; }
+    .post-content h2:first-child { margin-top: 0; }
+    .post-content h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.18rem; color: var(--text); margin: 32px 0 12px; }
+    .post-content p { font-size: 0.94rem; line-height: 1.88; color: var(--text-muted); margin-bottom: 1.2rem; }
+    .post-content ul, .post-content ol { margin: 0 0 1.4rem 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .post-content li { font-size: 0.92rem; line-height: 1.72; color: var(--text-muted); padding-left: 22px; position: relative; }
+    .post-content ul li::before { content: "—"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+    .post-content ol { counter-reset: ol; } .post-content ol li { counter-increment: ol; }
+    .post-content ol li::before { content: counter(ol) "."; position: absolute; left: 0; color: var(--teal); font-weight: 700; font-size: 0.82rem; }
+    .post-content blockquote { border-left: 3px solid var(--teal); padding: 18px 28px; background: var(--beige); margin: 32px 0; }
+    .post-content blockquote p { font-style: italic; font-size: 1.04rem; color: var(--text); margin: 0; }
+    .post-inline-img { width: 100%; margin: 36px 0; overflow: hidden; }
+    .post-inline-img img { width: 100%; display: block; height: 380px; object-fit: cover; }
+    .post-inline-img figcaption { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; padding: 10px 0 0; text-align: center; }
+    .post-cta-band { background: var(--teal); padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: 44px 0; }
+    .post-cta-band p { color: rgba(255,255,255,0.9); font-size: 0.9rem; line-height: 1.5; margin: 0; }
+    .post-cta-band a { white-space: nowrap; display: inline-block; padding: 13px 26px; background: var(--white); color: var(--teal); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; flex-shrink: 0; transition: background 0.2s, color 0.2s; }
+    .post-cta-band a:hover { background: var(--beige); }
+    .post-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 32px; }
+    .sidebar-block { border-top: 2px solid var(--teal); padding-top: 20px; }
+    .sidebar-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+    .sidebar-block p { font-size: 0.83rem; line-height: 1.72; color: var(--text-muted); }
+    .sidebar-block a.sidebar-cta { display: inline-block; margin-top: 14px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
+    .sidebar-block a.sidebar-cta:hover { color: var(--teal-dark); }
+    .sidebar-related { display: flex; flex-direction: column; gap: 16px; }
+    .related-item { display: flex; gap: 14px; align-items: flex-start; }
+    .related-item img { width: 64px; height: 52px; object-fit: cover; flex-shrink: 0; }
+    .related-item-text { flex: 1; }
+    .related-item-text .rel-cat { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
+    .related-item-text a { font-size: 0.8rem; font-family: var(--font-serif); font-weight: normal; color: var(--text); line-height: 1.3; }
+    .related-item-text a:hover { color: var(--teal); }
+    .more-articles { background: transparent; border-top: 1px solid rgba(0,0,0,0.06); padding: 80px 80px 90px; }
+    .more-articles-header { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--beige-2); padding-bottom: 22px; margin-bottom: 44px; }
+    .more-articles-header h2 { font-family: var(--font-serif); font-weight: normal; font-size: 1.4rem; color: var(--text); }
+    .more-articles-header a { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
+    .more-articles-header a:hover { color: var(--teal-dark); }
+    .more-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .more-card { background: var(--white); display: flex; flex-direction: column; border: 1px solid var(--beige-2); overflow: hidden; transition: box-shadow 0.3s, transform 0.3s; }
+    .more-card:hover { box-shadow: 0 10px 36px rgba(0,0,0,0.09); transform: translateY(-3px); }
+    .more-card-img { overflow: hidden; aspect-ratio: 16/10; }
+    .more-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; display: block; }
+    .more-card:hover .more-card-img img { transform: scale(1.06); }
+    .more-card-body { padding: 22px 20px 26px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .more-card-cat { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+    .more-card-body h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1rem; line-height: 1.3; color: var(--text); flex: 1; }
+    .more-card-link { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--white); display: inline-block; background: var(--teal); padding: 10px 20px; transition: background 0.2s; }
+    .more-card:hover .more-card-link { background: var(--teal-dark); }
+    @media (max-width: 1100px) { .post-hero-inner { padding: 0 40px 56px; } .post-body { padding: 60px 40px 80px; } .more-articles { padding-left: 40px; padding-right: 40px; } }
+    @media (max-width: 900px) { .post-body { grid-template-columns: 1fr; } .post-sidebar { position: static; } .more-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .more-grid { grid-template-columns: 1fr; } .post-hero-inner { padding: 0 24px 44px; } .post-body { padding: 44px 24px 60px; } .post-cta-band { flex-direction: column; align-items: center; text-align: center; padding: 28px 24px; } .post-cta-band a { align-self: center; } }
+  </style>
+  <link rel="stylesheet" href="accessibility.css?v=2">
+</head>
+<body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDVPHZJJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div class="site-wrap">
+  <div class="site-sticky" id="site-sticky">
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo"><a href="index"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a></div>
+        <div class="header-actions">
+          <a href="javascript:void(0)" class="btn-book">BOOK NOW</a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav"><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span></button>
+        </div>
+      </div>
+    </header>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="about">ABOUT</a></li><li><a href="educational">EDUCATION</a></li><li><a href="accommodation">PRIVATE STAY</a></li>
+        <li><a href="event">EVENTS</a></li><li><a href="gallery">GALLERY</a></li><li><a href="contact">CONTACT</a></li><li><a href="blogs" class="nav-active">BLOG</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
+    <nav><ul class="mobile-nav-list">
+      <li><a href="about">About</a></li><li><a href="educational">Education</a></li><li><a href="accommodation">Private Stay</a></li>
+      <li><a href="event">Events</a></li><li><a href="gallery">Gallery</a></li><li><a href="contact">Contact</a></li><li><a href="blogs">Blog</a></li>
+      <li class="mobile-nav-book-item"><a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK NOW</a></li>
+    </ul></nav>
+  </div>
+
+  <section class="post-hero" id="main-content" tabindex="-1">
+    <div class="post-hero-bg" style="background-image:url(images/edu-canoeing.jpg)"></div>
+    <div class="post-hero-overlay"></div>
+    <div class="post-hero-inner">
+      <a href="blogs" class="post-back-btn">&#8592; Back to Blog</a>
+      <div class="post-hero-breadcrumb"><span>&#8250;</span><a href="blogs">Journal</a><span>&#8250;</span><span>Activities</span></div>
+      <div class="post-hero-meta">
+        <span class="post-cat-tag" style="background:#7a9bb5">Activities</span>
+        <span class="post-read-time">4 min read</span>
+      </div>
+      <h1>Unleashing Your Inner Adventurer</h1>
+      <p class="post-hero-intro">Prepare to embark on an exhilarating journey of self-discovery as you delve into the thrilling adventures awaiting you at Hilston Park. Our array of activities promises to ignite your spirit of exploration.</p>
+    </div>
+  </section>
+
+  <div class="post-body">
+    <article class="post-content">
+
+      <p>At Hilston Park, we believe in the power of adventure to awaken the senses, challenge the mind, and inspire the soul. From the adrenaline-pumping heights of high ropes to the heart-pounding excitement of abseiling, our activities are designed to push you out of your comfort zone and into the realm of possibility.</p>
+
+      <h2>Outdoor Learning Activities</h2>
+      <p>Whether you&#8217;re conquering new heights with climbing, testing your courage with the Leap of Faith, or mastering precision on the Balance Beam, each adventure invites you to embrace the thrill of the unknown and discover the adventurer within.</p>
+
+      <h2>Exploring the Great Outdoors</h2>
+      <p>From the tranquil serenity of stargazing to the exhilarating challenges of orienteering, there is no shortage of opportunities to explore, discover, and marvel at the beauty of nature. At Hilston Park, adventure awaits around every corner, inviting you to embrace the freedom of the outdoors and create unforgettable memories amidst the beauty of the natural world.</p>
+      <p>Our outdoor team building activities provide the perfect opportunity to bond with your group while experiencing the wonders of nature firsthand.</p>
+
+      <figure class="post-inline-img">
+        <img src="images/edu-act-1.jpg" alt="Outdoor adventure activities at Hilston Park" loading="lazy">
+        <figcaption>Every visit to Hilston Park offers fresh opportunities for adventure and personal discovery</figcaption>
+      </figure>
+
+      <h2>Team-Building Adventures for Students</h2>
+      <p>Through activities meticulously designed to promote collaboration, communication, and camaraderie, students have the opportunity to create bonds that last a lifetime while honing essential skills for success.</p>
+      <ul>
+        <li>Navigating through the wilderness with orienteering teaches students the importance of teamwork and problem-solving.</li>
+        <li>Building rafts for exciting water adventures not only encourages creativity but also requires effective communication and cooperation.</li>
+        <li>In the heart-pounding Gladiator Challenge, students learn resilience and determination as they overcome obstacles together.</li>
+      </ul>
+
+      <blockquote>
+        <p>Our team-building activities provide students with a platform to grow, learn, and succeed together &mdash; setting the foundation for strong relationships and valuable skill development that will serve them well beyond their time at Hilston.</p>
+      </blockquote>
+
+      <p>Whether you&#8217;re organising a school excursion, corporate retreat, or family adventure, our experienced team will collaborate closely with you to craft a tailored experience that surpasses your expectations.</p>
+
+      <div class="post-cta-band">
+        <p>Ready to unleash your inner adventurer? Book your next residential trip or activity day at Hilston Park.</p>
+        <a href="contact">BOOK NOW</a>
+      </div>
+
+    </article>
+
+    <aside class="post-sidebar">
+      <div class="sidebar-block">
+        <p class="sidebar-label">About Hilston Park</p>
+        <p>A 60-acre historic estate in the Wye Valley, Wales. Serving schools, corporate groups and private guests for over 50 years.</p>
+        <a href="about" class="sidebar-cta">Learn About Us &#8594;</a>
+      </div>
+      <div class="sidebar-block">
+        <p class="sidebar-label">Related Articles</p>
+        <div class="sidebar-related">
+          <div class="related-item">
+            <img src="images/nature-bushcraft.jpg" alt="Wye Valley">
+            <div class="related-item-text">
+              <p class="rel-cat" style="color:#7a9bb5">Activities</p>
+              <a href="blog-wye-valley">The Wye Valley Estate: What Makes Hilston Park Unique</a>
+            </div>
+          </div>
+          <div class="related-item">
+            <img src="images/event-act-highropes.jpg" alt="Adventure">
+            <div class="related-item-text">
+              <p class="rel-cat" style="color:#7a9bb5">Activities</p>
+              <a href="blog-discover-adventure">Discover the Ultimate Adventure at Hilston Park</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <p class="sidebar-label">Plan a Visit</p>
+        <p>Schools, corporate groups and private guests can enquire directly. The team responds within one working day.</p>
+        <a href="javascript:void(0)" class="sidebar-cta" data-inquire>Get in Touch &#8594;</a>
+      </div>
+    </aside>
+  </div>
+
+  <section class="more-articles">
+    <div class="more-articles-header">
+      <h2>More from the Journal</h2>
+      <a href="blogs">View All Articles &#8594;</a>
+    </div>
+    <div class="more-grid">
+      <a href="blog-wye-valley" class="more-card" style="text-decoration:none">
+        <div class="more-card-img"><img src="images/nature-bushcraft.jpg" alt="Wye Valley" loading="lazy"></div>
+        <div class="more-card-body"><span class="more-card-cat" style="color:#7a9bb5">Activities</span><h3>The Wye Valley Estate: What Makes Hilston Park&nbsp;Unique</h3><span class="more-card-link">Read More &#8594;</span></div>
+      </a>
+      <a href="blog-discover-adventure" class="more-card" style="text-decoration:none">
+        <div class="more-card-img"><img src="images/event-act-highropes.jpg" alt="Adventure" loading="lazy"></div>
+        <div class="more-card-body"><span class="more-card-cat" style="color:#7a9bb5">Activities</span><h3>Discover the Ultimate Adventure at Hilston&nbsp;Park</h3><span class="more-card-link">Read More &#8594;</span></div>
+      </a>
+      <a href="blog-thrilling-adventures" class="more-card" style="text-decoration:none">
+        <div class="more-card-img"><img src="images/adventure.jpg" alt="Thrilling Adventures" loading="lazy"></div>
+        <div class="more-card-body"><span class="more-card-cat" style="color:#7a9bb5">Activities</span><h3>From Thrilling Adventures to Cosy Escapes: Your 2025&nbsp;Journey</h3><span class="more-card-link">Read More &#8594;</span></div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-crest"><img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park"></div>
+        <address>Newcastle, Monmouth,<br>Gwent, Wales, NP25 5NY</address>
+        <div class="social-icons">
+          <a href="https://www.youtube.com/@HilstonPark" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
+          <a href="https://www.instagram.com/hilstonparkofficial/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4A6.2 6.2 0 0012 5.8zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"/></svg></a>
+          <a href="https://www.tiktok.com/@hilston.park" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.84 1.54V6.8a4.84 4.84 0 01-1.07-.11z"/></svg></a>
+          <a href="https://www.facebook.com/hilstonparkofficial" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h2>Home</h2><ul><li><a href="about">About</a></li><li><a href="contact">Contact</a></li><li><a href="blogs">Blog</a></li><li><a href="gallery">Gallery</a></li></ul></div>
+      <div class="footer-col"><h2>Visitors</h2><ul><li><a href="visitors">Visitor Guide</a></li><li><a href="educational">Educational</a></li><li><a href="event">Events</a></li><li><a href="accommodation">Private Stay</a></li></ul></div>
+      <div class="footer-col"><h2>Legal</h2><ul><li><a href="legal">Safeguarding &amp; Child<br>Protection Policy</a></li><li><a href="terms">Terms &amp; Conditions</a></li><li><a href="privacy">Privacy Policy</a></li></ul></div>
+      <div class="footer-meta">
+        <p class="footer-copy">&copy; 2026 Hilston Park. All rights reserved.</p>
+        <p class="footer-madeby">Website made by <a href="https://www.5rv.digital" target="_blank" rel="noopener noreferrer"><strong>5RV Digital</strong></a></p>
+      </div>
+    </div>
+    <div class="footer-bar"></div>
+  </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="script.js?v=5"></script>
+<script src="accessibility.js?v=2"></script>
+<button id="hp-cookie-reopen" class="hp-cookie-reopen" aria-label="Manage cookie preferences" title="Manage cookie preferences" onclick="var w=document.getElementById('custom-cookie-manager');if(w){w.style.display='block';}return false;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="28" height="28"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="8.5" r="0.8" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="14.5" r="0.8" fill="currentColor" stroke="none"/></svg></button>
+</body>
+</html>
