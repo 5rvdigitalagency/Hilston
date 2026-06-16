@@ -345,24 +345,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 '</div>',
                 '<span class="bkm-field-err" id="bkm-err-about"></span>',
               '</div>',
-              '<div class="bkm-fields">',
-                '<div class="bkm-field">',
-                  '<label>Adults</label>',
-                  '<div class="bkm-stepper">',
-                    '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-inq-adults" aria-label="Decrease adults">&#8722;</button>',
-                    '<input type="number" class="bkm-step-val bkm-step-editable" id="bkm-inq-adults" value="0" min="0" max="999" inputmode="numeric" aria-label="Number of adults">',
-                    '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-inq-adults" aria-label="Increase adults">+</button>',
-                  '</div>',
-                '</div>',
-                '<div class="bkm-field">',
-                  '<label>Children</label>',
-                  '<div class="bkm-stepper">',
-                    '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-inq-children" aria-label="Decrease children">&#8722;</button>',
-                    '<input type="number" class="bkm-step-val bkm-step-editable" id="bkm-inq-children" value="0" min="0" max="999" inputmode="numeric" aria-label="Number of children">',
-                    '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-inq-children" aria-label="Increase children">+</button>',
-                  '</div>',
-                '</div>',
-              '</div>',
               '<div class="bkm-field"><label for="bkm-inq-message">Your enquiry <span class="bkm-req">*</span></label><textarea id="bkm-inq-message" rows="4" required></textarea><span class="bkm-field-err" id="bkm-err-message"></span></div>',
               '<input type="hidden" id="bkm-inq-context">',
               '<p class="bkm-error" id="bkm-inq-error">Please complete all required fields.</p>',
@@ -913,8 +895,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var email    = document.getElementById("bkm-inq-email").value.trim();
     var phone    = document.getElementById("bkm-inq-phone").value.trim();
     var about    = document.getElementById("bkm-inq-about").value;
-    var adults   = document.getElementById("bkm-inq-adults").value || "0";
-    var children = document.getElementById("bkm-inq-children").value || "0";
     var msg      = document.getElementById("bkm-inq-message").value.trim();
     var ctx      = inqContext.value || "general";
     /* Per-field validation */
@@ -972,8 +952,6 @@ document.addEventListener("DOMContentLoaded", function () {
         email: email,
         phone: phone,
         enquiry_about: about,
-        adults: adults,
-        children: children,
         service: svcLabel,
         message: msg,
         source_page: window.location.pathname

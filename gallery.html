@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Cookie Consent — loads before GTM to initialise Consent Mode v2 -->
+  <link rel="stylesheet" href="consent.css?v=5">
+  <script src="consent.js"></script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -235,6 +238,7 @@
     <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
     <nav>
       <ul class="mobile-nav-list">
+        <li><a href="index">Home</a></li>
         <li><a href="about">About</a></li>
         <li><a href="educational">Education</a></li>
         <li><a href="accommodation">Private Stay</a></li>
@@ -389,12 +393,11 @@
         <div class="gallery-img-item" data-category="estate">
           <img src="images/estate-exterior.png" alt="Hilston Park exterior" loading="lazy">
         </div>
-
+        <div class="gallery-img-item" data-category="estate">
+          <img src="images/gatehouse.webp" alt="Hilston Park gatehouse" loading="lazy">
+        </div>
 
         <!-- LANDSCAPE -->
-        <div class="gallery-img-item" data-category="landscape">
-          <img src="images/gallery/dji_0098.jpg" alt="Aerial view of the Wye Valley" loading="lazy">
-        </div>
         <div class="gallery-img-item" data-category="landscape">
           <img src="images/gallery/img_8166.jpg" alt="Wye Valley landscape" loading="lazy">
         </div>
@@ -407,7 +410,9 @@
         <div class="gallery-img-item" data-category="landscape">
           <img src="images/gallery/20230517_142334.jpg" alt="Hilston Park landscape" loading="lazy">
         </div>
-
+        <div class="gallery-img-item" data-category="landscape">
+          <img src="images/edu-estate.jpg" alt="Hilston Park estate and woodland" loading="lazy">
+        </div>
 
         <!-- FOOD & DINING -->
         <div class="gallery-img-item" data-category="food">
@@ -519,6 +524,7 @@
           <li><a href="legal">Safeguarding &amp; Child<br>Protection Policy</a></li>
           <li><a href="terms">Terms &amp; Conditions</a></li>
           <li><a href="privacy">Privacy Policy</a></li>
+          <li><a href="#" class="cookie-pref-link" onclick="if(window.hilstonConsent){window.hilstonConsent.open();}return false;">Cookie Preferences</a></li>
         </ul>
       </div>
 
@@ -533,7 +539,7 @@
 </div><!-- /site-wrap -->
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="script.js?v=5"></script>
+<script src="script.js"></script>
 <script>
 (function () {
   'use strict';
@@ -634,8 +640,6 @@
 </script>
 
 
-  <script src="accessibility.js?v=2"></script>
-<\!-- Cookie preferences button -->
-<button id="hp-cookie-reopen" class="hp-cookie-reopen" aria-label="Manage cookie preferences" title="Manage cookie preferences" onclick="var w=document.getElementById('custom-cookie-manager');if(w){w.style.display='block';}return false;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="28" height="28"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="8.5" r="0.8" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="14.5" r="0.8" fill="currentColor" stroke="none"/></svg></button>
+  <script src="accessibility.js"></script>
 </body>
 </html>
