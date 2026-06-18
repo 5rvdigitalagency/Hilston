@@ -201,6 +201,101 @@
     <p class="utility-note">Need direct planning support? Use the booking button or contact the Hilston Park team.</p>
   </section>
 
+  <!-- ===== WAYS TO REACH ===== -->
+  <section class="utility-section" style="background:#f5f3ef;">
+    <h2 style="font-family:var(--font-serif);font-weight:normal;font-size:clamp(1.9rem,3vw,2.8rem);color:var(--text);margin-bottom:12px;text-align:center;">Ways to Reach Hilston Park</h2>
+    <p style="text-align:center;color:var(--text-muted);font-size:0.94rem;max-width:60ch;margin:0 auto 48px;">Hilston Park, situated between the River Wye and the Black Mountains, is well-connected by road, rail and air. Multiple travel options are available to suit all journeys.</p>
+    <div class="utility-grid">
+      <article class="utility-card">
+        <h2>By Car</h2>
+        <p>Hilston Park sits beside the B4347 road in the Monnow Valley, approximately 8 miles northwest of Monmouth and just over a mile southwest of Skenfrith.</p>
+        <ul class="utility-list">
+          <li><strong>From the South (Newport/Cardiff):</strong> Take the A449 north to Raglan, then the B4233 toward Abergavenny. Pick up the B4347 north toward Skenfrith.</li>
+          <li><strong>From the North (Hereford):</strong> Head south on the A465, turn off toward Skenfrith via the B4521, then follow the B4347 southward.</li>
+          <li><strong>From the East (Monmouth):</strong> Take the B4233 west from Monmouth and join the B4347 heading northwest. Hilston Park is roughly 8 miles from Monmouth.</li>
+        </ul>
+        <div style="margin-top:20px;">
+          <iframe width="100%" height="320" frameborder="0" style="border:0;border-radius:4px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB2NIWI3Tv9iDPrlnowr_0ZqZWoAQydKJU&amp;q=Hilston+Park,+Newcastle,+Monmouth+NP25+5NY&amp;maptype=roadmap" allowfullscreen title="Hilston Park map"></iframe>
+        </div>
+      </article>
+      <article class="utility-card">
+        <h2>By Air</h2>
+        <p>The nearest major international airports are Cardiff, Bristol, and Birmingham, all offering scheduled flights from across Europe and beyond.</p>
+        <ul class="utility-list">
+          <li>Cardiff Airport (CWL) &mdash; approximately 45 miles, about 1 hour by car</li>
+          <li>Bristol Airport (BRS) &mdash; approximately 60 miles, around 1 hour 15 minutes by car</li>
+          <li>Birmingham Airport (BHX) &mdash; approximately 75 miles, about 1 hour 30 minutes by car</li>
+        </ul>
+        <h2 style="margin-top:28px;">Public Transport</h2>
+        <p>The nearest train station is Abergavenny, approximately 12 miles from Hilston Park. Local bus services run toward Monmouth, from where a taxi or arranged transfer completes the journey.</p>
+        <ul class="utility-list">
+          <li>Nearest Train Station: Abergavenny &mdash; regular services from Cardiff, Newport and Birmingham</li>
+          <li>Bus Services: Routes 43 and 60 connect Abergavenny to Monmouth</li>
+          <li>Taxi or Transfer: Available from both Abergavenny and Monmouth</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="newsletter-band">
+    <div class="newsletter-band-inner">
+      <div class="newsletter-band-left">
+        <h2>Join the Hilston Park Community</h2>
+        <p>Get updates on seasonal events and special offers in advance. We share the stories and planning tips you need to make the most of the estate.</p>
+      </div>
+      <div class="newsletter-band-right">
+        <p class="newsletter-sub">Join our newsletter to get exclusive insights, timely updates, and the latest news from Hilston Park.</p>
+        <div class="newsletter-form" id="visitors-newsletter-form">
+          <input class="newsletter-input" type="email" placeholder="Enter your email address" required>
+          <button class="newsletter-btn" type="button">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    (function () {
+      var wrap = document.getElementById('visitors-newsletter-form');
+      if (!wrap) return;
+      var emailInput = wrap.querySelector('input[type=email]');
+      var btn = wrap.querySelector('button');
+      if (!emailInput || !btn) return;
+      var msg = document.createElement('p');
+      msg.style.cssText = 'margin-top:0.75rem;font-size:0.875rem;display:none;color:var(--teal)';
+      wrap.parentNode.insertBefore(msg, wrap.nextSibling);
+      btn.addEventListener('click', function () {
+        var email = emailInput.value.trim();
+        if (!email) { emailInput.style.outline = '2px solid #e63946'; return; }
+        emailInput.style.outline = '';
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: '9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4',
+            subject: 'Newsletter Subscription - Visitor Guide',
+            email: email,
+            source_page: window.location.pathname
+          })
+        })
+        .then(function (r) { return r.json(); })
+        .then(function () {
+          wrap.style.display = 'none';
+          msg.textContent = 'Thanks for subscribing!';
+          msg.style.display = 'block';
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+          msg.style.color = '#e63946';
+          msg.textContent = 'Sorry, something went wrong. Please try again.';
+          msg.style.display = 'block';
+        });
+      });
+    })();
+  </script>
+
   <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-brand">
