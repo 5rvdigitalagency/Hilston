@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TDVPHZJJ');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <title>Outdoor Activity Centre Wales | Team-Building Activities | Hilston Park</title>
+  <meta name="description" content="15+ outdoor activities at Hilston Park, an outdoor activity centre in Wales. High ropes, canoeing, bushcraft, team challenges and more for schools, corporate groups and families.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="style.css?v=6">
+  <style>
+    /* HERO */
+    .act-hero {
+      position: relative; min-height: 540px; height: 80vh; max-height: 740px;
+      overflow: hidden; display: flex; align-items: flex-end;
+    }
+    .act-hero-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .act-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.76) 0%, rgba(0,0,0,0.3) 52%, rgba(0,0,0,0.18) 100%);
+    }
+    .act-hero-inner {
+      position: relative; z-index: 2; width: 100%; padding: 64px 80px;
+      color: var(--white);
+    }
+    .act-hero-inner h1 {
+      font-family: var(--font-serif); font-weight: normal;
+      font-size: clamp(2rem, 3.4vw, 3.5rem);
+      line-height: 1.1; color: var(--white); margin-bottom: 24px;
+    }
+    .act-hero-sub {
+      font-size: 0.96rem; line-height: 1.74; color: rgba(255,255,255,0.88);
+      max-width: 44ch; margin-bottom: 28px;
+    }
+
+    /* STATS BAR */
+    .stats-bar { background: var(--white); padding: 52px 80px; border-bottom: 1px solid var(--border); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 0 20px; position: relative;
+    }
+    .stat-item:not(:last-child)::after {
+      content: ''; position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%); width: 1px; height: 48px; background: var(--border);
+    }
+    .stat-number {
+      font-family: var(--font-serif); font-size: 3rem; font-weight: normal;
+      color: var(--teal); line-height: 1; display: flex; align-items: baseline; gap: 2px;
+    }
+    .stat-suffix { font-size: 2rem; color: var(--teal); }
+    .stat-label {
+      font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text); margin-top: 8px;
+    }
+
+    /* INTRO */
+    .act-intro { background: var(--white); padding: 88px 80px; }
+    .act-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .act-intro-img img { width: 100%; height: 520px; object-fit: cover; display: block; }
+    .act-intro-text h2 { margin-bottom: 16px; }
+    .act-intro-text p { font-size: 0.92rem; line-height: 1.88; color: var(--text-muted); margin-bottom: 1.1rem; }
+    .act-includes { list-style: none; padding: 0; margin: 24px 0 32px; display: flex; flex-direction: column; gap: 10px; }
+    .act-includes li { padding-left: 22px; position: relative; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .act-includes li::before { content: "\2014"; position: absolute; left: 0; color: var(--teal); }
+
+    /* ACTIVITY CATEGORIES */
+    .act-categories { background: var(--beige); padding: 88px 80px; }
+    .act-categories-heading { text-align: center; margin-bottom: 12px; }
+    .act-categories-sub { text-align: center; font-size: 0.92rem; line-height: 1.72; color: var(--text-muted); max-width: 680px; margin: 0 auto 64px; }
+    .act-category { margin-bottom: 72px; }
+    .act-category:last-child { margin-bottom: 0; }
+    .act-category-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid var(--teal); }
+    .act-category-num { font-family: var(--font-script); font-size: 2rem; color: var(--teal); line-height: 1; }
+    .act-category-header h3 { font-family: var(--font-serif); font-weight: normal; font-size: clamp(1.4rem, 2vw, 1.8rem); color: var(--text); }
+    .act-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .act-card-item { background: var(--white); padding: 28px 26px; }
+    .act-card-item h4 { font-family: var(--font-serif); font-weight: normal; font-size: 1.1rem; color: var(--text); margin-bottom: 10px; }
+    .act-card-item p { font-size: 0.86rem; line-height: 1.72; color: var(--text-muted); }
+
+    /* MOST REQUESTED */
+    .most-requested { background: var(--dark); padding: 88px 80px; }
+    .most-requested h2 { color: var(--white); text-align: center; margin-bottom: 56px; }
+    .most-req-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .most-req-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-top: 3px solid var(--teal); padding: 32px 28px; }
+    .most-req-card h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.15rem; color: var(--white); margin-bottom: 20px; }
+    .most-req-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .most-req-list li { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.75); padding-left: 16px; position: relative; }
+    .most-req-list li::before { content: '\2014'; position: absolute; left: 0; color: var(--teal); }
+
+    /* VISIT US */
+    .visit-us { background: var(--white); padding: 88px 80px; }
+    .visit-us .heading-display { margin-bottom: 44px; }
+    .visit-us-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .visit-card { background: var(--beige); padding: 36px 32px; display: flex; flex-direction: column; gap: 16px; border-top: 3px solid var(--teal); transition: transform 0.28s ease, box-shadow 0.28s ease; }
+    .visit-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(0,0,0,0.1); }
+    .visit-icon { width: 46px; height: 46px; background: var(--teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .visit-icon svg { width: 22px; height: 22px; stroke: white; fill: none; stroke-width: 2; }
+    .visit-card h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.3rem; color: var(--text); }
+    .visit-card p { font-size: 0.88rem; line-height: 1.78; color: var(--text-muted); flex: 1; }
+    .visit-card .btn-pill { margin-top: 4px; align-self: flex-start; }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--beige); padding: 88px 80px; text-align: center; }
+    .testimonial-wrap { min-height: 220px; display: flex; align-items: center; justify-content: center; }
+    .testimonial-item { display: none; flex-direction: column; align-items: center; gap: 18px; }
+    .testimonial-item.active { display: flex; }
+    .testimonial-quote-mark { font-family: Georgia, serif; font-size: 5rem; line-height: 0.6; color: var(--teal); margin-bottom: 8px; }
+    .testimonial-text { font-size: 1.18rem; line-height: 1.68; font-style: italic; color: var(--text-muted); max-width: 640px; }
+    .testimonial-author { font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted); }
+    .testimonial-dots { display: flex; justify-content: center; gap: 4px; margin-top: 36px; }
+    .testimonial-dots button { width: 44px; height: 44px; background: transparent; border: none; position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; }
+    .testimonial-dots button::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.2); transition: background 0.25s, width 0.25s, border-radius 0.25s; }
+    .testimonial-dots button.active { background: transparent; }
+    .testimonial-dots button.active::before { background: var(--teal); width: 24px; border-radius: 4px; }
+
+    /* PLANNING CTA */
+    .planning-cta { background: var(--dark); padding: 88px 80px; text-align: center; }
+    .planning-cta h2 { font-family: var(--font-serif); font-weight: normal; font-size: clamp(1.9rem,3vw,2.8rem); color: var(--white); margin-bottom: 18px; max-width: 22ch; margin-left: auto; margin-right: auto; line-height: 1.2; }
+    .planning-cta p { font-size: 0.94rem; line-height: 1.78; color: rgba(255,255,255,0.75); max-width: 52ch; margin: 0 auto 32px; }
+
+    /* NEWSLETTER */
+    .newsletter-band { background: var(--white); padding: 56px 80px; border-top: 1px solid var(--border); }
+    .newsletter-band-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .newsletter-band h2 { font-family: var(--font-sans); font-weight: 600; font-size: clamp(1.5rem, 2vw, 2.1rem); color: var(--text); line-height: 1.28; margin-bottom: 16px; }
+    .newsletter-band-left p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.72; }
+    .newsletter-sub { color: var(--text-muted); font-size: 0.88rem; line-height: 1.72; margin-bottom: 22px; }
+    .newsletter-form { display: flex; gap: 0; width: 100%; max-width: 460px; }
+    .newsletter-input { flex: 1; padding: 13px 18px; border: 1px solid var(--border); font-size: 0.88rem; outline: none; font-family: var(--font-sans); background: #f5f3ef; color: var(--text); }
+    .newsletter-btn { background: var(--teal); color: white; padding: 13px 28px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-sans); transition: background 0.2s; white-space: nowrap; }
+    .newsletter-btn:hover { background: var(--teal-dark); }
+
+    /* FAQ */
+    .faq { background: var(--beige); padding: 88px 80px; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1.65fr; gap: 80px; align-items: start; }
+    .faq-label { font-family: var(--font-script); font-size: 1.6rem; color: var(--teal); margin-bottom: 10px; display: block; }
+    .faq-grid .heading-display { position: sticky; top: 120px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .act-intro, .act-categories, .most-requested, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 40px; padding-right: 40px; }
+      .stats-bar { padding-left: 40px; padding-right: 40px; }
+      .act-hero-inner { padding: 48px 40px; }
+    }
+    @media (max-width: 880px) {
+      .act-intro-grid, .most-req-grid, .visit-us-grid, .faq-grid, .newsletter-band-inner { grid-template-columns: 1fr; }
+      .newsletter-band-inner { gap: 28px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 36px 0; }
+      .stat-item:nth-child(2)::after, .stat-item:nth-child(4)::after { display: none; }
+      .act-cards-grid { grid-template-columns: 1fr 1fr; }
+      .act-intro, .act-categories, .most-requested, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 24px; padding-right: 24px; }
+      .stats-bar { padding-left: 24px; padding-right: 24px; }
+      .act-hero-inner { padding: 40px 24px; }
+      .faq-grid .heading-display { position: static; }
+    }
+    @media (max-width: 540px) {
+      .act-cards-grid { grid-template-columns: 1fr; }
+      .act-intro, .act-categories, .most-requested, .visit-us, .testimonials, .planning-cta, .newsletter-band, .faq { padding-left: 16px !important; padding-right: 16px !important; }
+      .act-hero-inner { padding: 32px 16px; }
+    }
+  </style>
+  <link rel="stylesheet" href="accessibility.css?v=2">
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDVPHZJJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+<div class="site-wrap">
+
+  <!-- ===== STICKY SHELL ===== -->
+  <div class="site-sticky" id="site-sticky">
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <a href="index"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a>
+        </div>
+        <div class="header-actions">
+          <a href="javascript:void(0)" class="btn-book">BOOK NOW</a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="about">ABOUT</a></li>
+        <li><a href="educational">EDUCATION</a></li>
+        <li><a href="accommodation">PRIVATE STAY</a></li>
+        <li><a href="event">EVENTS</a></li>
+        <li><a href="activity" class="nav-active">ACTIVITIES</a></li>
+        <li><a href="gallery">GALLERY</a></li>
+        <li><a href="contact">CONTACT</a></li>
+        <li><a href="blogs">BLOG</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- ===== MOBILE NAV ===== -->
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="about">About</a></li>
+        <li><a href="educational">Education</a></li>
+        <li><a href="accommodation">Private Stay</a></li>
+        <li><a href="event">Events</a></li>
+        <li><a href="activity">Activities</a></li>
+        <li><a href="gallery">Gallery</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="blogs">Blog</a></li>
+        <li class="mobile-nav-book-item"><a href="javascript:void(0)" class="btn-book mobile-nav-book">BOOK NOW</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="act-hero" id="main-content" tabindex="-1">
+    <picture>
+      <source srcset="images/event-act-highropes.jpg" type="image/jpeg">
+      <img class="act-hero-img" src="images/event-act-highropes.jpg" alt="Outdoor activities at Hilston Park" fetchpriority="high" decoding="sync">
+    </picture>
+    <div class="act-hero-overlay"></div>
+    <div class="act-hero-inner">
+      <h1>Team-Building Activities at Hilston Park</h1>
+      <p class="act-hero-sub">Action-packed outdoor activities that challenge groups to build confidence and develop real teamwork.</p>
+      <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE ABOUT ACTIVITIES</a>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="15">0</span><span class="stat-suffix">+</span></div>
+        <p class="stat-label">Outdoor Challenges</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="50">0</span><span class="stat-suffix">+</span></div>
+        <p class="stat-label">Years of Experience</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="100">0</span><span class="stat-suffix">%</span></div>
+        <p class="stat-label">Staff-Led Activities</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">8<span class="stat-suffix">+</span></div>
+        <p class="stat-label">Minimum Age</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INTRO ===== -->
+  <section class="act-intro">
+    <div class="act-intro-grid">
+      <div class="act-intro-img">
+        <img src="images/adventure.jpg" alt="Outdoor team challenge at Hilston Park" loading="lazy">
+      </div>
+      <div class="act-intro-text">
+        <h2 class="heading-display">15+ Outdoor Challenges, Led by Qualified&nbsp;Instructors</h2>
+        <p>At Hilston Park, every activity is as safe as it is challenging. Whether climbing at height or navigating water-based tasks, participants are equipped with the right gear and guided through every step.</p>
+        <p>What every session includes:</p>
+        <ul class="act-includes">
+          <li>Professional supervision throughout, from briefing to finish</li>
+          <li>Activities built to boost teamwork, leadership and personal confidence</li>
+          <li>Complete access for schools, corporate groups, families and residential guests</li>
+          <li>Flexible scheduling (subject to weather conditions and staff availability)</li>
+          <li>Suitable for ages 8 and above, with selected activities available for younger children on request</li>
+        </ul>
+        <a href="javascript:void(0)" class="btn-pill" data-inquire>PLAN YOUR GROUP EXPERIENCE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ACTIVITY CATEGORIES ===== -->
+  <section class="act-categories">
+    <h2 class="heading-display act-categories-heading">Plan Your Group Experiences By Activity&nbsp;Type</h2>
+    <p class="act-categories-sub">From high ropes to water activities and bushcraft, every session is guided by qualified instructors and adapted to your group.</p>
+
+    <!-- Category 1 -->
+    <div class="act-category">
+      <div class="act-category-header">
+        <span class="act-category-num">1</span>
+        <h3>High Ropes &amp; Team Challenges</h3>
+      </div>
+      <div class="act-cards-grid">
+        <div class="act-card-item">
+          <h4>Jacob&rsquo;s Ladder</h4>
+          <p>A climbing challenge where groups must rely on teamwork, balance, and communication to help each other reach the top.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>Leap of Faith</h4>
+          <p>Participants climb to a height before taking a controlled jump designed to build confidence and trust through personal challenge.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>Gladiator Challenge</h4>
+          <p>Competitive outdoor tasks that encourage teamwork, quick decision-making, and communication in a fun and active setting.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>High &amp; Low Ropes Courses</h4>
+          <p>Obstacle-based rope courses designed to improve confidence, focus, coordination, and group communication at different challenge levels.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>Balance Beam</h4>
+          <p>A simple activity that tests balance, concentration, and teamwork while encouraging groups to support each other throughout the challenge.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>Climbing</h4>
+          <p>Instructor-led climbing sessions that help participants build confidence, determination, and problem-solving skills through outdoor challenge experiences.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 2 -->
+    <div class="act-category">
+      <div class="act-category-header">
+        <span class="act-category-num">2</span>
+        <h3>Water-Based Activities</h3>
+      </div>
+      <div class="act-cards-grid">
+        <div class="act-card-item">
+          <h4>Canoeing</h4>
+          <p>A guided water activity where groups paddle together while improving teamwork, coordination, and communication on the water.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>Paddle Boarding</h4>
+          <p>A relaxed but active water experience focused on balance, confidence, and enjoying outdoor activity in a supervised environment.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>Raft Building</h4>
+          <p>Teams work together to build and test their own raft using shared planning, communication, and problem-solving skills.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 3 -->
+    <div class="act-category">
+      <div class="act-category-header">
+        <span class="act-category-num">3</span>
+        <h3>Outdoor Learning &amp; Survival Activities</h3>
+      </div>
+      <div class="act-cards-grid">
+        <div class="act-card-item">
+          <h4>Bushcraft Skills</h4>
+          <p>Hands-on outdoor sessions teaching practical survival skills, teamwork, and confidence in natural outdoor surroundings.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>Rope Rescue</h4>
+          <p>A technical outdoor challenge focused on communication, teamwork, and controlled rescue exercises supervised by trained instructors.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>Mountaineering</h4>
+          <p>Outdoor walking and climbing experiences designed to encourage resilience, teamwork, and confidence in changing terrain.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>Night Hikes</h4>
+          <p>Guided evening walks that encourage awareness, communication, and teamwork while exploring outdoor environments after dark.</p>
+        </div>
+        <div class="act-card-item">
+          <h4>Designated Camping Areas</h4>
+          <p>Outdoor camping spaces designed for shared group experiences and quality time spent in natural surroundings.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 4 -->
+    <div class="act-category">
+      <div class="act-category-header">
+        <span class="act-category-num">4</span>
+        <h3>Group Bonding Experiences</h3>
+      </div>
+      <div class="act-cards-grid">
+        <div class="act-card-item">
+          <h4>Campfire Experiences</h4>
+          <p>Relaxed evening gatherings where groups can unwind, share stories, and spend quality time together after outdoor activities.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== MOST REQUESTED ===== -->
+  <section class="most-requested">
+    <h2 class="heading-display">Most Requested Activities by Group&nbsp;Type</h2>
+    <div class="most-req-grid">
+      <div class="most-req-card">
+        <h3>For Schools &amp; Educational Trips</h3>
+        <ul class="most-req-list">
+          <li>Bushcraft Skills</li>
+          <li>Canoeing</li>
+          <li>Climbing</li>
+          <li>Night Hikes</li>
+          <li>Rope Rescue</li>
+        </ul>
+      </div>
+      <div class="most-req-card">
+        <h3>For Corporate Groups</h3>
+        <ul class="most-req-list">
+          <li>High &amp; Low Ropes Courses</li>
+          <li>Gladiator Challenge</li>
+          <li>Jacob&rsquo;s Ladder</li>
+          <li>Leap of Faith</li>
+          <li>Raft Building</li>
+        </ul>
+      </div>
+      <div class="most-req-card">
+        <h3>For Families &amp; Private Guests</h3>
+        <ul class="most-req-list">
+          <li>Canoeing</li>
+          <li>Paddle Boarding</li>
+          <li>Campfire Experiences</li>
+          <li>Balance Beam</li>
+          <li>Bushcraft Skills</li>
+          <li>Night Hikes</li>
+          <li>Designated Camping Experiences</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VISIT US ===== -->
+  <section class="visit-us">
+    <h2 class="heading-display center">Plan Your Visit</h2>
+    <div class="visit-us-grid">
+      <div class="visit-card">
+        <div class="visit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+          </svg>
+        </div>
+        <h3>When to Visit</h3>
+        <p>Hilston Park welcomes guests year-round. Summer brings longer days and time outdoors, while winter offers a quieter setting, with time focused indoors.</p>
+        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
+      </div>
+      <div class="visit-card">
+        <div class="visit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+        </div>
+        <h3>Getting Here</h3>
+        <p>Hilston Park is located near Monmouth in Wales and is accessible by road. For schools and group organisers planning visits, travel assistance may also be provided.</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Hilston+Park%2C+Newcastle%2C+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">GET DIRECTIONS</a>
+      </div>
+      <div class="visit-card">
+        <div class="visit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 12 19.79 19.79 0 01.42 3.18 2 2 0 012.4 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.9a16 16 0 006.18 6.18l1.27-.78a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </div>
+        <h3>Get in Touch</h3>
+        <p>Whether you are a school group planning a residential trip, a corporate group planning a retreat, or a wedding party, we&rsquo;d love to arrange your visit.</p>
+        <a href="contact" class="btn-pill">CONTACT US</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials">
+    <div class="testimonial-wrap" id="testimonialWrap">
+      <div class="testimonial-item active">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">We came to Hilston Park with a primary school class for a residential. It was the best site I&rsquo;ve been to in 23 years of school camps!</p>
+        <p class="testimonial-author">Heidi Hall</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">The Hilston staff were all very helpful and friendly!! I can&rsquo;t wait to come back to this site!!</p>
+        <p class="testimonial-author">Supreet Singh</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote-mark">&ldquo;</p>
+        <p class="testimonial-text">Absolutely great team that took care of us. Both daughters enjoyed the leap of faith via the special activities team.</p>
+        <p class="testimonial-author">Ibrahim Ahmet</p>
+      </div>
+    </div>
+    <div class="testimonial-dots" id="testimonialDots"></div>
+    <div class="testimonials-cta" style="margin-top:40px;">
+      <a href="https://www.google.com/maps/search/?api=1&query=Hilston+Park%2C+Newcastle%2C+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-google-reviews">
+        <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.2 33.8 29.6 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.1 3l6.3-6.3C34.8 4.5 29.6 2 24 2 11.9 2 2 11.9 2 24s9.9 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/>
+        </svg>
+        Read All Our Reviews on Google
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== PLANNING CTA ===== -->
+  <section class="planning-cta">
+    <h2>Book Your Team-Building Session Now</h2>
+    <p>With activities designed to deliver meaningful shared experiences, Hilston Park, in a natural outdoor setting, helps groups connect and grow through adventure.</p>
+    <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE ABOUT ACTIVITIES</a>
+  </section>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="newsletter-band">
+    <div class="newsletter-band-inner">
+      <div class="newsletter-band-left">
+        <h2>Join the Hilston Park Community</h2>
+        <p>Get updates on seasonal events and special offers in advance. We share the stories and planning tips you need to make the most of the estate.</p>
+      </div>
+      <div class="newsletter-band-right">
+        <p class="newsletter-sub">Join our newsletter to get exclusive insights, timely updates, and the latest news from Hilston Park.</p>
+        <div class="newsletter-form" id="act-newsletter-form">
+          <input class="newsletter-input" type="email" placeholder="Enter your email address" required>
+          <button class="newsletter-btn" type="button">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    (function () {
+      var wrap = document.getElementById('act-newsletter-form');
+      if (!wrap) return;
+      var emailInput = wrap.querySelector('input[type=email]');
+      var btn = wrap.querySelector('button');
+      if (!emailInput || !btn) return;
+      var msg = document.createElement('p');
+      msg.style.cssText = 'margin-top:0.75rem;font-size:0.875rem;display:none;';
+      wrap.parentNode.insertBefore(msg, wrap.nextSibling);
+      btn.addEventListener('click', function () {
+        var email = emailInput.value.trim();
+        if (!email) { emailInput.style.outline = '2px solid #e63946'; return; }
+        emailInput.style.outline = '';
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: '9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4',
+            subject: 'Newsletter Subscription - Activities',
+            email: email,
+            source_page: window.location.pathname
+          })
+        })
+        .then(function (r) { return r.json(); })
+        .then(function () {
+          wrap.style.display = 'none';
+          msg.style.color = 'var(--teal, #2a9d8f)';
+          msg.textContent = 'Thanks for subscribing!';
+          msg.style.display = 'block';
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+          msg.style.color = '#e63946';
+          msg.textContent = 'Sorry, something went wrong. Please try again.';
+          msg.style.display = 'block';
+        });
+      });
+    })();
+  </script>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq">
+    <div class="faq-grid">
+      <div>
+        <span class="faq-label">FAQ</span>
+        <h2 class="heading-display">Frequently<br>Asked<br>Questions</h2>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span class="acc-question">Are outdoor activities free to use at Hilston Park?</span>
+            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+          </button>
+          <div class="accordion-body"><p>Activities are included in your booking, not as an add-on. What you pay depends on your group size, how long you are staying and what you want to do. The easiest way to work it out is to get in touch, and we will go from there.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span class="acc-question">Who can participate in outdoor activities at Hilston Park?</span>
+            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+          </button>
+          <div class="accordion-body"><p>Most of our activities are open to ages 8 and above. If you are bringing younger children, some newer activities can be arranged for them too. Just let us know at the time of booking, and we will check what is available for your group.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span class="acc-question">How do activities work for students with SEN?</span>
+            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+          </button>
+          <div class="accordion-body"><p>We adapt around the group. If a student needs a slower pace, a smaller group or a quieter setting, we work around that. Schools usually bring their own SEN staff, and we work alongside them. No student should feel left out, and we do our best to ensure that does not happen.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span class="acc-question">What activities are available for corporate groups?</span>
+            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+          </button>
+          <div class="accordion-body"><p>The activities we offer are not only available to corporate groups but also to educational trips, families, and private stays. From high ropes and bushcraft to water activities and team challenges, everything is included in your stay at Hilston Park.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn">
+            <span class="acc-question">How is safety managed during outdoor activities at Hilston Park?</span>
+            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
+          </button>
+          <div class="accordion-body"><p>Every activity within Hilston Park is run by qualified instructors who brief the group before anything starts. The right equipment is provided, and someone always stays with the group.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-crest">
+          <img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park">
+        </div>
+        <address>
+          Newcastle, Monmouth,<br>
+          Gwent, Wales, NP25 5NY
+        </address>
+        <div class="social-icons">
+          <a href="https://www.youtube.com/@HilstonPark" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
+          <a href="https://www.instagram.com/hilstonparkofficial/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4A6.2 6.2 0 0012 5.8zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"/></svg></a>
+          <a href="https://www.tiktok.com/@hilston.park" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.84 1.54V6.8a4.84 4.84 0 01-1.07-.11z"/></svg></a>
+          <a href="https://www.facebook.com/hilstonparkofficial" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h2>Home</h2>
+        <ul>
+          <li><a href="about">About</a></li>
+          <li><a href="contact">Contact</a></li>
+          <li><a href="blogs">Blog</a></li>
+          <li><a href="gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Visitors</h2>
+        <ul>
+          <li><a href="visitors">Visitor Guide</a></li>
+          <li><a href="educational">Educational</a></li>
+          <li><a href="event">Events</a></li>
+          <li><a href="accommodation">Private Stay</a></li>
+          <li><a href="activity">Activities</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="legal">Safeguarding &amp; Child<br>Protection Policy</a></li>
+          <li><a href="terms">Terms &amp; Conditions</a></li>
+          <li><a href="privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-meta">
+        <p class="footer-copy">&copy; 2026 Hilston Park. All rights reserved.</p>
+        <p class="footer-madeby">Website made by <a href="https://www.5rv.digital" target="_blank" rel="noopener noreferrer"><strong>5RV Digital</strong></a></p>
+      </div>
+    </div>
+    <div class="footer-bar"></div>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="script.js?v=5"></script>
+<script>
+  (function(){
+    var counters = document.querySelectorAll('.counter');
+    var observer = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var el = entry.target;
+          var target = parseInt(el.getAttribute('data-target'), 10);
+          var duration = 2200;
+          var startTime = performance.now();
+          function animate(now){
+            var progress = Math.min((now - startTime) / duration, 1);
+            el.textContent = Math.floor(progress * target);
+            if(progress < 1) requestAnimationFrame(animate);
+          }
+          requestAnimationFrame(animate);
+          obs.unobserve(el);
+        }
+      });
+    }, {threshold: 0.4});
+    counters.forEach(function(c){ observer.observe(c); });
+  })();
+
+  (function(){
+    var items = document.querySelectorAll('.testimonial-item');
+    var dotsEl = document.getElementById('testimonialDots');
+    if(!dotsEl) return;
+    var current = 0;
+    items.forEach(function(_, i){
+      var b = document.createElement('button');
+      b.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+      if(i===0) b.className='active';
+      b.addEventListener('click', function(){ go(i); });
+      dotsEl.appendChild(b);
+    });
+    function go(n){
+      items[current].classList.remove('active');
+      dotsEl.children[current].classList.remove('active');
+      current = n;
+      items[current].classList.add('active');
+      dotsEl.children[current].classList.add('active');
+    }
+    setInterval(function(){ go((current+1) % items.length); }, 4500);
+  })();
+</script>
+<script src="accessibility.js?v=2"></script>
+<button id="hp-cookie-reopen" class="hp-cookie-reopen" aria-label="Manage cookie preferences" title="Manage cookie preferences" onclick="var w=document.getElementById('custom-cookie-manager');if(w){w.style.display='block';}return false;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="28" height="28"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="8.5" r="0.8" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="14.5" r="0.8" fill="currentColor" stroke="none"/></svg></button>
+</body>
+</html>
