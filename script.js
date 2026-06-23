@@ -1224,10 +1224,10 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then(function(data) {
         var posts = Array.isArray(data) ? data : (data.posts || []);
-        /* Keep only photo / carousel posts (skip stories / reels thumbnails) */
+        /* Keep photo, carousel, and video posts (skip unsupported types) */
         posts = posts.filter(function(p) {
           var t = (p.mediaType || "").toUpperCase();
-          return t === "IMAGE" || t === "CAROUSEL_ALBUM" || t === "";
+          return t === "IMAGE" || t === "CAROUSEL_ALBUM" || t === "VIDEO" || t === "";
         });
         if (!posts.length) { startMarquee(INSTA_FALLBACK); return; }
 
@@ -1235,7 +1235,7 @@ document.addEventListener("DOMContentLoaded", function () {
           return {
             src: (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl)
               || (p.sizes && p.sizes.small  && p.sizes.small.mediaUrl)
-              || p.mediaUrl || "",
+              || p.thumbnailUrl || p.mediaUrl || "",
             alt:       p.caption ? p.caption.slice(0, 80) : "Hilston Park on Instagram",
             permalink: p.permalink || "https://www.instagram.com/hilstonparkofficial/"
           };
