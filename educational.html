@@ -17,6 +17,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <title>Educational Trips for Schools | Hilston Park Outdoor Centre</title>
   <meta name="description" content="Plan educational trips for schools in Wales with residential stays, outdoor learning, and safe, engaging activities for students.">
+  <link rel="preload" href="Videos/educational-hero-web.mp4" as="video" type="video/mp4">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style.css?v=6">
   <style>
@@ -28,6 +29,7 @@
     .edu-hero-video {
       position: absolute; inset: 0; width: 100%; height: 100%;
       object-fit: cover; object-position: center;
+      opacity: 0; transition: opacity 0.8s ease;
     }
     .edu-hero-overlay {
       position: absolute; inset: 0;
@@ -376,8 +378,8 @@
 
   <!-- HERO VIDEO -->
   <section class="edu-hero" id="main-content" tabindex="-1">
-    <video class="edu-hero-video" autoplay muted loop playsinline preload="auto">
-      <source src="Videos/Educational%20Hero%20Video%20Compressed.mp4" type="video/mp4">
+    <video class="edu-hero-video" autoplay muted loop playsinline preload="metadata" poster="images/hero-schools.jpg" oncanplay="this.style.opacity='1'">
+      <source src="Videos/educational-hero-web.mp4" type="video/mp4">
       <img src="images/hero-schools.jpg" alt="Hilston Park educational visits">
     </video>
     <div class="edu-hero-overlay"></div>

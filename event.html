@@ -17,6 +17,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <title>Outdoor Event Venue Wales | Corporate &amp; Private Events | Hilston Park</title>
   <meta name="description" content="Host events at an outdoor venue in Wales for team building, corporate events, and private parties with scenic views and engaging experiences.">
+  <link rel="preload" href="Videos/events-hero-web.mp4" as="video" type="video/mp4">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style.css?v=6">
   <style>
@@ -28,6 +29,7 @@
     .eve-hero-video {
       position: absolute; inset: 0; width: 100%; height: 100%;
       object-fit: cover; object-position: center;
+      opacity: 0; transition: opacity 0.8s ease;
     }
     .eve-hero-overlay {
       position: absolute; inset: 0;
@@ -329,8 +331,8 @@
 
   <!-- HERO VIDEO -->
   <section class="eve-hero" id="main-content" tabindex="-1">
-    <video class="eve-hero-video" autoplay muted loop playsinline>
-      <source src="Videos/events-hero.mp4" type="video/mp4">
+    <video class="eve-hero-video" autoplay muted loop playsinline preload="metadata" poster="images/event-hero.jpg" oncanplay="this.style.opacity='1'">
+      <source src="Videos/events-hero-web.mp4" type="video/mp4">
       <img src="images/event-hero.jpg" alt="Hilston Park events">
     </video>
     <div class="eve-hero-overlay"></div>
