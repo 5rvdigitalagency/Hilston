@@ -17,6 +17,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <title>About | Hilston Park Outdoor Centre</title>
   <meta name="description" content="Learn about Hilston Park, an activity centre in Monmouth offering residential trips, outdoor learning, and group experiences in Wales.">
+  <link rel="preload" href="Videos/about-hero-web.mp4" as="video" type="video/mp4">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style.css?v=6">
   <style>
@@ -33,6 +34,7 @@
     .about-hero-video {
       position: absolute; inset: 0; width: 100%; height: 100%;
       object-fit: cover; object-position: center;
+      opacity: 0; transition: opacity 0.8s ease;
     }
     .about-hero-overlay {
       position: absolute; inset: 0;
@@ -474,8 +476,8 @@
 
   <!-- HERO BANNER -->
   <section class="about-hero" id="main-content" tabindex="-1">
-    <video class="about-hero-video" autoplay muted loop playsinline preload="auto" oncanplay="this.playbackRate=1.4">
-      <source src="Videos/About%20Hero%20Compressed.mp4" type="video/mp4">
+    <video class="about-hero-video" autoplay muted loop playsinline preload="metadata" poster="images/about-hero.jpg" oncanplay="this.style.opacity='1';this.playbackRate=1.4">
+      <source src="Videos/about-hero-web.mp4" type="video/mp4">
     </video>
     <div class="about-hero-overlay"></div>
     <div class="about-hero-inner">

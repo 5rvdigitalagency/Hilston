@@ -12,6 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Group Accommodation Wales | Youth &amp; Residential Stays | Hilston Park</title>
   <meta name="description" content="Stay at group accommodation in Wales for schools and youth groups. Enjoy comfortable residential stays and digital detox experiences in nature.">
+  <link rel="preload" href="Videos/accommodation-hero-web.mp4" as="video" type="video/mp4">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style.css?v=6">
   <link rel="stylesheet" href="accessibility.css?v=2">
@@ -24,6 +25,7 @@
     .accom-hero-video {
       position: absolute; inset: 0; width: 100%; height: 100%;
       object-fit: cover; object-position: center;
+      opacity: 0; transition: opacity 0.8s ease;
     }
     .accom-hero-overlay {
       position: absolute; inset: 0;
@@ -423,8 +425,8 @@
 
   <!-- HERO VIDEO -->
   <section class="accom-hero">
-    <video class="accom-hero-video" autoplay muted loop playsinline preload="auto">
-      <source src="Videos/Accommodation%20Hero%20Compressed.mp4" type="video/mp4">
+    <video class="accom-hero-video" autoplay muted loop playsinline preload="metadata" poster="images/accommodation.jpg" oncanplay="this.style.opacity='1'">
+      <source src="Videos/accommodation-hero-web.mp4" type="video/mp4">
       <img src="images/accommodation.jpg" alt="Hilston Park accommodation">
     </video>
     <div class="accom-hero-overlay"></div>
