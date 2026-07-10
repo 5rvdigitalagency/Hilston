@@ -11,6 +11,28 @@
       "source": "/accomodation.html",
       "destination": "/accommodation",
       "permanent": true
-    }
+    },
+    { "source": "/blog-school-trip", "destination": "/blog/school-trip-at-hilston-park", "permanent": true },
+    { "source": "/blog-accommodation", "destination": "/blog/group-accommodation", "permanent": true },
+    { "source": "/blog-team-building", "destination": "/blog/team-building-activities", "permanent": true },
+    { "source": "/blog-wye-valley", "destination": "/blog/wye-valley-estate", "permanent": true },
+    { "source": "/blog-why-schools-book", "destination": "/blog/why-schools-choose-hilston-park", "permanent": true },
+    { "source": "/blog-international-menu", "destination": "/blog/school-trip-catering-dietary-options", "permanent": true },
+    { "source": "/blog-unleash-adventure", "destination": "/blog/adventure-activities-school-groups", "permanent": true },
+    { "source": "/blog-early-bird-booking", "destination": "/blog/early-bird-school-trip-booking", "permanent": true },
+    { "source": "/blog-discover-adventure", "destination": "/blog/adventure-at-hilston-park", "permanent": true },
+    { "source": "/blog-outdoor-team-building-setting", "destination": "/blog/outdoor-team-building-venue", "permanent": true },
+    { "source": "/blog-harnessing-collaboration", "destination": "/blog/teamwork-collaboration-activities", "permanent": true },
+    { "source": "/blog-inner-adventurer", "destination": "/blog/discover-your-inner-adventure", "permanent": true },
+    { "source": "/blog-empowering-education", "destination": "/blog/outdoor-education-for-schools", "permanent": true },
+    { "source": "/blog-memorable-school-trip", "destination": "/blog/memorable-adventure-school-trip", "permanent": true },
+    { "source": "/blog-corporate-events", "destination": "/blog/corporate-team-building-events", "permanent": true },
+    { "source": "/blog-natures-classroom", "destination": "/blog/nature-based-learning-school-trips", "permanent": true },
+    { "source": "/blog-inspiring-young-minds", "destination": "/blog/inspiring-young-minds-outdoor-learning", "permanent": true },
+    { "source": "/blog-experience-magic", "destination": "/blog/school-adventure-experience", "permanent": true },
+    { "source": "/media/t5mozlih/hilston_logo.jpg", "destination": "/Logo/Hilston_Park_Logo_3_Black.webp", "permanent": true },
+    { "source": "/privacy-policy", "destination": "/privacy", "permanent": true },
+    { "source": "/blog", "destination": "/blogs", "permanent": true },
+    { "source": "/blog/posts/:slug*", "destination": "/blogs", "permanent": true }
   ]
 }

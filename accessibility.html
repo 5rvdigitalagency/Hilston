@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TDVPHZJJ');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <title>Accessibility Statement | Hilston Park</title>
+  <meta name="description" content="Hilston Park accessibility statement — our WCAG 2.2 Level AA commitment, conformance status, known limitations, exceptions, and how to report issues.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="style.css?v=6">
+  <style>
+    /* ---- UTILITY HERO ---- */
+    .utility-hero {
+      background: #e9e6df;
+      text-align: center;
+      padding: 80px 24px 72px;
+    }
+    .utility-hero .eyebrow {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin-bottom: 18px;
+    }
+    .utility-hero h1 {
+      font-family: var(--font-serif, "Bodoni 72", Georgia, serif);
+      font-weight: normal;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      line-height: 1.15;
+      color: #36505d;
+      margin: 0 auto 20px;
+      max-width: 760px;
+    }
+    .utility-hero p {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: #6b6b6b;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ---- POLICY SECTION ---- */
+    .policy-section {
+      padding: 64px 24px 100px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .policy-section h2 {
+      font-family: var(--font-serif, "Bodoni 72", Georgia, serif);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      color: #4a6371;
+      margin: 48px 0 16px;
+      font-weight: normal;
+      line-height: 1.3;
+    }
+    .policy-section h2.first { margin-top: 0; }
+    .policy-section h3 {
+      font-family: var(--font-sans, "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #36505d;
+      margin: 32px 0 12px;
+    }
+    .policy-section p {
+      font-size: 0.93rem;
+      line-height: 1.88;
+      color: #6b6b6b;
+      margin-bottom: 1.2rem;
+    }
+    .policy-section ul {
+      margin: 0 0 1.4rem 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .policy-section li {
+      font-size: 0.92rem;
+      line-height: 1.72;
+      color: #6b6b6b;
+      padding-left: 22px;
+      position: relative;
+    }
+    .policy-section li::before {
+      content: "\2014";
+      position: absolute;
+      left: 0;
+      color: #4e9484;
+      font-weight: 700;
+    }
+    .policy-note {
+      background: #e9e6df;
+      border-left: 4px solid #cfcec9;
+      padding: 16px 24px;
+      margin: 1.2rem 0 1.8rem;
+      font-size: 0.86rem;
+      color: #6b6b6b;
+      line-height: 1.8;
+    }
+    .policy-links {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid #cfcec9;
+    }
+    .policy-links p { font-size: 0.88rem; color: #6b6b6b; }
+    .policy-links a { color: #4e9484; }
+
+    /* ---- STATUS BADGE ---- */
+    .a11y-status-badge {
+      display: inline-block;
+      background: #fdf3d7;
+      color: #7a5e00;
+      border: 1px solid #e8d178;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+    }
+
+    /* ---- CONFORMANCE SUMMARY TABLE ---- */
+    .a11y-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.4rem 0 2rem;
+      font-size: 0.86rem;
+    }
+    .a11y-summary-table th {
+      background: #4a6371;
+      color: #fff;
+      padding: 10px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .a11y-summary-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #cfcec9;
+      color: #5c5c5c;
+      vertical-align: middle;
+    }
+    .a11y-summary-table tr:nth-child(even) td { background: #f5f2ee; }
+    .pill {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .pill-pass  { background: #d4edda; color: #1a5c2a; }
+    .pill-partial { background: #fdf3d7; color: #7a5e00; }
+    .pill-na    { background: #ebebeb; color: #666; }
+
+    /* ---- PRINCIPLE BLOCKS ---- */
+    .a11y-principle {
+      background: #f5f2ee;
+      border-top: 3px solid #3c7a6c;
+      padding: 24px 28px;
+      margin: 24px 0;
+      border-radius: 0 0 4px 4px;
+    }
+    .a11y-principle h3 {
+      margin-top: 0;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #2f6358;
+    }
+    .a11y-principle ul {
+      margin-bottom: 0;
+    }
+
+    /* ---- LIMITATION CARDS ---- */
+    .a11y-limitation-item {
+      background: #fff;
+      border-left: 4px solid #c8882a;
+      padding: 16px 24px;
+      margin-bottom: 14px;
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .a11y-limitation-item h3 {
+      font-family: var(--font-sans, "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #36505d;
+      margin: 0 0 6px;
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
+    .a11y-limitation-item p {
+      margin: 0 0 8px;
+      font-size: 0.87rem;
+      line-height: 1.72;
+      color: #6b6b6b;
+    }
+    .a11y-limitation-item p:last-child { margin-bottom: 0; }
+    .wcag-ref {
+      display: inline-block;
+      font-size: 0.76rem;
+      color: #4e9484;
+      font-weight: 600;
+    }
+
+    /* ---- EXCEPTION CARDS ---- */
+    .a11y-exception-item {
+      background: #f5f2ee;
+      border-left: 4px solid #cfcec9;
+      padding: 14px 22px;
+      margin-bottom: 12px;
+      border-radius: 0 4px 4px 0;
+    }
+    .a11y-exception-item h3 {
+      font-family: var(--font-sans, "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif);
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #4a6371;
+      margin: 0 0 6px;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .a11y-exception-item p {
+      margin: 0;
+      font-size: 0.86rem;
+      line-height: 1.68;
+      color: #6b6b6b;
+    }
+
+    /* ---- WCAG 2.2 CALLOUT ---- */
+    .wcag22-callout {
+      background: #e8f4f1;
+      border: 1px solid #b0d8d0;
+      padding: 20px 24px;
+      margin: 1.4rem 0;
+      border-radius: 4px;
+    }
+    .wcag22-callout p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.76;
+      color: #2f6358;
+    }
+    .wcag22-callout strong { color: #1e4a40; }
+
+    @media (max-width: 640px) {
+      .utility-hero { padding: 56px 20px 52px; }
+      .policy-section { padding: 44px 20px 80px; }
+      .a11y-summary-table { font-size: 0.8rem; }
+      .a11y-summary-table th, .a11y-summary-table td { padding: 8px 12px; }
+      .a11y-principle { padding: 18px 20px; }
+    }
+  </style>
+  <link rel="stylesheet" href="accessibility.css?v=2">
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDVPHZJJ"
+  height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<div class="site-wrap">
+
+  <!-- ===== STICKY SHELL (header + nav) ===== -->
+  <div class="site-sticky" id="site-sticky">
+
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <a href="index"><picture><source srcset="Logo/Hilston_Park_Logo_3_Black.webp" type="image/webp"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park" width="315" height="60"></picture></a>
+        </div>
+        <div class="header-actions">
+          <a href="contact" class="btn-book">BOOK NOW</a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NAV ===== -->
+    <nav class="main-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="about">ABOUT</a></li>
+        <li><a href="educational">EDUCATION</a></li>
+        <li><a href="accommodation">PRIVATE STAY</a></li>
+        <li><a href="event">EVENTS</a></li>
+        <li><a href="activity">ACTIVITIES</a></li>
+        <li><a href="gallery">GALLERY</a></li>
+        <li><a href="contact">CONTACT</a></li>
+        <li><a href="blogs">BLOG</a></li>
+      </ul>
+    </nav>
+
+  </div><!-- /site-sticky -->
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="about">About</a></li>
+        <li><a href="educational">Education</a></li>
+        <li><a href="accommodation">Private Stay</a></li>
+        <li><a href="event">Events</a></li>
+        <li><a href="activity">Activities</a></li>
+        <li><a href="gallery">Gallery</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="blogs">Blog</a></li>
+        <li class="mobile-nav-book-item"><a href="contact" class="btn-book mobile-nav-book">BOOK NOW</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main id="main-content" tabindex="-1">
+
+    <section class="utility-hero">
+      <span class="eyebrow">Hilston Park</span>
+      <h1>Accessibility Statement</h1>
+      <p>Our commitment to WCAG 2.2 Level AA conformance, how we are actively improving accessibility, known limitations, and how to contact us with accessibility feedback.</p>
+    </section>
+
+    <section class="policy-section" aria-label="Accessibility statement content">
+
+      <!-- 1. OUR COMMITMENT -->
+      <h2 class="first">Our Commitment</h2>
+      <p>Hilston Park is committed to making our website accessible to as many people as possible, including people with disabilities, people who use assistive technologies, and people who depend on keyboard, switch, or voice navigation.</p>
+      <p>We aim to conform to the <strong>Web Content Accessibility Guidelines (WCAG) 2.2 Level AA</strong>, published by the World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI). These guidelines define how to make web content perceivable, operable, understandable, and robust for people with a wide range of disabilities — including visual, auditory, physical, speech, cognitive, language, learning, and neurological disabilities.</p>
+      <p>We treat accessibility as an ongoing responsibility, not a one-time fix. We are actively working to identify and address gaps, and we welcome feedback from users who encounter barriers on our site.</p>
+
+      <!-- 2. CONFORMANCE STATUS -->
+      <h2>Conformance Status</h2>
+      <span class="a11y-status-badge" aria-label="Conformance status: partially conformant, actively improving">Partially Conformant &mdash; Actively Improving</span>
+      <p>The Hilston Park website <strong>partially conforms</strong> to WCAG 2.2 Level AA. This means that some parts of the content do not yet fully meet the standard. We are actively working to address the specific limitations listed in the <a href="#known-limitations">Known Limitations</a> section below.</p>
+      <p>Formal colour contrast testing and a full interactive component audit have not yet been conducted. All other criteria have been assessed through self-evaluation and automated browser tools.</p>
+
+      <!-- CONFORMANCE OVERVIEW TABLE -->
+      <table class="a11y-summary-table" aria-label="WCAG 2.2 Level AA conformance overview by principle">
+        <thead>
+          <tr>
+            <th scope="col">WCAG Principle</th>
+            <th scope="col">Status</th>
+            <th scope="col">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Perceivable</strong></td>
+            <td><span class="pill pill-partial">Partial</span></td>
+            <td>Newsletter inputs lack programmatic labels; colour contrast not formally verified</td>
+          </tr>
+          <tr>
+            <td><strong>2. Operable</strong></td>
+            <td><span class="pill pill-partial">Partial</span></td>
+            <td>No site search or sitemap; some small touch targets not verified against 24&times;24&nbsp;px minimum</td>
+          </tr>
+          <tr>
+            <td><strong>3. Understandable</strong></td>
+            <td><span class="pill pill-pass">Meets</span></td>
+            <td>Consistent navigation and identification; correct page language; error handling on contact form</td>
+          </tr>
+          <tr>
+            <td><strong>4. Robust</strong></td>
+            <td><span class="pill pill-partial">Partial</span></td>
+            <td>Form submission status messages not verified as ARIA live regions; GTM iframes being updated</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 3. WHAT WCAG 2.2 AA REQUIRES -->
+      <h2>What WCAG 2.2 Level AA Requires</h2>
+      <p>WCAG 2.2 is organised around four principles. Each principle groups the specific requirements (called <em>success criteria</em>) that a website must meet. The following is a summary of Level AA requirements and how they apply to this site.</p>
+
+      <div class="wcag22-callout" role="note">
+        <p><strong>WCAG 2.2 vs. 2.1:</strong> WCAG 2.2 (published October 2023) extends WCAG 2.1 with six new success criteria at Level A and AA. These additions focus specifically on users with low vision, cognitive limitations, and motor disabilities. All WCAG 2.1 Level AA criteria are included within WCAG 2.2. This statement covers the full WCAG 2.2 Level AA set.</p>
+      </div>
+
+      <h3>1. Perceivable &mdash; Visual Presentation &amp; Contrast</h3>
+      <p>Users must be able to perceive all information presented on the page regardless of which of their senses they use.</p>
+      <ul>
+        <li><strong>Colour contrast (1.4.3):</strong> Body text and images of text must achieve a minimum 4.5:1 contrast ratio against their background. For large text (18pt or 14pt bold and above), the minimum is 3:1.</li>
+        <li><strong>Non-text contrast (1.4.11):</strong> User interface components (such as input field borders, checkbox outlines, and focus rings) and meaningful graphical elements must achieve at least 3:1 contrast against adjacent colours.</li>
+        <li><strong>Text resize (1.4.4):</strong> Users must be able to resize text up to 200% using browser zoom without losing content or functionality.</li>
+        <li><strong>Images of text (1.4.5):</strong> Text must be rendered as real text in HTML, not as images of text, unless the specific presentation is essential (logotypes are exempt).</li>
+        <li><strong>Reflow (1.4.10):</strong> Content must reflow at 400% zoom (320&nbsp;CSS pixels wide) without requiring two-dimensional scrolling.</li>
+        <li><strong>Text alternatives (1.1.1):</strong> All meaningful images must have descriptive alternative text. Decorative images must be hidden from assistive technologies.</li>
+        <li><strong>Input purpose (1.3.5):</strong> The purpose of form inputs collecting personal information must be programmatically identifiable so browsers and assistive technologies can autofill or relay context to users.</li>
+      </ul>
+
+      <h3>2. Operable &mdash; Navigation &amp; Interaction</h3>
+      <p>Users must be able to operate all interface components and navigate all content.</p>
+      <ul>
+        <li><strong>Keyboard access (2.1.1):</strong> All functionality must be accessible using a keyboard alone, with no keyboard traps.</li>
+        <li><strong>Bypass blocks (2.4.1):</strong> A mechanism to skip repeated navigation blocks (such as a skip link) must be available on every page.</li>
+        <li><strong>Visible focus (2.4.7):</strong> A clearly visible focus indicator must be present whenever a user navigates by keyboard.</li>
+        <li><strong>Multiple ways (2.4.5):</strong> More than one way must be available to locate a page within the site (e.g. navigation menu plus a site search or sitemap).</li>
+        <li><strong>Consistent navigation (3.2.3):</strong> Navigation menus that repeat across pages must appear in the same relative order each time.</li>
+        <li><strong>Focus not obscured &mdash; WCAG 2.2 (2.4.11):</strong> When an element receives keyboard focus, it must not be entirely hidden by author-created content such as sticky headers or cookie banners.</li>
+        <li><strong>Dragging movements &mdash; WCAG 2.2 (2.5.7):</strong> Any feature that requires a dragging gesture must also be operable by a single pointer click or tap, with no dragging required.</li>
+        <li><strong>Target size minimum &mdash; WCAG 2.2 (2.5.8):</strong> Interactive targets (buttons, icons, links) must measure at least 24&times;24&nbsp;CSS pixels, or have sufficient spacing so targets do not overlap.</li>
+      </ul>
+
+      <h3>3. Understandable &mdash; Readability, Forms &amp; Error Handling</h3>
+      <p>Users must be able to understand both the information and how to operate the interface.</p>
+      <ul>
+        <li><strong>Page language (3.1.1):</strong> The <code>lang</code> attribute on the <code>&lt;html&gt;</code> element must correctly identify the primary language of each page.</li>
+        <li><strong>Error identification (3.3.1):</strong> When a form error is detected automatically, the field in error must be identified and the error described in text.</li>
+        <li><strong>Labels or instructions (3.3.2):</strong> Labels or instructions must be provided for all user inputs.</li>
+        <li><strong>Error suggestion (3.3.3):</strong> Where an input error is detected and a correction is known, a suggestion must be provided to the user unless doing so would compromise security.</li>
+        <li><strong>Consistent help &mdash; WCAG 2.2 (3.2.6):</strong> Help mechanisms (such as contact details or a support link) that repeat across pages must appear in the same relative location on every page.</li>
+        <li><strong>Redundant entry &mdash; WCAG 2.2 (3.3.7):</strong> Information already entered by a user within the same session or process must not be requested again unless re-entry is essential or for security reasons.</li>
+        <li><strong>Accessible authentication &mdash; WCAG 2.2 (3.3.8):</strong> Where a user must authenticate, the process must not rely solely on a cognitive function test (such as remembering a password or solving a puzzle) unless an alternative method or assistance is provided.</li>
+      </ul>
+
+      <h3>4. Robust &mdash; Technical Compatibility</h3>
+      <p>Content must be robust enough to be interpreted reliably by current and future assistive technologies.</p>
+      <ul>
+        <li><strong>Name, role, value (4.1.2):</strong> All user interface components must expose their name, role, and current state or value programmatically so assistive technologies can interpret and relay them correctly.</li>
+        <li><strong>Status messages (4.1.3):</strong> Status messages (such as form submission confirmations or error alerts) must be programmatically determined through role or properties (for example <code>aria-live</code>) so they are announced to screen reader users without requiring focus to move to the message.</li>
+      </ul>
+
+      <h3>Media Requirements</h3>
+      <p>Pre-recorded video content must include audio descriptions for visual elements. Live audio content must provide real-time captions. The Hilston Park website does not currently host embedded synchronised media (pre-recorded video with audio, or live streams). Should video or live audio content be added in the future, captions and audio descriptions will be provided in accordance with WCAG 2.2 criteria 1.2.4 and 1.2.5.</p>
+
+      <!-- 4. HOW WE MEET THESE REQUIREMENTS -->
+      <h2>How We Address These Requirements</h2>
+      <p>The following measures are currently in place across the Hilston Park website:</p>
+
+      <div class="a11y-principle">
+        <h3>Perceivable</h3>
+        <ul>
+          <li>All meaningful images carry descriptive alternative text following the <code>alt</code> attribute standard</li>
+          <li>Decorative background images use <code>alt=""</code> and <code>role="presentation"</code> to be skipped by screen readers</li>
+          <li>The site is fully responsive and designed mobile-first; content reflows correctly at all viewport widths including 320&nbsp;px</li>
+          <li>All typography uses relative units (<code>rem</code> and <code>em</code>); text resizes correctly to 200% browser zoom without overflow</li>
+          <li>No images of text are used for informational content; the Hilston Park logo is a logotype (see Exceptions below)</li>
+          <li>The site does not play audio automatically; no audio content requires volume controls</li>
+          <li>Colour is not used as the sole means of conveying information, indicating an action, or distinguishing elements</li>
+          <li>An on-page accessibility toolbar provides high-contrast colour inversion and four colourblind simulation modes (deuteranopia, protanopia, tritanopia, achromatopsia), with preferences saved across sessions</li>
+        </ul>
+      </div>
+
+      <div class="a11y-principle">
+        <h3>Operable</h3>
+        <ul>
+          <li>A skip-to-main-content link is provided on every page; it becomes visible on keyboard focus</li>
+          <li>All interactive elements &mdash; navigation links, buttons, form fields, and the cookie banner &mdash; are reachable and operable by keyboard alone</li>
+          <li>The mobile navigation overlay is dismissible using the Escape key; focus is managed on open and close</li>
+          <li>Keyboard focus indicators are clearly visible on all interactive elements via <code>:focus-visible</code> styles in the accessibility stylesheet</li>
+          <li>All pages have unique, descriptive <code>&lt;title&gt;</code> elements</li>
+          <li>Headings follow a logical hierarchy (h1 &rarr; h2 &rarr; h3) on all pages</li>
+          <li>HTML landmark regions (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>) are used throughout</li>
+          <li>The sticky site header is compact; keyboard-focused elements below it are not entirely obscured (WCAG 2.2 &sect;2.4.11)</li>
+          <li>No drag-only interactions are used; all interactive controls use standard pointer or keyboard events (WCAG 2.2 &sect;2.5.7)</li>
+          <li>Social icon links and navigation items include <code>aria-label</code> attributes to provide accessible names beyond visual icon presentation</li>
+        </ul>
+      </div>
+
+      <div class="a11y-principle">
+        <h3>Understandable</h3>
+        <ul>
+          <li>All pages declare <code>&lt;html lang="en"&gt;</code> for correct language identification</li>
+          <li>Header and footer navigation appear in the same order on every page (WCAG &sect;3.2.3)</li>
+          <li>Interactive controls with the same function are named consistently across pages (WCAG &sect;3.2.4)</li>
+          <li>The contact form identifies required fields and displays error messages in text when validation fails (WCAG &sect;3.3.1)</li>
+          <li>Contact details (email and phone number) appear in the footer on every page in a consistent position (WCAG 2.2 &sect;3.2.6)</li>
+          <li>No multi-step form process requires a user to re-enter information they have already provided in the same session (WCAG 2.2 &sect;3.3.7)</li>
+          <li>The site has no user authentication; no login, password, or cognitive-test step exists (WCAG 2.2 &sect;3.3.8 not applicable)</li>
+          <li>User preferences set through the accessibility toolbar (font size, colour mode) persist across pages using <code>localStorage</code></li>
+        </ul>
+      </div>
+
+      <div class="a11y-principle">
+        <h3>Robust</h3>
+        <ul>
+          <li>WAI-ARIA roles, states, and properties are applied throughout: <code>aria-label</code>, <code>aria-expanded</code>, <code>aria-controls</code>, <code>aria-hidden</code>, <code>aria-labelledby</code>, and <code>role="dialog"</code> on the mobile navigation overlay</li>
+          <li>HTML is written to valid, semantic standards; landmark elements are used in preference to generic <code>&lt;div&gt;</code> containers where possible</li>
+          <li>Compatibility is targeted at current versions of Chrome, Firefox, Safari, and Edge with commonly used assistive technology combinations (NVDA + Chrome, JAWS + Chrome, VoiceOver + Safari on macOS and iOS)</li>
+        </ul>
+      </div>
+
+      <!-- 5. KNOWN LIMITATIONS -->
+      <h2 id="known-limitations">Known Limitations</h2>
+      <p>Despite the measures above, the following known limitations remain. We are actively working to resolve them:</p>
+
+      <div class="a11y-limitation-item">
+        <h3>Newsletter sign-up inputs &mdash; placeholder-only labelling</h3>
+        <p>Email sign-up fields on the Activities, Events, Accommodation, Blog, and Visitor Guide pages use only placeholder text to describe the input purpose. Placeholder text disappears as soon as the user begins typing and is not consistently announced as a label by all screen readers. A visible or programmatically associated <code>&lt;label&gt;</code> element, or an <code>aria-label</code> attribute, is required.</p>
+        <p><strong>Impact:</strong> Screen reader users may not receive the field description once typing begins.</p>
+        <p><span class="wcag-ref">WCAG 2.2 &sect;1.3.1 Info and Relationships (A) &nbsp;|&nbsp; &sect;3.3.2 Labels or Instructions (A) &nbsp;|&nbsp; &sect;4.1.2 Name, Role, Value (A)</span></p>
+      </div>
+
+      <div class="a11y-limitation-item">
+        <h3>Colour contrast &mdash; not formally tool-verified</h3>
+        <p>Visual review of the colour palette suggests the primary text colour (#2a2a2a on #f5f2ee background) and muted text (#5c5c5c) meet the 4.5:1 minimum. The teal accent colour (#3c7a6c) used for links and borders is estimated to meet 3:1 for large text. However, a formal audit using an automated contrast checker (such as WCAG Contrast Analyser or axe) has not been completed across all colour pairings on all pages.</p>
+        <p><strong>Impact:</strong> Some colour combinations &mdash; particularly small link text and muted body copy &mdash; may not formally meet 4.5:1 without verified measurement.</p>
+        <p><span class="wcag-ref">WCAG 2.2 &sect;1.4.3 Contrast Minimum (AA) &nbsp;|&nbsp; &sect;1.4.11 Non-text Contrast (AA)</span></p>
+      </div>
+
+      <div class="a11y-limitation-item">
+        <h3>Multiple ways to find a page &mdash; no site search or sitemap</h3>
+        <p>WCAG requires more than one way to locate any page within the site. Currently, the primary navigation menu and footer links are the only discovery mechanisms. No site search function or dedicated sitemap page is provided.</p>
+        <p><strong>Impact:</strong> Users who cannot use or find the navigation menu have limited alternative routes to reach specific pages.</p>
+        <p><span class="wcag-ref">WCAG 2.2 &sect;2.4.5 Multiple Ways (AA)</span></p>
+      </div>
+
+      <div class="a11y-limitation-item">
+        <h3>Touch target size &mdash; not fully verified</h3>
+        <p>WCAG 2.2 requires interactive targets to be at least 24&times;24&nbsp;CSS pixels, or have sufficient offset spacing from adjacent targets. Social media icon links in the footer and some smaller navigation items have not been formally measured against this criterion.</p>
+        <p><strong>Impact:</strong> Users with motor impairments or those using touchscreens may find some small targets difficult to activate accurately.</p>
+        <p><span class="wcag-ref">WCAG 2.2 &sect;2.5.8 Target Size Minimum (AA)</span></p>
+      </div>
+
+      <div class="a11y-limitation-item">
+        <h3>Form status messages &mdash; ARIA live region not confirmed</h3>
+        <p>The contact form displays a success or error message after submission. It has not been confirmed that these messages are exposed as <code>aria-live</code> regions or via an equivalent ARIA role so that screen reader users receive the announcement without needing to move focus to the message area manually.</p>
+        <p><strong>Impact:</strong> Screen reader users may not be automatically informed of whether their form submission succeeded or failed.</p>
+        <p><span class="wcag-ref">WCAG 2.2 &sect;4.1.3 Status Messages (AA)</span></p>
+      </div>
+
+      <div class="a11y-limitation-item">
+        <h3>Google Tag Manager noscript iframes &mdash; missing title attribute</h3>
+        <p>All pages include a hidden Google Tag Manager <code>&lt;noscript&gt;</code> iframe with zero dimensions and <code>display:none</code> styling. These iframes currently lack a <code>title</code> attribute on most pages. A <code>title="Google Tag Manager"</code> attribute has already been added to this accessibility statement page and is being rolled out across the full site.</p>
+        <p><strong>Impact:</strong> Negligible &mdash; elements are invisible &mdash; but technically a non-conformance.</p>
+        <p><span class="wcag-ref">WCAG 2.2 &sect;4.1.2 Name, Role, Value (A)</span></p>
+      </div>
+
+      <div class="policy-note" role="note">
+        If you encounter an accessibility barrier not listed above, please report it. We treat all accessibility reports as priority issues and aim to respond within five working days.
+      </div>
+
+      <!-- 6. EXCEPTIONS -->
+      <h2>Exceptions &mdash; Where Contrast Requirements Do Not Apply</h2>
+      <p>WCAG 2.2 explicitly excludes the following from the colour contrast requirement (criteria 1.4.3 and 1.4.11). These are not limitations; they are specified exceptions in the standard:</p>
+
+      <div class="a11y-exception-item">
+        <h3>Disabled interface elements</h3>
+        <p>Components that are disabled &mdash; such as a greyed-out submit button when a form is incomplete &mdash; are exempt from contrast requirements. Their reduced contrast is intentional, signalling to users that the component is not yet interactive. No contrast minimum applies to inactive or disabled state styling.</p>
+      </div>
+
+      <div class="a11y-exception-item">
+        <h3>Decorative text and purely decorative elements</h3>
+        <p>Text that is purely decorative and conveys no information, as well as text hidden from view or not visible to any user, is exempt. On this site, background overlay text used purely for visual texture is treated as decorative and is not relied upon to convey any meaning.</p>
+      </div>
+
+      <div class="a11y-exception-item">
+        <h3>Logotypes</h3>
+        <p>Text that forms part of a logo or brand name is exempt from the contrast requirement. The Hilston Park logo, which includes the brand wordmark as an image, is considered a logotype under WCAG 2.2 and is therefore not subject to the 4.5:1 text contrast minimum.</p>
+      </div>
+
+      <!-- 7. FEEDBACK AND CONTACT -->
+      <h2>Feedback and Contact</h2>
+      <p>We welcome feedback on the accessibility of the Hilston Park website. If you experience a barrier, find something difficult to use, or have a suggestion for how we could improve, please contact us:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:hello@hilstonpark.com">hello@hilstonpark.com</a></li>
+        <li><strong>Phone:</strong> <a href="tel:+441600240033">+44 (0) 1600 240033</a></li>
+        <li><strong>Contact form:</strong> <a href="contact">hilstonpark.com/contact</a></li>
+      </ul>
+      <p>We aim to respond to accessibility enquiries within <strong>five working days</strong>. If the issue requires development changes, we will provide an estimated timeframe for resolution.</p>
+
+      <!-- 8. TECHNICAL SPECIFICATIONS -->
+      <h2>Technical Specifications</h2>
+      <p>The Hilston Park website is built with HTML5, CSS3, and vanilla JavaScript. It does not use any JavaScript framework. The site relies on the following technologies for accessibility:</p>
+      <ul>
+        <li>HTML5 semantic elements and landmark roles (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;address&gt;</code>)</li>
+        <li>CSS3 for layout, responsive behaviour, focus styles, and colour contrast</li>
+        <li>Vanilla JavaScript for interactive components: mobile navigation overlay, date picker, cookie banner, and accessibility toolbar</li>
+        <li>WAI-ARIA (Accessible Rich Internet Applications) 1.2 roles, states, and properties throughout</li>
+        <li>A per-page accessibility toolbar providing font size adjustment, high-contrast inversion, and colourblind simulation filters</li>
+        <li>A global skip-to-content link on every page, revealed on keyboard focus</li>
+      </ul>
+      <p>The site is deployed on Vercel with <code>cleanUrls: true</code>, meaning pages are reachable at clean paths such as <code>/accessibility</code> rather than <code>/accessibility.html</code>.</p>
+
+      <!-- 9. ASSESSMENT APPROACH -->
+      <h2>Assessment Approach</h2>
+      <p>Hilston Park assessed the accessibility of this website using self-evaluation and automated browser tools. The specific methods used include:</p>
+      <ul>
+        <li><strong>Self-evaluation against WCAG 2.2 Level AA success criteria</strong> &mdash; each criterion reviewed manually by the development team</li>
+        <li><strong>Automated browser tools</strong> &mdash; structural issues including missing alternative text, absent form labels, improper heading hierarchy, and missing ARIA attributes were identified using browser-based accessibility inspection tools</li>
+        <li><strong>Keyboard navigation testing</strong> &mdash; all pages tested for complete keyboard operability, logical focus order, and visible focus indicators</li>
+        <li><strong>Screen reader spot-checks</strong> &mdash; key user journeys reviewed with VoiceOver on macOS and Safari</li>
+        <li><strong>Responsive and reflow testing</strong> &mdash; all breakpoints tested from 320&nbsp;px upwards</li>
+      </ul>
+      <p>No formal accredited third-party audit has been conducted. We plan to commission an independent evaluation in the future. The W3C provides a full reference at <a href="https://www.w3.org/WAI/WCAG22/quickref/" target="_blank" rel="noopener noreferrer">How to Meet WCAG (Quick Reference)</a>.</p>
+
+      <!-- 10. DATE -->
+      <h2>Date of This Statement</h2>
+      <p>This accessibility statement was created in <strong>July 2026</strong> and reflects the state of the Hilston Park website at that date. It will be reviewed and updated whenever significant content or structural changes are made to the site, and at least once annually.</p>
+
+      <div class="policy-links">
+        <p>See also: <a href="privacy">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms">Terms &amp; Conditions</a> &nbsp;|&nbsp; <a href="legal">Safeguarding Policy</a> &nbsp;|&nbsp; <a href="contact">Contact Hilston Park</a></p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-crest">
+          <picture><source srcset="Logo/Hilston_Park_Logo_White.webp" type="image/webp"><img src="Logo/Hilston_Park_Logo_White.png" alt="Hilston Park" width="315" height="60"></picture>
+        </div>
+        <address>
+          Newcastle, Monmouth,<br>
+          Gwent, Wales, NP25 5NY
+        </address>
+        <div class="social-icons">
+          <a href="https://www.youtube.com/@HilstonPark" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
+          <a href="https://www.instagram.com/hilstonparkofficial/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4A6.2 6.2 0 0012 5.8zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"/></svg></a>
+          <a href="https://www.tiktok.com/@hilston.park" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.84 1.54V6.8a4.84 4.84 0 01-1.07-.11z"/></svg></a>
+          <a href="https://www.facebook.com/hilstonparkofficial" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.4C0 23.4.6 24 1.3 24H12.8V14.7H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.7 4.6-4.7 1.3 0 2.5.1 3.7.2v3.3h-2.5c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.2c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h2>Home</h2>
+        <ul>
+          <li><a href="about">About</a></li>
+          <li><a href="contact">Contact</a></li>
+          <li><a href="blogs">Blog</a></li>
+          <li><a href="gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Visitors</h2>
+        <ul>
+          <li><a href="visitors">Visitor Guide</a></li>
+          <li><a href="educational">Educational</a></li>
+          <li><a href="event">Events</a></li>
+          <li><a href="accommodation">Private Stay</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="legal">Safeguarding &amp; Child<br>Protection Policy</a></li>
+          <li><a href="terms">Terms &amp; Conditions</a></li>
+          <li><a href="privacy">Privacy Policy</a></li>
+          <li><a href="accessibility">Accessibility Statement</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-meta">
+        <p class="footer-copy">&copy; 2026 Hilston Park. All rights reserved.</p>
+        <p class="footer-madeby">Website made by <a href="https://www.5rv.digital" target="_blank" rel="noopener noreferrer"><strong>5RV Digital</strong></a></p>
+      </div>
+    </div>
+    <div class="footer-bar"></div>
+  </footer>
+
+</div><!-- /site-wrap -->
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="script.js?v=5"></script>
+<script src="accessibility.js?v=2" defer></script>
+<button id="hp-cookie-reopen" class="hp-cookie-reopen" aria-label="Manage cookie preferences" title="Manage cookie preferences" onclick="var w=document.getElementById('custom-cookie-manager');if(w){w.style.display='block';}return false;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="28" height="28"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="8.5" r="0.8" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="14.5" r="0.8" fill="currentColor" stroke="none"/></svg></button>
+</body>
+</html>
