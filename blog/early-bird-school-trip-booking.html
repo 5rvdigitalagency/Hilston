@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <base href="/">
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TDVPHZJJ');</script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TDVPHZJJ');</script>
   <!-- End Google Tag Manager -->
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
-  <title>Corporate Events at Hilston Park | Hilston Park</title>
-  <meta name="description" content="Looking for corporate events that integrate team-building activities and leadership development in a stunning outdoor setting? Discover what Hilston Park offers for businesses.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <title>Early Bird Offers for Educational Trips at Hilston Park</title>
+  <meta name="description" content="Secure your preferred school trip dates with early booking at Hilston Park and give students an unforgettable outdoor learning adventure.">
+  <link rel="canonical" href="https://hilstonpark.com/blog/early-bird-school-trip-booking">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style.css?v=6">
   <style>
@@ -18,7 +29,8 @@
     .post-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,22,32,0.92) 35%, rgba(10,22,32,0.3) 75%, rgba(10,22,32,0.12) 100%); }
     .post-hero-inner { position: relative; z-index: 2; padding: 0 80px 72px; max-width: 860px; }
     .post-hero-breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 22px; }
-    .post-hero-breadcrumb a { color: rgba(255,255,255,0.55); } .post-hero-breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+    .post-hero-breadcrumb a { color: rgba(255,255,255,0.55); }
+    .post-hero-breadcrumb a:hover { color: rgba(255,255,255,0.9); }
     .post-back-btn { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.70); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 20px; transition: color 0.2s; }
     .post-back-btn:hover { color: var(--white); }
     .post-hero-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
@@ -30,10 +42,14 @@
     .post-content { max-width: 720px; }
     .post-content h2 { font-family: var(--font-serif); font-weight: normal; font-size: clamp(1.4rem, 2vw, 1.9rem); color: var(--text); margin: 48px 0 18px; line-height: 1.2; }
     .post-content h2:first-child { margin-top: 0; }
+    .post-content h3 { font-family: var(--font-serif); font-weight: normal; font-size: 1.18rem; color: var(--text); margin: 32px 0 12px; }
     .post-content p { font-size: 0.94rem; line-height: 1.88; color: var(--text-muted); margin-bottom: 1.2rem; }
-    .post-content ul { margin: 0 0 1.4rem 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .post-content ul, .post-content ol { margin: 0 0 1.4rem 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .post-content li { font-size: 0.92rem; line-height: 1.72; color: var(--text-muted); padding-left: 22px; position: relative; }
     .post-content ul li::before { content: "—"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+    .post-content ol { counter-reset: ol; }
+    .post-content ol li { counter-increment: ol; }
+    .post-content ol li::before { content: counter(ol) "."; position: absolute; left: 0; color: var(--teal); font-weight: 700; font-size: 0.82rem; }
     .post-content blockquote { border-left: 3px solid var(--teal); padding: 18px 28px; background: var(--beige); margin: 32px 0; }
     .post-content blockquote p { font-style: italic; font-size: 1.04rem; color: var(--text); margin: 0; }
     .post-inline-img { width: 100%; margin: 36px 0; overflow: hidden; }
@@ -41,7 +57,7 @@
     .post-inline-img figcaption { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; padding: 10px 0 0; text-align: center; }
     .post-cta-band { background: var(--teal); padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: 44px 0; }
     .post-cta-band p { color: rgba(255,255,255,0.9); font-size: 0.9rem; line-height: 1.5; margin: 0; }
-    .post-cta-band a { white-space: nowrap; display: inline-block; padding: 13px 26px; background: var(--white); color: var(--teal); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; flex-shrink: 0; transition: background 0.2s; }
+    .post-cta-band a { white-space: nowrap; display: inline-block; padding: 13px 26px; background: var(--white); color: var(--teal); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; flex-shrink: 0; transition: background 0.2s, color 0.2s; }
     .post-cta-band a:hover { background: var(--beige); }
     .post-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 32px; }
     .sidebar-block { border-top: 2px solid var(--teal); padding-top: 20px; }
@@ -53,7 +69,7 @@
     .related-item { display: flex; gap: 14px; align-items: flex-start; }
     .related-item img { width: 64px; height: 52px; object-fit: cover; flex-shrink: 0; }
     .related-item-text { flex: 1; }
-    .related-item-text .rel-cat { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px; }
+    .related-item-text .rel-cat { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
     .related-item-text a { font-size: 0.8rem; font-family: var(--font-serif); font-weight: normal; color: var(--text); line-height: 1.3; }
     .related-item-text a:hover { color: var(--teal); }
     .more-articles { background: transparent; border-top: 1px solid rgba(0,0,0,0.06); padding: 80px 80px 90px; }
@@ -79,7 +95,9 @@
   <link rel="stylesheet" href="accessibility.css?v=2">
 </head>
 <body>
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDVPHZJJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDVPHZJJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="site-wrap">
   <div class="site-sticky" id="site-sticky">
     <header class="site-header">
@@ -87,7 +105,9 @@
         <div class="header-logo"><a href="index"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park"></a></div>
         <div class="header-actions">
           <a href="javascript:void(0)" class="btn-book">BOOK NOW</a>
-          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav"><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span></button>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+          </button>
         </div>
       </div>
     </header>
@@ -95,7 +115,8 @@
       <ul class="nav-list">
         <li><a href="about">ABOUT</a></li><li><a href="educational">EDUCATION</a></li><li><a href="accommodation">PRIVATE STAY</a></li>
         <li><a href="event">EVENTS</a></li><li><a href="activity">ACTIVITIES</a></li>
-        <li><a href="gallery">GALLERY</a></li><li><a href="contact">CONTACT</a></li><li><a href="blogs" class="nav-active">BLOG</a></li>
+        <li><a href="gallery">GALLERY</a></li><li><a href="contact">CONTACT</a></li>
+        <li><a href="blogs" class="nav-active">BLOG</a></li>
       </ul>
     </nav>
   </div>
@@ -110,63 +131,52 @@
   </div>
 
   <section class="post-hero" id="main-content" tabindex="-1">
-    <div class="post-hero-bg" style="background-image:url(images/event-hero.jpg)"></div>
+    <div class="post-hero-bg" style="background-image:url(images/edu-group.jpg)"></div>
     <div class="post-hero-overlay"></div>
     <div class="post-hero-inner">
       <a href="blogs" class="post-back-btn">&#8592; Back to Blog</a>
-      <div class="post-hero-breadcrumb"><span>&#8250;</span><a href="blogs">Journal</a><span>&#8250;</span><span>Events</span></div>
+      <div class="post-hero-breadcrumb"><span>&#8250;</span><a href="blogs">Journal</a><span>&#8250;</span><span>Education</span></div>
       <div class="post-hero-meta">
-        <span class="post-cat-tag" style="background:var(--teal)">Events</span>
-        <span class="post-read-time">4 min read</span>
+        <span class="post-cat-tag" style="background:#5dab8c">Education</span>
+        <span class="post-read-time">5 min read</span>
       </div>
-      <h1>Corporate Events at Hilston&nbsp;Park</h1>
-      <p class="post-hero-intro">Looking for corporate events that integrate team-building activities, leadership development and enhanced staff engagement? Discover everything Hilston Park has to offer.</p>
+      <h1>Why Should You Secure Early Bird Booking for Educational Trips in&nbsp;2025?</h1>
+      <p class="post-hero-intro">With demand for educational trips continuing to grow, planning ahead has never been more important. Secure your spot and unlock the best outdoor learning experiences for your students.</p>
     </div>
   </section>
 
   <div class="post-body">
     <article class="post-content">
 
-      <p>Looking for corporate events that integrate team-building activities, leadership development and enhanced staff engagement in a stunning natural setting? Welcome to Hilston Park &mdash; where businesses come to challenge, connect and energise their teams in the heart of the Welsh countryside.</p>
+      <p>Planning school trips early has become crucial for securing the most sought-after destinations and activities. Schools that book in advance not only lock in preferred dates but also access the best rates, allowing more budget to be allocated elsewhere.</p>
 
-      <h2>Team Building Activities for Employees</h2>
-      <p>At Hilston Park, our corporate events are thoughtfully designed to address the real challenges that organisations face. Our wide range of activities ensures there is something to engage every member of your team:</p>
-      <ul>
-        <li><strong>High Ropes Course</strong> &mdash; builds trust, communication and mutual support under pressure</li>
-        <li><strong>Gladiator Challenge</strong> &mdash; a high-energy obstacle experience that reveals leadership under pressure</li>
-        <li><strong>Bushcraft</strong> &mdash; practical wilderness skills that foster creative problem-solving and resourcefulness</li>
-        <li><strong>Stargazing</strong> &mdash; a reflective, awe-inspiring experience that encourages perspective and wellbeing</li>
-        <li><strong>Mountaineering</strong> &mdash; develops goal-setting, perseverance and shared achievement</li>
-        <li><strong>Paddle Boarding</strong> &mdash; balance and focus under peaceful conditions &mdash; perfect for decompression</li>
-        <li><strong>Night Hikes</strong> &mdash; navigate together in the dark, building trust and team cohesion</li>
-        <li><strong>Bat Watching</strong> &mdash; a unique guided evening experience fostering curiosity and environmental awareness</li>
-      </ul>
+      <h2>The Benefits of Early Booking for Schools</h2>
+      <p>Booking early ensures your school secures the most sought-after destinations. Many schools miss out on prime locations because of last-minute arrangements, leaving them with fewer choices. By securing early bird deals, you lock in your preferred trip and access the best rates.</p>
+      <p>Moreover, educational trips booked in advance help administrators and teachers better prepare their students. From lesson plans tailored to specific locations to securing transportation and accommodation, early planning means everything will be in place for a smooth experience.</p>
+
+      <h2>Expand Learning Beyond the Classroom with Hilston Park</h2>
+      <p>At Hilston Park, one of the key attractions is our immersive outdoor learning activities. These experiences enable students to absorb knowledge in dynamic ways that go beyond traditional classroom settings. Whether it is problem-solving in nature, exploring geography in real-world settings, or taking part in physical challenges that build teamwork and resilience, each trip is filled with opportunities to develop critical skills.</p>
+      <p>Students also benefit from outdoor team-building activities, promoting essential qualities such as collaboration, trust, and leadership &mdash; all vital for their holistic growth.</p>
 
       <figure class="post-inline-img">
-        <img src="images/hp-svc-corporate.jpg" alt="Corporate team building at Hilston Park" loading="lazy">
-        <figcaption>Hilston Park provides the ideal outdoor environment for corporate teams to connect, challenge and grow together</figcaption>
+        <img src="images/edu-outdoor.jpg" alt="Students in outdoor learning at Hilston Park" loading="lazy">
+        <figcaption>Outdoor learning at Hilston Park connects curriculum to real-world experiences</figcaption>
       </figure>
 
-      <h2>Hilston&#8217;s Boost to Improve Staff Engagement</h2>
-      <p>The business case for investing in outdoor corporate experiences is well established. A well-designed outdoor event at Hilston Park delivers measurable improvements across several key workplace metrics:</p>
-      <ul>
-        <li><strong>Enhanced staff engagement</strong> &mdash; employees who feel valued and challenged are more motivated and committed</li>
-        <li><strong>Improved teamwork</strong> &mdash; shared challenges in an unfamiliar environment break down barriers and build genuine rapport</li>
-        <li><strong>Boosted morale</strong> &mdash; stepping away from desks and into nature revitalises energy and enthusiasm</li>
-        <li><strong>Strengthened communication</strong> &mdash; activities demand clear, respectful communication to succeed</li>
-      </ul>
+      <h2>Outdoor Learning Activities at Hilston Park: A Must for 2025</h2>
+      <p>Hilston Park leads the way in emphasising the value of outdoor learning. Our nature-based activities ignite curiosity and present students with unique challenges. Whether navigating scenic hiking trails, observing diverse wildlife, or gaining hands-on knowledge about the environment, these experiences foster a sense of responsibility and environmental awareness.</p>
 
       <blockquote>
-        <p>The best team-building experiences are not those that feel like training exercises &mdash; they are the ones that create real shared memories, genuine laughter, and a sense of collective achievement that teams carry back to the office.</p>
+        <p>By securing an early bird spot, your school can ensure access to outdoor adventures tailored to meet your students&#8217; educational needs &mdash; giving them a chance to disconnect from screens and immerse themselves in active, thoughtful learning.</p>
       </blockquote>
 
-      <h2>Looking for Outdoor Activity Centres for Corporate Events?</h2>
-      <p>Hilston Park is ideally positioned as a premier outdoor activity centre for corporate events in Wales and the wider UK. Our 60-acre estate in the Wye Valley provides a dramatic, inspiring backdrop for every type of corporate programme &mdash; from half-day team challenges to full residential leadership retreats.</p>
-      <p>Our expert staff work closely with you to tailor every detail, ensuring your event aligns with your specific objectives and delivers the outcomes your organisation needs.</p>
+      <h2>Why You Should Not Wait</h2>
+      <p>Waiting until the last minute may mean higher prices, fewer options, and more logistical challenges. By planning and making reservations now, schools can stay ahead of the rush and guarantee their preferred experiences at an affordable price.</p>
+      <p>Don&#8217;t miss out on the opportunity to give your students the best outdoor learning activities available. Secure your booking now and open the door to endless possibilities for growth, exploration, and fun.</p>
 
       <div class="post-cta-band">
-        <p>Ready to plan your next corporate event? Get in touch with our events team today.</p>
-        <a href="event">VIEW EVENTS</a>
+        <p>Secure your school trip to Hilston Park today. Our team will help you plan the perfect programme for your group.</p>
+        <a href="educational">PLAN A SCHOOL TRIP</a>
       </div>
 
     </article>
@@ -181,25 +191,25 @@
         <p class="sidebar-label">Related Articles</p>
         <div class="sidebar-related">
           <div class="related-item">
-            <img src="images/hero-corporate.jpg" alt="Team Building">
+            <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb6509b9ec1135b6c0dd89_Planning%20a%20School%20Adventure%20Trip%20in%202025.jpg" alt="School Trip">
             <div class="related-item-text">
-              <p class="rel-cat" style="color:#4e9484">Events</p>
-              <a href="blog-team-building">Team Building in the Welsh Countryside: What to Expect</a>
+              <p class="rel-cat" style="color:#5dab8c">Education</p>
+              <a href="/blog/school-trip-at-hilston-park">Planning a School Adventure Trip? Unleash It at Hilston Park</a>
             </div>
           </div>
           <div class="related-item">
-            <img src="images/edu-team.jpg" alt="Collaboration">
+            <img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb632a2b3438cd618d8b30_Why%20Schools%20Are%20Booking%20Their%202025%20Trips%20at%20Hilston%20Park.jpg" alt="Why Schools Book">
             <div class="related-item-text">
-              <p class="rel-cat" style="color:#4e9484">Events</p>
-              <a href="blog-harnessing-collaboration">Harnessing Collaboration at Hilston Park</a>
+              <p class="rel-cat" style="color:#5dab8c">Education</p>
+              <a href="/blog/why-schools-choose-hilston-park">Why Schools Are Booking Their Trips at Hilston Park</a>
             </div>
           </div>
         </div>
       </div>
       <div class="sidebar-block">
-        <p class="sidebar-label">Plan a Corporate Event</p>
-        <p>Residential and day programmes for corporate groups. Our team will tailor an experience around your objectives.</p>
-        <a href="event" class="sidebar-cta">View Events &#8594;</a>
+        <p class="sidebar-label">Plan a Visit</p>
+        <p>Schools, corporate groups and private guests can enquire directly. The team responds within one working day.</p>
+        <a href="javascript:void(0)" class="sidebar-cta" data-inquire>Get in Touch &#8594;</a>
       </div>
     </aside>
   </div>
@@ -210,17 +220,17 @@
       <a href="blogs">View All Articles &#8594;</a>
     </div>
     <div class="more-grid">
-      <a href="blog-team-building" class="more-card" style="text-decoration:none">
-        <div class="more-card-img"><img src="images/hero-corporate.jpg" alt="Team Building" loading="lazy"></div>
-        <div class="more-card-body"><span class="more-card-cat" style="color:#4e9484">Events</span><h3>Team Building in the Welsh Countryside: What to&nbsp;Expect</h3><span class="more-card-link">Read More &#8594;</span></div>
+      <a href="/blog/school-trip-at-hilston-park" class="more-card" style="text-decoration:none">
+        <div class="more-card-img"><img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb6509b9ec1135b6c0dd89_Planning%20a%20School%20Adventure%20Trip%20in%202025.jpg" alt="School Trip" loading="lazy"></div>
+        <div class="more-card-body"><span class="more-card-cat" style="color:#5dab8c">Education</span><h3>Planning a School Adventure Trip? Unleash It at Hilston&nbsp;Park</h3><span class="more-card-link">Read More &#8594;</span></div>
       </a>
-      <a href="blog-harnessing-collaboration" class="more-card" style="text-decoration:none">
-        <div class="more-card-img"><img src="images/edu-team.jpg" alt="Collaboration" loading="lazy"></div>
-        <div class="more-card-body"><span class="more-card-cat" style="color:#4e9484">Events</span><h3>Harnessing Collaboration at Hilston&nbsp;Park</h3><span class="more-card-link">Read More &#8594;</span></div>
+      <a href="/blog/adventure-activities-school-groups" class="more-card" style="text-decoration:none">
+        <div class="more-card-img"><img src="https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb632a2b3438cd618d8b30_Why%20Schools%20Are%20Booking%20Their%202025%20Trips%20at%20Hilston%20Park.jpg" alt="Why Schools Book" loading="lazy"></div>
+        <div class="more-card-body"><span class="more-card-cat" style="color:#5dab8c">Education</span><h3>Unleash the Adventure: Why Schools Are Booking Their 2025&nbsp;Trips</h3><span class="more-card-link">Read More &#8594;</span></div>
       </a>
-      <a href="blog-outdoor-team-building-setting" class="more-card" style="text-decoration:none">
-        <div class="more-card-img"><img src="images/hero-corporate.jpg" alt="Outdoor Team Building" loading="lazy"></div>
-        <div class="more-card-body"><span class="more-card-cat" style="color:#4e9484">Events</span><h3>Outdoor Team Building Activities for Every&nbsp;Setting</h3><span class="more-card-link">Read More &#8594;</span></div>
+      <a href="/blog/wye-valley-estate" class="more-card" style="text-decoration:none">
+        <div class="more-card-img"><img src="images/nature-bushcraft.jpg" alt="Wye Valley" loading="lazy"></div>
+        <div class="more-card-body"><span class="more-card-cat" style="color:#7a9bb5">Activities</span><h3>The Wye Valley Estate: What Makes Hilston Park&nbsp;Unique</h3><span class="more-card-link">Read More &#8594;</span></div>
       </a>
     </div>
   </section>
@@ -239,7 +249,7 @@
       </div>
       <div class="footer-col"><h2>Home</h2><ul><li><a href="about">About</a></li><li><a href="contact">Contact</a></li><li><a href="blogs">Blog</a></li><li><a href="gallery">Gallery</a></li></ul></div>
       <div class="footer-col"><h2>Visitors</h2><ul><li><a href="visitors">Visitor Guide</a></li><li><a href="educational">Educational</a></li><li><a href="event">Events</a></li><li><a href="accommodation">Private Stay</a></li></ul></div>
-      <div class="footer-col"><h2>Legal</h2><ul><li><a href="legal">Safeguarding &amp; Child<br>Protection Policy</a></li><li><a href="terms">Terms &amp; Conditions</a></li><li><a href="privacy">Privacy Policy</a></li></ul></div>
+      <div class="footer-col"><h2>Legal</h2><ul><li><a href="legal">Safeguarding &amp; Child<br>Protection Policy</a></li><li><a href="terms">Terms &amp; Conditions</a></li><li><a href="privacy">Privacy Policy</a></li><li><a href="accessibility">Accessibility Statement</a></li></ul></div>
       <div class="footer-meta">
         <p class="footer-copy">&copy; 2026 Hilston Park. All rights reserved.</p>
         <p class="footer-madeby">Website made by <a href="https://www.5rv.digital" target="_blank" rel="noopener noreferrer"><strong>5RV Digital</strong></a></p>
