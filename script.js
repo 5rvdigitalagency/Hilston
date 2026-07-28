@@ -1480,5 +1480,46 @@ function initHCS(wrap) {
 
 /* Auto-init on page load */
 document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.hcs').forEach(function (w) { initHCS(w); });
+  document.querySelectorAll('.hcs').forEach(function (w) { initHCS(w); });  
+});
+if (!document.getElementById('footer-legal-entity-style')) {
+  var style = document.createElement('style');
+  style.id = 'footer-legal-entity-style';
+  style.textContent =
+    '.footer-legal-entity{width:100%;max-width:1400px;box-sizing:border-box;margin:0 auto;padding:18px 80px 0;text-align:center;}' +
+    '.footer-legal-entity p{font-size:0.72rem;line-height:1.6;color:rgba(255,255,255,0.55);margin:0;}' +
+    '@media (max-width:880px){.footer-legal-entity{padding:16px 24px 0;}}' +
+    '@media (max-width:560px){.footer-legal-entity{padding:14px 16px 0;}}';
+  document.head.appendChild(style);
+}/* =====================================================
+   CORPORATE IDENTITY BLOCK
+   Companies Act 2006 / Provision of Services Regulations 2009
+   Injected site-wide (all pages share this script.js) so the
+   registered entity details appear in every page footer
+   without manual edits to each HTML file. Idempotent — skips
+   pages (e.g. contact.html) where the block is already
+   hard-coded into the HTML.
+   ===================================================== */
+document.addEventListener('DOMContentLoaded', function () {
+  var footer = document.querySelector('footer.site-footer');
+  if (!footer) return;
+  if (footer.querySelector('.footer-legal-entity')) return; /* already present */
+  var bar = footer.querySelector('.footer-bar');
+  if (!bar) return;
+
+  if (!document.getElementById('footer-legal-entity-style')) {
+    var style = document.createElement('style');
+    style.id = 'footer-legal-entity-style';
+    style.textContent =
+      '.footer-legal-entity{max-width:1400px;margin:0 auto;padding:18px 80px 0;}' +
+      '.footer-legal-entity p{font-size:0.72rem;line-height:1.6;color:rgba(255,255,255,0.55);margin:0;}' +
+      '@media (max-width:880px){.footer-legal-entity{padding:16px 24px 0;}}' +
+      '@media (max-width:560px){.footer-legal-entity{padding:14px 16px 0;}}';
+    document.head.appendChild(style);
+  }
+
+  var block = document.createElement('div');
+  block.className = 'footer-legal-entity';
+  block.innerHTML = '<p>Hilston Park is operated by Hilston Park Limited, a company registered in England and Wales under Company Number 12944054. Registered Office: Beech House, Edgbaston, Birmingham, United Kingdom, B15 3BE.</p>';
+  footer.insertBefore(block, bar);
 });

@@ -510,9 +510,18 @@
             <label for="message">Your Enquiry <span style="color:var(--teal)">*</span></label>
             <textarea id="message" name="message" rows="6" placeholder="Tell us about your group, preferred dates, and any specific requirements..." required></textarea>
           </div>
+          
           <div class="form-checkbox">
-            <input type="checkbox" id="agree" name="agree" required>
-            <label for="agree">I agree with the <a href="terms">Terms of Use</a> and <a href="privacy">Privacy Policy</a>.</label>
+            <input type="checkbox" id="special-category-consent" name="special_category_consent" value="Yes" required>
+            <label for="special-category-consent">I explicitly consent to Hilston Park processing my personal data, including medical histories, dietary requirements, and special educational needs (SEN), for the sole purpose of safely administering our group residential stay and activities in accordance with the <a href="privacy">Privacy Policy</a>.</label>
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="age-terms-confirm" name="age_terms_confirm" value="Yes" required>
+            <label for="age-terms-confirm">I confirm that I am aged 18 or over (or an authorised school representative), and I agree to the formal residential booking <a href="terms">terms, conditions</a>, and statutory cancellation frameworks.</label>
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="marketing-opt-in" name="marketing_opt_in" value="Yes">
+            <label for="marketing-opt-in">I would like to receive updates, newsletters, and marketing emails from Hilston Park about seasonal events, corporate team-building offers, and education packages.</label>
           </div>
           <p id="contact-form-error" style="color:#c0392b;font-size:0.82rem;margin-bottom:12px;display:none;">Please complete all required fields and accept the terms.</p>
           <p id="contact-form-success" style="color:var(--teal);font-size:0.9rem;margin-bottom:12px;display:none;">Thank you — your enquiry has been sent. We'll be in touch within one working day.</p>
