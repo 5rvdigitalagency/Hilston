@@ -3,6 +3,12 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.hilstonpark.com" }],
+      "destination": "https://hilstonpark.com/:path*",
+      "permanent": false
+    },
+    {
       "source": "/accomodation",
       "destination": "/accommodation",
       "permanent": true
