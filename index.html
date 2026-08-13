@@ -9,13 +9,25 @@
   <link rel="preload" as="image" type="image/webp" fetchpriority="high"
         imagesrcset="images/hp-hero-schools-768.webp 768w, images/hp-hero-schools.webp 1280w"
         imagesizes="(max-width: 880px) 100vw, 33vw">
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-TDVPHZJJ');</script>
-  <!-- End Google Tag Manager -->
+  <!-- Google Tag Manager (deferred until the page has loaded) -->
+  <script>
+    window.addEventListener('load', function () {
+      function loadTagManager() {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var firstScript = document.getElementsByTagName('script')[0];
+        var tagScript = document.createElement('script');
+        tagScript.async = true;
+        tagScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TDVPHZJJ';
+        firstScript.parentNode.insertBefore(tagScript, firstScript);
+      }
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadTagManager, { timeout: 2000 });
+      } else {
+        window.setTimeout(loadTagManager, 1000);
+      }
+    }, { once: true });
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -144,14 +156,14 @@
       </div>
     </article>
     <article class="hero-card">
-      <picture><source srcset="images/hp-hero-families-768.webp 768w, images/hp-hero-families.webp 1280w" sizes="(max-width: 880px) 100vw, 33vw" type="image/webp"><img class="hero-bg" src="images/hp-hero-families.jpg" alt="Bright skylight set into a ceiling, providing sunlight and enhancing the ambiance of the room." fetchpriority="low" decoding="async" width="1280" height="854"></picture>
+      <picture><source srcset="images/hp-hero-families-768.webp 768w, images/hp-hero-families.webp 1280w" sizes="(max-width: 880px) 100vw, 33vw" type="image/webp"><img class="hero-bg" src="images/hp-hero-families.jpg" alt="Bright skylight set into a ceiling, providing sunlight and enhancing the ambiance of the room." loading="lazy" fetchpriority="low" decoding="async" width="1280" height="854"></picture>
       <div class="hero-overlay"></div>
       <div class="hero-frame">
         <a href="accommodation" class="hero-label">Families &amp; Private Stays</a>
       </div>
     </article>
     <article class="hero-card">
-      <picture><source srcset="images/hp-hero-corporate-768.webp 768w, images/hp-hero-corporate.webp 1280w" sizes="(max-width: 880px) 100vw, 33vw" type="image/webp"><img class="hero-bg" src="images/hp-hero-corporate.jpg" alt="Several young men gathered in a circle, interacting and laughing, showcasing camaraderie and friendship." fetchpriority="low" decoding="async" width="1280" height="854"></picture>
+      <picture><source srcset="images/hp-hero-corporate-768.webp 768w, images/hp-hero-corporate.webp 1280w" sizes="(max-width: 880px) 100vw, 33vw" type="image/webp"><img class="hero-bg" src="images/hp-hero-corporate.jpg" alt="Several young men gathered in a circle, interacting and laughing, showcasing camaraderie and friendship." loading="lazy" fetchpriority="low" decoding="async" width="1280" height="854"></picture>
       <div class="hero-overlay"></div>
       <div class="hero-frame">
         <a href="event" class="hero-label">Corporate &amp; Group Events</a>
@@ -594,8 +606,8 @@
 
 </div><!-- /site-wrap -->
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="script.js?v=5"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
+<script src="script.js?v=5" defer></script>
 
   <script src="accessibility.js?v=2" defer></script>
 <button id="hp-cookie-reopen" class="hp-cookie-reopen" aria-label="Manage cookie preferences" title="Manage cookie preferences" onclick="var w=document.getElementById('custom-cookie-manager');if(w){w.style.display='block';}return false;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="28" height="28"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="8.5" r="0.8" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="14.5" r="0.8" fill="currentColor" stroke="none"/></svg></button>
