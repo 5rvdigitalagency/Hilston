@@ -1039,6 +1039,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 
 /* Accordion */
 .accordion { display: flex; flex-direction: column; gap: 8px; }
+.accordion-heading { margin: 0; }
 .accordion-item {
   background: var(--beige-soft);
   overflow: hidden;
