@@ -70,6 +70,13 @@ body {
 }
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: inherit; }
+.post-content a {
+  color: #2563a6;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.post-content a:hover { color: #174a7a; }
 ul { list-style: none; }
 address { font-style: normal; }
 button { font: inherit; cursor: pointer; }
