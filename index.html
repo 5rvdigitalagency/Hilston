@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Preconnect to key third-party origins (LCP / dynamic content) -->
-  <link rel="preconnect" href="https://feeds.behold.so">
+  <!-- Preconnect to third-party origins actually used during initial render -->
   <link rel="preconnect" href="https://api.open-meteo.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <!-- Preload LCP hero image (responsive: 768px on mobile, 1280px on desktop) -->
   <link rel="preload" as="image" type="image/webp" fetchpriority="high"
         imagesrcset="images/hp-hero-schools-768.webp 768w, images/hp-hero-schools.webp 1280w"
         imagesizes="(max-width: 880px) 100vw, 33vw">
-  <!-- Google Tag Manager (deferred until the page has loaded) -->
+  <!-- Google Tag Manager (deferred until the page has loaded and analytics consent is granted) -->
   <script>
-    window.addEventListener('load', function () {
+    (function () {
       function loadTagManager() {
+        if (window.__hilstonGTMLoaded) return;
+        window.__hilstonGTMLoaded = true;
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
         var firstScript = document.getElementsByTagName('script')[0];
@@ -21,12 +22,34 @@
         tagScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TDVPHZJJ';
         firstScript.parentNode.insertBefore(tagScript, firstScript);
       }
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(loadTagManager, { timeout: 2000 });
-      } else {
-        window.setTimeout(loadTagManager, 1000);
+
+      function shouldLoadGTM() {
+        try {
+          var prefs = JSON.parse(localStorage.getItem('hp_consent_v1') || 'null');
+          return !!(prefs && prefs.analytics);
+        } catch (e) {
+          return false;
+        }
       }
-    }, { once: true });
+
+      window.hilstonLoadGTM = function () {
+        if (shouldLoadGTM()) {
+          loadTagManager();
+        }
+      };
+
+      window.addEventListener('load', function () {
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(function () {
+            if (shouldLoadGTM()) loadTagManager();
+          }, { timeout: 4000 });
+        } else {
+          window.setTimeout(function () {
+            if (shouldLoadGTM()) loadTagManager();
+          }, 3000);
+        }
+      }, { once: true });
+    }());
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

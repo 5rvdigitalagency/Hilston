@@ -37,6 +37,9 @@
   function savePrefs(prefs) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); } catch (e) {}
     applyConsent(prefs);
+    if (prefs.analytics && window.hilstonLoadGTM) {
+      window.hilstonLoadGTM();
+    }
   }
 
   function applyConsent(prefs) {
@@ -165,9 +168,9 @@
               '<strong>Analytics Cookies</strong>' +
               '<p>Help us understand how visitors interact with our site (e.g. Google Analytics).</p>' +
             '</div>' +
-            '<label class="hpcm-toggle">' +
-              '<input type="checkbox" id="hp-pref-analytics"' + (p.analytics ? ' checked' : '') + '>' +
-              '<span class="hpcm-slider"></span>' +
+            '<label class="hpcm-toggle" for="hp-pref-analytics">' +
+              '<input type="checkbox" id="hp-pref-analytics" aria-label="Enable analytics cookies"' + (p.analytics ? ' checked' : '') + '>' +
+              '<span class="hpcm-slider" aria-hidden="true"></span>' +
             '</label>' +
           '</div>' +
         '</div>' +
@@ -179,9 +182,9 @@
               '<p>Allow us to personalise content and measure campaign effectiveness ' +
               '(e.g. Meta Pixel, Microsoft Clarity).</p>' +
             '</div>' +
-            '<label class="hpcm-toggle">' +
-              '<input type="checkbox" id="hp-pref-marketing"' + (p.marketing ? ' checked' : '') + '>' +
-              '<span class="hpcm-slider"></span>' +
+            '<label class="hpcm-toggle" for="hp-pref-marketing">' +
+              '<input type="checkbox" id="hp-pref-marketing" aria-label="Enable marketing and advertising cookies"' + (p.marketing ? ' checked' : '') + '>' +
+              '<span class="hpcm-slider" aria-hidden="true"></span>' +
             '</label>' +
           '</div>' +
         '</div>' +
@@ -192,9 +195,9 @@
               '<strong>Functional Cookies</strong>' +
               '<p>Enable enhanced features such as live chat and personalised content.</p>' +
             '</div>' +
-            '<label class="hpcm-toggle">' +
-              '<input type="checkbox" id="hp-pref-functional"' + (p.functional ? ' checked' : '') + '>' +
-              '<span class="hpcm-slider"></span>' +
+            '<label class="hpcm-toggle" for="hp-pref-functional">' +
+              '<input type="checkbox" id="hp-pref-functional" aria-label="Enable functional cookies"' + (p.functional ? ' checked' : '') + '>' +
+              '<span class="hpcm-slider" aria-hidden="true"></span>' +
             '</label>' +
           '</div>' +
         '</div>' +

@@ -16,3 +16,4 @@ Chnages/
 *.pdf
 .pdf-previews/
 *.csv
+.env*

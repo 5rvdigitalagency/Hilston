@@ -1,0 +1,42 @@
+ # Hilston Park Tickets
+
+ Standalone event ticketing and operations application. This directory is deployed as the independent Vercel project `hilston-park-ticketing`; it is not part of the Hilston Park marketing-site deployment.
+
+ ## Local testing
+
+ ```bash
+ npm install
+ npm run dev -- --hostname 127.0.0.1 --port 3001
+ ```
+
+ Open `http://127.0.0.1:3001/manage` and use the development-only credentials from `.env.example`. Change them before any shared deployment. Without `DATABASE_URL`, data is held in process memory for local flow testing only.
+
+ ## Persistent setup
+
+ 1. Create a PostgreSQL database and run `database/schema.sql`.
+2. Create an `organizations` row and set `ORGANIZATION_ID` to its UUID.
+3. Create a private Supabase Storage bucket named by `SUPABASE_STORAGE_BUCKET` for ticket PDFs.
+4. Configure `DATABASE_URL` with the Supabase transaction pooler, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ORGANIZATION_ID`, and `APP_SESSION_SECRET` in the standalone Vercel project. Service-role values are server-only.
+5. Configure `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` only as server-side Vercel environment variables.
+6. Point Stripe webhooks to `/api/webhooks/stripe` and enable `payment_intent.succeeded`.
+7. Do not promote public sales until the webhook transaction confirms bookings, issues tickets, and enqueues notifications idempotently.
+
+ ## Current routes
+
+ - `/events` public event catalogue
+ - `/apply` guest application flow
+ - `/account` buyer account entry point
+ - `/manage` staff login, event creation, publication, and attendance metrics
+ - `/private-enquiry` private event enquiry flow
+ - `/api/events` catalogue read and staff event creation
+ - `/api/events/[eventId]/attendees` attendee/application records
+ - `/api/auth/login` staff session creation
+ - `/api/checkout` server-side Stripe PaymentIntent boundary
+ - `/api/webhooks/stripe` signed Stripe webhook boundary
+
+ ## Production completion checklist
+
+ - Replace the development auth adapter with database-backed OTP verification and permission-key RBAC.
+ - Add transactional booking holds, expiry jobs, ticket types, inventory, refunds, PDF generation, signed downloads, email queues, QR check-in, reports, audit logs, and GDPR export/erase workflows.
+ - Add automated tests for concurrent inventory, webhook replay, capacity, authorization, consent, and refund calculations.
+ - Configure Vercel preview/production environment variables separately and verify the original `hilstonpark.com` project is never linked to this directory.
