@@ -380,6 +380,14 @@ body:has(#hp-cookie-banner.hpcc-show) .a11y-fab {
 }
 .a11y-reset-all:hover { background: #fdecea; border-color: #e2a09a; color: #c0392b; }
 
+.a11y-panel {
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.a11y-panel-title,
+.a11y-section h4 {
+  font-family: "Bodoni72", "Bodoni 72", Georgia, serif;
+}
+
 /* nothing — Normal is now .a11y-cb-none outside the grid */
 
 /* ---- Responsive: keep toolbar above mobile nav ---- */
