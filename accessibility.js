@@ -1,434 +1,717 @@
-/* Hilston Park — accessibility.js
-   Accessibility toolbar: font size, colour invert, colourblind modes.
-   Skip-to-main link. localStorage persistence across all pages.
-   Applied immediately to prevent flash of un-transformed content.
-*/
+document.addEventListener("DOMContentLoaded", function () {
 
-(function () {
-  'use strict';
+  /* =========================================================
+     CREATE ACCESSIBILITY HTML
+  ========================================================= */
 
-  /* =====================================================
-     CONSTANTS
-     ===================================================== */
-  var FONT_STEP    = 2;
-  var FONT_MIN     = 12;
-  var FONT_MAX     = 28;
-  var FONT_DEFAULT = 16;
+  const accessibilityHTML = `
+    <div id="hilston-accessibility-badge" aria-label="Accessibility Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true" focusable="false">
+        <circle cx="12" cy="4" r="2"></circle>
+        <line x1="3" y1="9" x2="21" y2="9"></line>
+        <line x1="12" y1="9" x2="12" y2="16"></line>
+        <line x1="12" y1="16" x2="8" y2="22"></line>
+        <line x1="12" y1="16" x2="16" y2="22"></line>
+      </svg>
+    </div>
 
-  var LS = {
-    fontSize : 'a11y_fontSize',
-    invert   : 'a11y_invert',
-    cbMode   : 'a11y_cbMode'
-  };
+    <div id="hilston-accessibility-sidebar">
+      <div>
 
-  var CB_MODES = ['deuteranopia', 'protanopia', 'tritanopia', 'achromatopsia'];
+        <div class="hilston-header">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true" focusable="false">
+              <circle cx="12" cy="4" r="2"></circle>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <line x1="12" y1="9" x2="12" y2="16"></line>
+              <line x1="12" y1="16" x2="8" y2="22"></line>
+              <line x1="12" y1="16" x2="16" y2="22"></line>
+            </svg>
+            Accessibility menu
+          </h3>
 
-  /* =====================================================
-     RESTORE PREFERENCES IMMEDIATELY (before DOM ready)
-     Avoids flash of un-transformed text on page load.
-     ===================================================== */
-  (function restoreEarly() {
-    try {
-      var savedSize = parseInt(localStorage.getItem(LS.fontSize), 10);
-      if (savedSize && savedSize !== FONT_DEFAULT) {
-        document.documentElement.style.fontSize = savedSize + 'px';
-      }
-      if (localStorage.getItem(LS.invert) === '1') {
-        document.documentElement.classList.add('a11y-invert');
-      }
-      var savedCB = localStorage.getItem(LS.cbMode);
-      if (savedCB && savedCB !== 'none') {
-        document.documentElement.classList.add('a11y-' + savedCB);
-      }
-    } catch (e) { /* localStorage may be blocked in private browsing */ }
-  })();
+          <button id="hilston-close-btn" type="button">
+            ✕
+          </button>
+        </div>
 
-  /* =====================================================
-     SVG COLOUR-BLIND FILTER DEFINITIONS
-     Matrix values based on established colour vision research
-     (Brettel, Vienot & Mollon / Machado et al.).
-     ===================================================== */
-  var SVG_FILTERS = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" '
-    + 'style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;">'
-    + '<defs>'
+        <div class="hilston-content">
 
-    /* Deuteranopia — green-cone deficiency (most common form of red-green colour blindness) */
-    + '<filter id="a11y-deuteranopia-filter" color-interpolation-filters="linearRGB">'
-    + '<feColorMatrix type="matrix" values="'
-    +   '0.625 0.375 0     0 0 '
-    +   '0.700 0.300 0     0 0 '
-    +   '0     0.300 0.700 0 0 '
-    +   '0     0     0     1 0"/>'
-    + '</filter>'
+          <!-- Accessibility Profiles -->
+          <div class="hilston-section">
+            <h4>Accessibility Profiles</h4>
 
-    /* Protanopia — red-cone deficiency */
-    + '<filter id="a11y-protanopia-filter" color-interpolation-filters="linearRGB">'
-    + '<feColorMatrix type="matrix" values="'
-    +   '0.567 0.433 0     0 0 '
-    +   '0.558 0.442 0     0 0 '
-    +   '0     0.242 0.758 0 0 '
-    +   '0     0     0     1 0"/>'
-    + '</filter>'
+            <div class="hilston-features-sec">
 
-    /* Tritanopia — blue-cone deficiency (blue-yellow colour blindness) */
-    + '<filter id="a11y-tritanopia-filter" color-interpolation-filters="linearRGB">'
-    + '<feColorMatrix type="matrix" values="'
-    +   '0.950 0.050 0     0 0 '
-    +   '0     0.433 0.567 0 0 '
-    +   '0     0.475 0.525 0 0 '
-    +   '0     0     0     1 0"/>'
-    + '</filter>'
+              <button type="button"
+                class="hilston-profile-btn"
+                data-profile="seizure">
+                Seizure Safe
+              </button>
 
-    /* Achromatopsia — complete colour blindness (monochrome vision) */
-    + '<filter id="a11y-achromatopsia-filter" color-interpolation-filters="linearRGB">'
-    + '<feColorMatrix type="matrix" values="'
-    +   '0.299 0.587 0.114 0 0 '
-    +   '0.299 0.587 0.114 0 0 '
-    +   '0.299 0.587 0.114 0 0 '
-    +   '0     0     0     1 0"/>'
-    + '</filter>'
+              <button type="button"
+                class="hilston-profile-btn"
+                data-profile="adhd">
+                ADHD Friendly
+              </button>
 
-    + '</defs></svg>';
+              <button type="button"
+                class="hilston-profile-btn"
+                data-profile="lowvision">
+                Low Vision
+              </button>
 
-  /* =====================================================
-     TOOLBAR HTML
-     ===================================================== */
-  var TOOLBAR_HTML = [
-    '<div class="a11y-fab" id="a11y-fab" role="region" aria-label="Accessibility options">',
+            </div>
+          </div>
 
-      /* ---- Expanding panel (hidden by default) ---- */
-      '<div class="a11y-panel" id="a11y-panel" aria-hidden="true" role="dialog" aria-labelledby="a11y-panel-title">',
+          <!-- Typography -->
+          <div class="hilston-section">
+            <h4>Typography Controls</h4>
 
-        '<div class="a11y-panel-header">',
-          '<span class="a11y-panel-title" id="a11y-panel-title">Accessibility</span>',
-          '<button class="a11y-panel-close" id="a11y-panel-close" aria-label="Close accessibility panel">&times;</button>',
-        '</div>',
+            <div class="hilston-features-sec">
 
-        /* Text size */
-        '<div class="a11y-section">',
-          '<span class="a11y-section-label" id="a11y-font-label-heading">Text Size</span>',
-          '<div class="a11y-font-row">',
-            '<button class="a11y-font-btn" id="a11y-font-dec" aria-label="Decrease text size" aria-describedby="a11y-font-label-heading">A&#8722;</button>',
-            '<span class="a11y-font-size-label" id="a11y-font-label" aria-live="polite" aria-atomic="true">Default</span>',
-            '<button class="a11y-font-btn" id="a11y-font-inc" aria-label="Increase text size" aria-describedby="a11y-font-label-heading">A+</button>',
-          '</div>',
-          '<button class="a11y-font-reset" id="a11y-font-reset" aria-label="Reset text size to default">Reset to default size</button>',
-        '</div>',
+              <button type="button" id="hilston-font-increase">
+                Increase Font Size
+              </button>
 
-        '<hr class="a11y-divider">',
+              <button type="button" id="hilston-font-decrease">
+                Decrease Font Size
+              </button>
 
-        /* Colour invert */
-        '<div class="a11y-section">',
-          '<div class="a11y-toggle-row">',
-            '<label class="a11y-toggle-label" for="a11y-invert-chk">Invert colours</label>',
-            '<label class="a11y-switch">',
-              '<input type="checkbox" id="a11y-invert-chk" role="switch" aria-checked="false">',
-              '<span class="a11y-switch-slider"></span>',
-            '</label>',
-          '</div>',
-        '</div>',
+              <button type="button" id="hilston-letter-spacing">
+                Increase Letter Spacing
+              </button>
 
-        '<hr class="a11y-divider">',
+              <button type="button" id="hilston-line-height">
+                Increase Line Height
+              </button>
 
-        /* Colour vision modes */
-        '<div class="a11y-section">',
-          '<span class="a11y-section-label" id="a11y-cb-label">Colour Vision</span>',
-          '<button class="a11y-cb-none active" id="a11y-cb-none" data-mode="none" aria-pressed="true" aria-label="No colour filter \u2014 normal vision (currently active)">',
-            '<span aria-hidden="true">&#10003; </span>No colour filter \u2014 normal vision',
-          '</button>',
-          '<div class="a11y-cb-grid" role="group" aria-labelledby="a11y-cb-label">',
-            '<button class="a11y-cb-btn" data-mode="deuteranopia" aria-pressed="false" aria-label="Deuteranopia red-green colour blindness simulation">Deuteranopia <small>red-green</small></button>',
-            '<button class="a11y-cb-btn" data-mode="protanopia" aria-pressed="false" aria-label="Protanopia red deficiency colour blindness simulation">Protanopia <small>red deficiency</small></button>',
-            '<button class="a11y-cb-btn" data-mode="tritanopia" aria-pressed="false" aria-label="Tritanopia blue-yellow colour blindness simulation">Tritanopia <small>blue-yellow</small></button>',
-            '<button class="a11y-cb-btn" data-mode="achromatopsia" aria-pressed="false" aria-label="Achromatopsia monochrome colour blindness simulation">Achromatopsia <small>monochrome</small></button>',
-          '</div>',
-        '</div>',
+              <button type="button" id="hilston-font-weight">
+                Bold Font Weight
+              </button>
 
-        '<hr class="a11y-divider">',
+              <button type="button" id="hilston-highlight-links">
+                Highlight Links
+              </button>
 
-        '<button class="a11y-reset-all" id="a11y-reset-all" aria-label="Reset all settings to accessibility defaults"><span aria-hidden="true">&#8635; </span>Reset all settings</button>',
+            </div>
+          </div>
 
-      '</div>',
-      /* ---- Trigger button ---- */
-      '<button class="a11y-toggle" id="a11y-toggle-btn"',
-        ' aria-expanded="false"',
-        ' aria-controls="a11y-panel"',
-        ' aria-label="Open accessibility options"',
-        ' title="Accessibility">',
-        /* Accessibility — outline person with arms out, legible at any size */
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">',
-          '<circle cx="12" cy="4" r="2"/>',
-          '<line x1="3" y1="9" x2="21" y2="9"/>',
-          '<line x1="12" y1="9" x2="12" y2="16"/>',
-          '<line x1="12" y1="16" x2="8" y2="22"/>',
-          '<line x1="12" y1="16" x2="16" y2="22"/>',
-        '</svg>',
-      '</button>',
+          <!-- Contrast & Saturation -->
+          <div class="hilston-section">
+            <h4>Contrast & Saturation</h4>
 
-    '</div>'
-  ].join('');
+            <div class="hilston-features-sec">
 
-  /* =====================================================
-     STATE
-     ===================================================== */
-  var currentFontSize;
-  try {
-    currentFontSize = parseInt(localStorage.getItem(LS.fontSize), 10) || FONT_DEFAULT;
-  } catch(e) {
-    currentFontSize = FONT_DEFAULT;
-  }
+              <button type="button" data-mode="dark">
+                Dark
+              </button>
 
-  /* =====================================================
-     HELPERS
-     ===================================================== */
-  function applyFontSize(size) {
-    currentFontSize = size;
-    if (size === FONT_DEFAULT) {
-      document.documentElement.style.fontSize = '';
-    } else {
-      document.documentElement.style.fontSize = size + 'px';
-    }
-    try { localStorage.setItem(LS.fontSize, size); } catch(e) {}
-    var label = document.getElementById('a11y-font-label');
-    if (label) {
-      label.textContent = (size === FONT_DEFAULT) ? 'Default' : size + 'px';
-    }
-    var decBtn = document.getElementById('a11y-font-dec');
-    var incBtn = document.getElementById('a11y-font-inc');
-    if (decBtn) decBtn.disabled = (size <= FONT_MIN);
-    if (incBtn) incBtn.disabled = (size >= FONT_MAX);
-    /* Show/hide the individual font reset link */
-    var fontReset = document.getElementById('a11y-font-reset');
-    if (fontReset) {
-      fontReset.classList.toggle('is-visible', size !== FONT_DEFAULT);
-    }
-  }
+              <button type="button" data-mode="light">
+                Light
+              </button>
 
-  function applyInvert(on) {
-    var html = document.documentElement;
-    if (on) {
-      html.classList.add('a11y-invert');
-    } else {
-      html.classList.remove('a11y-invert');
-    }
-    try { localStorage.setItem(LS.invert, on ? '1' : '0'); } catch(e) {}
-    var chk = document.getElementById('a11y-invert-chk');
-    if (chk) {
-      chk.checked = on;
-      chk.setAttribute('aria-checked', on ? 'true' : 'false');
-    }
-  }
+              <button type="button"
+                data-mode="low-saturation"
+                style="display:none">
+                Low Saturation
+              </button>
 
-  function applyColorblind(mode) {
-    var html = document.documentElement;
-    CB_MODES.forEach(function (m) { html.classList.remove('a11y-' + m); });
-    if (mode && mode !== 'none') {
-      html.classList.add('a11y-' + mode);
-    }
-    try { localStorage.setItem(LS.cbMode, mode); } catch(e) {}
+              <button type="button"
+                data-mode="grayscale"
+                style="display:none">
+                Grayscale
+              </button>
 
-    /* Update the "No filter" button */
-    var noneBtn = document.getElementById('a11y-cb-none');
-    if (noneBtn) {
-      var isNone = (!mode || mode === 'none');
-      noneBtn.classList.toggle('active', isNone);
-      noneBtn.setAttribute('aria-pressed', isNone ? 'true' : 'false');
-      noneBtn.setAttribute('aria-label', isNone
-        ? 'No colour filter \u2014 normal vision (currently active)'
-        : 'Remove colour filter and return to normal vision');
-      noneBtn.innerHTML = isNone
-        ? '<span aria-hidden="true">&#10003; </span>No colour filter \u2014 normal vision'
-        : '<span aria-hidden="true">&#8592; </span>Remove filter \u2014 return to normal';
-    }
+            </div>
+          </div>
 
-    /* Update the mode buttons */
-    document.querySelectorAll('.a11y-cb-btn').forEach(function (btn) {
-      var m = btn.getAttribute('data-mode');
-      var isActive = (m === mode);
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      if (isActive) {
-        btn.setAttribute('aria-label', 'Currently active: ' + btn.textContent.trim() + ' \u2014 click to remove this filter');
-      } else {
-        btn.setAttribute('aria-label', btn.textContent.trim() + ' colour vision simulation');
+          <!-- Motion & Audio -->
+          <div class="hilston-section">
+            <h4>Motion & Audio</h4>
+
+            <div class="hilston-features-sec">
+
+              <button type="button" id="hilston-pause-animations">
+                Pause Animations
+              </button>
+
+              <button type="button" id="hilston-pause-videos">
+                Pause Videos
+              </button>
+
+              <button type="button" id="hilston-mute-audio">
+                Mute Audio
+              </button>
+
+            </div>
+          </div>
+
+          <!-- Reset -->
+          <div class="hilston-section">
+            <button type="button" id="hilston-reset">
+              Reset Accessibility Settings
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Reading Mask -->
+    <div id="hilston-reading-mask" aria-hidden="true"></div>
+  `;
+
+  document.body.insertAdjacentHTML("beforeend", accessibilityHTML);
+
+
+  /* =========================================================
+     ELEMENTS
+  ========================================================= */
+
+  const html = document.documentElement;
+  const body = document.body;
+
+  const badge = document.getElementById(
+    "hilston-accessibility-badge"
+  );
+
+  const sidebar = document.getElementById(
+    "hilston-accessibility-sidebar"
+  );
+
+  const closeBtn = document.getElementById(
+    "hilston-close-btn"
+  );
+
+  const readingMask = document.getElementById(
+    "hilston-reading-mask"
+  );
+
+
+  /* =========================================================
+     OPEN / CLOSE MENU
+  ========================================================= */
+
+  badge.addEventListener("click", function () {
+    sidebar.classList.add("active");
+  });
+
+  closeBtn.addEventListener("click", function () {
+    sidebar.classList.remove("active");
+  });
+
+
+  /* =========================================================
+     FONT SIZE
+  ========================================================= */
+
+  const increaseSizes = [
+    "hilston-font-scale-110",
+    "hilston-font-scale-120",
+    "hilston-font-scale-130",
+    "hilston-font-scale-140",
+    "hilston-font-scale-150",
+    "hilston-font-scale-175",
+    "hilston-font-scale-200"
+  ];
+
+  const decreaseSizes = [
+    "hilston-font-scale-90",
+    "hilston-font-scale-80",
+    "hilston-font-scale-70",
+    "hilston-font-scale-60",
+    "hilston-font-scale-50"
+  ];
+
+  const allFontSizes = [
+    ...increaseSizes,
+    ...decreaseSizes
+  ];
+
+  let increaseIndex = -1;
+  let decreaseIndex = -1;
+
+  document
+    .getElementById("hilston-font-increase")
+    .addEventListener("click", function () {
+
+      decreaseIndex = -1;
+
+      if (increaseIndex < increaseSizes.length - 1) {
+
+        increaseIndex++;
+
+        html.classList.remove(...allFontSizes);
+
+        html.classList.add(
+          increaseSizes[increaseIndex]
+        );
       }
     });
-  }
 
-  function resetAll() {
-    applyFontSize(FONT_DEFAULT);
-    applyInvert(false);
-    applyColorblind('none');
-    try {
-      localStorage.removeItem(LS.fontSize);
-      localStorage.removeItem(LS.invert);
-      localStorage.removeItem(LS.cbMode);
-    } catch(e) {}
-  }
 
-  function openPanel() {
-    var panel     = document.getElementById('a11y-panel');
-    var toggleBtn = document.getElementById('a11y-toggle-btn');
-    if (!panel || !toggleBtn) return;
-    panel.classList.add('is-open');
-    panel.setAttribute('aria-hidden', 'false');
-    toggleBtn.setAttribute('aria-expanded', 'true');
-    toggleBtn.setAttribute('aria-label', 'Close accessibility options');
-    /* Move focus into panel */
-    var firstFocusable = panel.querySelector('button, input, [tabindex]');
-    if (firstFocusable) firstFocusable.focus();
-  }
+  document
+    .getElementById("hilston-font-decrease")
+    .addEventListener("click", function () {
 
-  function closePanel() {
-    var panel     = document.getElementById('a11y-panel');
-    var toggleBtn = document.getElementById('a11y-toggle-btn');
-    if (!panel || !toggleBtn) return;
-    panel.classList.remove('is-open');
-    panel.setAttribute('aria-hidden', 'true');
-    toggleBtn.setAttribute('aria-expanded', 'false');
-    toggleBtn.setAttribute('aria-label', 'Open accessibility options');
-    toggleBtn.focus();
-  }
+      increaseIndex = -1;
 
-  /* =====================================================
-     DOM READY — inject UI & wire events
-     ===================================================== */
-  document.addEventListener('DOMContentLoaded', function () {
+      if (decreaseIndex < decreaseSizes.length - 1) {
 
-    /* 1. Wrap all existing body content in #a11y-page-wrap.
-          The CSS colour/invert filters are applied to this wrapper (not body)
-          so that position:fixed elements that are siblings of the wrapper
-          (the FAB, below) are NOT inside the filtered subtree and keep
-          correct viewport-relative positioning. */
-    var pageWrap = document.createElement('div');
-    pageWrap.id = 'a11y-page-wrap';
-    while (document.body.firstChild) {
-      pageWrap.appendChild(document.body.firstChild);
-    }
-    document.body.appendChild(pageWrap);
+        decreaseIndex++;
 
-    /* 2. Inject SVG filter definitions into body, before the wrap */
-    var filterContainer = document.createElement('div');
-    filterContainer.innerHTML = SVG_FILTERS;
-    document.body.insertBefore(filterContainer.firstChild, pageWrap);
+        html.classList.remove(...allFontSizes);
 
-    /* 3. Inject skip-to-main link into body, before the wrap (first in tab order) */
-    var skipLink = document.createElement('a');
-    skipLink.href = '#main-content';
-    skipLink.className = 'skip-link';
-    skipLink.textContent = 'Skip to main content';
-    document.body.insertBefore(skipLink, pageWrap);
+        html.classList.add(
+          decreaseSizes[decreaseIndex]
+        );
+      }
+    });
 
-    /* 4. Inject toolbar into body AFTER the wrap (outside filtered subtree) */
-    document.body.insertAdjacentHTML('beforeend', TOOLBAR_HTML);
 
-    /* 5. Sync UI to restored preferences */
-    applyFontSize(currentFontSize);
+  /* =========================================================
+     TYPOGRAPHY
+  ========================================================= */
 
-    var savedInvert = false;
-    try { savedInvert = localStorage.getItem(LS.invert) === '1'; } catch(e) {}
-    applyInvert(savedInvert);
+  document
+    .getElementById("hilston-letter-spacing")
+    .addEventListener("click", function () {
 
-    var savedCB = 'none';
-    try { savedCB = localStorage.getItem(LS.cbMode) || 'none'; } catch(e) {}
-    applyColorblind(savedCB);
+      html.classList.toggle(
+        "hilston-letter-spacing"
+      );
+    });
 
-    /* 6. Toggle button */
-    var toggleBtn = document.getElementById('a11y-toggle-btn');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var panel = document.getElementById('a11y-panel');
-        if (panel && panel.classList.contains('is-open')) {
-          closePanel();
-        } else {
-          openPanel();
+
+  document
+    .getElementById("hilston-line-height")
+    .addEventListener("click", function () {
+
+      html.classList.toggle(
+        "hilston-line-height"
+      );
+    });
+
+
+  document
+    .getElementById("hilston-font-weight")
+    .addEventListener("click", function () {
+
+      html.classList.toggle(
+        "hilston-bold-font"
+      );
+    });
+
+
+  document
+    .getElementById("hilston-highlight-links")
+    .addEventListener("click", function () {
+
+      html.classList.toggle(
+        "hilston-highlight-links"
+      );
+    });
+
+
+  /* =========================================================
+     CONTRAST / SATURATION
+  ========================================================= */
+
+  document
+    .querySelectorAll("[data-mode]")
+    .forEach(function (button) {
+
+      button.addEventListener("click", function () {
+
+        const mode = button.dataset.mode;
+
+        body.classList.remove(
+          "hilston-dark-contrast",
+          "hilston-light-contrast",
+          "hilston-low-saturation",
+          "hilston-grayscale"
+        );
+
+        if (mode === "dark") {
+          body.classList.add(
+            "hilston-dark-contrast"
+          );
         }
-      });
-    }
 
-    /* Close button inside panel */
-    var panelCloseBtn = document.getElementById('a11y-panel-close');
-    if (panelCloseBtn) {
-      panelCloseBtn.addEventListener('click', function () { closePanel(); });
-    }
-
-    /* Close on Escape key */
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        var panel = document.getElementById('a11y-panel');
-        if (panel && panel.classList.contains('is-open')) {
-          closePanel();
+        if (mode === "light") {
+          body.classList.add(
+            "hilston-light-contrast"
+          );
         }
-      }
-    });
 
-    /* Close when clicking outside the fab */
-    document.addEventListener('click', function (e) {
-      var fab   = document.getElementById('a11y-fab');
-      var panel = document.getElementById('a11y-panel');
-      if (fab && panel && panel.classList.contains('is-open') && !fab.contains(e.target)) {
-        closePanel();
-      }
-    });
-
-    /* 7. Font size buttons */
-    var decBtn = document.getElementById('a11y-font-dec');
-    var incBtn = document.getElementById('a11y-font-inc');
-    if (decBtn) {
-      decBtn.addEventListener('click', function () {
-        applyFontSize(Math.max(FONT_MIN, currentFontSize - FONT_STEP));
-      });
-    }
-    if (incBtn) {
-      incBtn.addEventListener('click', function () {
-        applyFontSize(Math.min(FONT_MAX, currentFontSize + FONT_STEP));
-      });
-    }
-
-    /* 8. Invert switch */
-    var invertChk = document.getElementById('a11y-invert-chk');
-    if (invertChk) {
-      invertChk.addEventListener('change', function () {
-        applyInvert(invertChk.checked);
-      });
-    }
-
-    /* 9. Colour-blind mode buttons — clicking active button removes the filter */
-    document.querySelectorAll('.a11y-cb-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var clickedMode = btn.getAttribute('data-mode');
-        /* If this mode is already active, clicking it again removes it */
-        if (btn.classList.contains('active') && clickedMode !== 'none') {
-          applyColorblind('none');
-        } else {
-          applyColorblind(clickedMode);
+        if (mode === "low-saturation") {
+          body.classList.add(
+            "hilston-low-saturation"
+          );
         }
+
+        if (mode === "grayscale") {
+          body.classList.add(
+            "hilston-grayscale"
+          );
+        }
+
       });
+
     });
 
-    /* "No filter" button */
-    var noneBtn = document.getElementById('a11y-cb-none');
-    if (noneBtn) {
-      noneBtn.addEventListener('click', function () {
-        applyColorblind('none');
+
+  /* =========================================================
+     RESET PROFILE CLASSES
+  ========================================================= */
+
+  function resetProfiles() {
+
+    html.classList.remove(
+      "hilston-seizure-safe",
+      "hilston-adhd",
+      "hilston-low-vision",
+      "hilston-stop-motion"
+    );
+
+    body.classList.remove(
+      "hilston-seizure-safe",
+      "hilston-adhd",
+      "hilston-low-vision",
+      "hilston-stop-motion"
+    );
+
+    readingMask.classList.remove("active");
+  }
+
+
+  /* =========================================================
+     PAUSE ANIMATIONS
+  ========================================================= */
+
+  const pauseAnimations = document.getElementById(
+    "hilston-pause-animations"
+  );
+
+  if (pauseAnimations) {
+
+    pauseAnimations.addEventListener(
+      "click",
+      function () {
+
+        html.classList.toggle(
+          "hilston-stop-motion"
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     PAUSE VIMEO VIDEOS
+  ========================================================= */
+
+  document
+    .getElementById("hilston-pause-videos")
+    .addEventListener("click", function () {
+
+      document
+        .querySelectorAll('iframe[src*="vimeo.com"]')
+        .forEach(function (iframe) {
+
+          if (typeof Vimeo !== "undefined") {
+
+            new Vimeo.Player(iframe)
+              .pause()
+              .catch(function (error) {
+                console.log(error);
+              });
+
+          }
+
+        });
+
+    });
+
+document
+  .getElementById("hilston-pause-videos")
+  .addEventListener("click", function () {
+
+    // Pause all HTML5 videos
+    document.querySelectorAll("video").forEach(function (video) {
+      video.pause();
+    });
+
+    // Pause Vimeo videos if present
+    if (typeof Vimeo !== "undefined") {
+      document
+        .querySelectorAll('iframe[src*="vimeo.com"]')
+        .forEach(function (iframe) {
+          try {
+            new Vimeo.Player(iframe).pause().catch(function () {});
+          } catch (error) {
+            console.log(error);
+          }
+        });
+    }
+
+  });
+  /* =========================================================
+     MUTE VIMEO AUDIO
+  ========================================================= */
+
+  document
+    .getElementById("hilston-mute-audio")
+    .addEventListener("click", function () {
+
+      document
+        .querySelectorAll('iframe[src*="vimeo.com"]')
+        .forEach(function (iframe) {
+
+          if (typeof Vimeo !== "undefined") {
+
+            new Vimeo.Player(iframe)
+              .setVolume(0)
+              .catch(function (error) {
+                console.log(error);
+              });
+
+          }
+
+        });
+
+    });
+
+
+  /* =========================================================
+     ACCESSIBILITY PROFILES
+  ========================================================= */
+
+  document
+    .querySelectorAll(".hilston-profile-btn")
+    .forEach(function (button) {
+
+      button.addEventListener("click", function () {
+
+        resetProfiles();
+
+        const profile = button.dataset.profile;
+
+
+        /* -------------------------
+           SEIZURE SAFE
+        ------------------------- */
+
+        if (profile === "seizure") {
+
+          html.classList.add(
+            "hilston-seizure-safe"
+          );
+
+          html.classList.add(
+            "hilston-stop-motion"
+          );
+
+          document
+            .querySelectorAll("video")
+            .forEach(function (video) {
+              video.pause();
+            });
+
+
+          document
+            .querySelectorAll('iframe[src*="vimeo.com"]')
+            .forEach(function (iframe) {
+
+              if (typeof Vimeo !== "undefined") {
+
+                try {
+
+                  new Vimeo.Player(iframe)
+                    .pause()
+                    .catch(function () {});
+
+                } catch (error) {
+                  console.log(error);
+                }
+
+              }
+
+            });
+
+        }
+
+
+        /* -------------------------
+           ADHD FRIENDLY
+        ------------------------- */
+
+        if (profile === "adhd") {
+
+          body.classList.add(
+            "hilston-adhd"
+          );
+
+          html.classList.add(
+            "hilston-stop-motion"
+          );
+
+          readingMask.classList.add(
+            "active"
+          );
+
+        }
+
+
+        /* -------------------------
+           LOW VISION
+        ------------------------- */
+
+        if (profile === "lowvision") {
+
+          body.classList.add(
+            "hilston-bold-font"
+          );
+
+          body.classList.add(
+            "hilston-low-vision"
+          );
+
+        }
+
       });
+
+    });
+
+
+  /* =========================================================
+     READING MASK MOVEMENT
+  ========================================================= */
+
+  document.addEventListener(
+    "mousemove",
+    function (event) {
+
+      if (
+        readingMask &&
+        readingMask.classList.contains("active")
+      ) {
+
+        readingMask.style.top =
+          (event.clientY - 75) + "px";
+
+      }
+
     }
+  );
 
-    /* Font reset */
-    var fontResetBtn = document.getElementById('a11y-font-reset');
-    if (fontResetBtn) {
-      fontResetBtn.addEventListener('click', function () {
-        applyFontSize(FONT_DEFAULT);
-      });
-    }
 
-    /* 10. Reset all */
-    var resetBtn = document.getElementById('a11y-reset-all');
-    if (resetBtn) {
-      resetBtn.addEventListener('click', function () { resetAll(); });
-    }
+  /* =========================================================
+     RESET EVERYTHING
+  ========================================================= */
 
-  }); /* end DOMContentLoaded */
+  document
+    .getElementById("hilston-reset")
+    .addEventListener("click", function () {
 
-})();
+      html.classList.remove(
+        "hilston-seizure-safe",
+        "hilston-adhd",
+        "hilston-low-vision",
+        "hilston-stop-motion",
+        "hilston-font-scale-110",
+        "hilston-font-scale-120",
+        "hilston-font-scale-130",
+        "hilston-font-scale-140",
+        "hilston-font-scale-150",
+        "hilston-font-scale-175",
+        "hilston-font-scale-200",
+        "hilston-font-scale-90",
+        "hilston-font-scale-80",
+        "hilston-font-scale-70",
+        "hilston-font-scale-60",
+        "hilston-font-scale-50",
+        "hilston-letter-spacing",
+        "hilston-line-height",
+        "hilston-bold-font",
+        "hilston-highlight-links"
+      );
+
+
+      body.classList.remove(
+        "hilston-seizure-safe",
+        "hilston-adhd",
+        "hilston-low-vision",
+        "hilston-stop-motion",
+        "hilston-dark-contrast",
+        "hilston-light-contrast",
+        "hilston-low-saturation",
+        "hilston-grayscale",
+        "hilston-bold-font"
+      );
+
+
+      readingMask.classList.remove(
+        "active"
+      );
+
+
+      /* Reset audio */
+
+      document
+        .querySelectorAll("audio")
+        .forEach(function (audio) {
+
+          audio.muted = false;
+
+        });
+
+
+      /* Reset Vimeo volume */
+
+      document
+        .querySelectorAll('iframe[src*="vimeo.com"]')
+        .forEach(function (iframe) {
+
+          if (typeof Vimeo !== "undefined") {
+
+            try {
+
+              new Vimeo.Player(iframe)
+                .setVolume(1)
+                .catch(function () {});
+
+            } catch (error) {
+              console.log(error);
+            }
+
+          }
+
+        });
+
+
+      /* Reset font indexes */
+
+      increaseIndex = -1;
+      decreaseIndex = -1;
+
+
+      /* Reset stored settings */
+
+      localStorage.removeItem(
+        "hilston-font-size"
+      );
+
+    });
+
+});
