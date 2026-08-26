@@ -11,3 +11,24 @@
         padding: 10px;
     }
 }
+
+#hilston-accessibility-badge {
+    left: 28px;
+    right: auto;
+    top: auto;
+    bottom: 28px;
+    width: 58px;
+    height: 58px;
+    padding: 14px;
+}
+
+@media (max-width: 991px) {
+    #hilston-accessibility-badge {
+        left: 28px;
+        right: auto;
+        bottom: 28px;
+        width: 58px;
+        height: 58px;
+        padding: 14px;
+    }
+}
