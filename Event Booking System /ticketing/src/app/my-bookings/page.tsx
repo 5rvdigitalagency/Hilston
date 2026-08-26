@@ -1,0 +1,5 @@
+import Link from "next/link";
+
+export default function MyBookingsPage() {
+  return <main className="page-shell"><header className="subbar"><Link className="brand" href="/"><span className="brand-mark">HP</span><span>Hilston Park <em>Tickets</em></span></Link><Link className="account-link" href="/account">Account <span aria-hidden="true">↗</span></Link></header><section className="content-section account-layout"><p className="eyebrow">Customer account</p><h1>My bookings.</h1><div className="account-panel"><div className="empty-icon" aria-hidden="true">✦</div><h2>Your bookings will appear here</h2><p>Sign in with your verified email address to view confirmed bookings, refunds, and private ticket downloads.</p><Link className="primary-button" href="/account/sign-in">Sign in to continue <span aria-hidden="true">→</span></Link></div><p className="form-note">Only bookings belonging to the signed-in customer will be shown.</p></section><footer className="footer"><Link href="/events">Browse events</Link><Link href="/">Back to ticketing</Link></footer></main>;
+}

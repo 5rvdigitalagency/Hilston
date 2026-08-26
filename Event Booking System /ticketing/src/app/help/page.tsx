@@ -1,0 +1,5 @@
+import Link from "next/link";
+
+export default function HelpPage() {
+  return <main className="page-shell"><header className="subbar"><Link className="brand" href="/"><span className="brand-mark">HP</span><span>Hilston Park <em>Tickets</em></span></Link><Link className="account-link" href="/account">Account <span aria-hidden="true">↗</span></Link></header><section className="content-section account-layout"><p className="eyebrow">Support</p><h1>How can we help?</h1><div className="account-panel"><h2>Booking support</h2><p>For ticket questions, accessibility requirements, private events, or changes to an application, contact the Hilston Park team through the private enquiry form.</p><Link className="primary-button" href="/private-enquiry">Contact the team <span aria-hidden="true">→</span></Link></div><div className="account-panel"><h2>Already booked?</h2><p>Sign in to view your bookings and ticket downloads.</p><Link className="primary-button" href="/account/sign-in">Open my account <span aria-hidden="true">→</span></Link></div></section><footer className="footer"><Link href="/events">Browse events</Link><Link href="/">Back to ticketing</Link></footer></main>;
+}
