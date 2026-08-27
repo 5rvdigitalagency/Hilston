@@ -718,7 +718,7 @@
       copy.textContent = 'Confirm your details, then complete the test payment to reserve your place.';
       var form = document.createElement('form');
       form.className = 'event-booking-form';
-      form.innerHTML = '<label>Your name<input name="name" autocomplete="name" required></label><label>Email address<input name="email" type="email" autocomplete="email" required></label><label>Children attending<input name="childCount" type="number" min="0" max="100" value="0" required></label><div class="event-payment-note"><strong>Test payment</strong>No money is collected in this staging flow. Confirming below records a successful test payment and reserves the booking.</div><button class="btn-pill" type="submit">Confirm test payment</button>';
+      form.innerHTML = '<label>Your name<input name="name" autocomplete="name" required></label><label>Email address<input name="email" type="email" autocomplete="email" required></label><label>Children attending<input name="childCount" type="number" min="0" max="' + Math.max(0, Number(event.capacity || 1) - 1) + '" value="0" required></label><div class="event-payment-note"><strong>Test payment</strong>No money is collected in this staging flow. Confirming below records a successful test payment and reserves the booking.</div><button class="btn-pill" type="submit">Confirm test payment</button>';
       var message = document.createElement('div');
       message.className = 'event-booking-message';
       message.hidden = true;
@@ -732,7 +732,16 @@
         submit.disabled = true;
         submit.textContent = 'Confirming payment...';
         var data = new FormData(form);
-        fetch('https://hilston-park-ticketing.vercel.app/api/public/bookings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ eventId: event.id, name: data.get('name'), email: data.get('email'), childCount: Number(data.get('childCount')) || 0, paymentMode: 'test' }) })
+        var childCount = Number(data.get('childCount')) || 0;
+        if (childCount + 1 > Number(event.capacity || 0)) {
+          submit.disabled = false;
+          submit.textContent = 'Confirm test payment';
+          message.hidden = false;
+          message.className = 'event-booking-message error';
+          message.textContent = 'This event only has ' + event.capacity + ' places available per booking.';
+          return;
+        }
+        fetch('https://hilston-park-ticketing.vercel.app/api/public/bookings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ eventId: event.id, name: data.get('name'), email: data.get('email'), childCount: childCount, paymentMode: 'test' }) })
           .then(function (response) { return response.json().then(function (data) { return { ok: response.ok, data: data }; }); })
           .then(function (result) {
             if (result.ok) {
@@ -765,7 +774,7 @@
         var videos = attachments.filter(function (attachment) { return attachment.contentType && attachment.contentType.indexOf('video/') === 0; });
         var files = attachments.filter(function (attachment) { return attachment.contentType && attachment.contentType.indexOf('image/') !== 0 && attachment.contentType.indexOf('video/') !== 0; });
 
-        if (event.imageUrl && !images.some(function (attachment) { return attachment.url === event.imageUrl; })) images.unshift({ contentType: 'image/*', url: event.imageUrl });
+        if (!images.length && event.imageUrl) images.push({ contentType: 'image/*', url: event.imageUrl });
         if (images.length || videos.length) {
           var media = document.createElement('div');
           media.className = 'whats-on-card-media';
@@ -774,7 +783,6 @@
             image.className = 'whats-on-card-image';
             image.src = attachment.url;
             image.alt = event.title ? event.title + ' at Hilston Park' : 'Hilston Park event';
-            image.loading = 'lazy';
             media.appendChild(image);
           });
           videos.forEach(function (attachment) {
