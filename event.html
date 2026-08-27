@@ -292,6 +292,13 @@
     .whats-on-card-image, .whats-on-card-video { display: block; height: 190px; object-fit: cover; width: 100%; }
     .whats-on-files { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
     .whats-on-file { color: var(--teal); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .whats-on-book { align-self: flex-start; border: 0; cursor: pointer; margin-top: 6px; }
+    .event-booking-overlay { align-items: center; background: rgba(25,34,31,.78); display: flex; inset: 0; justify-content: center; padding: 20px; position: fixed; z-index: 10001; }
+    .event-booking-panel { background: var(--white); max-width: 510px; padding: 34px; position: relative; width: 100%; }
+    .event-booking-panel h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: normal; line-height: 1.05; margin: 8px 32px 14px 0; }
+    .event-booking-panel p { color: var(--text-muted); font-size: .9rem; line-height: 1.6; margin-bottom: 20px; }
+    .event-booking-close { background: none; border: 0; color: var(--text-muted); cursor: pointer; font-size: 2rem; line-height: 1; position: absolute; right: 16px; top: 14px; }
+    .event-booking-form { display: grid; gap: 15px; }.event-booking-form label { color: var(--text); display: grid; font-size: .7rem; font-weight: 700; gap: 7px; letter-spacing: .1em; text-transform: uppercase; }.event-booking-form input { border: 1px solid var(--border); font: inherit; padding: 12px; width: 100%; }.event-booking-form button { align-self: start; border: 0; cursor: pointer; }.event-booking-message { border-left: 3px solid var(--teal); color: var(--text-muted); font-size: .9rem; line-height: 1.6; margin-top: 18px; padding: 10px 14px; }.event-booking-message.error { border-color: #9a3d35; color: #7d302a; }
     .whats-on-date { font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--teal); font-weight: 600; }
     .whats-on-card h3 { font-size: 1.15rem; line-height: 1.35; }
     .whats-on-card p { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); }
@@ -661,9 +668,6 @@
       <p>Upcoming events open for booking at Hilston Park.</p>
     </div>
     <div class="whats-on-grid" id="whatsOnGrid"></div>
-    <div class="whats-on-cta">
-      <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">ENQUIRE ABOUT AN EVENT</a>
-    </div>
   </section>
 
   <script>
@@ -691,6 +695,49 @@
       span.className = 'whats-on-tag';
       span.textContent = text;
       return span;
+    }
+
+    function openEventBooking(event) {
+      var overlay = document.createElement('div');
+      overlay.className = 'event-booking-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      var panel = document.createElement('section');
+      panel.className = 'event-booking-panel';
+      var close = document.createElement('button');
+      close.className = 'event-booking-close';
+      close.type = 'button';
+      close.setAttribute('aria-label', 'Close booking form');
+      close.textContent = '×';
+      var eyebrow = document.createElement('div');
+      eyebrow.className = 'whats-on-date';
+      eyebrow.textContent = 'Book event';
+      var title = document.createElement('h2');
+      title.textContent = event.title;
+      var copy = document.createElement('p');
+      copy.textContent = 'Send your booking request directly to the Hilston Park events team.';
+      var form = document.createElement('form');
+      form.className = 'event-booking-form';
+      form.innerHTML = '<label>Your name<input name="name" autocomplete="name" required></label><label>Email address<input name="email" type="email" autocomplete="email" required></label><label>Children attending<input name="childCount" type="number" min="0" max="100" value="0" required></label><button class="btn-pill" type="submit">Send booking request</button>';
+      var message = document.createElement('div');
+      message.className = 'event-booking-message';
+      message.hidden = true;
+      panel.appendChild(close); panel.appendChild(eyebrow); panel.appendChild(title); panel.appendChild(copy); panel.appendChild(form); panel.appendChild(message); overlay.appendChild(panel); document.body.appendChild(overlay);
+      function dismiss() { overlay.remove(); }
+      close.addEventListener('click', dismiss);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) dismiss(); });
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var submit = form.querySelector('button[type="submit"]');
+        submit.disabled = true;
+        submit.textContent = 'Sending...';
+        var data = new FormData(form);
+        fetch('https://hilston-park-ticketing.vercel.app/api/events/' + encodeURIComponent(event.id) + '/attendees', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: data.get('name'), email: data.get('email'), childCount: Number(data.get('childCount')) || 0 }) })
+          .then(function (response) { return response.json().then(function (data) { return { ok: response.ok, data: data }; }); })
+          .then(function (result) { form.hidden = true; message.hidden = false; message.classList.toggle('error', !result.ok); message.textContent = result.ok ? 'Your booking request has been received. The Hilston Park events team will be in touch.' : (result.data.error || 'Your booking request could not be sent.'); })
+          .catch(function () { submit.disabled = false; submit.textContent = 'Send booking request'; message.hidden = false; message.classList.add('error'); message.textContent = 'Your booking request could not be sent. Please try again.'; });
+      });
+      form.querySelector('input[name="name"]').focus();
     }
 
     function render(events) {
@@ -763,6 +810,13 @@
           });
           card.appendChild(fileList);
         }
+
+        var book = document.createElement('button');
+        book.className = 'btn-pill whats-on-book';
+        book.type = 'button';
+        book.textContent = 'Book event';
+        book.addEventListener('click', function () { openEventBooking(event); });
+        card.appendChild(book);
 
 
         grid.appendChild(card);
