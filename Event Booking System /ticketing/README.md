@@ -13,13 +13,14 @@
 
  ## Persistent setup
 
- 1. Create a PostgreSQL database and run `database/schema.sql`.
-2. Create an `organizations` row and set `ORGANIZATION_ID` to its UUID.
-3. Create a private Supabase Storage bucket named by `SUPABASE_STORAGE_BUCKET` for ticket PDFs.
-4. Configure `DATABASE_URL` with the Supabase transaction pooler, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ORGANIZATION_ID`, and `APP_SESSION_SECRET` in the standalone Vercel project. Service-role values are server-only.
-5. Configure `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` only as server-side Vercel environment variables.
-6. Point Stripe webhooks to `/api/webhooks/stripe` and enable `payment_intent.succeeded`.
-7. Do not promote public sales until the webhook transaction confirms bookings, issues tickets, and enqueues notifications idempotently.
+1. Create a PostgreSQL database and run `database/schema.sql`.
+2. Run `database/srs-v1-additions.sql` after the base schema succeeds. This migration is additive and creates the remaining SRS tables, indexes, locked permission keys, and deny-by-default RLS posture.
+3. Create an `organizations` row and set `ORGANIZATION_ID` to its UUID.
+4. Create a private Supabase Storage bucket named by `SUPABASE_STORAGE_BUCKET` for ticket PDFs.
+5. Configure `DATABASE_URL` with the Supabase transaction pooler, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ORGANIZATION_ID`, and `APP_SESSION_SECRET` in the standalone Vercel project. Service-role values are server-only.
+6. Configure `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` only as server-side Vercel environment variables.
+7. Point Stripe webhooks to `/api/webhooks/stripe` and enable `payment_intent.succeeded`.
+8. Do not promote public sales until the webhook transaction confirms bookings, issues tickets, and enqueues notifications idempotently.
 
  ## Current routes
 
