@@ -116,6 +116,12 @@
        <priority>0.6400</priority>
   </url>
   <url>
+       <loc>https://hilstonpark.com/blog/raft-building-activities</loc>
+       <lastmod>2026-09-03T00:00:00+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
        <loc>https://hilstonpark.com/blog/wye-valley-estate</loc>
        <lastmod>2026-07-10T15:27:18+00:00</lastmod>
        <changefreq>daily</changefreq>
