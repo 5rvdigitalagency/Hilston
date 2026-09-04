@@ -8,6 +8,9 @@ This folder contains the source schema specifications supplied for the Hilston P
 | --- | --- | --- | --- |
 | v1 | 2026-09-04 | `Hilston-Park-Sitewide-Schema-v1-2026-09-04.csv` | Sitewide Organization, LocalBusiness, and WebSite schema |
 | v1 | 2026-09-04 | `Hilston-Park-Page-Specific-Schema-v1-2026-09-04.csv` | Page-specific Course, Event, Activity, Accommodation, and VideoObject schema |
+| v1 | 2026-09-04 | `Hilston-Park-Breadcrumb-Schema-v1-2026-09-04.csv` | BreadcrumbList schema |
+| v1 | 2026-09-04 | `Hilston-Park-FAQ-Schema-v1-2026-09-04.csv` | FAQPage schema |
+| v1 | 2026-09-04 | `Hilston-Park-Article-Schema-v1-2026-09-04.csv` | BlogPosting schema |
 
 ## Adding an Update
 

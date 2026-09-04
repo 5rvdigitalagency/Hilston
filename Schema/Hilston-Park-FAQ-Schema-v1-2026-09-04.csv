@@ -1,0 +1,528 @@
+Schema type,Implementation area - Page Wise,FAQ Schema Markup
+,,
+FAQ Schema,https://hilstonpark.com/accommodation,"{
+  ""@context"": ""https://schema.org"",
+  ""@type"": ""FAQPage"",
+  ""@id"": ""https://hilstonpark.com/accommodation/#faq"",
+  ""mainEntity"": [
+    {
+      ""@type"": ""Question"",
+      ""name"": ""What accommodation options are available at Hilston Park?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Hilston Park offers comfortable residential accommodation suitable for schools, youth groups, families, corporate teams, and private group bookings.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How many guests can stay at Hilston Park?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Hilston Park provides accommodation for both small and large groups. Contact the bookings team for details about capacity and availability.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Are meals included with accommodation?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Residential packages include freshly prepared meals, with vegetarian, vegan, and dietary requirements catered for when requested in advance.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Is Hilston Park suitable for school residential trips?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Hilston Park provides residential accommodation alongside outdoor education and adventure activities for school groups.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Do the accommodation facilities include staff rooms?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Staff accommodation is available to support teachers, group leaders, and supervisors during residential visits.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can dietary requirements be accommodated?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Hilston Park can cater for vegetarian, vegan, and other dietary requirements when informed during the booking process.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Is exclusive group accommodation available?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Exclusive accommodation may be available depending on group size and booking dates. Contact Hilston Park to discuss your requirements.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""What facilities are available for overnight guests?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Guests have access to comfortable sleeping accommodation, dining facilities, outdoor spaces, and convenient access to Hilston Park's adventure activities.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can families stay at Hilston Park?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Hilston Park welcomes families looking for countryside accommodation and access to outdoor experiences.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How can I book accommodation at Hilston Park?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Accommodation can be booked by contacting the Hilston Park team through the enquiry form or contact details on the official website.""
+      }
+    }
+  ]
+}"
+,,
+FAQ Schema,https://hilstonpark.com/educational,"""{
+  """"@context"""": """"https://schema.org"""",
+  """"@type"""": """"FAQPage"""",
+  """"@id"""": """"https://hilstonpark.com/educational/#faq-2"""",
+  """"mainEntity"""": [
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"Why should schools choose Hilston Park for educational trips?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Hilston Park combines outdoor adventure, curriculum-linked learning, and residential accommodation to create engaging educational experiences that help students develop confidence, teamwork, and leadership skills.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"How long can schools stay at Hilston Park?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Schools can choose from day visits or multi-day residential programmes depending on their educational objectives and group requirements.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"Are educational programmes tailored to each school?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Yes. Educational programmes can be adapted to suit different age groups, learning outcomes, and group sizes.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"Do students need previous outdoor activity experience?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"No. Activities are designed for participants of different abilities, with qualified instructors providing guidance throughout each session.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"What skills do students develop during their visit?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Students develop teamwork, communication, resilience, leadership, confidence, decision-making, and problem-solving skills through practical outdoor experiences.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"Are meals included in residential school trips?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Residential packages typically include meals and accommodation. Schools should confirm the package details when making a booking.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"Can Hilston Park accommodate large school groups?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Yes. Hilston Park can host both small and large school groups, with programmes designed to meet different group sizes.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"Are teachers required to supervise students during activities?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Teachers remain responsible for student supervision while qualified activity instructors lead and manage each outdoor activity.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"What safety measures are in place during activities?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Activities are conducted by trained instructors using appropriate safety equipment and operational procedures to provide a safe learning environment.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"Can educational visits be booked throughout the year?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Yes. Educational visits are available during much of the year, subject to availability and seasonal activity schedules.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"Does Hilston Park support outdoor curriculum learning?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Yes. Outdoor activities are designed to complement classroom learning while encouraging practical skills, environmental awareness, and personal development.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"Can schools request a customised activity programme?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Yes. Schools can discuss their learning objectives with the Hilston Park team to create a programme that meets their educational goals.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"How far in advance should schools book?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Schools are encouraged to book as early as possible, particularly for popular dates during the academic year.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"What should students bring for their educational visit?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Students should bring suitable outdoor clothing, comfortable footwear, and any items recommended by the school or Hilston Park before the visit.""""
+      }
+    },
+    {
+      """"@type"""": """"Question"""",
+      """"name"""": """"How can schools enquire about educational programmes?"""",
+      """"acceptedAnswer"""": {
+        """"@type"""": """"Answer"""",
+        """"text"""": """"Schools can contact Hilston Park through the enquiry form or contact information on the official website to discuss programme options, availability, and bookings.""""
+      }
+    }
+  ]
+}"""
+,,
+FAQ Schema,https://hilstonpark.com/event,"<script type=""application/ld+json"">
+{
+  ""@context"": ""https://schema.org"",
+  ""@type"": ""FAQPage"",
+  ""@id"": ""https://hilstonpark.com/event/#faq"",
+  ""mainEntity"": [
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How early should I book an event at Hilston Park?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""We recommend booking your event as early as possible, especially during peak seasons, to secure your preferred dates and event requirements.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can Hilston Park help plan my event?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. The Hilston Park team can help you plan your event, including activities, accommodation, catering, and scheduling to create a memorable experience.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Are catering options available for different dietary requirements?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Catering options are available for a range of dietary requirements, including vegetarian, vegan, and other special dietary needs when requested in advance.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How can I request a quote for an event?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""You can request a personalised event quotation by contacting the Hilston Park team through the enquiry form on the official website. Our team will discuss your event requirements and provide a tailored quote.""
+      }
+    }
+  ]
+}
+</script>"
+,,
+FAQ Schema,https://hilstonpark.com/activity,"<script type=""application/ld+json"">
+{
+  ""@context"": ""https://schema.org"",
+  ""@type"": ""FAQPage"",
+  ""@id"": ""https://hilstonpark.com/activity/#faq-2"",
+  ""mainEntity"": [
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Who can take part in activities at Hilston Park?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Hilston Park welcomes schools, youth groups, families, corporate teams, and private groups. Activities are adapted to suit different ages and experience levels.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Do I need previous experience to join the activities?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""No. Most activities are beginner-friendly and are led by qualified instructors who provide guidance throughout each session.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Is all activity equipment provided?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Essential safety equipment and activity-specific gear are provided for participants where required.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can multiple activities be booked on the same day?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Depending on availability and your programme, multiple activities can be combined into a full-day or multi-day adventure experience.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How long does each activity session last?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Activity durations vary depending on the programme and group schedule. Details are provided during the booking process.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""What happens if the weather is unsuitable for outdoor activities?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Hilston Park monitors weather conditions and may adjust activity schedules or provide suitable alternatives to ensure participant safety.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Are activities designed to build teamwork and leadership skills?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Many activities encourage collaboration, communication, leadership, confidence, and problem-solving through practical outdoor challenges.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can activities be tailored to different group objectives?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Programmes can be customised to meet educational, recreational, or corporate team-building goals.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Are instructors present during every activity?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Qualified instructors supervise activities, provide safety guidance, and support participants throughout each experience.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can families participate in outdoor adventure activities together?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Selected activities are suitable for families and groups, depending on participant ages and programme availability.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Do activities run throughout the year?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Many activities are available year-round, although schedules may vary depending on seasonal conditions and operational requirements.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How can I choose the right activity programme?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""The Hilston Park team can recommend activities based on your group's age, experience, objectives, and preferred visit duration.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Are there activities suitable for mixed-ability groups?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Many programmes can be adapted to accommodate participants with different experience levels and abilities.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can activities be included with residential stays?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Residential packages can include a selection of outdoor adventure activities alongside accommodation and catering.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How do I enquire about activity availability?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""You can contact Hilston Park through the enquiry form on the official website to discuss available activities, dates, and booking options.""
+      }
+    }
+  ]
+}
+</script>"
+,,
+FAQ Schema,https://hilstonpark.com/contact,"<script type=""application/ld+json"">
+{
+  ""@context"": ""https://schema.org"",
+  ""@type"": ""FAQPage"",
+  ""@id"": ""https://hilstonpark.com/contact/#faq"",
+  ""mainEntity"": [
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How can I contact Hilston Park?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""You can contact Hilston Park by completing the online enquiry form, calling the team, or sending an email through the contact details provided on the website.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can I enquire about school trips through the contact page?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. The contact page can be used to enquire about educational visits, residential school trips, outdoor learning programmes, and group bookings.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can I request a quote for a group booking?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Contact the Hilston Park team with your group size, preferred dates, and requirements to receive a personalised quotation.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can I contact Hilston Park about accommodation availability?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. You can enquire about accommodation availability, facilities, and residential packages using the contact form or by speaking with the bookings team.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can I arrange a visit before making a booking?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Prospective visitors can contact Hilston Park to discuss arranging a visit or viewing, subject to availability.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How long does it take to receive a response to my enquiry?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Hilston Park aims to respond to enquiries as quickly as possible during normal business hours.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can I contact Hilston Park about corporate events?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. The team can provide information about corporate events, team-building activities, venue hire, and bespoke event packages.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can I ask questions about outdoor activities before booking?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. The Hilston Park team can provide information about available activities, participant requirements, and programme options before you book.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Is the contact form suitable for general enquiries?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. The contact form can be used for general enquiries about accommodation, activities, educational visits, events, and bookings.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Where can I find directions to Hilston Park?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Directions and location information are available on the Contact page to help visitors plan their journey to Hilston Park.""
+      }
+    }
+  ]
+}
+</script>"
+,,
+FAQ Schema,https://hilstonpark.com/blogs,"<script type=""application/ld+json"">
+{
+  ""@context"": ""https://schema.org"",
+  ""@type"": ""FAQPage"",
+  ""mainEntity"": [
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How can I make an enquiry?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""You can make an enquiry by completing the contact form on our website or by contacting our team directly.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""How long does it take to receive a reply?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Our team aims to respond to all enquiries as quickly as possible during business hours.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can I enquire about group bookings?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. We welcome enquiries for schools, corporate groups, families, and private events.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can I request more information before booking?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. Our team is happy to answer your questions and provide additional information before you make a booking.""
+      }
+    },
+    {
+      ""@type"": ""Question"",
+      ""name"": ""Can I contact Hilston Park for general enquiries?"",
+      ""acceptedAnswer"": {
+        ""@type"": ""Answer"",
+        ""text"": ""Yes. You can contact us with any questions about our activities, accommodation, educational visits, events, or facilities.""
+      }
+    }
+  ]
+}
+</script>"
