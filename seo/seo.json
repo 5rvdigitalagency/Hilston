@@ -1,0 +1,3291 @@
+{
+  "$schema": "./seo.schema.json",
+  "defaults": {
+    "siteName": "Hilston Park",
+    "siteUrl": "https://hilstonpark.com",
+    "titleTemplate": "%s | {siteName}",
+    "ogImage": "",
+    "twitterCard": "summary_large_image",
+    "locale": "en_GB"
+  },
+  "pages": {
+    "/": {
+      "file": "index.html",
+      "title": "Outdoor Activity Centre Wales | Trips &amp; Team Building",
+      "description": "Outdoor activity centre in Wales offering residential trips, school stays, and outdoor activities for adults with team building experiences.",
+      "canonical": "https://hilstonpark.com/",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+44 (0) 1902 50000",
+            "contactType": "customer service",
+            "areaServed": "GB",
+            "availableLanguage": "en"
+          },
+          "sameAs": [
+            "https://www.youtube.com/@HilstonPark",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.facebook.com/hilstonparkofficial"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "@id": "https://hilstonpark.com/#localbusiness",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "description": "Hilston Park is an outdoor adventure, activity, education, conference and events venue located in Monmouthshire, Wales, offering residential school trips, team building, weddings, corporate events and outdoor experiences.",
+          "telephone": "+44 1600 240033",
+          "email": "booking@hilstonpark.com",
+          "priceRange": "££",
+          "currenciesAccepted": "GBP",
+          "paymentAccepted": "Cash, Credit Card, Debit Card",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Hilston Park",
+            "addressLocality": "Newcastle",
+            "addressRegion": "Monmouthshire",
+            "postalCode": "NP25 5NY",
+            "addressCountry": "GB"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.86593449958543,
+            "longitude": -2.8049438907672797
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "United Kingdom"
+          },
+          "sameAs": [
+            "https://www.facebook.com/hilstonparkofficial",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.youtube.com/@HilstonPark"
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://hilstonpark.com/#website",
+          "url": "https://hilstonpark.com/",
+          "name": "Hilston Park",
+          "description": "Hilston Park is an outdoor adventure, education, accommodation and events venue in Monmouthshire, Wales.",
+          "publisher": {
+            "@id": "https://hilstonpark.com/#organization"
+          },
+          "inLanguage": "en-GB"
+        }
+      ]
+    },
+    "/about": {
+      "file": "about.html",
+      "title": "Activity Centre in Monmouth | Hilston Park Outdoor Centre",
+      "description": "Learn about Hilston Park, an activity centre in Monmouth offering residential trips, outdoor learning, and group experiences in Wales.",
+      "canonical": "https://hilstonpark.com/about",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/about#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "About",
+              "item": "https://hilstonpark.com/about"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://hilstonpark.com/#organization",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+44 (0) 1902 50000",
+            "contactType": "customer service",
+            "areaServed": "GB",
+            "availableLanguage": "en"
+          },
+          "sameAs": [
+            "https://www.youtube.com/@HilstonPark",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.facebook.com/hilstonparkofficial"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "@id": "https://hilstonpark.com/#localbusiness",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "description": "Hilston Park is an outdoor adventure, activity, education, conference and events venue located in Monmouthshire, Wales, offering residential school trips, team building, weddings, corporate events and outdoor experiences.",
+          "telephone": "+44 1600 240033",
+          "email": "booking@hilstonpark.com",
+          "priceRange": "££",
+          "currenciesAccepted": "GBP",
+          "paymentAccepted": "Cash, Credit Card, Debit Card",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Hilston Park",
+            "addressLocality": "Newcastle",
+            "addressRegion": "Monmouthshire",
+            "postalCode": "NP25 5NY",
+            "addressCountry": "GB"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.86593449958543,
+            "longitude": -2.8049438907672797
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "United Kingdom"
+          },
+          "sameAs": [
+            "https://www.facebook.com/hilstonparkofficial",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.youtube.com/@HilstonPark"
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://hilstonpark.com/#website",
+          "url": "https://hilstonpark.com/",
+          "name": "Hilston Park",
+          "description": "Hilston Park is an outdoor adventure, education, accommodation and events venue in Monmouthshire, Wales.",
+          "publisher": {
+            "@id": "https://hilstonpark.com/#organization"
+          },
+          "inLanguage": "en-GB"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "@id": "https://hilstonpark.com/about#video",
+          "name": "Discover Hilston Park",
+          "description": "Explore Hilston Park, a historic countryside estate offering outdoor adventures, activities, accommodation and unique experiences in the heart of Wales.",
+          "thumbnailUrl": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+          "uploadDate": "2026-06-20",
+          "contentUrl": "https://hilstonpark.com/Videos/about-hero-web.mp4",
+          "embedUrl": "https://hilstonpark.com/about",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+            }
+          },
+          "isPartOf": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/about",
+            "name": "About Hilston Park"
+          }
+        }
+      ]
+    },
+    "/accessibility": {
+      "file": "accessibility.html",
+      "title": "Accessibility Statement | Hilston Park",
+      "description": "Hilston Park accessibility statement — our WCAG 2.2 Level AA commitment, conformance status, known limitations, exceptions, and how to report issues.",
+      "canonical": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": null
+    },
+    "/accommodation": {
+      "file": "accommodation.html",
+      "title": "Group Accommodation Wales | Youth &amp; Residential Stays",
+      "description": "Stay at group accommodation in Wales for schools and youth groups. Enjoy comfortable residential stays and digital detox experiences in nature.",
+      "canonical": "https://hilstonpark.com/accommodation",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/accommodation#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Accommodation",
+              "item": "https://hilstonpark.com/accommodation"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": "https://hilstonpark.com/accommodation/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What accommodation options are available at Hilston Park?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hilston Park offers comfortable residential accommodation suitable for schools, youth groups, families, corporate teams, and private group bookings."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How many guests can stay at Hilston Park?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hilston Park provides accommodation for both small and large groups. Contact the bookings team for details about capacity and availability."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are meals included with accommodation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Residential packages include freshly prepared meals, with vegetarian, vegan, and dietary requirements catered for when requested in advance."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Hilston Park suitable for school residential trips?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Hilston Park provides residential accommodation alongside outdoor education and adventure activities for school groups."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do the accommodation facilities include staff rooms?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Staff accommodation is available to support teachers, group leaders, and supervisors during residential visits."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can dietary requirements be accommodated?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Hilston Park can cater for vegetarian, vegan, and other dietary requirements when informed during the booking process."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is exclusive group accommodation available?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Exclusive accommodation may be available depending on group size and booking dates. Contact Hilston Park to discuss your requirements."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What facilities are available for overnight guests?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Guests have access to comfortable sleeping accommodation, dining facilities, outdoor spaces, and convenient access to Hilston Park's adventure activities."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can families stay at Hilston Park?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Hilston Park welcomes families looking for countryside accommodation and access to outdoor experiences."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I book accommodation at Hilston Park?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Accommodation can be booked by contacting the Hilston Park team through the enquiry form or contact details on the official website."
+              }
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://hilstonpark.com/#organization",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+44 (0) 1902 50000",
+            "contactType": "customer service",
+            "areaServed": "GB",
+            "availableLanguage": "en"
+          },
+          "sameAs": [
+            "https://www.youtube.com/@HilstonPark",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.facebook.com/hilstonparkofficial"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "@id": "https://hilstonpark.com/#localbusiness",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "description": "Hilston Park is an outdoor adventure, activity, education, conference and events venue located in Monmouthshire, Wales, offering residential school trips, team building, weddings, corporate events and outdoor experiences.",
+          "telephone": "+44 1600 240033",
+          "email": "booking@hilstonpark.com",
+          "priceRange": "££",
+          "currenciesAccepted": "GBP",
+          "paymentAccepted": "Cash, Credit Card, Debit Card",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Hilston Park",
+            "addressLocality": "Newcastle",
+            "addressRegion": "Monmouthshire",
+            "postalCode": "NP25 5NY",
+            "addressCountry": "GB"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.86593449958543,
+            "longitude": -2.8049438907672797
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "United Kingdom"
+          },
+          "sameAs": [
+            "https://www.facebook.com/hilstonparkofficial",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.youtube.com/@HilstonPark"
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://hilstonpark.com/#website",
+          "url": "https://hilstonpark.com/",
+          "name": "Hilston Park",
+          "description": "Hilston Park is an outdoor adventure, education, accommodation and events venue in Monmouthshire, Wales.",
+          "publisher": {
+            "@id": "https://hilstonpark.com/#organization"
+          },
+          "inLanguage": "en-GB"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "LodgingBusiness",
+          "@id": "https://hilstonpark.com/accommodation#lodgingbusiness",
+          "name": "Hilston Park Accommodation",
+          "description": "Stay at Hilston Park with a range of countryside accommodation options including cosy king rooms, garden view rooms, family rooms, group bunk rooms, exclusive house hire and a private gatehouse lodge.",
+          "url": "https://hilstonpark.com/accommodation",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+          "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Hilston Park",
+            "addressCountry": "GB"
+          },
+          "amenityFeature": [
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Countryside accommodation",
+              "value": true
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Family friendly accommodation",
+              "value": true
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Group accommodation",
+              "value": true
+            }
+          ],
+          "containsPlace": [
+            {
+              "@type": "Accommodation",
+              "name": "Cosy King Room",
+              "description": "A comfortable king-bedded room tucked within the Manor House, ideal for couples seeking a peaceful countryside escape.",
+              "occupancy": {
+                "@type": "QuantitativeValue",
+                "maxValue": 4
+              },
+              "amenityFeature": [
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "King-size bed",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "En-suite or private bathroom",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Estate views",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "@type": "Accommodation",
+              "name": "Double Garden View Room",
+              "description": "A bright double room overlooking the gardens and grounds, ideal for relaxing countryside stays.",
+              "occupancy": {
+                "@type": "QuantitativeValue",
+                "maxValue": 2
+              },
+              "amenityFeature": [
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Double bed",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Garden views",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "En-suite",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "@type": "Accommodation",
+              "name": "Large Double Garden View Room",
+              "description": "A spacious garden-view room offering extra comfort for guests enjoying longer countryside stays.",
+              "occupancy": {
+                "@type": "QuantitativeValue",
+                "maxValue": 6
+              },
+              "amenityFeature": [
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Large double bed",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Seating area",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Garden outlook",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "@type": "Accommodation",
+              "name": "Family Room",
+              "description": "A flexible family room designed for parents and children staying together during countryside activity breaks.",
+              "occupancy": {
+                "@type": "QuantitativeValue",
+                "maxValue": 4
+              },
+              "amenityFeature": [
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Family suite",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "En-suite",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Child friendly",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "@type": "Accommodation",
+              "name": "Dormitory / Group Bunk Rooms",
+              "description": "Shared accommodation designed for schools, youth groups and larger parties staying together at Hilston Park.",
+              "occupancy": {
+                "@type": "QuantitativeValue",
+                "maxValue": 13
+              },
+              "amenityFeature": [
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Bunk beds",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Separate facilities for boys and girls",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Staff supervision rooms",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "@type": "Accommodation",
+              "name": "Exclusive Use of House",
+              "description": "Private hire of the Manor House for celebrations, family gatherings and multi-day group stays.",
+              "occupancy": {
+                "@type": "QuantitativeValue",
+                "maxValue": 40
+              },
+              "amenityFeature": [
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Entire house access",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Private estate access",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Event support available",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "@type": "Accommodation",
+              "name": "Gatehouse",
+              "description": "A private self-contained lodge at the entrance of the Hilston Park estate, ideal for couples and small families.",
+              "amenityFeature": [
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Private entrance",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Self-contained lodge",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Countryside views",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "@id": "https://hilstonpark.com/accommodation#video",
+          "name": "Hilston Park Accommodation",
+          "description": "Explore accommodation options at Hilston Park, including cosy king rooms, garden view rooms, family rooms, group bunk rooms, exclusive house hire and the private Gatehouse lodge set within the beautiful Welsh countryside.",
+          "thumbnailUrl": [
+            "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+          ],
+          "uploadDate": "2026-07-20",
+          "contentUrl": "https://hilstonpark.com/Videos/accommodation-hero-web.mp4",
+          "embedUrl": "https://hilstonpark.com/accommodation",
+          "duration": "PT1M",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/accommodation"
+          },
+          "about": {
+            "@type": "LodgingBusiness",
+            "name": "Hilston Park Accommodation",
+            "url": "https://hilstonpark.com/accommodation"
+          }
+        }
+      ]
+    },
+    "/activity": {
+      "file": "activity.html",
+      "title": "Adventure Activities for Schools &amp; Groups | Hilston Park",
+      "description": "Explore over 15 outdoor adventure activities including kayaking, climbing, archery, bushcraft, watersports and team building experiences at Hilston Park.",
+      "canonical": "https://hilstonpark.com/activity",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Activity",
+              "item": "https://hilstonpark.com/activity"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": "https://hilstonpark.com/activity/#faq-2",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Who can take part in activities at Hilston Park?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hilston Park welcomes schools, youth groups, families, corporate teams, and private groups. Activities are adapted to suit different ages and experience levels."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I need previous experience to join the activities?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Most activities are beginner-friendly and are led by qualified instructors who provide guidance throughout each session."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is all activity equipment provided?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Essential safety equipment and activity-specific gear are provided for participants where required."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can multiple activities be booked on the same day?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Depending on availability and your programme, multiple activities can be combined into a full-day or multi-day adventure experience."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does each activity session last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Activity durations vary depending on the programme and group schedule. Details are provided during the booking process."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens if the weather is unsuitable for outdoor activities?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hilston Park monitors weather conditions and may adjust activity schedules or provide suitable alternatives to ensure participant safety."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are activities designed to build teamwork and leadership skills?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Many activities encourage collaboration, communication, leadership, confidence, and problem-solving through practical outdoor challenges."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can activities be tailored to different group objectives?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Programmes can be customised to meet educational, recreational, or corporate team-building goals."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are instructors present during every activity?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Qualified instructors supervise activities, provide safety guidance, and support participants throughout each experience."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can families participate in outdoor adventure activities together?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Selected activities are suitable for families and groups, depending on participant ages and programme availability."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do activities run throughout the year?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Many activities are available year-round, although schedules may vary depending on seasonal conditions and operational requirements."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I choose the right activity programme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Hilston Park team can recommend activities based on your group's age, experience, objectives, and preferred visit duration."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are there activities suitable for mixed-ability groups?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Many programmes can be adapted to accommodate participants with different experience levels and abilities."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can activities be included with residential stays?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Residential packages can include a selection of outdoor adventure activities alongside accommodation and catering."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I enquire about activity availability?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can contact Hilston Park through the enquiry form on the official website to discuss available activities, dates, and booking options."
+              }
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://hilstonpark.com/#organization",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+44 (0) 1902 50000",
+            "contactType": "customer service",
+            "areaServed": "GB",
+            "availableLanguage": "en"
+          },
+          "sameAs": [
+            "https://www.youtube.com/@HilstonPark",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.facebook.com/hilstonparkofficial"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "@id": "https://hilstonpark.com/#localbusiness",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "description": "Hilston Park is an outdoor adventure, activity, education, conference and events venue located in Monmouthshire, Wales, offering residential school trips, team building, weddings, corporate events and outdoor experiences.",
+          "telephone": "+44 1600 240033",
+          "email": "booking@hilstonpark.com",
+          "priceRange": "££",
+          "currenciesAccepted": "GBP",
+          "paymentAccepted": "Cash, Credit Card, Debit Card",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Hilston Park",
+            "addressLocality": "Newcastle",
+            "addressRegion": "Monmouthshire",
+            "postalCode": "NP25 5NY",
+            "addressCountry": "GB"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.86593449958543,
+            "longitude": -2.8049438907672797
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "United Kingdom"
+          },
+          "sameAs": [
+            "https://www.facebook.com/hilstonparkofficial",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.youtube.com/@HilstonPark"
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://hilstonpark.com/#website",
+          "url": "https://hilstonpark.com/",
+          "name": "Hilston Park",
+          "description": "Hilston Park is an outdoor adventure, education, accommodation and events venue in Monmouthshire, Wales.",
+          "publisher": {
+            "@id": "https://hilstonpark.com/#organization"
+          },
+          "inLanguage": "en-GB"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "@id": "https://hilstonpark.com/activity#activities",
+          "name": "Outdoor Activities at Hilston Park",
+          "description": "Explore outdoor adventure activities at Hilston Park including high ropes challenges, water activities, bushcraft skills, survival experiences, and group bonding activities designed for schools, groups, and team development.",
+          "url": "https://hilstonpark.com/activity",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "High Ropes & Team Challenges",
+              "item": {
+                "@type": "Service",
+                "name": "High Ropes & Team Challenges",
+                "description": "Adventure-based outdoor challenges including Jacob’s Ladder, Leap of Faith, Gladiator Challenge, ropes courses, balance activities, and climbing experiences designed to improve teamwork, confidence, communication, and problem-solving skills.",
+                "provider": {
+                  "@type": "LocalBusiness",
+                  "name": "Hilston Park",
+                  "url": "https://hilstonpark.com/",
+                  "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+                }
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Jacob’s Ladder",
+              "item": {
+                "@type": "Service",
+                "name": "Jacob’s Ladder",
+                "description": "A climbing challenge where groups rely on teamwork, balance, and communication to help each other reach the top."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Leap of Faith",
+              "item": {
+                "@type": "Service",
+                "name": "Leap of Faith",
+                "description": "A confidence-building challenge where participants climb to a height before completing a controlled jump designed to develop trust and personal achievement."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Gladiator Challenge",
+              "item": {
+                "@type": "Service",
+                "name": "Gladiator Challenge",
+                "description": "Competitive outdoor activities focused on teamwork, communication, quick decision-making, and group problem-solving."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "High & Low Ropes Courses",
+              "item": {
+                "@type": "Service",
+                "name": "High & Low Ropes Courses",
+                "description": "Obstacle-based rope activities designed to improve confidence, coordination, focus, and communication through different challenge levels."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "name": "Balance Beam",
+              "item": {
+                "@type": "Service",
+                "name": "Balance Beam",
+                "description": "A teamwork activity that develops balance, concentration, and group support skills."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 7,
+              "name": "Climbing",
+              "item": {
+                "@type": "Service",
+                "name": "Climbing",
+                "description": "Instructor-led climbing sessions helping participants develop confidence, determination, and problem-solving skills through outdoor challenges."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 8,
+              "name": "Canoeing",
+              "item": {
+                "@type": "Service",
+                "name": "Canoeing",
+                "description": "A guided water activity where groups paddle together while developing teamwork, coordination, and communication skills."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 9,
+              "name": "Paddle Boarding",
+              "item": {
+                "@type": "Service",
+                "name": "Paddle Boarding",
+                "description": "A supervised outdoor water activity focused on balance, confidence, and enjoying an active experience on the water."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 10,
+              "name": "Raft Building",
+              "item": {
+                "@type": "Service",
+                "name": "Raft Building",
+                "description": "A teamwork challenge where groups design, build, and test their own raft using communication, planning, and problem-solving."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 11,
+              "name": "Bushcraft Skills",
+              "item": {
+                "@type": "Service",
+                "name": "Bushcraft Skills",
+                "description": "Hands-on outdoor learning sessions teaching survival skills, teamwork, confidence, and practical knowledge in natural surroundings."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 12,
+              "name": "Rope Rescue",
+              "item": {
+                "@type": "Service",
+                "name": "Rope Rescue",
+                "description": "A technical outdoor challenge involving controlled rescue exercises that develop teamwork, communication, and problem-solving."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 13,
+              "name": "Mountaineering",
+              "item": {
+                "@type": "Service",
+                "name": "Mountaineering",
+                "description": "Outdoor climbing and walking experiences designed to build resilience, teamwork, and confidence across changing terrain."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 14,
+              "name": "Night Hikes",
+              "item": {
+                "@type": "Service",
+                "name": "Night Hikes",
+                "description": "Guided evening outdoor walks encouraging awareness, communication, teamwork, and exploration after dark."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 15,
+              "name": "Designated Camping Areas",
+              "item": {
+                "@type": "Service",
+                "name": "Designated Camping Areas",
+                "description": "Outdoor camping spaces providing opportunities for shared group experiences and connection with nature."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 16,
+              "name": "Campfire Experiences",
+              "item": {
+                "@type": "Service",
+                "name": "Campfire Experiences",
+                "description": "Relaxed evening gatherings allowing groups to unwind, share stories, and spend quality time together after outdoor activities."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "/blog-thrilling-adventures": {
+      "file": "blog-thrilling-adventures.html",
+      "title": "Discover Hilston Park: Adventures &amp; Cosy Escapes",
+      "description": "Discover thrilling adventures and cosy escapes at Hilston Park in Wales. From high ropes to kayaking and comfortable accommodation, your journey begins here.",
+      "canonical": "https://hilstonpark.com/blog-thrilling-adventures",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog-thrilling-adventures#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Thrilling Adventures",
+              "item": "https://hilstonpark.com/blog-thrilling-adventures"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog-thrilling-adventures"
+          },
+          "headline": "From Thrilling Adventures to Cosy Escapes: Your 2025 Journey Begins at Hilston Park",
+          "description": "Experience thrilling adventures at Hilston Park with exciting outdoor activities designed for schools, groups, and teams. From climbing and ziplining to kayaking and bushcraft, discover unforgettable experiences that build confidence, teamwork, and resilience.",
+          "image": "https://hilstonpark.com/images/event-act-highropes.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/adventure-activities-school-groups": {
+      "file": "blog/adventure-activities-school-groups.html",
+      "title": "Unleash Adventure at Hilston Park | Outdoor Activities",
+      "description": "Unleash the adventure at Hilston Park with exciting outdoor activities, school trips, team building, and unforgettable learning experiences in Wales.",
+      "canonical": "https://hilstonpark.com/blog/adventure-activities-school-groups",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/adventure-activities-school-groups#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Adventure Activities for School Groups",
+              "item": "https://hilstonpark.com/blog/adventure-activities-school-groups"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/adventure-activities-school-groups"
+          },
+          "headline": "Unleash the Adventure: Why Schools Are Booking Their 2025 Trips at Hilston Park",
+          "description": "Discover exciting adventure activities for school groups at Hilston Park. From climbing and archery to bushcraft and team challenges, explore outdoor experiences that build confidence, resilience, leadership, and teamwork while making learning fun and memorable.",
+          "image": "https://hilstonpark.com/images/edu-group.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/adventure-at-hilston-park": {
+      "file": "blog/adventure-at-hilston-park.html",
+      "title": "Discover Outdoor Adventure | Hilston Park",
+      "description": "Experience outdoor adventures, team building, and unforgettable school trips at Hilston Park in the beautiful Welsh countryside.",
+      "canonical": "https://hilstonpark.com/blog/adventure-at-hilston-park",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/adventure-at-hilston-park#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Adventure at Hilston Park",
+              "item": "https://hilstonpark.com/blog/adventure-at-hilston-park"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/adventure-at-hilston-park"
+          },
+          "headline": "Discover the Ultimate Adventure at Hilston Park",
+          "description": "Discover the exciting adventure activities at Hilston Park, where students build confidence, teamwork, and resilience through outdoor challenges, nature-based learning, and unforgettable residential experiences in a safe and inspiring environment.",
+          "image": "https://hilstonpark.com/images/hero-corporate.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/corporate-team-building-events": {
+      "file": "blog/corporate-team-building-events.html",
+      "title": "Corporate Events &amp; Team Building Venue | Hilston Park",
+      "description": "Host memorable corporate events at Hilston Park. Discover inspiring meeting spaces, conference facilities and business retreats in beautiful surroundings.",
+      "canonical": "https://hilstonpark.com/blog/corporate-team-building-events",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/corporate-team-building-events#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Corporate Team Building Events",
+              "item": "https://hilstonpark.com/blog/corporate-team-building-events"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/corporate-team-building-events"
+          },
+          "headline": "Corporate Events at Hilston Park",
+          "description": "**Blog Schema Description (250 characters):**\n\nDiscover how corporate team building events at Hilston Park inspire collaboration, strengthen communication, and boost team morale through engaging outdoor activities, bespoke challenges, and memorable experiences in a stunning countryside setting.",
+          "image": "https://hilstonpark.com/images/hp-svc-corporate.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston ParK",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Hilston ParK",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/discover-your-inner-adventure": {
+      "file": "blog/discover-your-inner-adventure.html",
+      "title": "Unleash Your Inner Adventurer | Adventure Activities",
+      "description": "Explore outdoor adventures at Hilston Park, designed to build confidence, teamwork, resilience, and a lifelong love of the great outdoors.",
+      "canonical": "https://hilstonpark.com/blog/discover-your-inner-adventure",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/discover-your-inner-adventure#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Discover Your Inner Adventure",
+              "item": "https://hilstonpark.com/blog/discover-your-inner-adventure"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/discover-your-inner-adventure"
+          },
+          "headline": "Unleashing Your Inner Adventurer",
+          "description": "Unleash your inner adventurer at Hilston Park with exciting outdoor activities designed to inspire confidence, teamwork, and resilience. From thrilling challenges to unforgettable group experiences, discover how adventure creates lasting memories for schools, teams, and groups.",
+          "image": "https://hilstonpark.com/images/edu-act-1.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/early-bird-school-trip-booking": {
+      "file": "blog/early-bird-school-trip-booking.html",
+      "title": "Early Bird Offers for Educational Trips at Hilston Park",
+      "description": "Secure your preferred school trip dates with early booking at Hilston Park and give students an unforgettable outdoor learning adventure.",
+      "canonical": "https://hilstonpark.com/blog/early-bird-school-trip-booking",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/early-bird-school-trip-booking#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Early Bird School Trip Booking",
+              "item": "https://hilstonpark.com/blog/early-bird-school-trip-booking"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/early-bird-school-trip-booking"
+          },
+          "headline": "Why Should You Secure Early Bird Booking for Educational Trips in 2025?",
+          "description": "Plan ahead with Hilston Park’s early bird school trip booking guide. Discover the benefits of booking early, including preferred dates, smoother planning, flexible arrangements, and more time to prepare an unforgettable residential adventure for your students.",
+          "image": "https://hilstonpark.com/images/edu-outdoor.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/group-accommodation": {
+      "file": "blog/group-accommodation.html",
+      "title": "School Trip Accommodation Guide | Hilston Park",
+      "description": "Enjoy a memorable stay at Hilston Park with comfortable accommodation, scenic views, modern amenities, and welcoming hospitality.",
+      "canonical": "https://hilstonpark.com/blog/group-accommodation",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/group-accommodation#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Group Accommodation",
+              "item": "https://hilstonpark.com/blog/group-accommodation"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/group-accommodation"
+          },
+          "headline": "Choosing Accommodation for a School Residential Trip",
+          "description": "Hilston Park offers flexible group accommodation in the Welsh countryside, with exclusive stays, catered options, and outdoor activities for schools, families, corporate teams, and private groups seeking memorable residential experiences.",
+          "image": "https://hilstonpark.com/images/manor-house.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-05-28",
+          "dateModified": "2026-05-28"
+        }
+      ]
+    },
+    "/blog/inspiring-young-minds-outdoor-learning": {
+      "file": "blog/inspiring-young-minds-outdoor-learning.html",
+      "title": "Inspiring Young Minds with Outdoor Learning | Hilston Park",
+      "description": "Discover how outdoor learning and adventure at Hilston Park inspire confidence, teamwork, and lifelong skills in young people.",
+      "canonical": "https://hilstonpark.com/blog/inspiring-young-minds-outdoor-learning",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/inspiring-young-minds-outdoor-learning#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Inspiring Young Minds Through Outdoor Learning",
+              "item": "https://hilstonpark.com/blog/inspiring-young-minds-outdoor-learning"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/inspiring-young-minds-outdoor-learning"
+          },
+          "headline": "Inspiring Young Minds Through Outdoor Education",
+          "description": "Discover how outdoor learning inspires young minds by boosting creativity, confidence, teamwork, and problem-solving. Explore the lasting educational, social, and wellbeing benefits of hands-on nature-based experiences beyond the classroom.",
+          "image": "https://hilstonpark.com/images/edu-act-1.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston ParK",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Hilston ParK",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/memorable-adventure-school-trip": {
+      "file": "blog/memorable-adventure-school-trip.html",
+      "title": "A Memorable School Trip | Outdoor Learning Adventures",
+      "description": "Discover how a memorable school trip at Hilston Park helps students build confidence, teamwork, and resilience through exciting outdoor learning adventures.",
+      "canonical": "https://hilstonpark.com/blog/memorable-adventure-school-trip",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/memorable-adventure-school-trip#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Memorable Adventure School Trip",
+              "item": "https://hilstonpark.com/blog/memorable-adventure-school-trip"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/memorable-adventure-school-trip"
+          },
+          "headline": "A Memorable School Trip at Hilston Park",
+          "description": "Create unforgettable school trip memories at Hilston Park with exciting outdoor adventures, team-building activities, and hands-on learning. Discover how residential school trips build confidence, resilience, friendships, and lifelong skills in a safe, inspiring environment.",
+          "image": "https://hilstonpark.com/images/edu-accom-schools.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston ParK",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Hilston ParK",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/nature-based-learning-school-trips": {
+      "file": "blog/nature-based-learning-school-trips.html",
+      "title": "Nature’s Classroom | Outdoor Learning &amp; School Adventures",
+      "description": "Discover how Hilston Park transforms nature into the ultimate classroom with outdoor learning, environmental education and exciting adventure activities.",
+      "canonical": "https://hilstonpark.com/blog/nature-based-learning-school-trips",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/nature-based-learning-school-trips#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Nature Based Learning School Trips",
+              "item": "https://hilstonpark.com/blog/nature-based-learning-school-trips"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/nature-based-learning-school-trips"
+          },
+          "headline": "Nature’s Classroom",
+          "description": "Discover how nature-based learning school trips at Hilston Park inspire curiosity, build confidence, and bring classroom learning to life through hands-on outdoor activities, environmental exploration, and memorable educational experiences in the countryside.",
+          "image": "https://hilstonpark.com/images/nature-bushcraft.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston ParK",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Hilston ParK",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/outdoor-education-for-schools": {
+      "file": "blog/outdoor-education-for-schools.html",
+      "title": "Empowering Education: Inspiring Future-Ready Learners",
+      "description": "Explore how empowering education inspires creativity, confidence, critical thinking, and leadership for future-ready learners.",
+      "canonical": "https://hilstonpark.com/blog/outdoor-education-for-schools",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/outdoor-education-for-schools#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Outdoor Education for Schools",
+              "item": "https://hilstonpark.com/blog/outdoor-education-for-schools"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/outdoor-education-for-schools"
+          },
+          "headline": "Empowering Education with Outdoor Learning Activities",
+          "description": "Discover how outdoor education at Hilston Park transforms learning beyond the classroom. Explore hands-on activities that inspire curiosity, build confidence, strengthen teamwork, and develop problem-solving skills while creating memorable educational experiences for schools.",
+          "image": "https://hilstonpark.com/images/edu-act-1.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/outdoor-team-building-venue": {
+      "file": "blog/outdoor-team-building-venue.html",
+      "title": "Outdoor Team Building Activities | Hilston Park",
+      "description": "Discover outdoor team building activities for schools, businesses and groups at Hilston Park. Build teamwork in a stunning outdoor setting.",
+      "canonical": "https://hilstonpark.com/blog/outdoor-team-building-venue",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/outdoor-team-building-venue#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Outdoor Team Building Venue",
+              "item": "https://hilstonpark.com/blog/outdoor-team-building-venue"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/outdoor-team-building-venue"
+          },
+          "headline": "Outdoor Team Building Activities for Every Setting",
+          "description": "Explore why Hilston Park is the ideal outdoor team building venue in Wales. Discover adventure activities, leadership challenges, and nature-based experiences that strengthen communication, collaboration, and team performance in a memorable setting.",
+          "image": "https://hilstonpark.com/images/edu-team.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/raft-building-activities": {
+      "file": "blog/raft-building-activities.html",
+      "title": "Raft Building Activities: Skills Children Learn",
+      "description": "Explore how raft building activities help children develop teamwork, problem-solving and confidence through a fun outdoor challenge at Hilston Park.",
+      "canonical": "https://hilstonpark.com/blog/raft-building-activities",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": null
+    },
+    "/blog/school-adventure-experience": {
+      "file": "blog/school-adventure-experience.html",
+      "title": "Experience the Magic at Hilston Park | Outdoor Learning",
+      "description": "Experience the magic of Hilston Park through outdoor learning, adventure activities and residential school trips that inspire young minds.",
+      "canonical": "https://hilstonpark.com/blog/school-adventure-experience",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/school-adventure-experience#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "School Adventure Experience",
+              "item": "https://hilstonpark.com/blog/school-adventure-experience"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/school-adventure-experience"
+          },
+          "headline": "Experience the Magic at Hilston Park",
+          "description": "Experience the excitement of a school adventure that combines outdoor activities, teamwork, and hands-on learning. Discover how adventure experiences at Hilston Park build confidence, resilience, leadership, and unforgettable memories for every student.",
+          "image": "https://hilstonpark.com/images/hp-exp-wide.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston ParK",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Hilston ParK",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/school-trip-at-hilston-park": {
+      "file": "blog/school-trip-at-hilston-park.html",
+      "title": "School Trips for Students | Hilston Park",
+      "description": "Discover how a school trip to Hilston Park helps students build confidence, teamwork, leadership, and lifelong memories through adventure.",
+      "canonical": "https://hilstonpark.com/blog/school-trip-at-hilston-park",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/school-trip-at-hilston-park#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "School Trip at Hilston Park",
+              "item": "https://hilstonpark.com/blog/school-trip-at-hilston-park"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/school-trip-at-hilston-park"
+          },
+          "headline": "Planning a School Adventure Trip? Unleash It at Hilston Park",
+          "description": "Experience how a school trip at Hilston Park combines outdoor adventure, teamwork, and hands-on learning. Discover how residential school trips build confidence, resilience, leadership, and lasting memories through engaging educational activities.",
+          "image": "https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb6509b9ec1135b6c0dd89_Planning%20a%20School%20Adventure%20Trip%20in%202025.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-05-28",
+          "dateModified": "2026-05-28"
+        }
+      ]
+    },
+    "/blog/school-trip-catering-dietary-options": {
+      "file": "blog/school-trip-catering-dietary-options.html",
+      "title": "A World of Flavours: Hilston Park’s International Menu",
+      "description": "Explore Hilston Park’s international menu featuring global flavours, fresh ingredients, and inclusive dining for schools, groups, and residential guests.",
+      "canonical": "https://hilstonpark.com/blog/school-trip-catering-dietary-options",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/school-trip-catering-dietary-options#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "School Trip Catering & Dietary Options",
+              "item": "https://hilstonpark.com/blog/school-trip-catering-dietary-options"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/school-trip-catering-dietary-options"
+          },
+          "headline": "Hilston Park’s International Menu",
+          "description": "Learn how Hilston Park provides nutritious, freshly prepared school trip meals with flexible dietary options. Discover how vegetarian, vegan, allergy-friendly, and special dietary requirements are carefully catered for, ensuring every student enjoys a safe and satisfying dining experience.",
+          "image": "https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb656eb0cfd911280851af_Hilston%20Park%27s%20International%20Menu.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-05-28",
+          "dateModified": "2026-05-28"
+        }
+      ]
+    },
+    "/blog/team-building-activities": {
+      "file": "blog/team-building-activities.html",
+      "title": "Outdoor Team Building Activities | Adventure Activities",
+      "description": "Plan a memorable school trip at Hilston Park with outdoor adventures, curriculum-linked activities, team building, and comfortable accommodation.",
+      "canonical": "https://hilstonpark.com/blog/team-building-activities",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/team-building-activities#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Team Building Activities",
+              "item": "https://hilstonpark.com/blog/team-building-activities"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/team-building-activities"
+          },
+          "headline": "Team Building in the Welsh Countryside: What to Expect",
+          "description": "Discover engaging team building activities that strengthen communication, trust, leadership, and collaboration. Learn how outdoor challenges at Hilston Park create memorable experiences that improve teamwork, morale, and problem-solving for groups of all sizes",
+          "image": "https://hilstonpark.com/images/hero-corporate.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-05-28",
+          "dateModified": "2026-05-28"
+        }
+      ]
+    },
+    "/blog/teamwork-collaboration-activities": {
+      "file": "blog/teamwork-collaboration-activities.html",
+      "title": "Build Team Collaboration | Hilston Park Activities",
+      "description": "Strengthen collaboration through tailored team-building programs at Hilston Park, designed for schools, businesses, and group development.",
+      "canonical": "https://hilstonpark.com/blog/teamwork-collaboration-activities",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/teamwork-collaboration-activities#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Teamwork & Collaboration Activities",
+              "item": "https://hilstonpark.com/blog/teamwork-collaboration-activities"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/teamwork-collaboration-activities"
+          },
+          "headline": "Harnessing Collaboration at Hilston Park",
+          "description": "Strengthen teamwork and collaboration with engaging group activities at Hilston Park. Discover practical challenges that build communication, trust, leadership, and problem-solving skills, creating memorable experiences for schools, organisations, and corporate teams.",
+          "image": "https://hilstonpark.com/images/hp-svc-corporate.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-06-16",
+          "dateModified": "2026-06-16"
+        }
+      ]
+    },
+    "/blog/why-outdoor-learning-matters": {
+      "file": "blog/why-outdoor-learning-matters.html",
+      "title": "Why Outdoor Learning Matters More Than Ever in UK Today",
+      "description": "Discover unforgettable residential trips for primary schools in Wales, helping pupils build confidence, teamwork and memories through outdoor adventures!",
+      "canonical": "https://hilstonpark.com/blog/why-outdoor-learning-matters",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": null
+    },
+    "/blog/why-schools-choose-hilston-park": {
+      "file": "blog/why-schools-choose-hilston-park.html",
+      "title": "School Residential Trips in Wales | Hilston Park",
+      "description": "Discover why schools choose Hilston Park for unforgettable residential trips, outdoor learning, adventure activities, and student development in Wales.",
+      "canonical": "https://hilstonpark.com/blog/why-schools-choose-hilston-park",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/why-schools-choose-hilston-park#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Why Schools Choose Hilston Park",
+              "item": "https://hilstonpark.com/blog/why-schools-choose-hilston-park"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/why-schools-choose-hilston-park"
+          },
+          "headline": "Why Schools Are Booking Their Trips at Hilston Park",
+          "description": "Discover why schools choose Hilston Park for unforgettable residential trips. Explore exciting outdoor activities, curriculum-linked learning, safe accommodation, and expert-led adventures that build confidence, teamwork, resilience, and lifelong memories.",
+          "image": "https://cdn.prod.website-files.com/69ca1b21261af2b4b1cd00be/69cb632a2b3438cd618d8b30_Why%20Schools%20Are%20Booking%20Their%202025%20Trips%20at%20Hilston%20Park.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-05-28",
+          "dateModified": "2026-05-28"
+        }
+      ]
+    },
+    "/blog/wye-valley-estate": {
+      "file": "blog/wye-valley-estate.html",
+      "title": "Wye Valley Adventure in Wales | Hilston Park",
+      "description": "Explore the natural beauty of the Wye Valley with riverside walks, ancient woodlands, charming villages, and outdoor activities near Hilston Park.",
+      "canonical": "https://hilstonpark.com/blog/wye-valley-estate",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/blog/wye-valley-estate#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://hilstonpark.com/blogs"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Wye Valley Estate",
+              "item": "https://hilstonpark.com/blog/wye-valley-estate"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/blog/wye-valley-estate"
+          },
+          "headline": "The Wye Valley Estate: What Makes Hilston Park Unique",
+          "description": "Explore the beauty of the Wye Valley Estate, where historic landscapes, scenic countryside, and outdoor adventures create unforgettable experiences. Discover walking trails, wildlife, heritage, and peaceful escapes near Hilston Park in the heart of Wales.",
+          "image": "https://hilstonpark.com/images/nature-bushcraft.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "hilstonpark",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp"
+            }
+          },
+          "datePublished": "2026-05-28",
+          "dateModified": "2026-05-28"
+        }
+      ]
+    },
+    "/blogs": {
+      "file": "blogs.html",
+      "title": "Wales Adventure Blogs | Group Events &amp; Trips",
+      "description": "Explore blogs on school trips, outdoor activities, corporate events, and group experiences in Wales. Tips, guides, and inspiration from Hilston Park.",
+      "canonical": "https://hilstonpark.com/blogs",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blogs",
+              "item": "https://hilstonpark.com/blogs"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How can I make an enquiry?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can make an enquiry by completing the contact form on our website or by contacting our team directly."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does it take to receive a reply?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our team aims to respond to all enquiries as quickly as possible during business hours."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I enquire about group bookings?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. We welcome enquiries for schools, corporate groups, families, and private events."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I request more information before booking?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Our team is happy to answer your questions and provide additional information before you make a booking."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I contact Hilston Park for general enquiries?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. You can contact us with any questions about our activities, accommodation, educational visits, events, or facilities."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "/contact": {
+      "file": "contact.html",
+      "title": "Contact Hilston Park Wales | School Trips &amp; Group Bookings",
+      "description": "Contact Hilston Park in Wales for school trips, group bookings, corporate events, and team building. Enquire today for your next outdoor experience.",
+      "canonical": "https://hilstonpark.com/contact",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Contact",
+              "item": "https://hilstonpark.com/contact"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": "https://hilstonpark.com/contact/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How can I contact Hilston Park?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can contact Hilston Park by completing the online enquiry form, calling the team, or sending an email through the contact details provided on the website."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I enquire about school trips through the contact page?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The contact page can be used to enquire about educational visits, residential school trips, outdoor learning programmes, and group bookings."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I request a quote for a group booking?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Contact the Hilston Park team with your group size, preferred dates, and requirements to receive a personalised quotation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I contact Hilston Park about accommodation availability?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. You can enquire about accommodation availability, facilities, and residential packages using the contact form or by speaking with the bookings team."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I arrange a visit before making a booking?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Prospective visitors can contact Hilston Park to discuss arranging a visit or viewing, subject to availability."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does it take to receive a response to my enquiry?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hilston Park aims to respond to enquiries as quickly as possible during normal business hours."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I contact Hilston Park about corporate events?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The team can provide information about corporate events, team-building activities, venue hire, and bespoke event packages."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I ask questions about outdoor activities before booking?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The Hilston Park team can provide information about available activities, participant requirements, and programme options before you book."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is the contact form suitable for general enquiries?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The contact form can be used for general enquiries about accommodation, activities, educational visits, events, and bookings."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where can I find directions to Hilston Park?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Directions and location information are available on the Contact page to help visitors plan their journey to Hilston Park."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "/data-complaint": {
+      "file": "data-complaint.html",
+      "title": "Data Protection Complaint | Hilston Park",
+      "description": "Submit a GDPR data protection complaint to Hilston Park. Raise concerns about personal data handling, privacy rights, or UK GDPR compliance.",
+      "canonical": "https://hilstonpark.com/data-complaint",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": null
+    },
+    "/educational": {
+      "file": "educational.html",
+      "title": "Educational Trips for Schools | Outdoor Learning &amp; Stays",
+      "description": "Plan educational trips for schools in Wales with residential stays, outdoor learning, and safe, engaging activities for students.",
+      "canonical": "https://hilstonpark.com/educational",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": "https://hilstonpark.com/educational#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://hilstonpark.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Educational",
+              "item": "https://hilstonpark.com/educational"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://hilstonpark.com/#organization",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+44 (0) 1902 50000",
+            "contactType": "customer service",
+            "areaServed": "GB",
+            "availableLanguage": "en"
+          },
+          "sameAs": [
+            "https://www.youtube.com/@HilstonPark",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.facebook.com/hilstonparkofficial"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "@id": "https://hilstonpark.com/#localbusiness",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "description": "Hilston Park is an outdoor adventure, activity, education, conference and events venue located in Monmouthshire, Wales, offering residential school trips, team building, weddings, corporate events and outdoor experiences.",
+          "telephone": "+44 1600 240033",
+          "email": "booking@hilstonpark.com",
+          "priceRange": "££",
+          "currenciesAccepted": "GBP",
+          "paymentAccepted": "Cash, Credit Card, Debit Card",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Hilston Park",
+            "addressLocality": "Newcastle",
+            "addressRegion": "Monmouthshire",
+            "postalCode": "NP25 5NY",
+            "addressCountry": "GB"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.86593449958543,
+            "longitude": -2.8049438907672797
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "United Kingdom"
+          },
+          "sameAs": [
+            "https://www.facebook.com/hilstonparkofficial",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.youtube.com/@HilstonPark"
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://hilstonpark.com/#website",
+          "url": "https://hilstonpark.com/",
+          "name": "Hilston Park",
+          "description": "Hilston Park is an outdoor adventure, education, accommodation and events venue in Monmouthshire, Wales.",
+          "publisher": {
+            "@id": "https://hilstonpark.com/#organization"
+          },
+          "inLanguage": "en-GB"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Course",
+          "@id": "https://hilstonpark.com/educational/#course",
+          "name": "Educational Residential Outdoor Learning Programmes",
+          "description": "Hilston Park provides curriculum-linked outdoor learning and residential educational programmes for schools, helping pupils develop confidence, teamwork, resilience and leadership through adventure-based activities in a safe and engaging environment.",
+          "url": "https://hilstonpark.com/educational",
+          "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+          "inLanguage": "en-GB",
+          "courseMode": "InPerson",
+          "provider": {
+            "@type": "EducationalOrganization",
+            "@id": "https://hilstonpark.com/#organization",
+            "name": "Hilston Park",
+            "url": "https://hilstonpark.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+            }
+          },
+          "audience": [
+            {
+              "@type": "EducationalAudience",
+              "educationalRole": "Student"
+            },
+            {
+              "@type": "EducationalAudience",
+              "educationalRole": "Teacher"
+            }
+          ],
+          "educationalLevel": [
+            "KS2 (Ages 8–11)",
+            "KS3 (Ages 11–14)",
+            "KS4 (Ages 14–16)",
+            "Post-16"
+          ],
+          "teaches": [
+            "Outdoor Learning",
+            "Adventure Education",
+            "Team Building",
+            "Leadership",
+            "Communication Skills",
+            "Confidence Building",
+            "Problem Solving",
+            "Resilience",
+            "Bushcraft",
+            "Environmental Education"
+          ],
+          "about": [
+            {
+              "@type": "Thing",
+              "name": "Outdoor Learning"
+            },
+            {
+              "@type": "Thing",
+              "name": "Residential School Trips"
+            },
+            {
+              "@type": "Thing",
+              "name": "Adventure Activities"
+            },
+            {
+              "@type": "Thing",
+              "name": "Team Building"
+            },
+            {
+              "@type": "Thing",
+              "name": "Personal Development"
+            }
+          ],
+          "hasCourseInstance": {
+            "@type": "CourseInstance",
+            "courseMode": "InPerson",
+            "location": {
+              "@type": "Place",
+              "name": "Hilston Park",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "GB"
+              }
+            }
+          },
+          "keywords": [
+            "School Residential Trips",
+            "Outdoor Education",
+            "Educational Visits",
+            "KS2 Residential",
+            "KS3 Outdoor Learning",
+            "KS4 Residential",
+            "College Residential Trips",
+            "Adventure Education",
+            "School Activity Centre"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "@id": "https://hilstonpark.com/educational#video",
+          "name": "Educational Trips and Outdoor Learning at Hilston Park",
+          "description": "Discover educational residential trips and outdoor learning experiences at Hilston Park. Students can develop confidence, teamwork, resilience and practical skills through engaging outdoor activities.",
+          "thumbnailUrl": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+          "uploadDate": "2026-07-20",
+          "contentUrl": "https://hilstonpark.com/Videos/educational-hero-web.mp4",
+          "embedUrl": "https://hilstonpark.com/educational",
+          "duration": "PT1M",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://hilstonpark.com/#organization",
+            "name": "Hilston Park",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+            }
+          },
+          "isPartOf": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/educational",
+            "name": "Educational Trips at Hilston Park"
+          },
+          "about": {
+            "@type": "EducationalOrganization",
+            "name": "Hilston Park",
+            "description": "Outdoor education centre offering school trips, residential experiences and activity-based learning."
+          }
+        }
+      ]
+    },
+    "/event": {
+      "file": "event.html",
+      "title": "Outdoor Event Venue Wales | Corporate &amp; Private Events",
+      "description": "Host events at an outdoor venue in Wales for team building, corporate events, and private parties with scenic views and engaging experiences.",
+      "canonical": "https://hilstonpark.com/event",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": "https://hilstonpark.com/event/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How early should I book an event at Hilston Park?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We recommend booking your event as early as possible, especially during peak seasons, to secure your preferred dates and event requirements."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can Hilston Park help plan my event?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The Hilston Park team can help you plan your event, including activities, accommodation, catering, and scheduling to create a memorable experience."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are catering options available for different dietary requirements?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Catering options are available for a range of dietary requirements, including vegetarian, vegan, and other special dietary needs when requested in advance."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I request a quote for an event?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can request a personalised event quotation by contacting the Hilston Park team through the enquiry form on the official website. Our team will discuss your event requirements and provide a tailored quote."
+              }
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://hilstonpark.com/#organization",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+44 (0) 1902 50000",
+            "contactType": "customer service",
+            "areaServed": "GB",
+            "availableLanguage": "en"
+          },
+          "sameAs": [
+            "https://www.youtube.com/@HilstonPark",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.facebook.com/hilstonparkofficial"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "@id": "https://hilstonpark.com/#localbusiness",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/",
+          "logo": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp",
+          "description": "Hilston Park is an outdoor adventure, activity, education, conference and events venue located in Monmouthshire, Wales, offering residential school trips, team building, weddings, corporate events and outdoor experiences.",
+          "telephone": "+44 1600 240033",
+          "email": "booking@hilstonpark.com",
+          "priceRange": "££",
+          "currenciesAccepted": "GBP",
+          "paymentAccepted": "Cash, Credit Card, Debit Card",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Hilston Park",
+            "addressLocality": "Newcastle",
+            "addressRegion": "Monmouthshire",
+            "postalCode": "NP25 5NY",
+            "addressCountry": "GB"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.86593449958543,
+            "longitude": -2.8049438907672797
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "United Kingdom"
+          },
+          "sameAs": [
+            "https://www.facebook.com/hilstonparkofficial",
+            "https://www.instagram.com/hilstonparkofficial/",
+            "https://www.youtube.com/@HilstonPark"
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://hilstonpark.com/#website",
+          "url": "https://hilstonpark.com/",
+          "name": "Hilston Park",
+          "description": "Hilston Park is an outdoor adventure, education, accommodation and events venue in Monmouthshire, Wales.",
+          "publisher": {
+            "@id": "https://hilstonpark.com/#organization"
+          },
+          "inLanguage": "en-GB"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "@id": "https://hilstonpark.com/event#event-list",
+          "name": "Outdoor Events at Hilston Park",
+          "description": "Explore outdoor corporate events, team building experiences, wellbeing retreats, private group stays, and health & wellbeing residentials at Hilston Park in the Wye Valley.",
+          "url": "https://hilstonpark.com/event",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "Event",
+                "@id": "https://hilstonpark.com/event#outdoor-corporate-events",
+                "name": "Outdoor Corporate Events",
+                "description": "Take your team out of the office to an environment that improves mental health. Hilston Park makes corporate events stress-free by handling the space, accommodation, activities, and catering.",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled",
+                "location": {
+                  "@type": "Place",
+                  "name": "Hilston Park",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Hilston Park",
+                    "addressRegion": "Monmouthshire",
+                    "addressCountry": "GB"
+                  }
+                },
+                "organizer": {
+                  "@type": "Organization",
+                  "name": "Hilston Park",
+                  "url": "https://hilstonpark.com/"
+                },
+                "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+                "url": "https://hilstonpark.com/event"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "@type": "Event",
+                "@id": "https://hilstonpark.com/event#outdoor-team-building-events",
+                "name": "Outdoor Team Building Events",
+                "description": "Enhance workplace collaboration through adventurous outdoor challenges, group problem-solving tasks, and hands-on activities safely hosted in the landscapes of the Wye Valley.",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled",
+                "location": {
+                  "@type": "Place",
+                  "name": "Hilston Park",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Hilston Park",
+                    "addressRegion": "Monmouthshire",
+                    "addressCountry": "GB"
+                  }
+                },
+                "organizer": {
+                  "@type": "Organization",
+                  "name": "Hilston Park",
+                  "url": "https://hilstonpark.com/"
+                },
+                "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+                "url": "https://hilstonpark.com/event"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "item": {
+                "@type": "Event",
+                "name": "Wellbeing Retreats",
+                "@id": "https://hilstonpark.com/event#wellbeing-retreats",
+                "description": "A quieter, more intentional event in a rural setting. Use the grounds and indoor spaces at Hilston Park for wellness programmes, mindfulness sessions, or leadership development days.",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled",
+                "location": {
+                  "@type": "Place",
+                  "name": "Hilston Park",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Hilston Park",
+                    "addressRegion": "Monmouthshire",
+                    "addressCountry": "GB"
+                  }
+                },
+                "organizer": {
+                  "@type": "Organization",
+                  "name": "Hilston Park",
+                  "url": "https://hilstonpark.com/"
+                },
+                "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+                "url": "https://hilstonpark.com/event"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "item": {
+                "@type": "Event",
+                "name": "Private Group Stays",
+                "@id": "https://hilstonpark.com/event#private-group-stays",
+                "description": "Birthdays, reunions, and celebration weekends at Hilston Park with sleeping, dining, outdoor space, and activities combined in one location.",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled",
+                "location": {
+                  "@type": "Place",
+                  "name": "Hilston Park",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Hilston Park",
+                    "addressRegion": "Monmouthshire",
+                    "addressCountry": "GB"
+                  }
+                },
+                "organizer": {
+                  "@type": "Organization",
+                  "name": "Hilston Park",
+                  "url": "https://hilstonpark.com/"
+                },
+                "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+                "url": "https://hilstonpark.com/event"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "item": {
+                "@type": "Event",
+                "name": "Health & Wellbeing Residentials",
+                "@id": "https://hilstonpark.com/event#health-wellbeing-residentials",
+                "description": "Plan a day or week-long rural retreat for structured wellbeing programmes or self-organised group stays at Hilston Park.",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled",
+                "location": {
+                  "@type": "Place",
+                  "name": "Hilston Park",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Hilston Park",
+                    "addressRegion": "Monmouthshire",
+                    "addressCountry": "GB"
+                  }
+                },
+                "organizer": {
+                  "@type": "Organization",
+                  "name": "Hilston Park",
+                  "url": "https://hilstonpark.com/"
+                },
+                "image": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+                "url": "https://hilstonpark.com/event"
+              }
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "@id": "https://hilstonpark.com/event#hero-video",
+          "name": "Events at Hilston Park",
+          "description": "Discover unforgettable events at Hilston Park, a countryside venue offering unique experiences, celebrations, group gatherings and outdoor adventures in a beautiful estate setting.",
+          "thumbnailUrl": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png",
+          "uploadDate": "2026-01-01",
+          "contentUrl": "https://hilstonpark.com/Videos/events-hero-web.mp4",
+          "embedUrl": "https://hilstonpark.com/event",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Hilston Park",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+            }
+          },
+          "isPartOf": {
+            "@type": "WebPage",
+            "@id": "https://hilstonpark.com/event",
+            "name": "Events at Hilston Park"
+          },
+          "about": {
+            "@type": "Place",
+            "name": "Hilston Park",
+            "description": "A countryside venue offering event experiences, group stays and outdoor activities."
+          }
+        }
+      ]
+    },
+    "/gallery": {
+      "file": "gallery.html",
+      "title": "Hilston Park Gallery | Outdoor Adventures &amp; Events",
+      "description": "Browse Hilston Park gallery and discover our stunning outdoor adventure centre, accommodation, activities, event spaces, &amp; beautiful countryside in Wales.",
+      "canonical": "https://hilstonpark.com/gallery",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://hilstonpark.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Gallery",
+            "item": "https://hilstonpark.com/gallery"
+          }
+        ]
+      }
+    },
+    "/legal": {
+      "file": "legal.html",
+      "title": "Safeguarding &amp; Child Protection Policy | Hilston Park",
+      "description": "Our Safeguarding &amp; Child Protection Policy covering DBS checks, designated safeguarding lead responsibilities, &amp; safe supervision of under-18 groups.",
+      "canonical": "https://hilstonpark.com/legal",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": null
+    },
+    "/privacy": {
+      "file": "privacy.html",
+      "title": "Privacy Policy | Hilston Park Wales",
+      "description": "Read the Hilston Park privacy policy to understand how we collect, use, and protect your personal data when using our website and services.",
+      "canonical": "https://hilstonpark.com/privacy",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": null
+    },
+    "/terms": {
+      "file": "terms.html",
+      "title": "Terms &amp; Conditions | Hilston Park",
+      "description": "Read the Hilston Park Terms &amp; Conditions covering bookings, cancellations, payments, visitor responsibilities, and the use of our facilities and services.",
+      "canonical": "https://hilstonpark.com/terms",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": null
+    },
+    "/visitors": {
+      "file": "visitors.html",
+      "title": "Visitor Information | Plan Your Visit to Hilston Park",
+      "description": "Find everything you need before visiting Hilston Park, including arrival information, accommodation, activities, directions, and essential visitor guidance.",
+      "canonical": "https://hilstonpark.com/visitors",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": null
+    }
+  },
+  "redirects": []
+}
