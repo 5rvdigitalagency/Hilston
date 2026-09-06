@@ -9,6 +9,31 @@
       "permanent": false
     },
     {
+      "source": "/seo/seo.json",
+      "destination": "/seo",
+      "permanent": false
+    },
+    {
+      "source": "/seo/seo.schema.json",
+      "destination": "/seo",
+      "permanent": false
+    },
+    {
+      "source": "/seo/apply-seo.mjs",
+      "destination": "/seo",
+      "permanent": false
+    },
+    {
+      "source": "/seo/check-seo.mjs",
+      "destination": "/seo",
+      "permanent": false
+    },
+    {
+      "source": "/seo/README.md",
+      "destination": "/seo",
+      "permanent": false
+    },
+    {
       "source": "/accomodation",
       "destination": "/accommodation",
       "permanent": true
