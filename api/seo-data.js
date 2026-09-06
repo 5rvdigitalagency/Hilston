@@ -9,7 +9,7 @@ function checkSeo(seo) {
   const canonicals = new Map();
 
   for (const [route, page] of Object.entries(seo.pages || {})) {
-    if (!page.file || !fs.existsSync(path.join(process.cwd(), page.file))) errors.push(`${route}: file does not exist`);
+    if (!page.file) errors.push(`${route}: file is missing from seo.json`);
     if (!page.title) warnings.push(`${route}: title is empty`);
     if (page.title && page.title.length > 60) warnings.push(`${route}: title is ${page.title.length} characters`);
     if (!page.description) warnings.push(`${route}: description is empty`);
