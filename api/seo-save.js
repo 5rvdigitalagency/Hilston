@@ -40,7 +40,7 @@ function escapeRegExp(value) {
 }
 
 function removeMarkerBlock(html) {
-  return html.replace(new RegExp('\n?[ \t]*' + escapeRegExp(MARKER_START) + '[\s\S]*?' + escapeRegExp(MARKER_END) + '[ \t]*\n?', 'g'), '\n');
+  return html.replace(new RegExp('\\n?[ \\t]*' + escapeRegExp(MARKER_START) + '[\\s\\S]*?' + escapeRegExp(MARKER_END) + '[ \\t]*\\n?', 'g'), '\n');
 }
 
 function removeControlledHeadTags(html) {
