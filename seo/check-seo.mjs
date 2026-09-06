@@ -4,7 +4,7 @@ import path from 'node:path';
 const ROOT = process.cwd();
 const SEO_PATH = path.join(ROOT, 'seo', 'seo.json');
 const strict = process.argv.includes('--strict');
-const ignoredPrefixes = ['Archive/', 'Chnages/', 'New Updates/', 'Event Booking System /ticketing/'];
+const ignoredPrefixes = ['Archive/', 'Chnages/', 'New Updates/', 'Event Booking System /ticketing/', 'seo/'];
 const skipDirs = new Set(['.git', '.vercel', '.venv', '.pdf-previews', 'node_modules']);
 const warnings = [];
 const errors = [];

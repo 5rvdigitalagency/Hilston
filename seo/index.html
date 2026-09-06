@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>SEO Control Centre | Hilston Park</title>
+  <style>
+    :root {
+      --ink: #263236;
+      --muted: #65777d;
+      --paper: #f7f4ee;
+      --panel: #ffffff;
+      --line: #d9ddd7;
+      --green: #456b53;
+      --green-dark: #2f4f3b;
+      --red: #9b2f2f;
+      --amber: #9a6a17;
+      --shadow: 0 18px 55px rgba(36, 48, 44, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(69, 107, 83, 0.12), rgba(211, 182, 116, 0.18)),
+        var(--paper);
+    }
+
+    button, input, textarea, select { font: inherit; }
+    button {
+      border: 0;
+      border-radius: 6px;
+      background: var(--green);
+      color: #fff;
+      padding: 10px 14px;
+      cursor: pointer;
+    }
+    button:hover { background: var(--green-dark); }
+    button.secondary { background: #e8ece7; color: var(--ink); }
+    button.danger { background: var(--red); }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .shell { max-width: 1220px; margin: 0 auto; padding: 28px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 22px; }
+    .brand h1 { margin: 0; font-size: clamp(2rem, 4vw, 4.4rem); line-height: 0.95; }
+    .brand p { margin: 8px 0 0; color: var(--muted); font-family: Helvetica, Arial, sans-serif; }
+    .panel { background: var(--panel); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: 8px; }
+    .login { max-width: 430px; margin: 12vh auto; padding: 28px; }
+    .login h1 { margin: 0 0 18px; font-size: 2.4rem; }
+    .field { display: grid; gap: 7px; margin-bottom: 14px; }
+    label { font-family: Helvetica, Arial, sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: #fff;
+      color: var(--ink);
+    }
+    textarea { min-height: 92px; resize: vertical; }
+    .status { margin-top: 14px; font-family: Helvetica, Arial, sans-serif; color: var(--muted); }
+    .status.error { color: var(--red); }
+    .status.ok { color: var(--green-dark); }
+
+    .workspace { display: grid; grid-template-columns: minmax(260px, 370px) 1fr; gap: 18px; align-items: start; }
+    .sidebar { overflow: hidden; }
+    .search { padding: 14px; border-bottom: 1px solid var(--line); }
+    .pages { max-height: 70vh; overflow: auto; }
+    .page-row {
+      width: 100%;
+      display: block;
+      text-align: left;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      background: #fff;
+      color: var(--ink);
+      padding: 13px 14px;
+    }
+    .page-row:hover, .page-row.active { background: #eef3ee; }
+    .route { display: block; font-family: Helvetica, Arial, sans-serif; font-size: 0.8rem; color: var(--green-dark); }
+    .title { display: block; margin-top: 3px; line-height: 1.25; }
+    .editor { padding: 20px; }
+    .editor-header { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; margin-bottom: 18px; }
+    .editor-header h2 { margin: 0; font-size: 2rem; overflow-wrap: anywhere; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .full { grid-column: 1 / -1; }
+    .metrics { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; font-family: Helvetica, Arial, sans-serif; font-size: 0.8rem; color: var(--muted); }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 4px 8px; background: #fafafa; }
+    .pill.warn { color: var(--amber); border-color: rgba(154, 106, 23, 0.35); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .warnings { margin: 0 0 18px; padding: 12px 16px; border-left: 4px solid var(--amber); background: #fff7e3; font-family: Helvetica, Arial, sans-serif; }
+    .hidden { display: none; }
+
+    @media (max-width: 850px) {
+      .shell { padding: 18px; }
+      .topbar, .editor-header { display: grid; }
+      .workspace { grid-template-columns: 1fr; }
+      .pages { max-height: 280px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section id="loginView" class="panel login">
+      <h1>SEO Control Centre</h1>
+      <form id="loginForm">
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" name="username" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit">Sign in</button>
+        <p id="loginStatus" class="status"></p>
+      </form>
+    </section>
+
+    <section id="appView" class="hidden">
+      <header class="topbar">
+        <div class="brand">
+          <h1>SEO Control Centre</h1>
+          <p id="summary">Loading metadata...</p>
+        </div>
+        <div class="actions">
+          <button id="refreshBtn" class="secondary" type="button">Refresh</button>
+          <button id="saveBtn" type="button">Save to GitHub</button>
+          <button id="logoutBtn" class="danger" type="button">Sign out</button>
+        </div>
+      </header>
+
+      <div id="warnings" class="warnings hidden"></div>
+
+      <div class="workspace">
+        <aside class="panel sidebar">
+          <div class="search">
+            <input id="filterInput" placeholder="Filter pages" aria-label="Filter pages">
+          </div>
+          <div id="pageList" class="pages"></div>
+        </aside>
+
+        <section class="panel editor">
+          <div class="editor-header">
+            <div>
+              <span id="routeLabel" class="route"></span>
+              <h2 id="editorTitle">Select a page</h2>
+            </div>
+            <div class="metrics" id="metrics"></div>
+          </div>
+
+          <div class="grid">
+            <div class="field full">
+              <label for="titleInput">Title</label>
+              <input id="titleInput">
+            </div>
+            <div class="field full">
+              <label for="descriptionInput">Description</label>
+              <textarea id="descriptionInput"></textarea>
+            </div>
+            <div class="field full">
+              <label for="canonicalInput">Canonical</label>
+              <input id="canonicalInput">
+            </div>
+            <div class="field">
+              <label for="ogTitleInput">OG Title</label>
+              <input id="ogTitleInput" placeholder="Falls back to title">
+            </div>
+            <div class="field">
+              <label for="ogImageInput">OG Image</label>
+              <input id="ogImageInput" placeholder="Falls back to default">
+            </div>
+            <div class="field full">
+              <label for="ogDescriptionInput">OG Description</label>
+              <textarea id="ogDescriptionInput" placeholder="Falls back to description"></textarea>
+            </div>
+            <div class="field">
+              <label for="robotsIndexInput">Robots Index</label>
+              <select id="robotsIndexInput">
+                <option value="true">index</option>
+                <option value="false">noindex</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="robotsFollowInput">Robots Follow</label>
+              <select id="robotsFollowInput">
+                <option value="true">follow</option>
+                <option value="false">nofollow</option>
+              </select>
+            </div>
+          </div>
+          <p id="saveStatus" class="status"></p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const state = { seo: null, route: null, dirty: false };
+    const loginView = document.querySelector('#loginView');
+    const appView = document.querySelector('#appView');
+    const pageList = document.querySelector('#pageList');
+    const filterInput = document.querySelector('#filterInput');
+    const fields = {
+      title: document.querySelector('#titleInput'),
+      description: document.querySelector('#descriptionInput'),
+      canonical: document.querySelector('#canonicalInput'),
+      ogTitle: document.querySelector('#ogTitleInput'),
+      ogDescription: document.querySelector('#ogDescriptionInput'),
+      ogImage: document.querySelector('#ogImageInput'),
+      robotsIndex: document.querySelector('#robotsIndexInput'),
+      robotsFollow: document.querySelector('#robotsFollowInput')
+    };
+
+    function setStatus(element, message, type = '') {
+      element.textContent = message;
+      element.className = `status ${type}`.trim();
+    }
+
+    async function api(path, options = {}) {
+      const response = await fetch(path, {
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+        ...options
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || `Request failed: ${response.status}`);
+      return data;
+    }
+
+    function currentPage() {
+      return state.seo.pages[state.route];
+    }
+
+    function renderWarnings(check) {
+      const box = document.querySelector('#warnings');
+      const messages = [...(check?.errors || []), ...(check?.warnings || [])];
+      box.classList.toggle('hidden', messages.length === 0);
+      box.innerHTML = messages.map(message => `<div>${escapeHtml(message)}</div>`).join('');
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char]));
+    }
+
+    function renderList() {
+      const filter = filterInput.value.trim().toLowerCase();
+      const routes = Object.keys(state.seo.pages).filter(route => {
+        const page = state.seo.pages[route];
+        return !filter || route.toLowerCase().includes(filter) || page.title.toLowerCase().includes(filter);
+      });
+      pageList.innerHTML = routes.map(route => {
+        const page = state.seo.pages[route];
+        return `<button class="page-row ${route === state.route ? 'active' : ''}" data-route="${escapeHtml(route)}" type="button"><span class="route">${escapeHtml(route)}</span><span class="title">${escapeHtml(page.title || '(empty title)')}</span></button>`;
+      }).join('');
+      pageList.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => selectRoute(button.dataset.route));
+      });
+    }
+
+    function renderEditor() {
+      const page = currentPage();
+      document.querySelector('#routeLabel').textContent = state.route;
+      document.querySelector('#editorTitle').textContent = page.title || 'Untitled page';
+      fields.title.value = page.title || '';
+      fields.description.value = page.description || '';
+      fields.canonical.value = page.canonical || '';
+      fields.ogTitle.value = page.ogTitle || '';
+      fields.ogDescription.value = page.ogDescription || '';
+      fields.ogImage.value = page.ogImage || '';
+      fields.robotsIndex.value = String(page.robots?.index !== false);
+      fields.robotsFollow.value = String(page.robots?.follow !== false);
+      renderMetrics();
+    }
+
+    function renderMetrics() {
+      const page = currentPage();
+      const titleLength = (page.title || '').length;
+      const descriptionLength = (page.description || '').length;
+      document.querySelector('#metrics').innerHTML = [
+        `<span class="pill ${titleLength > 60 ? 'warn' : ''}">Title ${titleLength}/60</span>`,
+        `<span class="pill ${descriptionLength < 50 || descriptionLength > 160 ? 'warn' : ''}">Description ${descriptionLength}/160</span>`,
+        `<span class="pill">File ${escapeHtml(page.file)}</span>`
+      ].join('');
+    }
+
+    function selectRoute(route) {
+      state.route = route;
+      renderList();
+      renderEditor();
+    }
+
+    function syncField() {
+      if (!state.route) return;
+      const page = currentPage();
+      page.title = fields.title.value;
+      page.description = fields.description.value;
+      page.canonical = fields.canonical.value;
+      page.ogTitle = fields.ogTitle.value;
+      page.ogDescription = fields.ogDescription.value;
+      page.ogImage = fields.ogImage.value;
+      page.robots = { index: fields.robotsIndex.value === 'true', follow: fields.robotsFollow.value === 'true' };
+      state.dirty = true;
+      document.querySelector('#editorTitle').textContent = page.title || 'Untitled page';
+      renderMetrics();
+      renderList();
+      setStatus(document.querySelector('#saveStatus'), 'Unsaved changes');
+    }
+
+    async function loadData() {
+      const data = await api('/api/seo-data');
+      state.seo = data.seo;
+      state.route = state.route || Object.keys(state.seo.pages)[0];
+      loginView.classList.add('hidden');
+      appView.classList.remove('hidden');
+      document.querySelector('#summary').textContent = `${Object.keys(state.seo.pages).length} pages · signed in as ${data.user}`;
+      renderWarnings(data.check);
+      renderList();
+      renderEditor();
+      setStatus(document.querySelector('#saveStatus'), state.dirty ? 'Unsaved changes' : 'Loaded', 'ok');
+    }
+
+    document.querySelector('#loginForm').addEventListener('submit', async event => {
+      event.preventDefault();
+      const form = new FormData(event.currentTarget);
+      try {
+        setStatus(document.querySelector('#loginStatus'), 'Signing in...');
+        await api('/api/seo-login', { method: 'POST', body: JSON.stringify({ username: form.get('username'), password: form.get('password') }) });
+        await loadData();
+      } catch (error) {
+        setStatus(document.querySelector('#loginStatus'), error.message, 'error');
+      }
+    });
+
+    document.querySelector('#saveBtn').addEventListener('click', async () => {
+      try {
+        setStatus(document.querySelector('#saveStatus'), 'Saving to GitHub...');
+        const result = await api('/api/seo-save', { method: 'POST', body: JSON.stringify({ seo: state.seo }) });
+        state.dirty = false;
+        setStatus(document.querySelector('#saveStatus'), `Saved ${result.files.length} file(s). Commit ${result.commit?.slice(0, 7) || 'not needed'}.`, 'ok');
+      } catch (error) {
+        setStatus(document.querySelector('#saveStatus'), error.message, 'error');
+      }
+    });
+
+    document.querySelector('#logoutBtn').addEventListener('click', async () => {
+      await api('/api/seo-logout', { method: 'POST' }).catch(() => null);
+      location.reload();
+    });
+
+    document.querySelector('#refreshBtn').addEventListener('click', () => loadData().catch(error => setStatus(document.querySelector('#saveStatus'), error.message, 'error')));
+    filterInput.addEventListener('input', renderList);
+    Object.values(fields).forEach(field => field.addEventListener('input', syncField));
+    Object.values(fields).forEach(field => field.addEventListener('change', syncField));
+
+    loadData().catch(error => {
+      loginView.classList.remove('hidden');
+      appView.classList.add('hidden');
+      if (error.message.includes('not configured')) setStatus(document.querySelector('#loginStatus'), error.message, 'error');
+    });
+  </script>
+</body>
+</html>
