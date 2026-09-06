@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Static Site SEO Control Centre",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "defaults", "pages", "redirects"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["siteName", "siteUrl", "titleTemplate", "ogImage", "twitterCard", "locale"],
+      "properties": {
+        "siteName": { "type": "string" },
+        "siteUrl": { "type": "string", "format": "uri" },
+        "titleTemplate": { "type": "string" },
+        "ogImage": { "type": "string" },
+        "twitterCard": { "type": "string", "enum": ["summary", "summary_large_image", "app", "player", ""] },
+        "locale": { "type": "string" }
+      }
+    },
+    "pages": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["file", "title", "description", "canonical", "ogTitle", "ogDescription", "ogImage", "robots", "schema"],
+        "properties": {
+          "file": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "canonical": { "type": "string" },
+          "ogTitle": { "type": "string" },
+          "ogDescription": { "type": "string" },
+          "ogImage": { "type": "string" },
+          "robots": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["index", "follow"],
+            "properties": {
+              "index": { "type": "boolean" },
+              "follow": { "type": "boolean" }
+            }
+          },
+          "schema": {
+            "anyOf": [
+              { "type": "null" },
+              { "type": "object" },
+              {
+                "type": "array",
+                "items": { "type": "object" }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "redirects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from", "to", "status"],
+        "properties": {
+          "from": { "type": "string", "pattern": "^/" },
+          "to": { "type": "string", "pattern": "^/" },
+          "status": { "type": "integer", "enum": [301, 302, 307, 308] }
+        }
+      }
+    }
+  }
+}
