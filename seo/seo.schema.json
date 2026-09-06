@@ -30,6 +30,7 @@
           "title": { "type": "string" },
           "description": { "type": "string" },
           "canonical": { "type": "string" },
+          "keywords": { "type": "string" },
           "ogTitle": { "type": "string" },
           "ogDescription": { "type": "string" },
           "ogImage": { "type": "string" },
