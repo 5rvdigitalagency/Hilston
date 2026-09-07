@@ -597,7 +597,11 @@
         state.dirty = false;
         setStatus(result.files?.length ? 'Saved. The website update has started.' : 'No changes to publish.', 'ok');
       } catch (error) {
-        setStatus('Could not save your SEO changes. Please contact the website developer.', 'error');
+        if (error instanceof SyntaxError) {
+          setStatus('The Schema markup box is not valid JSON. Remove any script wrapper tags and check commas and quotation marks.', 'error');
+        } else {
+          setStatus(error.message || 'Could not save your SEO changes. Please contact the website developer.', 'error');
+        }
       }
     });
 
