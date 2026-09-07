@@ -1945,7 +1945,16 @@
         "index": true,
         "follow": true
       },
-      "schema": null
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://hilstonpark.com/blog/raft-building-activities"
+        },
+        "headline": "Raft Building Activities: Skills Children Learn Through Outdoor Adventure",
+        "description": "Hand a group of children some barrels, a few poles and a coil of rope, tell them they've got to build something that floats."
+      }
     },
     "/blog/school-adventure-experience": {
       "file": "blog/school-adventure-experience.html",
