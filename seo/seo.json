@@ -1945,7 +1945,30 @@
         "index": true,
         "follow": true
       },
-      "schema": null
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://hilstonpark.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blogs",
+            "item": "https://hilstonpark.com/blogs"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Raft Building Activities",
+            "item": "https://hilstonpark.com/blog/raft-building-activities"
+          }
+        ]
+      }
     },
     "/blog/school-adventure-experience": {
       "file": "blog/school-adventure-experience.html",
