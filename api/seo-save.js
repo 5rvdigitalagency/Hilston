@@ -49,12 +49,18 @@ function removeControlledHeadTags(html) {
     .replace(/\n?[ \t]*<meta\b(?=[^>]*\bname=["']description["'])[^>]*>[ \t]*\n?/gi, '\n')
     .replace(/\n?[ \t]*<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>[ \t]*\n?/gi, '\n')
     .replace(/\n?[ \t]*<meta\b(?=[^>]*\bproperty=["']og:)[^>]*>[ \t]*\n?/gi, '\n')
-    .replace(/\n?[ \t]*<meta\b(?=[^>]*\bname=["']twitter:)[^>]*>[ \t]*\n?/gi, '\n');
+    .replace(/\n?[ \t]*<meta\b(?=[^>]*\bname=["']twitter:)[^>]*>[ \t]*\n?/gi, '\n')
+    .replace(/\n?[ \t]*<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>[ \t]*\n?/gi, '\n');
 }
 
 function makeMeta(name, content, attr = 'name') {
   if (String(content || '').trim().length === 0) return '';
   return `  <meta ${attr}="${escapeAttr(name)}" content="${escapeAttr(content)}">`;
+}
+
+function makeJsonLd(schema) {
+  if (schema === null || schema === undefined) return '';
+  return `  <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`;
 }
 
 function makeManagedTags(route, page, defaults) {
@@ -80,6 +86,7 @@ function makeManagedTags(route, page, defaults) {
   tags.push(makeMeta('twitter:title', title));
   tags.push(makeMeta('twitter:description', description));
   tags.push(makeMeta('twitter:image', ogImage));
+  tags.push(makeJsonLd(page.schema));
   return tags.filter(Boolean);
 }
 

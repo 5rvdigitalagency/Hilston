@@ -105,7 +105,8 @@ function removeControlledHeadTags(html) {
     .replace(/\n?[ \t]*<meta\b(?=[^>]*\bname=["']description["'])[^>]*>[ \t]*\n?/gi, '\n')
     .replace(/\n?[ \t]*<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>[ \t]*\n?/gi, '\n')
     .replace(/\n?[ \t]*<meta\b(?=[^>]*\bproperty=["']og:)[^>]*>[ \t]*\n?/gi, '\n')
-    .replace(/\n?[ \t]*<meta\b(?=[^>]*\bname=["']twitter:)[^>]*>[ \t]*\n?/gi, '\n');
+    .replace(/\n?[ \t]*<meta\b(?=[^>]*\bname=["']twitter:)[^>]*>[ \t]*\n?/gi, '\n')
+    .replace(/\n?[ \t]*<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>[ \t]*\n?/gi, '\n');
 }
 
 function escapeRegExp(value) {
@@ -125,6 +126,11 @@ function makeTitle(value) {
 function makeCanonical(value) {
   if (String(value || '').trim().length === 0) return '';
   return `  <link rel="canonical" href="${escapeAttr(value)}">`;
+}
+
+function makeJsonLd(schema) {
+  if (schema === null || schema === undefined) return '';
+  return `  <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`;
 }
 
 function makeManagedTags(route, page, defaults) {
@@ -154,6 +160,7 @@ function makeManagedTags(route, page, defaults) {
   tags.push(makeMeta('twitter:title', title));
   tags.push(makeMeta('twitter:description', description));
   tags.push(makeMeta('twitter:image', ogImage));
+  tags.push(makeJsonLd(page.schema));
 
   return tags.filter(Boolean);
 }
@@ -169,14 +176,14 @@ function assertPreserved(file, route, page, before, after) {
   const afterTitle = findTitle(after);
   const beforeDescription = findDescription(before);
   const afterDescription = findDescription(after);
-  const beforeJsonLd = findJsonLd(before).join('\n---seo-jsonld---\n');
-  const afterJsonLd = findJsonLd(after).join('\n---seo-jsonld---\n');
+  const jsonLdBlocks = findJsonLd(after);
   const expectedCanonical = absoluteUrl(page.canonical || route, seo.defaults.siteUrl);
   const afterCanonical = findCanonical(after);
 
   if (page.title && afterTitle !== normalizeWhitespace(page.title)) throw new Error(`${file}: title would not match seo.json`);
   if (page.description && afterDescription !== page.description) throw new Error(`${file}: description would not match seo.json`);
-  if (beforeJsonLd && beforeJsonLd !== afterJsonLd) throw new Error(`${file}: existing JSON-LD would change`);
+  if (page.schema === null && jsonLdBlocks.length !== 0) throw new Error(`${file}: JSON-LD would remain when schema is null`);
+  if (page.schema !== null && (jsonLdBlocks.length !== 1 || JSON.stringify(JSON.parse(jsonLdBlocks[0])) !== JSON.stringify(page.schema))) throw new Error(`${file}: JSON-LD would not match seo.json`);
   if (afterCanonical !== expectedCanonical) throw new Error(`${file}: canonical would be ${afterCanonical || '(missing)'} instead of ${expectedCanonical}`);
 }
 
