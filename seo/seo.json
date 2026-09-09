@@ -1945,7 +1945,16 @@
         "index": true,
         "follow": true
       },
-      "schema": null
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://hilstonpark.com/blog/raft-building-activities"
+        },
+        "headline": "Raft Building Activities: Skills Children Learn Through Outdoor Adventure",
+        "description": "Hand a group of children some barrels, a few poles and a coil of rope, tell them they've got to build something that floats."
+      }
     },
     "/blog/school-adventure-experience": {
       "file": "blog/school-adventure-experience.html",
@@ -2279,8 +2288,8 @@
     },
     "/blog/why-outdoor-learning-matters": {
       "file": "blog/why-outdoor-learning-matters.html",
-      "title": "Outdoor Learning Matters More Than Ever in UK",
-      "description": "Discover unforgettable residential trips for primary schools in Wales, helping pupils build confidence, teamwork and memories through outdoor adventures.",
+      "title": "Why Outdoor Learning Matters More Than Ever in UK Today",
+      "description": "Discover unforgettable residential trips for primary schools in Wales, helping pupils build confidence, teamwork and memories through outdoor adventures!",
       "canonical": "https://hilstonpark.com/blog/why-outdoor-learning-matters",
       "ogTitle": "",
       "ogDescription": "",
@@ -2289,30 +2298,7 @@
         "index": true,
         "follow": true
       },
-      "schema": {
-        "@context": "https://schema.org/",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://hilstonpark.com/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Blogs",
-            "item": "https://hilstonpark.com/blogs"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Outdoor Learning",
-            "item": "https://hilstonpark.com/blog/why-outdoor-learning-matters"
-          }
-        ]
-      }
+      "schema": null
     },
     "/blog/why-schools-choose-hilston-park": {
       "file": "blog/why-schools-choose-hilston-park.html",
