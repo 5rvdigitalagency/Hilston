@@ -2288,7 +2288,7 @@
     },
     "/blog/why-outdoor-learning-matters": {
       "file": "blog/why-outdoor-learning-matters.html",
-      "title": "Why Outdoor Learning Matters More Than Ever in UK Today",
+      "title": "Outdoor Learning Matters More Than Ever in UK",
       "description": "Discover unforgettable residential trips for primary schools in Wales, helping pupils build confidence, teamwork and memories through outdoor adventures!",
       "canonical": "https://hilstonpark.com/blog/why-outdoor-learning-matters",
       "ogTitle": "",
@@ -2298,7 +2298,31 @@
         "index": true,
         "follow": true
       },
-      "schema": null
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://hilstonpark.com/blog/why-outdoor-learning-matters#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://hilstonpark.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blogs",
+            "item": "https://hilstonpark.com/blogs"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Why Outdoor Learning Matters",
+            "item": "https://hilstonpark.com/blog/why-outdoor-learning-matters"
+          }
+        ]
+      }
     },
     "/blog/why-schools-choose-hilston-park": {
       "file": "blog/why-schools-choose-hilston-park.html",
