@@ -3420,3 +3420,12 @@ body:has(#hp-cookie-banner.hpcc-show) .wa-btn:hover {
   .hp-cookie-reopen { bottom: 82px; right: 16px; width: 52px; height: 52px; font-size: 1.1rem; }
   .hp-cookie-reopen.is-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
 }
+
+/*------------Common Css-------------*/
+   .accom-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+    .accom-list li { padding-left: 18px; position: relative; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .accom-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--teal); }
+
+    .activities-subhead.text-left{
+      text-align: left;
+    }
