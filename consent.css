@@ -5,7 +5,7 @@
    ========================================================================== */
 
 /* ── Floating cookie button (bottom-left) ─────────────────────────────────── */
-#hp-cookie-fab {
+/* #hp-cookie-fab {
   position: fixed;
   bottom: 24px;
   left: 24px;
@@ -23,9 +23,9 @@
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
   transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease, bottom 0.35s ease;
   line-height: 1;
-}
+} */
 /* Cookie FAB is hidden while the banner itself is showing (redundant UI) */
-#hp-cookie-banner.hpcc-show ~ #hp-cookie-fab,
+/* #hp-cookie-banner.hpcc-show ~ #hp-cookie-fab,
 body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
   opacity: 0;
   pointer-events: none;
@@ -38,10 +38,10 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
 #hp-cookie-fab:focus-visible {
   outline: 3px solid #3c7a6c;
   outline-offset: 3px;
-}
+} */
 
 /* ── Consent banner (bottom of viewport) ─────────────────────────────────── */
-#hp-cookie-banner {
+/* #hp-cookie-banner {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -55,9 +55,9 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
 }
 #hp-cookie-banner.hpcc-show {
   transform: translateY(0);
-}
+} */
 
-.hpcc-inner {
+/* .hpcc-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px 32px;
@@ -92,10 +92,11 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
   gap: 10px;
   flex-shrink: 0;
   flex-wrap: wrap;
-}
+} */
 
 /* ── Shared button styles ─────────────────────────────────────────────────── */
-.hpcc-btn {
+/* .hpcc-btn {
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -154,10 +155,10 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
 .hpcc-save:hover {
   background: #36505d;
   border-color: #36505d;
-}
+} */
 
 /* ── Preference centre modal ──────────────────────────────────────────────── */
-#hp-cookie-modal {
+/* #hp-cookie-modal {
   position: fixed;
   inset: 0;
   z-index: 100002;
@@ -237,7 +238,7 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
 }
 
 /* Category rows */
-.hpcm-cat {
+/* .hpcm-cat {
   border-top: 1px solid #e9e6df;
   padding: 16px 0;
 }
@@ -279,10 +280,10 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
   white-space: nowrap;
   flex-shrink: 0;
   align-self: center;
-}
+} */ 
 
 /* Toggle switch */
-.hpcm-toggle {
+/* .hpcm-toggle {
   position: relative;
   display: inline-block;
   width: 44px;
@@ -325,26 +326,26 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
 .hpcm-toggle input:focus-visible + .hpcm-slider {
   outline: 3px solid #3c7a6c;
   outline-offset: 2px;
-}
+} */
 
 /* Modal footer actions */
-.hpcm-foot {
+/* .hpcm-foot {
   display: flex;
   gap: 10px;
   justify-content: flex-end;
   flex-wrap: wrap;
-}
+} */
 
 /* ── Footer link ──────────────────────────────────────────────────────────── */
-.cookie-pref-link {
+/* .cookie-pref-link {
   cursor: pointer;
 }
 .cookie-pref-link:hover {
   text-decoration: underline;
-}
+} */
 
 /* ── Responsive ───────────────────────────────────────────────────────────── */
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
   .hpcc-inner {
     padding: 16px 20px;
     flex-direction: column;
@@ -375,4 +376,4 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
     bottom: 16px;
     left: 16px;
   }
-}
+} */
