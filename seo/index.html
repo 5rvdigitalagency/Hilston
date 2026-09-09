@@ -446,7 +446,17 @@
         fields.schema.value = JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: currentPage().title || routeLabel(state.route), url: currentPage().canonical || state.route }, null, 2);
       }
       if (fields.schemaTemplate.value === 'blogposting') {
-        fields.schema.value = JSON.stringify({ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: currentPage().title || routeLabel(state.route), description: currentPage().description || '', mainEntityOfPage: currentPage().canonical || state.route }, null, 2);
+        const canonical = currentPage().canonical || (state.route === '/' ? 'https://hilstonpark.com/' : `https://hilstonpark.com${state.route}`);
+        fields.schema.value = JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: currentPage().title || routeLabel(state.route),
+          description: currentPage().description || '',
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': canonical
+          }
+        }, null, 2);
       }
       syncSchema();
     }
@@ -591,6 +601,8 @@
 
     document.querySelector('#saveBtn').addEventListener('click', async () => {
       try {
+        // re-read every field from the DOM so a missed input/change event can never drop an edit
+        syncField();
         currentPage().schema = parseSchemaInput();
         setStatus('Saving and publishing...');
         const result = await api('/api/seo-save', { method: 'POST', body: JSON.stringify({ seo: state.seo }) });
@@ -606,8 +618,15 @@
     });
 
     document.querySelector('#deleteBtn').addEventListener('click', () => setStatus('Pages cannot be deleted here. Set Publish live off to noindex a page.', 'error'));
-    document.querySelector('#logoutBtn').addEventListener('click', async () => { await api('/api/seo-logout', { method: 'POST' }).catch(() => null); location.reload(); });
-    document.querySelector('#refreshBtn').addEventListener('click', () => loadData().catch(error => setStatus(error.message, 'error')));
+    document.querySelector('#logoutBtn').addEventListener('click', async () => {
+      if (state.dirty && !confirm('You have unsaved changes that have not been published. Sign out anyway?')) return;
+      await api('/api/seo-logout', { method: 'POST' }).catch(() => null);
+      location.reload();
+    });
+    document.querySelector('#refreshBtn').addEventListener('click', () => {
+      if (state.dirty && !confirm('You have unsaved changes that have not been published. Reloading will discard them. Continue?')) return;
+      loadData().catch(error => setStatus(error.message, 'error'));
+    });
     document.querySelector('#addRedirectBtn').addEventListener('click', addRedirect);
     document.querySelector('#exportMetadataBtn').addEventListener('click', exportMetadata);
     document.querySelector('#exportRedirectsBtn').addEventListener('click', exportRedirects);
@@ -639,6 +658,12 @@
         field.addEventListener('input', syncField);
         field.addEventListener('change', syncField);
       }
+    });
+
+    window.addEventListener('beforeunload', event => {
+      if (!state.dirty) return;
+      event.preventDefault();
+      event.returnValue = '';
     });
 
     loadData().catch(error => {
