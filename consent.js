@@ -62,6 +62,7 @@
   function injectUI() {
     var cookieButton = document.getElementById('hp-cookie-reopen');
     if (cookieButton) {
+      cookieButton.removeAttribute('onclick');
       cookieButton.addEventListener('click', function (event) {
         event.preventDefault();
         openModal();
@@ -122,6 +123,7 @@
   /* ── 4. Preference centre modal ────────────────────────────────────────── */
   function openModal() {
     if (document.getElementById('hp-cookie-modal')) { return; }
+    closeBanner();
     var p = getPrefs() || { analytics: false, marketing: false, functional: false };
 
     var el = document.createElement('div');

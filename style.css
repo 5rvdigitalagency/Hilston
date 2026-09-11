@@ -513,6 +513,9 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 /* Hide GTM's own cookie badge — replaced by #hp-cookie-reopen */
 #ccm-trigger-badge { display: none !important; }
 
+/* The site's consent manager is the single source of truth. */
+#custom-cookie-manager { display: none !important; }
+
 /* Centre the GTM cookie consent modal in the full-screen wrapper */
 #custom-cookie-manager .ccm-container {
   position: absolute;
