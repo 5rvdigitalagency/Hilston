@@ -60,28 +60,14 @@
 
   /* ── 3. UI injection ───────────────────────────────────────────────────── */
   function injectUI() {
-    injectFAB();
+    var cookieButton = document.getElementById('hp-cookie-reopen');
+    if (cookieButton) {
+      cookieButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        openModal();
+      });
+    }
     if (!getPrefs()) { injectBanner(); }
-  }
-
-  /* Floating cookie button (bottom-left, always visible) */
-  function injectFAB() {
-    if (document.getElementById('hp-cookie-fab')) { return; }
-    var btn = document.createElement('button');
-    btn.id = 'hp-cookie-fab';
-    btn.setAttribute('aria-label', 'Cookie Preferences');
-    btn.title = 'Cookie Preferences';
-    btn.innerHTML =
-      '<svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" width="24" height="24" aria-hidden="true">' +
-        '<path d="M21.6 10.3a1 1 0 0 0-.9-.3 3 3 0 0 1-3.3-3.3 1 1 0 0 0-1.3-1.1 3.1 3.1 0 0 1-3.4-1.4' +
-        ' 1 1 0 0 0-1.6-.1A9 9 0 1 0 21.9 11a1 1 0 0 0-.3-.7z' +
-        'M9 8.7a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6z' +
-        'M14 14.7a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6z' +
-        'M16.5 10a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' +
-        'M8 14a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>' +
-      '</svg>';
-    btn.addEventListener('click', function () { openModal(); });
-    document.body.appendChild(btn);
   }
 
   /* Bottom consent banner */
