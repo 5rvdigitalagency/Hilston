@@ -2106,6 +2106,17 @@ input.bkm-step-val::-webkit-outer-spin-button {
 }
 .bkm-error.visible { display: block; }
 
+.bkm-unavailable-actions {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 10px;
+}
+.bkm-unavailable-actions .bkm-btn { margin-top: 0; text-align: center; text-decoration: none; }
+.bkm-btn--secondary {
+  background: var(--white); color: var(--teal);
+  border: 2px solid var(--teal);
+}
+.bkm-btn--secondary:hover { background: var(--teal); color: var(--white); }
+
 .bkm-field-err {
   font-size: 0.71rem;
   color: #b03030;

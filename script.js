@@ -311,6 +311,10 @@ document.addEventListener("DOMContentLoaded", function () {
             '</div>',
             '<p class="bkm-capacity-hint" id="bkm-capacity-hint"></p>',
             '<p class="bkm-error" id="bkm-error">Please select a valid arrival and departure date.</p>',
+            '<div class="bkm-unavailable-actions" id="bkm-unavailable-actions" hidden>',
+              '<a class="bkm-btn bkm-btn--secondary" id="bkm-unavail-qbook" href="#" target="_blank" rel="noopener">Check directly on Q-Book</a>',
+              '<button class="bkm-btn" id="bkm-unavail-inquire" type="button">Send an enquiry instead</button>',
+            '</div>',
             '<button class="bkm-btn" id="bkm-submit">Apply</button>',
             '<p class="bkm-note" id="bkm-config-note">Secure booking powered by QBook.</p>',
           '</div>',
@@ -433,6 +437,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var childrenEl = document.getElementById("bkm-children");
   var accTypeEl  = document.getElementById("bkm-acctype");
   var errEl        = document.getElementById("bkm-error");
+  var unavailActionsEl = document.getElementById("bkm-unavailable-actions");
+  var unavailQbookBtn  = document.getElementById("bkm-unavail-qbook");
+  var unavailInquireBtn = document.getElementById("bkm-unavail-inquire");
 
   var phasePicker  = document.getElementById("bkm-phase-picker");
   var phaseConfig  = document.getElementById("bkm-phase-config");
@@ -473,6 +480,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (name === "confirm") phaseConfirm.hidden = false;
     errEl.classList.remove("visible");
     inqErr.classList.remove("visible");
+    if (unavailActionsEl) { unavailActionsEl.hidden = true; }
   }
 
   function configureFor(svc) {
@@ -586,9 +594,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  /* Build a Q-Book deep-link URL for the given dates/guests/room.
+     If the room has Q-Book item IDs, pass the first as &i= so Q-Book can
+     pre-filter the availability list to the relevant room. */
+  function buildQBookUrl(ci, co, adults, kids, roomDef) {
+    var qUrl = QBOOK_BASE + "?from=" + ci + "&to=" + co + "&k=" + QBOOK_K;
+    if (adults > 0) { qUrl += "&a=" + adults; }
+    if (kids > 0)   { qUrl += "&c=" + kids; }
+    if (roomDef && roomDef.qItemIDs && roomDef.qItemIDs.length > 0) {
+      qUrl += "&i=" + roomDef.qItemIDs[0];
+    }
+    return qUrl;
+  }
+
   /* Expose for use by the availability bar on the accommodation page */
   window._HP = {
     fetchAllNightlyRates: fetchAllNightlyRates,
+    buildQBookUrl: buildQBookUrl,
     QBOOK_BASE:  QBOOK_BASE,
     QBOOK_K:     QBOOK_K,
     ROOM_DEFS:   ROOM_DEFS,
@@ -730,16 +752,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     summaryEl.innerHTML = html;
 
-    /* Build Q-Book deep-link URL.
-       If a specific room type is selected and it has Q-Book item IDs, pass the first as &i=
-       so Q-Book can pre-filter the availability list to the relevant room. */
-    var qUrl = QBOOK_BASE + "?from=" + ci + "&to=" + co + "&k=" + QBOOK_K;
-    if (adults > 0) { qUrl += "&a=" + adults; }
-    if (kids > 0)   { qUrl += "&c=" + kids; }
-    if (roomDef.qItemIDs && roomDef.qItemIDs.length > 0) {
-      qUrl += "&i=" + roomDef.qItemIDs[0];
-    }
-    proceedBtn.href = qUrl;
+    proceedBtn.href = buildQBookUrl(ci, co, adults, kids, roomDef);
 
     setBrand("stay");
     showPhase("confirm");
@@ -885,11 +898,33 @@ document.addEventListener("DOMContentLoaded", function () {
         showPhase("config");
         errEl.textContent = "These dates don\u2019t appear to be available. Please choose different dates, or send us an enquiry.";
         errEl.classList.add("visible");
+        if (unavailActionsEl) {
+          unavailActionsEl.hidden = false;
+          if (unavailQbookBtn) {
+            var uAdults = parseInt(adultsEl.value, 10) || 0;
+            var uKids   = parseInt(childrenEl.value, 10) || 0;
+            unavailQbookBtn.href = buildQBookUrl(inEl.value, outEl.value, uAdults, uKids, selDef);
+          }
+        }
         return;
       }
       showConfirm(nightRates);
     });
   });
+
+  /* -- unavailable-dates fallback: hand off to a staff enquiry, prefilled with the search -- */
+  if (unavailInquireBtn) {
+    unavailInquireBtn.addEventListener("click", function () {
+      configureFor("inquire");
+      var msgEl = document.getElementById("bkm-inq-message");
+      if (msgEl && !msgEl.value) {
+        var roomLabel = (ROOM_DEFS[accTypeEl.value] || ROOM_DEFS['any']).label;
+        msgEl.value = "I'd like to check availability for " + fmt(inEl.value) + " to " + fmt(outEl.value)
+          + " (" + (parseInt(adultsEl.value, 10) || 0) + " adults, " + (parseInt(childrenEl.value, 10) || 0) + " children, "
+          + roomLabel + ") \u2014 Q-Book showed no rate for these dates online.";
+      }
+    });
+  }
 
   /* -- inquiry submit: POST to Formsubmit (no signup, sends to info@hilstonpark.com) -- */
   inqForm.addEventListener("submit", function (e) {
