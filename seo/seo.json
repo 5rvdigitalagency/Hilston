@@ -2290,26 +2290,48 @@
         "follow": true
       },
       "schema": {
-        "@context": "https://schema.org/",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
           {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://hilstonpark.com/"
+            "@type": "Question",
+            "name": "How does outdoor learning improve children's mental wellbeing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Outdoor learning supports children's mental wellbeing by reducing stress, encouraging physical activity and improving social interaction. Studies suggest that spending time in natural environments can enhance mood, concentration and emotional resilience while promoting confidence and self-esteem. Learning outdoors also encourages children to develop stronger friendships, manage challenges positively and feel more connected to their surroundings, contributing to improved overall wellbeing alongside academic development."
+            }
           },
           {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Blogs",
-            "item": "https://hilstonpark.com/blogs"
+            "@type": "Question",
+            "name": "Why are residential trips important for primary school pupils?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Primary School Residential Trips Wales provide opportunities for pupils to develop independence, resilience and teamwork outside the classroom. They encourage children to build confidence through shared experiences, strengthen friendships and apply classroom learning in real-life situations. Residential trips also support personal development by helping pupils improve communication, leadership and problem-solving skills while creating memorable educational experiences."
+            }
           },
           {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Outdoor Learning",
-            "item": "https://hilstonpark.com/blog/why-outdoor-learning-matters"
+            "@type": "Question",
+            "name": "What age is best for outdoor learning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Outdoor learning benefits children of all ages. Younger pupils develop curiosity, confidence and motor skills through exploration, while older children gain leadership, resilience and teamwork through increasingly challenging activities. Programmes should always be tailored to pupils' age, ability and curriculum requirements."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does outdoor learning support the Curriculum for Wales?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Outdoor learning supports the Curriculum for Wales by contributing to Health & Wellbeing, Humanities, Science and Technology, and Expressive Arts. Practical experiences encourage enquiry, collaboration, creativity and independent thinking while helping pupils make meaningful connections between classroom learning and the wider world."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What outdoor team building activities are suitable for primary schools?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Age-appropriate outdoor team building activities include High Ropes, Bushcraft, Canoeing, Orienteering, problem-solving challenges, obstacle courses and collaborative team games. These activities develop communication, leadership, resilience and teamwork while encouraging children to think creatively, support one another and overcome challenges together."
+            }
           }
         ]
       }
