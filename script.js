@@ -566,8 +566,12 @@ document.addEventListener("DOMContentLoaded", function () {
       callback(rates);
     }
 
+    /* Q-Book's CDN sends a 1-year max-age alongside a stale Expires header, so
+       browsers cache this response for months — bust it on every request so
+       availability/prices are never served from a year-old cache. */
     monthKeys.forEach(function (mk) {
-      fetch(SC_RATES_URL + "?start=" + mk)
+      var bustUrl = SC_RATES_URL + "?start=" + mk + "&_=" + Date.now();
+      fetch(bustUrl, { cache: "no-store" })
         .then(function (r) { return r.text(); })
         .then(function (html) {
           monthHtml[mk] = html;
