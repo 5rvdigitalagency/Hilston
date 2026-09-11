@@ -1945,16 +1945,7 @@
         "index": true,
         "follow": true
       },
-      "schema": {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://hilstonpark.com/blog/raft-building-activities"
-        },
-        "headline": "Raft Building Activities: Skills Children Learn Through Outdoor Adventure",
-        "description": "Hand a group of children some barrels, a few poles and a coil of rope, tell them they've got to build something that floats."
-      }
+      "schema": null
     },
     "/blog/school-adventure-experience": {
       "file": "blog/school-adventure-experience.html",
@@ -2288,7 +2279,7 @@
     },
     "/blog/why-outdoor-learning-matters": {
       "file": "blog/why-outdoor-learning-matters.html",
-      "title": "Outdoor Learning Matters More Than Ever in UK",
+      "title": "Why Outdoor Learning Matters More Than Ever in UK Today",
       "description": "Discover unforgettable residential trips for primary schools in Wales, helping pupils build confidence, teamwork and memories through outdoor adventures!",
       "canonical": "https://hilstonpark.com/blog/why-outdoor-learning-matters",
       "ogTitle": "",
@@ -2299,9 +2290,8 @@
         "follow": true
       },
       "schema": {
-        "@context": "https://schema.org",
+        "@context": "https://schema.org/",
         "@type": "BreadcrumbList",
-        "@id": "https://hilstonpark.com/blog/why-outdoor-learning-matters#breadcrumb",
         "itemListElement": [
           {
             "@type": "ListItem",
@@ -2318,7 +2308,7 @@
           {
             "@type": "ListItem",
             "position": 3,
-            "name": "Why Outdoor Learning Matters",
+            "name": "Outdoor Learning",
             "item": "https://hilstonpark.com/blog/why-outdoor-learning-matters"
           }
         ]
