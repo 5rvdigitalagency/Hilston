@@ -13,8 +13,8 @@
 }
 
 #hilston-accessibility-badge {
-    left: 28px;
-    right: auto;
+    left: auto;
+    right: 28px;
     top: auto;
     bottom: 28px;
     width: 58px;
@@ -24,9 +24,9 @@
 
 @media (max-width: 991px) {
     #hilston-accessibility-badge {
-        left: 28px;
-        right: auto;
-        bottom: 28px;
+        left: auto;
+        right: 16px;
+        bottom: 92px;
         width: 58px;
         height: 58px;
         padding: 14px;
