@@ -37,6 +37,9 @@
   pointer-events: auto;
   z-index: 100000;
 }
+body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-reopen {
+  bottom: 250px;
+}
 /* Cookie FAB is hidden while the banner itself is showing (redundant UI) */
 #hp-cookie-banner.hpcc-show ~ #hp-cookie-fab,
 body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
@@ -395,5 +398,8 @@ body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-fab {
     left: auto;
     width: 52px;
     height: 52px;
+  }
+  body:has(#hp-cookie-banner.hpcc-show) #hp-cookie-reopen {
+    bottom: 240px;
   }
 }
