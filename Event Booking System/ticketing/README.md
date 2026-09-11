@@ -22,6 +22,16 @@
 7. Point Stripe webhooks to `/api/webhooks/stripe` and enable `payment_intent.succeeded`.
 8. Do not promote public sales until the webhook transaction confirms bookings, issues tickets, and enqueues notifications idempotently.
 
+## Event publication gate
+
+Event publication is disabled by default at the server boundary. Keep these values split between Vercel environments:
+
+- Production: `EVENT_PUBLISHING_ENABLED=false`
+- Staging (`https://hilston-park.vercel.app`): `EVENT_PUBLISHING_ENABLED=true`
+- Staging browser feed: `EVENTS_PUBLIC_ORIGIN=https://hilston-park.vercel.app`
+
+When the gate is disabled, staff can still save drafts and take events down, but attempts to create or update a published event return `403`. The public events API returns an empty catalogue. Production also requires the separate `LIVE_EVENT_PUBLISHING_AUTHORIZED=true` flag, so enabling the staging flag cannot unlock live publishing by accident. Do not set either production authorisation flag to `true` until the team explicitly authorises live publishing.
+
  ## Current routes
 
  - `/events` public event catalogue

@@ -4,6 +4,7 @@ import { isStaffSession } from "@/lib/auth";
 import { cookies } from "next/headers";
 import { z } from "zod";
 import { databaseEnabled, insertEvent, listEvents, updateEvent } from "@/lib/db";
+import { eventPublishingEnabled } from "@/lib/event-publishing";
 
 const eventSchema = z.object({
   title: z.string().trim().min(2).max(120),
@@ -38,6 +39,9 @@ export async function POST(request: Request) {
   if (!(await isStaffSession(session, "events.manage"))) return NextResponse.json({ error: "Staff authentication required" }, { status: 401 });
   const parsed = eventSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Please check the event details", fields: parsed.error.flatten().fieldErrors }, { status: 400 });
+  if (parsed.data.published && !eventPublishingEnabled()) {
+    return NextResponse.json({ error: "Publishing is disabled while the event system is in testing." }, { status: 403 });
+  }
   if (databaseEnabled) return NextResponse.json({ event: await insertEvent(parsed.data) }, { status: 201 });
   if (process.env.NODE_ENV === "production" || process.env.DEMO_MODE === "false") return NextResponse.json({ error: "Event storage is not configured. Add a valid remote DATABASE_URL before creating events." }, { status: 503 });
   return NextResponse.json({ event: addEvent(parsed.data) }, { status: 201 });
@@ -50,6 +54,9 @@ export async function PATCH(request: Request) {
   const id = body && typeof body.id === "string" ? body.id : "";
   const parsed = eventSchema.safeParse(body);
   if (!id || !parsed.success) return NextResponse.json({ error: "Please check the event details", fields: parsed.success ? undefined : parsed.error.flatten().fieldErrors }, { status: 400 });
+  if (parsed.data.published && !eventPublishingEnabled()) {
+    return NextResponse.json({ error: "Publishing is disabled while the event system is in testing." }, { status: 403 });
+  }
   if (databaseEnabled) {
     try {
       const event = await updateEvent(id, parsed.data);
