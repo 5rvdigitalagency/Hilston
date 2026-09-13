@@ -1042,6 +1042,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!el) { return; }
     var href = el.getAttribute("href") || "";
     var hasAttr = el.hasAttribute("data-booking-type") || el.hasAttribute("data-inquire");
+    var label = el.textContent.replace(/\s+/g, " ").trim().toLowerCase();
+    if (label === "book now") {
+      e.preventDefault();
+      window.location.href = QBOOK_BASE + "?k=" + QBOOK_K;
+      return;
+    }
     if (el.classList.contains("btn-book") && href === "#contact-form") { return; }
     if (el.classList.contains("btn-book")) {
       e.preventDefault();
