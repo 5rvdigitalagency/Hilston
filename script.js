@@ -582,7 +582,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     monthKeys.forEach(function (mk) {
-      fetch(SC_RATES_URL + "?start=" + mk)
+      var bustUrl = SC_RATES_URL + "?start=" + mk + "&_=" + Date.now();
+      fetch(bustUrl, { cache: "no-store" })
         .then(function (r) { return r.text(); })
         .then(function (html) {
           monthHtml[mk] = html;
@@ -1023,7 +1024,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var href = el.getAttribute("href") || "";
     var hasAttr = el.hasAttribute("data-booking-type") || el.hasAttribute("data-inquire");
     var label = el.textContent.replace(/\s+/g, " ").trim().toLowerCase();
-    if (label === "book now") {
+    if (label === "book now" || label === "plan your escape") {
       e.preventDefault();
       window.location.href = QBOOK_BASE + "?k=" + QBOOK_K;
       return;
