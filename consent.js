@@ -61,13 +61,20 @@
   /* ── 3. UI injection ───────────────────────────────────────────────────── */
   function injectUI() {
     var cookieButton = document.getElementById('hp-cookie-reopen');
-    if (cookieButton) {
-      cookieButton.removeAttribute('onclick');
-      cookieButton.addEventListener('click', function (event) {
-        event.preventDefault();
-        openModal();
-      });
+    if (!cookieButton) {
+      cookieButton = document.createElement('button');
+      cookieButton.id = 'hp-cookie-reopen';
+      cookieButton.className = 'hp-cookie-reopen';
+      cookieButton.type = 'button';
+      cookieButton.setAttribute('aria-label', 'Manage cookie preferences');
+      cookieButton.setAttribute('title', 'Manage cookie preferences');
+      cookieButton.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="28" height="28"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="8.5" r="0.8" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="14.5" r="0.8" fill="currentColor" stroke="none"/></svg>';
+      document.body.appendChild(cookieButton);
     }
+    cookieButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      openModal();
+    });
     if (!getPrefs()) { injectBanner(); }
   }
 
