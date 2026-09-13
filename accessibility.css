@@ -390,7 +390,7 @@ body:has(#hp-cookie-banner.hpcc-show) .a11y-fab {
 #hilston-accessibility-badge {
   position: fixed;
   left: 24px;
-  bottom: 24px;
+  bottom: 96px;
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -449,7 +449,7 @@ body:has(#hp-cookie-banner.hpcc-show) .a11y-fab {
   box-shadow: 0 -9999px 0 9999px rgba(0, 0, 0, 0.65), 0 9999px 0 9999px rgba(0, 0, 0, 0.65);
 }
 @media (max-width: 480px) {
-  #hilston-accessibility-badge { left: 12px; bottom: 16px; width: 52px; height: 52px; }
+  #hilston-accessibility-badge { left: 12px; bottom: 84px; width: 52px; height: 52px; }
   #hilston-accessibility-sidebar { left: -100vw; bottom: 16px; }
   #hilston-accessibility-sidebar.active { left: 12px; }
 }
