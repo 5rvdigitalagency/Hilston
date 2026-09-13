@@ -1465,7 +1465,7 @@ document.addEventListener("DOMContentLoaded", function () {
    ===================================================== */
 (function () {
   /* TODO: replace with actual WhatsApp number (digits only, incl. country code, e.g. 447700000000) */
-  var WA_NUMBER = "447700000000";
+  var WA_NUMBER = "447803016677";
 
   var btn = document.createElement("a");
   btn.id            = "wa-btn";
