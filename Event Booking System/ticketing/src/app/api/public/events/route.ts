@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { databaseEnabled, describeDatabaseUrl, listEventMedia, listEvents } from "@/lib/db";
 import { ensureDemoEvent, store } from "@/lib/store";
 import { createEventMediaUrl } from "@/lib/supabase";
-import { eventPublishingEnabled, publicEventsCorsHeaders } from "@/lib/event-publishing";
+import { eventPublishingEnabled, publicEventsCorsHeaders, publicEventsFeedAuthorized } from "@/lib/event-publishing";
 
 export async function OPTIONS(request: Request) {
   return new NextResponse(null, { status: 204, headers: publicEventsCorsHeaders(request) });
@@ -10,7 +10,7 @@ export async function OPTIONS(request: Request) {
 
 export async function GET(request: Request) {
   const corsHeaders = publicEventsCorsHeaders(request);
-  if (!eventPublishingEnabled()) {
+  if (!eventPublishingEnabled() || !publicEventsFeedAuthorized(request)) {
     return NextResponse.json({ events: [] }, { headers: { ...corsHeaders, "Cache-Control": "no-store" } });
   }
   const debug = new URL(request.url).searchParams.has("debug");

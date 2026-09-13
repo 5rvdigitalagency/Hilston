@@ -4,6 +4,7 @@ import { createMockBooking, databaseEnabled, getBookingForEmail, markDispatchByK
 import { appBaseUrl, emailEnabled, sendBookingConfirmation, sendStaffBookingAlert } from "@/lib/email";
 import { createTicketLinkToken } from "@/lib/ticket-links";
 import { buildTicketPdf } from "@/lib/ticket-pdf";
+import { publicEventsFeedAuthorized } from "@/lib/event-publishing";
 
 const CORS = { "Access-Control-Allow-Origin": "https://hilston-park.vercel.app", "Access-Control-Allow-Methods": "POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type" };
 const bookingSchema = z.object({ eventId: z.string().uuid(), name: z.string().trim().min(2).max(120), email: z.string().email().max(254), childCount: z.number().int().min(0).max(100), paymentMode: z.literal("test") });
@@ -37,6 +38,7 @@ async function deliverBookingEmails(bookingId: string, staffEmail?: string) {
 }
 
 export async function POST(request: Request) {
+  if (!publicEventsFeedAuthorized(request)) return NextResponse.json({ error: "Booking service unavailable." }, { status: 404, headers: CORS });
   if (!databaseEnabled) return NextResponse.json({ error: "Booking storage is unavailable." }, { status: 503, headers: CORS });
   const parsed = bookingSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Please check the booking details." }, { status: 400, headers: CORS });

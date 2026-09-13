@@ -7,14 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
   var stickyShell = document.getElementById("site-sticky");
   if (stickyShell) {
     window.addEventListener("scroll", function () {
-      if (window.scrollY > 80) {
+      if (window.scrollY > 60) {
         stickyShell.classList.add("scrolled");
-      } else if (window.scrollY < 40) {
+      } else {
         stickyShell.classList.remove("scrolled");
       }
-      /* 40–80 px dead-zone: keep whichever state is active.
-         This prevents the header's own layout-shift from toggling
-         the class back and forth (scroll-anchor feedback / shiver). */
     }, { passive: true });
   }
 
@@ -76,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /* =====================================================
      ACTIVE NAV LINK
      ===================================================== */
-  var currentPage = window.location.pathname.split("/").pop() || "index";
+  var currentPage = window.location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".nav-list a").forEach(function (link) {
     if (link.getAttribute("href") === currentPage) {
       link.classList.add("active");
@@ -251,8 +248,8 @@ document.addEventListener("DOMContentLoaded", function () {
             '<p class="bkm-form-title">What would you like to do?</p>',
             '<p class="bkm-form-sub">Choose what fits &mdash; you can switch at any time.</p>',
             '<div class="bkm-tiles">',
-              '<button class="bkm-tile" data-pick="stay"><span class="bkm-tile-icon"><img src="images/bkm-icon-stay.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="80" height="80" style="width:80px;height:80px;object-fit:contain;"></span><span class="bkm-tile-label">Stay with us</span><span class="bkm-tile-desc">Self-catered country house &amp; group accommodation &mdash; live rates &amp; availability</span></button>',
-              '<button class="bkm-tile" data-pick="inquire"><span class="bkm-tile-icon"><img src="images/bkm-icon-enquire.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="80" height="80" style="width:80px;height:80px;object-fit:contain;"></span><span class="bkm-tile-label">Enquire about</span><span class="bkm-tile-desc">Events, weddings, corporate days, school trips &mdash; send us a message</span></button>',
+              '<button class="bkm-tile" data-pick="stay"><span class="bkm-tile-icon"><img src="Chnages/Stay with us model icon .png" alt="" aria-hidden="true" style="width:80px;height:80px;object-fit:contain;"></span><span class="bkm-tile-label">Stay with us</span><span class="bkm-tile-desc">Self-catered country house &amp; group accommodation &mdash; live rates &amp; availability</span></button>',
+              '<button class="bkm-tile" data-pick="inquire"><span class="bkm-tile-icon"><img src="Chnages/Enquire about model icon .png" alt="" aria-hidden="true" style="width:80px;height:80px;object-fit:contain;"></span><span class="bkm-tile-label">Enquire about</span><span class="bkm-tile-desc">Events, weddings, corporate days, school trips &mdash; send us a message</span></button>',
             '</div>',
             '<p class="bkm-note">Secure booking powered by QBook &mdash; all availability and payment handled on this site.</p>',
           '</div>',
@@ -311,10 +308,6 @@ document.addEventListener("DOMContentLoaded", function () {
             '</div>',
             '<p class="bkm-capacity-hint" id="bkm-capacity-hint"></p>',
             '<p class="bkm-error" id="bkm-error">Please select a valid arrival and departure date.</p>',
-            '<div class="bkm-unavailable-actions" id="bkm-unavailable-actions" hidden>',
-              '<a class="bkm-btn bkm-btn--secondary" id="bkm-unavail-qbook" href="#" target="_blank" rel="noopener">Check directly on Q-Book</a>',
-              '<button class="bkm-btn" id="bkm-unavail-inquire" type="button">Send an enquiry instead</button>',
-            '</div>',
             '<button class="bkm-btn" id="bkm-submit">Apply</button>',
             '<p class="bkm-note" id="bkm-config-note">Secure booking powered by QBook.</p>',
           '</div>',
@@ -348,6 +341,24 @@ document.addEventListener("DOMContentLoaded", function () {
                   '<input type="hidden" id="bkm-inq-about" value="">',
                 '</div>',
                 '<span class="bkm-field-err" id="bkm-err-about"></span>',
+              '</div>',
+              '<div class="bkm-fields">',
+                '<div class="bkm-field">',
+                  '<label>Adults</label>',
+                  '<div class="bkm-stepper">',
+                    '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-inq-adults" aria-label="Decrease adults">&#8722;</button>',
+                    '<input type="number" class="bkm-step-val bkm-step-editable" id="bkm-inq-adults" value="0" min="0" max="999" inputmode="numeric" aria-label="Number of adults">',
+                    '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-inq-adults" aria-label="Increase adults">+</button>',
+                  '</div>',
+                '</div>',
+                '<div class="bkm-field">',
+                  '<label>Children</label>',
+                  '<div class="bkm-stepper">',
+                    '<button type="button" class="bkm-step-btn bkm-step-dec" data-target="bkm-inq-children" aria-label="Decrease children">&#8722;</button>',
+                    '<input type="number" class="bkm-step-val bkm-step-editable" id="bkm-inq-children" value="0" min="0" max="999" inputmode="numeric" aria-label="Number of children">',
+                    '<button type="button" class="bkm-step-btn bkm-step-inc" data-target="bkm-inq-children" aria-label="Increase children">+</button>',
+                  '</div>',
+                '</div>',
               '</div>',
               '<div class="bkm-field"><label for="bkm-inq-message">Your enquiry <span class="bkm-req">*</span></label><textarea id="bkm-inq-message" rows="4" required></textarea><span class="bkm-field-err" id="bkm-err-message"></span></div>',
               '<input type="hidden" id="bkm-inq-context">',
@@ -437,9 +448,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var childrenEl = document.getElementById("bkm-children");
   var accTypeEl  = document.getElementById("bkm-acctype");
   var errEl        = document.getElementById("bkm-error");
-  var unavailActionsEl = document.getElementById("bkm-unavailable-actions");
-  var unavailQbookBtn  = document.getElementById("bkm-unavail-qbook");
-  var unavailInquireBtn = document.getElementById("bkm-unavail-inquire");
 
   var phasePicker  = document.getElementById("bkm-phase-picker");
   var phaseConfig  = document.getElementById("bkm-phase-config");
@@ -480,7 +488,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (name === "confirm") phaseConfirm.hidden = false;
     errEl.classList.remove("visible");
     inqErr.classList.remove("visible");
-    if (unavailActionsEl) { unavailActionsEl.hidden = true; }
   }
 
   function configureFor(svc) {
@@ -574,12 +581,8 @@ document.addEventListener("DOMContentLoaded", function () {
       callback(rates);
     }
 
-    /* Q-Book's CDN sends a 1-year max-age alongside a stale Expires header, so
-       browsers cache this response for months — bust it on every request so
-       availability/prices are never served from a year-old cache. */
     monthKeys.forEach(function (mk) {
-      var bustUrl = SC_RATES_URL + "?start=" + mk + "&_=" + Date.now();
-      fetch(bustUrl, { cache: "no-store" })
+      fetch(SC_RATES_URL + "?start=" + mk)
         .then(function (r) { return r.text(); })
         .then(function (html) {
           monthHtml[mk] = html;
@@ -594,23 +597,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* Build a Q-Book deep-link URL for the given dates/guests/room.
-     If the room has Q-Book item IDs, pass the first as &i= so Q-Book can
-     pre-filter the availability list to the relevant room. */
-  function buildQBookUrl(ci, co, adults, kids, roomDef) {
-    var qUrl = QBOOK_BASE + "?from=" + ci + "&to=" + co + "&k=" + QBOOK_K;
-    if (adults > 0) { qUrl += "&a=" + adults; }
-    if (kids > 0)   { qUrl += "&c=" + kids; }
-    if (roomDef && roomDef.qItemIDs && roomDef.qItemIDs.length > 0) {
-      qUrl += "&i=" + roomDef.qItemIDs[0];
-    }
-    return qUrl;
-  }
-
   /* Expose for use by the availability bar on the accommodation page */
   window._HP = {
     fetchAllNightlyRates: fetchAllNightlyRates,
-    buildQBookUrl: buildQBookUrl,
     QBOOK_BASE:  QBOOK_BASE,
     QBOOK_K:     QBOOK_K,
     ROOM_DEFS:   ROOM_DEFS,
@@ -752,7 +741,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     summaryEl.innerHTML = html;
 
-    proceedBtn.href = buildQBookUrl(ci, co, adults, kids, roomDef);
+    /* Build Q-Book deep-link URL.
+       If a specific room type is selected and it has Q-Book item IDs, pass the first as &i=
+       so Q-Book can pre-filter the availability list to the relevant room. */
+    var qUrl = QBOOK_BASE + "?from=" + ci + "&to=" + co + "&k=" + QBOOK_K;
+    if (adults > 0) { qUrl += "&a=" + adults; }
+    if (kids > 0)   { qUrl += "&c=" + kids; }
+    if (roomDef.qItemIDs && roomDef.qItemIDs.length > 0) {
+      qUrl += "&i=" + roomDef.qItemIDs[0];
+    }
+    proceedBtn.href = qUrl;
 
     setBrand("stay");
     showPhase("confirm");
@@ -898,33 +896,11 @@ document.addEventListener("DOMContentLoaded", function () {
         showPhase("config");
         errEl.textContent = "These dates don\u2019t appear to be available. Please choose different dates, or send us an enquiry.";
         errEl.classList.add("visible");
-        if (unavailActionsEl) {
-          unavailActionsEl.hidden = false;
-          if (unavailQbookBtn) {
-            var uAdults = parseInt(adultsEl.value, 10) || 0;
-            var uKids   = parseInt(childrenEl.value, 10) || 0;
-            unavailQbookBtn.href = buildQBookUrl(inEl.value, outEl.value, uAdults, uKids, selDef);
-          }
-        }
         return;
       }
       showConfirm(nightRates);
     });
   });
-
-  /* -- unavailable-dates fallback: hand off to a staff enquiry, prefilled with the search -- */
-  if (unavailInquireBtn) {
-    unavailInquireBtn.addEventListener("click", function () {
-      configureFor("inquire");
-      var msgEl = document.getElementById("bkm-inq-message");
-      if (msgEl && !msgEl.value) {
-        var roomLabel = (ROOM_DEFS[accTypeEl.value] || ROOM_DEFS['any']).label;
-        msgEl.value = "I'd like to check availability for " + fmt(inEl.value) + " to " + fmt(outEl.value)
-          + " (" + (parseInt(adultsEl.value, 10) || 0) + " adults, " + (parseInt(childrenEl.value, 10) || 0) + " children, "
-          + roomLabel + ") \u2014 Q-Book showed no rate for these dates online.";
-      }
-    });
-  }
 
   /* -- inquiry submit: POST to Formsubmit (no signup, sends to info@hilstonpark.com) -- */
   inqForm.addEventListener("submit", function (e) {
@@ -934,6 +910,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var email    = document.getElementById("bkm-inq-email").value.trim();
     var phone    = document.getElementById("bkm-inq-phone").value.trim();
     var about    = document.getElementById("bkm-inq-about").value;
+    var adults   = document.getElementById("bkm-inq-adults").value || "0";
+    var children = document.getElementById("bkm-inq-children").value || "0";
     var msg      = document.getElementById("bkm-inq-message").value.trim();
     var ctx      = inqContext.value || "general";
     /* Per-field validation */
@@ -991,6 +969,8 @@ document.addEventListener("DOMContentLoaded", function () {
         email: email,
         phone: phone,
         enquiry_about: about,
+        adults: adults,
+        children: children,
         service: svcLabel,
         message: msg,
         source_page: window.location.pathname
@@ -1043,7 +1023,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var href = el.getAttribute("href") || "";
     var hasAttr = el.hasAttribute("data-booking-type") || el.hasAttribute("data-inquire");
     var label = el.textContent.replace(/\s+/g, " ").trim().toLowerCase();
-    if (label === "book now" || label === "plan your escape") {
+    if (label === "book now") {
       e.preventDefault();
       window.location.href = QBOOK_BASE + "?k=" + QBOOK_K;
       return;
@@ -1208,7 +1188,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var img = document.createElement("img");
         img.src     = item.src;
         img.alt     = item.alt || "";
-        img.loading = "lazy";
+        img.loading = "eager";
         img.decoding = "async";
         tile.appendChild(img);
         set.appendChild(tile);
@@ -1258,7 +1238,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    function startInstaFetch() {
+    /* Fetch with a 5-second timeout; fall back to local images on any failure */
     var ctrl  = typeof AbortController !== "undefined" ? new AbortController() : null;
     var timer = ctrl ? setTimeout(function() { ctrl.abort(); }, 5000) : null;
 
@@ -1269,10 +1249,10 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then(function(data) {
         var posts = Array.isArray(data) ? data : (data.posts || []);
-        /* Keep photo, carousel, and video posts (skip unsupported types) */
+        /* Keep only photo / carousel posts (skip stories / reels thumbnails) */
         posts = posts.filter(function(p) {
           var t = (p.mediaType || "").toUpperCase();
-          return t === "IMAGE" || t === "CAROUSEL_ALBUM" || t === "VIDEO" || t === "";
+          return t === "IMAGE" || t === "CAROUSEL_ALBUM" || t === "";
         });
         if (!posts.length) { startMarquee(INSTA_FALLBACK); return; }
 
@@ -1280,7 +1260,7 @@ document.addEventListener("DOMContentLoaded", function () {
           return {
             src: (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl)
               || (p.sizes && p.sizes.small  && p.sizes.small.mediaUrl)
-              || p.thumbnailUrl || p.mediaUrl || "",
+              || p.mediaUrl || "",
             alt:       p.caption ? p.caption.slice(0, 80) : "Hilston Park on Instagram",
             permalink: p.permalink || "https://www.instagram.com/hilstonparkofficial/"
           };
@@ -1292,16 +1272,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (timer) clearTimeout(timer);
         startMarquee(INSTA_FALLBACK);
       });
-    }
-
-    /* Only start fetch when Instagram section scrolls into view */
-    var instaSection = instaInner.closest("section") || instaInner.parentElement;
-    if ("IntersectionObserver" in window) {
-      var instaObs = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting) { instaObs.disconnect(); startInstaFetch(); }
-      }, { rootMargin: "300px" });
-      instaObs.observe(instaSection);
-    } else { startInstaFetch(); }
   }
 
   /* =========================================================
@@ -1371,12 +1341,121 @@ document.addEventListener("DOMContentLoaded", function () {
 }); /* end DOMContentLoaded */
 
 /* =====================================================
-   COOKIE CONSENT
-   Handled by consent.js (Google Consent Mode v2 — Accept /
-   Decline / Manage Preferences + persistent floating icon).
-   The previous inline banner was removed to avoid a duplicate
-   consent system that did not signal Google Consent Mode.
+   COOKIE CONSENT BANNER
    ===================================================== */
+(function () {
+  var COOKIE_KEY = "hp_cookie_consent";
+
+  function getConsent () {
+    try { return JSON.parse(localStorage.getItem(COOKIE_KEY)); } catch (e) { return null; }
+  }
+  function saveConsent (prefs) {
+    try { localStorage.setItem(COOKIE_KEY, JSON.stringify(prefs)); } catch (e) {}
+  }
+
+  /* Banner HTML */
+  var bannerHTML = [
+    '<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie notice" aria-live="polite">',
+      '<div class="cookie-banner-inner">',
+        '<div class="cookie-banner-text">',
+          '<strong>Cookie Notice</strong>',
+          '<p>We use cookies to improve your experience and understand how you use our site. See our <a href="privacy.html">Privacy Policy</a> for details.</p>',
+        '</div>',
+        '<div class="cookie-banner-actions">',
+          '<button class="cookie-btn cookie-btn-manage" id="cookie-manage">Manage Preferences</button>',
+          '<button class="cookie-btn cookie-btn-accept" id="cookie-accept">Accept All</button>',
+        '</div>',
+      '</div>',
+    '</div>',
+
+    '<div id="cookie-modal" class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">',
+      '<div class="cookie-modal-panel">',
+        '<button class="cookie-modal-close" id="cookie-modal-close" aria-label="Close preferences">&times;</button>',
+        '<h2 id="cookie-modal-title">Cookie Preferences</h2>',
+        '<p>Choose which cookies you allow. Necessary cookies keep the site working and cannot be disabled.</p>',
+        '<div class="cookie-pref">',
+          '<div class="cookie-pref-row">',
+            '<div><strong>Necessary Cookies</strong><p>Required for the website to function correctly. Cannot be disabled.</p></div>',
+            '<span class="cookie-toggle-fixed">Always On</span>',
+          '</div>',
+          '<div class="cookie-pref-row">',
+            '<div><strong>Analytics Cookies</strong><p>Help us understand how visitors interact with our website so we can improve it.</p></div>',
+            '<label class="cookie-toggle"><input type="checkbox" id="pref-analytics" checked><span class="cookie-toggle-slider"></span></label>',
+          '</div>',
+          '<div class="cookie-pref-row">',
+            '<div><strong>Marketing Cookies</strong><p>Allow us to show relevant content and measure the effectiveness of our campaigns.</p></div>',
+            '<label class="cookie-toggle"><input type="checkbox" id="pref-marketing"><span class="cookie-toggle-slider"></span></label>',
+          '</div>',
+        '</div>',
+        '<div class="cookie-modal-actions">',
+          '<button class="cookie-btn cookie-btn-accept" id="cookie-save-prefs">Save Preferences</button>',
+        '</div>',
+      '</div>',
+    '</div>'
+  ].join("");
+
+  /* Only show if consent not yet recorded */
+  if (!getConsent()) {
+    document.body.insertAdjacentHTML("beforeend", bannerHTML);
+
+    var banner     = document.getElementById("cookie-banner");
+    var modal      = document.getElementById("cookie-modal");
+    var btnAccept  = document.getElementById("cookie-accept");
+    var btnManage  = document.getElementById("cookie-manage");
+    var btnClose   = document.getElementById("cookie-modal-close");
+    var btnSave    = document.getElementById("cookie-save-prefs");
+    var cbAnalytics = document.getElementById("pref-analytics");
+    var cbMarketing = document.getElementById("pref-marketing");
+
+    /* Show banner after short delay */
+    setTimeout(function () {
+      banner.classList.add("is-visible");
+    }, 800);
+
+    function dismissBanner (prefs) {
+      saveConsent(prefs);
+      banner.classList.remove("is-visible");
+      setTimeout(function () { banner.parentNode && banner.parentNode.removeChild(banner); }, 500);
+      if (modal.classList.contains("is-open")) {
+        modal.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+    }
+
+    btnAccept.addEventListener("click", function () {
+      dismissBanner({ necessary: true, analytics: true, marketing: true, accepted: "all" });
+    });
+
+    btnManage.addEventListener("click", function () {
+      modal.classList.add("is-open");
+    });
+
+    btnClose.addEventListener("click", function () {
+      modal.classList.remove("is-open");
+    });
+
+    btnSave.addEventListener("click", function () {
+      dismissBanner({
+        necessary: true,
+        analytics: cbAnalytics.checked,
+        marketing: cbMarketing.checked,
+        accepted: "custom"
+      });
+    });
+
+    /* Close modal on overlay click */
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) { modal.classList.remove("is-open"); }
+    });
+
+    /* Close on Escape */
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) {
+        modal.classList.remove("is-open");
+      }
+    });
+  }
+}());
 
 /* =====================================================
    WHATSAPP FLOATING BUTTON
@@ -1384,7 +1463,8 @@ document.addEventListener("DOMContentLoaded", function () {
    e.g. href="https://wa.me/447700000000"
    ===================================================== */
 (function () {
-  var WA_NUMBER = "447803016677";
+  /* TODO: replace with actual WhatsApp number (digits only, incl. country code, e.g. 447700000000) */
+  var WA_NUMBER = "447700000000";
 
   var btn = document.createElement("a");
   btn.id            = "wa-btn";
@@ -1405,16 +1485,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* Reveal after a moment so it doesn't flash on load */
   setTimeout(function () { btn.classList.add("is-visible"); }, 1200);
-  /* Cookie button (static HTML) — same delay */
-  setTimeout(function () {
-    var cookieBtn = document.getElementById('hp-cookie-reopen');
-    if (cookieBtn) cookieBtn.classList.add('is-visible');
-  }, 1200);
-  /* a11y-fab (injected by defer'd accessibility.js) — slight extra delay */
-  setTimeout(function () {
-    var a11yFab = document.getElementById('a11y-fab');
-    if (a11yFab) a11yFab.classList.add('is-visible');
-  }, 1400);
 }());
 
 
@@ -1525,46 +1595,5 @@ function initHCS(wrap) {
 
 /* Auto-init on page load */
 document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.hcs').forEach(function (w) { initHCS(w); });  
-});
-if (!document.getElementById('footer-legal-entity-style')) {
-  var style = document.createElement('style');
-  style.id = 'footer-legal-entity-style';
-  style.textContent =
-    '.footer-legal-entity{width:100%;max-width:1400px;box-sizing:border-box;margin:0 auto;padding:18px 80px 0;text-align:center;}' +
-    '.footer-legal-entity p{font-size:0.72rem;line-height:1.6;color:rgba(255,255,255,0.55);margin:0;}' +
-    '@media (max-width:880px){.footer-legal-entity{padding:16px 24px 0;}}' +
-    '@media (max-width:560px){.footer-legal-entity{padding:14px 16px 0;}}';
-  document.head.appendChild(style);
-}/* =====================================================
-   CORPORATE IDENTITY BLOCK
-   Companies Act 2006 / Provision of Services Regulations 2009
-   Injected site-wide (all pages share this script.js) so the
-   registered entity details appear in every page footer
-   without manual edits to each HTML file. Idempotent — skips
-   pages (e.g. contact.html) where the block is already
-   hard-coded into the HTML.
-   ===================================================== */
-document.addEventListener('DOMContentLoaded', function () {
-  var footer = document.querySelector('footer.site-footer');
-  if (!footer) return;
-  if (footer.querySelector('.footer-legal-entity')) return; /* already present */
-  var bar = footer.querySelector('.footer-bar');
-  if (!bar) return;
-
-  if (!document.getElementById('footer-legal-entity-style')) {
-    var style = document.createElement('style');
-    style.id = 'footer-legal-entity-style';
-    style.textContent =
-      '.footer-legal-entity{max-width:1400px;margin:0 auto;padding:18px 80px 0;}' +
-      '.footer-legal-entity p{font-size:0.72rem;line-height:1.6;color:rgba(255,255,255,0.55);margin:0;}' +
-      '@media (max-width:880px){.footer-legal-entity{padding:16px 24px 0;}}' +
-      '@media (max-width:560px){.footer-legal-entity{padding:14px 16px 0;}}';
-    document.head.appendChild(style);
-  }
-
-  var block = document.createElement('div');
-  block.className = 'footer-legal-entity';
-  block.innerHTML = '<p>Hilston Park is operated by Hilston Park Limited, a company registered in England and Wales under Company Number 12944054. Registered Office: Beech House, Edgbaston, Birmingham, United Kingdom, B15 3BE.</p>';
-  footer.insertBefore(block, bar);
+  document.querySelectorAll('.hcs').forEach(function (w) { initHCS(w); });
 });
