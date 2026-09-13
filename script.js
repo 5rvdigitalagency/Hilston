@@ -1250,11 +1250,8 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then(function(data) {
         var posts = Array.isArray(data) ? data : (data.posts || []);
-        /* Keep only photo / carousel posts (skip stories / reels thumbnails) */
-        posts = posts.filter(function(p) {
-          var t = (p.mediaType || "").toUpperCase();
-          return t === "IMAGE" || t === "CAROUSEL_ALBUM" || t === "";
-        });
+        /* Behold supplies a usable thumbnail URL for photos, carousels, and Reels. */
+        posts = posts.filter(function(p) { return p && p.mediaUrl || (p && p.sizes); });
         if (!posts.length) { startMarquee(INSTA_FALLBACK); return; }
 
         var items = posts.map(function(p) {
