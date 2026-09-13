@@ -1043,7 +1043,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var href = el.getAttribute("href") || "";
     var hasAttr = el.hasAttribute("data-booking-type") || el.hasAttribute("data-inquire");
     var label = el.textContent.replace(/\s+/g, " ").trim().toLowerCase();
-    if (label === "book now") {
+    if (label === "book now" || label === "plan your escape") {
       e.preventDefault();
       window.location.href = QBOOK_BASE + "?k=" + QBOOK_K;
       return;
