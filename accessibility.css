@@ -384,3 +384,72 @@ body:has(#hp-cookie-banner.hpcc-show) .a11y-fab {
     left: 0;
   }
 }
+
+
+/* Legacy accessibility script controls */
+#hilston-accessibility-badge {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 50%;
+  background: #3c7a6c;
+  color: #fff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+#hilston-accessibility-badge svg { width: 28px; height: 28px; }
+#hilston-accessibility-sidebar {
+  position: fixed;
+  left: -430px;
+  bottom: 24px;
+  z-index: 10000;
+  width: min(400px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: #fff;
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease;
+}
+#hilston-accessibility-sidebar.active { left: 24px; }
+#hilston-accessibility-sidebar .hilston-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: #3c7a6c;
+  color: #fff;
+}
+#hilston-accessibility-sidebar .hilston-header h3 { margin: 0; font-size: 1.25rem; }
+#hilston-close-btn { border: 0; background: transparent; color: #fff; font-size: 1.25rem; cursor: pointer; }
+#hilston-accessibility-sidebar .hilston-content { padding: 20px; }
+#hilston-accessibility-sidebar .hilston-features-sec { display: flex; flex-wrap: wrap; gap: 8px; }
+#hilston-accessibility-sidebar .hilston-section { margin-bottom: 18px; }
+#hilston-accessibility-sidebar .hilston-section h4 { margin: 0 0 10px; color: #3c7a6c; }
+#hilston-accessibility-sidebar .hilston-section button {
+  padding: 8px 10px;
+  border: 1px solid #d6d6d6;
+  background: #fff;
+  color: #252525;
+  cursor: pointer;
+}
+#hilston-reading-mask { display: none; }
+#hilston-reading-mask.active {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: block;
+  pointer-events: none;
+  box-shadow: 0 -9999px 0 9999px rgba(0, 0, 0, 0.65), 0 9999px 0 9999px rgba(0, 0, 0, 0.65);
+}
+@media (max-width: 480px) {
+  #hilston-accessibility-badge { left: 12px; bottom: 16px; width: 52px; height: 52px; }
+  #hilston-accessibility-sidebar { left: -100vw; bottom: 16px; }
+  #hilston-accessibility-sidebar.active { left: 12px; }
+}
