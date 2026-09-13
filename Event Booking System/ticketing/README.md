@@ -26,11 +26,29 @@
 
 Event publication is disabled by default at the server boundary. Keep these values split between Vercel environments:
 
-- Production: `EVENT_PUBLISHING_ENABLED=false`
-- Staging (`https://hilston-park.vercel.app`): `EVENT_PUBLISHING_ENABLED=true`
+- Live website: `EVENT_DEPLOYMENT_ROLE=live`, `EVENT_PUBLISHING_ENABLED=false`, and `LIVE_EVENT_PUBLISHING_AUTHORIZED=false`
+- Ticketing staging (`https://hilston-park-ticketing.vercel.app`): `EVENT_DEPLOYMENT_ROLE=staging` and `EVENT_PUBLISHING_ENABLED=true`
 - Staging browser feed: `EVENTS_PUBLIC_ORIGIN=https://hilston-park.vercel.app`
 
-When the gate is disabled, staff can still save drafts and take events down, but attempts to create or update a published event return `403`. The public events API returns an empty catalogue. Production also requires the separate `LIVE_EVENT_PUBLISHING_AUTHORIZED=true` flag, so enabling the staging flag cannot unlock live publishing by accident. Do not set either production authorisation flag to `true` until the team explicitly authorises live publishing.
+When the gate is disabled, staff can still save drafts and take events down, but attempts to create or update a published event return `403`. The public events API returns an empty catalogue. A live deployment requires both `EVENT_PUBLISHING_ENABLED=true` and `LIVE_EVENT_PUBLISHING_AUTHORIZED=true`, so staging settings cannot unlock live publishing by accident. Do not set either live authorisation flag to `true` until the team explicitly authorises live publishing.
+
+## Main-site event feed authorisation
+
+The public events API is not a browser feed. It remains empty unless
+`EVENTS_PUBLIC_FEED_ENABLED=true` and a request supplies the matching
+`Authorization: Bearer` value from `TICKETING_EVENTS_FEED_KEY`. Configure the
+same randomly generated key only in the approved main-site Vercel project.
+
+The main site must also set all of the following before it can display events:
+
+- `EVENTS_DISPLAY_ENABLED=true`
+- `TICKETING_EVENTS_API_URL` to the approved ticketing API URL
+- `TICKETING_EVENTS_FEED_KEY` to the matching ticketing value
+
+Leave `EVENTS_DISPLAY_ENABLED` and `EVENTS_PUBLIC_FEED_ENABLED` unset or false
+for every unapproved preview, staging, or production deployment. This pair of
+server-side checks prevents a published ticketing event from appearing on a
+website unless both deployments have been deliberately authorised together.
 
  ## Current routes
 
