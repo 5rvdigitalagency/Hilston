@@ -1145,7 +1145,7 @@
       "file": "blog-thrilling-adventures.html",
       "title": "Discover Hilston Park: Adventures &amp; Cosy Escapes",
       "description": "Discover thrilling adventures and cosy escapes at Hilston Park in Wales. From high ropes to kayaking and comfortable accommodation, your journey begins here.",
-      "canonical": "https://hilstonpark.com/blog-thrilling-adventures",
+      "canonical": "https://hilstonpark.com/blog/thrilling-adventures",
       "ogTitle": "",
       "ogDescription": "",
       "ogImage": "",
@@ -1175,7 +1175,7 @@
               "@type": "ListItem",
               "position": 3,
               "name": "Thrilling Adventures",
-              "item": "https://hilstonpark.com/blog-thrilling-adventures"
+              "item": "https://hilstonpark.com/blog/thrilling-adventures"
             }
           ]
         },
@@ -3356,5 +3356,11 @@
       "schema": null
     }
   },
-  "redirects": []
+  "redirects": [
+    {
+      "from": "/blog-thrilling-adventures",
+      "to": "/blog/thrilling-adventures",
+      "status": 301
+    }
+  ]
 }
