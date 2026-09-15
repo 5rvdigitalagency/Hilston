@@ -92,6 +92,81 @@
     }
     .policy-links p { font-size: 0.88rem; color: #6b6b6b; }
     .policy-links a { color: #4e9484; }
+    .cancellation-form {
+      background: #e9e6df;
+      border-left: 4px solid #4e9484;
+      padding: 28px;
+      margin: 1.4rem 0 2rem;
+    }
+    .cancellation-form h3 {
+      font-family: var(--font-serif, 'Bodoni 72', Georgia, serif);
+      color: #4a6371;
+      font-size: 1.3rem;
+      font-weight: normal;
+      margin: 0 0 10px;
+    }
+    .cancellation-form-intro { margin-bottom: 24px; }
+    .cancellation-field { margin-bottom: 18px; }
+    .cancellation-field label {
+      color: #4a6371;
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .cancellation-field input,
+    .cancellation-field select,
+    .cancellation-field textarea {
+      background: #fff;
+      border: 1px solid #cfcec9;
+      box-sizing: border-box;
+      color: #36505d;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      outline: none;
+      padding: 13px 14px;
+      width: 100%;
+    }
+    .cancellation-field input:focus,
+    .cancellation-field select:focus,
+    .cancellation-field textarea:focus { border-color: #4e9484; }
+    .cancellation-field textarea { min-height: 120px; resize: vertical; }
+    .cancellation-declaration {
+      align-items: flex-start;
+      display: flex;
+      gap: 10px;
+      margin: 24px 0;
+    }
+    .cancellation-declaration input {
+      accent-color: #4e9484;
+      height: 17px;
+      margin-top: 3px;
+      width: 17px;
+    }
+    .cancellation-declaration label {
+      color: #6b6b6b;
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+    .cancellation-submit {
+      background: #4a6371;
+      border: 0;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 15px 24px;
+      text-transform: uppercase;
+      width: 100%;
+    }
+    .cancellation-submit:hover { background: #36505d; }
+    .cancellation-submit:disabled { cursor: wait; opacity: 0.7; }
+    .cancellation-message { display: none; font-size: 0.86rem; margin: 0 0 14px; }
+    .cancellation-message.error { color: #a62c2b; }
+    .cancellation-message.success { color: #277664; }
     /* ---- UTILITY HERO ---- */
     .utility-hero {
       background: #e9e6df;
@@ -126,6 +201,7 @@
     @media (max-width: 640px) {
       .utility-hero { padding: 56px 20px 52px; }
       .policy-section { padding: 44px 20px 80px; }
+      .cancellation-form { padding: 22px 18px; }
     }
   </style>
   <link rel="stylesheet" href="accessibility.css?v=3">
@@ -255,33 +331,96 @@
     <p>This statutory cancellation right may not apply to certain services, including accommodation bookings, leisure activities, events or venue hire arranged for a specific date or period, where exclusions apply under consumer protection legislation.</p>
     <p>If you believe your booking qualifies for a statutory cancellation right, you can submit your cancellation request using the form below.</p>
 
-    <h3>Cancellation Request Form</h3>
-    <p><strong>1. Full Name of Client(s)</strong><br>
-    Enter your answer</p>
-    <p><strong>2. Email Address</strong><br>
-    Enter your answer</p>
-    <p><strong>3. Full Postal Address</strong><br>
-    Enter your answer</p>
-    <p><strong>4. Booking Reference Number or Group Name</strong><br>
-    Enter your answer</p>
-    <p><strong>5. Type of Booking / Service Cancelled</strong><br>
-    Select one:</p>
-    <ul>
-      <li>Boutique B&amp;B / Private Stay</li>
-      <li>Corporate Team Building Hire</li>
-      <li>Private Event / Venue Hire</li>
-      <li>School Residential / Educational Visit</li>
-      <li>Other Service</li>
-    </ul>
-    <p><strong>6. Date the Booking Was Confirmed (Invoiced/Accepted)</strong><br>
-    Enter your answer</p>
-    <p><strong>7. Reason for Cancellation (Optional)</strong><br>
-    Enter your answer</p>
-    <p><em>(This field is optional and will not affect your ability to submit a statutory cancellation request.)</em></p>
+    <form class="cancellation-form" id="cancellation-request-form">
+      <input type="hidden" name="access_key" value="d185ded1-269c-4f96-99db-28427596cf0a">
+      <input type="hidden" name="subject" value="Cancellation request from Hilston Park website">
+      <input type="hidden" name="from_name" value="Hilston Park Cancellation Request">
+      <h3>Cancellation Request Form</h3>
+      <p class="cancellation-form-intro">Complete this form to submit a statutory cancellation request. We will acknowledge your request in writing.</p>
+      <div class="cancellation-field">
+        <label for="cancellation-name">Full Name of Client(s)</label>
+        <input type="text" id="cancellation-name" name="client_name" autocomplete="name" required>
+      </div>
+      <div class="cancellation-field">
+        <label for="cancellation-email">Email Address</label>
+        <input type="email" id="cancellation-email" name="email" autocomplete="email" required>
+      </div>
+      <div class="cancellation-field">
+        <label for="cancellation-address">Full Postal Address</label>
+        <textarea id="cancellation-address" name="postal_address" autocomplete="street-address" required></textarea>
+      </div>
+      <div class="cancellation-field">
+        <label for="cancellation-reference">Booking Reference Number or Group Name</label>
+        <input type="text" id="cancellation-reference" name="booking_reference_or_group_name" required>
+      </div>
+      <div class="cancellation-field">
+        <label for="cancellation-service">Type of Booking / Service Cancelled</label>
+        <select id="cancellation-service" name="booking_type" required>
+          <option value="" selected disabled>Select a service</option>
+          <option value="Boutique B&B / Private Stay">Boutique B&amp;B / Private Stay</option>
+          <option value="Corporate Team Building Hire">Corporate Team Building Hire</option>
+          <option value="Private Event / Venue Hire">Private Event / Venue Hire</option>
+          <option value="School Residential / Educational Visit">School Residential / Educational Visit</option>
+          <option value="Other Service">Other Service</option>
+        </select>
+      </div>
+      <div class="cancellation-field">
+        <label for="cancellation-confirmed-date">Date the Booking Was Confirmed (Invoiced/Accepted)</label>
+        <input type="date" id="cancellation-confirmed-date" name="booking_confirmed_date" required>
+      </div>
+      <div class="cancellation-field">
+        <label for="cancellation-reason">Reason for Cancellation <span aria-hidden="true">(optional)</span></label>
+        <textarea id="cancellation-reason" name="cancellation_reason"></textarea>
+      </div>
+      <div class="cancellation-declaration">
+        <input type="checkbox" id="cancellation-declaration" name="statutory_cancellation_declaration" value="Confirmed" required>
+        <label for="cancellation-declaration">I formally notify Hilston Park of my intention to withdraw from my service agreement where a statutory cancellation right applies. I confirm that I am the primary account holder or authorised group representative.</label>
+      </div>
+      <p class="cancellation-message error" id="cancellation-form-error" role="alert">Please complete all required fields and confirm the declaration.</p>
+      <p class="cancellation-message success" id="cancellation-form-success" role="status">Thank you. Your cancellation request has been sent and will be acknowledged in writing.</p>
+      <button type="submit" class="cancellation-submit" id="cancellation-submit-button">Submit Cancellation Request</button>
+    </form>
+    <script>
+      (function () {
+        var form = document.getElementById('cancellation-request-form');
+        var error = document.getElementById('cancellation-form-error');
+        var success = document.getElementById('cancellation-form-success');
+        var submitButton = document.getElementById('cancellation-submit-button');
+        if (!form) return;
 
-    <h3>Legal Declaration</h3>
-    <p><input type="checkbox" aria-label="I formally notify Hilston Park of my intention to withdraw from my service agreement where a statutory cancellation right applies"> By submitting this digital form, I formally notify Hilston Park of my intention to withdraw from my service agreement where a statutory cancellation right applies. I confirm that I am the primary account holder or authorised group representative.</p>
-    <p><button type="button">Submit Cancellation Request</button></p>
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          error.style.display = 'none';
+          success.style.display = 'none';
+          if (!form.checkValidity()) {
+            error.style.display = 'block';
+            form.reportValidity();
+            return;
+          }
+          submitButton.disabled = true;
+          submitButton.textContent = 'Sending...';
+          fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) })
+            .then(function (response) { return response.json(); })
+            .then(function (result) {
+              if (result.success) {
+                form.reset();
+                success.style.display = 'block';
+              } else {
+                error.textContent = 'Sorry, we could not send your request. Please email booking@hilstonpark.com directly.';
+                error.style.display = 'block';
+              }
+            })
+            .catch(function () {
+              error.textContent = 'Sorry, we could not send your request. Please email booking@hilstonpark.com directly.';
+              error.style.display = 'block';
+            })
+            .then(function () {
+              submitButton.disabled = false;
+              submitButton.textContent = 'Submit Cancellation Request';
+            });
+        });
+      }());
+    </script>
 
     <h2>Third-Party Bookings</h2>
     <p>Where bookings are made through third-party platforms such as Airbnb or <a href="http://Booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a>, cancellation rights, payment processes and refund arrangements may be governed by the terms and conditions of the platform used at the time of booking.</p>
