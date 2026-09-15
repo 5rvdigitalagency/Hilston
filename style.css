@@ -2988,3 +2988,12 @@ span.flatpickr-weekday {
   .wa-btn { right: 16px; bottom: 20px; width: 52px; height: 52px; }
   .wa-tooltip { display: none; }
 }
+
+/*------------Common Css-------------*/
+   .accom-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+    .accom-list li { padding-left: 18px; position: relative; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
+    .accom-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--teal); }
+
+    .activities-subhead.text-left{
+      text-align: left;
+    }

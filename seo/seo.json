@@ -1971,6 +1971,82 @@
         "dateModified": "2026-09-03"
       }
     },
+    "/blog/hilston-park-school-residential-trips": {
+      "file": "blog/hilston-park-school-residential-trips.html",
+      "title": "Accommodation Hilston Park | Group Stays & Outdoor Events",
+      "description": "Discover Hilston Park accommodation for group stays, outdoor team building events and corporate experiences near Monmouth in the beautiful Wye Valley.",
+      "canonical": "https://hilstonpark.com/blog/hilston-park-school-residential-trips",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://hilstonpark.com/blog/hilston-park-school-residential-trips"
+        },
+        "headline": "Accommodation Hilston Park | Group Stays & Outdoor Events",
+        "image": "https://hilstonpark.com/images/school-trips.avif",
+        "author": {
+          "@type": "Organization",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Hilston Park",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+          }
+        },
+        "datePublished": "2026-06-16",
+        "dateModified": "2026-06-16"
+      }
+    },
+    "/blog/school-residential-trips-wales": {
+      "file": "blog/school-residential-trips-Wales.html",
+      "title": "Experience the Magic at Hilston Park | Outdoor Learning",
+      "description": "Discover school residential trips at Hilston Park near Monmouth, Wales. Explore residential experiences, outdoor education centers, and activities for schools.",
+      "canonical": "https://hilstonpark.com/blog/school-residential-trips-wales",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://hilstonpark.com/blog/school-residential-trips-wales"
+        },
+        "headline": "Experience the Magic at Hilston Park | Outdoor Learning",
+        "image": "https://hilstonpark.com/images/school-trips.avif",
+        "author": {
+          "@type": "Organization",
+          "name": "Hilston Park",
+          "url": "https://hilstonpark.com/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Hilston Park",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+          }
+        },
+        "datePublished": "2026-06-16",
+        "dateModified": "2026-06-16"
+      }
+    },
     "/blog/school-adventure-experience": {
       "file": "blog/school-adventure-experience.html",
       "title": "Experience the Magic at Hilston Park | Outdoor Learning",
