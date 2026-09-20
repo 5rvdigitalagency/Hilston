@@ -1947,28 +1947,55 @@
       },
       "schema": {
         "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://hilstonpark.com/blog/raft-building-activities"
-        },
-        "headline": "Raft Building Activities: Skills Children Learn Through Outdoor Adventure",
-        "image": "https://hilstonpark.com/images/edu-canoeing.jpg",
-        "author": {
-          "@type": "Organization",
-          "name": "Hilston Park",
-          "url": "https://hilstonpark.com/"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Hilston Park",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+        "@graph": [
+          {
+            "@type": "BlogPosting",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://hilstonpark.com/blog/raft-building-activities"
+            },
+            "headline": "Raft Building Activities: Skills Children Learn Through Outdoor Adventure",
+            "image": "https://hilstonpark.com/images/edu-canoeing.jpg",
+            "author": {
+              "@type": "Organization",
+              "name": "Hilston Park",
+              "url": "https://hilstonpark.com/"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Hilston Park",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.png"
+              }
+            },
+            "datePublished": "2026-09-03",
+            "dateModified": "2026-09-03"
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://hilstonpark.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blogs",
+                "item": "https://hilstonpark.com/blogs"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Raft Building Activities",
+                "item": "https://hilstonpark.com/blog/raft-building-activities"
+              }
+            ]
           }
-        },
-        "datePublished": "2026-09-03",
-        "dateModified": "2026-09-03"
+        ]
       }
     },
     "/blog/hilston-park-school-residential-trips": {
@@ -2049,7 +2076,7 @@
     },
     "/blog/school-adventure-experience": {
       "file": "blog/school-adventure-experience.html",
-      "title": "Experience the Magic at Hilston Park | Outdoor Learning",
+      "title": "School Adventure at Hilston Park | Outdoor Learning",
       "description": "Experience the magic of Hilston Park through outdoor learning, adventure activities and residential school trips that inspire young minds.",
       "canonical": "https://hilstonpark.com/blog/school-adventure-experience",
       "ogTitle": "",
