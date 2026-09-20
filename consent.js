@@ -11,8 +11,6 @@
 (function () {
   'use strict';
 
-  return;
-
   var STORAGE_KEY = 'hp_consent_v1';
 
   /* ── 1. Consent Mode v2 defaults (all denied) ──────────────────────────── */
