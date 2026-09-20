@@ -327,6 +327,27 @@
       saveStatus.className = `status ${type}`.trim();
     }
 
+    // Translates raw JS/API error text into plain wording the whole team can act on.
+    function humanizeError(error) {
+      const message = error?.message || String(error || '');
+      console.error('[SEO admin]', error);
+
+      if (error instanceof SyntaxError || /JSON/i.test(message)) {
+        return 'The "Schema markup" box has a typo in it — usually an extra or missing bracket, comma or quotation mark. Check the end of what you pasted, fix it, and try again (or clear the box if you are not sure).';
+      }
+      if (/Invalid username or password/i.test(message)) return 'That username or password is not right. Please check them and try again.';
+      if (/auth is not configured/i.test(message)) return 'Sign-in has not been set up for this tool yet. Please contact the website developer.';
+      if (/Unauthoris|Unauthoriz/i.test(message)) return 'You have been signed out, probably because it has been a while since you logged in. Please sign in again.';
+      if (/rate limit/i.test(message)) return 'Too many changes were made too quickly. Please wait a few minutes, then try again.';
+      if (/Bad credentials|Not Found/i.test(message)) return 'The website could not connect to save your changes. Please contact the website developer.';
+      if (/missing <head>|missing file|Invalid route key|missing from seo\.json/i.test(message)) return 'One of the pages is set up incorrectly behind the scenes. Please contact the website developer.';
+      if (/Failed to fetch|NetworkError|network/i.test(message)) return 'Could not reach the website. Please check your internet connection and try again.';
+      if (/Request failed: 401/.test(message)) return 'You have been signed out. Please sign in again.';
+      if (/Request failed: 5\d\d/.test(message)) return 'The website is having a temporary problem. Please try again in a minute.';
+      if (/Request failed:/.test(message)) return 'Something went wrong talking to the website. Please try again.';
+      return message ? `Something went wrong: ${message}. If this keeps happening, contact the website developer.` : 'Something went wrong. Please try again, and contact the website developer if it keeps happening.';
+    }
+
     async function api(path, options = {}) {
       const response = await fetch(path, {
         credentials: 'same-origin',
@@ -467,7 +488,7 @@
         state.dirty = true;
         setStatus('Unsaved changes');
       } catch (error) {
-        setStatus(`Schema JSON error: ${error.message}`, 'error');
+        setStatus(humanizeError(error), 'error');
       }
     }
 
@@ -492,7 +513,7 @@
       const from = document.querySelector('#redirectFromInput').value.trim();
       const to = document.querySelector('#redirectToInput').value.trim();
       const status = Number(document.querySelector('#redirectStatusInput').value);
-      if (!from.startsWith('/') || !to.startsWith('/')) return setStatus('Redirect URLs must start with /', 'error');
+      if (!from.startsWith('/') || !to.startsWith('/')) return setStatus('Both web addresses need to start with a "/" (for example /old-page). Please fix them and try again.', 'error');
       state.seo.redirects = state.seo.redirects || [];
       state.seo.redirects.push({ from, to, status });
       document.querySelector('#redirectFromInput').value = '';
@@ -595,7 +616,7 @@
         await api('/api/seo-login', { method: 'POST', body: JSON.stringify({ username: form.get('username'), password: form.get('password') }) });
         await loadData();
       } catch (error) {
-        document.querySelector('#loginStatus').textContent = error.message;
+        document.querySelector('#loginStatus').textContent = humanizeError(error);
       }
     });
 
@@ -609,15 +630,11 @@
         state.dirty = false;
         setStatus(result.files?.length ? 'Saved. The website update has started.' : 'No changes to publish.', 'ok');
       } catch (error) {
-        if (error instanceof SyntaxError) {
-          setStatus('The Schema markup box is not valid JSON. Remove any script wrapper tags and check commas and quotation marks.', 'error');
-        } else {
-          setStatus(error.message || 'Could not save your SEO changes. Please contact the website developer.', 'error');
-        }
+        setStatus(humanizeError(error), 'error');
       }
     });
 
-    document.querySelector('#deleteBtn').addEventListener('click', () => setStatus('Pages cannot be deleted here. Set Publish live off to noindex a page.', 'error'));
+    document.querySelector('#deleteBtn').addEventListener('click', () => setStatus('You can\'t delete a page from here. Instead, turn off "Publish live" for that page to hide it from search engines.', 'error'));
     document.querySelector('#logoutBtn').addEventListener('click', async () => {
       if (state.dirty && !confirm('You have unsaved changes that have not been published. Sign out anyway?')) return;
       await api('/api/seo-logout', { method: 'POST' }).catch(() => null);
@@ -625,7 +642,7 @@
     });
     document.querySelector('#refreshBtn').addEventListener('click', () => {
       if (state.dirty && !confirm('You have unsaved changes that have not been published. Reloading will discard them. Continue?')) return;
-      loadData().catch(error => setStatus(error.message, 'error'));
+      loadData().catch(error => setStatus(humanizeError(error), 'error'));
     });
     document.querySelector('#addRedirectBtn').addEventListener('click', addRedirect);
     document.querySelector('#exportMetadataBtn').addEventListener('click', exportMetadata);
@@ -669,7 +686,7 @@
     loadData().catch(error => {
       loginView.classList.remove('hidden');
       appView.classList.add('hidden');
-      document.querySelector('#loginStatus').textContent = error.message;
+      document.querySelector('#loginStatus').textContent = humanizeError(error);
     });
   </script>
 </body>
