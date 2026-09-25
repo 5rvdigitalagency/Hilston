@@ -24,49 +24,6 @@
   <link rel="preload" as="image" type="image/webp" fetchpriority="high"
         imagesrcset="images/hp-hero-schools-768.webp 768w, images/hp-hero-schools.webp 1280w"
         imagesizes="(max-width: 880px) 100vw, 33vw">
-  <!-- Google Tag Manager (deferred until the page has loaded and analytics consent is granted) -->
-  <script>
-    (function () {
-      function loadTagManager() {
-        if (window.__hilstonGTMLoaded) return;
-        window.__hilstonGTMLoaded = true;
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var firstScript = document.getElementsByTagName('script')[0];
-        var tagScript = document.createElement('script');
-        tagScript.async = true;
-        tagScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TDVPHZJJ';
-        firstScript.parentNode.insertBefore(tagScript, firstScript);
-      }
-
-      function shouldLoadGTM() {
-        try {
-          var prefs = JSON.parse(localStorage.getItem('hp_consent_v1') || 'null');
-          return !!(prefs && prefs.analytics);
-        } catch (e) {
-          return false;
-        }
-      }
-
-      window.hilstonLoadGTM = function () {
-        if (shouldLoadGTM()) {
-          loadTagManager();
-        }
-      };
-
-      window.addEventListener('load', function () {
-        if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(function () {
-            if (shouldLoadGTM()) loadTagManager();
-          }, { timeout: 4000 });
-        } else {
-          window.setTimeout(function () {
-            if (shouldLoadGTM()) loadTagManager();
-          }, 3000);
-        }
-      }, { once: true });
-    }());
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -121,6 +78,11 @@
   <meta name="google-site-verification" content="d1Lclo9uQ-yswl719z2Ui3SdWc_IwVWOwwy4LAWjmsA" />
   <link rel="stylesheet" href="consent.css?v=6">
   <script src="consent.js"></script>
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TDVPHZJJ');
+  </script>
+  <!-- End Google Tag Manager -->
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
