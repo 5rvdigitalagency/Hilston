@@ -70,6 +70,7 @@
     { "source": "/media/t5mozlih/hilston_logo.jpg", "destination": "/Logo/Hilston_Park_Logo_3_Black.webp", "permanent": true },
     { "source": "/privacy-policy", "destination": "/privacy", "permanent": true },
     { "source": "/blog", "destination": "/blogs", "permanent": true },
-    { "source": "/blog/posts/:slug*", "destination": "/blogs", "permanent": true }
+    { "source": "/blog/posts/:slug*", "destination": "/blogs", "permanent": true },
+    { "source": "/blog-thrilling-adventures", "destination": "/blog/thrilling-adventures", "permanent": true }
   ]
 }

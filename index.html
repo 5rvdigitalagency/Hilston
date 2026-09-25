@@ -14,6 +14,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Outdoor Activity Centre Wales | Trips &amp; Team Building">
     <meta name="twitter:description" content="Outdoor activity centre in Wales offering residential trips, school stays, and outdoor activities for adults with team building experiences.">
+    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"BreadcrumbList","@id":"https://hilstonpark.com/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hilstonpark.com/"}]},{"@context":"https://schema.org","@type":"Organization","name":"Hilston Park","url":"https://hilstonpark.com/","logo":"https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp","contactPoint":{"@type":"ContactPoint","telephone":"+44 (0) 1902 50000","contactType":"customer service","areaServed":"GB","availableLanguage":"en"},"sameAs":["https://www.youtube.com/@HilstonPark","https://www.instagram.com/hilstonparkofficial/","https://www.facebook.com/hilstonparkofficial"]},{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://hilstonpark.com/#localbusiness","name":"Hilston Park","url":"https://hilstonpark.com/","logo":"https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp","image":"https://hilstonpark.com/Logo/Hilston_Park_Logo_3_Black.webp","description":"Hilston Park is an outdoor adventure, activity, education, conference and events venue located in Monmouthshire, Wales, offering residential school trips, team building, weddings, corporate events and outdoor experiences.","telephone":"+44 1600 240033","email":"booking@hilstonpark.com","priceRange":"££","currenciesAccepted":"GBP","paymentAccepted":"Cash, Credit Card, Debit Card","address":{"@type":"PostalAddress","streetAddress":"Hilston Park","addressLocality":"Newcastle","addressRegion":"Monmouthshire","postalCode":"NP25 5NY","addressCountry":"GB"},"geo":{"@type":"GeoCoordinates","latitude":51.86593449958543,"longitude":-2.8049438907672797},"areaServed":{"@type":"Country","name":"United Kingdom"},"sameAs":["https://www.facebook.com/hilstonparkofficial","https://www.instagram.com/hilstonparkofficial/","https://www.youtube.com/@HilstonPark"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"17:00"}]},{"@context":"https://schema.org","@type":"WebSite","@id":"https://hilstonpark.com/#website","url":"https://hilstonpark.com/","name":"Hilston Park","description":"Hilston Park is an outdoor adventure, education, accommodation and events venue in Monmouthshire, Wales.","publisher":{"@id":"https://hilstonpark.com/#organization"},"inLanguage":"en-GB"}]</script>
   <!-- seo:end -->
 
   <!-- Preconnect to third-party origins actually used during initial render -->
@@ -23,49 +24,6 @@
   <link rel="preload" as="image" type="image/webp" fetchpriority="high"
         imagesrcset="images/hp-hero-schools-768.webp 768w, images/hp-hero-schools.webp 1280w"
         imagesizes="(max-width: 880px) 100vw, 33vw">
-  <!-- Google Tag Manager (deferred until the page has loaded and analytics consent is granted) -->
-  <script>
-    (function () {
-      function loadTagManager() {
-        if (window.__hilstonGTMLoaded) return;
-        window.__hilstonGTMLoaded = true;
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var firstScript = document.getElementsByTagName('script')[0];
-        var tagScript = document.createElement('script');
-        tagScript.async = true;
-        tagScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TDVPHZJJ';
-        firstScript.parentNode.insertBefore(tagScript, firstScript);
-      }
-
-      function shouldLoadGTM() {
-        try {
-          var prefs = JSON.parse(localStorage.getItem('hp_consent_v1') || 'null');
-          return !!(prefs && prefs.analytics);
-        } catch (e) {
-          return false;
-        }
-      }
-
-      window.hilstonLoadGTM = function () {
-        if (shouldLoadGTM()) {
-          loadTagManager();
-        }
-      };
-
-      window.addEventListener('load', function () {
-        if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(function () {
-            if (shouldLoadGTM()) loadTagManager();
-          }, { timeout: 4000 });
-        } else {
-          window.setTimeout(function () {
-            if (shouldLoadGTM()) loadTagManager();
-          }, 3000);
-        }
-      }, { once: true });
-    }());
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -118,8 +76,13 @@
   <link rel="preload" href="accessibility.css?v=3" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="accessibility.css?v=3"></noscript>
   <meta name="google-site-verification" content="d1Lclo9uQ-yswl719z2Ui3SdWc_IwVWOwwy4LAWjmsA" />
-  <link rel="stylesheet" href="consent.css?v=6">
-  <script src="consent.js"></script>
+  
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TDVPHZJJ');
+  </script>
+  <!-- End Google Tag Manager -->
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -141,7 +104,7 @@
           <a href="/"><picture><source srcset="Logo/Hilston_Park_Logo_3_Black.webp" type="image/webp"><img src="Logo/Hilston_Park_Logo_3_Black.png" alt="Hilston Park" width="315" height="60"></picture></a>
         </div>
         <div class="header-actions">
-          <a href="contact" class="btn-book">BOOK NOW</a>
+          <a href="https://web-bookings.hotels.uk.com/#/booking/51665/items/availability?from=2026-09-11&to=2026-09-30&k=JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D&a=2&r=1789138302314" class="btn-book">BOOK NOW</a>
           <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
@@ -180,7 +143,7 @@
         <li><a href="gallery">Gallery</a></li>
         <li><a href="contact">Contact</a></li>
         <li><a href="blogs">Blog</a></li>
-        <li class="mobile-nav-book-item"><a href="contact" class="btn-book mobile-nav-book">BOOK NOW</a></li>
+        <li class="mobile-nav-book-item"><a href="https://web-bookings.hotels.uk.com/#/booking/51665/items/availability?from=2026-09-11&to=2026-09-30&k=JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D&a=2&r=1789138302314" class="btn-book mobile-nav-book">BOOK NOW</a></li>
       </ul>
     </nav>
   </div>
@@ -297,7 +260,7 @@
               <li>Sleeps groups from 9 to 130+ guests</li>
               <li>1 to 7+ night residential stays</li>
             </ul>
-            <a href="accommodation" class="btn-hero" data-booking-type="stay">CHECK AVAILABILITY</a>
+            <a href="https://web-bookings.hotels.uk.com/#/booking/51665/items/availability?from=2026-09-11&to=2026-09-30&k=JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D&a=2&r=1789138302314" class="btn-hero" data-booking-type="stay">CHECK AVAILABILITY</a>
           </div>
         </div>
       </article>
@@ -351,7 +314,7 @@
           <li>Smaller group setup</li>
           <li>Quiet, self-contained environment</li>
         </ul>
-        <a href="accommodation" class="btn-pill" data-booking-type="stay">BOOK NOW</a>
+        <a href="https://web-bookings.hotels.uk.com/#/booking/51665/items/availability?from=2026-09-11&to=2026-09-30&k=JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D&a=2&r=1789138302314" class="btn-pill" data-booking-type="stay">BOOK NOW</a>
       </div>
     </article>
 
@@ -365,7 +328,7 @@
           <li>En-suite + shared bathrooms</li>
           <li>Private standalone building within the estate grounds</li>
         </ul>
-        <a href="accommodation" class="btn-pill" data-booking-type="stay">FIND YOUR SPACE</a>
+        <a href="https://web-bookings.hotels.uk.com/#/booking/51665/items/availability?from=2026-09-11&to=2026-09-30&k=JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D&a=2&r=1789138302314" class="btn-pill" data-booking-type="stay">FIND YOUR SPACE</a>
       </div>
     </article>
   </section>
@@ -649,6 +612,6 @@
 <script src="script.js?v=5" defer></script>
 
   <script src="accessibility.js?v=2" defer></script>
-<button id="hp-cookie-reopen" class="hp-cookie-reopen" aria-label="Manage cookie preferences" title="Manage cookie preferences" onclick="var w=document.getElementById('custom-cookie-manager');if(w){w.style.display='block';}return false;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="28" height="28"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="8.5" r="0.8" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="14.5" r="0.8" fill="currentColor" stroke="none"/></svg></button>
+
 </body>
 </html>
