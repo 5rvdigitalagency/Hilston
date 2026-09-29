@@ -1,0 +1,45 @@
+{
+  "name": "ticketing",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "db:migrate": "tsx scripts/db-migrate.ts",
+    "prod:cleanup": "tsx scripts/prod-cleanup.ts"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "@supabase/supabase-js": "^2.109.0",
+    "@types/nodemailer": "^8.0.1",
+    "@zxing/browser": "^0.2.1",
+    "bcryptjs": "^3.0.3",
+    "jose": "^6.2.10",
+    "next": "16.3.2",
+    "nodemailer": "^7.0.13",
+    "pdf-lib": "^1.17.1",
+    "pg": "^8.23.0",
+    "qrcode": "^1.5.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "stripe": "^22.5.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/pg": "^8.23.1",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.2",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^4.1.11"
+  }
+}
