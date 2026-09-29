@@ -1,0 +1,14 @@
+import Link from "next/link";
+
+const sections = {
+  events: { eyebrow: "Create or edit", title: "Event editor", copy: "Build an event, add its dates, audience rules, prices, capacity, and publishing status. The full editor is ready to connect to the event catalogue." },
+  submissions: { eyebrow: "Guest management", title: "Submissions and attendance", copy: "See who has applied, who has paid, who is attending, and how many children are included in each event." },
+  media: { eyebrow: "Images and video", title: "Event media", copy: "Upload photographs, videos, and supporting files for the public event page. Files will be stored privately until published." },
+  storefront: { eyebrow: "Public event page", title: "Storefront preview", copy: "Review the event information guests will see before publishing it to the public Hilston Park event feed." },
+} as const;
+
+export default async function CmsSectionPage({ params }: { params: Promise<{ section: string }> }) {
+  const { section } = await params;
+  const content = sections[section as keyof typeof sections] || sections.events;
+  return <main className="page-shell"><header className="subbar"><Link className="brand" href="/manage/cms"><img className="brand-logo" src="/brand/hilston-park-logo.webp" alt="Hilston Park Tickets" /></Link><div className="cms-header-actions"><span className="status-pill">Staff CMS</span><Link className="account-link" href="/manage/check-in">Check-in ↗</Link></div></header><section className="cms-hero"><div><p className="eyebrow">Events and operations</p><h1>{content.title}</h1><p>{content.copy}</p></div><span className="sandbox-badge">Staff workspace</span></section><div className="cms-app-layout"><nav className="cms-tabs" aria-label="CMS sections"><Link className={section === "events" ? "active" : ""} href="/manage/cms/events">Event editor</Link><Link className={section === "submissions" ? "active" : ""} href="/manage/cms/submissions">Submissions</Link><Link className={section === "media" ? "active" : ""} href="/manage/cms/media">Media</Link><Link className={section === "storefront" ? "active" : ""} href="/manage/cms/storefront">Storefront</Link></nav><section className="cms-content section-page"><div className="cms-panel section-panel"><p className="eyebrow">{content.eyebrow}</p><h2>{content.title}</h2><p className="panel-copy">This section is protected by staff login and is ready for its connected workflow.</p><div className="section-placeholder"><span aria-hidden="true">✦</span><strong>{section === "storefront" ? "Preview is ready" : "Connected workflow ready"}</strong><small>The next data connection will make this section live.</small></div><Link className="primary-button" href="/manage/cms">Back to CMS overview <span aria-hidden="true">→</span></Link></div></section></div><footer className="footer"><Link href="/manage">Dashboard</Link><Link href="/manage/check-in">Staff check-in</Link></footer></main>;
+}
