@@ -7,8 +7,12 @@ export function rateLimitRetryAfterSeconds(nowMs: number, windowMs: number) {
   return Math.max(1, Math.ceil((windowStart + windowMs - nowMs) / 1000));
 }
 
-export function storefrontBookingKey(ip: string, sessionId: string) {
-  return `storefront-booking:${ip}:${sessionId}`;
+export function storefrontBookingIpKey(ip: string) {
+  return `storefront-booking-ip:${ip}`;
+}
+
+export function storefrontBookingSessionKey(sessionId: string) {
+  return `storefront-booking-session:${sessionId}`;
 }
 
 export function checkInKey(staffUserId: string) {
@@ -16,7 +20,8 @@ export function checkInKey(staffUserId: string) {
 }
 
 export function requestIp(request: Request) {
-  return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+  return request.headers.get("x-vercel-forwarded-for")?.trim()
+    || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
     || request.headers.get("x-real-ip")
     || "unknown";
 }

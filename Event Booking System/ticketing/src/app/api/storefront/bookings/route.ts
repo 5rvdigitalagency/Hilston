@@ -5,7 +5,7 @@ import { stagingStorefrontEnabled } from "@/lib/event-publishing";
 import { createTicketLinkToken } from "@/lib/ticket-links";
 import { deliverBookingEmails, emailEnabled } from "@/lib/booking-delivery";
 import { computeDemoEventStatus, createStoreSessionBooking, store } from "@/lib/store";
-import { requestIp, storefrontBookingKey } from "@/lib/rate-limit";
+import { requestIp, storefrontBookingIpKey, storefrontBookingSessionKey } from "@/lib/rate-limit";
 import { checkDatabaseRateLimit } from "@/lib/db";
 
 const bookingSchema = z.object({
@@ -43,7 +43,9 @@ export async function POST(request: Request) {
 
   const parsed = bookingSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Please check the booking details." }, { status: 400 });
-  const rate = await checkDatabaseRateLimit(storefrontBookingKey(requestIp(request), parsed.data.sessionId), 20, 60 * 1000);
+  const ipRate = await checkDatabaseRateLimit(storefrontBookingIpKey(requestIp(request)), 20, 60 * 1000);
+  const sessionRate = await checkDatabaseRateLimit(storefrontBookingSessionKey(parsed.data.sessionId), 10, 60 * 1000);
+  const rate = ipRate.allowed ? sessionRate : ipRate;
   if (!rate.allowed) return NextResponse.json({ error: "Too many booking attempts. Please try again later." }, { status: 429, headers: { "Retry-After": String(rate.retryAfterSeconds) } });
   if (!testPaymentsAllowed()) {
     return NextResponse.json({ error: "Online payments are not configured for live sales." }, { status: 503 });

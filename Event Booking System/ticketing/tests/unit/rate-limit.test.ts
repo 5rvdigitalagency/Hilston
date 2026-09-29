@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { checkInKey, rateLimitRetryAfterSeconds, rateLimitWindowStart, storefrontBookingKey } from "@/lib/rate-limit";
+import { checkInKey, rateLimitRetryAfterSeconds, rateLimitWindowStart, requestIp, storefrontBookingIpKey, storefrontBookingSessionKey } from "@/lib/rate-limit";
 
 describe("rate-limit window maths", () => {
   it("floors a timestamp to its fixed window", () => {
@@ -12,9 +12,15 @@ describe("rate-limit window maths", () => {
 });
 
 describe("rate-limit keys", () => {
+  it("prefers Vercel's forwarded client IP", () => {
+    expect(requestIp(new Request("https://tickets.example", { headers: { "x-vercel-forwarded-for": "203.0.113.8", "x-forwarded-for": "198.51.100.4" } }))).toBe("203.0.113.8");
+    expect(requestIp(new Request("https://tickets.example", { headers: { "x-forwarded-for": "198.51.100.4, 10.0.0.1" } }))).toBe("198.51.100.4");
+  });
+
   it("scopes storefront booking limits by IP and session", () => {
-    expect(storefrontBookingKey("203.0.113.4", "session-a")).toBe("storefront-booking:203.0.113.4:session-a");
-    expect(storefrontBookingKey("203.0.113.4", "session-a")).not.toBe(storefrontBookingKey("203.0.113.4", "session-b"));
+    expect(storefrontBookingIpKey("203.0.113.4")).toBe("storefront-booking-ip:203.0.113.4");
+    expect(storefrontBookingIpKey("203.0.113.4")).toBe(storefrontBookingIpKey("203.0.113.4"));
+    expect(storefrontBookingSessionKey("session-a")).not.toBe(storefrontBookingSessionKey("session-b"));
   });
 
   it("scopes check-in limits by staff identity rather than IP", () => {
