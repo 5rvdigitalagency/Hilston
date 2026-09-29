@@ -168,24 +168,6 @@ export default function CmsPage() {
       .catch(() => setCategoriesError(true));
   }, []);
 
-  useEffect(() => {
-    fetch("/api/auth/session", { cache: "no-store" })
-      .then((response) => response.json())
-      .then((result) => {
-        if (!result.authenticated) return setAccess("denied");
-        setAccess("allowed");
-        if (result.mediaMaxMb) setMediaMaxMb(result.mediaMaxMb);
-        loadEvents().then((loadedEvents) => {
-          const edit = initialPendingEdit();
-          if (edit) window.dispatchEvent(new CustomEvent("ticketing:open-event-edit", { detail: { edit, events: loadedEvents } }));
-        });
-        loadBookings();
-        loadCategories();
-        return undefined;
-      })
-      .catch(() => setAccess("denied"));
-  }, [loadEvents, loadBookings, loadCategories]);
-
   const categoryOptions = useMemo(() => {
     if (form.categoryId && !categories.some((category) => category.id === form.categoryId)) {
       const label = editingEvent?.categoryId === form.categoryId ? editingEvent.category : "Unknown category";
@@ -502,17 +484,23 @@ export default function CmsPage() {
   }
 
   useEffect(() => {
-    function openEventEdit(event: Event) {
-      const detail = (event as CustomEvent<{ edit: { id: string; step: number }; events: EventRecord[] }>).detail;
-      const match = detail.events.find((candidate) => candidate.id === detail.edit.id);
-      if (match) {
-        startEditing(match).then(() => setWizardStepAndMark(detail.edit.step));
-        window.history.replaceState(null, "", "/manage/cms");
-      }
-    }
-    window.addEventListener("ticketing:open-event-edit", openEventEdit);
-    return () => window.removeEventListener("ticketing:open-event-edit", openEventEdit);
-  }, []);
+    fetch("/api/auth/session", { cache: "no-store" })
+      .then((response) => response.json())
+      .then((result) => {
+        if (!result.authenticated) return setAccess("denied");
+        setAccess("allowed");
+        if (result.mediaMaxMb) setMediaMaxMb(result.mediaMaxMb);
+        loadEvents().then((loadedEvents) => {
+          const edit = initialPendingEdit();
+          const match = edit && loadedEvents.find((event) => event.id === edit.id);
+          if (match && edit) startEditing(match).then(() => setWizardStepAndMark(edit.step));
+        });
+        loadBookings();
+        loadCategories();
+        return undefined;
+      })
+      .catch(() => setAccess("denied"));
+  }, [loadEvents, loadBookings, loadCategories]);
 
   async function setPublication(event: EventRecord, published: boolean) {
     const prompt = published
