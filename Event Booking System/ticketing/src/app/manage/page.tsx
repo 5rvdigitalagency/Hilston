@@ -12,7 +12,7 @@ type DashboardReport = {
   activity: { action: string; createdAt: string }[];
 };
 type DashboardEvent = { id: string; title: string; startsAt: string; venue: string; capacity: number; attendeeCount?: number; childCount?: number; status?: string; published: boolean; archived?: boolean; createdAt: string };
-type DashboardBooking = { bookingId: string; eventId: string; eventTitle: string; startsAt: string; createdAt: string; name: string; status: string; paid: boolean; totalPence: number; ticketCount: number };
+type DashboardBooking = { bookingId: string; eventId: string; eventTitle: string; startsAt: string; createdAt: string; name: string; status: string; paid: boolean; totalPence: number; totalGuests: number };
 type Period = "month" | "30d" | "all";
 
 const shortDate = (value: string) => new Date(value).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
@@ -139,10 +139,10 @@ export default function ManagePage() {
   const prevPeriodPaidBookings = prevPeriodBookings.filter((booking) => deriveBookingStatus(booking) === "paid");
 
   const periodTotalEvents = periodEvents.length;
-  const periodTicketsSold = periodPaidBookings.reduce((total, booking) => total + booking.ticketCount, 0);
+  const periodTicketsSold = periodPaidBookings.reduce((total, booking) => total + booking.totalGuests, 0);
   const periodTotalBookings = periodBookings.length;
   const periodRevenue = periodPaidBookings.reduce((total, booking) => total + booking.totalPence, 0);
-  const prevTicketsSold = prevPeriodPaidBookings.reduce((total, booking) => total + booking.ticketCount, 0);
+  const prevTicketsSold = prevPeriodPaidBookings.reduce((total, booking) => total + booking.totalGuests, 0);
   const prevRevenue = prevPeriodPaidBookings.reduce((total, booking) => total + booking.totalPence, 0);
 
   const metricDeltas = {

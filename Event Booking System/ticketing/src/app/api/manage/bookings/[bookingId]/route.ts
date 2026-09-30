@@ -19,10 +19,10 @@ export async function PATCH(request: Request, context: { params: Promise<{ booki
     const refundNeeded = summary.provider !== null && summary.provider !== "mock";
     return NextResponse.json({
       ok: true,
-      ticketsReleased: summary.tickets,
+      guestsReleased: summary.guests,
       message: refundNeeded
-        ? `Booking cancelled and ${summary.tickets} ${summary.tickets === 1 ? "place" : "places"} released. Refund the payment in the ${summary.provider} dashboard; refunds are not automatic yet.`
-        : `Booking cancelled and ${summary.tickets} ${summary.tickets === 1 ? "place" : "places"} released.`,
+        ? `Booking cancelled and ${summary.guests} ${summary.guests === 1 ? "place" : "places"} released. Refund the payment in the ${summary.provider} dashboard; refunds are not automatic yet.`
+        : `Booking cancelled and ${summary.guests} ${summary.guests === 1 ? "place" : "places"} released.`,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "";

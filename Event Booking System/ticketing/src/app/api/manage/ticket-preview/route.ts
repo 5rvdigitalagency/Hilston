@@ -18,7 +18,9 @@ export async function GET() {
     startsAt: new Date().toISOString(),
     venue: "Sample venue",
     guestName: "Sample guest",
-    ticketCodes: [`${org.ticketPrefix}-SAMPLE123456`],
+    ticketCode: `${org.ticketPrefix}-SAMPLE1`,
+    totalGuests: 2,
+    bookingReference: "BK-SAMPL",
     preview: true,
   });
 

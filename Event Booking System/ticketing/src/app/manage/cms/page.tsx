@@ -27,7 +27,7 @@ type EventRecord = {
   childCount?: number;
 };
 
-type BookingSummary = { bookingId: string; eventId: string; paid: boolean; testPayment?: boolean; status: string; ticketCount: number; totalPence: number };
+type BookingSummary = { bookingId: string; eventId: string; paid: boolean; testPayment?: boolean; status: string; totalGuests: number; totalPence: number };
 type SessionRow = { date: string; startTime: string; endTime: string; capacity: string };
 type TicketRow = { name: string; price: string; maxPerOrder: string };
 
@@ -181,19 +181,19 @@ export default function CmsPage() {
     drafts: events.filter((event) => computeStatusValue(event) === "draft").length,
     archived: events.filter((event) => computeStatusValue(event) === "archived").length,
     bookings: bookings.length,
-    ticketsSold: bookings.filter((booking) => booking.paid).reduce((total, booking) => total + booking.ticketCount, 0),
+    ticketsSold: bookings.filter((booking) => booking.paid).reduce((total, booking) => total + booking.totalGuests, 0),
     revenuePence: bookings.filter((booking) => booking.paid).reduce((total, booking) => total + booking.totalPence, 0),
   }), [events, bookings]);
 
   const bookingTotalsByEvent = useMemo(() => bookings.reduce((totals, booking) => {
     const current = totals.get(booking.eventId) || { tickets: 0, testTickets: 0, revenuePence: 0, activeTickets: 0, bookings: 0 };
     current.bookings += 1;
-    if (booking.status !== "cancelled") current.activeTickets += booking.ticketCount;
+    if (booking.status !== "cancelled") current.activeTickets += booking.totalGuests;
     if (booking.paid) {
-      current.tickets += booking.ticketCount;
+      current.tickets += booking.totalGuests;
       current.revenuePence += booking.totalPence;
     } else if (booking.testPayment && booking.status !== "cancelled") {
-      current.testTickets += booking.ticketCount;
+      current.testTickets += booking.totalGuests;
     }
     totals.set(booking.eventId, current);
     return totals;

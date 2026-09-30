@@ -35,16 +35,16 @@ export default async function BookingConfirmationPage({ params }: { params: Prom
         <dl className="booking-facts">
           <div><dt>When</dt><dd>{formatWhen(booking.startsAt)}</dd></div>
           <div><dt>Where</dt><dd>{booking.venue}</dd></div>
-          <div><dt>Tickets</dt><dd>{booking.ticketCodes.length}</dd></div>
+          <div><dt>Booking</dt><dd>1 Booking &middot; {booking.totalGuests} guest{booking.totalGuests === 1 ? "" : "s"} &middot; 1 QR ticket</dd></div>
         </dl>
         <div className="confirmation-actions">
-          <Link className="primary-button" href={`/tickets/${token}`}>View tickets</Link>
+          <Link className="primary-button" href={`/tickets/${token}`}>View / download ticket</Link>
           <Link className="secondary-link" href="/events">Back to events</Link>
         </div>
       </div>
       <aside className="confirmation-card">
         <p className="eyebrow">Booking reference</p>
-        <h2>{booking.bookingId.slice(0, 8).toUpperCase()}</h2>
+        <h2>{booking.bookingReference || booking.bookingId.slice(0, 8).toUpperCase()}</h2>
         <p>A ticket link is ready for this preview booking. Confirmation email delivery depends on the staging email configuration.</p>
         <p>{booking.email}</p>
       </aside>

@@ -52,7 +52,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    let booking: { bookingId: string; attendeeId: string; eventTitle: string; totalPence: number; tickets: { id: string; ticketCode: string }[] };
+    let booking: { bookingId: string; attendeeId: string; eventTitle: string; totalPence: number; ticketCode: string; totalGuests: number };
     if (databaseEnabled) {
       const event = (await listEvents()).find((item) => item.id === parsed.data.eventId && item.status === "published");
       if (!event) return NextResponse.json({ error: "This event is no longer available." }, { status: 404 });

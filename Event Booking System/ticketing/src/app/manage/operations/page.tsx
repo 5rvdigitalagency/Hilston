@@ -42,7 +42,7 @@ function describeActivity(item: { action: string; metadata?: Record<string, unkn
   }
   if (item.action === "booking.cancelled") {
     const customer = typeof meta.customer === "string" && meta.customer ? ` for ${meta.customer}` : "";
-    const count = typeof meta.tickets === "number" ? ` (${meta.tickets} ${meta.tickets === 1 ? "ticket" : "tickets"} released)` : "";
+    const count = typeof meta.guests === "number" ? ` (${meta.guests} ${meta.guests === 1 ? "guest" : "guests"} released)` : "";
     return `${who} cancelled a booking${customer}${title ? ` on${title}` : ""}${count}`;
   }
   if (item.action === "booking.confirmed" && meta.paymentProvider === "mock") return `${who} created a test booking (no payment)`;

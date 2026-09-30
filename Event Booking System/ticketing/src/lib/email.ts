@@ -70,22 +70,23 @@ function escapeHtml(value: string) {
   return value.replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character] as string));
 }
 
-export function bookingConfirmationHtml(input: { name: string; eventTitle: string; startsAt: string; venue: string; ticketCodes: string[]; ticketUrl?: string }) {
+export function bookingConfirmationHtml(input: { name: string; eventTitle: string; startsAt: string; venue: string; ticketCode: string; totalGuests: number; bookingReference?: string; ticketUrl?: string }) {
   const when = new Date(input.startsAt).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short", timeZone: "Europe/London" });
   const base = appBaseUrl();
-  const tickets = input.ticketCodes.map((code) => `
+  const guestWord = input.totalGuests === 1 ? "guest" : "guests";
+  const ticket = `
     <table role="presentation" cellpadding="0" cellspacing="0" style="border:1px solid #e2ded4;border-radius:12px;margin:0 0 16px;padding:18px;width:100%">
       <tr>
         <td style="vertical-align:middle;width:150px">
-          <img src="${base}/api/public/tickets/${encodeURIComponent(code)}/qr" width="130" height="130" alt="QR code for ticket ${escapeHtml(code)}" style="display:block;border:0" />
+          <img src="${base}/api/public/tickets/${encodeURIComponent(input.ticketCode)}/qr" width="130" height="130" alt="QR code for ticket ${escapeHtml(input.ticketCode)}" style="display:block;border:0" />
         </td>
         <td style="vertical-align:middle;font-family:Helvetica,Arial,sans-serif">
           <p style="margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7b7566">Ticket</p>
-          <p style="margin:0;font-size:20px;font-weight:bold;color:#36505D">${escapeHtml(code)}</p>
-          <p style="margin:8px 0 0;font-size:13px;color:#5c5648">Show this QR code at the entrance. Each ticket admits one person and can be scanned once.</p>
+          <p style="margin:0;font-size:20px;font-weight:bold;color:#36505D">${escapeHtml(input.ticketCode)}</p>
+          <p style="margin:8px 0 0;font-size:13px;color:#5c5648">Show this QR code at the entrance. It covers your whole booking of ${input.totalGuests} ${guestWord}.</p>
         </td>
       </tr>
-    </table>`).join("");
+    </table>`;
 
   return `<!DOCTYPE html><html><body style="margin:0;background:#f6f4ef;padding:24px">
     <table role="presentation" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;margin:0 auto;max-width:640px;padding:32px;width:100%">
@@ -93,38 +94,38 @@ export function bookingConfirmationHtml(input: { name: string; eventTitle: strin
         <p style="margin:0 0 6px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#b9a36b">Hilston Park</p>
         <h1 style="margin:0 0 18px;font-size:26px;color:#36505D">Your booking is confirmed</h1>
         <p style="margin:0 0 8px;font-size:15px">Hello ${escapeHtml(input.name)},</p>
-        <p style="margin:0 0 20px;font-size:15px;line-height:1.6">Thank you for booking <strong>${escapeHtml(input.eventTitle)}</strong>. Your tickets are below.</p>
+        <p style="margin:0 0 20px;font-size:15px;line-height:1.6">Thank you for booking <strong>${escapeHtml(input.eventTitle)}</strong>. Your ticket is below.</p>
         <table role="presentation" cellpadding="0" cellspacing="0" style="background:#f6f4ef;border-radius:12px;margin:0 0 24px;padding:16px;width:100%">
           <tr><td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;color:#36505D">
             <p style="margin:0 0 6px"><strong>When:</strong> ${escapeHtml(when)}</p>
             <p style="margin:0 0 6px"><strong>Where:</strong> ${escapeHtml(input.venue)}</p>
-            <p style="margin:0"><strong>Tickets:</strong> ${input.ticketCodes.length}</p>
+            <p style="margin:0"><strong>Booking:</strong> 1 Booking &middot; ${input.totalGuests} ${guestWord} &middot; 1 QR ticket</p>
           </td></tr>
         </table>
-        ${tickets}
-        ${input.ticketUrl ? `<p style="margin:20px 0 0;font-size:14px"><a href="${input.ticketUrl}" style="color:#3f8175">View your tickets online</a></p>` : ""}
-        <p style="margin:20px 0 0;font-size:13px;color:#5c5648;line-height:1.6">If the QR codes do not display, the same codes are attached to this email as images.</p>
+        ${ticket}
+        ${input.ticketUrl ? `<p style="margin:20px 0 0"><a href="${input.ticketUrl}" style="background:#3f8175;border-radius:6px;color:#ffffff;display:inline-block;font-family:Helvetica,Arial,sans-serif;font-size:14px;padding:12px 20px;text-decoration:none">View / download ticket</a></p>` : ""}
+        <p style="margin:20px 0 0;font-size:13px;color:#5c5648;line-height:1.6">If the QR code does not display, the same code is attached to this email as an image.</p>
         <p style="margin:16px 0 0;font-size:13px;color:#5c5648">Hilston Park, Monmouthshire</p>
       </td></tr>
     </table>
   </body></html>`;
 }
 
-export async function sendBookingConfirmation(input: { name: string; email: string; eventTitle: string; startsAt: string; venue: string; ticketCodes: string[]; ticketUrl?: string; pdf?: Buffer }) {
-  const attachments = await Promise.all(input.ticketCodes.map(async (code) => ({ filename: `ticket-${code}.png`, content: await ticketQrPngBase64(code) })));
-  if (input.pdf) attachments.unshift({ filename: "tickets.pdf", content: input.pdf.toString("base64") });
+export async function sendBookingConfirmation(input: { name: string; email: string; eventTitle: string; startsAt: string; venue: string; ticketCode: string; totalGuests: number; bookingReference?: string; ticketUrl?: string; pdf?: Buffer }) {
+  const attachments = [{ filename: `ticket-${input.ticketCode}.png`, content: await ticketQrPngBase64(input.ticketCode) }];
+  if (input.pdf) attachments.unshift({ filename: "ticket.pdf", content: input.pdf.toString("base64") });
   return sendEmail({
     to: input.email,
-    subject: `Your tickets for ${input.eventTitle}`,
+    subject: `Your ticket for ${input.eventTitle}`,
     html: bookingConfirmationHtml(input),
     attachments,
   });
 }
 
-export async function sendStaffBookingAlert(input: { to: string; name: string; email: string; eventTitle: string; ticketCount: number }) {
+export async function sendStaffBookingAlert(input: { to: string; name: string; email: string; eventTitle: string; totalGuests: number }) {
   return sendEmail({
     to: input.to,
     subject: `New booking: ${input.eventTitle}`,
-    html: `<p style="font-family:Helvetica,Arial,sans-serif">${escapeHtml(input.name)} (${escapeHtml(input.email)}) booked ${input.ticketCount} ticket(s) for <strong>${escapeHtml(input.eventTitle)}</strong>.</p>`,
+    html: `<p style="font-family:Helvetica,Arial,sans-serif">${escapeHtml(input.name)} (${escapeHtml(input.email)}) booked ${input.totalGuests} guest${input.totalGuests === 1 ? "" : "s"} for <strong>${escapeHtml(input.eventTitle)}</strong>.</p>`,
   });
 }

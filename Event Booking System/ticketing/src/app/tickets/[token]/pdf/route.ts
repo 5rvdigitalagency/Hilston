@@ -12,20 +12,23 @@ export async function GET(_request: Request, context: { params: Promise<{ token:
 
   try {
     const booking = await getBookingForEmail(bookingId);
+    if (!booking.ticketCode) return NextResponse.json({ error: "Tickets could not be produced." }, { status: 404 });
     const pdf = await buildTicketPdf({
       org: await orgSettings(),
       eventTitle: booking.eventTitle,
       startsAt: booking.startsAt,
       venue: booking.venue,
       guestName: booking.name,
-      ticketCodes: booking.ticketCodes,
+      ticketCode: booking.ticketCode,
+      totalGuests: booking.totalGuests,
+      bookingReference: booking.bookingReference || undefined,
     });
     return new NextResponse(new Uint8Array(pdf), {
       headers: {
         "Content-Type": "application/pdf",
         // FR-PR-04: ticket documents must never sit in a shared cache.
         "Cache-Control": "private, no-store",
-        "Content-Disposition": `attachment; filename="tickets-${bookingId.slice(0, 8)}.pdf"`,
+        "Content-Disposition": `attachment; filename="ticket-${bookingId.slice(0, 8)}.pdf"`,
       },
     });
   } catch {

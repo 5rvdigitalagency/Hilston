@@ -23,26 +23,27 @@ async function main() {
       version text primary key,
       applied_at timestamptz not null default now()
     )`);
+    // "Up" files are plain `NNNN_name.sql` (no `.up` infix); "down" files are `NNNN_name.down.sql`.
     const files = (await readdir(migrationsDir))
-      .filter((file) => file.endsWith(`.${direction}.sql`))
+      .filter((file) => direction === "up" ? file.endsWith(".sql") && !file.endsWith(".down.sql") : file.endsWith(".down.sql"))
       .sort();
     if (baseline) {
-      for (const file of files.filter((candidate) => candidate.endsWith(".up.sql"))) {
-        const version = basename(file, ".up.sql");
+      for (const file of files) {
+        const version = basename(file, ".sql");
         await client.query("insert into schema_migrations (version) values ($1) on conflict (version) do nothing", [version]);
       }
       await client.query("commit");
-      console.log(`Baselined ${files.filter((file) => file.endsWith(".up.sql")).length} migration(s) without running SQL.`);
+      console.log(`Baselined ${files.length} migration(s) without running SQL.`);
       return;
     }
     const applied = await client.query("select version from schema_migrations");
     const appliedVersions = new Set(applied.rows.map((row) => row.version as string));
     const pending = direction === "up"
-      ? files.filter((file) => !appliedVersions.has(basename(file, ".up.sql")))
+      ? files.filter((file) => !appliedVersions.has(basename(file, ".sql")))
       : files.filter((file) => appliedVersions.has(basename(file, ".down.sql"))).reverse();
 
     for (const file of pending) {
-      const version = direction === "up" ? basename(file, ".up.sql") : basename(file, ".down.sql");
+      const version = direction === "up" ? basename(file, ".sql") : basename(file, ".down.sql");
       console.log(`${direction === "up" ? "Applying" : "Reverting"} ${version}`);
       await client.query(await readFile(join(migrationsDir, file), "utf8"));
       if (direction === "up") await client.query("insert into schema_migrations (version) values ($1)", [version]);

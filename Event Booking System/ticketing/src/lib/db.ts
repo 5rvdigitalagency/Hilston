@@ -1,6 +1,7 @@
 import { Pool } from "pg";
 import type { AttendeeRecord, EventRecord } from "./store";
 import { getOrgSettings } from "./settings";
+import { allowPartialCheckIn, generateBookingReference, generateBookingTicketCode, resolveCheckInAdmission } from "./check-in-logic";
 
 const pool = process.env.DATABASE_URL ? new Pool({ connectionString: process.env.DATABASE_URL, max: 5, ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined }) : null;
 const organizationId = process.env.ORGANIZATION_ID;
@@ -388,33 +389,29 @@ export async function createMockBooking(input: { eventId: string; name: string; 
     }
 
     let totalPence = 0;
-    const tickets: { id: string; ticketCode: string }[] = [];
-    const { ticketPrefix } = await getOrgSettings(pool, organizationId);
 
     for (const itemPlan of itemPlans) {
-      const insertedItem = await client.query(
-        "insert into booking_items (booking_id, ticket_type_id, quantity, unit_price_pence) values ($1, $2, $3, $4) returning id",
+      await client.query(
+        "insert into booking_items (booking_id, ticket_type_id, quantity, unit_price_pence) values ($1, $2, $3, $4)",
         [bookingId, itemPlan.ticketTypeId, itemPlan.quantity, itemPlan.unitPricePence],
       );
       totalPence += itemPlan.unitPricePence * itemPlan.quantity;
-
-      for (let index = 0; index < itemPlan.quantity; index += 1) {
-        const ticketCode = `${ticketPrefix}-${crypto.randomUUID().replace(/-/g, "").slice(0, 12).toUpperCase()}`;
-        const ticket = await client.query(
-          "insert into tickets (booking_id, booking_item_id, event_id, ticket_code, status) values ($1, $2, $3, $4, 'issued') returning id, ticket_code",
-          [bookingId, insertedItem.rows[0].id, input.eventId, ticketCode],
-        );
-        tickets.push({ id: ticket.rows[0].id as string, ticketCode: ticket.rows[0].ticket_code as string });
-      }
     }
 
-    await client.query("update bookings set total_pence = $1 where id = $2", [totalPence, bookingId]);
+    // Phase 10.1: one booking = one ticket code (HP-XXXXXX) + one QR code, guest count tracked
+    // on booking_tickets rather than one legacy `tickets` row per guest.
+    const ticketCode = generateBookingTicketCode();
+    await client.query(
+      "insert into booking_tickets (booking_id, ticket_code, total_guests) values ($1, $2, $3)",
+      [bookingId, ticketCode, totalGuests],
+    );
+    await client.query("update bookings set booking_reference = $1, total_pence = $2 where id = $3", [generateBookingReference(), totalPence, bookingId]);
     await client.query("insert into payments (booking_id, provider, stripe_mode, payment_intent_id, amount_pence, status) values ($1, 'mock', 'test', $2, $3, 'succeeded')", [bookingId, `mock_${crypto.randomUUID()}`, totalPence]);
     await client.query("insert into notification_dispatches (organization_id, dispatch_key, template_key, recipient, status) values ($1, $2, 'booking_confirmation', $3, 'pending')", [organizationId, `booking:${bookingId}:guest`, input.email]);
     if (input.staffEmail) await client.query("insert into notification_dispatches (organization_id, dispatch_key, template_key, recipient, status) values ($1, $2, 'new_booking_staff', $3, 'pending')", [organizationId, `booking:${bookingId}:staff`, input.staffEmail]);
     await client.query("commit");
-    await writeAuditLog("booking.confirmed", { bookingId, eventId: input.eventId, ticketCount: tickets.length, paymentProvider: "mock" });
-    return { bookingId, attendeeId: attendee.rows[0].id as string, eventTitle: event.rows[0].title as string, tickets };
+    await writeAuditLog("booking.confirmed", { bookingId, eventId: input.eventId, guestCount: totalGuests, paymentProvider: "mock" });
+    return { bookingId, attendeeId: attendee.rows[0].id as string, eventTitle: event.rows[0].title as string, ticketCode, totalGuests };
   } catch (error) { await client.query("rollback"); throw error; } finally { client.release(); }
 }
 
@@ -518,35 +515,31 @@ export async function createSessionBooking(input: {
     );
 
     let totalPence = 0;
-    const tickets: { id: string; ticketCode: string }[] = [];
-    const { ticketPrefix } = await getOrgSettings(pool, organizationId);
 
     for (const item of input.items) {
       const ticketType = ticketTypeMap.get(item.ticketTypeId)!;
       const unitPricePence = Number(ticketType.price_pence);
-      const insertedItem = await client.query(
-        "insert into booking_items (booking_id, ticket_type_id, quantity, unit_price_pence) values ($1, $2, $3, $4) returning id",
+      await client.query(
+        "insert into booking_items (booking_id, ticket_type_id, quantity, unit_price_pence) values ($1, $2, $3, $4)",
         [bookingId, item.ticketTypeId, item.quantity, unitPricePence],
       );
       totalPence += unitPricePence * item.quantity;
-
-      for (let index = 0; index < item.quantity; index += 1) {
-        const ticketCode = `${ticketPrefix}-${crypto.randomUUID().replace(/-/g, "").slice(0, 12).toUpperCase()}`;
-        const ticket = await client.query(
-          "insert into tickets (booking_id, booking_item_id, event_id, ticket_code, status) values ($1, $2, $3, $4, 'issued') returning id, ticket_code",
-          [bookingId, insertedItem.rows[0].id, input.eventId, ticketCode],
-        );
-        tickets.push({ id: ticket.rows[0].id as string, ticketCode: ticket.rows[0].ticket_code as string });
-      }
     }
 
-    await client.query("update bookings set total_pence = $1 where id = $2", [totalPence, bookingId]);
+    // Phase 10.1: one booking = one ticket code (HP-XXXXXX) + one QR code, guest count tracked
+    // on booking_tickets rather than one legacy `tickets` row per guest.
+    const ticketCode = generateBookingTicketCode();
+    await client.query(
+      "insert into booking_tickets (booking_id, ticket_code, total_guests) values ($1, $2, $3)",
+      [bookingId, ticketCode, totalQuantity],
+    );
+    await client.query("update bookings set booking_reference = $1, total_pence = $2 where id = $3", [generateBookingReference(), totalPence, bookingId]);
     await client.query("insert into payments (booking_id, provider, stripe_mode, payment_intent_id, amount_pence, status) values ($1, 'mock', 'test', $2, $3, 'succeeded')", [bookingId, `mock_${crypto.randomUUID()}`, totalPence]);
     await client.query("insert into notification_dispatches (organization_id, dispatch_key, template_key, recipient, status) values ($1, $2, 'booking_confirmation', $3, 'pending')", [organizationId, `booking:${bookingId}:guest`, input.email]);
     if (input.staffEmail) await client.query("insert into notification_dispatches (organization_id, dispatch_key, template_key, recipient, status) values ($1, $2, 'new_booking_staff', $3, 'pending')", [organizationId, `booking:${bookingId}:staff`, input.staffEmail]);
     await client.query("commit");
-    await writeAuditLog("booking.confirmed", { bookingId, eventId: input.eventId, ticketCount: tickets.length, paymentProvider: "mock" });
-    return { bookingId, attendeeId: attendee.rows[0].id as string, eventTitle: session.rows[0].title as string, totalPence, tickets };
+    await writeAuditLog("booking.confirmed", { bookingId, eventId: input.eventId, guestCount: totalQuantity, paymentProvider: "mock" });
+    return { bookingId, attendeeId: attendee.rows[0].id as string, eventTitle: session.rows[0].title as string, totalPence, ticketCode, totalGuests: totalQuantity };
   } catch (error) { await client.query("rollback"); throw error; } finally { client.release(); }
 }
 
@@ -581,7 +574,7 @@ export async function listEventMedia(eventId: string) {
 export async function cancelBooking(bookingId: string, actor?: AuditActor) {
   if (!pool || !organizationId) throw new Error("Database is not configured");
   const client = await pool.connect();
-  let summary: { title: string; email: string; tickets: number; provider: string | null };
+  let summary: { title: string; email: string; guests: number; provider: string | null };
   try {
     await client.query("begin");
     const booking = await client.query(
@@ -590,79 +583,108 @@ export async function cancelBooking(bookingId: string, actor?: AuditActor) {
     );
     if (booking.rowCount === 0) throw new Error("booking_not_found");
     if (booking.rows[0].status === "cancelled") throw new Error("booking_already_cancelled");
-    const used = await client.query("select count(*)::int as count from tickets where booking_id = $1 and (status = 'checked_in' or exists (select 1 from check_ins where check_ins.ticket_id = tickets.id))", [bookingId]);
-    if (used.rows[0].count > 0) throw new Error("booking_checked_in");
+    const used = await client.query("select coalesce(checked_in_count, 0)::int as count from booking_tickets where booking_id = $1", [bookingId]);
+    if ((used.rows[0]?.count ?? 0) > 0) throw new Error("booking_checked_in");
     await client.query("update bookings set status = 'cancelled' where id = $1", [bookingId]);
-    const voided = await client.query("update tickets set status = 'cancelled' where booking_id = $1 and status = 'issued'", [bookingId]);
+    const guests = await client.query("select coalesce(total_guests, 0)::int as guests from booking_tickets where booking_id = $1", [bookingId]);
+    await client.query("update tickets set status = 'cancelled' where booking_id = $1 and status = 'issued'", [bookingId]);
     const payment = await client.query("select provider from payments where booking_id = $1 and status = 'succeeded' order by created_at desc limit 1", [bookingId]);
     await client.query("commit");
-    summary = { title: booking.rows[0].title as string, email: (booking.rows[0].buyer_email as string) || "", tickets: voided.rowCount ?? 0, provider: (payment.rows[0]?.provider as string | undefined) ?? null };
+    summary = { title: booking.rows[0].title as string, email: (booking.rows[0].buyer_email as string) || "", guests: guests.rows[0]?.guests ?? 0, provider: (payment.rows[0]?.provider as string | undefined) ?? null };
   } catch (error) { await client.query("rollback"); throw error; } finally { client.release(); }
-  await writeAuditLog("booking.cancelled", { bookingId, title: summary.title, customer: summary.email, tickets: summary.tickets, paymentProvider: summary.provider, ...auditActor(actor).metadata }, auditActor(actor).context);
+  await writeAuditLog("booking.cancelled", { bookingId, title: summary.title, customer: summary.email, guests: summary.guests, paymentProvider: summary.provider, ...auditActor(actor).metadata }, auditActor(actor).context);
   return summary;
 }
 
-export async function checkInTicket(ticketCode: string, staffUserId: string, ip: string | null, userAgent: string | null) {
+export async function checkInBookingTicket(ticketCode: string, guests: number | undefined, staffUserId: string, ip: string | null, userAgent: string | null) {
   if (!pool || !organizationId) throw new Error("Database is not configured");
-  // check_in_ticket() predates booking cancellation, so cancelled tickets are rejected here.
-  const existing = await pool.query("select status from tickets where ticket_code = upper(trim($1))", [ticketCode]);
-  if (existing.rows[0]?.status === "cancelled") throw new Error("ticket_cancelled");
-  const result = await pool.query("select * from check_in_ticket($1, $2, $3, $4)", [ticketCode, staffUserId, ip, userAgent]);
+  const existing = await pool.query(
+    `select booking_tickets.total_guests, booking_tickets.checked_in_count, bookings.status
+       from booking_tickets
+       join bookings on bookings.id = booking_tickets.booking_id
+      where booking_tickets.ticket_code = upper(trim($1)) and bookings.organization_id = $2`,
+    [ticketCode, organizationId],
+  );
+  if (!existing.rowCount) throw new Error("ticket_not_found");
+  if (existing.rows[0].status === "cancelled") throw new Error("ticket_cancelled");
+  const admission = resolveCheckInAdmission(
+    { totalGuests: Number(existing.rows[0].total_guests), checkedInCount: Number(existing.rows[0].checked_in_count) },
+    guests,
+    allowPartialCheckIn(),
+  );
+  if (!admission.ok) throw new Error(admission.error);
+  const result = await pool.query("select * from check_in_booking($1, $2, $3, $4, $5)", [ticketCode, admission.guestsToAdmit, staffUserId, ip, userAgent]);
+  await writeAuditLog("checkin.recorded", { ticketCode: ticketCode.toUpperCase(), guestsCheckedIn: admission.guestsToAdmit }, { userId: staffUserId, ip, userAgent });
   return result.rows[0];
 }
 
-/** Scan history for a ticket, so staff can see when a duplicate was first used. */
-export async function getTicketScanDetails(ticketCode: string) {
+/** Scan history + guest breakdown for a booking ticket, so staff can review it before admitting guests. */
+export async function getBookingScanDetails(ticketCode: string) {
   if (!pool || !organizationId) return null;
   const result = await pool.query(
-        `select tickets.ticket_code, tickets.status, events.title as event_title,
-          es.id as session_id, es.starts_at as session_starts_at, es.ends_at as session_ends_at,
+    `select booking_tickets.ticket_code, booking_tickets.total_guests, booking_tickets.checked_in_count,
+            bookings.id as booking_id, bookings.status as booking_status, bookings.booking_reference,
             bookings.buyer_name, bookings.buyer_email,
-            check_ins.checked_in_at, users.email as scanned_by
-     from tickets
-     join events on events.id = tickets.event_id
-         left join booking_items on booking_items.id = tickets.booking_item_id
-         left join ticket_types on ticket_types.id = booking_items.ticket_type_id
-         left join event_sessions es on es.id = ticket_types.event_session_id
-     left join bookings on bookings.id = tickets.booking_id
-     left join check_ins on check_ins.ticket_id = tickets.id
-     left join users on users.id = check_ins.staff_user_id
-     where upper(trim(tickets.ticket_code)) = upper(trim($1)) and events.organization_id = $2
-     order by check_ins.checked_in_at asc limit 1`,
+            events.title as event_title,
+            (select min(es.starts_at) from booking_items bi join ticket_types tt on tt.id = bi.ticket_type_id join event_sessions es on es.id = tt.event_session_id where bi.booking_id = bookings.id) as session_starts_at,
+            (select min(es.ends_at) from booking_items bi join ticket_types tt on tt.id = bi.ticket_type_id join event_sessions es on es.id = tt.event_session_id where bi.booking_id = bookings.id) as session_ends_at,
+            (select tt.event_session_id from booking_items bi join ticket_types tt on tt.id = bi.ticket_type_id where bi.booking_id = bookings.id limit 1) as session_id,
+            coalesce(bool_or(payments.status = 'succeeded' and payments.provider <> 'mock'), false) as paid,
+            coalesce(bool_or(payments.status = 'succeeded' and payments.provider = 'mock'), false) as test_payment,
+            (select coalesce(json_agg(json_build_object('name', ticket_types.name, 'quantity', booking_items.quantity) order by ticket_types.name), '[]')
+               from booking_items join ticket_types on ticket_types.id = booking_items.ticket_type_id
+              where booking_items.booking_id = bookings.id) as guest_breakdown,
+            (select max(checked_in_at) from booking_check_ins where booking_check_ins.booking_ticket_id = (select id from booking_tickets where ticket_code = upper(trim($1)))) as last_checked_in_at,
+            (select users.email from booking_check_ins join users on users.id = booking_check_ins.staff_user_id where booking_check_ins.booking_ticket_id = (select id from booking_tickets where ticket_code = upper(trim($1))) order by booking_check_ins.checked_in_at desc limit 1) as scanned_by
+       from booking_tickets
+       join bookings on bookings.id = booking_tickets.booking_id
+       join events on events.id = bookings.event_id
+       left join payments on payments.booking_id = bookings.id
+      where booking_tickets.ticket_code = upper(trim($1)) and bookings.organization_id = $2
+      group by booking_tickets.ticket_code, booking_tickets.total_guests, booking_tickets.checked_in_count,
+               bookings.id, bookings.status, bookings.booking_reference, bookings.buyer_name, bookings.buyer_email, events.title`,
     [ticketCode, organizationId],
   );
   if (!result.rowCount) return null;
   const row = result.rows[0];
   return {
     ticketCode: row.ticket_code as string,
-    status: row.status as string,
+    bookingReference: (row.booking_reference as string) || null,
+    bookingStatus: row.booking_status as string,
     eventTitle: row.event_title as string,
     sessionId: (row.session_id as string) || null,
     sessionStartsAt: row.session_starts_at ? new Date(row.session_starts_at).toISOString() : null,
     sessionEndsAt: row.session_ends_at ? new Date(row.session_ends_at).toISOString() : null,
-    guestName: (row.buyer_name as string) || "",
-    guestEmail: (row.buyer_email as string) || "",
-    checkedInAt: row.checked_in_at ? new Date(row.checked_in_at).toISOString() : null,
+    buyerName: (row.buyer_name as string) || "",
+    buyerEmail: (row.buyer_email as string) || "",
+    guestBreakdown: (row.guest_breakdown as { name: string; quantity: number }[]) || [],
+    totalGuests: Number(row.total_guests),
+    checkedInCount: Number(row.checked_in_count),
+    paid: Boolean(row.paid),
+    testPayment: Boolean(row.test_payment),
+    lastCheckedInAt: row.last_checked_in_at ? new Date(row.last_checked_in_at).toISOString() : null,
     scannedBy: (row.scanned_by as string) || null,
   };
 }
 
-/** Ticket states for the guest-facing link, so a reused ticket cannot look valid. */
-export async function getBookingTicketStates(bookingId: string) {
-  if (!pool || !organizationId) return [];
+/** Single-ticket state for the guest-facing link, so a reused ticket cannot look valid. */
+export async function getBookingTicketState(bookingId: string) {
+  if (!pool || !organizationId) return null;
   const result = await pool.query(
-    `select tickets.ticket_code, tickets.status,
-            (select max(checked_in_at) from check_ins where check_ins.ticket_id = tickets.id) as checked_in_at
-     from tickets join bookings on bookings.id = tickets.booking_id
-     where tickets.booking_id = $1 and bookings.organization_id = $2
-     order by tickets.created_at`,
+    `select booking_tickets.ticket_code, booking_tickets.total_guests, booking_tickets.checked_in_count,
+            (select max(checked_in_at) from booking_check_ins where booking_check_ins.booking_ticket_id = booking_tickets.id) as last_checked_in_at
+       from booking_tickets join bookings on bookings.id = booking_tickets.booking_id
+      where booking_tickets.booking_id = $1 and bookings.organization_id = $2`,
     [bookingId, organizationId],
   );
-  return result.rows.map((row) => ({
+  if (!result.rowCount) return null;
+  const row = result.rows[0];
+  return {
     ticketCode: row.ticket_code as string,
-    status: row.status as string,
-    checkedInAt: row.checked_in_at ? new Date(row.checked_in_at).toISOString() : null,
-  }));
+    totalGuests: Number(row.total_guests),
+    checkedInCount: Number(row.checked_in_count),
+    lastCheckedInAt: row.last_checked_in_at ? new Date(row.last_checked_in_at).toISOString() : null,
+  };
 }
 
 export async function ensureStaffUser(email: string) {
@@ -939,11 +961,11 @@ export async function markNotificationFailed(id: string, error: string) {
   await pool.query("update notification_dispatches set status = 'failed', last_error = $2 where id = $1", [id, error.slice(0, 1000)]);
 }
 
-export type BookingTicket = { id: string; ticketCode: string; status: string; checkedInAt: string | null };
 export type BookingItem = { name: string; quantity: number; unitPricePence: number };
 export type BookingPayment = { provider: string; paymentIntentId: string; paidAt: string } | null;
 export type BookingDetail = {
   bookingId: string;
+  bookingReference: string | null;
   attendeeId: string | null;
   eventId: string;
   eventTitle: string;
@@ -955,7 +977,9 @@ export type BookingDetail = {
   specialRequests: string | null;
   sessionStartsAt: string | null;
   childCount: number;
-  ticketCount: number;
+  totalGuests: number;
+  guestsCheckedIn: number;
+  ticketCode: string | null;
   status: string;
   paid: boolean;
   testPayment: boolean;
@@ -963,18 +987,17 @@ export type BookingDetail = {
   createdAt: string;
   confirmationStatus: string | null;
   confirmationSentAt: string | null;
-  tickets: BookingTicket[];
   items: BookingItem[];
   payment: BookingPayment;
 };
 
-/** Full booking records for the staff console, including issued tickets for QR display. */
+/** Full booking records for the staff console, guest-counted rather than ticket-row-counted (Phase 10.1). */
 export async function listBookingDetails(eventId?: string): Promise<BookingDetail[]> {
   if (!pool || !organizationId) return [];
   const params: unknown[] = [organizationId];
   if (eventId) params.push(eventId);
   const result = await pool.query(`
-    select bookings.id as booking_id, bookings.status, bookings.total_pence, bookings.created_at,
+    select bookings.id as booking_id, bookings.booking_reference, bookings.status, bookings.total_pence, bookings.created_at,
            bookings.buyer_name, bookings.buyer_email, bookings.buyer_phone, bookings.special_requests,
            (select min(es.starts_at) from booking_items bi join ticket_types tt on tt.id = bi.ticket_type_id join event_sessions es on es.id = tt.event_session_id where bi.booking_id = bookings.id) as session_starts_at,
            events.id as event_id, events.title as event_title, events.starts_at,
@@ -982,7 +1005,7 @@ export async function listBookingDetails(eventId?: string): Promise<BookingDetai
            attendees.id as attendee_id, coalesce(attendees.child_count, 0) as child_count,
            coalesce(bool_or(payments.status = 'succeeded' and payments.provider <> 'mock'), false) as paid,
            coalesce(bool_or(payments.status = 'succeeded' and payments.provider = 'mock'), false) as test_payment,
-           coalesce(json_agg(json_build_object('id', tickets.id, 'ticketCode', tickets.ticket_code, 'status', tickets.status, 'checkedInAt', (select max(check_ins.checked_in_at) from check_ins where check_ins.ticket_id = tickets.id)) order by tickets.created_at) filter (where tickets.id is not null), '[]') as tickets,
+           booking_tickets.ticket_code, coalesce(booking_tickets.total_guests, 0) as total_guests, coalesce(booking_tickets.checked_in_count, 0) as guests_checked_in,
            max(dispatch.status) as confirmation_status,
            max(dispatch.sent_at) as confirmation_sent_at,
            (select coalesce(json_agg(json_build_object('name', ticket_types.name, 'quantity', booking_items.quantity, 'unitPricePence', booking_items.unit_price_pence) order by ticket_types.name), '[]') from booking_items join ticket_types on ticket_types.id = booking_items.ticket_type_id where booking_items.booking_id = bookings.id) as items,
@@ -992,14 +1015,15 @@ export async function listBookingDetails(eventId?: string): Promise<BookingDetai
     left join venues on venues.id = events.venue_id
     left join attendees on attendees.booking_id = bookings.id
     left join payments on payments.booking_id = bookings.id
-    left join tickets on tickets.booking_id = bookings.id
+    left join booking_tickets on booking_tickets.booking_id = bookings.id
     left join notification_dispatches dispatch on dispatch.dispatch_key = 'booking:' || bookings.id::text || ':guest'
     where bookings.organization_id = $1 ${eventId ? "and events.id = $2" : ""}
-    group by bookings.id, events.id, venues.name, attendees.id
+    group by bookings.id, events.id, venues.name, attendees.id, booking_tickets.ticket_code, booking_tickets.total_guests, booking_tickets.checked_in_count
     order by bookings.created_at desc
     limit 500`, params);
   return result.rows.map((row) => ({
     bookingId: row.booking_id as string,
+    bookingReference: (row.booking_reference as string | null) ?? null,
     attendeeId: (row.attendee_id as string | null) ?? null,
     eventId: row.event_id as string,
     eventTitle: row.event_title as string,
@@ -1011,7 +1035,9 @@ export async function listBookingDetails(eventId?: string): Promise<BookingDetai
     specialRequests: (row.special_requests as string | null) || null,
     sessionStartsAt: row.session_starts_at ? new Date(row.session_starts_at).toISOString() : null,
     childCount: Number(row.child_count || 0),
-    ticketCount: (row.tickets as BookingTicket[]).length,
+    totalGuests: Number(row.total_guests || 0),
+    guestsCheckedIn: Number(row.guests_checked_in || 0),
+    ticketCode: (row.ticket_code as string | null) ?? null,
     status: row.status as string,
     paid: Boolean(row.paid),
     testPayment: Boolean(row.test_payment),
@@ -1019,7 +1045,6 @@ export async function listBookingDetails(eventId?: string): Promise<BookingDetai
     createdAt: row.created_at.toISOString(),
     confirmationStatus: (row.confirmation_status as string | null) ?? null,
     confirmationSentAt: row.confirmation_sent_at ? new Date(row.confirmation_sent_at).toISOString() : null,
-    tickets: row.tickets as BookingTicket[],
     items: (row.items as BookingItem[]) || [],
     payment: row.payment ? { provider: row.payment.provider as string, paymentIntentId: row.payment.paymentIntentId as string, paidAt: new Date(row.payment.paidAt).toISOString() } : null,
   }));
@@ -1027,10 +1052,30 @@ export async function listBookingDetails(eventId?: string): Promise<BookingDetai
 
 export async function getBookingForEmail(bookingId: string) {
   if (!pool || !organizationId) throw new Error("Database is not configured");
-  const result = await pool.query("select bookings.id, bookings.buyer_name, bookings.buyer_email, events.title as event_title, events.starts_at, coalesce(venues.name, 'Hilston Park') as venue, coalesce(json_agg(tickets.ticket_code order by tickets.created_at) filter (where tickets.id is not null), '[]') as ticket_codes from bookings join events on events.id = bookings.event_id left join venues on venues.id = events.venue_id left join tickets on tickets.booking_id = bookings.id where bookings.id = $1 and bookings.organization_id = $2 group by bookings.id, events.id, venues.name", [bookingId, organizationId]);
+  const result = await pool.query(
+    `select bookings.id, bookings.booking_reference, bookings.buyer_name, bookings.buyer_email,
+            events.title as event_title, events.starts_at, coalesce(venues.name, 'Hilston Park') as venue,
+            booking_tickets.ticket_code, coalesce(booking_tickets.total_guests, 0) as total_guests
+       from bookings
+       join events on events.id = bookings.event_id
+       left join venues on venues.id = events.venue_id
+       left join booking_tickets on booking_tickets.booking_id = bookings.id
+      where bookings.id = $1 and bookings.organization_id = $2`,
+    [bookingId, organizationId],
+  );
   if (!result.rowCount) throw new Error("booking_not_found");
   const row = result.rows[0];
-  return { bookingId: row.id as string, name: (row.buyer_name as string) || "Guest", email: row.buyer_email as string, eventTitle: row.event_title as string, startsAt: row.starts_at.toISOString(), venue: row.venue as string, ticketCodes: row.ticket_codes as string[] };
+  return {
+    bookingId: row.id as string,
+    bookingReference: (row.booking_reference as string | null) ?? null,
+    name: (row.buyer_name as string) || "Guest",
+    email: row.buyer_email as string,
+    eventTitle: row.event_title as string,
+    startsAt: row.starts_at.toISOString(),
+    venue: row.venue as string,
+    ticketCode: (row.ticket_code as string | null) ?? null,
+    totalGuests: Number(row.total_guests || 0),
+  };
 }
 
 export async function markDispatchByKey(dispatchKey: string, outcome: { status: "sent" | "failed"; providerRef?: string; error?: string }) {

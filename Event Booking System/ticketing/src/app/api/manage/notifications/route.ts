@@ -25,11 +25,13 @@ export async function POST(request: Request) {
 
     const details = await getBookingForEmail(bookingId);
     if (!details.email) return NextResponse.json({ error: "This booking has no email address." }, { status: 409 });
+    const ticketCode = details.ticketCode;
+    if (!ticketCode) return NextResponse.json({ error: "This booking has no issued ticket yet." }, { status: 409 });
     if (!emailEnabled) return NextResponse.json({ status: "queued", message: "Confirmation queued. Add EMAIL_FROM plus either SMTP_HOST or RESEND_API_KEY to send emails." });
 
     try {
       const ticketUrl = `${appBaseUrl()}/tickets/${await createTicketLinkToken(bookingId)}`;
-      const sent = await sendBookingConfirmation({ ...details, ticketUrl });
+      const sent = await sendBookingConfirmation({ name: details.name, email: details.email, eventTitle: details.eventTitle, startsAt: details.startsAt, venue: details.venue, ticketCode, totalGuests: details.totalGuests, bookingReference: details.bookingReference || undefined, ticketUrl });
       await markDispatchByKey(`booking:${bookingId}:guest`, { status: "sent", providerRef: sent.id });
       await writeAuditLog("notification.booking_confirmation.sent", { bookingId });
       return NextResponse.json({ status: "sent", message: `Tickets sent to ${details.email}.` });

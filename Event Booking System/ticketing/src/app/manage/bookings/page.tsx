@@ -7,12 +7,12 @@ import { useSearchParams } from "next/navigation";
 import StaffShell from "../staff-shell";
 import { BOOKING_STATUS_LABEL, deriveBookingStatus, formatGBP, type BookingStatus } from "@/lib/booking-status";
 
-type BookingTicket = { id: string; ticketCode: string; status: string; checkedInAt: string | null };
 type BookingItem = { name: string; quantity: number; unitPricePence: number };
 type BookingPayment = { provider: string; paymentIntentId: string; paidAt: string } | null;
 
 type Booking = {
   bookingId: string;
+  bookingReference: string | null;
   eventId: string;
   eventTitle: string;
   startsAt: string;
@@ -22,7 +22,9 @@ type Booking = {
   phone?: string | null;
   specialRequests?: string | null;
   sessionStartsAt?: string | null;
-  ticketCount: number;
+  totalGuests: number;
+  guestsCheckedIn: number;
+  ticketCode: string | null;
   status: string;
   paid: boolean;
   testPayment?: boolean;
@@ -30,7 +32,6 @@ type Booking = {
   createdAt: string;
   confirmationStatus: string | null;
   confirmationSentAt: string | null;
-  tickets: BookingTicket[];
   items: BookingItem[];
   payment: BookingPayment;
 };
@@ -47,10 +48,6 @@ function formatDateTime(value: string) {
 
 function paymentStatus(booking: Booking): BookingStatus {
   return deriveBookingStatus(booking);
-}
-
-function checkedInCount(booking: Booking) {
-  return booking.tickets.filter((ticket) => ticket.status === "checked_in" || ticket.checkedInAt).length;
 }
 
 function initials(name: string) {
@@ -157,7 +154,7 @@ function BookingsPageInner() {
   }
 
   function exportCsv() {
-    const header = ["Booking No.", "Customer", "Email", "Phone", "Event", "Session", "Ticket types", "Tickets", "Amount (GBP)", "Payment status", "Payment reference", "Checked in", "Special requests", "Booked at"];
+    const header = ["Booking No.", "Customer", "Email", "Phone", "Event", "Session", "Ticket types", "Guests", "Amount (GBP)", "Payment status", "Payment reference", "Checked in", "Special requests", "Booked at"];
     const rows = filteredBookings.map((booking) => [
       booking.bookingId.slice(0, 8).toUpperCase(),
       booking.name,
@@ -166,11 +163,11 @@ function BookingsPageInner() {
       booking.eventTitle,
       formatDateTime(booking.sessionStartsAt || booking.startsAt),
       booking.items.map((item) => `${item.name} x ${item.quantity}`).join("; "),
-      String(booking.ticketCount),
+      String(booking.totalGuests),
       (booking.totalPence / 100).toFixed(2),
       BOOKING_STATUS_LABEL[paymentStatus(booking)],
       booking.payment?.paymentIntentId || "",
-      `${checkedInCount(booking)} / ${booking.ticketCount}`,
+      `${booking.guestsCheckedIn} / ${booking.totalGuests}`,
       booking.specialRequests || "",
       formatDateTime(booking.createdAt),
     ]);
@@ -186,7 +183,7 @@ function BookingsPageInner() {
 
   async function cancelOpenBooking(booking: Booking) {
     const refundNote = booking.paid ? " The payment is not refunded automatically; refund it in the payment provider's dashboard." : "";
-    if (window.confirm(`Cancel booking ${booking.bookingId.slice(0, 8).toUpperCase()} for ${booking.name}? Their ${booking.ticketCount} ${booking.ticketCount === 1 ? "ticket" : "tickets"} will stop working and the places will be released.${refundNote}`) === false) return;
+    if (window.confirm(`Cancel booking ${booking.bookingId.slice(0, 8).toUpperCase()} for ${booking.name}? Their ${booking.totalGuests} ${booking.totalGuests === 1 ? "guest" : "guests"} will stop working and the places will be released.${refundNote}`) === false) return;
     setCancelling(true);
     setResendState(null);
     try {
@@ -282,7 +279,7 @@ function BookingsPageInner() {
           {!loading && filteredBookings.length > 0 && (
             <div className="event-table-wrap">
               <table className="event-management-table">
-                <thead><tr><th className="event-table-checkbox"><input type="checkbox" aria-label="Select all bookings on this page" checked={paginatedBookings.length > 0 && paginatedBookings.every((booking) => selectedIds.has(booking.bookingId))} onChange={toggleSelectAllOnPage} /></th><th>Booking no.</th><th>Customer</th><th>Event</th><th>Date</th><th>Tickets</th><th>Amount</th><th>Payment status</th><th>Check-in</th><th>Actions</th></tr></thead>
+                <thead><tr><th className="event-table-checkbox"><input type="checkbox" aria-label="Select all bookings on this page" checked={paginatedBookings.length > 0 && paginatedBookings.every((booking) => selectedIds.has(booking.bookingId))} onChange={toggleSelectAllOnPage} /></th><th>Booking no.</th><th>Customer</th><th>Event</th><th>Date</th><th>Guests</th><th>Amount</th><th>Payment status</th><th>Check-in</th><th>Actions</th></tr></thead>
                 <tbody>
                   {paginatedBookings.map((booking) => {
                     const status = paymentStatus(booking);
@@ -293,10 +290,10 @@ function BookingsPageInner() {
                         <td><strong>{booking.name}</strong><small>{booking.email}</small></td>
                         <td>{booking.eventTitle}</td>
                         <td>{formatDate(booking.startsAt)}</td>
-                        <td>{booking.ticketCount}</td>
+                        <td>{booking.totalGuests}</td>
                         <td>{formatGBP(booking.totalPence)}</td>
                         <td><span className={`event-status-pill ${status === "paid" ? "published" : status === "pending_payment" || status === "test" ? "draft" : "cancelled"}`}><i />{BOOKING_STATUS_LABEL[status]}</span></td>
-                        <td>{checkedInCount(booking)} / {booking.ticketCount}</td>
+                        <td>{booking.guestsCheckedIn} / {booking.totalGuests}</td>
                         <td><div className="event-table-actions"><button className="table-action" type="button" onClick={() => { setOpenBookingId(booking.bookingId); setResendState(null); }}>View</button></div></td>
                       </tr>
                     );
@@ -349,13 +346,14 @@ function BookingsPageInner() {
               <h3 className="booking-drawer-section">Event</h3>
               <p className="booking-event-summary"><strong>{openBooking.eventTitle}</strong><small>Session: {formatDateTime(openBooking.sessionStartsAt || openBooking.startsAt)} &middot; {openBooking.venue}</small></p>
 
-              <h3 className="booking-drawer-section">Tickets</h3>
+              <h3 className="booking-drawer-section">Guests</h3>
               {openBooking.items.length > 0 ? (
                 <ul className="booking-ticket-list">
                   {openBooking.items.map((item, index) => <li key={`${item.name}-${index}`}><span>{item.name} &times; {item.quantity} @ {formatGBP(item.unitPricePence)}</span><span>{formatGBP(item.unitPricePence * item.quantity)}</span></li>)}
                   <li className="booking-ticket-total"><span>Total amount</span><span>{formatGBP(openBooking.totalPence)}</span></li>
                 </ul>
-              ) : <p className="panel-copy">Ticket breakdown is not available for this booking.</p>}
+              ) : <p className="panel-copy">Guest breakdown is not available for this booking.</p>}
+              {openBooking.ticketCode && <p className="panel-copy"><strong>QR ticket code:</strong> {openBooking.ticketCode}{openBooking.bookingReference ? ` \u00b7 Booking ${openBooking.bookingReference}` : ""}</p>}
 
               <h3 className="booking-drawer-section">Payment</h3>
               <dl className="booking-payment-facts">
@@ -366,7 +364,7 @@ function BookingsPageInner() {
               </dl>
 
               <h3 className="booking-drawer-section">Check-in</h3>
-              <p className="booking-checkin-row"><strong>{checkedInCount(openBooking)} / {openBooking.ticketCount}</strong> checked in <Link href="/manage/check-in">Open check-in</Link></p>
+              <p className="booking-checkin-row"><strong>{openBooking.guestsCheckedIn} / {openBooking.totalGuests}</strong> guests checked in <Link href="/manage/check-in">Open check-in</Link></p>
 
               <h3 className="booking-drawer-section">Confirmation email</h3>
               <p className="panel-copy">{openBooking.confirmationSentAt ? `Last sent ${formatDateTime(openBooking.confirmationSentAt)}` : openBooking.confirmationStatus === "failed" ? "Last attempt failed to send." : "Not sent yet."}</p>
@@ -374,8 +372,8 @@ function BookingsPageInner() {
               <button className="primary-button" type="button" disabled={resending} onClick={() => resendConfirmation(openBooking.bookingId)}>{resending ? "Sending..." : "Resend confirmation"}</button>
               {openBooking.status !== "cancelled" && <>
                 <h3 className="booking-drawer-section">Cancel booking</h3>
-                <p className="panel-copy">{checkedInCount(openBooking) > 0 ? "A ticket has already been used, so this booking can't be cancelled." : "Cancelling voids the tickets and releases the places."}</p>
-                <button className="secondary-button danger-button" type="button" disabled={cancelling || checkedInCount(openBooking) > 0} onClick={() => cancelOpenBooking(openBooking)}>{cancelling ? "Cancelling..." : "Cancel booking"}</button>
+                <p className="panel-copy">{openBooking.guestsCheckedIn > 0 ? "A guest has already been checked in, so this booking can't be cancelled." : "Cancelling voids the ticket and releases the places."}</p>
+                <button className="secondary-button danger-button" type="button" disabled={cancelling || openBooking.guestsCheckedIn > 0} onClick={() => cancelOpenBooking(openBooking)}>{cancelling ? "Cancelling..." : "Cancel booking"}</button>
               </>}
             </div>
           </aside>

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { databaseEnabled, getBookingForEmail, getBookingTicketStates } from "@/lib/db";
-import { getStoreBookingForEmail, getStoreBookingTicketStates } from "@/lib/store";
+import { databaseEnabled, getBookingForEmail, getBookingTicketState } from "@/lib/db";
+import { getStoreBookingForEmail, getStoreBookingTicketState } from "@/lib/store";
 import { readTicketLinkToken } from "@/lib/ticket-links";
 
 export const dynamic = "force-dynamic";
@@ -40,44 +40,45 @@ export default async function TicketsPage({ params }: { params: Promise<{ token:
     );
   }
 
-  const states = databaseEnabled ? await getBookingTicketStates(bookingId) : getStoreBookingTicketStates(bookingId);
-  const stateFor = (code: string) => states.find((item) => item.ticketCode === code);
-  const usedCount = states.filter((item) => item.status === "checked_in" || item.checkedInAt).length;
+  const state = databaseEnabled ? await getBookingTicketState(bookingId) : getStoreBookingTicketState(bookingId);
+  const totalGuests = state?.totalGuests ?? booking.totalGuests;
+  const checkedInCount = state?.checkedInCount ?? 0;
+  const used = checkedInCount > 0;
+  const code = booking.ticketCode;
 
   return (
     <main className="page-shell">
       <section className="content-section ticket-page">
         <p className="eyebrow">Hilston Park</p>
-        <h1>Your tickets</h1>
-        <p className="lead-copy">Hello {booking.name}, here are your tickets for <strong>{booking.eventTitle}</strong>. Show each QR code at the entrance. Every ticket admits one person and can be scanned once.</p>
+        <h1>Your ticket</h1>
+        <p className="lead-copy">Hello {booking.name}, here is your ticket for <strong>{booking.eventTitle}</strong>. Show this QR code at the entrance &mdash; it covers your whole booking.</p>
 
         <dl className="booking-facts">
           <div><dt>Event</dt><dd>{booking.eventTitle}</dd></div>
           <div><dt>When</dt><dd>{formatWhen(booking.startsAt)}</dd></div>
           <div><dt>Where</dt><dd>{booking.venue}</dd></div>
-          <div><dt>Tickets</dt><dd>{booking.ticketCodes.length}{usedCount > 0 ? ` (${usedCount} already used)` : ""}</dd></div>
+          <div><dt>Booking</dt><dd>1 Booking &middot; {totalGuests} guest{totalGuests === 1 ? "" : "s"} &middot; 1 QR ticket{used ? ` (${checkedInCount} of ${totalGuests} checked in)` : ""}</dd></div>
         </dl>
 
-        <div className="booking-tickets">
-          <ul>
-            {booking.ticketCodes.map((code) => {
-              const state = stateFor(code);
-              const used = state?.status === "checked_in" || Boolean(state?.checkedInAt);
-              return (
-                <li key={code} className={used ? "ticket-used" : undefined}>
-                  <img src={`/api/public/tickets/${encodeURIComponent(code)}/qr`} alt={`QR code for ticket ${code}`} width={200} height={200} />
-                  <strong>{code}</strong>
-                  {used
-                    ? <small className="ticket-state-used">Already used{state?.checkedInAt ? ` \u00b7 ${formatWhen(state.checkedInAt)}` : ""}</small>
-                    : <small className="ticket-state-valid">Valid &middot; admits one</small>}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        {code && (
+          <div className="booking-tickets">
+            <ul>
+              <li className={checkedInCount >= totalGuests ? "ticket-used" : undefined}>
+                <img src={`/api/public/tickets/${encodeURIComponent(code)}/qr`} alt={`QR code for ticket ${code}`} width={200} height={200} />
+                <strong>{code}</strong>
+                {booking.bookingReference && <small>Booking {booking.bookingReference}</small>}
+                {checkedInCount >= totalGuests
+                  ? <small className="ticket-state-used">Fully checked in</small>
+                  : used
+                    ? <small className="ticket-state-valid">Valid &middot; {totalGuests - checkedInCount} guest{totalGuests - checkedInCount === 1 ? "" : "s"} remaining</small>
+                    : <small className="ticket-state-valid">Valid &middot; admits {totalGuests} guest{totalGuests === 1 ? "" : "s"}</small>}
+              </li>
+            </ul>
+          </div>
+        )}
 
-        <p className="form-note">Each QR code can only be scanned once. Copying or forwarding a ticket does not create a second entry.</p>
-        <p className="ticket-download"><a className="primary-button" href={`/tickets/${token}/pdf`}>Download tickets (PDF)</a></p>
+        <p className="form-note">This QR code covers your entire booking. Copying or forwarding it does not create extra entries.</p>
+        <p className="ticket-download"><a className="primary-button" href={`/tickets/${token}/pdf`}>View / download ticket (PDF)</a></p>
       </section>
       <footer className="footer">
         <Link href="https://hilstonpark.com">Hilston Park</Link>

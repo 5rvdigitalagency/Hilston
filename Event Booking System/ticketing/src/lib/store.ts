@@ -1,4 +1,5 @@
 import { demoSeedAllowed } from "./demo-environment";
+import { allowPartialCheckIn, generateBookingReference, generateBookingTicketCode, resolveCheckInAdmission } from "./check-in-logic";
 
 export type EventStatus = "draft" | "published" | "archived" | "cancelled" | "completed" | "sold_out";
 
@@ -47,6 +48,15 @@ export type AttendeeRecord = {
 
 export type TicketRecord = { id: string; eventId: string; ticketCode: string; status: "issued" | "checked_in"; attendeeName: string; checkedInAt?: string; };
 
+/** Phase 10.1: one booking = one ticket code + one QR code, with a guest total and a running checked-in count. */
+export type BookingTicketRecord = {
+  id: string;
+  bookingId: string;
+  ticketCode: string;
+  totalGuests: number;
+  checkedInCount: number;
+};
+
 export type EventSessionRecord = { id: string; eventId: string; startsAt: string; endsAt?: string; capacity: number };
 export type TicketTypeRecord = { id: string; sessionId: string; name: string; pricePence: number; maxPerOrder: number };
 export type SessionBookingRecord = {
@@ -59,7 +69,7 @@ export type SessionBookingRecord = {
   specialRequests: string;
   items: { ticketTypeId: string; quantity: number; unitPricePence: number }[];
   totalPence: number;
-  tickets: { id: string; ticketCode: string }[];
+  bookingReference: string;
   createdAt: string;
 };
 
@@ -70,15 +80,17 @@ type TicketingStore = {
   sessions: EventSessionRecord[];
   ticketTypes: TicketTypeRecord[];
   sessionBookings: SessionBookingRecord[];
+  bookingTickets: BookingTicketRecord[];
 };
 
 const globalStore = globalThis as typeof globalThis & { __ticketingStore?: TicketingStore };
 
-export const store = globalStore.__ticketingStore ?? { events: [], attendees: [], tickets: [], sessions: [], ticketTypes: [], sessionBookings: [] };
+export const store = globalStore.__ticketingStore ?? { events: [], attendees: [], tickets: [], sessions: [], ticketTypes: [], sessionBookings: [], bookingTickets: [] };
 // Fast-refresh can reuse an older-shaped global across edits to this file, so backfill any missing arrays defensively.
 store.sessions ??= [];
 store.ticketTypes ??= [];
 store.sessionBookings ??= [];
+store.bookingTickets ??= [];
 globalStore.__ticketingStore = store;
 
 export function ensureDemoTickets() {
@@ -220,9 +232,10 @@ export function createStoreSessionBooking(input: { eventId: string; sessionId: s
     totalPence += ticketType.pricePence * item.quantity;
   }
 
-  const tickets = Array.from({ length: totalQuantity }, () => ({ id: crypto.randomUUID(), ticketCode: `DEMO-${crypto.randomUUID().slice(0, 8).toUpperCase()}` }));
+  const bookingId = crypto.randomUUID();
+  const ticketCode = generateBookingTicketCode();
   const booking: SessionBookingRecord = {
-    id: crypto.randomUUID(),
+    id: bookingId,
     eventId: input.eventId,
     sessionId: input.sessionId,
     name: input.name,
@@ -231,14 +244,14 @@ export function createStoreSessionBooking(input: { eventId: string; sessionId: s
     specialRequests: input.specialRequests,
     items,
     totalPence,
-    tickets,
+    bookingReference: generateBookingReference(),
     createdAt: new Date().toISOString(),
   };
   store.sessionBookings.push(booking);
-  for (const ticket of tickets) store.tickets.push({ id: ticket.id, eventId: input.eventId, ticketCode: ticket.ticketCode, status: "issued", attendeeName: input.name });
+  store.bookingTickets.push({ id: crypto.randomUUID(), bookingId, ticketCode, totalGuests: totalQuantity, checkedInCount: 0 });
   event.attendeeCount += totalQuantity;
 
-  return { bookingId: booking.id, attendeeId: booking.id, eventTitle: event.title, totalPence, tickets };
+  return { bookingId: booking.id, attendeeId: booking.id, eventTitle: event.title, totalPence, ticketCode, totalGuests: totalQuantity };
 }
 
 /** Demo-mode counterpart to db.ts's getBookingForEmail. */
@@ -247,14 +260,17 @@ export function getStoreBookingForEmail(bookingId: string) {
   if (!booking) throw new Error("booking_not_found");
   const event = store.events.find((item) => item.id === booking.eventId);
   const session = store.sessions.find((item) => item.id === booking.sessionId);
+  const bookingTicket = store.bookingTickets.find((item) => item.bookingId === bookingId);
   return {
     bookingId: booking.id,
+    bookingReference: booking.bookingReference,
     name: booking.name,
     email: booking.email,
     eventTitle: event?.title ?? "Event",
     startsAt: session?.startsAt ?? event?.startsAt ?? booking.createdAt,
     venue: event?.venue ?? "",
-    ticketCodes: booking.tickets.map((ticket) => ticket.ticketCode),
+    ticketCode: bookingTicket?.ticketCode ?? null,
+    totalGuests: bookingTicket?.totalGuests ?? 0,
   };
 }
 
@@ -282,12 +298,51 @@ export function checkInTicket(ticketCode: string) {
   return { ok: true as const, ticket };
 }
 
-/** Demo-mode counterpart to db.ts's getBookingTicketStates. */
-export function getStoreBookingTicketStates(bookingId: string) {
-  const booking = store.sessionBookings.find((item) => item.id === bookingId);
-  if (!booking) return [];
-  const ticketCodes = new Set(booking.tickets.map((ticket) => ticket.ticketCode));
-  return store.tickets
-    .filter((ticket) => ticketCodes.has(ticket.ticketCode))
-    .map((ticket) => ({ ticketCode: ticket.ticketCode, status: ticket.status, checkedInAt: ticket.checkedInAt ?? null }));
+/** Demo-mode counterpart to db.ts's getBookingTicketState. */
+export function getStoreBookingTicketState(bookingId: string) {
+  const bookingTicket = store.bookingTickets.find((item) => item.bookingId === bookingId);
+  if (!bookingTicket) return null;
+  return { ticketCode: bookingTicket.ticketCode, totalGuests: bookingTicket.totalGuests, checkedInCount: bookingTicket.checkedInCount };
+}
+
+/** Demo-mode counterpart to db.ts's getBookingScanDetails. */
+export function getStoreBookingScanDetails(ticketCode: string) {
+  const bookingTicket = store.bookingTickets.find((item) => item.ticketCode.toUpperCase() === ticketCode.trim().toUpperCase());
+  if (!bookingTicket) return null;
+  const booking = store.sessionBookings.find((item) => item.id === bookingTicket.bookingId);
+  if (!booking) return null;
+  const event = store.events.find((item) => item.id === booking.eventId);
+  const session = store.sessions.find((item) => item.id === booking.sessionId);
+  const guestBreakdown = booking.items.map((item) => {
+    const ticketType = store.ticketTypes.find((candidate) => candidate.id === item.ticketTypeId);
+    return { name: ticketType?.name ?? "Ticket", quantity: item.quantity };
+  });
+  return {
+    ticketCode: bookingTicket.ticketCode,
+    bookingReference: booking.bookingReference,
+    bookingStatus: "confirmed",
+    eventTitle: event?.title ?? "Event",
+    sessionId: session?.id ?? null,
+    sessionStartsAt: session?.startsAt ?? null,
+    sessionEndsAt: session?.endsAt ?? null,
+    buyerName: booking.name,
+    buyerEmail: booking.email,
+    guestBreakdown,
+    totalGuests: bookingTicket.totalGuests,
+    checkedInCount: bookingTicket.checkedInCount,
+    paid: false,
+    testPayment: true,
+    lastCheckedInAt: null,
+    scannedBy: null,
+  };
+}
+
+/** Demo-mode counterpart to db.ts's checkInBookingTicket. */
+export function checkInBookingByCode(ticketCode: string, guests: number | undefined) {
+  const bookingTicket = store.bookingTickets.find((item) => item.ticketCode.toUpperCase() === ticketCode.trim().toUpperCase());
+  if (!bookingTicket) return { ok: false as const, error: "ticket_not_found" };
+  const admission = resolveCheckInAdmission({ totalGuests: bookingTicket.totalGuests, checkedInCount: bookingTicket.checkedInCount }, guests, allowPartialCheckIn());
+  if (!admission.ok) return { ok: false as const, error: admission.error };
+  bookingTicket.checkedInCount += admission.guestsToAdmit;
+  return { ok: true as const, guestsCheckedIn: admission.guestsToAdmit, totalGuests: bookingTicket.totalGuests, checkedInCount: bookingTicket.checkedInCount };
 }
