@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies, headers } from "next/headers";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
-import { createCustomerAccount, getAccountByEmail, isBlockedEmailDomain, logRegistrationAttempt } from "@/lib/db";
+import { createCustomerAccount, databaseEnabled, getAccountByEmail, isBlockedEmailDomain, loginLockState, logRegistrationAttempt, recordLoginAttempt } from "@/lib/db";
 import { createCustomerSession, customerSession } from "@/lib/auth";
 
 const signUpSchema = z.object({ action: z.literal("signup"), displayName: z.string().trim().min(2).max(120), email: z.string().email().max(254), password: z.string().min(12).max(200) });
@@ -36,8 +36,15 @@ export async function POST(request: Request) {
       }
       account = await createCustomerAccount({ email: parsed.data.email, displayName: parsed.data.displayName, passwordHash: await bcrypt.hash(parsed.data.password, 12) });
     } else {
+      const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || null;
+      if (databaseEnabled) {
+        const lock = await loginLockState("customer", parsed.data.email, ip).catch(() => ({ locked: false, retryAfterSeconds: 0 }));
+        if (lock.locked) return NextResponse.json({ error: "Too many unsuccessful sign-in attempts. Please try again later." }, { status: 429, headers: { "Retry-After": String(lock.retryAfterSeconds) } });
+      }
       const existing = await getAccountByEmail(parsed.data.email);
-      if (!existing?.passwordHash || existing.status !== "active" || !(await bcrypt.compare(parsed.data.password, existing.passwordHash))) return NextResponse.json({ error: "Email or password was not recognised." }, { status: 401 });
+      const valid = Boolean(existing?.passwordHash) && existing?.status === "active" && await bcrypt.compare(parsed.data.password, existing.passwordHash as string);
+      if (databaseEnabled) await recordLoginAttempt("customer", parsed.data.email, ip, valid).catch(() => undefined);
+      if (valid === false || existing === null) return NextResponse.json({ error: "Email or password was not recognised." }, { status: 401 });
       account = { id: existing.id, email: existing.email, displayName: existing.displayName || "Customer" };
     }
     const response = NextResponse.json({ account: { email: account.email, displayName: account.displayName } });

@@ -36,14 +36,14 @@ export function publicEventsFeedAuthorized(request: Request) {
     && secureEqual(authorization.slice(7), key);
 }
 
-export function publicEventsCorsHeaders(request: Request) {
+export function publicEventsCorsHeaders(request: Request, methods = "GET, OPTIONS") {
   const requestOrigin = request.headers.get("origin");
   const allowedOrigin = publicEventsOrigin();
   const origin = requestOrigin === allowedOrigin ? requestOrigin : allowedOrigin;
 
   return {
     "Access-Control-Allow-Origin": origin,
-    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Access-Control-Allow-Methods": methods,
     "Access-Control-Allow-Headers": "Content-Type, Cache-Control",
     Vary: "Origin",
   };

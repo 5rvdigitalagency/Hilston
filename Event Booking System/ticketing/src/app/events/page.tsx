@@ -1,43 +1,63 @@
 import Link from "next/link";
-import { databaseEnabled, listEvents } from "@/lib/db";
+import { databaseEnabled, listEventMedia, listEventSchedules, listEvents } from "@/lib/db";
 import { stagingStorefrontEnabled } from "@/lib/event-publishing";
-import { ensureDemoEvent, store } from "@/lib/store";
+import { computeDemoEventStatus, ensureDemoEvent, listStoreEventSchedules, store } from "@/lib/store";
+import { createEventMediaUrl } from "@/lib/supabase";
+import EventCatalogue from "./event-catalogue";
 
 export const dynamic = "force-dynamic";
-
-function formatDate(value: string) {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "Date to confirm";
-  return date.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
-}
 
 export default async function EventsPage() {
   const enabled = stagingStorefrontEnabled();
   let events = [] as Awaited<ReturnType<typeof listEvents>>;
+  let schedules: Awaited<ReturnType<typeof listEventSchedules>> = {};
+  let images: Record<string, string> = {};
 
   if (enabled) {
-    if (databaseEnabled) events = await listEvents(false).catch(() => []);
-    else {
+    if (databaseEnabled) {
+      events = await listEvents(false).catch(() => []);
+      schedules = await listEventSchedules(events.map((event) => event.id)).catch(() => ({}));
+      const mediaEntries = await Promise.all(events.map(async (event) => {
+        const media = await listEventMedia(event.id).catch(() => []);
+        const image = media.find((item) => item.contentType.startsWith("image/"));
+        return image ? [event.id, await createEventMediaUrl(image.storageKey)] as const : null;
+      }));
+      images = Object.fromEntries(mediaEntries.filter((entry): entry is readonly [string, string] => entry !== null));
+    } else {
       ensureDemoEvent();
       events = store.events.filter((event) => event.published && !event.archived);
+      schedules = listStoreEventSchedules(events.map((event) => event.id));
     }
   }
 
-  return <main className="auth-gate"><section className="auth-gate-panel">
-    <p className="eyebrow">Hilston Park Tickets</p>
-    <h1>Upcoming events</h1>
-    <p>Ticketing preview environment. Events listed here are not published to the Hilston Park website.</p>
-    {!enabled && <><h2>Events are not available for review.</h2><p>This ticketing storefront has not been authorised for this deployment.</p></>}
-    {enabled && !events.length && <><h2>No upcoming events.</h2><p>Published ticketing events will appear here for staging review.</p></>}
-    {enabled && events.map((event) => {
-      const placesLeft = Math.max(0, event.capacity - event.attendeeCount - event.childCount);
-      return <section key={event.id} className="cms-card">
-        <p className="eyebrow">{formatDate(event.startsAt)}</p>
-        <h2>{event.title}</h2>
-        <p>{event.description}</p>
-        <p>{event.venue} · {placesLeft > 0 ? `${placesLeft} places left` : "Fully booked"}</p>
-      </section>;
-    })}
-    <Link className="secondary-link" href="/staff-login">Staff sign in</Link>
-  </section></main>;
+  const upcomingEvents = events.flatMap((event) => {
+    const status = event.status ?? computeDemoEventStatus(event);
+    return status === "published" || status === "sold_out" ? [{ ...event, status, sessions: schedules[event.id] || [], imageUrl: images[event.id] }] : [];
+  });
+
+  return <main className="page-shell">
+    <header className="topbar">
+      <Link className="brand" href="/events" aria-label="Hilston Park events">
+        <img className="brand-logo" src="/brand/hilston-park-logo.webp" alt="Hilston Park" />
+      </Link>
+      <span className="storefront-preview-label">Ticketing preview</span>
+      <Link className="account-link" href="/staff-login">Staff sign in</Link>
+    </header>
+    <section className="page-intro events-intro">
+      <p className="eyebrow">Hilston Park</p>
+      <h1>What’s on</h1>
+      <p>Explore upcoming events at Hilston Park.</p>
+    </section>
+    <section className="catalogue events-catalogue">
+      <div className="section-heading">
+        <div><p className="eyebrow">The programme</p><h2>Upcoming events</h2></div>
+        <span className="status-pill">Preview only</span>
+
+      </div>
+      {!enabled && <div className="empty-state"><h3>Events are not available for review.</h3><p>This ticketing storefront has not been authorised for this deployment.</p></div>}
+      {enabled && !upcomingEvents.length && <div className="empty-state"><h3>No upcoming events</h3><p>Published events will appear here when they are ready for the preview storefront.</p></div>}
+      {enabled && upcomingEvents.length > 0 && <EventCatalogue events={upcomingEvents} />}
+    </section>
+    <footer className="footer"><span>Hilston Park ticketing preview</span><span>Not connected to the live website</span></footer>
+  </main>;
 }
