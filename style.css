@@ -2998,4 +2998,7 @@ span.flatpickr-weekday {
       text-align: left;
     }
 
-    /*----code up-------*/
+.post-content a{
+    color:#4e9484;
+        font-weight: bold;
+}
