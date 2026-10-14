@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hilston Park | Testimonials</title>
+<style>
+    :root{--green:#0b4035;--green2:#164f40;--ink:#17352f;--muted:#61736d;--cream:#f7f6ef;--line:#deded2;--white:#fff;--shadow:0 8px 24px #183a3010}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,a{font:inherit}button{cursor:pointer}.testimonials{position:relative;isolation:isolate;overflow:hidden;min-height:100vh;padding:32px max(5.8vw,24px) 0;background:radial-gradient(ellipse at 70% 5%,#fff 0%,#f7f6ef 62%)}
+.testimonials__inner{max-width:1180px;margin:auto;position:relative;z-index:2}.eyebrow{display:flex;align-items:center;gap:10px;color:#668579;font-size:10px;letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:8px}.eyebrow:before{content:"";width:18px;height:1px;background:#789b8c}.testimonials h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(34px,4vw,48px);line-height:1.05;font-weight:500;letter-spacing:-1.3px;margin:0 0 8px;color:#142d28}.intro{font-size:14px;line-height:1.65;color:#526760;max-width:470px;margin:0 0 22px}
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;margin-bottom:28px}.tab{min-height:47px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--line);background:transparent;color:#465b54;border-radius:5px;font-size:12px;font-weight:600;transition:background .2s,color .2s,border .2s}.tab .tab-icon{font-size:17px;line-height:1}.tab:hover,.tab:focus-visible{border-color:#7d9c8e}.tab[aria-selected="true"]{background:var(--green);color:#fff;border-color:var(--green)}
+.carousel-wrap{position:relative;padding:0 8.5%;}.carousel-viewport{overflow:hidden;border-radius:8px}.carousel-track{display:flex;transition:transform .45s cubic-bezier(.2,.75,.25,1);will-change:transform}.testimonial-card{flex:0 0 100%;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center;padding:12px;background:#fff;border:1px solid #ecebe3;border-radius:8px;box-shadow:var(--shadow);min-height:258px}.media{position:relative;min-height:220px;height:100%;overflow:hidden;border-radius:5px;background:#d9dfd5}.media img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}.play-button{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;border:2px solid #fff;background:#123d32c9;color:#fff;display:grid;place-items:center;font-size:22px;padding-left:4px;box-shadow:0 3px 15px #0003}.play-button:hover{background:var(--green)}.quote{padding:14px 16px 14px 0}.quote-mark{font-family:Georgia,serif;font-size:45px;line-height:.8;color:var(--green);font-weight:bold;height:31px}.quote blockquote{font-family:Georgia,'Times New Roman',serif;font-size:clamp(16px,1.55vw,19px);line-height:1.55;margin:0 0 18px;color:#425951}.person{display:flex;align-items:center;gap:11px}.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#d8dfd8}.person strong{display:block;font-size:12px;color:#26453b;margin-bottom:4px}.person span{display:block;font-size:11px;color:#718078}.arrow{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border:0;border-radius:50%;background:var(--green);color:#fff;font-size:26px;line-height:1;display:grid;place-items:center;box-shadow:0 4px 12px #0001;z-index:3}.arrow:hover{background:#1d5a49}.arrow:disabled{opacity:.4}.arrow--prev{left:2.5%}.arrow--next{right:2.5%}.dots{display:flex;justify-content:center;gap:9px;margin:19px 0 34px}.dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#d4d8d0;transition:transform .2s,background .2s}.dot[aria-current="true"]{background:var(--green);transform:scale(1.12)}
+.share{text-align:center;position:relative;z-index:2;padding:0 0 72px}.leaf{display:flex;align-items:center;justify-content:center;gap:9px;color:#739a83;margin-bottom:8px;font-size:17px}.leaf:before,.leaf:after{content:"";width:17px;height:1px;background:#91ac9a}.share h2{font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:29px;margin:0 0 10px;color:#1c3931}.share p{max-width:400px;margin:0 auto 19px;color:#65776f;font-size:12px;line-height:1.7}.review-link{display:inline-flex;align-items:center;gap:12px;background:var(--green);color:white;text-decoration:none;padding:13px 25px;border-radius:30px;font-size:12px;font-weight:700;transition:background .2s,transform .2s}.review-link:hover{background:#1d5a49;transform:translateY(-1px)}
+.footer-wave{position:absolute;z-index:0;bottom:0;left:0;width:100%;height:190px;background:linear-gradient(0deg,#062e25d9,#0b4035e8),url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1800&q=80') center 48%/cover;clip-path:ellipse(88% 57% at 50% 100%)}.footer-wave:before{content:"";position:absolute;left:-5%;top:-33px;width:110%;height:75px;background:var(--cream);border-radius:50%;transform:rotate(3deg)}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:#071e19c9;z-index:20;padding:22px}.modal.is-open{display:flex}.modal__box{position:relative;width:min(850px,100%);background:#fff;border-radius:10px;padding:16px}.modal__close{position:absolute;right:8px;top:8px;z-index:2;border:0;border-radius:50%;width:36px;height:36px;background:var(--green);color:#fff;font-size:23px}.modal video,.modal iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#102b24;border-radius:5px}.modal__note{font-size:12px;color:var(--muted);margin:10px 3px 0}
+@media(min-width:1000px){.testimonials{padding-top:38px}.testimonial-card{min-height:280px}.media,.media img{min-height:250px}}
+@media(max-width:760px){.testimonials{padding:26px 18px 0}.intro{font-size:13px}.tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-bottom:22px}.tab{font-size:11px;min-height:44px;gap:7px}.carousel-wrap{padding:0 24px}.testimonial-card{grid-template-columns:1fr;gap:12px;padding:10px}.media,.media img{height:205px;min-height:205px}.quote{padding:7px 8px 13px}.quote blockquote{font-size:17px;margin-bottom:14px}.quote-mark{font-size:38px;height:26px}.arrow{width:36px;height:36px;font-size:22px}.arrow--prev{left:-1px}.arrow--next{right:-1px}.dots{margin:16px 0 28px}.share{padding-bottom:85px}.share h2{font-size:26px}.footer-wave{height:145px}}
+@media(max-width:420px){.testimonials h1{font-size:35px}.tab{padding:7px 4px;font-size:10px}.tab .tab-icon{font-size:15px}.media,.media img{height:175px;min-height:175px}.carousel-wrap{padding:0 20px}.testimonial-card{min-height:0}.person span{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+</style>
+</head>
+<body>
+<main class="testimonials">
+ <div class="testimonials__inner">
+  <div class="eyebrow">Real experiences · Lasting memories</div>
+  <h1>Testimonials</h1>
+  <p class="intro">Hear from the teachers, guests and event visitors who have experienced<br class="desktop-break"> Hilston Park for themselves.</p>
+  <div class="tabs" role="tablist" aria-label="Testimonial categories">
+   <button class="tab" id="tab-schools" role="tab" aria-selected="true" aria-controls="testimonial-panel" data-category="schools"><span class="tab-icon" aria-hidden="true">♧</span> Schools &amp; Teachers</button>
+   <button class="tab" id="tab-guests" role="tab" aria-selected="false" aria-controls="testimonial-panel" data-category="guests"><span class="tab-icon" aria-hidden="true">⌂</span> Private Guests</button>
+   <button class="tab" id="tab-events" role="tab" aria-selected="false" aria-controls="testimonial-panel" data-category="events"><span class="tab-icon" aria-hidden="true">▦</span> Events</button>
+   <button class="tab" id="tab-community" role="tab" aria-selected="false" aria-controls="testimonial-panel" data-category="community"><span class="tab-icon" aria-hidden="true">♧</span> Community &amp; Partners</button>
+  </div>
+  <section id="testimonial-panel" role="tabpanel" aria-labelledby="tab-schools">
+   <div class="carousel-wrap">
+    <button class="arrow arrow--prev" type="button" aria-label="Previous testimonial">‹</button>
+    <div class="carousel-viewport" aria-live="polite"><div class="carousel-track" id="carousel-track"></div></div>
+    <button class="arrow arrow--next" type="button" aria-label="Next testimonial">›</button>
+   </div>
+   <div class="dots" id="carousel-dots" aria-label="Choose testimonial"></div>
+  </section>
+
+ </div>
+</main>
+<div class="modal" id="video-modal" role="dialog" aria-modal="true" aria-label="Testimonial video"><div class="modal__box"><button class="modal__close" type="button" aria-label="Close video">×</button><div id="video-content"></div><p class="modal__note" id="video-note">Replace the demo video URL in the JavaScript with your own testimonial video.</p></div></div>
+<script>
+    (() => {
+ const imageSchool='https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85';
+ const imageHouse='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1000&q=85';
+ const imageEvent='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1000&q=85';
+ const imageGrounds='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=85';
+ // Replace sample names/quotes and video URLs with approved real testimonials.
+ const testimonials={
+  schools:[
+   {image:imageSchool,quote:'The organisation of our residential was excellent. The staff were fantastic and the students absolutely loved every minute. The activities, accommodation and food all exceeded our expectations, and we would highly recommend Hilston Park to other schools.',name:'Sarah Thompson',role:'Teacher, Oakridge School',video:''},
+   {image:imageGrounds,quote:'The team made our school visit feel welcoming from the moment we arrived. The activities were engaging, well organised and full of opportunities for the pupils to learn.',name:'James Wilson',role:'Head of Year, Westfield School',video:''},
+   {image:imageHouse,quote:'A memorable residential experience with supportive instructors, comfortable accommodation and activities our pupils are still talking about.',name:'Emma Roberts',role:'Primary Teacher',video:''}
+  ],
+  guests:[
+   {image:imageHouse,quote:'A beautiful place to stay, with lovely grounds and thoughtful hospitality. It was the perfect setting to relax, explore and spend quality time together.',name:'Olivia Martin',role:'Private Guest',video:''},
+   {image:imageGrounds,quote:'The setting was peaceful and the whole experience felt personal. We enjoyed the facilities and would happily return for another stay.',name:'Daniel Price',role:'Weekend Guest',video:''}
+  ],
+  events:[
+   {image:imageEvent,quote:'Such a fun and brilliantly organised event. The atmosphere, attention to detail and friendly team made it a night to remember.',name:'Charlotte Evans',role:'Event Guest',video:''},
+   {image:imageHouse,quote:'We came along for a special weekend and had a fantastic time. Everything was thoughtfully planned and the venue made the experience feel unique.',name:'Michael Green',role:'Murder Mystery Guest',video:''}
+  ],
+  community:[
+   {image:imageGrounds,quote:'Hilston Park is a welcoming venue and a valued local partner. The team are helpful, professional and genuinely committed to creating great experiences.',name:'Alex Morgan',role:'Community Partner',video:''},
+   {image:imageEvent,quote:'Working with the team was straightforward from start to finish. The venue offers a wonderful setting for bringing people together.',name:'Rebecca Hall',role:'Local Organisation',video:''}
+  ]
+ };
+ const track=document.getElementById('carousel-track'),dots=document.getElementById('carousel-dots');
+ const tabs=[...document.querySelectorAll('.tab')],prev=document.querySelector('.arrow--prev'),next=document.querySelector('.arrow--next');
+ const modal=document.getElementById('video-modal'),videoContent=document.getElementById('video-content'),videoNote=document.getElementById('video-note');
+ let category='schools',index=0,timer=null;
+ function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+ function render(){const items=testimonials[category];index=(index+items.length)%items.length;
+  track.innerHTML=items.map((item,i)=>`<article class="testimonial-card" aria-label="Testimonial ${i+1} of ${items.length}"><div class="media"><img src="${escapeHTML(item.image)}" alt="${escapeHTML(category==='schools'?'School group enjoying an outdoor residential experience':category==='guests'?'Accommodation and grounds at Hilston Park':category==='events'?'Guests attending a special event':'Hilston Park grounds and community setting')}" loading="${i===index?'eager':'lazy'}">${item.video?`<button class="play-button" type="button" data-video="${escapeHTML(item.video)}" aria-label="Play ${escapeHTML(item.name)}'s testimonial video">▶</button>`:''}</div><div class="quote"><div class="quote-mark" aria-hidden="true">“</div><blockquote>“${escapeHTML(item.quote)}”</blockquote><div class="person"><img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy"><div><strong>${escapeHTML(item.name)}</strong><span>${escapeHTML(item.role)}</span></div></div></div></article>`).join('');
+  track.style.transform=`translateX(-${index*100}%)`;
+  dots.innerHTML=items.map((_,i)=>`<button class="dot" type="button" data-index="${i}" aria-label="Show testimonial ${i+1}" aria-current="${i===index?'true':'false'}"></button>`).join('');
+  prev.disabled=items.length<2;next.disabled=items.length<2;
+  document.getElementById('testimonial-panel').setAttribute('aria-labelledby',`tab-${category}`);
+ }
+ function goTo(n){index=(n+testimonials[category].length)%testimonials[category].length;render();restartAutoplay()}
+ function setCategory(nextCategory){if(!testimonials[nextCategory])return;category=nextCategory;index=0;tabs.forEach(tab=>{const selected=tab.dataset.category===category;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1});render();restartAutoplay()}
+ function restartAutoplay(){clearInterval(timer);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(()=>goTo(index+1),7000)}
+ prev.addEventListener('click',()=>goTo(index-1));next.addEventListener('click',()=>goTo(index+1));
+ tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>setCategory(tab.dataset.category));tab.addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft','Home','End'].includes(e.key))return;e.preventDefault();let target=i;if(e.key==='ArrowRight')target=(i+1)%tabs.length;if(e.key==='ArrowLeft')target=(i-1+tabs.length)%tabs.length;if(e.key==='Home')target=0;if(e.key==='End')target=tabs.length-1;tabs[target].focus();setCategory(tabs[target].dataset.category)})});
+ dots.addEventListener('click',e=>{const dot=e.target.closest('[data-index]');if(dot)goTo(Number(dot.dataset.index))});
+ track.addEventListener('click',e=>{const button=e.target.closest('[data-video]');if(!button)return;const url=button.dataset.video;videoContent.innerHTML='';videoNote.textContent='';if(url.includes('youtube.com')||url.includes('youtu.be')||url.includes('vimeo.com')){const iframe=document.createElement('iframe');iframe.src=url;iframe.title='Testimonial video';iframe.allow='autoplay; fullscreen; picture-in-picture';iframe.allowFullscreen=true;videoContent.appendChild(iframe)}else{const video=document.createElement('video');video.controls=true;video.autoplay=true;video.src=url;videoContent.appendChild(video)}modal.classList.add('is-open');modal.querySelector('.modal__close').focus();clearInterval(timer)});
+ function closeModal(){modal.classList.remove('is-open');videoContent.innerHTML='';restartAutoplay()}
+ modal.querySelector('.modal__close').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('is-open'))closeModal()});
+ let touchStart=0;track.addEventListener('touchstart',e=>{touchStart=e.changedTouches[0].clientX},{passive:true});track.addEventListener('touchend',e=>{const delta=e.changedTouches[0].clientX-touchStart;if(Math.abs(delta)>45)goTo(index+(delta<0?1:-1))},{passive:true});
+ document.querySelector('.carousel-wrap').addEventListener('mouseenter',()=>clearInterval(timer));document.querySelector('.carousel-wrap').addEventListener('mouseleave',restartAutoplay);document.querySelector('.carousel-wrap').addEventListener('focusin',()=>clearInterval(timer));document.querySelector('.carousel-wrap').addEventListener('focusout',restartAutoplay);
+ render();restartAutoplay();
+})();
+
+</script>
+</body></html>
