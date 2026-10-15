@@ -3001,6 +3001,7 @@ span.flatpickr-weekday {
 .post-content a{
     color:#4e9484;
         font-weight: bold;
+        text-decoration: underline;
 }
 
 /*--up code--*/
