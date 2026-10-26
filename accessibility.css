@@ -474,7 +474,7 @@ body:has(#hp-cookie-banner.hpcc-show) .a11y-fab {
 
 
 
-#hilston-accessibility-badge{padding:15px;position:fixed;left:27px;bottom:12%;width:60px;height:60px;border-radius:50%;background:#0047ab;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:28px;z-index:999;box-shadow:0 5px 20px rgb(0 0 0/.2)}
+#hilston-accessibility-badge{padding:15px;position:fixed;left:27px;bottom:12%;width:52px;height:52px;border-radius:50%;background:#3c7a6c;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:28px;z-index:999;box-shadow:0 5px 20px rgb(0 0 0/.2)}
 #hilston-accessibility-sidebar{position:fixed;left:-400px;width:400px;background:#fff;z-index:999999;overflow-y:auto;transition:left .3s;box-shadow:0 1px 20px 0 rgb(0 0 0/.2);border-radius:20px;bottom:82px}
 #hilston-accessibility-sidebar.active{left:30px}
 .hilston-header{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid #e5e5e5;position:sticky;top:0;background:#0049a9;color:#fff}
