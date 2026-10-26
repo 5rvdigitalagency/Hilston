@@ -218,7 +218,7 @@ p, li, blockquote, figcaption, .section-intro, .hero-sub, .card-desc,
 /* =====================================================
    HEADER
    ===================================================== */
-.site-header { background: var(--white); padding: 26px 56px; transition: padding 0.3s ease; }
+.site-header { background: var(--white); padding: 12px 56px; transition: padding 0.3s ease; }
 .header-inner {
   display: flex;
   align-items: center;
