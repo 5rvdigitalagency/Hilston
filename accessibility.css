@@ -453,3 +453,74 @@ body:has(#hp-cookie-banner.hpcc-show) .a11y-fab {
   #hilston-accessibility-sidebar { left: -100vw; bottom: 16px; }
   #hilston-accessibility-sidebar.active { left: 12px; }
 }
+
+.hilston-header svg{
+  width: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#hilston-accessibility-badge{padding:15px;position:fixed;left:27px;bottom:12%;width:52px;height:52px;border-radius:50%;background:#3c7a6c;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:28px;z-index:999;box-shadow:0 5px 20px rgb(0 0 0/.2)}
+#hilston-accessibility-sidebar{position:fixed;left:-400px;width:400px;background:#fff;z-index:999999;overflow-y:auto;transition:left .3s;box-shadow:0 1px 20px 0 rgb(0 0 0/.2);border-radius:20px;bottom:82px}
+#hilston-accessibility-sidebar.active{left:30px}
+.hilston-header{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid #e5e5e5;position:sticky;top:0;background:#0049a9;color:#fff}
+.hilston-header svg{width:20px}
+.hilston-features-sec{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:15px}
+.hilston-header h3{margin:0;font-size:16px;text-transform:capitalize;display:flex;align-items:center;gap:15px;font-weight:600}
+#hilston-close-btn{border:none;background:0 0;cursor:pointer;font-size:20px}
+.hilston-content{padding:20px;overflow:auto;max-height:65vh}
+.hilston-section{text-align:center}
+.hilston-section h4{margin:0 0 15px;text-align:center;text-transform:uppercase;font-size:14px;color:#0049a9}
+#hilston-reset{padding:12px;margin:0 auto;background:#0049a9;color:#fff}
+.hilston-section button{padding:3px 10px;margin-bottom:0;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;font-weight:500;font-size:14px;line-height:22px;width:auto}
+.hilston-section button#hilston-reset{padding:8px 15px;margin-top:20px}
+.hilston-section button:hover{background:#f5f5f5}
+.hilston-letter-spacing *{letter-spacing:.12em!important}
+.hilston-bold-font *{font-weight:700!important}
+.hilston-highlight-links a{background:#447bdc!important;color:#000!important;text-decoration:underline!important;outline:#000 solid 2px!important}
+.hilston-dark-contrast,.hilston-dark-contrast body{background:#121212!important;color:#fff!important}
+.hilston-dark-contrast article,.hilston-dark-contrast aside,.hilston-dark-contrast footer,.hilston-dark-contrast header,.hilston-dark-contrast main,.hilston-dark-contrast nav,.hilston-dark-contrast section{background-color:#121212!important;color:#fff!important}
+.hilston-dark-contrast div{background-color:#fff0;color:#fff!important}
+.hilston-dark-contrast .hilston-section button{border:1px solid #242424}
+.hilston-dark-contrast #hilston-accessibility-sidebar{background-color:#3a3939!important}
+.hilston-dark-contrast .hilston-header{background-color:#000}
+.hilston-dark-contrast a,.hilston-dark-contrast h1,.hilston-dark-contrast h2,.hilston-dark-contrast h3,.hilston-dark-contrast h4,.hilston-dark-contrast h5,.hilston-dark-contrast h6,.hilston-dark-contrast label,.hilston-dark-contrast li,.hilston-dark-contrast p,.hilston-dark-contrast span{color:#fff!important}
+.hilston-dark-contrast input,.hilston-dark-contrast select,.hilston-dark-contrast textarea{background:#1f1f1f!important;color:#fff!important;border:1px solid #555!important}
+.hilston-dark-contrast button{background:#333!important;color:#fff!important}
+.hilston-dark-contrast img,.hilston-dark-contrast svg,.hilston-dark-contrast video{filter:none!important}
+body.hilston-light-contrast .hilston-header h3{color:#fff}
+body.hilston-light-contrast{background:#fff!important;color:#000!important}
+body.hilston-light-contrast article,body.hilston-light-contrast footer,body.hilston-light-contrast header,body.hilston-light-contrast main,body.hilston-light-contrast section{background:#fff!important}
+body.hilston-light-contrast input,body.hilston-light-contrast select,body.hilston-light-contrast textarea{background:#fff!important;color:#000!important;border:2px solid #000!important}
+.hilston-low-saturation{filter:saturate(30%)}
+.hilston-grayscale{filter:grayscale(100%)}
+.hilston-seizure-safe *,.hilston-seizure-safe :after,.hilston-seizure-safe :before,.hilston-stop-motion *,.hilston-stop-motion :after,.hilston-stop-motion :before{animation:none!important;transition:none!important}
+#hilston-reading-mask{pointer-events:none;display:none;position:fixed;left:0;top:0;width:100%;height:150px;z-index:999998;transition:transform .08s linear;box-shadow:0 -9999px 0 9999px rgb(0 0 0/.65),0 9999px 0 9999px rgb(0 0 0/.65);background:0 0}
+.hilston-seizure-safe{filter:grayscale(100%)!important}
+.hilston-low-vision{font-size:150%!important}
+.hilston-adhd{letter-spacing:.08em!important}
+#hilston-reading-mask.active{display:block}
+html.hilston-font-scale-110 body{zoom:1.1}
+html.hilston-font-scale-120 body{zoom:1.2}
+html.hilston-font-scale-130 body{zoom:1.3}
+html.hilston-font-scale-140 body{zoom:1.4}
+html.hilston-font-scale-150 body{zoom:1.5}
+html.hilston-font-scale-90 body{zoom:.9}
+html.hilston-font-scale-80 body{zoom:.8}
+html.hilston-font-scale-70 body{zoom:.7}
+html.hilston-font-scale-60 body{zoom:.6}
+html.hilston-font-scale-50 body{zoom:.5}
