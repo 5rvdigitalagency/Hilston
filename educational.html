@@ -202,7 +202,25 @@
       transition: max-height 0.4s ease, opacity 0.4s ease;
       opacity: 0;
     }
-    .gallery-slide-item:hover .slide-label-sub { max-height: 80px; opacity: 1; }
+    .slide-focus ul ,.accom-section ul{
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 8px 0 0;
+}
+
+.slide-focus li ,.accom-section li{
+  display: list-item;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.accom-section li{
+font-size: 0.88rem;
+    line-height: 1.78;
+    color: var(--text-muted);
+}
+
+
+    .gallery-slide-item:hover .slide-label-sub { max-height: 180px; opacity: 1; }
     .slide-label-arrow {
       display: inline-block; margin-top: 12px; font-size: 0.68rem;
       font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
@@ -403,9 +421,9 @@
     <div class="edu-hero-overlay"></div>
     <div class="edu-hero-inner">
       <div>
-        <h1>Supervised Learning Outside the Classroom</h1>
-        <p class="edu-hero-sub">Residential school trips for KS2 to Post-16. Fully guided, activity-led, and developed to support learning within nature.</p>
-        <a href="javascript:void(0)" class="btn-pill" data-inquire>PLAN A SCHOOL TRIP</a>
+        <h1>Learning Outside the Classroom</h1>
+        <p class="edu-hero-sub">Residential school trips at Hilston Park help pupils learn through adventures, challenges, activities and shared experiences.</p>
+        <a href="javascript:void(0)" class="btn-pill" data-inquire>PLAN A SCHOOL VISIT</a>
       </div>
     </div>
   </section>
@@ -439,9 +457,9 @@
         <img src="images/edu-act-1.jpg" alt="Students at Hilston Park">
       </div>
       <div class="edu-intro-text">
-        <h2 class="heading-display">Progressive Educational Trips for&nbsp;Schools</h2>
-        <p>Learning beyond the school gates is the moment that teaches more than it excites.</p>
-        <p>At Hilston Park, students learn through safely structured outdoor experiences that leave a lasting impact. A day programme or a residential stay in the Welsh countryside provides access to outdoor education activities that foster personal development for primary to Post-16 pupils. With over 50 years of experience, trained staff, and inclusive SEND support, Hilston Park ensures the safety of every child within larger groups.</p>
+        <h2 class="heading-display">Valuable Educational Trips for Schools</h2>
+        <p>Activity sessions aren’t the only thing that brings growth and learning. It’s the experience of living together; managing kitchen duties, eating together, and interacting with peers and staff.</p>
+        <p>For many pupils, a Hilston Park residential is their first time away from home for several nights. Therefore, we plan their experience in a way that balances high safety standards with room for independence, personal responsibility, and confidence to grow.</p><p>Here at Hilston Park, we host day trips, short stays, and week-long residentials for primary and secondary schools. Located in the Welsh countryside, our trips are designed to challenge, educate, and support both pupils and visiting staff.</p><p>Our site features an on-site Learning Centre for classroom work, manor house accommodation for up to 130 students plus staff, camping space for 100+, and the option for exclusive use of the estate.</p>
         <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
       </div>
     </div>
@@ -449,8 +467,8 @@
 
   <!-- ACTIVITIES -->
   <section class="activities">
-    <h2 class="heading-display activities-heading">Inspire with 15+ Outdoor Experiences</h2>
-    <p class="activities-subhead">Every outdoor activity at Hilston Park is guided with expert care, provided with quality equipment, and adapted to ensure every student feels capable and inspired to explore.</p>
+    <h2 class="heading-display activities-heading">Inspire with 15+ Outdoor Experiences That Help Grow in Confidence</h2>
+    <p class="activities-subhead">Every outdoor activity at Hilston Park is guided by experienced instructors. When pupils participate, they develop essential life skills, including communication, teamwork, leadership, and resilience.</p>
     <div class="activities-grid">
       <div class="act-col">
         <div class="act-text-card">
@@ -494,27 +512,27 @@
   <section class="we-offer">
     <div class="we-offer-inner">
       <div>
-        <h2 class="heading-display">What We Offer to Make Educational Trips Exceptional</h2>
+        <h2 class="heading-display">What Makes Our School Residentials Different</h2>
         <ol class="offer-list">
           <li class="offer-item">
             <h3>Adventure &amp; Team Building Activities</h3>
-            <p>Supporting learning outside the classroom with activities that get students thinking, moving and working together.</p>
+            <p>Learn through adventure and practical challenges that teach teamwork and problem-solving skills.</p>
           </li>
           <li class="offer-item">
             <h3>Meals &amp; Catering</h3>
-            <p>Fresh, home-cooked food is prepared on-site after collecting all the dietary and allergy information before arrival.</p>
+            <p>We collect dietary and allergy information before our cooking professionals prepare fresh, home-cooked meals.</p>
           </li>
           <li class="offer-item">
             <h3>Flexible Residential&nbsp;Stays</h3>
-            <p>Whether a day trip or a week-long residential, we plan around your timetable, your objectives and your group.</p>
+            <p>Whether a single day trip or a week-long residential, we plan around your school’s schedule and learning goals.</p>
           </li>
           <li class="offer-item">
-            <h3>SEN &amp; Additional Needs&nbsp;Support</h3>
-            <p>Group sizes, pace and environment can all be adjusted to suit your students. Your SEN staff take the lead and we handle everything else.</p>
+            <h3>Support for Teachers &amp; Pupils</h3>
+            <p>Our team leads activities and evening entertainment, giving teachers more time to support pupils, take part in activities and build relationships with their class.</p>
           </li>
         </ol>
         <div class="offer-cta">
-          <a href="/contact" class="btn-pill" data-inquire>MAKE AN ENQUIRY</a>
+          <a href="/contact" class="btn-pill" data-inquire>EXPLORE REAL EXPERIENCES</a>
         </div>
       </div>
       <div class="we-offer-images">
@@ -531,7 +549,7 @@
     <div class="age-gallery-header">
       <div>
         <h2 class="heading-display age-gallery-heading light">Educational Programmes by Age&nbsp;Group</h2>
-        <p class="age-gallery-sub">Every programme the staff at Hilston Park designs matches the age, confidence and readiness of the students group.</p>
+        <p class="age-gallery-sub">Every programme designed by the staff at Hilston Park matches the age, confidence and readiness of the student group.</p>
       </div>
       <div class="gallery-nav">
         <button class="gallery-arrow" id="galleryPrev" aria-label="Previous slide">
@@ -547,44 +565,94 @@
         <img src="images/edu-act-3.jpg" alt="KS2 Primary School Residential">
         <div class="slide-label">
           <span class="slide-label-title">KS2 (Ages 8&ndash;11) &mdash; Primary School Residential</span>
-          <span class="slide-label-sub">Away from home for the first time. We make sure it feels like the right decision.</span>
+          <div class="slide-label-sub">Away from home for the first time. We make sure it feels like the right decision.
+
+   
+      <div class="slide-focus">
+        <strong>Focus:</strong>
+        <ul>
+          <li>Confidence in a new environment</li>
+          <li>Safe independence with staff always nearby</li>
+          <li>Collaborative, guided group activities</li>
+        </ul>
+      </div>
+    </div>
         </div>
       </div>
       <div class="gallery-slide-item">
         <img src="images/edu-canoeing.jpg" alt="KS3 Secondary Outdoor Learning">
         <div class="slide-label">
           <span class="slide-label-title">KS3 (Ages 11&ndash;14) &mdash; Secondary Outdoor Learning</span>
-          <span class="slide-label-sub">The age where curiosity kicks in. We give them the space to explore it safely.</span>
+          <div class="slide-label-sub">The age where curiosity kicks in. We give them the space to explore it safely.
+                <div class="slide-focus">
+        <strong>Focus:</strong>
+        <ul>
+          <li>Communication within teams</li>
+          <li>Shared responsibility for group outcomes</li>
+          <li>Outdoor challenges with clear boundaries</li>
+        </ul>
+      </div>
+
+
+          </div>
         </div>
       </div>
       <div class="gallery-slide-item">
         <img src="images/adventure.jpg" alt="KS4 GCSE Age Group">
         <div class="slide-label">
           <span class="slide-label-title">KS4 (Ages 14&ndash;16) &mdash; GCSE Age Group</span>
-          <span class="slide-label-sub">Ready for more. These sessions give them the challenge to match it.</span>
+          <div class="slide-label-sub">Ready for more. These sessions give them the challenge to match it.
+
+                  <div class="slide-focus">
+        <strong>Focus:</strong>
+        <ul>
+          <li>Leadership within group tasks</li>
+          <li>Decision-making with staff guidance</li>
+          <li>Resilience and personal responsibility</li>
+        </ul>
+      </div>
+
+         </div>
         </div>
       </div>
       <div class="gallery-slide-item">
         <img src="images/edu-outdoor.jpg" alt="Post-16 College Groups">
         <div class="slide-label">
           <span class="slide-label-title">Post-16 &amp; College Groups</span>
-          <span class="slide-label-sub">Last year of education. These sessions prepare for what comes next.</span>
+          <div class="slide-label-sub">Last year of education. These sessions prepare for what comes next.
+
+      <div class="slide-focus">
+          <strong>Focus:</strong>
+          <ul>
+            <li>Real group challenges that reflect adult responsibility</li>
+            <li>Leadership in practical, outdoor situations</li>
+            <li>Teamwork, communication and honest reflection</li>
+          </ul>
+        </div>
+
+      </div>
         </div>
       </div>
       <div class="gallery-slide-item">
         <img src="images/accommodation.jpg" alt="SEND Inclusion Groups">
         <div class="slide-label">
           <span class="slide-label-title">SEND &amp; Inclusion Groups</span>
-          <span class="slide-label-sub">Every student participates. Our staff adapt pace, group size and setting for every need.</span>
+          <div class="slide-label-sub">Every student participates. Our staff adapt pace, group size and setting for every need.</span>
         </div>
       </div>
     </div>
+   
+    </div>
+        <div class="accom-cta" style="text-align: center;">
+          <a href="/contact" class="btn-pill" >Get a Custom Itinerary</a>
+        </div>
+   
   </section>
 
   <!-- ACCOMMODATION -->
   <section class="edu-accom">
     <h2 class="heading-display edu-accom-heading">School Group Accommodation at Hilston&nbsp;Park</h2>
-    <p class="edu-accom-sub">For large group residentials of 30 or more, Hilston Park&rsquo;s historic manor house gives schools a fully self-contained space where students sleep, eat and spend time with groups.</p>
+    <p class="edu-accom-sub">For large group residentials of 30 or more, Hilston Park’s historic manor house gives schools a fully self-contained space where students sleep, eat and spend time together.</p>
     <div class="edu-accom-grid">
       <div class="edu-accom-img">
         <img src="images/edu-accom-2.jpg" alt="Bunk rooms sleeping 130+ students at Hilston Park">
@@ -595,7 +663,7 @@
       <div class="edu-accom-content">
         <div class="accom-section">
           <h3>Sleeping Arrangements</h3>
-          <p>Hilston Park offers bunk room accommodation for large school groups, with staff rooms nearby to keep supervisors close to students.</p>
+          <ul><li>16 bunk rooms sleeping 130+ students</li><li>Additional beds available on the lower floor</li><li>Staff rooms within the same building, keeping your team close to students at all times</li><li>Room allocation organised by class or year group, confirmed before arrival</li></ul>
         </div>
         <div class="accom-section">
           <h3>Dining Hall</h3>
@@ -610,7 +678,7 @@
           <p>Every activity area is within walking distance on the estate. No coaches, no off-site travel, no wasted time in the day.</p>
         </div>
         <div class="accom-cta">
-          <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
+          <a href="javascript:void(0)" class="btn-pill" data-inquire>DISCOVER YOUR STAY</a>
         </div>
       </div>
     </div>
@@ -749,7 +817,7 @@
               <span class="acc-question">What age groups do you welcome for educational trips?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button></h3>
-          <div class="accordion-body"><p>Hilston Park welcomes school groups from KS2 through to Post-16 and Sixth Form. Every programme at our outdoor learning centre is shaped around the age, ability and learning objectives of your group.</p></div>
+          <div class="accordion-body"><p>Hilston Park welcomes school groups from KS2 through to Post-16. Every programme at our outdoor learning centre is designed around the age, ability and learning objectives of your group.</p></div>
         </div>
         <div class="accordion-item">
           <h3 class="accordion-heading"><button class="accordion-btn">
@@ -763,14 +831,14 @@
               <span class="acc-question">How long can a school residential last?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button></h3>
-          <div class="accordion-body"><p>There is no fixed limit. Most schools plan between one and five nights, though longer stays are available. Every residential is planned around your school calendar and curriculum goals.</p></div>
+          <div class="accordion-body"><p>There is no fixed limit or template. Most schools plan between one and five nights, though longer stays are available.</p></div>
         </div>
         <div class="accordion-item">
           <h3 class="accordion-heading"><button class="accordion-btn">
               <span class="acc-question">Do you support students with SEN on residential trips?</span>
               <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
             </button></h3>
-          <div class="accordion-body"><p>Yes. We work closely with SEN coordinators to ensure every student can fully participate. For schools planning educational trips for students with SEN, speak with our team before your visit so that we can understand specific learning, mobility, or behavioural requirements.</p></div>
+          <div class="accordion-body"><p>Yes. We review your pupils’ specific learning, mobility, and behavioural requirements before you arrive to adjust equipment, activity pacing, and site arrangements.</p></div>
         </div>
         <div class="accordion-item">
           <h3 class="accordion-heading"><button class="accordion-btn">

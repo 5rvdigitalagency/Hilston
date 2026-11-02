@@ -40,6 +40,388 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style.css?v=6">
   <style>
+    
+/* UPCOMING EVENTS */
+
+.twe-events {
+  padding: 100px 20px;
+  background: #f5f4ef;
+}
+
+.twe-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.twe-heading {
+  max-width: 760px;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.twe-eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #8b9165;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.twe-heading h2 {
+  margin: 0 0 18px;
+  color: #303c2d;
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.twe-heading p {
+  margin: 0 auto;
+  color: #686b61;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* FULL-WIDTH EVENT CARD */
+
+.twe-event-card {
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(37, 48, 33, 0.08);
+}
+
+.twe-event-content {
+  width: 100%;
+  padding: 45px 50px;
+}
+
+.twe-event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 25px;
+  margin-bottom: 22px;
+}
+
+.twe-event-meta span {
+  color: #77796e;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.twe-event-content h3 {
+  margin: 0 0 15px;
+  color: #303c2d;
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.twe-event-intro {
+  margin: 0 0 28px;
+  color: #686b61;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* TICKET PRICING */
+
+.twe-ticket-pricing {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  max-width: 500px;
+  margin-bottom: 35px;
+  padding: 22px 25px;
+  background: #f5f5ef;
+  border-left: 3px solid #858e62;
+}
+
+.twe-price-item {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.twe-price-label {
+  color: #77796e;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.twe-price-item strong {
+  color: #303c2d;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.twe-price-item strong small {
+  color: #77796e;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.twe-price-divider {
+  width: 1px;
+  height: 48px;
+  background: #d8d9ce;
+}
+
+/* INCLUDED DETAILS */
+
+.twe-included {
+  margin-bottom: 30px;
+}
+
+.twe-included h4,
+.twe-booking-info h4 {
+  margin: 0 0 20px;
+  color: #303c2d;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.twe-included ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px 35px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.twe-included li {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.twe-check {
+  display: flex;
+  flex: 0 0 23px;
+  align-items: center;
+  justify-content: center;
+  width: 23px;
+  height: 23px;
+  margin-top: 1px;
+  color: #fff;
+  background: #78835a;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.twe-included li strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #384333;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.twe-included li p {
+  margin: 0;
+  color: #74766c;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* BOOKING INFORMATION */
+
+.twe-booking-info {
+  padding: 24px;
+  background: #f7f7f3;
+  border: 1px solid #e9e9e0;
+  border-radius: 6px;
+}
+
+.twe-booking-info h4 {
+  margin-bottom: 17px;
+}
+
+.twe-booking-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e5dc;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.twe-booking-row:last-of-type {
+  border-bottom: 0;
+}
+
+.twe-booking-row span {
+  color: #77796e;
+}
+
+.twe-booking-row strong {
+  color: #384333;
+  font-weight: 600;
+  text-align: right;
+}
+
+.twe-booking-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 25px;
+  margin-top: 18px;
+  padding-top: 17px;
+  border-top: 1px solid #e5e5dc;
+}
+
+.twe-booking-links a {
+  color: #657348;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.twe-booking-links a:hover {
+  color: #303c2d;
+}
+
+/* CTA */
+
+.twe-event-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px 20px;
+  margin-top: 28px;
+}
+
+.twe-book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  min-height: 52px;
+  padding: 14px 25px;
+  color: #fff;
+  background: #68734d;
+  border: 1px solid #68734d;
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.twe-book-btn:hover {
+  color: #fff;
+  background: #303c2d;
+  border-color: #303c2d;
+}
+
+.twe-book-btn span {
+  font-size: 19px;
+  transition: transform 0.3s ease;
+}
+
+.twe-book-btn:hover span {
+  transform: translateX(5px);
+}
+
+.twe-footer-note {
+  color: #85867d;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 767px) {
+  .twe-events {
+    padding: 65px 16px;
+  }
+
+  .twe-heading {
+    margin-bottom: 30px;
+  }
+
+  .twe-heading h2 {
+    font-size: 31px;
+  }
+
+  .twe-heading p {
+    font-size: 14px;
+  }
+
+  .twe-event-content {
+    padding: 28px 22px;
+  }
+
+  .twe-event-content h3 {
+    font-size: 29px;
+  }
+
+  .twe-included ul {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .twe-ticket-pricing {
+    gap: 15px;
+    padding: 18px 15px;
+  }
+
+  .twe-price-item strong {
+    font-size: 23px;
+  }
+
+  .twe-price-label {
+    font-size: 10px;
+  }
+
+  .twe-booking-info {
+    padding: 19px 16px;
+  }
+
+  .twe-booking-row {
+    font-size: 12px;
+  }
+
+  .twe-event-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .twe-book-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .twe-ticket-pricing {
+    gap: 10px;
+    padding: 15px 10px;
+  }
+
+  .twe-price-item strong {
+    font-size: 21px;
+  }
+
+  .twe-price-item strong small {
+    font-size: 11px;
+  }
+
+  .twe-booking-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
     /* EVENT HERO */
     .eve-hero {
       position: relative; min-height: 540px; height: 80vh; max-height: 740px;
@@ -92,7 +474,10 @@
       font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--text); margin-top: 8px;
     }
-
+.accom-list{
+  padding-left: 2
+0px;
+}
     /* INTRO */
     .eve-intro { background: var(--white); padding: 88px 80px; }
     .eve-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
@@ -104,7 +489,7 @@
     /* EVENTS WE HOST */
     .events-we-host { background: var(--dark); padding: 88px 80px; }
     .events-we-host-header { margin-bottom: 48px; text-align: center; }
-    .events-we-host-header h2 { color: var(--white); }
+    .events-we-host-header h2 ,.events-we-host-header { color: var(--white); }
 
     /* WHAT'S ON (live from ticketing backend) */
     .whats-on { padding: 88px 80px; display: none; }
@@ -361,712 +746,1256 @@
 
   </div><!-- /site-sticky -->
 
-  <!-- ===== MOBILE NAV OVERLAY ===== -->
-  <div class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
-    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
-    <nav>
-      <ul class="mobile-nav-list">
-        <li><a href="about">About</a></li>
-        <li><a href="educational">Education</a></li>
-        <li><a href="accommodation">Private Stay</a></li>
-        <li><a href="event">Events</a></li>
-        <li><a href="activity">Activities</a></li>
-        <li><a href="gallery">Gallery</a></li>
-        <li><a href="contact">Contact</a></li>
-        <li><a href="blogs">Blog</a></li>
-        <li class="mobile-nav-book-item"><a href="https://web-bookings.hotels.uk.com/#/booking/51665/items/availability?from=2026-09-11&to=2026-09-30&k=JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D&a=2&r=1789138302314" class="btn-book mobile-nav-book">BOOK NOW</a></li>
-      </ul>
-    </nav>
-  </div>
+ <!-- HERO VIDEO -->
+<section class="eve-hero" id="main-content" tabindex="-1">
+  <video class="eve-hero-video"
+         autoplay muted loop playsinline preload="metadata"
+         poster="images/event-hero.jpg"
+         oncanplay="this.style.opacity='1'">
+    <source src="Videos/events-hero-web.mp4" type="video/mp4">
+    <img src="images/event-hero.jpg" alt="Hilston Park events">
+  </video>
 
-  <!-- HERO VIDEO -->
-  <section class="eve-hero" id="main-content" tabindex="-1">
-    <video class="eve-hero-video" autoplay muted loop playsinline preload="metadata" poster="images/event-hero.jpg" oncanplay="this.style.opacity='1'">
-      <source src="Videos/events-hero-web.mp4" type="video/mp4">
-      <img src="images/event-hero.jpg" alt="Hilston Park events">
-    </video>
-    <div class="eve-hero-overlay"></div>
-    <div class="eve-hero-inner">
-      <div>
-        <h1>Curated Event Experiences at Hilston&nbsp;Park</h1>
-        <p class="eve-hero-sub">Hilston Park create events that are experienced, not simply attended. From corporate retreats and private gatherings to special occasions, every event at Hilston Park venue brings enriching&nbsp;experiences.</p>
-        <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">PLAN YOUR EVENT</a>
-      </div>
-    </div>
-  </section>
+  <div class="eve-hero-overlay"></div>
 
-  <!-- STATS -->
-  <section class="stats-bar">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-number"><span class="counter" data-target="15">0</span><span class="stat-suffix">+</span></div>
-        <p class="stat-label">Outdoor Activities</p>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number"><span class="counter" data-target="130">0</span><span class="stat-suffix">+</span></div>
-        <p class="stat-label">Guest Stays</p>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number"><span class="counter" data-target="700">0</span><span class="stat-suffix">+</span></div>
-        <p class="stat-label">Years of History</p>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number"><span class="counter" data-target="100">0</span><span class="stat-suffix">%</span></div>
-        <p class="stat-label">Staff-Led Activities</p>
-      </div>
-    </div>
-  </section>
+  <div class="eve-hero-inner">
+    <div>
+      <h1>Curated Event Experiences At Hilston Park</h1>
 
-  <!-- INTRO -->
-  <section class="eve-intro">
-    <div class="eve-intro-grid">
-      <div class="eve-intro-img">
-        <img src="images/event-incl-banner.jpg" alt="Outdoor team building at Hilston Park">
-      </div>
-      <div class="eve-intro-text">
-        <h2 class="heading-display">Every Events Set to Challenge, Connect and&nbsp;Energise</h2>
-        <p class="eve-intro-sub">Most teams arrive at Hilston Park not quite sure what to expect. By the end of the day, we ensure that hesitation is removed.</p>
-        <p>Our outdoor team building activities put people in situations they would never encounter in the office. Someone who is usually quiet becomes the one leading the group. The Welsh countryside does something to people that a conference room cannot replicate. We plan the entire experience, including activities, catering, and accommodation if needed. You share your group size, your goals, and your dates. We build the day around you.</p>
-      </div>
-    </div>
-  </section>
+      <p class="eve-hero-sub">
+        Our planned events aren't simply attended, they're experienced.
+        Within our majestic estate, our event planners create elegant
+        spaces for social gatherings and special celebrations.
+      </p>
 
-  <!-- EVENTS WE HOST -->
-  <section class="events-we-host">
-    <div class="events-we-host-header">
-      <h2 class="heading-display">Events We Host</h2>
-    </div>
-    <div class="service-carousel">
-    <div class="service-grid" id="serviceGrid">
-      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="12"/></svg>
-        </div>
-        <h3>Outdoor Corporate&nbsp;Events</h3>
-        <p>Take your team out of the office to an environment that improves mental health. Hilston Park makes corporate events stress-free for you by handling the space, accommodation, activities, and catering.</p>
-      </div>
-      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <h3>Outdoor Team Building&nbsp;Events</h3>
-        <p>Enhance workplace collaboration through adventurous outdoor challenges, group problem-solving tasks, and hands-on activities safely hosted in the landscapes of the Wye Valley.</p>
-      </div>
-      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s-8-5.8-8-12a8 8 0 0116 0c0 6.2-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <h3>Wellbeing Retreats</h3>
-        <p>A quieter, more intentional event in a rural setting. Use the grounds and indoor spaces to deliver wellness programmes, mindfulness sessions, or leadership development days.</p>
-      </div>
-      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <h3>Private Group Stays</h3>
-        <p>Birthdays, reunions, celebration weekends. Hilston Park brings together sleeping, dining, outdoor space, and activities so your group can enjoy it all in one place.</p>
-      </div>
-      <div class="service-card" data-booking-type="event" role="button" tabindex="0">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-        </div>
-        <h3>Health &amp; Wellbeing Residentials</h3>
-        <p>Plan a day or week-long rural retreat for structured wellbeing programmes or self-organised group stays.</p>
-      </div>
-    </div>
-    </div><!-- /.service-carousel -->
-    <div class="carousel-nav" id="serviceCarouselNav">
-      <button class="carousel-btn" id="servicePrev" aria-label="Previous">
-        <svg viewBox="0 0 18 18"><polyline points="11,3 5,9 11,15"/></svg>
-      </button>
-      <div class="carousel-dots" id="serviceDots"></div>
-      <button class="carousel-btn" id="serviceNext" aria-label="Next">
-        <svg viewBox="0 0 18 18"><polyline points="7,3 13,9 7,15"/></svg>
-      </button>
-    </div>
-    <div class="service-cta">
-      <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">ENQUIRE ABOUT AN EVENT</a>
-    </div>
-  </section>
-
-  <!-- WHAT'S ON -->
-  <section class="whats-on" id="whatsOn" aria-labelledby="whatsOnHeading">
-    <div class="whats-on-header">
-      <h2 class="heading-display" id="whatsOnHeading">What&rsquo;s On</h2>
-      <p>Upcoming events open for booking at Hilston Park.</p>
-    </div>
-    <div class="whats-on-grid" id="whatsOnGrid"></div>
-  </section>
-
-  <script>
-  (function () {
-    var ENDPOINT = '/api/events';
-    var section = document.getElementById('whatsOn');
-    var grid = document.getElementById('whatsOnGrid');
-    if (!section || !grid) return;
-
-    var AUDIENCE = {
-      general: 'All ages',
-      adult_only: 'Adults only',
-      kids_only: 'Children only',
-      kids_parent_mandatory: 'Child + parent'
-    };
-
-    var AUDIENCE_NOTICE = {
-      general: 'Open to all ages.',
-      adult_only: 'Adults only. Everyone attending must be 18 or over.',
-      kids_only: 'For children only.',
-      kids_parent_mandatory: 'Children must be accompanied by a parent or guardian.'
-    };
-
-    function ageNotice(event) {
-      var parts = [AUDIENCE_NOTICE[event.audiencePolicy] || ''];
-      var hasMin = typeof event.minAge === 'number';
-      var hasMax = typeof event.maxAge === 'number';
-      if (hasMin && hasMax) parts.push('Ages ' + event.minAge + ' to ' + event.maxAge + '.');
-      else if (hasMin) parts.push('Minimum age ' + event.minAge + '.');
-      else if (hasMax) parts.push('Maximum age ' + event.maxAge + '.');
-      return parts.filter(Boolean).join(' ');
-    }
-
-    function formatDate(value) {
-      var date = new Date(value);
-      if (isNaN(date)) return '';
-      return date.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
-    }
-
-    function tag(text) {
-      var span = document.createElement('span');
-      span.className = 'whats-on-tag';
-      span.textContent = text;
-      return span;
-    }
-
-    function openEventBooking(event) {
-      var overlay = document.createElement('div');
-      overlay.className = 'event-booking-overlay';
-      overlay.setAttribute('role', 'dialog');
-      overlay.setAttribute('aria-modal', 'true');
-      var panel = document.createElement('section');
-      panel.className = 'event-booking-panel';
-      var close = document.createElement('button');
-      close.className = 'event-booking-close';
-      close.type = 'button';
-      close.setAttribute('aria-label', 'Close booking form');
-      close.textContent = '×';
-      var eyebrow = document.createElement('div');
-      eyebrow.className = 'whats-on-date';
-      eyebrow.textContent = 'Book event';
-      var title = document.createElement('h2');
-      title.textContent = event.title;
-      var copy = document.createElement('p');
-      var placesAvailable = typeof event.placesLeft === 'number' ? event.placesLeft : Number(event.capacity || 0);
-      copy.textContent = placesAvailable > 0
-        ? 'Confirm your details, then complete the test payment to reserve your place. ' + placesAvailable + ' place' + (placesAvailable === 1 ? '' : 's') + ' remaining.'
-        : 'This event is fully booked. Please contact Hilston Park to join the waiting list.';
-      var form = document.createElement('form');
-      form.className = 'event-booking-form';
-      var notice = document.createElement('div');
-      notice.className = 'event-audience-notice';
-      notice.innerHTML = '<strong>Who can attend</strong>' + ageNotice(event);
-      form.innerHTML = '<label>Your name<input name="name" autocomplete="name" required></label><label>Email address<input name="email" type="email" autocomplete="email" required></label><label>Children attending<input name="childCount" type="number" min="0" max="' + Math.max(0, placesAvailable - 1) + '" value="0" required></label><div class="event-payment-note"><strong>Test payment</strong>No money is collected in this staging flow. Confirming below records a successful test payment and reserves the booking.</div><button class="btn-pill" type="submit">Confirm test payment</button>';
-      var message = document.createElement('div');
-      message.className = 'event-booking-message';
-      message.hidden = true;
-      panel.appendChild(close); panel.appendChild(eyebrow); panel.appendChild(title); panel.appendChild(copy); panel.appendChild(notice); panel.appendChild(form); panel.appendChild(message); overlay.appendChild(panel); document.body.appendChild(overlay);
-      function dismiss() { overlay.remove(); }
-      close.addEventListener('click', dismiss);
-      overlay.addEventListener('click', function (e) { if (e.target === overlay) dismiss(); });
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var submit = form.querySelector('button[type="submit"]');
-        submit.disabled = true;
-        submit.textContent = 'Confirming payment...';
-        var data = new FormData(form);
-        var childCount = Number(data.get('childCount')) || 0;
-        if (childCount + 1 > placesAvailable) {
-          submit.disabled = false;
-          submit.textContent = 'Confirm test payment';
-          message.hidden = false;
-          message.className = 'event-booking-message error';
-          message.textContent = placesAvailable > 0
-            ? 'Only ' + placesAvailable + ' place' + (placesAvailable === 1 ? '' : 's') + ' remaining, so this booking is too large.'
-            : 'This event is fully booked.';
-          return;
-        }
-        fetch('/api/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ eventId: event.id, name: data.get('name'), email: data.get('email'), childCount: childCount, paymentMode: 'test' }) })
-          .then(function (response) { return response.json().then(function (data) { return { ok: response.ok, data: data }; }); })
-          .then(function (result) {
-            if (result.ok) {
-              form.remove();
-              message.hidden = false;
-              message.className = 'event-booking-success';
-              var codes = result.data.booking.tickets.map(function (ticket) { return '<code>' + ticket.ticketCode + '</code>'; }).join('');
-              message.innerHTML = '<span class="event-booking-success-mark" aria-hidden="true">✓</span><strong>Booking confirmed</strong><span>Your test payment is confirmed. Your booking is now visible to the Hilston Park events team. Guest and staff notifications are queued for delivery.</span><div class="event-ticket-codes">' + codes + '</div><button class="btn-pill" type="button">Done</button>';
-              message.querySelector('button').addEventListener('click', dismiss);
-              return;
-            }
-            submit.disabled = false;
-            submit.textContent = 'Confirm test payment';
-            message.hidden = false;
-            message.className = 'event-booking-message error';
-            message.textContent = result.data.error || 'Your booking request could not be sent.';
-          })
-          .catch(function () { submit.disabled = false; submit.textContent = 'Confirm test payment'; message.hidden = false; message.classList.add('error'); message.textContent = 'We could not reach the booking service. Check your internet connection, disable any ad or privacy blocker for this page, and try again.'; });
-      });
-      form.querySelector('input[name="name"]').focus();
-    }
-
-    function render(events) {
-      events.forEach(function (event) {
-        var card = document.createElement('article');
-        card.className = 'whats-on-card';
-
-        var attachments = Array.isArray(event.attachments) ? event.attachments : [];
-        var images = attachments.filter(function (attachment) { return attachment.contentType && attachment.contentType.indexOf('image/') === 0; });
-        var videos = attachments.filter(function (attachment) { return attachment.contentType && attachment.contentType.indexOf('video/') === 0; });
-        var files = attachments.filter(function (attachment) { return attachment.contentType && attachment.contentType.indexOf('image/') !== 0 && attachment.contentType.indexOf('video/') !== 0; });
-
-        if (!images.length && event.imageUrl) images.push({ contentType: 'image/*', url: event.imageUrl });
-        if (images.length || videos.length) {
-          var media = document.createElement('div');
-          media.className = 'whats-on-card-media';
-          images.forEach(function (attachment) {
-            var image = document.createElement('img');
-            image.className = 'whats-on-card-image';
-            image.src = attachment.url;
-            image.alt = event.title ? event.title + ' at Hilston Park' : 'Hilston Park event';
-            media.appendChild(image);
-          });
-          videos.forEach(function (attachment) {
-            var video = document.createElement('video');
-            video.className = 'whats-on-card-video';
-            video.src = attachment.url;
-            video.controls = true;
-            video.preload = 'metadata';
-            media.appendChild(video);
-          });
-          card.appendChild(media);
-        }
-
-        var when = document.createElement('div');
-        when.className = 'whats-on-date';
-        when.textContent = formatDate(event.startsAt);
-        card.appendChild(when);
-
-        var title = document.createElement('h3');
-        title.textContent = event.title || 'Untitled event';
-        card.appendChild(title);
-
-        if (event.description) {
-          var body = document.createElement('p');
-          body.textContent = event.description;
-          card.appendChild(body);
-        }
-
-        var meta = document.createElement('div');
-        meta.className = 'whats-on-meta';
-        if (event.category) meta.appendChild(tag(event.category));
-        if (event.venue) meta.appendChild(tag(event.venue));
-        if (AUDIENCE[event.audiencePolicy]) meta.appendChild(tag(AUDIENCE[event.audiencePolicy]));
-        if (typeof event.minAge === 'number' || typeof event.maxAge === 'number') {
-          meta.appendChild(tag(typeof event.minAge === 'number' && typeof event.maxAge === 'number' ? 'Ages ' + event.minAge + '-' + event.maxAge : typeof event.minAge === 'number' ? event.minAge + '+' : 'Up to ' + event.maxAge));
-        }
-        if (event.capacity) meta.appendChild(tag(typeof event.placesLeft === 'number' ? (event.placesLeft > 0 ? event.placesLeft + ' places left' : 'Fully booked') : event.capacity + ' places'));
-        if (meta.childNodes.length) card.appendChild(meta);
-
-        if (files.length) {
-          var fileList = document.createElement('div');
-          fileList.className = 'whats-on-files';
-          files.forEach(function (attachment, index) {
-            var file = document.createElement('a');
-            file.className = 'whats-on-file';
-            file.href = attachment.url;
-            file.target = '_blank';
-            file.rel = 'noopener';
-            file.textContent = 'Event attachment ' + (index + 1);
-            fileList.appendChild(file);
-          });
-          card.appendChild(fileList);
-        }
-
-        var book = document.createElement('button');
-        book.className = 'btn-pill whats-on-book';
-        book.type = 'button';
-        book.textContent = 'Book event';
-        book.addEventListener('click', function () { openEventBooking(event); });
-        card.appendChild(book);
-
-
-        grid.appendChild(card);
-      });
-      section.classList.add('is-visible');
-    }
-
-    fetch(ENDPOINT, { cache: 'no-store', headers: { Accept: 'application/json', 'Cache-Control': 'no-cache' } })
-      .then(function (response) { return response.ok ? response.json() : null; })
-      .then(function (data) {
-        var events = data && Array.isArray(data.events) ? data.events : [];
-        if (events.length) render(events);
-      })
-      .catch(function () { /* section stays hidden when the catalogue is unavailable */ });
-  })();
-  </script>
-
-  <!-- ACTIVITIES -->
-  <section class="activities">
-    <h2 class="heading-display activities-heading">Outdoor Activities Included in&nbsp;Events</h2>
-    <p class="activities-subhead">Time outdoors is part of how groups work together. At Hilston Park, activities are included in every event and are used to support teamwork and keep groups actively engaged.</p>
-    <div class="activities-grid">
-      <div class="act-col">
-        <div class="act-text-card">
-          <h3 class="act-label">Nature &amp; Bushcraft</h3>
-          <p>Explore the outdoors through hands-on learning, survival skills, and environmental discovery.</p>
-        </div>
-        <div class="act-img-card" style="height:767px;">
-          <img src="images/event-act-highropes.jpg" alt="High Ropes team building at Hilston Park">
-        </div>
-      </div>
-      <div class="act-col">
-        <div class="act-text-card">
-          <h3 class="act-label">High Ropes &amp; Climbing</h3>
-          <p>Boost confidence and trust through supported aerial challenges with full safety guidance.</p>
-        </div>
-        <div class="act-img-card" style="height:600px;">
-          <img src="images/event-act-nature.jpg" alt="Nature and bushcraft activity at Hilston Park">
-        </div>
-        <div class="act-text-card">
-          <h3 class="act-label">Wilderness Discovery</h3>
-          <p>Learn about the habitats of rare dragonflies and plant species currently being protected for research.</p>
-        </div>
-      </div>
-      <div class="act-col">
-        <div class="act-img-card" style="height:703px;">
-          <img src="images/event-act-third.jpg" alt="Outdoor problem-solving at Hilston Park">
-        </div>
-        <div class="act-text-card">
-          <h3 class="act-label">Team Challenges</h3>
-          <p>Build communication, leadership, and teamwork through group problem-solving activities.</p>
-        </div>
-        <div class="act-cta-card">
-          <a href="activity">VIEW ALL ACTIVITIES</a>
-          <svg viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M13 11L18 6L13 1M0 6h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- WHAT IS INCLUDED -->
-  <section class="eve-include">
-    <div class="eve-offer-layout">
-
-      <div>
-        <h2 class="heading-display">What's Included in Your Event Experience</h2>
-        <p class="activities-subhead text-left">Hilston Park gives groups access to meet, stay, eat, and take part in outdoor activities within one countryside venue. A highlight of our services</p>
-        <div class="eve-offer-text">
-          <div class="eve-offer-item">
-            <span class="eve-offer-num">01</span>
-            <h3>Event Hosting Spaces and Residentials</h3>
-            <p>For groups booking an event or residential stay, Hilston Park offers two accommodation options on site:</p>
-          </div>
-          <div class="eve-offer-item">
-            <span class="eve-offer-num">02</span>
-            <h3>Outdoor Team Building Activities</h3>
-            <p>The estate includes more than 15 outdoor activities used for leadership retreats, team building, problem-solving exercises, and group challenges. Activities take place across the grounds and can be added to both day events and residential programmes.</p>
-          </div>
-          <div class="eve-offer-item">
-            <span class="eve-offer-num">03</span>
-            <h3>Planned Catering</h3>
-            <p>Meals are included in your event. We serve group meals at agreed-upon times and handle all dietary requirements in advance, including vegetarian, vegan, and allergies, so your schedule stays uninterrupted.</p>
-          </div>
-          <div class="eve-offer-item">
-            <span class="eve-offer-num">04</span>
-            <h3>Meeting Spaces &amp; Outdoor Areas</h3>
-            <p>We provide your group with dedicated indoor rooms for meetings, workshops, and briefings, with outdoor space available for team activities and breakout sessions.</p>
-          </div>
-        </div>
-        <div class="eve-include-cta">
-          <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">ENQUIRE ABOUT ACTIVITIES</a>
-        </div>
-      </div>
-
-      <div class="eve-offer-images">
-        <div class="eve-offer-img-grid">
-          <img src="images/event-manor.jpg" alt="Wedding ceremony at Hilston Park estate">
-          <img src="images/event-incl-food.jpg" alt="Freshly prepared catering at Hilston Park">
-          <img src="images/event-incl-nature.jpg" alt="Outdoor activities at Hilston Park">
-          <img src="images/event-incl-adventure.jpg" alt="Adventure experiences at Hilston Park">
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SCHOOL GROUP ACCOMMODATION -->
-  <section class="edu-accom">
-    <h2 class="heading-display edu-accom-heading">What&#8217;s Included in Your Event Experience</h2>
-    <p class="edu-accom-sub">For residential events and multi-day gatherings, Hilston Park provides a self-contained space where guests can stay, dine, and take part in activities all within the estate.</p>
-    <div class="edu-accom-grid">
-      <div class="edu-accom-img">
-        <img src="images/edu-accom-2.jpg" alt="Bunk rooms sleeping 130+ students at Hilston Park">
-        <img src="images/food.jpg" alt="Freshly prepared meals in Hilston Park's dining hall">
-        <img src="images/5rv02861.jpg" alt="Shared common areas at Hilston Park">
-        <img src="images/edu-accom-activity.jpg" alt="Outdoor activity areas within walking distance at Hilston Park">
-      </div>
-      <div class="edu-accom-content">
-        <div class="accom-section">
-          <h3>Sleeping Arrangements</h3>
-          <p>A range of shared and private room options allows event groups to stay comfortably on-site, keeping everyone together throughout the experience.</p>
-        </div>
-        <div class="accom-section">
-          <h3>Dining Hall</h3>
-          <p>The on-site dining space supports both catered events and organised group meals, making it easy to bring guests together at set times.</p>
-        </div>
-        <div class="accom-section">
-          <h3>Shared Spaces</h3>
-          <p>Indoor spaces across the house provide room for informal meetings, breakout sessions, and relaxed social time between scheduled activities.</p>
-        </div>
-        <div class="accom-section">
-          <h3>Activity Access</h3>
-          <p>With activity areas located nearby, guests can move easily between sessions, accommodation, and event spaces without leaving the estate.</p>
-        </div>
-        <div class="accom-cta">
-          <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACCOMMODATION -->
-  <section class="eve-accom">
-    <div class="eve-accom-header">
-      <h2 class="heading-display">Event Hosting Spaces and Residentials</h2>
-      <p>For groups booking an event or residential stay, Hilston Park offers two accommodation options on site:</p>
-    </div>
-
-    <!-- Manor House -->
-    <div class="accom-block">
-      <img src="images/event-manor.jpg" alt="Manor House at Hilston Park">
-      <div class="accom-block-content">
-        <h3>Manor House</h3>
-        <p>The main residential building on the estate is suited to large group events and multi-day corporate residentials.</p>
-        <ul class="accom-list">
-          <li>Sleeps 130+ guests across 16 rooms</li>
-          <li>Additional beds available on the lower floor</li>
-          <li>Unique, shared dining experience with active staff</li>
-          <li>All activity and event spaces are within walking distance on the estate</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Courtyard Rooms -->
-    <div class="accom-block reverse">
-      <img src="images/event-courtyard.jpg" alt="Courtyard Rooms at Hilston Park">
-      <div class="accom-block-content">
-        <h3>Courtyard Rooms</h3>
-        <p>Private, restored rooms within the estate grounds, suited to smaller corporate stays, families, and special occasions.</p>
-        <ul class="accom-list">
-          <li>Private individual rooms with rich experience</li>
-          <li>Suited to groups of 2 to 6</li>
-          <li>Direct access to the grounds and activity areas</li>
-          <li>Better suited for guests who need their own space throughout the stay</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="eve-accom-cta">
-<a href="https://web-bookings.hotels.uk.com/#/booking/51665/items/availability?from=2026-09-11&to=2026-09-30&k=JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D&a=2&r=1792045137020" class="btn-pill" target="_blank">Compare Our Spaces</a>
-    </div>
-  </section>
-
-  <!-- VISIT US -->
-  <section class="visit-us">
-    <h2 class="heading-display center">Plan Your Visit</h2>
-    <div class="visit-us-grid">
-      <div class="visit-card">
-        <div class="visit-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
-            <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
-          </svg>
-        </div>
-        <h3>When to Visit</h3>
-        <p>Hilston Park welcomes guests year-round. Summer brings longer days and time outdoors, while winter offers a quieter setting, with time focused indoors.</p>
-        <a href="javascript:void(0)" class="btn-pill" data-inquire>ENQUIRE NOW</a>
-      </div>
-      <div class="visit-card">
-        <div class="visit-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-        </div>
-        <h3>Getting Here</h3>
-        <p>Hilston Park is located near Monmouth in Wales and is accessible by road. For schools and group organisers planning visits, travel assistance may also be provided.</p>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Hilston+Park%2C+Newcastle%2C+Monmouth+NP25+5NY" target="_blank" rel="noopener" class="btn-pill">GET DIRECTIONS</a>
-      </div>
-      <div class="visit-card">
-        <div class="visit-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 12 19.79 19.79 0 01.42 3.18 2 2 0 012.4 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.9a16 16 0 006.18 6.18l1.27-.78a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-          </svg>
-        </div>
-        <h3>Get in Touch</h3>
-        <p>Whether you are a school group planning a residential trip, a corporate group planning a retreat, or a wedding party, we&rsquo;d love to arrange your visit.</p>
-        <a href="contact" class="btn-pill">CONTACT US</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testimonials">
-    <div class="testimonial-wrap" id="testimonialWrap">
-      <div class="testimonial-item active">
-        <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-text">My husband and I stayed in a really cosy cabin with great amenities surrounded by a wonderful park, lake and scenery.</p>
-        <p class="testimonial-author">Subashini Nathan</p>
-      </div>
-      <div class="testimonial-item">
-        <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-text">Attended a meditation retreat at this beautiful site. The site is absolutely beautiful, and the views are breathtaking.</p>
-        <p class="testimonial-author">Supreet Singh</p>
-      </div>
-      <div class="testimonial-item">
-        <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-text">Best week ever!! It was so fun to come and play outside with lots of adrenaline activities, and the staff got so involved in making it the best experience.</p>
-        <p class="testimonial-author">Lua Martinez</p>
-      </div>
-    </div>
-    <div class="testimonial-dots" id="testimonialDots"></div>
-    <div class="testimonials-cta">
-      <a href="https://www.google.com/maps/place/Hilston+Park+-+County+Manor+-+Private+Bookings+-+Outdoor+Activity+Centre/@51.8657689,-2.8048366,17z/data=!4m11!3m10!1s0x4871c91e8d342bf7:0xd98229dae8d45b5c!5m2!4m1!1i2!8m2!3d51.8657689!4d-2.8048366!9m1!1b1!16s%2Fm%2F0j66bg3?entry=ttu&g_ep=EgoyMDI2MDYyOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="btn-google-reviews">
-        <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.2 33.8 29.6 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.1 3l6.3-6.3C34.8 4.5 29.6 2 24 2 11.9 2 2 11.9 2 24s9.9 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/>
-        </svg>
-        Read All Our Reviews on Google
+      <a href="javascript:void(0)"
+         class="btn-pill"
+         data-booking-type="event">
+        PLAN YOUR EVENT
       </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PLANNING CTA -->
-  <section class="planning-cta">
-    <h2>Planning an Event, Retreat or Group Stay?</h2>
-    <p>Tell us about your group size, preferred dates, and what you have in mind. The Hilston Park team will help you work out the right combination of accommodation, activities, catering, and event space.</p>
-    <a href="javascript:void(0)" class="btn-pill" data-booking-type="event">DISCUSS YOUR EVENT</a>
-  </section>
 
-  <!-- NEWSLETTER -->
-  <section class="newsletter-band">
-    <div class="newsletter-band-inner">
-      <div class="newsletter-band-left">
-        <h2>Subscribe to our newsletter for tips and latest offers</h2>
-        <p>Adventure starts here. Subscribe to our newsletter and get the latest news, seasonal activities, special event dates, and exclusive deals delivered to your inbox.</p>
+<!-- STATS -->
+<section class="stats-bar">
+  <div class="stats-grid">
+
+    <div class="stat-item">
+      <div class="stat-number">
+        <span class="counter" data-target="15">0</span>
+        <span class="stat-suffix">+</span>
       </div>
-      <div class="newsletter-band-right">
-        <p class="newsletter-sub">Join our newsletter to get exclusive insights, timely updates, and the latest news from Hilston Park.</p>
-        <div class="newsletter-form">
-          <input class="newsletter-input" type="email" placeholder="Enter your email address" required>
-          <button class="newsletter-btn" type="button">Subscribe</button>
-        </div>
-      </div>
+      <p class="stat-label">Outdoor Activities</p>
     </div>
-  </section>
-  <script>
-    (function () {
-      var wrap = document.querySelector('.newsletter-band .newsletter-form');
-      if (!wrap) return;
-      var emailInput = wrap.querySelector('input[type=email]');
-      var btn = wrap.querySelector('button');
-      if (!emailInput || !btn) return;
-      var msg = document.createElement('p');
-      msg.style.cssText = 'margin-top:0.75rem;font-size:0.875rem;display:none;';
-      wrap.parentNode.insertBefore(msg, wrap.nextSibling);
-      btn.addEventListener('click', function () {
-        var email = emailInput.value.trim();
-        if (!email) { emailInput.style.outline = '2px solid #e63946'; return; }
-        emailInput.style.outline = '';
-        btn.disabled = true;
-        btn.textContent = 'Sending…';
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            access_key: '9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4',
-            subject: 'Newsletter Subscription - Events',
-            email: email,
-            source_page: window.location.pathname
-          })
-        })
-        .then(function (r) { return r.json(); })
-        .then(function () {
-          wrap.style.display = 'none';
-          msg.style.color = 'var(--teal, #2a9d8f)';
-          msg.textContent = 'Thanks for subscribing!';
-          msg.style.display = 'block';
-        })
-        .catch(function () {
-          btn.disabled = false;
-          btn.textContent = 'Subscribe';
-          msg.style.color = '#e63946';
-          msg.textContent = 'Sorry, something went wrong. Please try again.';
-          msg.style.display = 'block';
-        });
-      });
-    })();
-  </script>
 
-  <!-- FAQ -->
-  <section class="faq">
-    <div class="faq-grid">
-      <div>
-        <span class="faq-label">FAQ</span>
-        <h2 class="heading-display">Frequently<br>Asked<br>Questions</h2>
+    <div class="stat-item">
+      <div class="stat-number">
+        <span class="counter" data-target="130">0</span>
+        <span class="stat-suffix">+</span>
       </div>
-      <div class="accordion">
-        <div class="accordion-item">
-          <h3 class="accordion-heading"><button class="accordion-btn">
-            <span class="acc-question">What types of groups can book events at Hilston Park?</span>
-            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
-          </button></h3>
-          <div class="accordion-body"><p>We welcome corporate teams, private groups, wellbeing organisations, and community groups. If you are looking for an outdoor event venue in Wales with on-site accommodation, outdoor activities, and catering, Hilston Park can support your event needs.</p></div>
+      <p class="stat-label">Guest Stays</p>
+    </div>
+
+    <div class="stat-item">
+      <div class="stat-number">
+        <span class="counter" data-target="700">0</span>
+        <span class="stat-suffix">+</span>
+      </div>
+      <p class="stat-label">Years of History</p>
+    </div>
+
+    <div class="stat-item">
+      <div class="stat-number">
+        <span class="counter" data-target="100">0</span>
+        <span class="stat-suffix">%</span>
+      </div>
+      <p class="stat-label">Staff-Led Activities</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- INTRO -->
+<section class="eve-intro">
+  <div class="eve-intro-grid">
+
+    <div class="eve-intro-img">
+      <img src="images/event-incl-banner.jpg"
+           alt="Outdoor team building at Hilston Park">
+    </div>
+
+    <div class="eve-intro-text">
+      <h2 class="heading-display">
+        Outdoor Team Building Events Set to Challenge, Connect and&nbsp;Energise
+      </h2>
+
+      <p class="eve-intro-sub">
+        Most teams arrive at Hilston Park not quite sure what to expect.
+        By the end of the day, we ensure that hesitation is removed.
+      </p>
+
+      <p>
+        Our outdoor team building activities put people in situations
+        they would never encounter in the office. Someone who is usually
+        quiet becomes the one leading the group. A team that barely talks
+        outside meetings starts laughing. The Welsh countryside does
+        something to people that a conference room cannot replicate.
+      </p>
+
+      <p>
+        We plan the entire experience, including activities, catering,
+        and accommodation if needed. You share your group size, your
+        goals, and your dates. We build the day around you.
+      </p>
+
+      <p>
+        Whether you are organising a one-day session or a multi-day
+        residential retreat, Hilston Park provides the space, activities,
+        and support needed for a genuinely stress-free group experience.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- UPCOMING EVENTS -->
+<section class="whats-on" id="whatsOn" aria-labelledby="whatsOnHeading">
+
+  <div class="whats-on-header">
+    <h2 class="heading-display" id="whatsOnHeading">
+      Upcoming Events at Hilston Park
+    </h2>
+
+    <p>
+      Check out upcoming events at Hilston Park, with dates, ticket prices,
+      accommodation details and information about each event.
+    </p>
+  </div>
+
+  <div class="whats-on-grid">
+
+    <!-- TRAITORS WEEKEND -->
+    <article class="whats-on-card">
+
+      <div class="whats-on-card-media">
+        <img class="whats-on-card-image"
+             src="images/event-hero.jpg"
+             alt="Traitors Weekend event at Hilston Park">
+      </div>
+
+      <div class="whats-on-date">
+        13–15 November 2026
+      </div>
+
+      <h3>Traitors Weekend</h3>
+
+      <p>
+        Be part of a Traitors-themed weekend at Hilston Park, where
+        unexpected twists and challenges put your suspicions to the test.
+      </p>
+
+      <div class="whats-on-meta">
+        <span class="whats-on-tag">13–15 November 2026</span>
+        <span class="whats-on-tag">Near Monmouth, Wales</span>
+      </div>
+
+      <div class="whats-on-event-details">
+
+        <h4>Ticket Price</h4>
+        <p>
+          £45 per person or £160 for a group of four.
+        </p>
+
+        <h4>What's Included</h4>
+
+        <ul class="accom-list">
+          <li>
+            Traitors-themed games and group challenges. The full programme
+            will be confirmed before booking.
+          </li>
+          <li>
+            On-site accommodation in the Manor House and Courtyard Rooms.
+            Availability and prices for this event need confirmation.
+          </li>
+          <li>
+            Catering can be arranged at Hilston Park. Details of meals
+            and refreshments included in the ticket price need confirmation.
+          </li>
+          <li>
+            <strong>Venue:</strong> Hilston Park, near Monmouth, Wales.
+          </li>
+        </ul>
+
+        <h4>Booking Information</h4>
+
+        <ul class="accom-list">
+          <li><strong>Date:</strong> 13–15 November 2026</li>
+          <li><strong>Venue:</strong> Hilston Park, near Monmouth, Wales</li>
+          <li>
+            <strong>Terms and Conditions:</strong>
+            <a href="/terms"
+               target="_blank"
+               rel="noopener">
+              View terms and conditions
+            </a>
+          </li>
+          <li>
+            <strong>Cancellation Policy:</strong>
+            <a href="/"
+               target="_blank"
+               rel="noopener">
+              View cancellation policy
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+      <a href="javascript:void(0)"
+         class="btn-pill whats-on-book"
+         data-booking-type="event">
+        BOOK NOW
+      </a>
+
+    </article>
+
+  </div>
+</section>
+
+
+
+<section class="twe-events" id="upcoming-events">
+  <div class="twe-container">
+
+    <div class="twe-heading">
+      <span class="twe-eyebrow">Discover What's Happening</span>
+      <h2>Upcoming Events at Hilston Park</h2>
+      <p>
+        Check out upcoming events at Hilston Park, with dates, ticket prices,
+        accommodation details and information about each event.
+      </p>
+    </div>
+
+    <div class="twe-event-card">
+
+      <div class="twe-event-content">
+
+        <div class="twe-event-meta">
+          <span>📅 13–15 November 2026</span>
+          <span>📍 Hilston Park, Wales</span>
         </div>
-        <div class="accordion-item">
-          <h3 class="accordion-heading"><button class="accordion-btn">
-            <span class="acc-question">Are events limited to fixed packages?</span>
-            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
-          </button></h3>
-          <div class="accordion-body"><p>Not at all. You decide how long you need. One day, three days, a full week. Most groups land somewhere between 1 and 7 days, but we work according to your schedule, not a fixed template.</p></div>
-        </div>
-        <div class="accordion-item">
-          <h3 class="accordion-heading"><button class="accordion-btn">
-            <span class="acc-question">What is included in your group event?</span>
-            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
-          </button></h3>
-          <div class="accordion-body"><p>It depends on how you book.</p>
-            <ul class="accom-list">
-              <li><strong>Day Event -</strong> Outdoor space, activities, and catering during your visit.</li>
-              <li><strong>Residential Stay -</strong> Overnight accommodation, all meals, activities, and evening use of the grounds.</li>
-              <li><strong>Meeting Spaces -</strong> Indoor rooms available for workshops, briefings, and sessions.</li>
-            </ul>
+
+        <h3>Traitors Weekend</h3>
+
+        <p class="twe-event-intro">
+          Be part of a Traitors-themed weekend at Hilston Park, where
+          unexpected twists and challenges put your suspicions to the test.
+        </p>
+
+        <div class="twe-ticket-pricing">
+          <div class="twe-price-item">
+            <span class="twe-price-label">Individual Ticket</span>
+            <strong>£45 <small>/ person</small></strong>
+          </div>
+
+          <div class="twe-price-divider"></div>
+
+          <div class="twe-price-item">
+            <span class="twe-price-label">Group Ticket</span>
+            <strong>£160 <small>/ four people</small></strong>
           </div>
         </div>
-        <div class="accordion-item">
-          <h3 class="accordion-heading"><button class="accordion-btn">
-            <span class="acc-question">Are private bookings exclusive use?</span>
-            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
-          </button></h3>
-          <div class="accordion-body"><p>It depends on the accommodation and your dates. Some options can be arranged for exclusive use. Mention it when you enquire, and we will let you know what is available.</p></div>
+
+        <div class="twe-included">
+          <h4>What's Included</h4>
+
+          <ul>
+            <li>
+              <span class="twe-check">✓</span>
+              <div>
+                <strong>Traitors-Themed Games</strong>
+                <p>
+                  Take part in themed games and group challenges.
+                  The full programme will be confirmed before booking.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <span class="twe-check">✓</span>
+              <div>
+                <strong>On-Site Accommodation</strong>
+                <p>
+                  Stay at the Manor House or Courtyard Rooms.
+                  Availability and prices for this event need confirmation.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <span class="twe-check">✓</span>
+              <div>
+                <strong>Catering Options</strong>
+                <p>
+                  Catering can be arranged at Hilston Park. Details of meals
+                  and refreshments included in the ticket price need confirmation.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <span class="twe-check">✓</span>
+              <div>
+                <strong>Event Venue</strong>
+                <p>Hilston Park, near Monmouth, Wales.</p>
+              </div>
+            </li>
+          </ul>
         </div>
-        <div class="accordion-item">
-          <h3 class="accordion-heading"><button class="accordion-btn">
-            <span class="acc-question">Do you support multi-day residential events?</span>
-            <span class="acc-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="acc-svg"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg></span>
-          </button></h3>
-          <div class="accordion-body"><p>Yes, and it is one of the things Hilston Park does well. Your group can stay overnight, run activities throughout the day, use the grounds in the evening, and have every meal catered on site.</p></div>
+
+        <div class="twe-booking-info">
+          <h4>Booking Information</h4>
+
+          <div class="twe-booking-row">
+            <span>Date</span>
+            <strong>13–15 November 2026</strong>
+          </div>
+
+          <div class="twe-booking-row">
+            <span>Venue</span>
+            <strong>Hilston Park, near Monmouth, Wales</strong>
+          </div>
+
+          <div class="twe-booking-links">
+            <a href="/terms"
+               target="_blank" rel="noopener noreferrer">
+              Terms and Conditions ↗
+            </a>
+
+            <a href="/terms"
+               target="_blank" rel="noopener noreferrer">
+              Cancellation Policy ↗
+            </a>
+          </div>
         </div>
+
+        <div class="twe-event-footer">
+             <a href="javascript:void(0)"
+           class="btn-pill"
+           data-booking-type="event">
+          
+            Enquire About This Event <span>→</span>
+          </a>
+          <span class="twe-footer-note">
+            Get in touch for booking and accommodation details.
+          </span>
+        </div>
+
       </div>
     </div>
-  </section>
 
+  </div>
+</section>
+
+
+<!-- WHAT'S INCLUDED -->
+<section class="eve-include">
+
+  <div class="eve-offer-layout">
+
+    <div>
+
+      <h2 class="heading-display">
+        What's Included in Your Event Experience
+      </h2>
+
+      <p class="activities-subhead text-left">
+        Hilston Park gives groups access to meet, stay, eat, and take part
+        in outdoor activities within one countryside venue. A highlight
+        of our services:
+      </p>
+
+      <div class="eve-offer-text">
+
+        <div class="eve-offer-item">
+          <span class="eve-offer-num">01</span>
+
+          <h3>On-Site Residential Accommodation</h3>
+
+          <p>
+            Stay at the Manor House or Courtyard Rooms for multi-day events,
+            with indoor and outdoor spaces available for day visits.
+          </p>
+        </div>
+
+        <div class="eve-offer-item">
+          <span class="eve-offer-num">02</span>
+
+          <h3>Outdoor Team Building Activities</h3>
+
+          <p>
+            Choose from more than 15 outdoor activities for team building,
+            leadership exercises, problem-solving and group challenges.
+          </p>
+        </div>
+
+        <div class="eve-offer-item">
+          <span class="eve-offer-num">03</span>
+
+          <h3>Planned Catering</h3>
+
+          <p>
+            Enjoy meals arranged around your event schedule, with food
+            preferences and dietary requirements discussed in advance.
+          </p>
+        </div>
+
+        <div class="eve-offer-item">
+          <span class="eve-offer-num">04</span>
+
+          <h3>Meeting Spaces &amp; Outdoor Areas</h3>
+
+          <p>
+            Use indoor spaces for meetings, workshops and briefings,
+            with outdoor areas for activities, group sessions and breaks.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="eve-include-cta">
+        <a href="javascript:void(0)"
+           class="btn-pill"
+           data-booking-type="event">
+          ENQUIRE ABOUT ACTIVITIES
+        </a>
+      </div>
+
+    </div>
+
+    <div class="eve-offer-images">
+      <div class="eve-offer-img-grid">
+
+        <img src="images/event-manor.jpg"
+             alt="Manor House at Hilston Park">
+
+        <img src="images/event-incl-food.jpg"
+             alt="Freshly prepared catering at Hilston Park">
+
+        <img src="images/event-incl-nature.jpg"
+             alt="Outdoor activities at Hilston Park">
+
+        <img src="images/event-incl-adventure.jpg"
+             alt="Adventure experiences at Hilston Park">
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PRIVATE EVENTS AND GROUP EXPERIENCES -->
+<section class="events-we-host">
+
+  <div class="events-we-host-header">
+    <h2 class="heading-display">
+      Private Events and Group Experiences
+    </h2>
+
+    <p>
+      Alongside our scheduled events, Hilston Park also provides event
+      space for corporate gatherings, wellbeing retreats and family celebrations.
+    </p>
+  </div>
+
+  <div class="service-carousel">
+
+    <div class="service-grid" id="serviceGrid">
+
+      <!-- CORPORATE EVENTS -->
+      <div class="service-card"
+           data-booking-type="event"
+           role="button"
+           tabindex="0">
+
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="7" width="20" height="14" rx="2"/>
+            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+            <line x1="12" y1="12" x2="12" y2="12"/>
+          </svg>
+        </div>
+
+        <h3>Corporate Events</h3>
+
+        <p>
+          Bring your team together for meetings, workshops and outdoor
+          activities in the grounds of Hilston Park.
+        </p>
+      </div>
+
+
+      <!-- OUTDOOR TEAM BUILDING -->
+      <div class="service-card"
+           data-booking-type="event"
+           role="button"
+           tabindex="0">
+
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+            <path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+
+        <h3>Outdoor Team Building</h3>
+
+        <p>
+          Give groups the chance to work together through outdoor
+          challenges, leadership exercises and group activities.
+        </p>
+      </div>
+
+
+      <!-- WELLBEING RETREATS -->
+      <div class="service-card"
+           data-booking-type="event"
+           role="button"
+           tabindex="0">
+
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22s-8-5.8-8-12a8 8 0 0116 0c0 6.2-8 12-8 12z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+
+        <h3>Wellbeing Retreats</h3>
+
+        <p>
+          Use the estate's indoor spaces and grounds for wellbeing
+          programmes, mindfulness sessions and residential retreats.
+        </p>
+      </div>
+
+
+      <!-- FAMILY GATHERINGS -->
+      <div class="service-card"
+           data-booking-type="event"
+           role="button"
+           tabindex="0">
+
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+
+        <h3>Family Gatherings and Celebrations</h3>
+
+        <p>
+          Bring friends and family together for birthdays, anniversaries,
+          reunions and other private occasions.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="carousel-nav" id="serviceCarouselNav">
+
+    <button class="carousel-btn"
+            id="servicePrev"
+            aria-label="Previous">
+      <svg viewBox="0 0 18 18">
+        <polyline points="11,3 5,9 11,15"/>
+      </svg>
+    </button>
+
+    <div class="carousel-dots" id="serviceDots"></div>
+
+    <button class="carousel-btn"
+            id="serviceNext"
+            aria-label="Next">
+      <svg viewBox="0 0 18 18">
+        <polyline points="7,3 13,9 7,15"/>
+      </svg>
+    </button>
+
+  </div>
+
+  <div class="service-cta">
+    <a href="javascript:void(0)"
+       class="btn-pill"
+       data-booking-type="event">
+      PLAN YOUR EVENT
+    </a>
+  </div>
+
+</section>
+
+
+<!-- EVENT HOSTING SPACES AND RESIDENTIALS -->
+<section class="eve-accom">
+
+  <div class="eve-accom-header">
+
+    <h2 class="heading-display">
+      Event Hosting Spaces and Residentials
+    </h2>
+
+    <p>
+      The estate offers two accommodation options for groups and
+      residential stays:
+    </p>
+
+  </div>
+
+
+  <!-- MANOR HOUSE -->
+  <div class="accom-block">
+
+    <img src="images/event-manor.jpg"
+         alt="Manor House at Hilston Park">
+
+    <div class="accom-block-content">
+
+      <h3>Manor House</h3>
+
+      <ul class="accom-list">
+        <li>Sleeps 130+ guests across 16 rooms</li>
+        <li>Additional beds available on the lower floor</li>
+        <li>Shared dining facilities</li>
+        <li>Access to activity and event spaces across the estate</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+
+  <!-- COURTYARD ROOMS -->
+  <div class="accom-block reverse">
+
+    <img src="images/event-courtyard.jpg"
+         alt="Courtyard Rooms at Hilston Park">
+
+    <div class="accom-block-content">
+
+      <h3>Courtyard Rooms</h3>
+
+      <ul class="accom-list">
+        <li>Individual rooms within the estate grounds</li>
+        <li>Suitable for smaller groups, subject to availability</li>
+        <li>Access to the grounds and activity areas</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+
+  <div class="eve-accom-cta">
+
+    <a href="https://web-bookings.hotels.uk.com/#/booking/51665/items/availability?from=2026-09-11&to=2026-09-30&k=JkS11OXJmyC7NCQPDqJUBbaGYNTE2NjU%3D&a=2&r=1792045137020"
+       class="btn-pill"
+       target="_blank"
+       rel="noopener">
+      COMPARE OUR SPACES
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- VISIT US -->
+<section class="visit-us">
+
+  <h2 class="heading-display center">
+    Plan Your Visit
+  </h2>
+
+  <div class="visit-us-grid">
+
+
+    <!-- WHEN TO VISIT -->
+    <div class="visit-card">
+
+      <div class="visit-icon">
+        <svg viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="2" x2="12" y2="4"/>
+          <line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="2" y1="12" x2="4" y2="12"/>
+          <line x1="20" y1="12" x2="22" y2="12"/>
+        </svg>
+      </div>
+
+      <h3>When to Visit</h3>
+
+      <p>
+        Hilston Park welcomes guests year-round. Summer brings longer
+        days and time outdoors, while winter offers a quieter setting,
+        with time focused indoors.
+      </p>
+
+      <a href="javascript:void(0)"
+         class="btn-pill"
+         data-inquire>
+        ENQUIRE NOW
+      </a>
+
+    </div>
+
+
+    <!-- GETTING HERE -->
+    <div class="visit-card">
+
+      <div class="visit-icon">
+        <svg viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+      </div>
+
+      <h3>Getting Here</h3>
+
+      <p>
+        Hilston Park is located near Monmouth in Wales and is accessible
+        by road. For schools and group organisers planning visits,
+        travel assistance may also be provided.
+      </p>
+
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Hilston+Park%2C+Newcastle%2C+Monmouth+NP25+5NY"
+         target="_blank"
+         rel="noopener"
+         class="btn-pill">
+        GET DIRECTIONS
+      </a>
+
+    </div>
+
+
+    <!-- GET IN TOUCH -->
+    <div class="visit-card">
+
+      <div class="visit-icon">
+        <svg viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 12 19.79 19.79 0 01.42 3.18 2 2 0 012.4 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.9a16 16 0 006.18 6.18l1.27-.78a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+      </div>
+
+      <h3>Get In Touch</h3>
+
+      <p>
+        Whether you are a school group planning a residential trip,
+        a corporate group planning a retreat, or a wedding party,
+        we'd love to arrange your visit.
+      </p>
+
+      <a href="contact" class="btn-pill">
+        CONTACT US
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+
+  <div class="testimonial-wrap" id="testimonialWrap">
+
+
+    <div class="testimonial-item active">
+
+      <div class="tcard-stars">
+        &#9733;&#9733;&#9733;&#9733;&#9733;
+      </div>
+
+      <p class="testimonial-text">
+        My husband and I stayed in a really cosy cabin with great
+        amenities surrounded by a wonderful park, lake and scenery.
+      </p>
+
+      <p class="testimonial-author">
+        Subashini Nathan
+      </p>
+
+    </div>
+
+
+    <div class="testimonial-item">
+
+      <div class="tcard-stars">
+        &#9733;&#9733;&#9733;&#9733;&#9733;
+      </div>
+
+      <p class="testimonial-text">
+        Attended a meditation retreat at this beautiful site.
+        The site is absolutely beautiful, and the views are breathtaking.
+      </p>
+
+      <p class="testimonial-author">
+        Supreet Singh
+      </p>
+
+    </div>
+
+
+    <div class="testimonial-item">
+
+      <div class="tcard-stars">
+        &#9733;&#9733;&#9733;&#9733;&#9733;
+      </div>
+
+      <p class="testimonial-text">
+        Best week ever!! It was so fun to come and play outside with
+        lots of adrenaline activities, and the staff got so involved
+        in making it the best experience.
+      </p>
+
+      <p class="testimonial-author">
+        Lua Martinez
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="testimonial-dots" id="testimonialDots"></div>
+
+
+  <div class="testimonials-cta">
+
+    <a href="https://www.google.com/maps/place/Hilston+Park+-+County+Manor+-+Private+Bookings+-+Outdoor+Activity+Centre/@51.8657689,-2.8048366,17z/data=!4m11!3m10!1s0x4871c91e8d342bf7:0xd98229dae8d45b5c!5m2!4m1!1i2!8m2!3d51.8657689!4d-2.8048366!9m1!1b1!16s%2Fm%2F0j66bg3?entry=ttu&g_ep=EgoyMDI2MDYyOC4wIKXMDSoASAFQAw%3D%3D"
+       target="_blank"
+       rel="noopener"
+       class="btn-google-reviews">
+
+      <svg width="18"
+           height="18"
+           viewBox="0 0 48 48"
+           xmlns="http://www.w3.org/2000/svg"
+           aria-hidden="true">
+        <path fill="#4285F4"
+              d="M44.5 20H24v8.5h11.8C34.2 33.8 29.6 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.1 3l6.3-6.3C34.8 4.5 29.6 2 24 2 11.9 2 2 11.9 2 24s9.9 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/>
+      </svg>
+
+      Read All Our Reviews on Google
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- PLANNING CTA -->
+<section class="planning-cta">
+
+  <h2>
+    Planning an Event, Retreat or Group Stay?
+  </h2>
+
+  <p>
+    Tell us about your group, preferred dates and requirements.
+    The Hilston Park team can discuss suitable accommodation,
+    activities, catering and event spaces.
+  </p>
+
+  <a href="javascript:void(0)"
+     class="btn-pill"
+     data-booking-type="event">
+    DISCUSS YOUR EVENT
+  </a>
+
+</section>
+
+
+<!-- NEWSLETTER -->
+<section class="newsletter-band">
+
+  <div class="newsletter-band-inner">
+
+    <div class="newsletter-band-left">
+
+      <h2>
+        Subscribe to our newsletter for tips and latest offers
+      </h2>
+
+      <p>
+        Adventure starts here. Subscribe to our newsletter and get the
+        latest news, seasonal activities, special event dates, and
+        exclusive deals delivered to your inbox.
+      </p>
+
+    </div>
+
+
+    <div class="newsletter-band-right">
+
+      <p class="newsletter-sub">
+        Join our newsletter to get exclusive insights, timely updates,
+        and the latest news from Hilston Park.
+      </p>
+
+      <div class="newsletter-form">
+
+        <input class="newsletter-input"
+               type="email"
+               placeholder="Enter your email address"
+               required>
+
+        <button class="newsletter-btn" type="button">
+          Subscribe
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- NEWSLETTER SCRIPT -->
+<script>
+(function () {
+
+  var wrap = document.querySelector(
+    '.newsletter-band .newsletter-form'
+  );
+
+  if (!wrap) return;
+
+  var emailInput = wrap.querySelector('input[type=email]');
+  var btn = wrap.querySelector('button');
+
+  if (!emailInput || !btn) return;
+
+  var msg = document.createElement('p');
+
+  msg.style.cssText =
+    'margin-top:0.75rem;font-size:0.875rem;display:none;';
+
+  wrap.parentNode.insertBefore(msg, wrap.nextSibling);
+
+  btn.addEventListener('click', function () {
+
+    var email = emailInput.value.trim();
+
+    if (!email) {
+      emailInput.style.outline = '2px solid #e63946';
+      emailInput.focus();
+      return;
+    }
+
+    if (!emailInput.checkValidity()) {
+      emailInput.reportValidity();
+      return;
+    }
+
+    emailInput.style.outline = '';
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+
+      body: JSON.stringify({
+        access_key: '9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4',
+        subject: 'Newsletter Subscription - Events',
+        email: email,
+        source_page: window.location.pathname
+      })
+
+    })
+
+    .then(function (response) {
+      return response.json();
+    })
+
+    .then(function (data) {
+
+      if (!data.success) {
+        throw new Error('Subscription failed');
+      }
+
+      wrap.style.display = 'none';
+
+      msg.style.color = 'var(--teal, #2a9d8f)';
+      msg.textContent = 'Thanks for subscribing!';
+      msg.style.display = 'block';
+
+    })
+
+    .catch(function () {
+
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+
+      msg.style.color = '#e63946';
+      msg.textContent =
+        'Sorry, something went wrong. Please try again.';
+
+      msg.style.display = 'block';
+
+    });
+
+  });
+
+})();
+</script>
+
+
+<!-- FAQ -->
+<section class="faq">
+
+  <div class="faq-grid">
+
+    <div>
+      <span class="faq-label">FAQ</span>
+
+      <h2 class="heading-display">
+        Frequently<br>
+        Asked<br>
+        Questions
+      </h2>
+    </div>
+
+
+    <div class="accordion">
+
+
+      <!-- FAQ 1 -->
+      <div class="accordion-item">
+
+        <h3 class="accordion-heading">
+          <button class="accordion-btn">
+
+            <span class="acc-question">
+              What types of groups can book events at Hilston Park?
+            </span>
+
+            <span class="acc-icon">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   viewBox="0 0 16 16"
+                   fill="currentColor"
+                   class="acc-svg">
+                <path fill-rule="evenodd"
+                      d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </span>
+
+          </button>
+        </h3>
+
+        <div class="accordion-body">
+          <p>
+            We welcome corporate teams, private groups, wellbeing
+            organisations, and community groups. If you are looking
+            for an outdoor event venue in Wales with on-site
+            accommodation, outdoor activities, and catering,
+            Hilston Park can support your event needs.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- FAQ 2 -->
+      <div class="accordion-item">
+
+        <h3 class="accordion-heading">
+          <button class="accordion-btn">
+
+            <span class="acc-question">
+              Are events limited to fixed packages?
+            </span>
+
+            <span class="acc-icon">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   viewBox="0 0 16 16"
+                   fill="currentColor"
+                   class="acc-svg">
+                <path fill-rule="evenodd"
+                      d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </span>
+
+          </button>
+        </h3>
+
+        <div class="accordion-body">
+          <p>
+            Not at all. You decide how long you need. One day, three
+            days, a full week. Most groups land somewhere between
+            1 and 7 days, but we work according to your schedule,
+            not a fixed template.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- FAQ 3 -->
+      <div class="accordion-item">
+
+        <h3 class="accordion-heading">
+          <button class="accordion-btn">
+
+            <span class="acc-question">
+              What is included in your group event?
+            </span>
+
+            <span class="acc-icon">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   viewBox="0 0 16 16"
+                   fill="currentColor"
+                   class="acc-svg">
+                <path fill-rule="evenodd"
+                      d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </span>
+
+          </button>
+        </h3>
+
+        <div class="accordion-body">
+
+          <p>It depends on how you book.</p>
+
+          <ul class="accom-list">
+
+            <li>
+              <strong>Day Event -</strong>
+              Outdoor space, activities, and catering during your visit.
+            </li>
+
+            <li>
+              <strong>Residential Stay -</strong>
+              Overnight accommodation, all meals, activities, and
+              evening use of the grounds.
+            </li>
+
+            <li>
+              <strong>Meeting Spaces -</strong>
+              Indoor rooms available for workshops, briefings, and sessions.
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- FAQ 4 -->
+      <div class="accordion-item">
+
+        <h3 class="accordion-heading">
+          <button class="accordion-btn">
+
+            <span class="acc-question">
+              Are private bookings exclusive use?
+            </span>
+
+            <span class="acc-icon">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   viewBox="0 0 16 16"
+                   fill="currentColor"
+                   class="acc-svg">
+                <path fill-rule="evenodd"
+                      d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </span>
+
+          </button>
+        </h3>
+
+        <div class="accordion-body">
+          <p>
+            It depends on the accommodation and your dates. Some
+            options can be arranged for exclusive use. Mention it
+            when you enquire, and we will let you know what is available.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- FAQ 5 -->
+      <div class="accordion-item">
+
+        <h3 class="accordion-heading">
+          <button class="accordion-btn">
+
+            <span class="acc-question">
+              Do you support multi-day residential events?
+            </span>
+
+            <span class="acc-icon">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   viewBox="0 0 16 16"
+                   fill="currentColor"
+                   class="acc-svg">
+                <path fill-rule="evenodd"
+                      d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </span>
+
+          </button>
+        </h3>
+
+        <div class="accordion-body">
+          <p>
+            Yes, and it is one of the things Hilston Park does well.
+            Your group can stay overnight, run activities throughout
+            the day, use the grounds in the evening, and have every
+            meal catered on site.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-grid">
