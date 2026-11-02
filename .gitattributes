@@ -1,0 +1,2 @@
+Videos/*.mp4 filter=lfs diff=lfs merge=lfs -text
+Videos/*.webm filter=lfs diff=lfs merge=lfs -text
