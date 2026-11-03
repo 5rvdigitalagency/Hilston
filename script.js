@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var SC_RATES_URL = "https://cdn.hotels.uk.com/sc/51665/eff381e2425e310943f59d71f160fa71/0/4";
   /* Inquiry endpoint — Formsubmit relays form data to this email; first submission triggers a confirmation email to activate */
   var INQUIRY_ENDPOINT = "https://api.web3forms.com/submit";
-  var INQUIRY_ACCESS_KEY = "d185ded1-269c-4f96-99db-28427596cf0a";
+  var INQUIRY_ACCESS_KEY = "9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4";
 
   /* Room definitions — sourced from Q-Book api/pull and accommodation page.
      maxAdults/maxChildren reflect Q-Book item occupancy settings.
@@ -387,6 +387,35 @@ document.addEventListener("DOMContentLoaded", function () {
     '</div>'
   ].join("");
 
+  (function () {
+  const storageKey = "hilston_initial_attribution";
+
+  window.getHilstonAttribution = function () {
+    let data = localStorage.getItem(storageKey);
+
+    if (data) {
+      return JSON.parse(data);
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const referrer = document.referrer || "Direct";
+
+    data = {
+      initial_landing_page: window.location.href,
+      initial_referrer: referrer,
+      initial_traffic_source: params.get("utm_source") || "Direct",
+      landing_page_query: window.location.search,
+      utm_source: params.get("utm_source") || "",
+      utm_medium: params.get("utm_medium") || ""
+    };
+
+    localStorage.setItem(storageKey, JSON.stringify(data));
+
+    return data;
+  };
+
+  console.log("Attribution script loaded");
+})();
   document.body.insertAdjacentHTML("beforeend", modalHTML);
 
   /* -- live weather at Hilston Park via Open-Meteo (no API key) -- */
@@ -960,23 +989,49 @@ document.addEventListener("DOMContentLoaded", function () {
     submitBtnEl.disabled = true;
     submitBtnEl.textContent = "Sending\u2026";
 
-    fetch(INQUIRY_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({
-        access_key: INQUIRY_ACCESS_KEY,
-        subject: "Website enquiry: " + about,
-        name: name,
-        email: email,
-        phone: phone,
-        enquiry_about: about,
-        adults: adults,
-        children: children,
-        service: svcLabel,
-        message: msg,
-        source_page: window.location.pathname
-      })
-    })
+
+    
+
+
+
+
+
+
+const attribution = window.getHilstonAttribution
+  ? window.getHilstonAttribution()
+  : {};
+
+fetch(INQUIRY_ENDPOINT, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  body: JSON.stringify({
+    access_key: INQUIRY_ACCESS_KEY,
+    subject: "Website enquiry: " + about,
+
+    name: name,
+    email: email,
+    phone: phone,
+    enquiry_about: about,
+    adults: adults,
+    children: children,
+    service: svcLabel,
+    message: msg,
+    source_page: window.location.pathname,
+
+    // Initial traffic attribution
+    initial_landing_page: attribution.initial_landing_page || "",
+    initial_referrer: attribution.initial_referrer || "",
+    initial_traffic_source: attribution.initial_traffic_source || "",
+    landing_page_query: attribution.landing_page_query || "",
+    utm_source: attribution.utm_source || "",
+    utm_medium: attribution.utm_medium || ""
+  })
+})
+
+
       .then(function (r) { return r.json().catch(function () { return {}; }); })
       .then(function (data) {
         if (data && (data.success === "true" || data.success === true)) {
