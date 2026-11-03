@@ -480,110 +480,494 @@
       <div class="contact-form-wrap">
         <h2>Send Us an Enquiry</h2>
         <p class="form-intro">Whether you are planning a school trip, corporate retreat, or private stay, fill in the form and the team will be in touch.</p>
-        <form id="contact-page-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
-          <input type="hidden" name="access_key" value="9f14fa15-82cc-4d52-bd27-f1a9dd53e1a4">
-          <input type="hidden" name="subject" value="Website Enquiry — Hilston Park">
-          <input type="hidden" name="redirect" value="false">
-          <div class="form-row">
-            <div class="form-field">
-              <label for="first-name">First Name <span style="color:var(--teal)">*</span></label>
-              <input type="text" id="first-name" name="first_name" placeholder="Jane" required>
-            </div>
-            <div class="form-field">
-              <label for="last-name">Last Name <span style="color:var(--teal)">*</span></label>
-              <input type="text" id="last-name" name="last_name" placeholder="Smith" required>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="email">Email Address <span style="color:var(--teal)">*</span></label>
-            <input type="email" id="email" name="email" placeholder="jane@school.ac.uk" required>
-          </div>
-          <div class="form-field">
-            <label for="phone">Phone Number <span style="color:var(--teal)">*</span></label>
-            <input type="tel" id="phone" name="phone" placeholder="+44 (0) ..." required>
-          </div>
-          <div class="form-field">
-            <label id="hcs-group-type-lbl">I am enquiring about <span style="color:var(--teal)">*</span></label>
-            <div class="hcs hcs--box" id="hcs-group-type" aria-labelledby="hcs-group-type-lbl">
-              <button type="button" class="hcs-btn" aria-haspopup="listbox" aria-expanded="false">
-                <span class="hcs-value hcs-placeholder">Select enquiry type</span>
-                <svg class="hcs-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="1 1 7 7 13 1"/></svg>
-              </button>
-              <ul class="hcs-list" role="listbox" aria-label="Enquiry type">
-                <li class="hcs-opt hcs-opt--placeholder" data-value="" role="option">Select enquiry type</li>
-                <li class="hcs-opt" data-value="School Trip" role="option">School Trip</li>
-                <li class="hcs-opt" data-value="Corporate Event / Team Building" role="option">Corporate Event / Team Building</li>
-                <li class="hcs-opt" data-value="Wedding" role="option">Wedding</li>
-                <li class="hcs-opt" data-value="Private Event / Party" role="option">Private Event / Party</li>
-                <li class="hcs-opt" data-value="Group Accommodation" role="option">Group Accommodation</li>
-                <li class="hcs-opt" data-value="Exclusive Use of House" role="option">Exclusive Use of House</li>
-                <li class="hcs-opt" data-value="Other" role="option">Other</li>
-              </ul>
-              <input type="hidden" id="group-type" name="group_type" value="">
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="message">Your Enquiry <span style="color:var(--teal)">*</span></label>
-            <textarea id="message" name="message" rows="6" placeholder="Tell us about your group, preferred dates, and any specific requirements..." required></textarea>
-          </div>
-          
-          <div class="form-checkbox">
-            <input type="checkbox" id="special-category-consent" name="special_category_consent" value="Yes" required>
-            <label for="special-category-consent">I explicitly consent to Hilston Park processing my personal data, including medical histories, dietary requirements, and special educational needs (SEN), for the sole purpose of safely administering our group residential stay and activities in accordance with the <a href="privacy">Privacy Policy</a>.</label>
-          </div>
-          <div class="form-checkbox">
-            <input type="checkbox" id="age-terms-confirm" name="age_terms_confirm" value="Yes" required>
-            <label for="age-terms-confirm">I confirm that I am aged 18 or over (or an authorised school representative), and I agree to the formal residential booking <a href="terms">terms, conditions</a>, and statutory cancellation frameworks.</label>
-          </div>
-          <div class="form-checkbox">
-            <input type="checkbox" id="marketing-opt-in" name="marketing_opt_in" value="Yes">
-            <label for="marketing-opt-in">I would like to receive updates, newsletters, and marketing emails from Hilston Park about seasonal events, corporate team-building offers, and education packages.</label>
-          </div>
-          <p id="contact-form-error" style="color:#c0392b;font-size:0.82rem;margin-bottom:12px;display:none;">Please complete all required fields and accept the terms.</p>
-          <p id="contact-form-success" style="color:var(--teal);font-size:0.9rem;margin-bottom:12px;display:none;">Thank you — your enquiry has been sent. We'll be in touch within one working day.</p>
-          <button type="submit" class="btn-submit" id="contact-submit-btn">SEND ENQUIRY</button>
-        </form>
-        <script>
-          (function(){
-            var form = document.getElementById('contact-page-form');
-            var errEl = document.getElementById('contact-form-error');
-            var successEl = document.getElementById('contact-form-success');
-            var submitBtn = document.getElementById('contact-submit-btn');
-            if (!form) return;
-            form.addEventListener('submit', function(e){
-              e.preventDefault();
-              errEl.style.display = 'none';
-              successEl.style.display = 'none';
-              var agree = document.getElementById('agree');
-              if (!form.checkValidity() || !agree.checked) {
-                errEl.style.display = 'block';
-                return;
-              }
-              submitBtn.disabled = true;
-              submitBtn.textContent = 'Sending\u2026';
-              var data = new FormData(form);
-              fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
-                .then(function(r){ return r.json(); })
-                .then(function(res){
-                  if (res.success) {
-                    form.reset();
-                    successEl.style.display = 'block';
-                  } else {
-                    errEl.textContent = 'Sorry, something went wrong. Please email booking@hilstonpark.com directly.';
-                    errEl.style.display = 'block';
-                  }
-                  submitBtn.disabled = false;
-                  submitBtn.textContent = 'SEND ENQUIRY';
-                })
-                .catch(function(){
-                  errEl.textContent = 'Sorry, something went wrong. Please email booking@hilstonpark.com directly.';
-                  errEl.style.display = 'block';
-                  submitBtn.disabled = false;
-                  submitBtn.textContent = 'SEND ENQUIRY';
-                });
-            });
-          }());
-        </script>
+
+            <form id="contact-page-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+
+
+
+            <!-- Web3Forms Configuration -->
+            <input type="hidden" name="access_key" value="b9af6718-939e-4059-a992-0b28abaa9fac">
+            <input type="hidden" name="subject" value="Website Enquiry — Hilston Park">
+            <input type="hidden" name="redirect" value="false">
+
+            <!-- Web3Forms Honeypot -->
+            <input type="checkbox" name="botcheck" style="display:none;">
+
+            <!-- Submission Tracking -->
+            <input type="hidden" name="submitted_at" id="submitted_at">
+            <input type="hidden" name="page_url" id="page_url">
+            <input type="hidden" name="page_title" id="page_title">
+
+            <!-- Initial Attribution Tracking -->
+            <input type="hidden" name="initial_landing_page" id="initial_landing_page">
+            <input type="hidden" name="initial_referrer" id="initial_referrer">
+            <input type="hidden" name="initial_traffic_source" id="initial_traffic_source">
+            <input type="hidden" name="landing_page_query" id="landing_page_query">
+
+            <!-- UTM Tracking -->
+            <input type="hidden" name="utm_source" id="utm_source">
+            <input type="hidden" name="utm_medium" id="utm_medium">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="first-name">First Name <span style="color:var(--teal)">*</span></label>
+                        <input type="text" id="first-name" name="first_name" placeholder="Jane" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="last-name">Last Name <span style="color:var(--teal)">*</span></label>
+                        <input type="text" id="last-name" name="last_name" placeholder="Smith" required>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="email">Email Address <span style="color:var(--teal)">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="jane@school.ac.uk" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="phone">Phone Number <span style="color:var(--teal)">*</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="+44 (0) ..." required>
+                </div>
+
+                <div class="form-field">
+                    <label id="hcs-group-type-lbl">
+                        I am enquiring about <span style="color:var(--teal)">*</span>
+                    </label>
+
+                    <div class="hcs hcs--box" id="hcs-group-type" aria-labelledby="hcs-group-type-lbl">
+
+                        <button type="button" class="hcs-btn" aria-haspopup="listbox" aria-expanded="false">
+                            <span class="hcs-value hcs-placeholder">Select enquiry type</span>
+
+                            <svg class="hcs-arrow" width="14" height="9" viewBox="0 0 14 9"
+                                fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" aria-hidden="true">
+                                <polyline points="1 1 7 7 13 1"/>
+                            </svg>
+                        </button>
+
+                        <ul class="hcs-list" role="listbox" aria-label="Enquiry type">
+                            <li class="hcs-opt hcs-opt--placeholder" data-value="" role="option">
+                                Select enquiry type
+                            </li>
+                            <li class="hcs-opt" data-value="School Trip" role="option">School Trip</li>
+                            <li class="hcs-opt" data-value="Corporate Event / Team Building" role="option">Corporate Event / Team Building</li>
+                            <li class="hcs-opt" data-value="Wedding" role="option">Wedding</li>
+                            <li class="hcs-opt" data-value="Private Event / Party" role="option">Private Event / Party</li>
+                            <li class="hcs-opt" data-value="Group Accommodation" role="option">Group Accommodation</li>
+                            <li class="hcs-opt" data-value="Exclusive Use of House" role="option">Exclusive Use of House</li>
+                            <li class="hcs-opt" data-value="Other" role="option">Other</li>
+                        </ul>
+
+                        <input type="hidden" id="group-type" name="group_type" value="">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="message">Your Enquiry <span style="color:var(--teal)">*</span></label>
+                    <textarea id="message" name="message" rows="6"
+                        placeholder="Tell us about your group, preferred dates, and any specific requirements..."
+                        required></textarea>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="special-category-consent"
+                        name="special_category_consent" value="Yes" required>
+
+                    <label for="special-category-consent">
+                        I explicitly consent to Hilston Park processing my personal data,
+                        including medical histories, dietary requirements, and special
+                        educational needs (SEN), for the sole purpose of safely administering
+                        our group residential stay and activities in accordance with the
+                        <a href="privacy">Privacy Policy</a>.
+                    </label>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="age-terms-confirm"
+                        name="age_terms_confirm" value="Yes" required>
+
+                    <label for="age-terms-confirm">
+                        I confirm that I am aged 18 or over (or an authorised school
+                        representative), and I agree to the formal residential booking
+                        <a href="terms">terms, conditions</a>, and statutory cancellation frameworks.
+                    </label>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="marketing-opt-in"
+                        name="marketing_opt_in" value="Yes">
+
+                    <label for="marketing-opt-in">
+                        I would like to receive updates, newsletters, and marketing emails
+                        from Hilston Park about seasonal events, corporate team-building
+                        offers, and education packages.
+                    </label>
+                </div>
+
+                <p id="contact-form-error"
+                    style="color:#c0392b;font-size:0.82rem;margin-bottom:12px;display:none;">
+                    Please complete all required fields and accept the terms.
+                </p>
+
+                <p id="contact-form-success"
+                    style="color:var(--teal);font-size:0.9rem;margin-bottom:12px;display:none;">
+                    Thank you — your enquiry has been sent. We'll be in touch within one working day.
+                </p>
+
+                <button type="submit" class="btn-submit" id="contact-submit-btn">
+                    SEND ENQUIRY
+                </button>
+
+            </form>
+
+
+                <!-- ATTRIBUTION TRACKING SCRIPT -->
+
+
+                <script>
+                (function () {
+                    'use strict';
+
+                    var form = document.getElementById('contact-page-form');
+                    if (!form) return;
+
+                    var errEl = document.getElementById('contact-form-error');
+                    var successEl = document.getElementById('contact-form-success');
+                    var submitBtn = document.getElementById('contact-submit-btn');
+                    var groupType = document.getElementById('group-type');
+
+                    var dropdown = document.getElementById('hcs-group-type');
+                    var dropdownBtn = dropdown ? dropdown.querySelector('.hcs-btn') : null;
+                    var dropdownValue = dropdown ? dropdown.querySelector('.hcs-value') : null;
+                    var options = dropdown ? dropdown.querySelectorAll('.hcs-opt') : [];
+
+                    // =====================================
+                    // LOCAL STORAGE HELPERS
+                    // =====================================
+
+                    function getStored(key) {
+                        try {
+                            return localStorage.getItem(key) || '';
+                        } catch (e) {
+                            return '';
+                        }
+                    }
+
+                    function saveStored(key, value) {
+                        try {
+                            localStorage.setItem(key, value);
+                        } catch (e) {
+                            console.warn('Could not save attribution:', e);
+                        }
+                    }
+
+                    // =====================================
+                    // INITIAL ATTRIBUTION TRACKING
+                    // =====================================
+
+                    function captureInitialAttribution() {
+
+                        // Capture only once, on the visitor's first landing page.
+                        if (getStored('initial_landing_page')) return;
+
+                        var params = new URLSearchParams(window.location.search);
+
+                        var landingPage = window.location.href;
+                        var referrer = document.referrer || 'Direct';
+
+                        var source = params.get('utm_source') || '';
+                        var medium = params.get('utm_medium') || '';
+
+                        // Detect traffic source when UTM parameters are absent.
+                        if (!source && document.referrer) {
+
+                            try {
+                                var referrerHost = new URL(document.referrer).hostname;
+
+                                if (
+                                    referrerHost.includes('google.')
+                                ) {
+                                    source = 'google';
+                                    medium = 'organic';
+
+                                } else if (
+                                    referrerHost.includes('bing.')
+                                ) {
+                                    source = 'bing';
+                                    medium = 'organic';
+
+                                } else if (
+                                    referrerHost.includes('yahoo.')
+                                ) {
+                                    source = 'yahoo';
+                                    medium = 'organic';
+
+                                } else if (
+                                    referrerHost.includes('duckduckgo.')
+                                ) {
+                                    source = 'duckduckgo';
+                                    medium = 'organic';
+
+                                } else {
+                                    source = referrerHost;
+                                    medium = 'referral';
+                                }
+
+                            } catch (e) {
+                                source = 'Unknown';
+                                medium = 'referral';
+                            }
+
+                        } else if (!source) {
+                            source = 'Direct';
+                            medium = 'Direct';
+                        }
+
+                        saveStored('initial_landing_page', landingPage);
+                        saveStored('initial_referrer', referrer);
+                        saveStored('initial_traffic_source', source);
+                        saveStored('landing_page_query', window.location.search);
+
+                        saveStored('utm_source', params.get('utm_source') || source);
+                        saveStored('utm_medium', params.get('utm_medium') || medium);
+                    }
+
+                    captureInitialAttribution();
+
+                    // =====================================
+                    // POPULATE HIDDEN TRACKING FIELDS
+                    // =====================================
+
+                    function populateTrackingFields() {
+
+                        var fields = {
+                            submitted_at: new Date().toISOString(),
+
+                            page_url: window.location.href,
+                            page_title: document.title,
+
+                            initial_landing_page: getStored('initial_landing_page'),
+                            initial_referrer: getStored('initial_referrer'),
+                            initial_traffic_source: getStored('initial_traffic_source'),
+                            landing_page_query: getStored('landing_page_query'),
+
+                            utm_source: getStored('utm_source'),
+                            utm_medium: getStored('utm_medium')
+                        };
+
+                        Object.keys(fields).forEach(function (key) {
+
+                            var field = form.querySelector('[name="' + key + '"]');
+
+                            if (field) {
+                                field.value = fields[key];
+                            }
+
+                        });
+                    }
+
+                    // Populate fields when page loads.
+                    populateTrackingFields();
+
+                    // =====================================
+                    // CUSTOM ENQUIRY DROPDOWN
+                    // =====================================
+
+                    function closeDropdown() {
+
+                        if (!dropdown) return;
+
+                        dropdown.classList.remove('is-open');
+
+                        if (dropdownBtn) {
+                            dropdownBtn.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+
+                    if (dropdown && dropdownBtn) {
+
+                        dropdownBtn.addEventListener('click', function () {
+
+                            var isOpen =
+                                dropdownBtn.getAttribute('aria-expanded') === 'true';
+
+                            dropdownBtn.setAttribute(
+                                'aria-expanded',
+                                String(!isOpen)
+                            );
+
+                            dropdown.classList.toggle('is-open', !isOpen);
+
+                        });
+
+                        options.forEach(function (option) {
+
+                            option.addEventListener('click', function () {
+
+                                var value = this.getAttribute('data-value');
+                                var label = this.textContent.trim();
+
+                                if (groupType) {
+                                    groupType.value = value;
+                                }
+
+                                if (dropdownValue) {
+
+                                    dropdownValue.textContent =
+                                        value ? label : 'Select enquiry type';
+
+                                    dropdownValue.classList.toggle(
+                                        'hcs-placeholder',
+                                        !value
+                                    );
+                                }
+
+                                options.forEach(function (item) {
+
+                                    item.setAttribute(
+                                        'aria-selected',
+                                        String(item === option)
+                                    );
+
+                                });
+
+                                closeDropdown();
+
+                            });
+
+                        });
+
+                        document.addEventListener('click', function (e) {
+
+                            if (!dropdown.contains(e.target)) {
+                                closeDropdown();
+                            }
+
+                        });
+
+                    }
+
+                    // =====================================
+                    // WEB3FORMS SUBMISSION
+                    // =====================================
+
+                    form.addEventListener('submit', async function (e) {
+
+                        e.preventDefault();
+
+                        if (errEl) {
+                            errEl.style.display = 'none';
+                        }
+
+                        if (successEl) {
+                            successEl.style.display = 'none';
+                        }
+
+                        // Validate standard form fields and enquiry dropdown.
+                        if (!form.checkValidity() || !groupType || !groupType.value) {
+
+                            if (errEl) {
+
+                                errEl.textContent =
+                                    'Please complete all required fields and select an enquiry type.';
+
+                                errEl.style.display = 'block';
+                            }
+
+                            if (!form.checkValidity()) {
+                                form.reportValidity();
+                            }
+
+                            return;
+                        }
+
+                        submitBtn.disabled = true;
+                        submitBtn.textContent = 'Sending…';
+
+                        try {
+
+                            // Refresh tracking information immediately before submission.
+                            populateTrackingFields();
+
+                            var formData = new FormData(form);
+
+                            var response = await fetch(
+                                'https://api.web3forms.com/submit',
+                                {
+                                    method: 'POST',
+                                    body: formData
+                                }
+                            );
+
+                            var result = await response.json();
+
+                            if (response.ok && result.success) {
+
+                                // Reset form after successful submission.
+                                form.reset();
+
+                                // Restore tracking information after reset.
+                                populateTrackingFields();
+
+                                // Reset custom enquiry dropdown.
+                                if (dropdownValue) {
+
+                                    dropdownValue.textContent =
+                                        'Select enquiry type';
+
+                                    dropdownValue.classList.add('hcs-placeholder');
+                                }
+
+                                if (groupType) {
+                                    groupType.value = '';
+                                }
+
+                                options.forEach(function (option) {
+
+                                    option.setAttribute('aria-selected', 'false');
+
+                                });
+
+                                closeDropdown();
+
+                                if (successEl) {
+                                    successEl.style.display = 'block';
+                                }
+
+                            } else {
+
+                                throw new Error(
+                                    result.message || 'Submission failed.'
+                                );
+
+                            }
+
+                        } catch (error) {
+
+                            console.error('Web3Forms error:', error);
+
+                            if (errEl) {
+
+                                errEl.textContent =
+                                    'Sorry, something went wrong. Please email booking@hilstonpark.com directly.';
+
+                                errEl.style.display = 'block';
+                            }
+
+                        } finally {
+
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = 'SEND ENQUIRY';
+
+                        }
+
+                    });
+
+                })();
+                </script>
+
       </div>
       <div class="map-wrap">
         <iframe
@@ -713,7 +1097,7 @@
         </div>
         <div>
           <span class="info-label">Call Us</span>
-          <a href="tel:+441902500000" class="info-value">+44 (0) 1600 240033</a>
+          <a href="tel:+4401600240033" class="info-value">+44 (0) 1600 240033</a>
         </div>
       </div>
       <div class="contact-info-card">
