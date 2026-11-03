@@ -40,6 +40,55 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style.css?v=6">
   <style>
+    /* HERO BANNER */
+    .about-hero {
+      position: relative;
+      min-height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .about-hero-video {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      opacity: 0; transition: opacity 0.8s ease;
+    }
+    .about-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.18) 100%);
+    }
+    .about-hero-inner {
+      position: relative; z-index: 2;
+      width: 100%; padding: 64px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: flex-end;
+      color: var(--white);
+    }
+    .about-hero-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 14px;
+    }
+    .about-hero-inner h1 {
+      font-family: var(--font-serif);
+      font-weight: normal;
+      font-size: clamp(2.6rem, 4.2vw, 4.4rem);
+      line-height: 1.06; color: var(--white);
+    }
+    .about-hero-sub {
+      font-size: 0.96rem; line-height: 1.78;
+      color: rgba(255,255,255,0.88);
+      max-width: 60ch;
+      align-self: flex-end;
+      padding-bottom: 8px;
+    }
+   .about-hero-sub p{
+    margin-bottom: 15px;
+   }
+
     
 /* UPCOMING EVENTS */
 
@@ -748,14 +797,15 @@
 
  <!-- HERO VIDEO -->
 <section class="eve-hero" id="main-content" tabindex="-1">
-  <video class="eve-hero-video"
+  <!-- <video class="eve-hero-video"
          autoplay muted loop playsinline preload="metadata"
          poster="images/event-hero.jpg"
          oncanplay="this.style.opacity='1'">
     <source src="Videos/events-hero-web.mp4" type="video/mp4">
     <img src="images/event-hero.jpg" alt="Hilston Park events">
-  </video>
+  </video> -->
 
+        <img class="about-hero-video" src="images/about-hero.jpg" alt="Hilston Park overview" loading="lazy" style="opacity: 1;">
 
   
 
