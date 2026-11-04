@@ -3018,3 +3018,7 @@ span.flatpickr-weekday {
     line-height: 1.78;
     color: var(--text-muted);
 }
+
+.testimonials-cta.cta-dark a{
+  color: #fff;
+}
