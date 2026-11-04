@@ -41,7 +41,7 @@
 /* HERO BANNER */
     .about-hero {
       position: relative;
-      min-height: 560px;
+      min-height: 700px;
       overflow: hidden;
       display: flex;
       align-items: flex-end;
@@ -468,7 +468,11 @@ font-size: 0.88rem;
       <source src="Videos/education.webm" type="video/webm">
       <img src="images/hero-schools.jpg" alt="Hilston Park educational visits">
     </video> -->
-        <img class="about-hero-video" src="images/about-hero.jpg" alt="Hilston Park overview" loading="lazy" style="opacity: 1;">
+        <!-- <img class="about-hero-video" src="images/about-hero.jpg" alt="Hilston Park overview" loading="lazy" style="opacity: 1;"> -->
+            <video class="about-hero-video" autoplay muted loop playsinline preload="metadata" poster="images/about-hero.jpg" oncanplay="this.style.opacity='1';">
+      <source src="/Videos/Education.mp4" type="video/mp4">
+    </video>
+
 
     <div class="edu-hero-overlay"></div>
     <div class="edu-hero-inner">
