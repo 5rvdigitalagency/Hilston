@@ -1,0 +1,632 @@
+
+<meta name="robots" content="noindex, nofollow">
+<section class="hp-social-section" id="life-at-hilston">
+  <div class="hp-social-container">
+
+    <!-- Section heading -->
+    <div class="hp-social-heading">
+      <span class="hp-social-eyebrow">FOLLOW OUR JOURNEY</span>
+      <h2>Life at Hilston Park</h2>
+      <p>
+        Adventures, special moments and a little look behind the scenes.
+        Follow us and see what's happening at Hilston Park.
+      </p>
+    </div>
+
+    <!-- Social tabs -->
+    <div class="hp-social-tabs" role="group" aria-label="Filter social media posts">
+      <button class="hp-tab active" data-filter="all">All Posts</button>
+      <button class="hp-tab" data-filter="instagram">Instagram</button>
+      <button class="hp-tab" data-filter="facebook">Facebook</button>
+      <button class="hp-tab" data-filter="tiktok">TikTok</button>
+      <button class="hp-tab" data-filter="youtube">YouTube</button>
+    </div>
+
+    <!-- Social posts -->
+    <div class="hp-social-grid" id="hpSocialGrid"></div>
+
+    <!-- Load more -->
+    <div class="hp-load-more-wrap">
+      <button class="hp-load-more" id="hpLoadMore">
+        Load More
+        <span aria-hidden="true">↓</span>
+      </button>
+    </div>
+
+    <!-- Follow links -->
+    <div class="hp-social-follow">
+      <p>Stay connected with us</p>
+
+      <div class="hp-follow-links">
+        <a href="https://www.instagram.com/hilstonparkofficial/"
+           target="_blank" rel="noopener noreferrer">
+          Instagram ↗
+        </a>
+
+        <a href="https://www.facebook.com/hilstonparkofficial"
+           target="_blank" rel="noopener noreferrer">
+          Facebook ↗
+        </a>
+
+        <a href="https://www.tiktok.com/"
+           target="_blank" rel="noopener noreferrer">
+          TikTok ↗
+        </a>
+
+        <a href="https://www.youtube.com/@HilstonPark"
+           target="_blank" rel="noopener noreferrer">
+          YouTube ↗
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ================================
+   HILSTON PARK SOCIAL SECTION
+================================ */
+
+.hp-social-section {
+  width: 100%;
+  padding: 85px 20px;
+  background: #f7f6f1;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.hp-social-section * {
+  box-sizing: border-box;
+}
+
+.hp-social-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* Heading */
+
+.hp-social-heading {
+  max-width: 680px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+
+.hp-social-eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #9a7747;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.hp-social-heading h2 {
+  margin: 0 0 15px;
+  color: #263e32;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.hp-social-heading p {
+  margin: 0;
+  color: #686b64;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Tabs */
+
+.hp-social-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 35px;
+}
+
+.hp-tab {
+  padding: 11px 21px;
+  border: 1px solid #d9d9ce;
+  border-radius: 30px;
+  background: transparent;
+  color: #354438;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.hp-tab:hover,
+.hp-tab.active {
+  background: #294735;
+  border-color: #294735;
+  color: #fff;
+}
+
+/* Grid */
+
+.hp-social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+/* Individual card */
+
+.hp-social-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 4.3;
+  border-radius: 8px;
+  background: #deded5;
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.hp-social-card[hidden] {
+  display: none;
+}
+
+.hp-social-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s ease;
+}
+
+.hp-social-card:hover img {
+  transform: scale(1.07);
+}
+
+/* Image overlay */
+
+.hp-social-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.72),
+    rgba(0, 0, 0, 0.05) 65%
+  );
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+.hp-social-card:hover .hp-social-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.82),
+    rgba(0, 0, 0, 0.1) 75%
+  );
+}
+
+/* Platform label */
+
+.hp-social-platform {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 7px 12px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #263e32;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Play icon */
+
+.hp-social-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 20px;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.hp-social-card:hover .hp-social-play {
+  background: #fff;
+  color: #294735;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Card text */
+
+.hp-social-title {
+  margin: 0;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.hp-social-view {
+  display: inline-block;
+  margin-top: 8px;
+  color: rgba(255,255,255,0.85);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Load more */
+
+.hp-load-more-wrap {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.hp-load-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  border: 1px solid #294735;
+  border-radius: 30px;
+  background: transparent;
+  color: #294735;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.hp-load-more:hover {
+  background: #294735;
+  color: #fff;
+}
+
+.hp-load-more[hidden] {
+  display: none;
+}
+
+/* Follow section */
+
+.hp-social-follow {
+  margin-top: 65px;
+  padding-top: 30px;
+  border-top: 1px solid #deded4;
+  text-align: center;
+}
+
+.hp-social-follow p {
+  margin: 0 0 18px;
+  color: #294735;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.hp-follow-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hp-follow-links a {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 1px solid #d4d7cd;
+  border-radius: 30px;
+  color: #294735;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.hp-follow-links a:hover {
+  background: #294735;
+  border-color: #294735;
+  color: #fff;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .hp-social-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .hp-social-section {
+    padding: 65px 20px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 560px) {
+  .hp-social-section {
+    padding: 50px 15px;
+  }
+
+  .hp-social-heading {
+    margin-bottom: 28px;
+  }
+
+  .hp-social-heading p {
+    font-size: 14px;
+  }
+
+  .hp-social-tabs {
+    gap: 8px;
+    margin-bottom: 25px;
+  }
+
+  .hp-tab {
+    padding: 9px 14px;
+    font-size: 12px;
+  }
+
+  .hp-social-grid {
+    gap: 11px;
+  }
+
+  .hp-social-card {
+    aspect-ratio: 1 / 1.2;
+  }
+
+  .hp-social-overlay {
+    padding: 12px;
+  }
+
+  .hp-social-title {
+    font-size: 14px;
+  }
+
+  .hp-social-platform {
+    top: 9px;
+    left: 9px;
+    padding: 5px 8px;
+    font-size: 9px;
+  }
+
+  .hp-social-play {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+
+  .hp-social-view {
+    font-size: 10px;
+  }
+
+  .hp-social-follow {
+    margin-top: 40px;
+  }
+
+  .hp-follow-links {
+    gap: 8px;
+  }
+
+  .hp-follow-links a {
+    padding: 9px 13px;
+    font-size: 12px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* =================================
+     EDIT YOUR SOCIAL POSTS HERE
+  ================================= */
+
+  const hpSocialPosts = [
+
+    {
+      title: "Outdoor Adventures",
+      platform: "instagram",
+      image: "https://hilstonpark.com/images/gallery/5rv02864.jpg",
+      url: "https://www.instagram.com/hilstonparkofficial/"
+    },
+
+    {
+      title: "Team Activities",
+      platform: "facebook",
+      image: "https://hilstonpark.com/images/gallery/5rv02928.jpg",
+      url: "https://www.facebook.com/hilstonparkofficial"
+    },
+
+    {
+      title: "Canoeing on the River Wye",
+      platform: "tiktok",
+      image: "https://hilstonpark.com/images/gallery/canoeing-on-river-wye.jpg",
+      url: "https://www.tiktok.com/"
+    },
+
+    {
+      title: "Discover Hilston Park",
+      platform: "youtube",
+      image: "https://hilstonpark.com/images/gallery/82569458-7776-11eb-9fd1-0242ac110002---auto--.jpg",
+      url: "https://www.youtube.com/@HilstonPark"
+    },
+
+    {
+      title: "Life at Hilston Park",
+      platform: "instagram",
+      image: "https://hilstonpark.com/images/gallery/5rv02899.jpg",
+      url: "https://www.instagram.com/hilstonparkofficial/"
+    },
+
+    {
+      title: "Food and Dining",
+      platform: "facebook",
+      image: "https://hilstonpark.com/images/food.jpg",
+      url: "https://www.facebook.com/hilstonparkofficial"
+    },
+
+    {
+      title: "Water Activities",
+      platform: "instagram",
+      image: "https://hilstonpark.com/images/gallery/gopr0170.jpg",
+      url: "https://www.instagram.com/hilstonparkofficial/"
+    },
+
+    {
+      title: "Group Experiences",
+      platform: "youtube",
+      image: "https://hilstonpark.com/images/gallery/5rv02928.jpg",
+      url: "https://www.youtube.com/@HilstonPark"
+    },
+
+    {
+      title: "Explore the Estate",
+      platform: "facebook",
+      image: "https://hilstonpark.com/images/gallery/5rv02864.jpg",
+      url: "https://www.facebook.com/hilstonparkofficial"
+    }
+
+  ];
+
+  /* =================================
+     GRID SETTINGS
+  ================================= */
+
+  const grid = document.getElementById("hpSocialGrid");
+  const loadMoreBtn = document.getElementById("hpLoadMore");
+  const tabs = document.querySelectorAll(".hp-tab");
+
+  const postsPerLoad = 6;
+
+  let activeFilter = "all";
+  let visibleCount = postsPerLoad;
+
+  /* =================================
+     DISPLAY POSTS
+  ================================= */
+
+  function renderPosts() {
+
+    grid.innerHTML = "";
+
+    const filteredPosts = hpSocialPosts.filter(function(post) {
+      return activeFilter === "all" ||
+             post.platform === activeFilter;
+    });
+
+    const postsToShow = filteredPosts.slice(0, visibleCount);
+
+    postsToShow.forEach(function(post) {
+
+      const card = document.createElement("a");
+
+      card.className = "hp-social-card";
+      card.href = post.url;
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+      card.setAttribute(
+        "aria-label",
+        "View " + post.title + " on " + post.platform
+      );
+
+      const image = document.createElement("img");
+      image.src = post.image;
+      image.alt = post.title + " at Hilston Park";
+      image.loading = "lazy";
+
+      const overlay = document.createElement("div");
+      overlay.className = "hp-social-overlay";
+
+      const platform = document.createElement("span");
+      platform.className = "hp-social-platform";
+      platform.textContent = post.platform;
+
+      const play = document.createElement("span");
+      play.className = "hp-social-play";
+      play.setAttribute("aria-hidden", "true");
+      play.textContent = "▶";
+
+      const title = document.createElement("h3");
+      title.className = "hp-social-title";
+      title.textContent = post.title;
+
+      const view = document.createElement("span");
+      view.className = "hp-social-view";
+      view.textContent = "View post ↗";
+
+      overlay.appendChild(platform);
+      overlay.appendChild(play);
+      overlay.appendChild(title);
+      overlay.appendChild(view);
+
+      card.appendChild(image);
+      card.appendChild(overlay);
+
+      grid.appendChild(card);
+
+    });
+
+    loadMoreBtn.hidden =
+      visibleCount >= filteredPosts.length;
+
+    if (filteredPosts.length === 0) {
+      grid.innerHTML = "<p>No posts available in this category.</p>";
+    }
+
+  }
+
+  /* =================================
+     FILTER TABS
+  ================================= */
+
+  tabs.forEach(function(tab) {
+
+    tab.addEventListener("click", function() {
+
+      tabs.forEach(function(item) {
+        item.classList.remove("active");
+      });
+
+      tab.classList.add("active");
+
+      activeFilter = tab.dataset.filter;
+      visibleCount = postsPerLoad;
+
+      renderPosts();
+
+    });
+
+  });
+
+  /* =================================
+     LOAD MORE
+  ================================= */
+
+  loadMoreBtn.addEventListener("click", function() {
+
+    visibleCount += postsPerLoad;
+    renderPosts();
+
+  });
+
+  /* Initial display */
+
+  renderPosts();
+
+});
+</script>
