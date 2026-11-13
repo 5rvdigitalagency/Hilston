@@ -482,7 +482,7 @@
   </section>
 
   <!-- ===== INSTAGRAM ===== -->
-  <section class="insta-strip">
+  <!-- <section class="insta-strip">
     <div class="insta-header">
       <div class="insta-heading">
         <p class="insta-eyebrow">Follow Us on Instagram</p>
@@ -498,10 +498,73 @@
 
     <div class="insta-track" role="region" aria-label="Hilston Park Instagram gallery">
       <div class="insta-inner" id="insta-inner">
-        <!-- populated by script.js via Behold JSON API -->
+        populated by script.js via Behold JSON API 
       </div>
     </div>
-  </section>
+  </section> -->
+
+  <section class="hp-social-section" id="life-at-hilston">
+  <div class="hp-social-container">
+
+    <!-- Section heading -->
+    <div class="hp-social-heading">
+      <span class="hp-social-eyebrow">FOLLOW OUR JOURNEY</span>
+      <h2>Life at Hilston Park</h2>
+      <p>
+        Adventures, special moments and a little look behind the scenes.
+        Follow us and see what's happening at Hilston Park.
+      </p>
+    </div>
+
+    <!-- Social tabs -->
+    <div class="hp-social-tabs" role="group" aria-label="Filter social media posts">
+      <button class="hp-tab active" data-filter="all">All Posts</button>
+      <button class="hp-tab" data-filter="instagram">Instagram</button>
+      <button class="hp-tab" data-filter="facebook">Facebook</button>
+      <button class="hp-tab" data-filter="tiktok">TikTok</button>
+      <button class="hp-tab" data-filter="youtube">YouTube</button>
+    </div>
+
+    <!-- Social posts -->
+    <div class="hp-social-grid" id="hpSocialGrid"></div>
+
+    <!-- Load more -->
+    <div class="hp-load-more-wrap">
+      <button class="hp-load-more" id="hpLoadMore">
+        Load More
+        <span aria-hidden="true">↓</span>
+      </button>
+    </div>
+
+    <!-- Follow links -->
+    <div class="hp-social-follow">
+      <p>Stay connected with us</p>
+
+      <div class="hp-follow-links">
+        <a href="https://www.instagram.com/hilstonparkofficial/"
+           target="_blank" rel="noopener noreferrer">
+          Instagram ↗
+        </a>
+
+        <a href="https://www.facebook.com/hilstonparkofficial"
+           target="_blank" rel="noopener noreferrer">
+          Facebook ↗
+        </a>
+
+        <a href="https://www.tiktok.com/"
+           target="_blank" rel="noopener noreferrer">
+          TikTok ↗
+        </a>
+
+        <a href="https://www.youtube.com/@HilstonPark"
+           target="_blank" rel="noopener noreferrer">
+          YouTube ↗
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <!-- ===== FAQ ===== -->
   <section class="faq">
@@ -611,6 +674,207 @@
 <script src="script.js?v=5" defer></script>
 
   <script src="accessibility.js?v=2" defer></script>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* =================================
+     EDIT YOUR SOCIAL POSTS HERE
+  ================================= */
+
+  const hpSocialPosts = [
+
+    {
+      title: "Outdoor Adventures",
+      platform: "instagram",
+      image: "https://hilstonpark.com/images/gallery/5rv02864.jpg",
+      url: "https://www.instagram.com/hilstonparkofficial/"
+    },
+
+    {
+      title: "Team Activities",
+      platform: "facebook",
+      image: "https://hilstonpark.com/images/gallery/5rv02928.jpg",
+      url: "https://www.facebook.com/hilstonparkofficial"
+    },
+
+    {
+      title: "Canoeing on the River Wye",
+      platform: "tiktok",
+      image: "https://hilstonpark.com/images/gallery/canoeing-on-river-wye.jpg",
+      url: "https://www.tiktok.com/"
+    },
+
+    {
+      title: "Discover Hilston Park",
+      platform: "youtube",
+      image: "https://hilstonpark.com/images/gallery/82569458-7776-11eb-9fd1-0242ac110002---auto--.jpg",
+      url: "https://www.youtube.com/@HilstonPark"
+    },
+
+    {
+      title: "Life at Hilston Park",
+      platform: "instagram",
+      image: "https://hilstonpark.com/images/gallery/5rv02899.jpg",
+      url: "https://www.instagram.com/hilstonparkofficial/"
+    },
+
+    {
+      title: "Food and Dining",
+      platform: "facebook",
+      image: "https://hilstonpark.com/images/food.jpg",
+      url: "https://www.facebook.com/hilstonparkofficial"
+    },
+
+    {
+      title: "Water Activities",
+      platform: "instagram",
+      image: "https://hilstonpark.com/images/gallery/gopr0170.jpg",
+      url: "https://www.instagram.com/hilstonparkofficial/"
+    },
+
+    {
+      title: "Group Experiences",
+      platform: "youtube",
+      image: "https://hilstonpark.com/images/gallery/5rv02928.jpg",
+      url: "https://www.youtube.com/@HilstonPark"
+    },
+
+    {
+      title: "Explore the Estate",
+      platform: "facebook",
+      image: "https://hilstonpark.com/images/gallery/5rv02864.jpg",
+      url: "https://www.facebook.com/hilstonparkofficial"
+    }
+
+  ];
+
+  /* =================================
+     GRID SETTINGS
+  ================================= */
+
+  const grid = document.getElementById("hpSocialGrid");
+  const loadMoreBtn = document.getElementById("hpLoadMore");
+  const tabs = document.querySelectorAll(".hp-tab");
+
+  const postsPerLoad = 6;
+
+  let activeFilter = "all";
+  let visibleCount = postsPerLoad;
+
+  /* =================================
+     DISPLAY POSTS
+  ================================= */
+
+  function renderPosts() {
+
+    grid.innerHTML = "";
+
+    const filteredPosts = hpSocialPosts.filter(function(post) {
+      return activeFilter === "all" ||
+             post.platform === activeFilter;
+    });
+
+    const postsToShow = filteredPosts.slice(0, visibleCount);
+
+    postsToShow.forEach(function(post) {
+
+      const card = document.createElement("a");
+
+      card.className = "hp-social-card";
+      card.href = post.url;
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+      card.setAttribute(
+        "aria-label",
+        "View " + post.title + " on " + post.platform
+      );
+
+      const image = document.createElement("img");
+      image.src = post.image;
+      image.alt = post.title + " at Hilston Park";
+      image.loading = "lazy";
+
+      const overlay = document.createElement("div");
+      overlay.className = "hp-social-overlay";
+
+      const platform = document.createElement("span");
+      platform.className = "hp-social-platform";
+      platform.textContent = post.platform;
+
+      const play = document.createElement("span");
+      play.className = "hp-social-play";
+      play.setAttribute("aria-hidden", "true");
+      play.textContent = "▶";
+
+      const title = document.createElement("h3");
+      title.className = "hp-social-title";
+      title.textContent = post.title;
+
+      const view = document.createElement("span");
+      view.className = "hp-social-view";
+      view.textContent = "View post ↗";
+
+      overlay.appendChild(platform);
+      overlay.appendChild(play);
+      overlay.appendChild(title);
+      overlay.appendChild(view);
+
+      card.appendChild(image);
+      card.appendChild(overlay);
+
+      grid.appendChild(card);
+
+    });
+
+    loadMoreBtn.hidden =
+      visibleCount >= filteredPosts.length;
+
+    if (filteredPosts.length === 0) {
+      grid.innerHTML = "<p>No posts available in this category.</p>";
+    }
+
+  }
+
+  /* =================================
+     FILTER TABS
+  ================================= */
+
+  tabs.forEach(function(tab) {
+
+    tab.addEventListener("click", function() {
+
+      tabs.forEach(function(item) {
+        item.classList.remove("active");
+      });
+
+      tab.classList.add("active");
+
+      activeFilter = tab.dataset.filter;
+      visibleCount = postsPerLoad;
+
+      renderPosts();
+
+    });
+
+  });
+
+  /* =================================
+     LOAD MORE
+  ================================= */
+
+  loadMoreBtn.addEventListener("click", function() {
+
+    visibleCount += postsPerLoad;
+    renderPosts();
+
+  });
+
+  /* Initial display */
+
+  renderPosts();
+
+});
+</script>
 
 </body>
 </html>
