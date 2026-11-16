@@ -54,7 +54,7 @@
 
     --dark: #4a6371;
     --dark-deep: #36505d;
-
+--dark-green:#3c7a6c;
     --beige: #e9e6df;
     --beige-soft: #f5f2ee;
     --beige-2: #d8d4cc;
@@ -112,12 +112,12 @@
 
 .hp-eyebrow {
     display: inline-block;
-    color: var(--beige-2);
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 18px;
+        color: var(--beige-2);
 }
 
 .hp-eyebrow--green {
@@ -237,21 +237,7 @@
     margin-bottom: 32px;
 }
 
-.hp-hero__bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 70px;
-    padding: 20px 24px;
-    background: rgba(54,80,93,.92);
-    color: var(--white);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-}
+
 
 
 /* =====================================================
@@ -593,20 +579,14 @@
     isolation: isolate;
     padding: 105px 0;
     text-align: center;
-    background: var(--dark-deep);
+    background: transparent;
 }
 
 .hp-final-cta__image {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background:
-        linear-gradient(
-            rgba(54,80,93,.90),
-            rgba(54,80,93,.90)
-        ),
-        url('/wp-content/uploads/2026/11/hilston-countryside.jpg')
-        center/cover no-repeat;
+
 }
 
 .hp-final-cta__content {
@@ -614,7 +594,7 @@
 }
 
 .hp-final-cta h2 {
-    color: var(--white);
+    /* color: var(--white); */
     font-size: clamp(34px, 4vw, 48px);
     margin-bottom: 20px;
 }
@@ -622,7 +602,7 @@
 .hp-final-cta p {
     max-width: 700px;
     margin: 0 auto 32px;
-    color: rgba(255,255,255,.88);
+    /* color: rgba(255,255,255,.88); */
     font-size: 15px;
     line-height: 1.9;
 }
@@ -704,13 +684,6 @@
         line-height: 1.8;
     }
 
-    .hp-hero__bottom {
-        gap: 12px;
-        justify-content: space-around;
-        font-size: 9px;
-        padding: 17px 10px;
-        letter-spacing: .5px;
-    }
 
 
     /* SECTION SPACING */
@@ -838,10 +811,7 @@
         font-size: 34px;
     }
 
-    .hp-hero__bottom {
-        font-size: 8px;
-        gap: 7px;
-    }
+
 
     .hp-development h3 {
         font-size: 26px;
@@ -930,6 +900,7 @@
     </nav>
   </div>
 
+
 <main class="hp-whats-new">
 
   <!-- HERO SECTION -->
@@ -941,22 +912,19 @@
     <div class="hp-hero__overlay"></div>
 
     <div class="hp-container hp-hero__content">
-      <span class="hp-eyebrow">THE NEXT CHAPTER · 2027</span>
-      <h1>Something Exciting Is Taking Shape at Hilston Park</h1>
+      <span class="hp-eyebrow">OUR FUTURE PLANS 2027</span>
+      <h1>See More Exciting Things Coming at Hilston Park</h1>
       <p>
-        New adventures, new facilities and more opportunities to explore.
-        Discover what's coming to Hilston Park in 2027.
+        We're planning to introduce four new facilities and activities
+        at Hilston Park in 2027, with even more opportunities for
+        adventure and exploration.
       </p>
       <a href="#hp-developments" class="hp-btn">
         EXPLORE WHAT'S COMING <span>→</span>
       </a>
     </div>
 
-    <div class="hp-hero__bottom">
-      <span>NEW EXPERIENCES</span>
-      <span>MORE ADVENTURE</span>
-      <span>COMING IN 2027</span>
-    </div>
+
   </section>
 
 
@@ -965,21 +933,22 @@
     <div class="hp-container hp-intro__inner">
 
       <div class="hp-intro__heading">
-        <span class="hp-eyebrow hp-eyebrow--green">GROWING FOR THE FUTURE</span>
-        <h2>A New Chapter in the <span>Hilston Park Experience</span></h2>
+        <span class="hp-eyebrow hp-eyebrow--green">
+          THE GROWING ERA OF HILSTON PARK
+        </span>
+        <h2>Which New Facility is <span>Arriving at Hilston Park?</span></h2>
       </div>
 
       <div class="hp-intro__text">
         <p>
-          There's plenty happening behind the scenes at Hilston Park.
-          We're investing in exciting new facilities and outdoor experiences
-          designed to bring even more opportunities for adventure,
-          learning and personal development.
+          We have some new additions planned for our estate. These include
+          a seven-obstacle high ropes course, a treetop adventure in our
+          woodland, more activities on the River Monnow and a new archery range.
         </p>
         <p>
-          From woodland treetop challenges to new river activities,
-          discover the developments we're working towards for 2027
-          and follow our journey as they take shape.
+          Each will bring something different to our existing outdoor
+          activities, giving schools, groups and visitors more ways to
+          enjoy their time at Hilston Park.
         </p>
       </div>
 
@@ -993,41 +962,40 @@
     <div class="hp-container">
 
       <div class="hp-section-heading">
-        <span class="hp-eyebrow hp-eyebrow--green">LOOKING AHEAD TO 2027</span>
-        <h2>Discover What's <span>Coming Soon</span></h2>
+        <span class="hp-eyebrow hp-eyebrow--green">PREPARING FOR 2027</span>
+        <h2>Explore What's <span>Coming to Hilston Park</span></h2>
         <p>
-          Four exciting developments that will bring new challenges,
-          experiences and opportunities to Hilston Park.
+          Take a look at what's planned and what each new facility will offer.
         </p>
       </div>
 
 
-      <!-- DEVELOPMENT 1 -->
+      <!-- DEVELOPMENT 1: HIGH ROPES -->
       <article class="hp-development">
         <div class="hp-development__image">
           <img src="/images/gallery/5rv03049.jpg"
-               alt="Woodland high ropes adventure course">
+               alt="Planned woodland high ropes adventure course">
           <span class="hp-image-number">01</span>
         </div>
 
         <div class="hp-development__content">
-          <span class="hp-status">COMING IN 2027</span>
+          <span class="hp-status">ARRIVING IN 2027</span>
           <span class="hp-category">OUTDOOR ADVENTURE</span>
 
-          <h3>High Ropes Course</h3>
+          <h3>Our New High Ropes Course</h3>
 
-          <h4>Seven obstacles. One exciting new challenge.</h4>
+          <h4>Seven obstacles to test your skills.</h4>
 
           <p>
-            We're developing a brand-new 7-obstacle linear high ropes
-            course, giving participants the opportunity to take on
-            exciting aerial challenges and push beyond their comfort zones.
+            We're developing a new linear high ropes course with seven
+            obstacles. Participants will make their way through a series
+            of raised challenges, testing their balance and confidence
+            along the route.
           </p>
 
           <p>
-            Designed to encourage personal growth, the course will
-            help individuals build confidence, resilience and the
-            ability to work together as a team.
+            The course will also give groups a chance to work together,
+            overcome difficulties and support one another.
           </p>
 
           <div class="hp-benefits">
@@ -1035,124 +1003,120 @@
             <span>Resilience</span>
             <span>Teamwork</span>
             <span>Problem-solving</span>
-            <span>Achievement</span>
           </div>
         </div>
       </article>
 
 
-      <!-- DEVELOPMENT 2 -->
+      <!-- DEVELOPMENT 2: TREETOP ADVENTURE -->
       <article class="hp-development hp-development--reverse">
         <div class="hp-development__image">
           <img src="/images/gallery/5rv03049.jpg"
-               alt="Woodland treetop adventure and zipline experience">
+               alt="Planned Clip and Go treetop woodland adventure">
           <span class="hp-image-number">02</span>
         </div>
 
         <div class="hp-development__content">
-          <span class="hp-status">COMING IN 2027</span>
+          <span class="hp-status">ARRIVING IN 2027</span>
           <span class="hp-category">WOODLAND ADVENTURE</span>
 
           <h3>Clip and Go Treetop Adventure</h3>
 
-          <h4>Discover the woodland from a whole new perspective.</h4>
+          <h4>A new way to enjoy our woodland.</h4>
 
           <p>
-            An exciting new Clip and Go treetop adventure is planned
-            for Hilston Park. Participants will navigate a series
-            of elevated challenges through the woodland.
+            We're planning a Clip and Go treetop adventure through
+            the Hilston Park woodland. Participants will move between
+            a series of elevated challenges while attached to a
+            safety system.
           </p>
 
           <p>
-            The experience will culminate in three zip lines,
-            offering an exciting finish and unique views of the
-            surrounding countryside.
+            The experience will end with three zip lines, with views
+            of the trees and surrounding countryside.
           </p>
 
           <div class="hp-benefits">
             <span>Adventure</span>
-            <span>Exploration</span>
-            <span>Confidence</span>
             <span>Coordination</span>
+            <span>Confidence</span>
             <span>Teamwork</span>
           </div>
         </div>
       </article>
 
 
-      <!-- DEVELOPMENT 3 -->
+      <!-- DEVELOPMENT 3: RIVER MONNOW -->
       <article class="hp-development">
         <div class="hp-development__image">
           <img src="/images/gallery/5rv03049.jpg"
-               alt="Canoeing and outdoor water activities on a countryside river">
+               alt="Planned canoeing and river activities on the River Monnow">
           <span class="hp-image-number">03</span>
         </div>
 
         <div class="hp-development__content">
           <span class="hp-status">PLANNED FOR 2027</span>
-          <span class="hp-category">WATERSPORTS & EXPLORATION</span>
+          <span class="hp-category">WATERSPORTS &amp; EXPLORATION</span>
 
-          <h3>River Activities – River Monnow</h3>
+          <h3>Water Adventure on River Monnow</h3>
 
-          <h4>New adventures on the water.</h4>
+          <h4>Paddle along the River Monnow.</h4>
 
           <p>
-            We're expanding our watersports provision with planned
-            canoeing and river-running activities on the River Monnow.
+            We're planning more watersports activities, including
+            canoeing and river-running trips on the River Monnow.
+            Proposed routes will take groups from Skenfrith towards Monmouth.
           </p>
 
           <p>
-            Proposed routes from Skenfrith towards Monmouth will
-            provide opportunities to explore the surrounding landscape
-            while developing water-based skills, environmental awareness
-            and teamwork.
+            These trips will give participants more time on the water,
+            with opportunities to practise their skills, work as a team
+            and learn about the local river environment.
           </p>
 
           <div class="hp-benefits">
-            <span>Outdoor adventure</span>
-            <span>Water skills</span>
+            <span>Canoeing</span>
+            <span>Water Skills</span>
             <span>Exploration</span>
-            <span>Environment</span>
             <span>Teamwork</span>
           </div>
         </div>
       </article>
 
 
-      <!-- DEVELOPMENT 4 -->
+      <!-- DEVELOPMENT 4: ARCHERY -->
       <article class="hp-development hp-development--reverse">
         <div class="hp-development__image">
           <img src="/images/gallery/5rv03049.jpg"
-               alt="Outdoor archery range with targets">
+               alt="Planned GB-standard archery range at Hilston Park">
           <span class="hp-image-number">04</span>
         </div>
 
         <div class="hp-development__content">
-          <span class="hp-status">COMING IN 2027</span>
-          <span class="hp-category">SKILL & PRECISION</span>
+          <span class="hp-status">ARRIVING IN 2027</span>
+          <span class="hp-category">SKILL &amp; PRECISION</span>
 
           <h3>GB Standard Archery Range</h3>
 
-          <h4>A new space to develop focus and precision.</h4>
+          <h4>A new facility for all levels of experience.</h4>
 
           <p>
-            We're introducing a new GB-standard archery facility
-            to provide a professional environment for beginners
-            and more experienced participants.
+            We're introducing a new GB-standard archery range at
+            Hilston Park. Beginners can learn the basics, while those
+            with previous experience can practise their aim and
+            improve their technique.
           </p>
 
           <p>
-            Whether learning the fundamentals or refining existing
-            skills, archery offers an opportunity to develop
-            concentration, discipline, precision and confidence.
+            The facility will also give participants a chance to
+            develop focus, concentration and accuracy.
           </p>
 
           <div class="hp-benefits">
-            <span>Concentration</span>
             <span>Focus</span>
+            <span>Concentration</span>
             <span>Discipline</span>
             <span>Precision</span>
-            <span>Confidence</span>
           </div>
         </div>
       </article>
@@ -1166,29 +1130,28 @@
     <div class="hp-container hp-journey__inner">
 
       <div class="hp-journey__content">
-        <span class="hp-eyebrow">BEHIND THE SCENES</span>
-        <h2>Follow Our <span>Development Journey</span></h2>
+        <span class="hp-eyebrow">FOLLOW OUR PROGRESS</span>
+        <h2>What's Happening <span>Behind the Scenes?</span></h2>
 
         <p>
-          The excitement starts long before the facilities open.
-          We want to take you behind the scenes and share how
-          our new experiences are coming together.
+          There's more to share than the finished facilities. We'll
+          bring you updates from the estate as work progresses, with
+          photographs and videos of the changes taking place.
         </p>
 
         <p>
-          From the first stages of development to the finishing
-          touches, check back for photographs, videos and updates
-          from the Hilston Park team.
+          You can check back to see how each project develops and
+          get a first look at the new facilities before they open.
         </p>
 
-        <a href="/contact/" class="hp-btn hp-btn--light">
+        <a href="/contact/" class="hp-btn">
           GET IN TOUCH <span>→</span>
         </a>
       </div>
 
       <div class="hp-journey__visual">
         <img src="/images/gallery/5rv03049.jpg"
-             alt="Development work and outdoor facilities at Hilston Park">
+             alt="Hilston Park estate and future development plans">
 
         <div class="hp-journey__caption">
           <span>OUR JOURNEY TO 2027</span>
@@ -1205,11 +1168,10 @@
     <div class="hp-container">
 
       <div class="hp-section-heading">
-        <span class="hp-eyebrow hp-eyebrow--green">STAY IN THE LOOP</span>
-        <h2>See What's <span>Taking Shape</span></h2>
+        <span class="hp-eyebrow hp-eyebrow--green">HILSTON PARK UPDATES</span>
+        <h2>See How Our Plans <span>Are Progressing</span></h2>
         <p>
-          Keep up with the latest announcements, progress updates
-          and first looks at our upcoming facilities.
+          We'll add new updates to this page as the work continues.
         </p>
       </div>
 
@@ -1218,25 +1180,33 @@
         <div class="hp-update-card">
           <div class="hp-update-card__icon">01</div>
           <h3>Development Updates</h3>
-          <p>Follow the progress of our new facilities as work develops.</p>
+          <p>
+            See the latest news about each new facility and its progress.
+          </p>
         </div>
 
         <div class="hp-update-card">
           <div class="hp-update-card__icon">02</div>
-          <h3>Behind the Scenes</h3>
-          <p>Meet the team and see what's happening across the estate.</p>
+          <h3>Meet the People Involved</h3>
+          <p>
+            Hear from the Hilston Park team as they work on the new developments.
+          </p>
         </div>
 
         <div class="hp-update-card">
           <div class="hp-update-card__icon">03</div>
-          <h3>Photos & Videos</h3>
-          <p>Enjoy construction photography, drone footage and previews.</p>
+          <h3>Photos and Videos</h3>
+          <p>
+            See photographs, construction footage and aerial views of the estate.
+          </p>
         </div>
 
         <div class="hp-update-card">
           <div class="hp-update-card__icon">04</div>
           <h3>Opening Announcements</h3>
-          <p>Be among the first to hear when new experiences become available.</p>
+          <p>
+            We'll share confirmed opening dates as each facility becomes available.
+          </p>
         </div>
 
       </div>
@@ -1247,16 +1217,18 @@
   <!-- FINAL CTA -->
   <section class="hp-final-cta">
     <div class="hp-final-cta__image"></div>
+
     <div class="hp-container hp-final-cta__content">
 
-      <span class="hp-eyebrow">THE FUTURE OF HILSTON PARK</span>
+      <span class="hp-eyebrow hp-eyebrow--green">THE FUTURE OF HILSTON PARK</span>
 
-      <h2>More to Explore. More to Experience.</h2>
+      <h2>There's Already Plenty to Do at Hilston Park</h2>
 
       <p>
-        Planning a school trip, group adventure or corporate visit?
-        Speak to our team about the experiences currently available
-        and what we're planning for the future.
+        In the future, there will be more to explore and more to experience.
+        But you don't have to wait for our new facilities to open.
+        Speak to our team about what's currently available and what we
+        have planned for the future.
       </p>
 
       <div class="hp-final-cta__buttons">
@@ -1264,8 +1236,8 @@
           ENQUIRE NOW <span>→</span>
         </a>
 
-        <a href="/activities/" class="hp-btn hp-btn--outline">
-          EXPLORE CURRENT ACTIVITIES
+        <a href="/activity" class="hp-btn">
+          EXPLORE CURRENT ACTIVITIES <span>→</span>
         </a>
       </div>
 
@@ -1273,6 +1245,7 @@
   </section>
 
 </main>
+
 
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
