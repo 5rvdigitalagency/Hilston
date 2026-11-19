@@ -3,3 +3,4 @@ Videos/*.webm filter=lfs diff=lfs merge=lfs -text
 Videos/about.mp4 filter=lfs diff=lfs merge=lfs -text
 Videos/*.mov filter=lfs diff=lfs merge=lfs -text
 Videos/*.m4v filter=lfs diff=lfs merge=lfs -text
+Videos/Gallery/*.mp4 filter=lfs diff=lfs merge=lfs -text
