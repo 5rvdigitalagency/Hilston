@@ -35,6 +35,273 @@
   <link rel="stylesheet" href="style.css?v=6">
   <style>
 
+.video-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0, 0, 0, 0.92);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.video-lightbox.active {
+    display: flex;
+}
+
+.video-lightbox__content {
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+}
+
+.video-lightbox__content video {
+    display: block;
+    width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    background: #000;
+}
+
+.video-lightbox__close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 100000;
+    color: #fff;
+    background: transparent;
+    border: none;
+    font-size: 42px;
+    cursor: pointer;
+}
+
+
+/* =========================================
+   CINEMATIC VIDEO GALLERY
+========================================= */
+
+.gallery-video-section {
+  background: #f8f6f1;
+  padding: 75px 60px 85px;
+}
+
+.gallery-video-heading {
+  max-width: 720px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.gallery-video-heading h2 {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.15;
+  color: var(--text);
+  margin: 12px 0 14px;
+}
+
+.gallery-video-heading h2 em {
+  font-style: italic;
+}
+
+.gallery-video-heading p {
+  max-width: 570px;
+  margin: 0 auto;
+  color: #666;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.gallery-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.video-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  background: #252525;
+  border-radius: 8px;
+  aspect-ratio: 16 / 10;
+  isolation: isolate;
+}
+
+.video-card video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease, opacity 0.4s ease;
+}
+
+.video-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.05) 65%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.video-card:hover video {
+  transform: scale(1.07);
+  opacity: 0.85;
+}
+
+.video-card__play {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 62px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.video-card__play span {
+  font-size: 19px;
+  margin-left: 4px;
+}
+
+.video-card:hover .video-card__play {
+  background: var(--teal);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-card__caption {
+  position: absolute;
+  z-index: 2;
+  left: 22px;
+  right: 18px;
+  bottom: 20px;
+  color: #fff;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.video-card:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 4px;
+}
+
+/* VIDEO MODAL */
+
+.video-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 25px;
+  background: rgba(0,0,0,0.94);
+}
+
+.video-lightbox.open {
+  display: flex;
+}
+
+.video-lightbox__content {
+  width: min(1100px, 100%);
+}
+
+.video-lightbox__content video {
+  display: block;
+  width: 100%;
+  max-height: 82vh;
+  background: #000;
+  object-fit: contain;
+}
+
+.video-lightbox__close {
+  position: absolute;
+  top: 15px;
+  right: 28px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 42px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 860px) {
+  .gallery-video-section {
+    padding: 60px 40px;
+  }
+
+  .gallery-video-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 560px) {
+  .gallery-video-section {
+    padding: 45px 20px 55px;
+  }
+
+  .gallery-video-heading {
+    margin-bottom: 28px;
+  }
+
+  .gallery-video-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .video-card {
+    aspect-ratio: 16 / 10;
+  }
+
+  .video-card__caption {
+    font-size: 1.15rem;
+    left: 17px;
+    bottom: 16px;
+  }
+
+  .video-card__play {
+    width: 54px;
+    height: 54px;
+  }
+
+  .video-lightbox {
+    padding: 20px 12px;
+  }
+
+  .video-lightbox__close {
+    top: 12px;
+    right: 15px;
+  }
+}
+
     /* ===== GALLERY PAGE ===== */
 
     .gallery-section {
@@ -274,6 +541,9 @@
       <p class="gallery-eyebrow">Gallery</p>
       <h1 class="gallery-heading"><em>Hilston Park</em> &mdash; explore the estate, activities &amp; Wye&nbsp;Valley&nbsp;landscape</h1>
     </div>
+
+
+
 
     <!-- TAB BAR -->
     <div class="gallery-tabs-wrap">
@@ -666,6 +936,8 @@
         <div class="gallery-img-item" data-category="accommodation">
             <img src="images/accommodation/Room%20B%209.avif" alt="Room B 9 at Hilston Park" loading="lazy">
         </div>
+
+        
 <!-- End ACCOMMODATION -->
 
       </div><!-- /gallery-grid -->
@@ -685,6 +957,171 @@
     </button>
     <p class="lightbox-counter" id="lightboxCounter"></p>
   </div>
+<!-- VIDEO GALLERY -->
+<section class="gallery-video-section" aria-labelledby="gallery-video-heading">
+  <div class="gallery-video-heading">
+    <span class="gallery-eyebrow">HILSTON PARK IN MOTION</span>
+    <h2 id="gallery-video-heading">A Glimpse of Hilston Park</em></h2>
+    <p>From outdoor adventures to the people who make Hilston Park special, take a closer look at life on the estate.</p>
+  </div>
+
+  <div class="gallery-video-grid">
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/Staff with visitors 1_1.mp4"
+      aria-label="Play Staff and visitors at Hilston Park">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/Staff with visitors 1_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">A Warm Hilston Welcome</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/Staff riding Quad 4_1.mp4"
+      aria-label="Play quad biking video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/Staff riding Quad 4_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Quad Biking Adventures</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/Staff Riding Quad 3_1.mp4"
+      aria-label="Play quad biking video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/Staff Riding Quad 3_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Adventure on the Estate</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/Staff Riding Quad 2_1.mp4"
+      aria-label="Play quad biking video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/Staff Riding Quad 2_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Explore the Outdoors</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/Staff Riding Quad 1_1.mp4"
+      aria-label="Play quad biking video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/Staff Riding Quad 1_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Quad Biking Experience</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/People Eating 1_1.mp4"
+      aria-label="Play dining video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/People Eating 1_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Good Food, Great Company</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/Obstacle Course 4_1.mp4"
+      aria-label="Play obstacle course video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/Obstacle Course 4_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Take on the Challenge</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/HP Team 2_1.mp4"
+      aria-label="Play Hilston Park team video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/HP Team 2_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Meet the Hilston Team</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/HP Team 1_1.mp4"
+      aria-label="Play Hilston Park team video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/HP Team 1_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">The People Behind the Experience</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/HP Staff 1_1.mp4"
+      aria-label="Play Hilston Park staff video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/HP Staff 1_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Life at Hilston Park</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/C6414_1.mp4"
+      aria-label="Play Hilston Park video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/C6414_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Moments at Hilston</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/C1547_1.mp4"
+      aria-label="Play Hilston Park video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/C1547_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">A Day to Remember</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/Archery 7_1.mp4"
+      aria-label="Play archery video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/Archery 7_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Aim, Focus, Fire</span>
+    </button>
+
+    <button class="video-card" type="button"
+      data-video="videos/gallery/Archery 3_1.mp4"
+      aria-label="Play archery video">
+      <video muted playsinline preload="metadata">
+        <source src="videos/gallery/Archery 3_1.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__play"><span>▶</span></span>
+      <span class="video-card__caption">Archery Adventures</span>
+    </button>
+
+  </div>
+</section>
+
+<!-- VIDEO LIGHTBOX -->
+<div class="video-lightbox" id="videoLightbox"
+     role="dialog" aria-modal="true"
+     aria-label="Video player">
+
+  <button type="button" class="video-lightbox__close"
+          id="videoLightboxClose" aria-label="Close video">&times;</button>
+
+  <div class="video-lightbox__content">
+    <video id="galleryModalVideo" controls playsinline></video>
+  </div>
+</div>
 
   <!-- FOOTER -->
   <footer class="site-footer">
@@ -844,7 +1281,75 @@
 
 }());
 </script>
+<script>
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const videoCards = document.querySelectorAll(".video-card");
+    const lightbox = document.getElementById("videoLightbox");
+    const modalVideo = document.getElementById("galleryModalVideo");
+    const closeButton = document.getElementById("videoLightboxClose");
+
+    if (!videoCards.length || !lightbox || !modalVideo || !closeButton) {
+        console.error("Video gallery elements not found.");
+        return;
+    }
+
+    // Open video
+    videoCards.forEach(function (card) {
+
+        card.addEventListener("click", function () {
+
+            const videoPath = card.getAttribute("data-video");
+
+            if (!videoPath) return;
+
+            modalVideo.pause();
+            modalVideo.src = videoPath;
+            modalVideo.load();
+
+            lightbox.classList.add("active");
+            document.body.style.overflow = "hidden";
+
+            modalVideo.play().catch(function (error) {
+                console.log("Video playback requires user interaction:", error);
+            });
+
+        });
+
+    });
+
+    // Close video
+    function closeVideo() {
+
+        modalVideo.pause();
+        modalVideo.removeAttribute("src");
+        modalVideo.load();
+
+        lightbox.classList.remove("active");
+        document.body.style.overflow = "";
+
+    }
+
+    closeButton.addEventListener("click", closeVideo);
+
+    // Close when clicking outside video
+    lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+            closeVideo();
+        }
+    });
+
+    // Close using Escape key
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && lightbox.classList.contains("active")) {
+            closeVideo();
+        }
+    });
+
+});
+
+</script>
 
   <script src="accessibility.js"></script>
 </body>
